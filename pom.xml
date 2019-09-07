@@ -1,0 +1,108 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.chaingrok</groupId>
+	<artifactId>libra4j</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>libra4j</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<!-- local variables -->
+		<protobuf.groupId>com.google.protobuf</protobuf.groupId>
+		<protobuf.version>3.9.1</protobuf.version>
+		<grpc.groupId>io.grpc</grpc.groupId>
+		<grpc.version>1.23.0</grpc.version>
+	</properties>
+
+	<dependencies>
+		<!-- protobuf -->
+		<dependency>
+    		<groupId>${protobuf.groupId}</groupId>
+   			<artifactId>protobuf-java</artifactId>
+    		<version>${protobuf.version}</version>
+		</dependency>
+		<!-- grpc -->
+		<dependency>
+     		<groupId>${grpc.groupId}</groupId>
+      		<artifactId>grpc-api</artifactId>
+      		<version>${grpc.version}</version>
+      		<scope>compile</scope>
+    	</dependency>
+    	<dependency>
+     		<groupId>${grpc.groupId}</groupId>
+      		<artifactId>grpc-protobuf</artifactId>
+      		<version>${grpc.version}</version>
+      		<scope>compile</scope>
+    	</dependency>
+    	<dependency>
+     		<groupId>${grpc.groupId}</groupId>
+      		<artifactId>grpc-stub</artifactId>
+      		<version>${grpc.version}</version>
+      		<scope>compile</scope>
+    	</dependency>
+    	<!-- generic dependencies -->
+    	<dependency>
+     		<groupId>junit</groupId>
+      		<artifactId>junit</artifactId>
+      		<version>4.11</version>
+      		<scope>compile</scope>
+    	</dependency>
+  	</dependencies>
+  
+	<build>
+		<plugins>
+			<plugin>
+        		<groupId>org.apache.maven.plugins</groupId>
+       			<artifactId>maven-compiler-plugin</artifactId>
+       			<version>3.8.1</version>
+      		</plugin>
+      		<plugin>
+    			<groupId>org.codehaus.mojo</groupId>
+   				 <artifactId>build-helper-maven-plugin</artifactId>
+    			<version>3.0.0</version>
+   				 <executions>
+        			<execution>
+            			<phase>generate-sources</phase>
+            			<goals>
+               				 <goal>add-source</goal>
+            			</goals>
+            			<configuration>
+               			 <sources>
+                    		<source>src/grpc</source>
+               		 	</sources>
+            			</configuration>
+       		 		</execution>
+    			</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.4</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<!-- attached to Maven test phase -->
+					<execution>
+						<id>report</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	
+</project>
