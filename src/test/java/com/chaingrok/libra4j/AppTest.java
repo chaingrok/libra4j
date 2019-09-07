@@ -1,4 +1,4 @@
-package com.chaingrok.libra4jj;
+package com.chaingrok.libra4j;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
