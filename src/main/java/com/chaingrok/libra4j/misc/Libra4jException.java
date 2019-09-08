@@ -9,7 +9,7 @@ public class Libra4jException extends RuntimeException {
 
 	public Libra4jException(Throwable e) {
 		super(e.getMessage());
-		System.out.println("Exception message: " + e.getMessage());
-		e.printStackTrace();
+		//System.out.println("Exception message: " + e.getMessage());
+		//e.printStackTrace();
 	}
 }
