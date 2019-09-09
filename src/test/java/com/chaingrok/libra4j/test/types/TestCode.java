@@ -13,7 +13,7 @@ import com.chaingrok.libra4j.types.Code;
 public class TestCode extends TestClass {
 	
 	@Test
-	public void test001_getArgumentType() {
+	public void test001_newInstances() {
 		Code code = new Code(Code.MINT.getBytes());
 		assertArrayEquals(Code.MINT.getBytes(),code.getBytes());
 		code = new Code(Code.PEER_TO_PEER_TRANSFER.getBytes());
