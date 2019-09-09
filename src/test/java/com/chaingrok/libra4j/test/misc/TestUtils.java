@@ -85,7 +85,7 @@ public class TestUtils {
 		Utils.writeFile(content,file);
 		assertTrue(file.exists());
 		byte[] bytes = Utils.readFile(file);
-		assertEquals(content+"\n",new String(bytes));
+		assertEquals(content+System.lineSeparator() ,new String(bytes));
 	}
 	
 	@Test
