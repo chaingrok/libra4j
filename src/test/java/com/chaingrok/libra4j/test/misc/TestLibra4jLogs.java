@@ -37,7 +37,7 @@ public class TestLibra4jLogs {
 	public void test003_createLogs() {
 		assertFalse(Libra4jLog.hasLogs());
 		assertNotNull(Libra4jLog.getLogs());
-		assertEquals(0,Libra4jLog.getLogs());
+		assertEquals(0,Libra4jLog.getLogs().size());
 	}
 
 }
