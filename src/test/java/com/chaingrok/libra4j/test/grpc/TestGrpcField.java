@@ -43,6 +43,7 @@ public class TestGrpcField {
 		assertEquals(1,logs.size());
 		Libra4jLog log = logs.get(0);
 		assertTrue(log instanceof Libra4jError);
+		Libra4jLog.purgeLogs();
 	}
 	
 	@Test
