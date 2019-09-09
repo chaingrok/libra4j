@@ -14,6 +14,7 @@ import org.junit.runners.MethodSorters;
 import com.chaingrok.libra4j.misc.Libra4jError;
 import com.chaingrok.libra4j.misc.Libra4jInfo;
 import com.chaingrok.libra4j.misc.Libra4jLog;
+import com.chaingrok.libra4j.misc.Libra4jLog.Type;
 import com.chaingrok.libra4j.misc.Libra4jWarning;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -36,6 +37,18 @@ public class TestLibra4jLogs {
 		assertFalse(Libra4jLog.hasLogs());
 		assertNotNull(Libra4jLog.getLogs());
 		assertEquals(0,Libra4jLog.getLogs().size());
+		assertFalse(Libra4jLog.hasLogs());
+		new Libra4jError(Type.INIT_ERROR);
+		assertEquals(1,Libra4jLog.getLogs().size());
+		assertTrue(Libra4jLog.hasLogs());
+		new Libra4jWarning(Type.INVALID_CLASS);
+		assertEquals(2,Libra4jLog.getLogs().size());
+		new Libra4jInfo(Type.MISSING_DATA);
+		assertEquals(3,Libra4jLog.getLogs().size());
+		assertTrue(Libra4jLog.hasLogs());
+		Libra4jLog.purgeLogs();
+		assertEquals(0,Libra4jLog.getLogs().size());
+		assertFalse(Libra4jLog.hasLogs());
 	}
 
 }

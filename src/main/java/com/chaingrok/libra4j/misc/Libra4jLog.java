@@ -103,8 +103,8 @@ public abstract class Libra4jLog {
 		return result;
 	}
 	
-	public static void purgeErrors() {
-		errorLog = null;
+	public static void purgeLogs() {
+		errorLog = new ArrayList<Libra4jLog>();
 	}
 
 	public enum Type {
