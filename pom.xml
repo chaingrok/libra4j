@@ -35,6 +35,11 @@
    			 <version>2.3.1</version>
    			 <scope>compile</scope>
 		</dependency>
+		<dependency>
+    		<groupId>org.bouncycastle</groupId>
+    		<artifactId>bcprov-jdk15on</artifactId>
+    		<version>1.62</version>
+		</dependency>
 		<!-- protobuf -->
 		<dependency>
     		<groupId>${protobuf.groupId}</groupId>
@@ -61,6 +66,11 @@
       		<version>${grpc.version}</version>
       		<scope>compile</scope>
     	</dependency>
+		<dependency>
+    		<groupId>${grpc.groupId}</groupId>
+   			 <artifactId>grpc-okhttp</artifactId>
+   			 <version>${grpc.version}</version>
+		</dependency>
     	<!-- generic dependencies -->
     	<dependency>
      		<groupId>junit</groupId>
