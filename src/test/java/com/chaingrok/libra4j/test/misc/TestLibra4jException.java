@@ -1,6 +1,8 @@
 package com.chaingrok.libra4j.test.misc;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
 
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -18,6 +20,7 @@ public class TestLibra4jException {
 			throw new Libra4jException(message);
 		} catch (Libra4jException e) {
 			assertEquals(message,e.getMessage());
+			assertNull(e.getThrowable());
 		}
 	}
 	
@@ -29,6 +32,7 @@ public class TestLibra4jException {
 			throw new Libra4jException(e0);
 		} catch (Libra4jException e) {
 			assertEquals(message,e.getMessage());
+			assertSame(e0,e.getThrowable());
 		}
 	}
 

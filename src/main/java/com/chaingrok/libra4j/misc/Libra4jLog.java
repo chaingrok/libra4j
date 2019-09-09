@@ -3,7 +3,7 @@ package com.chaingrok.libra4j.misc;
 import java.util.ArrayList;
 
 
-public class Libra4jLog {  
+public abstract class Libra4jLog {  
 	
 	private static ArrayList<Libra4jLog> errorLog = new ArrayList<Libra4jLog>();
 	
