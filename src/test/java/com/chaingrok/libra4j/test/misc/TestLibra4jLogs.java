@@ -22,12 +22,12 @@ import com.chaingrok.libra4j.misc.Libra4jWarning;
 public class TestLibra4jLogs {
 	
 	@Test
-	public void tes001_LogIsAbstract() {
+	public void test001_LogIsAbstract() {
 		assertTrue(Modifier.isAbstract(Libra4jLog.class.getModifiers()));
 	}
 	
 	@Test
-	public void tes002_checkInheritance() {
+	public void test002_checkInheritance() {
 		assertTrue(Libra4jLog.class.isAssignableFrom(Libra4jError.class));
 		assertTrue(Libra4jLog.class.isAssignableFrom(Libra4jWarning.class));
 		assertTrue(Libra4jLog.class.isAssignableFrom(Libra4jInfo.class));
