@@ -1,9 +1,12 @@
 package com.chaingrok.libra4j.test.grpc;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Set;
@@ -13,31 +16,33 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import com.chaingrok.libra4j.grpc.GrpcField;
+import com.chaingrok.libra4j.misc.Libra4jError;
 import com.chaingrok.libra4j.misc.Libra4jException;
+import com.chaingrok.libra4j.misc.Libra4jLog;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestGrpcField {
 	
 	@Test
 	public void test000_FieldSize() {
-		assertEquals(60,GrpcField.values().length);
+		assertEquals(68,GrpcField.values().length);
 	}
 	
 	@Test
-	public void test001_FieldOk() {
-		assertEquals(60,GrpcField.values().length);
+	public void test001_getFieldOk() {
 		assertEquals(GrpcField.LEDGER_INFO,GrpcField.get(GrpcField.LEDGER_INFO.getFullName()));
 		assertEquals(GrpcField.SIGNATURES,GrpcField.get(GrpcField.SIGNATURES.getFullName()));
 	}
 	
 	@Test
-	public void test002_FieldOk() {
-		try {
-			GrpcField.get("foo");
-			fail("should throw exception with unknown fullName");
-		} catch (Libra4jException e) {
-			assertEquals("unknown " + GrpcField.class.getCanonicalName() + ":foo",e.getMessage());
-		}
+	public void test002_FieldKo() {
+		assertFalse(Libra4jLog.hasLogs());
+		assertNull(GrpcField.get("foo"));
+		assertTrue(Libra4jLog.hasLogs());
+		ArrayList<Libra4jLog> logs = Libra4jLog.getLogs();
+		assertEquals(1,logs.size());
+		Libra4jLog log = logs.get(0);
+		assertTrue(log instanceof Libra4jError);
 	}
 	
 	@Test
@@ -85,6 +90,6 @@ public class TestGrpcField {
 		for (String type : reversedTypes) {
 			System.out.println("type: " + new StringBuilder(type).reverse().toString());
 		}
-		assertEquals(8,result);
+		assertEquals(10,result);
 	}
 }
