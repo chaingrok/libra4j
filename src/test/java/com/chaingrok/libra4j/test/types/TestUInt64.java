@@ -1,5 +1,6 @@
 package com.chaingrok.libra4j.test.types;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -109,5 +110,29 @@ public class TestUInt64 {
 		} catch (Libra4jException e) {
 			assertEquals("UInt64 cannot be constructed from negative long value: " + value,e.getMessage());
 		}
+	}
+	
+	@Test
+	public void test04_testGetBytes() {
+		long value = 0L;
+		UInt64 u64 = new UInt64(value);
+		byte[] bytes = u64.getBytes();
+		assertEquals(UInt64.BYTE_LENGTH,bytes.length);
+		byte[] expected =  {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
+		assertArrayEquals(expected,bytes);
+		//
+		value = 1L;
+		u64 = new UInt64(value);
+		bytes = u64.getBytes();
+		assertEquals(UInt64.BYTE_LENGTH,bytes.length);
+		byte[]  expected2 =  {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x01};
+		assertArrayEquals(expected2,bytes);
+		//
+		value = 100L;
+		u64 = new UInt64(value);
+		bytes = u64.getBytes();
+		assertEquals(UInt64.BYTE_LENGTH,bytes.length);
+		byte[]  expected3 =  {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x64};
+		assertArrayEquals(expected3,bytes);
 	}
 }
