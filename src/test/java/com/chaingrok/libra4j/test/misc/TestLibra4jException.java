@@ -9,9 +9,10 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import com.chaingrok.libra4j.misc.Libra4jException;
+import com.chaingrok.libra4j.test.TestClass;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class TestLibra4jException {
+public class TestLibra4jException extends TestClass {
 	
 	@Test
 	public void tes001_throwException() {

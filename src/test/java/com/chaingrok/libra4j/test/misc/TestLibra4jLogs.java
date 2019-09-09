@@ -16,9 +16,10 @@ import com.chaingrok.libra4j.misc.Libra4jInfo;
 import com.chaingrok.libra4j.misc.Libra4jLog;
 import com.chaingrok.libra4j.misc.Libra4jLog.Type;
 import com.chaingrok.libra4j.misc.Libra4jWarning;
+import com.chaingrok.libra4j.test.TestClass;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class TestLibra4jLogs {
+public class TestLibra4jLogs extends TestClass {
 	
 	@Test
 	public void test001_LogIsAbstract() {

@@ -9,10 +9,11 @@ import org.libra.grpc.types.Transaction.TransactionArgument.ArgType;
 
 import com.chaingrok.libra4j.misc.Libra4jError;
 import com.chaingrok.libra4j.misc.Libra4jLog;
+import com.chaingrok.libra4j.test.TestClass;
 import com.chaingrok.libra4j.types.Argument.Type;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class TestArgument {
+public class TestArgument extends TestClass {
 	
 	@Test
 	public void test001_getArgumentType() {
@@ -29,6 +30,7 @@ public class TestArgument {
 		assertEquals(1,Libra4jError.getLogs().size());
 		Libra4jLog error = Libra4jLog.getLogs().get(0);
 		assertEquals(Libra4jError.Type.UNKNOWN_VALUE,error.getType());
+		Libra4jLog.purgeLogs();
 	}
 
 }

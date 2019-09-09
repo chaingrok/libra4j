@@ -11,6 +11,7 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import com.chaingrok.libra4j.test.TestClass;
 import com.chaingrok.libra4j.types.ByteArrayObject;
 import com.chaingrok.libra4j.types.Code;
 import com.chaingrok.libra4j.types.EventData;
@@ -19,7 +20,7 @@ import com.chaingrok.libra4j.types.ValidatorId;
 
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class TestByteArrayObject {
+public class TestByteArrayObject extends TestClass {
 	
 	@Test
 	public void test001_isAbstract() {

@@ -12,7 +12,7 @@ import com.chaingrok.libra4j.test.TestData;
 import com.chaingrok.libra4j.types.ValidatorEndpoint;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class TestValidatorEndpoint {
+public class TestValidatorEndpoint extends TestClass {
 	
 	@Test
 	public void tes001_newInstance() {

@@ -21,7 +21,7 @@ import com.google.protobuf.ByteString;
 
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class TestUtils {
+public class TestUtils extends TestClass {
 	
 	@Test
     public void test001_byteToHex() {

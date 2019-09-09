@@ -7,11 +7,12 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import com.chaingrok.libra4j.misc.Utils;
+import com.chaingrok.libra4j.test.TestClass;
 import com.chaingrok.libra4j.types.Hash;
 
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class TestHash {
+public class TestHash extends TestClass {
 	
 	@Test
 	public void test001_hashStandardValuess() {

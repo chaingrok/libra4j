@@ -4,14 +4,16 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+
+
+import java.util.ArrayList;
 
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import com.chaingrok.libra4j.misc.Libra4jError;
-import com.chaingrok.libra4j.misc.Libra4jException;
+import com.chaingrok.libra4j.misc.Libra4jLog;
 import com.chaingrok.libra4j.test.TestClass;
 import com.chaingrok.libra4j.types.AccountAddress;
 
@@ -21,12 +23,14 @@ public class TestAccountAddress extends TestClass {
 	
 	@Test
 	public void test001_testLength() {
-		try {
-			new AccountAddress("00");
-			fail("should fail on incorrect size");
-		} catch (Libra4jException e) {
-			assertTrue(e.getMessage().startsWith("invalid account address size"));
-		}
+		assertFalse(Libra4jLog.hasLogs());
+		new AccountAddress("00");
+		assertTrue(Libra4jLog.hasLogs());
+		ArrayList<Libra4jLog> logs = Libra4jLog.getLogs();
+		assertEquals(1,logs.size());
+		Libra4jLog log = logs.get(0);
+		assertTrue(log instanceof Libra4jError);
+		Libra4jLog.purgeLogs();
 	}
 	
 	@Test
