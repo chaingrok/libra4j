@@ -97,6 +97,12 @@ public class Utils {
 	    return buffer.getLong();
 	}
 	
+	public static byte[] intToByteArray(int x) {
+	    ByteBuffer buffer = ByteBuffer.allocate(Integer.BYTES);
+	    buffer.putInt(x);
+	    return buffer.array();
+	}
+	
 	public static int byteArrayToInt(byte[] bytes) {
 	    ByteBuffer buffer = ByteBuffer.allocate(Integer.BYTES);
 	    buffer.put(bytes);

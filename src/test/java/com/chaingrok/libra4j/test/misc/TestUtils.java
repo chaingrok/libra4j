@@ -3,7 +3,9 @@ package com.chaingrok.libra4j.test.misc;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,6 +15,7 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import com.chaingrok.libra4j.misc.Libra4jException;
 import com.chaingrok.libra4j.misc.Utils;
 import com.google.protobuf.ByteString;
 
@@ -66,6 +69,11 @@ public class TestUtils {
 		byte[] bytes3 = {0x12,0x34,0x56,0x78,0x00};
 		byte[] bytes4 = {0x00,0x78,0x56,0x34,0x12};
 		assertArrayEquals(bytes4,Utils.reverseByteOrder(bytes3));
+		//
+		ByteString byteString = ByteString.copyFrom(bytes);
+		assertArrayEquals(bytes2,Utils.reverseByteOrder(byteString));
+		ByteString byteString2 = ByteString.copyFrom(bytes3);
+		assertArrayEquals(bytes4,Utils.reverseByteOrder(byteString2));
 	}
 	
 	@Test
@@ -81,7 +89,25 @@ public class TestUtils {
 	}
 	
 	@Test
-	public void test007_byteArrayToLong() {
+	public void test007_readWritErrors() throws IOException {
+		try {
+			Utils.readFile("");
+			fail("empty filepath should fail");
+		} catch (Libra4jException e) {
+			assertNotNull(e.getThrowable());
+			assertTrue(e.getThrowable() instanceof IOException);
+		}
+		try {
+			Utils.writeFile(" ","");
+			fail("empty filepath should fail");
+		} catch (Libra4jException e) {
+			assertNotNull(e.getThrowable());
+			assertTrue(e.getThrowable() instanceof IOException);
+		}
+	}
+	
+	@Test
+	public void test008_byteArrayToLong() {
 		long value = 0L;
 		assertEquals(value,Utils.byteArrayToLong(Utils.longToByteArray(value)));
 		value = 1L;
@@ -95,7 +121,21 @@ public class TestUtils {
 	}
 	
 	@Test
-	public void test008_byteArrayToBigInt() {
+	public void test009_byteArrayToInt() {
+		int value = 0;
+		assertEquals(value,Utils.byteArrayToInt(Utils.intToByteArray(value)));
+		value = 1;
+		assertEquals(value,Utils.byteArrayToInt(Utils.intToByteArray(value)));
+		value = -1;
+		assertEquals(value,Utils.byteArrayToInt(Utils.intToByteArray(value)));
+		value = Integer.MAX_VALUE;
+		assertEquals(value,Utils.byteArrayToInt(Utils.intToByteArray(value)));
+		value = Integer.MIN_VALUE;
+		assertEquals(value,Utils.byteArrayToInt(Utils.intToByteArray(value)));
+	}
+	
+	@Test
+	public void test0010_byteArrayToBigInt() {
 		byte[] bytes={0x00};
 		assertEquals(BigInteger.valueOf(0),Utils.byteArraytoBigInt(bytes));
 		byte[] bytes2={0x00,0x01};
@@ -113,6 +153,13 @@ public class TestUtils {
 		value = -1L;
 		byte[] bytes7 = Utils.longToByteArray(value);
 		assertEquals(new BigInteger("18446744073709551615"),Utils.byteArraytoBigInt(bytes7)); //18 446 744 073 709 551 615 = Long.MAX_VALUE + 1 due to 2-compl logic
+	}
+	
+	@Test
+	public void test011_timestampMillisTotString() {
+		long millis = 1568003223154L;
+		String dateString = Utils.timestampMillisToDateString(millis);
+		assertEquals("2019-09-09 06:27:03",dateString);
 	}
  
 }
