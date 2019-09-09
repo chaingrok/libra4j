@@ -17,6 +17,7 @@ import org.junit.runners.MethodSorters;
 
 import com.chaingrok.libra4j.misc.Libra4jException;
 import com.chaingrok.libra4j.misc.Utils;
+import com.chaingrok.libra4j.test.TestClass;
 import com.google.protobuf.ByteString;
 
 
