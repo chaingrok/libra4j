@@ -39,14 +39,19 @@ public class TestLibra4jLogs extends TestClass {
 		assertNotNull(Libra4jLog.getLogs());
 		assertEquals(0,Libra4jLog.getLogs().size());
 		assertFalse(Libra4jLog.hasLogs());
-		new Libra4jError(Type.INIT_ERROR);
+		new Libra4jError(Type.INIT_ERROR); // log code only 
 		assertEquals(1,Libra4jLog.getLogs().size());
 		assertTrue(Libra4jLog.hasLogs());
-		new Libra4jWarning(Type.INVALID_CLASS);
+		new Libra4jWarning(Type.INVALID_CLASS,1L); //log code + transaction version
 		assertEquals(2,Libra4jLog.getLogs().size());
-		new Libra4jInfo(Type.MISSING_DATA);
+		new Libra4jInfo(Type.MISSING_DATA,2L,new Object()); //log code + transaction version + error object
 		assertEquals(3,Libra4jLog.getLogs().size());
 		assertTrue(Libra4jLog.hasLogs());
+		//
+		String content = Libra4jLog.dumpLogs();
+		assertNotNull(content);
+		assertTrue(content.length() > 0);
+		//
 		Libra4jLog.purgeLogs();
 		assertEquals(0,Libra4jLog.getLogs().size());
 		assertFalse(Libra4jLog.hasLogs());

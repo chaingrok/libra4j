@@ -80,7 +80,7 @@ public abstract class Libra4jLog {
 		String result = "";
 		int count = 0;
 		for (Libra4jLog log : Libra4jLog.getLogs()) {
-			result += "ERROR #" + ++count + ": " + log.getType().toString();
+			result += log.getClass().getSimpleName() + " #" + ++count + ": " + log.getType().toString();
 			if (log.getObject() != null) {
 				result += " -- " + log.getObject().toString();
 			}
