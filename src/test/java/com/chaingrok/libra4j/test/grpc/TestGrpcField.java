@@ -14,11 +14,13 @@ import java.util.Set;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
+import org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfo;
 
 import com.chaingrok.libra4j.grpc.GrpcField;
 import com.chaingrok.libra4j.misc.Libra4jError;
 import com.chaingrok.libra4j.misc.Libra4jException;
 import com.chaingrok.libra4j.misc.Libra4jLog;
+import com.chaingrok.libra4j.misc.Libra4jWarning;
 import com.chaingrok.libra4j.test.TestClass;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -93,5 +95,11 @@ public class TestGrpcField extends TestClass {
 			System.out.println("type: " + new StringBuilder(type).reverse().toString());
 		}
 		assertEquals(10,result);
+	}
+	
+	@Test
+	public void test004_getOwningClass() {
+		assertEquals(LedgerInfo.class,GrpcField.LEDGER_INFO_VERSION.getOwningClass());
+		assertEquals(LedgerInfo.class,GrpcField.LEDGER_INFO_VERSION.getFieldClass());
 	}
 }
