@@ -98,8 +98,8 @@ public class TestGrpcField extends TestClass {
 	}
 	
 	@Test
-	public void test004_getOwningClass() {
+	public void test004_getParameters() {
 		assertEquals(LedgerInfo.class,GrpcField.LEDGER_INFO_VERSION.getOwningClass());
-		assertEquals(LedgerInfo.class,GrpcField.LEDGER_INFO_VERSION.getFieldClass());
+		assertEquals(Long.class,GrpcField.LEDGER_INFO_VERSION.getFieldClass());
 	}
 }
