@@ -51,6 +51,9 @@ public class TestLibra4jLogs extends TestClass {
 		String content = Libra4jLog.dumpLogs();
 		assertNotNull(content);
 		assertTrue(content.length() > 0);
+		assertTrue(content.contains(Libra4jError.class.getSimpleName() + " #"));
+		assertTrue(content.contains(Libra4jWarning.class.getSimpleName() + " #"));
+		assertTrue(content.contains(Libra4jInfo.class.getSimpleName() + " #"));
 		//
 		Libra4jLog.purgeLogs();
 		assertEquals(0,Libra4jLog.getLogs().size());
