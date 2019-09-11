@@ -18,7 +18,7 @@ public class AccountAddress extends ByteArrayObject {
 	public static final String LIBRA_NETWORK_ID_SHORT = "lb";
 	
 	public AccountAddress(ByteString bytes) {
-		this(bytes.toByteArray());  // NullException fine if bytes is null
+			this(bytes.toByteArray());  //TODO: bytes == null will throw exception
 	}
 	
 	public AccountAddress(String hex) {
@@ -29,9 +29,10 @@ public class AccountAddress extends ByteArrayObject {
 		super(bytes);
 		if (bytes == null) {
 			new Libra4jError(Type.NULL_DATA,"input byte array cannot be null for account address");
-		}
-		if (bytes.length != BYTE_LENGTH) {
-			new Libra4jError(Type.INVALID_LENGTH,"invalid account address size: " + bytes.length +  " <> " + BYTE_LENGTH);
+		} else {
+			if (bytes.length != BYTE_LENGTH) {
+				new Libra4jError(Type.INVALID_LENGTH,"invalid account address size: " + bytes.length +  " <> " + BYTE_LENGTH);
+			}
 		}
 		this.bytes = bytes;
 	}
