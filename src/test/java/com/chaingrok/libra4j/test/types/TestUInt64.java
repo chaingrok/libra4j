@@ -118,7 +118,7 @@ public class TestUInt64 extends TestClass {
 	}
 	
 	@Test
-	public void test04_testGetBytes() {
+	public void test004_testGetBytes() {
 		long value = 0L;
 		UInt64 u64 = new UInt64(value);
 		byte[] bytes = u64.getBytes();
@@ -139,5 +139,16 @@ public class TestUInt64 extends TestClass {
 		assertEquals(UInt64.BYTE_LENGTH,bytes.length);
 		byte[]  expected3 =  {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x64};
 		assertArrayEquals(expected3,bytes);
+	}
+	
+	@Test
+	public void test005_bytesVsLongValues() {
+		Long number = 123456L;
+		UInt64 uint64 = new UInt64(number);
+		assertEquals(number,(Long)uint64.getAsLong());
+		byte[] bytes = uint64.getBytes();
+		uint64 = new UInt64(bytes);
+		assertEquals(number,(Long)uint64.getAsLong());
+		
 	}
 }
