@@ -24,7 +24,7 @@ public class Transaction {
 	private Hash signedTransactionHash = null ;
 	private Hash eventRootHash = null;
 	private Hash stateRootHash = null;
-	private byte[] fullTxtBytes = null;
+	private byte[] fullTxnBytes = null;
 	private byte[] rawTxnBytes = null;
 	private ArrayList<Event> eventsList = null;
 	
@@ -158,12 +158,12 @@ public class Transaction {
 		this.stateRootHash = stateRootHash;
 	}
 
-	public byte[] getFullTxtBytes() {
-		return fullTxtBytes;
+	public byte[] getFullTxnBytes() {
+		return fullTxnBytes;
 	}
 
-	public void setFullTxtBytes(byte[] fullTxtBytes) {
-		this.fullTxtBytes = fullTxtBytes;
+	public void setFullTxnBytes(byte[] fullTxnBytes) {
+		this.fullTxnBytes = fullTxnBytes;
 	}
 
 	public byte[] getRawTxnBytes() {
