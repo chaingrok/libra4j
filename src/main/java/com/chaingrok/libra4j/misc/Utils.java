@@ -133,6 +133,10 @@ public class Utils {
 		return getByteArray(l,(byte)0x00);
 	}
 	
+	public static byte[] getByteArray(int l, int pattern) {
+		return getByteArray(l,(byte)pattern);
+	}
+	
 	public static byte[] getByteArray(int l, byte pattern) {
 		byte[] result = new byte[l];
 		for(int i=0 ; i<l ;++i) {
