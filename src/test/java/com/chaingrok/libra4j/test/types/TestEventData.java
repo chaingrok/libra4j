@@ -8,6 +8,7 @@ import org.junit.runners.MethodSorters;
 
 import com.chaingrok.libra4j.misc.Utils;
 import com.chaingrok.libra4j.test.TestClass;
+import com.chaingrok.libra4j.types.AccountAddress;
 import com.chaingrok.libra4j.types.EventData;
 import com.google.protobuf.ByteString;
 
@@ -16,7 +17,7 @@ public class TestEventData extends TestClass {
 	
 	@Test
 	public void test001_newInstance() {
-		ByteString byteString  = ByteString.copyFrom(Utils.getByteArray(20));
+		ByteString byteString  = ByteString.copyFrom(Utils.getByteArray(AccountAddress.BYTE_LENGTH * 2)); //length must be > Account address length to deserialize access path;
 		EventData eventData = new EventData(byteString);
 		assertEquals(byteString,eventData.getByteString());
 	}
