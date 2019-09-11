@@ -6,7 +6,7 @@ import com.google.protobuf.ByteString;
 
 public class Signature {
 	
-	public static final int LENGTH = 64;
+	public static final int BYTE_LENGTH = 64;
 	
 	private byte[] bytes = null;
 	
@@ -15,8 +15,8 @@ public class Signature {
 	}
 	
 	public Signature(byte[] bytes) {
-		if (bytes.length != LENGTH)  {
-			throw new Libra4jException("invalid length for signature: " + bytes.length + " <> " + LENGTH);
+		if (bytes.length != BYTE_LENGTH)  {
+			throw new Libra4jException("invalid length for signature: " + bytes.length + " <> " + BYTE_LENGTH);
 		}
 		this.bytes = bytes;
 	}

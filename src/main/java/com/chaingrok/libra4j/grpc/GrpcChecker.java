@@ -73,7 +73,7 @@ public class GrpcChecker {
 			System.out.println("signed is null");
 			result = false;
 		} else {
-			if (signed.size() != Signature.LENGTH) {
+			if (signed.size() != Signature.BYTE_LENGTH) {
 				System.out.println("invalid signed size:" + signed.size());
 				result = false;
 			}
