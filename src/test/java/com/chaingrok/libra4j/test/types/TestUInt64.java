@@ -100,6 +100,10 @@ public class TestUInt64 extends TestClass {
 		u64 = new UInt64(value);
 		assertEquals(value,u64.getAsLong());
 		//
+		value = 123456L;
+		u64 = new UInt64(value);
+		assertEquals(value,u64.getAsLong());
+		//
 		value = Long.MAX_VALUE;
 		u64 = new UInt64(value);
 		assertEquals(value,u64.getAsLong());
