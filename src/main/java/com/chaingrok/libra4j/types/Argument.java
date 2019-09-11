@@ -32,7 +32,10 @@ public class Argument {
 		String dataStr = "";
 		switch (type) {
 			case U64:
-				dataStr = (new UInt64(Utils.reverseByteOrder(data))).getAsLong() +" (" + Utils.byteArrayToHexString(data) + ")";
+				dataStr = (new UInt64(data)).getAsLong() +" (" + Utils.byteArrayToHexString(data) + ")";
+				break;
+			case STRING:
+				dataStr = new String(data) + " (" + Utils.byteArrayToHexString(data) + ")";
 				break;
 			default:
 				dataStr = Utils.byteArrayToHexString(data);
