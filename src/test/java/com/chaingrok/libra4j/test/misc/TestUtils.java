@@ -162,5 +162,22 @@ public class TestUtils extends TestClass {
 		String dateString = Utils.timestampMillisToDateString(millis);
 		//assertEquals("2019-09-09 06:27:03",dateString); TODO: fix UTC vs local time
 	}
- 
+	
+	@Test
+	public void test012_getByteArray() {
+		int l = 10;
+		byte[] bytes = Utils.getByteArray(l);
+		assertEquals(l,bytes.length);
+		for(byte b : bytes) {
+			assertEquals((byte)0x00,b);
+		}
+		//
+		l = 15;
+		byte pattern = 0x01;
+		bytes = Utils.getByteArray(l,pattern);
+		assertEquals(l,bytes.length);
+		for(byte b : bytes) {
+			assertEquals(pattern,b);
+		}
+	}
 }

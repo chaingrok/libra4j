@@ -128,5 +128,17 @@ public class Utils {
 		result = sdf.format(calendar.getTime());
 		return result;
 	}
+	
+	public static byte[] getByteArray(int l) {
+		return getByteArray(l,(byte)0x00);
+	}
+	
+	public static byte[] getByteArray(int l, byte pattern) {
+		byte[] result = new byte[l];
+		for(int i=0 ; i<l ;++i) {
+			result[i] = pattern;
+		}
+		return result;
+	}
 
 }
