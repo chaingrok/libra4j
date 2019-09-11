@@ -39,7 +39,7 @@ public class Path {
 		String result = "";
 		result += getType().toString();
 		if (getType() == Type.UNKNOWN) {
-			result += " (" + Utils.byteArrayToHexString(path) + ")";
+			result += " (" + new String(path) + " - " + Utils.byteArrayToHexString(path) + ")";
 		}
 		return result;
 	}
