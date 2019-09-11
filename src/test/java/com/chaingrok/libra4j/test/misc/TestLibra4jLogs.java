@@ -109,8 +109,11 @@ public class TestLibra4jLogs extends TestClass {
 		new Libra4jInfo(Type.INVALID_CLASS,1L); //log code + transaction version
 		assertEquals(2,Libra4jLog.getLogs().size());
 		//
-		new Libra4jInfo(Type.MISSING_DATA,2L,new Object()); //log code + transaction version + error object
+		new Libra4jInfo(Type.INVALID_CLASS,new Object()); //log code + error object
 		assertEquals(3,Libra4jLog.getLogs().size());
+		//
+		new Libra4jInfo(Type.MISSING_DATA,2L,new Object()); //log code + transaction version + error object
+		assertEquals(4,Libra4jLog.getLogs().size());
 		//
 		assertTrue(Libra4jLog.hasLogs());
 		//
