@@ -13,6 +13,7 @@ import com.chaingrok.libra4j.types.AccessPath;
 import com.chaingrok.libra4j.types.AccountAddress;
 import com.chaingrok.libra4j.types.Event;
 import com.chaingrok.libra4j.types.EventData;
+import com.chaingrok.libra4j.types.Path;
 import com.google.protobuf.ByteString;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -35,7 +36,7 @@ public class TestEvent extends TestClass {
 		event.setData(eventData);
 		assertSame(eventData,event.getData());
 		//
-		AccessPath accessPath = new AccessPath(Utils.getByteArray(18));
+		AccessPath accessPath = AccessPath.create((byte)0x00,new AccountAddress(AccountAddress.ADDRESS_ZERO),new Path("/test_path"));
 		event.setAccessPath(accessPath);
 		assertSame(accessPath,event.getAccessPath());
 	}

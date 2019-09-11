@@ -11,6 +11,10 @@ public class Path {
 	
 	private byte[] path;
 	
+	public Path(String path) {
+		this(path.getBytes());
+	}
+	
 	public Path(byte[] path) {
 		String str = new String(path);
 		if (!str.matches("[a-zA-Z0-9_\\/]+")) {
@@ -22,7 +26,7 @@ public class Path {
 		this.path = path;
 	}
 	
-	public byte[] get() {
+	public byte[] getBytes() {
 		return path;
 	}
 	

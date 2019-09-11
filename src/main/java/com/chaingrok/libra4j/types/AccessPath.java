@@ -80,5 +80,11 @@ public class AccessPath implements Serialized {
 		result += "access path - tag: " + tag + " - address: " + getAddress().toString() + " - path: " + getPath().toString();
 		return result;
 	}
+	
+	public static AccessPath create(byte tag,AccountAddress accountAddress,Path path) {
+		byte[] tagArray = new byte[1];
+		tagArray[0] = tag;
+		return new AccessPath(Utils.byteArrayToHexString(tagArray) + Utils.byteArrayToHexString(accountAddress.getBytes()) + Utils.byteArrayToHexString(path.getBytes()));
+	}
 
 }
