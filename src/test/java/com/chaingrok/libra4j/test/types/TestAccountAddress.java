@@ -39,7 +39,7 @@ public class TestAccountAddress extends TestClass {
 		try {
 			new AccountAddress(byteString);
 			fail("should throw null Exception");
-		} catch (NullPointerException e) {
+		} catch (RuntimeException e) {
 			assertTrue(e instanceof NullPointerException);
 		}
 	}
