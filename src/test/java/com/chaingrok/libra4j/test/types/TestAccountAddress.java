@@ -24,7 +24,7 @@ public class TestAccountAddress extends TestClass {
 	
 	
 	@Test
-	public void test001_testLength() {
+	public void test001TestLength() {
 		assertFalse(Libra4jLog.hasLogs());
 		new AccountAddress((byte[])null);
 		assertTrue(Libra4jLog.hasLogs());
@@ -45,7 +45,7 @@ public class TestAccountAddress extends TestClass {
 	}
 	
 	@Test
-	public void test002_testLength() {
+	public void test002TestLength() {
 		assertFalse(Libra4jLog.hasLogs());
 		new AccountAddress("00");
 		assertTrue(Libra4jLog.hasLogs());
@@ -57,7 +57,7 @@ public class TestAccountAddress extends TestClass {
 	}
 	
 	@Test
-	public void test03_testNotEquals() {
+	public void test03TestNotEquals() {
 		AccountAddress address = new AccountAddress("045d3e63dba85f759d66f9bed4a0e4c262d17f9713f25e846fdae63891837a98");
 		assertFalse(address.equals(null));
 		//
@@ -70,7 +70,7 @@ public class TestAccountAddress extends TestClass {
 	}
 	
 	@Test
-	public void test004_testEquals() {
+	public void test004TestEquals() {
 		AccountAddress address = new AccountAddress("045d3e63dba85f759d66f9bed4a0e4c262d17f9713f25e846fdae63891837a98");
 		assertEquals(AccountAddress.BYTE_LENGTH,address.getBytes().length);
 		assertEquals(address,address);

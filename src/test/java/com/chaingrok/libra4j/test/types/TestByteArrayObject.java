@@ -23,12 +23,12 @@ import com.chaingrok.libra4j.types.ValidatorId;
 public class TestByteArrayObject extends TestClass {
 	
 	@Test
-	public void test001_isAbstract() {
+	public void test001IsAbstract() {
 		assertTrue(Modifier.isAbstract(ByteArrayObject.class.getModifiers()));
 	}
 	
 	@Test 
-	public void test002_validateHeritingClasses() {
+	public void test002ValidateHeritingClasses() {
 		assertTrue(ByteArrayObject.class.isAssignableFrom(Code.class));
 		assertTrue(ByteArrayObject.class.isAssignableFrom(Module.class));
 		assertTrue(ByteArrayObject.class.isAssignableFrom(EventData.class));
@@ -36,7 +36,7 @@ public class TestByteArrayObject extends TestClass {
 	}
 	
 	@Test
-	public void test003_testEquals() {
+	public void test003TestEquals() {
 		ByteArrayObjectTest byteArray1 = new ByteArrayObjectTest("0101");
 		ByteArrayObjectTest byteArray2 = new ByteArrayObjectTest("0101");
 		assertEquals(byteArray1,byteArray1);

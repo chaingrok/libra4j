@@ -19,7 +19,7 @@ public class TestAccessPath {
 	
 	
 	@Test
-	public void test001_newInstance() {
+	public void test001NewInstance() {
 		String path = "/test_path";
 		AccessPath accessPath = new AccessPath((byte)0x00,new AccountAddress(AccountAddress.ADDRESS_ZERO),new Path(path));
 		String string = accessPath.toString();
@@ -28,7 +28,7 @@ public class TestAccessPath {
 	}
 	
 	@Test
-	public void test002_parseAccessPath1() {
+	public void test00ParseAccessPath1() {
 		String hex = "01217da6c6b3e19f1825cfb2676daecce3bf3de03cf26647c78df00b371b25cc972f73656e745f6576656e74735f636f756e742f";
 		AccessPath accessPath = new AccessPath(hex);
 		assertEquals(AccessPath.RESOURCE_TAG,accessPath.getTag());
@@ -42,7 +42,7 @@ public class TestAccessPath {
 	}
 	
 	@Test
-	public void test003_parseAccessPath2() {
+	public void test003ParseAccessPath2() {
 		String hex = "01217da6c6b3e19f1825cfb2676daecce3bf3de03cf26647c78df00b371b25cc972f72656365697665645f6576656e74735f636f756e742f";
 		AccessPath accessPath = new AccessPath(hex);
 		assertEquals(AccessPath.RESOURCE_TAG,accessPath.getTag());

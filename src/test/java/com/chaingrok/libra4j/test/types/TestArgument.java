@@ -19,7 +19,7 @@ import com.chaingrok.libra4j.types.UInt64;
 public class TestArgument extends TestClass {
 	
 	@Test
-	public void test001_getArgumentType() {
+	public void test001GetArgumentType() {
 		assertEquals(Type.U64,Type.get(ArgType.U64));
 		assertEquals(Type.ADDRESS,Type.get(ArgType.ADDRESS));
 		assertEquals(Type.STRING,Type.get(ArgType.STRING));
@@ -28,7 +28,7 @@ public class TestArgument extends TestClass {
 	}
 	
 	@Test
-	public void test002_failArgumentType() {
+	public void test002FailArgumentType() {
 		assertEquals(Type.UNRECOGNIZED,Type.get(ArgType.UNRECOGNIZED));
 		assertEquals(1,Libra4jError.getLogs().size());
 		Libra4jLog error = Libra4jLog.getLogs().get(0);
@@ -37,7 +37,7 @@ public class TestArgument extends TestClass {
 	}
 	
 	@Test
-	public void test003_newInstance() {
+	public void test003NewInstance() {
 		Argument argument = new Argument();
 		argument.setType(Type.STRING);
 		assertEquals(Type.STRING,argument.getType());
