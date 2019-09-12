@@ -1,6 +1,8 @@
 package com.chaingrok.libra4j.test.types;
 
 import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -9,6 +11,8 @@ import org.junit.runners.MethodSorters;
 import com.chaingrok.libra4j.misc.Utils;
 import com.chaingrok.libra4j.test.TestClass;
 import com.chaingrok.libra4j.types.Hash;
+import com.chaingrok.libra4j.types.Hash.HashSalt;
+import com.google.protobuf.ByteString;
 
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -30,9 +34,23 @@ public class TestHash extends TestClass {
 		byte[] hashHello = Utils.hexStringToByteArray("3338be694f50c5f338814986cdf0686453a888b84f424d792af4b9202398f392");
 		Hash hash = Hash.hash("hello");
 		assertArrayEquals(hashHello,hash.getBytes());
+		ByteString byteString = ByteString.copyFrom(hashHello);
+		hash = new Hash(byteString);
+		assertArrayEquals(hashHello,hash.getBytes());
 		//
 		byte[] hashWorld = Utils.hexStringToByteArray("420baf620e3fcd9b3715b42b92506e9304d56e02d3a103499a3a292560cb66b2");
 		hash = Hash.hash("world");
 		assertArrayEquals(hashWorld,hash.getBytes());
+		byteString = ByteString.copyFrom(hashWorld);
+		hash = new Hash(byteString);
+		assertArrayEquals(hashWorld,hash.getBytes());
+	}
+	
+	@Test
+	public void test003_checkSalt() {
+		assertNotNull(HashSalt.ACCOUNT_ADDRESS.getSalt());
+		assertTrue(HashSalt.ACCOUNT_ADDRESS.getSalt().length() > 0);
+		assertNotNull(HashSalt.RAW_TRANSACTION.getSalt());
+		assertTrue(HashSalt.RAW_TRANSACTION.getSalt().length() > 0);
 	}
 }

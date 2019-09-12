@@ -24,10 +24,6 @@ public class Hash extends ByteArrayObject {
 		}
 	}
 	
-	public int size() {
-		return this.bytes.length;
-	}
-	
 	public static Hash hash(String str) {
 		return hash(str.getBytes());
 	}
