@@ -80,8 +80,10 @@ public class LedgerInfo {
 		result += "   transaction accumulator hash: " + transactionAccumulatorHash + "\n";
 		result += "   consensus block id: " + consensusBlockId + "\n";
 		result += "   validators (" + validators.size() + "): ";
-		for (Validator validator : validators) {
-			result += validator.getValidatorId() + ",";
+		if (validators.size() > 0) {
+			for (Validator validator : validators) {
+				result += validator.getValidatorId() + ",";
+			}
 		}
 		result += "\n";
 		return result;
