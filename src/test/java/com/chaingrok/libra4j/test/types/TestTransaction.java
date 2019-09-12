@@ -1,5 +1,6 @@
 package com.chaingrok.libra4j.test.types;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
@@ -14,11 +15,14 @@ import org.junit.runners.MethodSorters;
 import com.chaingrok.libra4j.misc.Libra4jLog;
 import com.chaingrok.libra4j.misc.Utils;
 import com.chaingrok.libra4j.test.TestClass;
+import com.chaingrok.libra4j.types.Argument;
 import com.chaingrok.libra4j.types.Code;
 import com.chaingrok.libra4j.types.Event;
 import com.chaingrok.libra4j.types.Hash;
+import com.chaingrok.libra4j.types.Module;
 import com.chaingrok.libra4j.types.Program;
 import com.chaingrok.libra4j.types.Transaction;
+import com.chaingrok.libra4j.types.Argument.Type;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestTransaction extends TestClass {
@@ -135,10 +139,25 @@ public class TestTransaction extends TestClass {
 		Program program = new Program();
 		program.setCode(Code.MINT);
 		transaction.setProgram(program);
+		Argument argument = new Argument();
+		argument.setType(Type.STRING);
+		String argValue = "foo_bar";
+		byte[] bytes = argValue.getBytes();
+		argument.setData(bytes);
+		ArrayList<Argument> arguments = new ArrayList<Argument>();
+		arguments.add(argument);
+		program.setArguments(arguments);
+		byte[] code = {0x00,0x01,0x0a,0x0b};
+		Module module = new Module(code);
+		ArrayList<Module> modules = new ArrayList<Module>();
+		modules.add(module);
+		program.setModules(modules);
 		//
 		String string = transaction.toString();
 		assertTrue(string.contains(version + ""));
 		assertTrue(string.contains(Transaction.Type.MINT + ""));
+		assertTrue(string.contains(argValue));
+		assertTrue(string.contains(Utils.byteArrayToHexString(bytes)));
 	}
 
 }
