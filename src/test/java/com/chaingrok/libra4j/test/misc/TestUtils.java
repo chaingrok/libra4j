@@ -160,7 +160,7 @@ public class TestUtils extends TestClass {
 	public void test011_timestampMillisTotString() {
 		long millis = 1568003223154L;
 		String dateString = Utils.timestampMillisToDateString(millis);
-		//assertEquals("2019-09-09 06:27:03",dateString); TODO: fix UTC vs local time
+		assertEquals("2019-09-09 04:27:03",dateString);
 	}
 	
 	@Test

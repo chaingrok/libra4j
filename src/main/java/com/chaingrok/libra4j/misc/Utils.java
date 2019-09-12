@@ -10,6 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.TimeZone;
 
 import javax.xml.bind.DatatypeConverter;
 
@@ -122,6 +123,7 @@ public class Utils {
 	public static String timestampMillisToDateString(long millis) {
 		String result = null;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTimeInMillis(millis);
 		sdf.format(calendar.getTime());
