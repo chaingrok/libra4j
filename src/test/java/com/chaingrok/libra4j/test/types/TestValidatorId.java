@@ -21,14 +21,14 @@ import com.google.protobuf.ByteString;
 public class TestValidatorId extends TestClass {
 	
 	@Test
-	public void test001_newInstanceOk() {
+	public void test001NewInstanceOk() {
 		byte[] id = {0x00,0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x00,0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x00,0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x00,0x01,0x02,0x03,0x04,0x05,0x06,0x07};
 		ValidatorId validatorId  = new ValidatorId(ByteString.copyFrom(id));
 		assertArrayEquals(id,validatorId.getBytes());
 	}
 	
 	@Test
-	public void test002_newInstanceKo() {
+	public void test002NewInstanceKo() {
 		assertFalse(Libra4jLog.hasLogs());
 		byte[] id = {0x00};
 		ValidatorId validatorId  = new ValidatorId(ByteString.copyFrom(id));

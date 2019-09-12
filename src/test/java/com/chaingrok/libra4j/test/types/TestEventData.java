@@ -16,7 +16,7 @@ import com.google.protobuf.ByteString;
 public class TestEventData extends TestClass {
 	
 	@Test
-	public void test001_newInstance() {
+	public void test001NewInstance() {
 		ByteString byteString  = ByteString.copyFrom(Utils.getByteArray(AccountAddress.BYTE_LENGTH * 2)); //length must be > Account address length to deserialize access path;
 		EventData eventData = new EventData(byteString);
 		assertEquals(byteString,eventData.getByteString());

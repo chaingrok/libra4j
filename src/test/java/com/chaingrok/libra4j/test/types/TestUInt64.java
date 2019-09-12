@@ -22,7 +22,7 @@ import com.google.protobuf.ByteString;
 public class TestUInt64 extends TestClass {
 	
 	@Test
-	public void test001_testWrongFormat() {
+	public void test001WrongFormat() {
 		byte[] bytes = {};
 		try {
 			new UInt64(bytes);
@@ -41,7 +41,7 @@ public class TestUInt64 extends TestClass {
 	}
 	
 	@Test
-	public void test002_testLongValues() {
+	public void test002LongValues() {
 		long value = 0L;
 		byte[] bytes = Utils.longToByteArray(value);
 		ByteString byteString = ByteString.copyFrom(bytes);
@@ -59,7 +59,7 @@ public class TestUInt64 extends TestClass {
 	}
 	
 	@Test
-	public void test003_testBiggerThanLongValues() {
+	public void test003BiggerThanLongValues() {
 		long value = -1L;
 		byte[] bytes = Utils.longToByteArray(value);
 		ByteString byteString = ByteString.copyFrom(bytes);
@@ -87,7 +87,7 @@ public class TestUInt64 extends TestClass {
 	}
 	
 	@Test
-	public void test003_testContructFromLong() {
+	public void test004ContructFromLong() {
 		long value = 0L;
 		UInt64 u64 = new UInt64(value);
 		assertEquals(value,u64.getAsLong());
@@ -118,7 +118,7 @@ public class TestUInt64 extends TestClass {
 	}
 	
 	@Test
-	public void test004_testGetBytes() {
+	public void test005GetBytes() {
 		long value = 0L;
 		UInt64 u64 = new UInt64(value);
 		byte[] bytes = u64.getBytes();

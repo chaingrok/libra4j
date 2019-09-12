@@ -19,7 +19,7 @@ import com.google.protobuf.ByteString;
 public class TestHash extends TestClass {
 	
 	@Test
-	public void test001_hashStandardValuess() {
+	public void test001HashStandardValuess() {
 		// 0 address hash
 		String zero32Bytes = "0000000000000000000000000000000000000000000000000000000000000000";
 		byte[] hashZero32 = Utils.hexStringToByteArray("9e6291970cb44dd94008c79bcaf9d86f18b4b49ba5b2a04781db7199ed3b9e4e");
@@ -29,7 +29,7 @@ public class TestHash extends TestClass {
 	}
 	
 	@Test
-	public void test002_hashSamples() {
+	public void test002HashSamples() {
 		//source: crypto/legacy_crypto/src/unit_tests/hash_test.rs
 		byte[] hashHello = Utils.hexStringToByteArray("3338be694f50c5f338814986cdf0686453a888b84f424d792af4b9202398f392");
 		Hash hash = Hash.hash("hello");
@@ -47,7 +47,7 @@ public class TestHash extends TestClass {
 	}
 	
 	@Test
-	public void test003_checkSalt() {
+	public void test003CheckSalt() {
 		assertNotNull(HashSalt.ACCOUNT_ADDRESS.getSalt());
 		assertTrue(HashSalt.ACCOUNT_ADDRESS.getSalt().length() > 0);
 		assertNotNull(HashSalt.RAW_TRANSACTION.getSalt());

@@ -18,7 +18,7 @@ import com.chaingrok.libra4j.types.Program;
 public class TestProgram extends TestClass {
 	
 	@Test
-	public void test001_newInstance() {
+	public void test001NewInstance() {
 		Program program = new Program();
 		//
 		Code code = new Code(Code.MINT.getBytes());

@@ -17,7 +17,7 @@ import com.google.protobuf.ByteString;
 public class TestValidator extends TestClass {
 	
 	@Test
-	public void test001_newInstance() {
+	public void test001NewInstance() {
 		Validator validator = new Validator();
 		//
 		ValidatorId validatorId = new ValidatorId(ByteString.copyFrom(Utils.getByteArray(ValidatorId.BYTE_LENGTH)));

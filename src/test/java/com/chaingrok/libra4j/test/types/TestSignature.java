@@ -19,7 +19,7 @@ import com.google.protobuf.ByteString;
 public class TestSignature extends TestClass {
 	
 	@Test
-	public void test001_newInstanceOk() {
+	public void test001NewInstanceOk() {
 		byte[] bytes = Utils.getByteArray(Signature.BYTE_LENGTH,0x01);
 		Signature signature = new Signature(bytes);
 		assertSame(bytes,signature.getBytes());
@@ -30,7 +30,7 @@ public class TestSignature extends TestClass {
 	}
 	
 	@Test
-	public void test002_newInstanceKo() {
+	public void test002NewInstanceKo() {
 		byte[] bytes = Utils.getByteArray(Signature.BYTE_LENGTH-1,0x00);
 		try {
 			new Signature(bytes);
@@ -41,7 +41,7 @@ public class TestSignature extends TestClass {
 	}
 	
 	@Test
-	public void test002_SignatureToString() {
+	public void test002SignatureToString() {
 		byte[] bytes = Utils.getByteArray(Signature.BYTE_LENGTH,0x01);
 		Signature signature = new Signature(bytes);
 		assertTrue(signature.toString().contains(Utils.byteArrayToHexString(bytes)));

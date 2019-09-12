@@ -18,7 +18,7 @@ import com.chaingrok.libra4j.types.Path;
 public class TestPath extends TestClass {
 	
 	@Test
-	public void test001_checkPathType() {
+	public void test001CheckPathType() {
 		assertEquals(Path.Type.UNKNOWN,Path.Type.get("foo"));
 		assertEquals(3,Path.Type.values().length);
 		assertEquals(Path.Type.SENT_EVENTS_COUNT,Path.Type.get(Path.Type.SENT_EVENTS_COUNT.get()));
@@ -26,7 +26,7 @@ public class TestPath extends TestClass {
 	}
 	
 	@Test
-	public void test002_checkFromHex() {
+	public void test002CheckFromHex() {
 		Path path = new Path(Utils.hexStringToByteArray("2f72656365697665645f6576656e74735f636f756e742f"));
 		assertEquals(Path.Type.RECEIVED_EVENTS_COUNT,path.getType());
 		path = new Path(Utils.hexStringToByteArray("2f73656e745f6576656e74735f636f756e742f"));
@@ -34,7 +34,7 @@ public class TestPath extends TestClass {
 	}
 	
 	@Test
-	public void test003_testInvalidCharInPath() {
+	public void test003InvalidCharInPath() {
 		byte[] path = {0x00};
 		try {
 			new Path(path);
@@ -60,7 +60,7 @@ public class TestPath extends TestClass {
 	}
 	
 	@Test
-	public void test004_testPathStart() {
+	public void test004PathStart() {
 		byte[] path = "foo".getBytes();
 		try {
 			new Path(path);

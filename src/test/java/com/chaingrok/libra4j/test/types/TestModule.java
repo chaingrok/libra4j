@@ -13,7 +13,7 @@ import com.chaingrok.libra4j.types.Module;
 public class TestModule extends TestClass {
 	
 	@Test
-	public void test001_newInstance() {
+	public void test001NewInstance() {
 		byte[] code = {0x00,0x01};
 		Module module = new Module(code);
 		assertArrayEquals(code,module.getBytes());

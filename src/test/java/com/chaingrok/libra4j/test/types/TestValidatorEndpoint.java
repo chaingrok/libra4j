@@ -16,7 +16,7 @@ import com.chaingrok.libra4j.types.ValidatorEndpoint;
 public class TestValidatorEndpoint extends TestClass {
 	
 	@Test
-	public void tes001_newInstance() {
+	public void tes001NewInstance() {
 		ValidatorEndpoint validatorEndpoint = new ValidatorEndpoint(TestData.LIBRA_TESTNET_VALIDATOR_ADDRESS,TestData.LIBRA_TESTNET_VALIDATOR_PORT);
 		assertEquals(TestData.LIBRA_TESTNET_VALIDATOR_ADDRESS,validatorEndpoint.getDns());
 		assertEquals(TestData.LIBRA_TESTNET_VALIDATOR_PORT,validatorEndpoint.getPort());

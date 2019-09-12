@@ -21,7 +21,7 @@ import com.google.protobuf.ByteString;
 public class TestLedgerInfo extends TestClass {
 	
 	@Test
-	public void test001_newInstance() {
+	public void test001NewInstance() {
 		LedgerInfo ledgerInfo = new LedgerInfo();
 		//
 		byte[] consensusBlockIdBytes = Utils.getByteArray(Hash.BYTE_LENGTH,0x00);

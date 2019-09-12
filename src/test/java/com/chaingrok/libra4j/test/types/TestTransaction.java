@@ -27,7 +27,7 @@ import com.chaingrok.libra4j.types.Argument.Type;
 public class TestTransaction extends TestClass {
 	
 	@Test
-	public void test001_newInstance() {
+	public void test001NewInstance() {
 		Transaction transaction = new Transaction();
 		assertNull(transaction.getVersion());
 		Long version = new Long(0L);
@@ -113,7 +113,7 @@ public class TestTransaction extends TestClass {
 	}
 	
 	@Test
-	public void test002_checkType() {
+	public void test002CheckType() {
 		Transaction transaction = new Transaction();
 		Program program= new Program();
 		program.setCode(Code.MINT);
@@ -129,7 +129,7 @@ public class TestTransaction extends TestClass {
 	}
 	
 	@Test
-	public void test003_testToString() {
+	public void test003ToString() {
 		Transaction transaction = new Transaction();
 		//
 		Long version = new Long(12345678L);

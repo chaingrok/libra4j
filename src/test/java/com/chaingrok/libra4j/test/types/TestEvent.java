@@ -21,7 +21,7 @@ import com.google.protobuf.ByteString;
 public class TestEvent extends TestClass {
 	
 	@Test
-	public void test001_newInstance() {
+	public void test001NewInstance() {
 		Event event = new Event();
 		//
 		Long sequenceNumber = new Long(0);
@@ -43,7 +43,7 @@ public class TestEvent extends TestClass {
 	}
 	
 	@Test
-	public void test002_EventToString() {
+	public void test002EventToString() {
 		Event event = new Event();
 		//
 		long seqNum = 123456789L;
