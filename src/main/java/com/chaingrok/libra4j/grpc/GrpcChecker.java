@@ -324,7 +324,6 @@ public class GrpcChecker {
 			list.add(GrpcField.RESPONSE_ITEMS);
 			list.add(GrpcField.LEDGER_INFO_WITH_SIGS);
 			this.put(org.libra.grpc.types.GetWithProof.UpdateToLatestLedgerResponse.class,list);
-			//
 		}
 		
 	}
