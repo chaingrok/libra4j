@@ -1,6 +1,5 @@
 package com.chaingrok.libra4j.test.types;
 
-import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertSame;
 
 import org.junit.FixMethodOrder;

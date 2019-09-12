@@ -10,7 +10,6 @@ import org.libra.grpc.types.Transaction.TransactionArgument.ArgType;
 
 import com.chaingrok.libra4j.misc.Libra4jError;
 import com.chaingrok.libra4j.misc.Libra4jLog;
-import com.chaingrok.libra4j.misc.Utils;
 import com.chaingrok.libra4j.test.TestClass;
 import com.chaingrok.libra4j.types.Argument;
 import com.chaingrok.libra4j.types.Argument.Type;
