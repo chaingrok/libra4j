@@ -2,8 +2,8 @@ package com.chaingrok.libra4j.types;
 
 public class Validator {
 	
-	ValidatorId id;
-	Signature signature;
+	private ValidatorId id;
+	private Signature signature;
 	
 	public ValidatorId getValidatorId() {
 		return id;

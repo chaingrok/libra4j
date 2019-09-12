@@ -10,10 +10,9 @@ import com.google.protobuf.ByteString;
 public class UInt64 {
 	
 	public static final int BYTE_LENGTH = 8;
-	
 	public static final BigInteger MAX_VALUE= new BigInteger("18446744073709551615"); // 18 446 744 073 709 551 615
 	
-	byte[] bytes = null;
+	private byte[] bytes = null;
 	
 	public UInt64(ByteString byteString) {
 		this(byteString.toByteArray());
