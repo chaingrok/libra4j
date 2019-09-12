@@ -15,7 +15,7 @@ import com.chaingrok.libra4j.test.TestClass;
 public class TestLibra4jException extends TestClass {
 	
 	@Test
-	public void tes001_throwException() {
+	public void tes001ThrowException() {
 		String message = "message";
 		try {
 			throw new Libra4jException(message);
@@ -26,7 +26,7 @@ public class TestLibra4jException extends TestClass {
 	}
 	
 	@Test
-	public void tes002_throwException() {
+	public void tes002ThrowExceptionWithThrowable() {
 		String message = "message";
 		Libra4jException e0 = new Libra4jException(message);
 		try {

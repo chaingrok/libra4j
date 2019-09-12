@@ -22,19 +22,19 @@ import com.chaingrok.libra4j.test.TestClass;
 public class TestLibra4jLogs extends TestClass {
 	
 	@Test
-	public void test001_LogIsAbstract() {
+	public void test001LogIsAbstract() {
 		assertTrue(Modifier.isAbstract(Libra4jLog.class.getModifiers()));
 	}
 	
 	@Test
-	public void test002_checkInheritance() {
+	public void test002CheckInheritance() {
 		assertTrue(Libra4jLog.class.isAssignableFrom(Libra4jError.class));
 		assertTrue(Libra4jLog.class.isAssignableFrom(Libra4jWarning.class));
 		assertTrue(Libra4jLog.class.isAssignableFrom(Libra4jInfo.class));
 	}
 	
 	@Test
-	public void test003_createErrors() {
+	public void test003CreateErrors() {
 		assertFalse(Libra4jLog.hasLogs());
 		assertNotNull(Libra4jLog.getLogs());
 		assertEquals(0,Libra4jLog.getLogs().size());
@@ -65,7 +65,7 @@ public class TestLibra4jLogs extends TestClass {
 	}
 	
 	@Test
-	public void test004_createWarnings() {
+	public void test004CreateWarnings() {
 		assertFalse(Libra4jLog.hasLogs());
 		assertNotNull(Libra4jLog.getLogs());
 		assertEquals(0,Libra4jLog.getLogs().size());
@@ -96,7 +96,7 @@ public class TestLibra4jLogs extends TestClass {
 	}
 	
 	@Test
-	public void test005_createInfos() {
+	public void test005CreateInfos() {
 		assertFalse(Libra4jLog.hasLogs());
 		assertNotNull(Libra4jLog.getLogs());
 		assertEquals(0,Libra4jLog.getLogs().size());

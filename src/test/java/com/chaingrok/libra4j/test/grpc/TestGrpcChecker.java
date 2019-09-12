@@ -19,7 +19,7 @@ import org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfo;
 public class TestGrpcChecker extends TestClass {
 	
 	@Test
-	public void test000_checkLedgerInfo() {
+	public void test000CheckLedgerInfo() {
 		GrpcChecker grpcChecker = new GrpcChecker();
 		//
 		long version = 123L;

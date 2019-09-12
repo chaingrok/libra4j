@@ -25,7 +25,7 @@ import com.google.protobuf.ByteString;
 public class TestUtils extends TestClass {
 	
 	@Test
-    public void test001_byteToHex() {
+    public void test001ByteToHex() {
 		byte[] bytes = {0x00};
     	assertEquals("00",Utils.byteArrayToHexString(bytes));
 		byte[] bytes2 = {0x74,0x65,0x73,0x74};
@@ -33,7 +33,7 @@ public class TestUtils extends TestClass {
     }
 	
 	@Test
-    public void test002_hexToByte() {
+    public void test002HexToByte() {
 		byte[] bytes = {0x00};
     	assertArrayEquals(bytes,Utils.hexStringToByteArray("00"));
 		byte[] bytes2 = {0x74,0x65,0x73,0x74};
@@ -41,7 +41,7 @@ public class TestUtils extends TestClass {
     }
 	
 	@Test
-    public void test003_byteStringToHex() {
+    public void test003ByteStringToHex() {
 		byte[] bytes = {0x00};
 		ByteString byteString = ByteString.copyFrom(bytes);
     	assertEquals("00",Utils.byteStringToHexString(byteString));
@@ -51,7 +51,7 @@ public class TestUtils extends TestClass {
     }
 	
 	@Test
-    public void test004_hexToByteString() {
+    public void test004HexToByteString() {
 		byte[] bytes = {0x00};
 		ByteString byteString = ByteString.copyFrom(bytes);
     	assertEquals(byteString,Utils.hexStringToByteString("00"));
@@ -61,7 +61,7 @@ public class TestUtils extends TestClass {
     }
 	
 	@Test
-	public void test005_reverseByteOrder() {
+	public void test005ReverseByteOrder() {
 		//even number of bytes
 		byte[] bytes = {0x12,0x34,0x56,0x78};
 		byte[] bytes2 = {0x78,0x56,0x34,0x12};
@@ -78,7 +78,7 @@ public class TestUtils extends TestClass {
 	}
 	
 	@Test
-	public void test006_readWriteFile() throws IOException {
+	public void test006ReadWriteFile() throws IOException {
 		File file = File.createTempFile("tmpFile", "tmp");
 		assertTrue(file.delete());
 		assertFalse(file.exists());
@@ -90,7 +90,7 @@ public class TestUtils extends TestClass {
 	}
 	
 	@Test
-	public void test007_readWritErrors() throws IOException {
+	public void test007ReadWritErrors() throws IOException {
 		try {
 			Utils.readFile("");
 			fail("empty filepath should fail");
@@ -108,7 +108,7 @@ public class TestUtils extends TestClass {
 	}
 	
 	@Test
-	public void test008_byteArrayToLong() {
+	public void test008ByteArrayToLong() {
 		long value = 0L;
 		assertEquals(value,Utils.byteArrayToLong(Utils.longToByteArray(value)));
 		value = 1L;
@@ -122,7 +122,7 @@ public class TestUtils extends TestClass {
 	}
 	
 	@Test
-	public void test009_byteArrayToInt() {
+	public void test009ByteArrayToInt() {
 		int value = 0;
 		assertEquals(value,Utils.byteArrayToInt(Utils.intToByteArray(value)));
 		value = 1;
@@ -136,7 +136,7 @@ public class TestUtils extends TestClass {
 	}
 	
 	@Test
-	public void test0010_byteArrayToBigInt() {
+	public void test0010ByteArrayToBigInt() {
 		byte[] bytes={0x00};
 		assertEquals(BigInteger.valueOf(0),Utils.byteArraytoBigInt(bytes));
 		byte[] bytes2={0x00,0x01};
@@ -157,14 +157,14 @@ public class TestUtils extends TestClass {
 	}
 	
 	@Test
-	public void test011_timestampMillisTotString() {
+	public void test011TimestampMillisTotString() {
 		long millis = 1568003223154L;
 		String dateString = Utils.timestampMillisToDateString(millis);
 		assertEquals("2019-09-09 04:27:03",dateString);
 	}
 	
 	@Test
-	public void test012_getByteArray() {
+	public void test012GetByteArray() {
 		int l = 10;
 		byte[] bytes = Utils.getByteArray(l);
 		assertEquals(l,bytes.length);

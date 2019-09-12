@@ -20,14 +20,13 @@ import com.chaingrok.libra4j.grpc.GrpcField;
 import com.chaingrok.libra4j.misc.Libra4jError;
 import com.chaingrok.libra4j.misc.Libra4jException;
 import com.chaingrok.libra4j.misc.Libra4jLog;
-import com.chaingrok.libra4j.misc.Libra4jWarning;
 import com.chaingrok.libra4j.test.TestClass;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestGrpcField extends TestClass {
 	
 	@Test
-	public void test000_FieldSize() {
+	public void test001FieldSize() {
 		assertEquals(68,GrpcField.values().length);
 	}
 	
@@ -38,7 +37,7 @@ public class TestGrpcField extends TestClass {
 	}
 	
 	@Test
-	public void test002_FieldKo() {
+	public void test002FieldKo() {
 		assertFalse(Libra4jLog.hasLogs());
 		assertNull(GrpcField.get("foo"));
 		assertTrue(Libra4jLog.hasLogs());
@@ -50,7 +49,7 @@ public class TestGrpcField extends TestClass {
 	}
 	
 	@Test
-	public void test003_testFullDuplicates() {
+	public void test003FullDuplicates() {
 		boolean result = true;
 		HashMap<String,GrpcField> map = new HashMap<String,GrpcField>();
 		for(GrpcField grpcField : GrpcField.values()) {
@@ -66,7 +65,7 @@ public class TestGrpcField extends TestClass {
 	}
 	
 	@Test
-	public void test003_testSuffixDuplicates() {
+	public void test004SuffixDuplicates() {
 		int result = 0;
 		HashMap<String,GrpcField> map = new HashMap<String,GrpcField>();
 		for(GrpcField grpcField : GrpcField.values()) {
@@ -98,7 +97,7 @@ public class TestGrpcField extends TestClass {
 	}
 	
 	@Test
-	public void test004_getParameters() {
+	public void test005GetParameters() {
 		assertEquals(LedgerInfo.class,GrpcField.LEDGER_INFO_VERSION.getOwningClass());
 		assertEquals(Long.class,GrpcField.LEDGER_INFO_VERSION.getFieldClass());
 	}
