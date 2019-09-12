@@ -124,5 +124,21 @@ public class TestTransaction extends TestClass {
 		assertTrue(Libra4jLog.hasLogs());
 		Libra4jLog.purgeLogs();
 	}
+	
+	@Test
+	public void test003_testToString() {
+		Transaction transaction = new Transaction();
+		//
+		Long version = new Long(12345678L);
+		transaction.setVersion(version);
+		//
+		Program program = new Program();
+		program.setCode(Code.MINT);
+		transaction.setProgram(program);
+		//
+		String string = transaction.toString();
+		assertTrue(string.contains(version + ""));
+		assertTrue(string.contains(Transaction.Type.MINT + ""));
+	}
 
 }

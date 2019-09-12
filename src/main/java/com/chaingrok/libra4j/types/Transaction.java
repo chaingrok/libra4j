@@ -190,8 +190,12 @@ public class Transaction {
 	public String toString() {
 		String result = "";
 		result += "transaction " + getVersion() + ":\n";
-		result += "   sender account address: " + getSenderAccountAddress().toString() + "\n";
-		result += "   signature: " + getSignature().toString() + "\n";
+		if (getSenderAccountAddress() != null) {
+			result += "   sender account address: " + getSenderAccountAddress().toString() + "\n";
+		}
+		if (getSignature() != null) {
+			result += "   signature: " + getSignature().toString() + "\n";
+		}
 		result += "   signed transaction hash:" + getSignedTransactionHash() + "\n";
 		result += "   sequence number: " + getSequenceNumber() + "\n";
 		result += "   gas used: "  + getGasUsed() + "\n";
@@ -201,18 +205,24 @@ public class Transaction {
 		if (program != null) {
 			ArrayList<Argument> arguments = getProgram().getArguments();
 			if (arguments != null) {
-				for (Argument argument : arguments) {
-					result += "      argument: " +  argument + "\n";
+				if (arguments.size() > 0) {
+					for (Argument argument : arguments) {
+						result += "      argument: " +  argument + "\n";
+					}
 				}
 			}
 			ArrayList<Module> modules = program.getModules();
 			if (modules != null) {
-				for (Module module : modules) {
-					result += "      module (" + module.getBytes().length+ " bytes): " +  module + "\n";;
+				if (modules.size() > 0) {
+					for (Module module : modules) {
+						result += "      module (" + module.getBytes().length+ " bytes): " +  module + "\n";;
+					}
 				}
 			}
 			Code code = getProgram().getCode();
-			result += "      code (" + code.getBytes().length+ " bytes): " +  code + "\n";
+			if (code != null) {
+				result += "      code (" + code.getBytes().length+ " bytes): " +  code + "\n";
+			}
 		}
 		ArrayList<Event> events = getEventsList();
 		if ((events != null) 
@@ -223,7 +233,6 @@ public class Transaction {
 			}
 		}
 		result += "   type = " + getType() +  "\n";
-			
 		return result;
 	}
 	
