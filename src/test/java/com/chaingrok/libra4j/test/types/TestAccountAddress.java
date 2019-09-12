@@ -59,7 +59,7 @@ public class TestAccountAddress extends TestClass {
 	@Test
 	public void test03TestNotEquals() {
 		AccountAddress address = new AccountAddress("045d3e63dba85f759d66f9bed4a0e4c262d17f9713f25e846fdae63891837a98");
-		assertFalse(address.equals(null));
+		assertFalse(address ==null);
 		//
 		assertFalse(Libra4jError.hasLogs());
 		assertFalse(address.equals(new Object()));

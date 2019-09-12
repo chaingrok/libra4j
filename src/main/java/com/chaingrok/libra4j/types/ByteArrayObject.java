@@ -46,7 +46,7 @@ public abstract class ByteArrayObject {
 							break;
 						}
 					}
-					if (delta == false) {
+					if (!delta) {
 						result = true;
 					}
 				}
