@@ -215,7 +215,7 @@ public class Transaction {
 			if (modules != null) {
 				if (modules.size() > 0) {
 					for (Module module : modules) {
-						result += "      module (" + module.getBytes().length+ " bytes): " +  module + "\n";;
+						result += "      module (" + module.getBytes().length+ " bytes): " +  module + "\n";
 					}
 				}
 			}

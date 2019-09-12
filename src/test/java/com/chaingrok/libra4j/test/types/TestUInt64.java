@@ -142,7 +142,7 @@ public class TestUInt64 extends TestClass {
 	}
 	
 	@Test
-	public void test005_bytesVsLongValues() {
+	public void test005BytesVsLongValues() {
 		Long number = 123456L;
 		UInt64 uint64 = new UInt64(number);
 		assertEquals(number,(Long)uint64.getAsLong());

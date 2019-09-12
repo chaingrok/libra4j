@@ -31,7 +31,7 @@ public class TestGrpcField extends TestClass {
 	}
 	
 	@Test
-	public void test001_getFieldOk() {
+	public void test001GetFieldOk() {
 		assertEquals(GrpcField.LEDGER_INFO,GrpcField.get(GrpcField.LEDGER_INFO.getFullName()));
 		assertEquals(GrpcField.SIGNATURES,GrpcField.get(GrpcField.SIGNATURES.getFullName()));
 	}
