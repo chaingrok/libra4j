@@ -251,7 +251,7 @@ public class GrpcChecker {
 				}
 			}
 		}
-		if (result == true) {
+		if (result) {
 			result = checkMandatoryFields(object);
 		}
 		return result;
