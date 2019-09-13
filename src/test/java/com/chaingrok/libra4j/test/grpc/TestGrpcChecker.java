@@ -21,11 +21,14 @@ import com.chaingrok.libra4j.types.Signature;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.Descriptors.FieldDescriptor;
 import com.google.protobuf.MessageOrBuilder;
+import com.google.protobuf.UInt64Value;
 import com.google.protobuf.UnknownFieldSet;
 import com.google.protobuf.UnknownFieldSet.Field;
 
 import org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfo;
 import org.libra.grpc.types.LedgerInfoOuterClass.ValidatorSignature;
+import org.libra.grpc.types.Transaction.TransactionListWithProof;
+import org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestGrpcChecker extends TestClass {
@@ -134,8 +137,21 @@ public class TestGrpcChecker extends TestClass {
 		assertTrue(grpcChecker.checkExpectedFields(new Object(),0));
 	}
 	
+	/*
 	@Test
-	public void test008CheckExpectedFieldsOkForMessageOrBuilder() {
+	public void test008CheckExpectedFieldsOkForUInt64Value() {
+		GrpcChecker grpcChecker = new GrpcChecker();
+		//
+		UInt64Value uint64Value = UInt64Value.newBuilder()
+									.setValue(12345L)
+									.build();
+		assertEquals(1, uint64Value.getAllFields().size());
+		assertTrue(grpcChecker.checkExpectedFields(uint64Value,1));
+	}
+	*/
+	
+	@Test
+	public void test009CheckExpectedFieldsOkForMessageOrBuilder() {
 		GrpcChecker grpcChecker = new GrpcChecker();
 		//
 		int expectedSize = 5;
@@ -155,6 +171,37 @@ public class TestGrpcChecker extends TestClass {
 		Map<FieldDescriptor, Object> fields = ledgerInfo.getAllFields();
 		assertEquals(expectedSize,fields.size());
 		assertTrue(grpcChecker.checkExpectedFields(ledgerInfo,expectedSize));
+	}
+	
+	@Test
+	public void test008CheckExpectedFieldsOkForRepeatedField() {
+		GrpcChecker grpcChecker = new GrpcChecker();
+		//
+		int transactionExpectedFields = 1;
+		int listExpectedFields = 2;
+		long gasUsed = 123;
+		TransactionInfo transactionInfo1 = TransactionInfo.newBuilder()
+											.setGasUsed(gasUsed)
+											.build();
+		assertTrue(transactionInfo1 instanceof MessageOrBuilder);
+		assertTrue(grpcChecker.checkExpectedFields(transactionInfo1,transactionExpectedFields));
+		TransactionInfo transactionInfo2 = TransactionInfo.newBuilder()
+				.setGasUsed(gasUsed)
+				.build();
+		assertTrue(transactionInfo2 instanceof MessageOrBuilder);
+		assertTrue(grpcChecker.checkExpectedFields(transactionInfo2,transactionExpectedFields));
+		UInt64Value version = UInt64Value.newBuilder()
+				.setValue(12345L)
+				.build();
+		assertEquals(1,version.getAllFields().size());
+		TransactionListWithProof transactionListWithProof = TransactionListWithProof.newBuilder()
+									.setFirstTransactionVersion(version)
+									.addInfos(0,transactionInfo1)
+									.addInfos(0,transactionInfo2)
+									.build();
+		assertTrue(transactionListWithProof instanceof MessageOrBuilder);
+		assertEquals(listExpectedFields,transactionListWithProof.getAllFields().size());
+		assertTrue(grpcChecker.checkExpectedFields(transactionListWithProof,listExpectedFields));
 	}
 	
 	@Test
