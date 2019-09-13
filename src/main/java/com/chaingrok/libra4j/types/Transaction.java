@@ -7,8 +7,6 @@ import com.chaingrok.libra4j.misc.Libra4jWarning;
 
 public class Transaction {
 	
-	public static final int SIGNATURE_SIZE = 64;
-	
 	private AccountAddress senderAccountAddress = null;
 	private Long version = null;
 	private Long sequenceNumber = null;
@@ -180,10 +178,6 @@ public class Transaction {
 
 	public void setEventsList(ArrayList<Event> eventsList) {
 		this.eventsList = eventsList;
-	}
-
-	public static int getSignatureSize() {
-		return SIGNATURE_SIZE;
 	}
 
 	@Override

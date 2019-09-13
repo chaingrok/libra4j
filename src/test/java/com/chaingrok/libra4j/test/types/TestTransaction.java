@@ -20,6 +20,7 @@ import com.chaingrok.libra4j.types.Event;
 import com.chaingrok.libra4j.types.Hash;
 import com.chaingrok.libra4j.types.Module;
 import com.chaingrok.libra4j.types.Program;
+import com.chaingrok.libra4j.types.Signature;
 import com.chaingrok.libra4j.types.Transaction;
 import com.chaingrok.libra4j.types.Argument.Type;
 
@@ -141,8 +142,8 @@ public class TestTransaction extends TestClass {
 		Argument argument = new Argument();
 		argument.setType(Type.STRING);
 		String argValue = "foo_bar";
-		byte[] bytes = argValue.getBytes();
-		argument.setData(bytes);
+		byte[] argBytes = argValue.getBytes();
+		argument.setData(argBytes);
 		ArrayList<Argument> arguments = new ArrayList<Argument>();
 		arguments.add(argument);
 		program.setArguments(arguments);
@@ -151,12 +152,16 @@ public class TestTransaction extends TestClass {
 		ArrayList<Module> modules = new ArrayList<Module>();
 		modules.add(module);
 		program.setModules(modules);
+		byte[] signatureBytes = Utils.getByteArray(Signature.BYTE_LENGTH,0x55);
+		Signature signature = new Signature(signatureBytes);
+		transaction.setSignature(signature);
 		//
 		String string = transaction.toString();
 		assertTrue(string.contains(version + ""));
 		assertTrue(string.contains(Transaction.Type.MINT + ""));
 		assertTrue(string.contains(argValue));
-		assertTrue(string.contains(Utils.byteArrayToHexString(bytes)));
+		assertTrue(string.contains(Utils.byteArrayToHexString(argBytes)));
+		assertTrue(string.contains(Utils.byteArrayToHexString(signatureBytes)));
 	}
 
 }
