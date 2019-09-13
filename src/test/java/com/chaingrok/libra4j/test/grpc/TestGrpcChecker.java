@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -18,6 +19,8 @@ import com.chaingrok.libra4j.types.AccountAddress;
 import com.chaingrok.libra4j.types.Hash;
 import com.chaingrok.libra4j.types.Signature;
 import com.google.protobuf.ByteString;
+import com.google.protobuf.Descriptors.FieldDescriptor;
+import com.google.protobuf.MessageOrBuilder;
 import com.google.protobuf.UnknownFieldSet;
 import com.google.protobuf.UnknownFieldSet.Field;
 
@@ -125,8 +128,41 @@ public class TestGrpcChecker extends TestClass {
 	}
 	
 	@Test
-	public void test007CheckExpectedFields() {
-		
+	public void test007CheckExpectedFieldsOkEdgeCases() {
+		GrpcChecker grpcChecker = new GrpcChecker();
+		assertTrue(grpcChecker.checkExpectedFields(null,0));
+		assertTrue(grpcChecker.checkExpectedFields(new Object(),0));
+	}
+	
+	@Test
+	public void test008CheckExpectedFieldsOkForMessageOrBuilder() {
+		GrpcChecker grpcChecker = new GrpcChecker();
+		//
+		int expectedSize = 5;
+		long version = 123L;
+		long timestampUsecs = 456789L;
+		ByteString consensusBlockId = ByteString.copyFrom(Utils.getByteArray(Hash.BYTE_LENGTH,0x11));
+		ByteString consensusDataHash = ByteString.copyFrom(Utils.getByteArray(Hash.BYTE_LENGTH,0x22));
+		ByteString transactionAccumulatorHash = ByteString.copyFrom(Utils.getByteArray(Hash.BYTE_LENGTH,0x33));
+		LedgerInfo ledgerInfo = LedgerInfo.newBuilder()
+									.setVersion(version)
+									.setTimestampUsecs(timestampUsecs)
+									.setConsensusBlockId(consensusBlockId)
+									.setConsensusDataHash(consensusDataHash)
+									.setTransactionAccumulatorHash(transactionAccumulatorHash)
+									.build();
+		assertTrue(ledgerInfo instanceof MessageOrBuilder);
+		Map<FieldDescriptor, Object> fields = ledgerInfo.getAllFields();
+		assertEquals(expectedSize,fields.size());
+		assertTrue(grpcChecker.checkExpectedFields(ledgerInfo,expectedSize));
+	}
+	
+	@Test
+	public void test007CheckExpectedFieldsKo() {
+		GrpcChecker grpcChecker = new GrpcChecker();
+		assertFalse(grpcChecker.checkExpectedFields(null,1));
+		assertFalse(grpcChecker.checkExpectedFields(new Object(),1));
+		//
 	}
 	
 }

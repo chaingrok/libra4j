@@ -72,7 +72,7 @@ public class GrpcChecker {
 			MessageOrBuilder grpcItem = (MessageOrBuilder) object;
 			Message defaultInstance = grpcItem.getDefaultInstanceForType();
 			Class<? extends MessageOrBuilder> grpcOwningClass = grpcItem.getClass();
-			//System.out.println("checking item: " + grpcOwningClass.getCanonicalName());
+			//.out.println("checking item: " + grpcOwningClass.getCanonicalName());
 			if (!grpcOwningClass.equals(defaultInstance.getClass())) {
 				throw new Libra4jException("classes are different for grpc item: " + grpcItem.getClass().getCanonicalName() + " <> " + defaultInstance.getClass());
 			}
@@ -90,7 +90,7 @@ public class GrpcChecker {
 					String fieldFullName = fieldDescriptor.getFullName();
 					GrpcField grpcField = GrpcField.get(fieldDescriptor.getFullName());
 					if (grpcField != null) {
-						//System.out.println("grpc field being processed: " + grpcField.toString());
+						System.out.println("grpc field being processed: " + grpcField.toString());
 						if (!grpcField.getOwningClass().equals(grpcOwningClass)) {
 							throw new Libra4jException("owning class is invalid for field: " + fieldFullName + ": " 
 									+ grpcOwningClass.getCanonicalName()
@@ -201,7 +201,12 @@ public class GrpcChecker {
 				result = checkMandatoryFields(object);
 			} 
 		} else {
-			result = false;
+			if ((minExpectedItemsCount == 0)
+					&& (maxExpectedItemsCount == 0)) {
+				result = true;
+			} else {
+				result = false;
+			}
 		}
 		return result;
 	}
