@@ -193,42 +193,6 @@ public class GrpcChecker {
 								} else {
 									System.out.println("   checked i32 field " + fieldFullName + " -> " + i32DefaultInstance.getClass().getCanonicalName() + " - ok");
 								}
-						} else if (fieldObject instanceof StringValueOrBuilder) {
-							throw new Libra4jException("field type checking is not implemented for " + StringValueOrBuilder.class.getCanonicalName());
-						} else if (fieldObject instanceof FloatValueOrBuilder) {
-							throw new Libra4jException("field type checking is not implemented for " + FloatValueOrBuilder.class.getCanonicalName());
-						} else if (fieldObject instanceof DoubleValueOrBuilder) {
-							throw new Libra4jException("field type checking is not implemented for " + DoubleValueOrBuilder.class.getCanonicalName());
-						} else if (fieldObject instanceof DurationOrBuilder) {
-							throw new Libra4jException("field type checking is not implemented for " + DurationOrBuilder.class.getCanonicalName());
-						} else if (fieldObject instanceof BytesValueOrBuilder) {
-							throw new Libra4jException("field type checking is not implemented for " + BytesValueOrBuilder.class.getCanonicalName());
-						} else if (fieldObject instanceof BytesValue) {
-							throw new Libra4jException("field type checking is not implemented for " + BytesValue.class.getCanonicalName());
-						} else if (fieldObject instanceof BoolValueOrBuilder) {
-							throw new Libra4jException("field type checking is not implemented for " + BoolValueOrBuilder.class.getCanonicalName());
-						} else if (fieldObject instanceof AnyOrBuilder) {
-							throw new Libra4jException("field type checking is not implemented for " + AnyOrBuilder.class.getCanonicalName());
-						} else if (fieldObject instanceof ApiOrBuilder) {
-							throw new Libra4jException("field type checking is not implemented for " + ApiOrBuilder.class.getCanonicalName());
-						} else if (fieldObject instanceof EnumOrBuilder) {
-							throw new Libra4jException("field type checking is not implemented for " + EnumOrBuilder.class.getCanonicalName());
-						} else if (fieldObject instanceof EnumValueOrBuilder) {
-							throw new Libra4jException("field type checking is not implemented for " + EnumValueOrBuilder.class.getCanonicalName());
-						} else if (fieldObject instanceof TimestampOrBuilder) {
-							throw new Libra4jException("field type checking is not implemented for " + TimestampOrBuilder.class.getCanonicalName());
-						} else if (fieldObject instanceof EmptyOrBuilder) {
-							throw new Libra4jException("field type checking is not implemented for " + EmptyOrBuilder.class.getCanonicalName());
-						} else if (fieldObject instanceof FieldMaskOrBuilder) {
-							throw new Libra4jException("field type checking is not implemented for " + FieldMaskOrBuilder.class.getCanonicalName());
-						} else if (fieldObject instanceof FieldOrBuilder) {
-							throw new Libra4jException("field type checking is not implemented for " + FieldOrBuilder.class.getCanonicalName());
-						} else if (fieldObject instanceof StructOrBuilder) {
-							throw new Libra4jException("field type checking is not implemented for " + StructOrBuilder.class.getCanonicalName());
-						} else if (fieldObject instanceof ListValueOrBuilder) {
-							throw new Libra4jException("field type checking is not implemented for " + ListValueOrBuilder.class.getCanonicalName());
-						} else if (fieldObject instanceof MixinOrBuilder) {
-							throw new Libra4jException("field type checking is not implemented for " + MixinOrBuilder.class.getCanonicalName());
 						} else {
 							throw new Libra4jException("field type checking is not implemented: " + fieldFullName + " (object class: " + fieldObject.getClass().getCanonicalName() + ")");
 						}
@@ -250,27 +214,34 @@ public class GrpcChecker {
 				}
 			}
 		}
-		if (result) {
-			result = checkMandatoryFields(object);
+		if (result != null) {
+			if (result) {
+				result = checkMandatoryFields(object);
+			} 
+		} else {
+			result = false;
 		}
 		return result;
 	}
 	
 	public boolean checkMandatoryFields(Object object) {
 		//System.out.println("entering checkMandatoryFields() ...");
-		boolean result = true;
-		Map<FieldDescriptor, Object> fieldDescriptorMap = objectFieldsMap.get(object);
-		ArrayList<GrpcField> mandatoryFields = MANDATORY_OBJECT_FIELDS_MAP.get(object.getClass());
-		if (mandatoryFields != null) {
-			//System.out.println("cheking of mandatory fields for " + object.getClass().getCanonicalName());
-			if (fieldDescriptorMap == null) {
-				result = false;
-				new Libra4jError(Type.NULL_DATA,"field descriptor map not set for object: " + object.getClass().getCanonicalName());
-			} else {
-				for (GrpcField mandatoryField : mandatoryFields) {
-					if (!isFieldSet(object,mandatoryField)) {
-						result = false; //no loop break to collect all potential errors
-						new Libra4jError(Type.MISSING_DATA,"mandatory field missing for" + object.getClass().getCanonicalName() + ":" + mandatoryField);
+		boolean result = false;
+		if (object != null) {
+			result = true;
+			Map<FieldDescriptor, Object> fieldDescriptorMap = objectFieldsMap.get(object);
+			ArrayList<GrpcField> mandatoryFields = MANDATORY_OBJECT_FIELDS_MAP.get(object.getClass());
+			if (mandatoryFields != null) {
+				//System.out.println("cheking of mandatory fields for " + object.getClass().getCanonicalName());
+				if (fieldDescriptorMap == null) {
+					result = false;
+					new Libra4jError(Type.NULL_DATA,"field descriptor map not set for object: " + object.getClass().getCanonicalName());
+				} else {
+					for (GrpcField mandatoryField : mandatoryFields) {
+						if (!isFieldSet(object,mandatoryField)) {
+							result = false; //no loop break to collect all potential errors
+							new Libra4jError(Type.MISSING_DATA,"mandatory field missing for" + object.getClass().getCanonicalName() + ":" + mandatoryField);
+						}
 					}
 				}
 			}
