@@ -1,6 +1,7 @@
 package com.chaingrok.libra4j.test.types;
 
 import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -53,4 +54,10 @@ public class TestHash extends TestClass {
 		assertNotNull(HashSalt.RAW_TRANSACTION.getSalt());
 		assertTrue(HashSalt.RAW_TRANSACTION.getSalt().length() > 0);
 	}
+	
+	@Test
+	public void test004HashWithSalt() {
+		assertEquals("3338be694f50c5f338814986cdf0686453a888b84f424d792af4b9202398f392",Utils.byteArrayToHexString(Hash.hashWithSalt("hello", HashSalt.ACCOUNT_ADDRESS).getBytes()));
+	}
+	
 }
