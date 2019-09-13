@@ -124,4 +124,9 @@ public class TestGrpcChecker extends TestClass {
 		Libra4jLog.purgeLogs();
 	}
 	
+	@Test
+	public void test007CheckExpectedFields() {
+		
+	}
+	
 }
