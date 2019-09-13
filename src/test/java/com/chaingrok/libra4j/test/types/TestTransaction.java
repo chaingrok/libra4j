@@ -14,6 +14,7 @@ import org.junit.runners.MethodSorters;
 import com.chaingrok.libra4j.misc.Libra4jLog;
 import com.chaingrok.libra4j.misc.Utils;
 import com.chaingrok.libra4j.test.TestClass;
+import com.chaingrok.libra4j.types.AccountAddress;
 import com.chaingrok.libra4j.types.Argument;
 import com.chaingrok.libra4j.types.Code;
 import com.chaingrok.libra4j.types.Event;
@@ -41,8 +42,6 @@ public class TestTransaction extends TestClass {
 		assertSame(sequenceNumber,transaction.getSequenceNumber());
 		//
 		assertNull(transaction.getSenderPublicKey()); //TODO
-		//
-		assertNull(transaction.getSignature());//TODO
 		//
 		assertNull(transaction.getMaxGasAmount());
 		Long maxGasAmount = new Long(0L);
@@ -111,6 +110,18 @@ public class TestTransaction extends TestClass {
 		ArrayList<Event> eventsList = new ArrayList<Event>();
 		transaction.setEventsList(eventsList);
 		assertSame(eventsList,transaction.getEventsList());
+		//
+		assertNull(transaction.getSignature());
+		byte[] signatureBytes = Utils.getByteArray(Signature.BYTE_LENGTH,0x55);
+		Signature signature = new Signature(signatureBytes);
+		transaction.setSignature(signature);
+		assertSame(signature,transaction.getSignature());
+		//
+		assertNull(transaction.getSenderAccountAddress());
+		byte[] accountAddressBytes = Utils.getByteArray(AccountAddress.BYTE_LENGTH,0x66);
+		AccountAddress accountAddress = new AccountAddress(accountAddressBytes);
+		transaction.setSenderAccountAddress(accountAddress);
+		assertSame(accountAddress,transaction.getSenderAccountAddress());
 	}
 	
 	@Test
@@ -155,6 +166,9 @@ public class TestTransaction extends TestClass {
 		byte[] signatureBytes = Utils.getByteArray(Signature.BYTE_LENGTH,0x55);
 		Signature signature = new Signature(signatureBytes);
 		transaction.setSignature(signature);
+		byte[] accountAddressBytes = Utils.getByteArray(AccountAddress.BYTE_LENGTH,0x66);
+		AccountAddress accountAddress = new AccountAddress(accountAddressBytes);
+		transaction.setSenderAccountAddress(accountAddress);
 		//
 		String string = transaction.toString();
 		assertTrue(string.contains(version + ""));
@@ -162,6 +176,7 @@ public class TestTransaction extends TestClass {
 		assertTrue(string.contains(argValue));
 		assertTrue(string.contains(Utils.byteArrayToHexString(argBytes)));
 		assertTrue(string.contains(Utils.byteArrayToHexString(signatureBytes)));
+		assertTrue(string.contains(Utils.byteArrayToHexString(accountAddressBytes)));
 	}
 
 }
