@@ -279,15 +279,21 @@ public class GrpcChecker {
 	}
 	
 	public boolean checkFieldErrors(List<String> initializationErrors,UnknownFieldSet unknownFieldSet) {
-		boolean result = false;
-		Map<Integer, Field> map = unknownFieldSet.asMap();
-		if (map.keySet().size() == 0) {
-			result = true;
-		} else {
-			new Libra4jError(Type.INIT_ERROR,unknownFieldSet);
-		}
-		if (initializationErrors.size() != 0) {
+		Boolean result = null;
+		if (unknownFieldSet != null) {
+			Map<Integer, Field> map = unknownFieldSet.asMap();
+			if (map.keySet().size() != 0) {
+				new Libra4jError(Type.INIT_ERROR,unknownFieldSet);
+				result = false;
+			}
+		} 
+		if ((initializationErrors != null) 
+			&& (initializationErrors.size() != 0)) {
 			new Libra4jError(Type.INIT_ERROR,initializationErrors);
+			result = false;
+		}
+		if (result == null) {
+			result = true;
 		}
 		return result;
 	}

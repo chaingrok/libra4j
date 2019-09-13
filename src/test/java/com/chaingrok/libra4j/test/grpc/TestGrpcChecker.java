@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
+
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
@@ -16,6 +18,8 @@ import com.chaingrok.libra4j.types.AccountAddress;
 import com.chaingrok.libra4j.types.Hash;
 import com.chaingrok.libra4j.types.Signature;
 import com.google.protobuf.ByteString;
+import com.google.protobuf.UnknownFieldSet;
+import com.google.protobuf.UnknownFieldSet.Field;
 
 import org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfo;
 import org.libra.grpc.types.LedgerInfoOuterClass.ValidatorSignature;
@@ -80,6 +84,44 @@ public class TestGrpcChecker extends TestClass {
 									.setSignature(signature)
 									.build();
 		assertTrue(grpcChecker.checkValidatorSignature(validatorSignature));
+	}
+	
+	@Test
+	public void test005CheckFieldErrorsOk() {
+		GrpcChecker grpcChecker = new GrpcChecker();
+		//
+		assertTrue(grpcChecker.checkFieldErrors(null,null));
+		//
+		UnknownFieldSet unknownFieldSet = UnknownFieldSet.newBuilder()
+									.build();
+		assertTrue(grpcChecker.checkFieldErrors(null,unknownFieldSet));
+		ArrayList<String> initializationErrors = new ArrayList<String>();
+		assertTrue(grpcChecker.checkFieldErrors(initializationErrors,unknownFieldSet));
+		assertTrue(grpcChecker.checkFieldErrors(initializationErrors,null));
+	}
+	
+	@Test
+	public void test006CheckFieldErrorsKo() {
+		GrpcChecker grpcChecker = new GrpcChecker();
+		//
+		assertTrue(grpcChecker.checkFieldErrors(null,null));
+		//
+		Field field  = Field.newBuilder()
+					.build();
+		UnknownFieldSet unknownFieldSet = UnknownFieldSet.newBuilder()
+									.addField(1,field)
+									.build();
+		assertFalse(grpcChecker.checkFieldErrors(null,unknownFieldSet));
+		assertTrue(Libra4jLog.hasLogs());
+		assertEquals(1,Libra4jLog.getLogs().size());
+		Libra4jLog.purgeLogs();
+		//
+		ArrayList<String> initializationErrors = new ArrayList<String>();
+		initializationErrors.add("error");
+		assertFalse(grpcChecker.checkFieldErrors(initializationErrors,null));
+		assertTrue(Libra4jLog.hasLogs());
+		assertEquals(1,Libra4jLog.getLogs().size());
+		Libra4jLog.purgeLogs();
 	}
 	
 }
