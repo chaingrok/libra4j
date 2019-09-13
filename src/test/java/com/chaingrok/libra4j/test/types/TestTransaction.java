@@ -14,16 +14,20 @@ import org.junit.runners.MethodSorters;
 import com.chaingrok.libra4j.misc.Libra4jLog;
 import com.chaingrok.libra4j.misc.Utils;
 import com.chaingrok.libra4j.test.TestClass;
+import com.chaingrok.libra4j.types.AccessPath;
 import com.chaingrok.libra4j.types.AccountAddress;
 import com.chaingrok.libra4j.types.Argument;
 import com.chaingrok.libra4j.types.Code;
 import com.chaingrok.libra4j.types.Event;
+import com.chaingrok.libra4j.types.EventData;
 import com.chaingrok.libra4j.types.Hash;
 import com.chaingrok.libra4j.types.Module;
+import com.chaingrok.libra4j.types.Path;
 import com.chaingrok.libra4j.types.Program;
 import com.chaingrok.libra4j.types.Signature;
 import com.chaingrok.libra4j.types.Transaction;
 import com.chaingrok.libra4j.types.Argument.Type;
+import com.google.protobuf.ByteString;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestTransaction extends TestClass {
@@ -169,6 +173,23 @@ public class TestTransaction extends TestClass {
 		byte[] accountAddressBytes = Utils.getByteArray(AccountAddress.BYTE_LENGTH,0x66);
 		AccountAddress accountAddress = new AccountAddress(accountAddressBytes);
 		transaction.setSenderAccountAddress(accountAddress);
+		//
+		Event event = new Event();
+		long seqNum = 12345678999L;
+		Long sequenceNumber = new Long(seqNum);
+		event.setSequenceNumber(sequenceNumber);
+		byte[] eventAccountAddressBytes = Utils.getByteArray(AccountAddress.BYTE_LENGTH,0x39);
+		AccountAddress eventAccountAddress = new AccountAddress(eventAccountAddressBytes);
+		event.setAddress(eventAccountAddress);
+		byte[] eventDataBytes = Utils.getByteArray(20,0xab);
+		ByteString byteString  = ByteString.copyFrom(eventDataBytes);
+		EventData eventData = new EventData(byteString);
+		event.setData(eventData);
+		String testPath = "/test_path";
+		AccessPath accessPath = AccessPath.create((byte)0x00,new AccountAddress(AccountAddress.ADDRESS_ZERO),new Path(testPath));
+		event.setAccessPath(accessPath);
+		ArrayList<Event> events = new ArrayList<Event>();
+		events.add(event);
 		//
 		String string = transaction.toString();
 		assertTrue(string.contains(version + ""));
