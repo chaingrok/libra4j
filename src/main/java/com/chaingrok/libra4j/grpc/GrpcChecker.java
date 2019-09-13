@@ -11,6 +11,7 @@ import org.libra.grpc.types.LedgerInfoOuterClass.ValidatorSignature;
 import com.chaingrok.libra4j.misc.Libra4jError;
 import com.chaingrok.libra4j.misc.Libra4jLog.Type;
 import com.chaingrok.libra4j.misc.Libra4jException;
+import com.chaingrok.libra4j.types.AccountAddress;
 import com.chaingrok.libra4j.types.Hash;
 import com.chaingrok.libra4j.types.Signature;
 import com.google.protobuf.Descriptors.FieldDescriptor;
@@ -65,18 +66,16 @@ public class GrpcChecker {
 		return result;
 	}
 	
-	protected boolean checkSignature(ValidatorSignature signature) {
+	public boolean checkValidatorSignature(ValidatorSignature validatorSignature) {
 		boolean result = true;
-		new Hash(signature.getValidatorId());
-		ByteString signed = signature.getSignature();
+		new AccountAddress(validatorSignature.getValidatorId());
+		ByteString signed = validatorSignature.getSignature();
 		if (signed == null) {
-			System.out.println("signed is null");
+			new Libra4jError(Type.INVALID_TIMESTAMP,"validator signature invalid: signed is null");
 			result = false;
 		} else {
-			if (signed.size() != Signature.BYTE_LENGTH) {
-				System.out.println("invalid signed size:" + signed.size());
-				result = false;
-			}
+			Signature signature = new Signature(signed);
+			result = signature.isValid();
 		}
 		return result;
 	}
