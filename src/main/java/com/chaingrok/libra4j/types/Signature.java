@@ -1,7 +1,6 @@
 package com.chaingrok.libra4j.types;
 
 import com.chaingrok.libra4j.misc.Libra4jError;
-import com.chaingrok.libra4j.misc.Libra4jException;
 import com.chaingrok.libra4j.misc.Libra4jLog.Type;
 import com.chaingrok.libra4j.misc.Utils;
 import com.google.protobuf.ByteString;
