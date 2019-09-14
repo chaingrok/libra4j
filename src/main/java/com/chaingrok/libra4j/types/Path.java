@@ -68,11 +68,10 @@ public class Path {
 		public static Type get(String t) {
 			Type result = null;
 			for (Type type : Type.values()) {
-				if (!type.equals(UNKNOWN)) {
-					if (type.type.equals(t)) {
-						result = type;
-						break;
-					}
+				if ((!type.equals(UNKNOWN))
+					&& (type.type.equals(t))) {
+					result = type;
+					break;
 				}
 			}
 			if (result == null) {

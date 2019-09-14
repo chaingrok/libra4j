@@ -3,6 +3,7 @@ package com.chaingrok.libra4j.test.types;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -38,9 +39,9 @@ public class TestAccountAddress extends TestClass {
 		ByteString byteString = null;
 		try {
 			new AccountAddress(byteString);
-			fail("should throw null Exception");
-		} catch (RuntimeException e) {
-			assertTrue(e instanceof NullPointerException);
+			fail("should throw NullPointerException");
+		} catch (NullPointerException e) {
+			assertNull(e.getMessage());
 		}
 	}
 	

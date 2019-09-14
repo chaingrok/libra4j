@@ -198,19 +198,17 @@ public class Transaction {
 		result += "   program: " +  "\n";
 		if (program != null) {
 			ArrayList<Argument> arguments = getProgram().getArguments();
-			if (arguments != null) {
-				if (arguments.size() > 0) {
-					for (Argument argument : arguments) {
-						result += "      argument: " +  argument + "\n";
-					}
+			if ((arguments != null)
+				&& (arguments.size() > 0)) {
+				for (Argument argument : arguments) {
+					result += "      argument: " +  argument + "\n";
 				}
 			}
 			ArrayList<Module> modules = program.getModules();
-			if (modules != null) {
-				if (modules.size() > 0) {
-					for (Module module : modules) {
-						result += "      module (" + module.getBytes().length+ " bytes): " +  module + "\n";
-					}
+			if ((modules != null)
+				&& (modules.size() > 0)) {
+				for (Module module : modules) {
+					result += "      module (" + module.getBytes().length+ " bytes): " +  module + "\n";
 				}
 			}
 			Code code = getProgram().getCode();

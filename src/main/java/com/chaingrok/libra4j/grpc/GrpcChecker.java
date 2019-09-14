@@ -127,9 +127,9 @@ public class GrpcChecker {
 											+ defaultListInstance.getClass().getCanonicalName()
 											+ " <> " 
 											+ grpcField.getFieldClass().getCanonicalName());
-								} else {
-									//System.out.println("   checked repeated field " + fieldFullName + " -> " + defaultListInstance.getClass().getCanonicalName() + " - ok");
-								}
+								} /*else {
+									System.out.println("   checked repeated field " + fieldFullName + " -> " + defaultListInstance.getClass().getCanonicalName() + " - ok");
+								}*/
 							}
 						} else if (fieldObject instanceof Int64ValueOrBuilder) {
 							 Int64ValueOrBuilder i64GrpcItem = (Int64ValueOrBuilder) fieldObject;
