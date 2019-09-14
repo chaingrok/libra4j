@@ -39,6 +39,7 @@ public class Argument {
 				break;
 			default:
 				dataStr = Utils.byteArrayToHexString(data);
+				break;
 		}
 		result += "argument: type = " +type + " - data = " + dataStr;
 		return result;

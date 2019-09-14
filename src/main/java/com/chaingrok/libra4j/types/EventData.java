@@ -46,6 +46,7 @@ public class EventData extends ByteArrayObject {
 			default:
 				result += Utils.byteArrayToHexString(bytes);
 				new Libra4jError(Libra4jError.Type.UNKNOWN_VALUE,"Should not happen");
+				break;
 		}
 		return result;
 	}
