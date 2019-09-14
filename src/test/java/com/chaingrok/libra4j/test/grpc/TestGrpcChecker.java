@@ -58,6 +58,32 @@ public class TestGrpcChecker extends TestClass {
 		assertTrue(string.contains(GrpcField.TIMESTAMP_USECS.getFullName() + ""));
 	}
 	
+	@Test
+	public void test002IsFieldSet() {
+		GrpcChecker grpcChecker = new GrpcChecker();
+		//
+		assertFalse(grpcChecker.isFieldSet(null,null, null));
+		assertFalse(Libra4jLog.hasLogs());
+		assertFalse(grpcChecker.isFieldSet(GrpcField.ACCOUNT_BLOB,null, null));
+		assertFalse(Libra4jLog.hasLogs());
+		assertFalse(grpcChecker.isFieldSet(GrpcField.ACCOUNT_BLOB,new Object(), null));
+		assertEquals(1,Libra4jLog.getLogs().size());
+		Libra4jLog.purgeLogs();
+		//
+		LedgerInfo ledgerInfo = LedgerInfo.newBuilder()
+				.build();
+		assertEquals(0,ledgerInfo.getAllFields().size());
+		assertFalse(grpcChecker.isFieldSet(GrpcField.LEDGER_INFO_VERSION,ledgerInfo,ledgerInfo.getAllFields()));
+		long version = 123L;
+		ledgerInfo = LedgerInfo.newBuilder()
+				.setVersion(version)
+				.build();
+		assertTrue(grpcChecker.isFieldSet(GrpcField.LEDGER_INFO_VERSION,ledgerInfo,ledgerInfo.getAllFields()));
+		assertFalse(grpcChecker.isFieldSet(GrpcField.TIMESTAMP_USECS,ledgerInfo,ledgerInfo.getAllFields()));
+	}
+	
+	
+	
 	
 	@Test
 	public void test002CheckLedgerInfoEmpty() {

@@ -70,13 +70,13 @@ public class GrpcChecker {
 	public boolean checkExpectedFields(Object object,int minExpectedItemsCount,int maxExpectedItemsCount) {
 		Boolean result = null;
 		if (object instanceof MessageOrBuilder) {
-			MessageOrBuilder grpcItem = (MessageOrBuilder) object;
-			Message message = grpcItem.getDefaultInstanceForType();
-			Class<? extends MessageOrBuilder> grpcOwningClass = grpcItem.getClass();
+			MessageOrBuilder grpcMessage = (MessageOrBuilder) object;
+			Message message = grpcMessage.getDefaultInstanceForType();
+			Class<? extends MessageOrBuilder> grpcOwningClass = grpcMessage.getClass();
 			if (!grpcOwningClass.equals(message.getClass())) {
-				throw new Libra4jException("classes are different for grpc item: " + grpcItem.getClass().getCanonicalName() + " <> " + message.getClass());
+				throw new Libra4jException("classes are different for grpc item: " + grpcMessage.getClass().getCanonicalName() + " <> " + message.getClass());
 			}
-			Map<FieldDescriptor, Object> fieldDescriptors = grpcItem.getAllFields();
+			Map<FieldDescriptor, Object> fieldDescriptors = grpcMessage.getAllFields();
 			objectFieldsMap.put(object,fieldDescriptors);
 			System.out.println(dumpFields(object,fieldDescriptors));
 			int mapSize = fieldDescriptors.size();
@@ -227,7 +227,7 @@ public class GrpcChecker {
 					new Libra4jError(Type.NULL_DATA,"field descriptor map not set for object: " + object.getClass().getCanonicalName());
 				} else {
 					for (GrpcField mandatoryField : mandatoryFields) {
-						if (!isFieldSet(object,mandatoryField)) {
+						if (!isFieldSet(mandatoryField,object,objectFieldsMap.get(object))) {
 							result = false; //no loop break to collect all potential errors
 							new Libra4jError(Type.MISSING_DATA,"mandatory field missing for" + object.getClass().getCanonicalName() + ":" + mandatoryField);
 						}
@@ -258,17 +258,21 @@ public class GrpcChecker {
 		return result;
 	}
 	
-	public boolean isFieldSet(Object object,GrpcField field) {
+	public boolean isFieldSet(GrpcField field,Object object,Map<FieldDescriptor, Object> objectFieldsMap) {
 		boolean result = false;
-		String fullName = field.getFullName();
-		Map<FieldDescriptor, Object> fieldDescriptorMap = objectFieldsMap.get(object);
-		if (fieldDescriptorMap == null) {
-			new Libra4jError(Type.NULL_DATA,"field descriptor map not set for object: " + object.getClass().getCanonicalName());
-		}
-		for (FieldDescriptor fieldDescriptor : fieldDescriptorMap.keySet()) {
-			if (fieldDescriptor.getFullName().equals(fullName)) {
-				result = true;
-				break;
+		if (field != null) {
+			String fullName = field.getFullName();
+			if (object != null)  {
+				if (objectFieldsMap == null) {
+					new Libra4jError(Type.NULL_DATA,"field descriptor map not set for object: " + object.getClass().getCanonicalName());
+				} else {
+					for (FieldDescriptor fieldDescriptor : objectFieldsMap.keySet()) {
+						if (fieldDescriptor.getFullName().equals(fullName)) {
+							result = true;
+							break;
+						}
+					}
+				}
 			}
 		}
 		return result;
