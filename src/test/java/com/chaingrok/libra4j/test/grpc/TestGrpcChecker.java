@@ -14,6 +14,7 @@ import org.junit.runners.MethodSorters;
 import com.chaingrok.libra4j.grpc.GrpcChecker;
 import com.chaingrok.libra4j.grpc.GrpcField;
 import com.chaingrok.libra4j.misc.Libra4jLog;
+import com.chaingrok.libra4j.misc.Libra4jLog.Type;
 import com.chaingrok.libra4j.misc.Utils;
 import com.chaingrok.libra4j.test.TestClass;
 import com.chaingrok.libra4j.types.AccountAddress;
@@ -83,8 +84,6 @@ public class TestGrpcChecker extends TestClass {
 	}
 	
 	
-	
-	
 	@Test
 	public void test002CheckLedgerInfoEmpty() {
 		GrpcChecker grpcChecker = new GrpcChecker();
@@ -126,7 +125,10 @@ public class TestGrpcChecker extends TestClass {
 									.build();
 		assertFalse(grpcChecker.checkValidatorSignature(validatorSignature));
 		assertTrue(Libra4jLog.hasLogs());
+		//System.out.println("logs: " + Libra4jLog.dumpLogs());
 		assertEquals(2,Libra4jLog.getLogs().size());
+		assertEquals(Type.INVALID_LENGTH,Libra4jLog.getLogs().get(0).getType());
+		assertEquals(Type.MISSING_DATA,Libra4jLog.getLogs().get(1).getType());
 		Libra4jLog.purgeLogs();
 	}
 	

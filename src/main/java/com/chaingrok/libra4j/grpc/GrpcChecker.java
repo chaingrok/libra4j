@@ -53,8 +53,8 @@ public class GrpcChecker {
 		boolean result = true;
 		new AccountAddress(validatorSignature.getValidatorId());
 		ByteString signed = validatorSignature.getSignature();
-		if (signed == null) {
-			new Libra4jError(Type.INVALID_TIMESTAMP,"validator signature invalid: signed is null");
+		if (signed.size() == 0) {
+			new Libra4jError(Type.MISSING_DATA,"validator signature invalid: signed is null");
 			result = false;
 		} else {
 			Signature signature = new Signature(signed);
