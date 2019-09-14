@@ -40,8 +40,8 @@ public class TestByteArrayObject extends TestClass {
 		ByteArrayObjectTest byteArray1 = new ByteArrayObjectTest("0101");
 		ByteArrayObjectTest byteArray2 = new ByteArrayObjectTest("0101");
 		assertEquals(byteArray1,byteArray1);
+		assertEquals(byteArray1.hashCode(),byteArray2.hashCode());
 		assertNotSame(byteArray1,byteArray2);
-		assertEquals(byteArray1,byteArray2);
 		//
 		ByteArrayObjectTest byteArray3 = new ByteArrayObjectTest("01");
 		assertNotEquals(byteArray1,byteArray3);
