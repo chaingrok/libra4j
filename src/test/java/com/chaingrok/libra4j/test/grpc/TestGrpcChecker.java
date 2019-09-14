@@ -2,6 +2,7 @@ package com.chaingrok.libra4j.test.grpc;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
@@ -27,7 +28,10 @@ import com.google.protobuf.UInt64Value;
 import com.google.protobuf.UnknownFieldSet;
 import com.google.protobuf.UnknownFieldSet.Field;
 
+import org.libra.grpc.types.GetWithProof.ResponseItem;
+import org.libra.grpc.types.GetWithProof.UpdateToLatestLedgerResponse;
 import org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfo;
+import org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures;
 import org.libra.grpc.types.LedgerInfoOuterClass.ValidatorSignature;
 import org.libra.grpc.types.Transaction.TransactionListWithProof;
 import org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo;
@@ -83,9 +87,33 @@ public class TestGrpcChecker extends TestClass {
 		assertFalse(grpcChecker.isFieldSet(GrpcField.TIMESTAMP_USECS,ledgerInfo,ledgerInfo.getAllFields()));
 	}
 	
+	@Test
+	public void test003CheckMandatoryFields() {
+		GrpcChecker grpcChecker = new GrpcChecker();
+		//
+		assertTrue(grpcChecker.MANDATORY_OBJECT_FIELDS_MAP.size() == 1);
+		assertNotNull(grpcChecker.MANDATORY_OBJECT_FIELDS_MAP.get(UpdateToLatestLedgerResponse.class));
+		UpdateToLatestLedgerResponse updateToLatestLedgerResponse = UpdateToLatestLedgerResponse.newBuilder()
+													.build();
+		assertFalse(grpcChecker.checkMandatoryFields(updateToLatestLedgerResponse));
+		System.out.println("logs: " + Libra4jLog.dumpLogs());
+		assertEquals(2,Libra4jLog.getLogs().size());
+		Libra4jLog.purgeLogs();
+		//
+		ResponseItem responseItem = ResponseItem.newBuilder()
+				.build();
+		LedgerInfoWithSignatures ledgerInfoWithSignatures = LedgerInfoWithSignatures.newBuilder()
+																.build();
+		updateToLatestLedgerResponse = UpdateToLatestLedgerResponse.newBuilder()
+											.addResponseItems(responseItem)
+											.setLedgerInfoWithSigs(ledgerInfoWithSignatures)
+											.build();
+		assertTrue(grpcChecker.checkMandatoryFields(updateToLatestLedgerResponse));
+	}
+	
 	
 	@Test
-	public void test002CheckLedgerInfoEmpty() {
+	public void test004CheckLedgerInfoEmpty() {
 		GrpcChecker grpcChecker = new GrpcChecker();
 		//
 		LedgerInfo ledgerInfo = LedgerInfo.newBuilder()
@@ -98,7 +126,7 @@ public class TestGrpcChecker extends TestClass {
 	
 	
 	@Test
-	public void test003CheckLedgerInfoOk() {
+	public void test005CheckLedgerInfoOk() {
 		GrpcChecker grpcChecker = new GrpcChecker();
 		//
 		long version = 123L;
@@ -118,7 +146,7 @@ public class TestGrpcChecker extends TestClass {
 	}
 	
 	@Test
-	public void test004CheckValidatorSignatureKo() {
+	public void test006CheckValidatorSignatureKo() {
 		GrpcChecker grpcChecker = new GrpcChecker();
 		//
 		ValidatorSignature validatorSignature = ValidatorSignature.newBuilder()
@@ -133,7 +161,7 @@ public class TestGrpcChecker extends TestClass {
 	}
 	
 	@Test
-	public void test005CheckValidatorSignatureOk() {
+	public void test007CheckValidatorSignatureOk() {
 		GrpcChecker grpcChecker = new GrpcChecker();
 		//
 		ByteString accountAddress =ByteString.copyFrom(Utils.getByteArray(AccountAddress.BYTE_LENGTH,0x33));
@@ -146,7 +174,7 @@ public class TestGrpcChecker extends TestClass {
 	}
 	
 	@Test
-	public void test005CheckFieldErrorsOk() {
+	public void test008CheckFieldErrorsOk() {
 		GrpcChecker grpcChecker = new GrpcChecker();
 		//
 		assertTrue(grpcChecker.checkFieldErrors(null,null));
@@ -160,7 +188,7 @@ public class TestGrpcChecker extends TestClass {
 	}
 	
 	@Test
-	public void test006CheckFieldErrorsKo() {
+	public void test009CheckFieldErrorsKo() {
 		GrpcChecker grpcChecker = new GrpcChecker();
 		//
 		assertTrue(grpcChecker.checkFieldErrors(null,null));
@@ -184,7 +212,7 @@ public class TestGrpcChecker extends TestClass {
 	}
 	
 	@Test
-	public void test007CheckExpectedFieldsOkEdgeCases() {
+	public void test010CheckExpectedFieldsOkEdgeCases() {
 		GrpcChecker grpcChecker = new GrpcChecker();
 		assertTrue(grpcChecker.checkExpectedFields(null,0));
 		assertTrue(grpcChecker.checkExpectedFields(new Object(),0));
@@ -204,7 +232,7 @@ public class TestGrpcChecker extends TestClass {
 	*/
 	
 	@Test
-	public void test009CheckExpectedFieldsOkForMessageOrBuilder() {
+	public void test011CheckExpectedFieldsOkForMessageOrBuilder() {
 		GrpcChecker grpcChecker = new GrpcChecker();
 		//
 		int expectedSize = 5;
@@ -227,7 +255,7 @@ public class TestGrpcChecker extends TestClass {
 	}
 	
 	@Test
-	public void test008CheckExpectedFieldsOkForRepeatedField() {
+	public void test012CheckExpectedFieldsOkForRepeatedField() {
 		GrpcChecker grpcChecker = new GrpcChecker();
 		//
 		int transactionExpectedFields = 1;
@@ -258,7 +286,7 @@ public class TestGrpcChecker extends TestClass {
 	}
 	
 	@Test
-	public void test007CheckExpectedFieldsKo() {
+	public void test012CheckExpectedFieldsKo() {
 		GrpcChecker grpcChecker = new GrpcChecker();
 		assertFalse(grpcChecker.checkExpectedFields(null,1));
 		assertFalse(grpcChecker.checkExpectedFields(new Object(),1));

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.libra.grpc.types.GetWithProof.UpdateToLatestLedgerResponse;
 import org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfo;
 import org.libra.grpc.types.LedgerInfoOuterClass.ValidatorSignature;
 
@@ -27,7 +28,7 @@ import com.google.protobuf.UnknownFieldSet.Field;
 
 public class GrpcChecker {
 	
-	private final MandatoryObjectFieldsMap MANDATORY_OBJECT_FIELDS_MAP = new MandatoryObjectFieldsMap();
+	public final MandatoryObjectFieldsMap MANDATORY_OBJECT_FIELDS_MAP = new MandatoryObjectFieldsMap();
 	private HashMap<Object,Map<FieldDescriptor, Object>> objectFieldsMap =  new HashMap<Object,Map<FieldDescriptor, Object>>();
 	
 	
@@ -200,7 +201,7 @@ public class GrpcChecker {
 		}
 		if (result != null) {
 			if (result) {
-				result = checkMandatoryFields(object);
+				result = checkMandatoryFields((MessageOrBuilder)object);
 			} 
 		} else {
 			if ((minExpectedItemsCount == 0)
@@ -213,26 +214,27 @@ public class GrpcChecker {
 		return result;
 	}
 	
-	public boolean checkMandatoryFields(Object object) {
-		//System.out.println("entering checkMandatoryFields() ...");
+	public boolean checkMandatoryFields(MessageOrBuilder messageOrBuilder) {
 		boolean result = false;
-		if (object != null) {
+		if (messageOrBuilder != null) {
 			result = true;
-			Map<FieldDescriptor, Object> fieldDescriptorMap = objectFieldsMap.get(object);
-			ArrayList<GrpcField> mandatoryFields = MANDATORY_OBJECT_FIELDS_MAP.get(object.getClass());
+			//Map<FieldDescriptor, Object> fieldDescriptorMap = objectFieldsMap.get(object);
+			Map<FieldDescriptor, Object> fieldDescriptorMap = messageOrBuilder.getAllFields();
+			ArrayList<GrpcField> mandatoryFields = MANDATORY_OBJECT_FIELDS_MAP.get(messageOrBuilder.getClass());
 			if (mandatoryFields != null) {
+				/*
 				//System.out.println("cheking of mandatory fields for " + object.getClass().getCanonicalName());
 				if (fieldDescriptorMap == null) {
 					result = false;
 					new Libra4jError(Type.NULL_DATA,"field descriptor map not set for object: " + object.getClass().getCanonicalName());
-				} else {
-					for (GrpcField mandatoryField : mandatoryFields) {
-						if (!isFieldSet(mandatoryField,object,objectFieldsMap.get(object))) {
+				} else {*/
+				for (GrpcField mandatoryField : mandatoryFields) {
+					if (!isFieldSet(mandatoryField,messageOrBuilder,fieldDescriptorMap)) {
 							result = false; //no loop break to collect all potential errors
-							new Libra4jError(Type.MISSING_DATA,"mandatory field missing for" + object.getClass().getCanonicalName() + ":" + mandatoryField);
-						}
+							new Libra4jError(Type.MISSING_DATA,"mandatory field missing for " + messageOrBuilder.getClass().getCanonicalName() + ":" + mandatoryField);
 					}
 				}
+				//}
 			}
 		}
 		return result;
@@ -295,13 +297,13 @@ public class GrpcChecker {
 	}
 	
 	@SuppressWarnings("serial")
-	private class MandatoryObjectFieldsMap extends HashMap<Class<?>,ArrayList<GrpcField>> {
+	public class MandatoryObjectFieldsMap extends HashMap<Class<?>,ArrayList<GrpcField>> {
 		
 		{
 			ArrayList<GrpcField> list = new ArrayList<GrpcField>();
 			list.add(GrpcField.RESPONSE_ITEMS);
 			list.add(GrpcField.LEDGER_INFO_WITH_SIGS);
-			this.put(org.libra.grpc.types.GetWithProof.UpdateToLatestLedgerResponse.class,list);
+			this.put(UpdateToLatestLedgerResponse.class,list);
 		}
 		
 	}
