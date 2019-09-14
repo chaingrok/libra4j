@@ -12,6 +12,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import com.chaingrok.libra4j.grpc.GrpcChecker;
+import com.chaingrok.libra4j.grpc.GrpcField;
 import com.chaingrok.libra4j.misc.Libra4jLog;
 import com.chaingrok.libra4j.misc.Utils;
 import com.chaingrok.libra4j.test.TestClass;
@@ -35,7 +36,31 @@ public class TestGrpcChecker extends TestClass {
 	
 	
 	@Test
-	public void test001CheckLedgerInfoEmpty() {
+	public void test001DumpFields() {
+		GrpcChecker grpcChecker = new GrpcChecker();
+		//
+		assertEquals("",grpcChecker.dumpFields(null,null));
+		//
+		LedgerInfo ledgerInfo = LedgerInfo.newBuilder()
+									.build();
+		assertTrue(grpcChecker.dumpFields(ledgerInfo, null).contains(ledgerInfo.getClass().getCanonicalName()));
+		//
+		long version = 123L;
+		long timestampUsecs = 456789L;
+		ledgerInfo = LedgerInfo.newBuilder()
+									.setVersion(version)
+									.setTimestampUsecs(timestampUsecs)
+									.build();
+		String string = grpcChecker.dumpFields(ledgerInfo, ledgerInfo.getAllFields());
+		System.out.println((string));
+		assertTrue(string.contains(ledgerInfo.getClass().getCanonicalName()));
+		assertTrue(string.contains(GrpcField.LEDGER_INFO_VERSION.getFullName() + ""));
+		assertTrue(string.contains(GrpcField.TIMESTAMP_USECS.getFullName() + ""));
+	}
+	
+	
+	@Test
+	public void test002CheckLedgerInfoEmpty() {
 		GrpcChecker grpcChecker = new GrpcChecker();
 		//
 		LedgerInfo ledgerInfo = LedgerInfo.newBuilder()
@@ -48,7 +73,7 @@ public class TestGrpcChecker extends TestClass {
 	
 	
 	@Test
-	public void test002CheckLedgerInfoOk() {
+	public void test003CheckLedgerInfoOk() {
 		GrpcChecker grpcChecker = new GrpcChecker();
 		//
 		long version = 123L;
@@ -68,7 +93,7 @@ public class TestGrpcChecker extends TestClass {
 	}
 	
 	@Test
-	public void test003CheckValidatorSignatureKo() {
+	public void test004CheckValidatorSignatureKo() {
 		GrpcChecker grpcChecker = new GrpcChecker();
 		//
 		ValidatorSignature validatorSignature = ValidatorSignature.newBuilder()
@@ -80,7 +105,7 @@ public class TestGrpcChecker extends TestClass {
 	}
 	
 	@Test
-	public void test004CheckValidatorSignatureOk() {
+	public void test005CheckValidatorSignatureOk() {
 		GrpcChecker grpcChecker = new GrpcChecker();
 		//
 		ByteString accountAddress =ByteString.copyFrom(Utils.getByteArray(AccountAddress.BYTE_LENGTH,0x33));

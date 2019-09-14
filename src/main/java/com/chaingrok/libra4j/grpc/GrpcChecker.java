@@ -11,6 +11,7 @@ import org.libra.grpc.types.LedgerInfoOuterClass.ValidatorSignature;
 import com.chaingrok.libra4j.misc.Libra4jError;
 import com.chaingrok.libra4j.misc.Libra4jLog.Type;
 import com.chaingrok.libra4j.misc.Libra4jException;
+import com.chaingrok.libra4j.misc.Libra4jInfo;
 import com.chaingrok.libra4j.types.AccountAddress;
 import com.chaingrok.libra4j.types.Hash;
 import com.chaingrok.libra4j.types.Signature;
@@ -70,22 +71,21 @@ public class GrpcChecker {
 		Boolean result = null;
 		if (object instanceof MessageOrBuilder) {
 			MessageOrBuilder grpcItem = (MessageOrBuilder) object;
-			Message defaultInstance = grpcItem.getDefaultInstanceForType();
+			Message message = grpcItem.getDefaultInstanceForType();
 			Class<? extends MessageOrBuilder> grpcOwningClass = grpcItem.getClass();
-			//.out.println("checking item: " + grpcOwningClass.getCanonicalName());
-			if (!grpcOwningClass.equals(defaultInstance.getClass())) {
-				throw new Libra4jException("classes are different for grpc item: " + grpcItem.getClass().getCanonicalName() + " <> " + defaultInstance.getClass());
+			if (!grpcOwningClass.equals(message.getClass())) {
+				throw new Libra4jException("classes are different for grpc item: " + grpcItem.getClass().getCanonicalName() + " <> " + message.getClass());
 			}
-			Map<FieldDescriptor, Object> fieldDescriptorMap = grpcItem.getAllFields();
-			objectFieldsMap.put(object,fieldDescriptorMap);
-			analyzeFields(object,fieldDescriptorMap);
-			int mapSize = fieldDescriptorMap.size();
+			Map<FieldDescriptor, Object> fieldDescriptors = grpcItem.getAllFields();
+			objectFieldsMap.put(object,fieldDescriptors);
+			System.out.println(dumpFields(object,fieldDescriptors));
+			int mapSize = fieldDescriptors.size();
 			//System.out.println("   field map size: " + fieldDescriptorMap.size());
-			if (fieldDescriptorMap.size() == 0) {
+			if (fieldDescriptors.size() == 0) {
 				result = true;
 			} else {
 				int count = 0;
-				for (FieldDescriptor fieldDescriptor : fieldDescriptorMap.keySet()) {
+				for (FieldDescriptor fieldDescriptor : fieldDescriptors.keySet()) {
 					++count;
 					String fieldFullName = fieldDescriptor.getFullName();
 					GrpcField grpcField = GrpcField.get(fieldDescriptor.getFullName());
@@ -97,7 +97,7 @@ public class GrpcChecker {
 									+ " <> " 
 									+ grpcField.getOwningClass().getCanonicalName());
 						}
-						Object fieldObject = fieldDescriptorMap.get(fieldDescriptor);
+						Object fieldObject = fieldDescriptors.get(fieldDescriptor);
 						if (grpcField.getFieldClass().isAssignableFrom(fieldObject.getClass())) {
 							/*
 							System.out.println("   checked field " + fieldFullName + " -> " 
@@ -154,6 +154,7 @@ public class GrpcChecker {
 									System.out.println("   checked i64 field " + fieldFullName + " -> " + i64DefaultInstance.getClass().getCanonicalName() + " - ok");
 								}
 						} */ else if (fieldObject instanceof Int32ValueOrBuilder) {
+							 new Libra4jInfo(Type.UNKNOWN_VALUE,"Int32ValueOrBuilder" + fieldObject.getClass().getCanonicalName()); //TODO: remove
 							 Int32ValueOrBuilder i32GrpcItem = (Int32ValueOrBuilder) fieldObject;
 							 Message i32DefaultInstance = i32GrpcItem.getDefaultInstanceForType();
 							 if (!grpcField.getFieldClass().equals(i32DefaultInstance.getClass())) {
@@ -165,6 +166,7 @@ public class GrpcChecker {
 									System.out.println("   checked i32 field " + fieldFullName + " -> " + i32DefaultInstance.getClass().getCanonicalName() + " - ok");
 								}
 						} else if (fieldObject instanceof Int32Value) {
+							 new Libra4jInfo(Type.UNKNOWN_VALUE,"Int32Value" + fieldObject.getClass().getCanonicalName()); //TODO: remove
 							 Int32Value i32GrpcItem = (Int32Value) fieldObject;
 							 Message i32DefaultInstance = i32GrpcItem.getDefaultInstanceForType();
 							 if (!grpcField.getFieldClass().equals(i32DefaultInstance.getClass())) {
@@ -272,11 +274,20 @@ public class GrpcChecker {
 		return result;
 	}
 	
-	public void analyzeFields(Object object, Map<FieldDescriptor, Object> fieldDescriptorMap) {
-		System.out.println("field analysis for : " + object.getClass().getCanonicalName());
-		for (FieldDescriptor fieldDescriptor : fieldDescriptorMap.keySet()) {
-			System.out.println("   field name: " + fieldDescriptor.getFullName());
+	public String dumpFields(Object object, Map<FieldDescriptor, Object> fieldDescriptorMap) {
+		StringBuilder result = new StringBuilder();
+		if (object != null) {
+			result.append("field analysis for : " + object.getClass().getCanonicalName());
+			result.append("\n");
+			if ((fieldDescriptorMap != null) 
+					&& (fieldDescriptorMap.size()  > 0)) {
+				for (FieldDescriptor fieldDescriptor : fieldDescriptorMap.keySet()) {
+					result.append("   field name: " + fieldDescriptor.getFullName());
+					result.append("\n");
+				}
+			}
 		}
+		return result.toString();
 	}
 	
 	@SuppressWarnings("serial")
