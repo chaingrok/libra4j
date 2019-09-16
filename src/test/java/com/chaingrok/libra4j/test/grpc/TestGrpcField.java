@@ -101,4 +101,10 @@ public class TestGrpcField extends TestClass {
 		assertEquals(LedgerInfo.class,GrpcField.LEDGER_INFO_VERSION.getOwningClass());
 		assertEquals(Long.class,GrpcField.LEDGER_INFO_VERSION.getFieldClass());
 	}
+	
+	@Test
+	public void test006HierarchizeGrpcFields() {
+		String string = GrpcField.hierarchizeGrpcFields();
+		assertEquals("",string);
+	}
 }

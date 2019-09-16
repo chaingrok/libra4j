@@ -4,6 +4,9 @@ import com.google.protobuf.ByteString;
 import com.google.protobuf.UInt64Value;
 import com.google.protobuf.Descriptors.EnumValueDescriptor;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import org.libra.grpc.types.AccessPathOuterClass.AccessPath;
 import org.libra.grpc.types.AccountStateBlobOuterClass.AccountStateBlob;
 import org.libra.grpc.types.AccountStateBlobOuterClass.AccountStateWithProof;
@@ -141,6 +144,46 @@ public enum GrpcField {
 			new Libra4jError(Type.UNKNOWN_VALUE,"unknown " + GrpcField.class.getCanonicalName() + ":" + fullName);
 		}
 		return result;
+	}
+	
+	public static String hierarchizeGrpcFields() {
+		StringBuilder result = new StringBuilder();
+		HashMap<Class<?>,ArrayList<GrpcField>> owningClasses = new HashMap<Class<?>,ArrayList<GrpcField>>();
+		for (GrpcField grpcField : GrpcField.values()) {
+			Class<?> owningClass = grpcField.getOwningClass();
+			ArrayList<GrpcField> list = owningClasses.get(owningClass);
+			if (list == null) {
+				list = new ArrayList<GrpcField>();
+				owningClasses.put(owningClass,list);
+			}
+			list.add(grpcField);
+		}
+		HashMap<Class<?>,ArrayList<GrpcField>> declaringClasses = new HashMap<Class<?>,ArrayList<GrpcField>>();
+		for (GrpcField grpcField : GrpcField.values()) {
+			Class<?> declaringClass = grpcField.getDeclaringClass();
+			ArrayList<GrpcField> list = declaringClasses.get(declaringClass);
+			if (list == null) {
+				list = new ArrayList<GrpcField>();
+				declaringClasses.put(declaringClass,list);
+			}
+			list.add(grpcField);
+		}
+		/*
+		ArrayList<Class <?>> orderedClasses = new ArrayList<Class <?>>();
+		while(owningClasses.size() > 0) {
+			for(Class<?> owningClass : owningClasses.keySet()) {
+				if (!declaringClasses.containsKey(owningClass)) {
+					orderedClasses.add(owningClass);
+					owningClasses.remove(owningClass);
+					declaringClasses.remove(owningClass);
+					break;
+				}
+			}
+		}
+		for(Class<?> orderedClass : orderedClasses) {
+			result.append(orderedClass);
+		}*/
+		return result.toString();
 	}
 	
 }
