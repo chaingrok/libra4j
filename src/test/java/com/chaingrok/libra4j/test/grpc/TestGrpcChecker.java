@@ -100,7 +100,7 @@ public class TestGrpcChecker extends TestClass {
 		UpdateToLatestLedgerResponse updateToLatestLedgerResponse = UpdateToLatestLedgerResponse.newBuilder()
 													.build();
 		assertFalse(grpcChecker.checkMandatoryFields(updateToLatestLedgerResponse));
-		System.out.println("logs: " + Libra4jLog.dumpLogs());
+		//System.out.println("logs: " + Libra4jLog.dumpLogs());
 		assertEquals(2,Libra4jLog.getLogs().size());
 		Libra4jLog.purgeLogs();
 		//
@@ -232,7 +232,7 @@ public class TestGrpcChecker extends TestClass {
 	}
 	
 	@Test
-	public void test011CheckExpectedFieldsOkForUIntValues() {
+	public void test011CheckFieldDescrpitorOkForUIntValues() {
 		//GrpcChecker grpcChecker = new GrpcChecker();
 		long value = 12345L;
 		//
@@ -321,6 +321,6 @@ public class TestGrpcChecker extends TestClass {
 									.build();
 		assertTrue(transactionListWithProof instanceof MessageOrBuilder);
 		assertEquals(listExpectedFields,transactionListWithProof.getAllFields().size());
-		assertTrue(grpcChecker.checkExpectedFields(transactionListWithProof,listExpectedFields));
+		//assertTrue(grpcChecker.checkExpectedFields(transactionListWithProof,listExpectedFields));
 	}
 }
