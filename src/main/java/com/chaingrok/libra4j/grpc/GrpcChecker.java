@@ -82,7 +82,7 @@ public class GrpcChecker {
 			if (fieldDescriptors.size() != 0) {
 				for (FieldDescriptor fieldDescriptor : fieldDescriptors.keySet()) {
 					boolean fieldResult = checkFieldDescriptor(grpcClass,fieldDescriptor,fieldDescriptors);
-					if (fieldResult == false) {
+					if (!fieldResult) {
 						result = false;
 					}
 				}
@@ -128,7 +128,7 @@ public class GrpcChecker {
 			}
 			Object fieldObject = fieldDescriptors.get(fieldDescriptor);
 			if (grpcField.getFieldClass().isAssignableFrom(fieldObject.getClass())) {
-				//what is expected do nothing
+				result = true;
 			} else if (fieldObject instanceof MessageOrBuilder) {
 				MessageOrBuilder fieldObjetMessageOfBuilder = (MessageOrBuilder) fieldObject;
 				Message defaultFieldInstance = fieldObjetMessageOfBuilder.getDefaultInstanceForType();
@@ -138,7 +138,9 @@ public class GrpcChecker {
 							+ " <> " 
 							+ grpcField.getFieldClass().getCanonicalName());
 					result = false;
-				} 
+				} else {
+					result = true;
+				}
 			} else if (fieldDescriptor.isRepeated()) {
 				@SuppressWarnings("rawtypes")
 				List list = (List)fieldObject;
@@ -152,9 +154,12 @@ public class GrpcChecker {
 								+ " <> " 
 								+ grpcField.getFieldClass().getCanonicalName());
 						result = false;
+					} else {
+						result = true;
 					}
 				} else {
 					new Libra4jError(Type.INVALID_CLASS,"listObject is not instanceOf MessageOrBuilder:" + listObject.getClass().getCanonicalName());
+					result = false;
 				}
 			} else if (fieldObject instanceof Int64ValueOrBuilder) {
 				 Int64ValueOrBuilder i64GrpcItem = (Int64ValueOrBuilder) fieldObject;
@@ -165,7 +170,9 @@ public class GrpcChecker {
 								+ " <> " 
 								+ grpcField.getFieldClass().getCanonicalName());
 					 result = false;
-					} 
+					} else {
+						result = true;
+					}
 			} else if (fieldObject instanceof Int64Value) {
 				 Int64Value i64GrpcItem = (Int64Value) fieldObject;
 				 Message i64DefaultInstance = i64GrpcItem.getDefaultInstanceForType();
@@ -175,7 +182,9 @@ public class GrpcChecker {
 								+ " <> " 
 								+ grpcField.getFieldClass().getCanonicalName());
 					 result = false;
-					} 
+					} else {
+						result = true;
+					}
 			} else if (fieldObject instanceof Int32ValueOrBuilder) {
 				 new Libra4jInfo(Type.UNKNOWN_VALUE,"Int32ValueOrBuilder" + fieldObject.getClass().getCanonicalName()); //TODO: remove
 				 Int32ValueOrBuilder i32GrpcItem = (Int32ValueOrBuilder) fieldObject;
@@ -186,7 +195,9 @@ public class GrpcChecker {
 								+ " <> " 
 								+ grpcField.getFieldClass().getCanonicalName());
 					 result = false;
-					} 
+					}  else {
+						result = true;
+					}
 			} else if (fieldObject instanceof Int32Value) {
 				 new Libra4jInfo(Type.UNKNOWN_VALUE,"Int32Value" + fieldObject.getClass().getCanonicalName()); //TODO: remove
 				 Int32Value i32GrpcItem = (Int32Value) fieldObject;
@@ -197,7 +208,9 @@ public class GrpcChecker {
 								+ " <> " 
 								+ grpcField.getFieldClass().getCanonicalName());
 						result = false;
-					} 
+					} else {
+						result = true;
+					}
 			} else {
 				new Libra4jError(Type.INVALID_COUNT,"field type checking is not implemented: " + fieldFullName + " (object class: " + fieldObject.getClass().getCanonicalName() + ")");
 				result = false;
