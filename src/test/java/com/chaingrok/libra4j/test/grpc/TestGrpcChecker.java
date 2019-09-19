@@ -60,7 +60,7 @@ public class TestGrpcChecker extends TestClass {
 		System.out.println((string));
 		assertTrue(string.contains(ledgerInfo.getClass().getCanonicalName()));
 		assertTrue(string.contains(GrpcField.LEDGER_INFO_VERSION.getFullName() + ""));
-		assertTrue(string.contains(GrpcField.TIMESTAMP_USECS.getFullName() + ""));
+		assertTrue(string.contains(GrpcField.LEDGER_TIMESTAMP_USECS.getFullName() + ""));
 	}
 	
 	@Test
@@ -84,7 +84,7 @@ public class TestGrpcChecker extends TestClass {
 				.setVersion(version)
 				.build();
 		assertTrue(grpcChecker.isFieldSet(GrpcField.LEDGER_INFO_VERSION,ledgerInfo,ledgerInfo.getAllFields()));
-		assertFalse(grpcChecker.isFieldSet(GrpcField.TIMESTAMP_USECS,ledgerInfo,ledgerInfo.getAllFields()));
+		assertFalse(grpcChecker.isFieldSet(GrpcField.LEDGER_TIMESTAMP_USECS,ledgerInfo,ledgerInfo.getAllFields()));
 	}
 	
 	@Test

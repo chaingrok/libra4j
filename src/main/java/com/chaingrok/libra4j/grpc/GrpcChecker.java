@@ -92,11 +92,11 @@ public class GrpcChecker {
 					GrpcField grpcField = GrpcField.get(fieldDescriptor.getFullName());
 					if (grpcField != null) {
 						System.out.println("grpc field being processed: " + grpcField.toString());
-						if (!grpcField.getOwningClass().equals(grpcOwningClass)) {
+						if (!grpcField.getParentFieldClass().equals(grpcOwningClass)) {
 							throw new Libra4jException("owning class is invalid for field: " + fieldFullName + ": " 
 									+ grpcOwningClass.getCanonicalName()
 									+ " <> " 
-									+ grpcField.getOwningClass().getCanonicalName());
+									+ grpcField.getParentFieldClass().getCanonicalName());
 						}
 						Object fieldObject = fieldDescriptors.get(fieldDescriptor);
 						if (grpcField.getFieldClass().isAssignableFrom(fieldObject.getClass())) {

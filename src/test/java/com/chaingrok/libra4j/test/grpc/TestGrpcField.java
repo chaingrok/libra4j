@@ -25,9 +25,11 @@ import com.chaingrok.libra4j.test.TestClass;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestGrpcField extends TestClass {
 	
+	public static final int GRPC_FIELD_COUNT = 70;
+	
 	@Test
 	public void test001FieldSize() {
-		assertEquals(68,GrpcField.values().length);
+		assertEquals(GRPC_FIELD_COUNT,GrpcField.values().length);
 	}
 	
 	@Test
@@ -98,13 +100,31 @@ public class TestGrpcField extends TestClass {
 	
 	@Test
 	public void test005GetParameters() {
-		assertEquals(LedgerInfo.class,GrpcField.LEDGER_INFO_VERSION.getOwningClass());
+		assertEquals(LedgerInfo.class,GrpcField.LEDGER_INFO_VERSION.getParentFieldClass());
 		assertEquals(Long.class,GrpcField.LEDGER_INFO_VERSION.getFieldClass());
 	}
 	
+	
 	@Test
-	public void test006HierarchizeGrpcFields() {
-		String string = GrpcField.hierarchizeGrpcFields();
-		assertEquals("",string);
+	public void test006CheckFieldHierarchy() {
+		String string = GrpcField.checkFieldsHierarchy();
+		System.out.println(string);
+		assertTrue(string.equals(""));
+	}
+	
+	@Test
+	public void test007AnalyzeFieldTree() {
+		String string = GrpcField.grpcFieldFlatTreeToString(GrpcField.getGrpcFieldFlatTree());
+		System.out.println(string);
+		assertTrue(string.contains("ACCOUNT_STATE_PROOF: <LEDGER_INFO_TO_TRANSACTION_INFO_PROOF,TRANSACTION_INFO,TRANSACTION_INFO_TO_ACCOUNT_PROOF,>"));
+		assertTrue(string.contains("EVENT_ACCESS_PATH: <ACCESS_PATH_ADDRESS,ACCESS_PATH_PATH,>"));
+		assertEquals(GrpcField.values().length,string.split("\n").length);
+		//
+		string = GrpcField.grpcFieldsTreeToString();
+		System.out.println(string);
+		assertTrue(string.contains(GrpcField.SPARSE_MERKLE_PROOF_NON_DEFAULT_SIBLINGS.toString()));
+		assertTrue(string.contains(GrpcField.GAS_USED.toString()));
+		assertTrue(string.contains(GrpcField.PROOF_NON_DEFAULT_SIBLINGS.toString()));
+		assertEquals(GrpcField.values().length,string.split("\n").length);
 	}
 }
