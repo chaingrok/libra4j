@@ -233,7 +233,7 @@ public class TestGrpcChecker extends TestClass {
 	
 	@Test
 	public void test011CheckExpectedFieldsOkForUIntValues() {
-		GrpcChecker grpcChecker = new GrpcChecker();
+		//GrpcChecker grpcChecker = new GrpcChecker();
 		long value = 12345L;
 		//
 		assertTrue(MessageOrBuilder.class.isAssignableFrom(UInt32Value.class));
