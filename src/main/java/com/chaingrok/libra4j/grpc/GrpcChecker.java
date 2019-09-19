@@ -161,7 +161,8 @@ public class GrpcChecker {
 					new Libra4jError(Type.INVALID_CLASS,"listObject is not instanceOf MessageOrBuilder:" + listObject.getClass().getCanonicalName());
 					result = false;
 				}
-			} else if (fieldObject instanceof Int64ValueOrBuilder) {
+			} else if ((fieldObject instanceof Int64ValueOrBuilder)
+						|| (fieldObject instanceof Int64Value)) {
 				 Int64ValueOrBuilder i64GrpcItem = (Int64ValueOrBuilder) fieldObject;
 				 Message i64DefaultInstance = i64GrpcItem.getDefaultInstanceForType();
 				 if (!grpcField.getFieldClass().equals(i64DefaultInstance.getClass())) {
@@ -173,20 +174,8 @@ public class GrpcChecker {
 					} else {
 						result = true;
 					}
-			} else if (fieldObject instanceof Int64Value) {
-				 Int64Value i64GrpcItem = (Int64Value) fieldObject;
-				 Message i64DefaultInstance = i64GrpcItem.getDefaultInstanceForType();
-				 if (!grpcField.getFieldClass().equals(i64DefaultInstance.getClass())) {
-					 new Libra4jError(Type.INVALID_CLASS,"returned field class is invalid: " + fieldFullName + ": " 
-								+ i64DefaultInstance.getClass().getCanonicalName()
-								+ " <> " 
-								+ grpcField.getFieldClass().getCanonicalName());
-					 result = false;
-					} else {
-						result = true;
-					}
-			} else if (fieldObject instanceof Int32ValueOrBuilder) {
-				 new Libra4jInfo(Type.UNKNOWN_VALUE,"Int32ValueOrBuilder" + fieldObject.getClass().getCanonicalName()); //TODO: remove
+			} else if ((fieldObject instanceof Int32ValueOrBuilder)
+						|| (fieldObject instanceof Int32Value)) {
 				 Int32ValueOrBuilder i32GrpcItem = (Int32ValueOrBuilder) fieldObject;
 				 Message i32DefaultInstance = i32GrpcItem.getDefaultInstanceForType();
 				 if (!grpcField.getFieldClass().equals(i32DefaultInstance.getClass())) {
@@ -198,26 +187,10 @@ public class GrpcChecker {
 					}  else {
 						result = true;
 					}
-			} else if (fieldObject instanceof Int32Value) {
-				 new Libra4jInfo(Type.UNKNOWN_VALUE,"Int32Value" + fieldObject.getClass().getCanonicalName()); //TODO: remove
-				 Int32Value i32GrpcItem = (Int32Value) fieldObject;
-				 Message i32DefaultInstance = i32GrpcItem.getDefaultInstanceForType();
-				 if (!grpcField.getFieldClass().equals(i32DefaultInstance.getClass())) {
-						new Libra4jError(Type.INVALID_CLASS,"returned field class is invalid: " + fieldFullName + ": " 
-								+ i32DefaultInstance.getClass().getCanonicalName()
-								+ " <> " 
-								+ grpcField.getFieldClass().getCanonicalName());
-						result = false;
-					} else {
-						result = true;
-					}
 			} else {
 				new Libra4jError(Type.INVALID_COUNT,"field type checking is not implemented: " + fieldFullName + " (object class: " + fieldObject.getClass().getCanonicalName() + ")");
 				result = false;
 			}
-		}
-		if (result == null) {
-			result = true;
 		}
 		return result;
 	}
