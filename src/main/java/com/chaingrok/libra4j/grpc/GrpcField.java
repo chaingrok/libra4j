@@ -155,14 +155,14 @@ public enum GrpcField {
 		ArrayList<GrpcField> childrenGrpcFields = flatGrpcFieldTree.remove(grpcField);
 		for(int i=0;i<level;++i) {
 			result.append("   ");
-		};
+		}
 		result.append("level " + level + ":" + grpcField + "\n");
 		//System.out.println(result.toString());
 		if ((childrenGrpcFields != null)
 				&& (childrenGrpcFields.size() > 0)) {
-			++level;
+			int newLevel = level+1;
 			for (GrpcField childGrpcField : childrenGrpcFields) {
-				result.append(grpcFieldsTreeToString(level,childGrpcField,flatGrpcFieldTree));
+				result.append(grpcFieldsTreeToString(newLevel,childGrpcField,flatGrpcFieldTree));
 			}
 		}
 		return result;

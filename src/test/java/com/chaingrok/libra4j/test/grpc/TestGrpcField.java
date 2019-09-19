@@ -109,7 +109,7 @@ public class TestGrpcField extends TestClass {
 	public void test006CheckFieldHierarchy() {
 		String string = GrpcField.checkFieldsHierarchy();
 		System.out.println(string);
-		assertTrue(string.equals(""));
+		assertEquals("",string);
 	}
 	
 	@Test
