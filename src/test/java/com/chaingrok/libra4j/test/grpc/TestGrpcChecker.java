@@ -24,7 +24,9 @@ import com.chaingrok.libra4j.types.Signature;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.Descriptors.FieldDescriptor;
 import com.google.protobuf.MessageOrBuilder;
+import com.google.protobuf.UInt32Value;
 import com.google.protobuf.UInt64Value;
+import com.google.protobuf.UInt64ValueOrBuilder;
 import com.google.protobuf.UnknownFieldSet;
 import com.google.protobuf.UnknownFieldSet.Field;
 
@@ -181,6 +183,7 @@ public class TestGrpcChecker extends TestClass {
 		//
 		UnknownFieldSet unknownFieldSet = UnknownFieldSet.newBuilder()
 									.build();
+		assertEquals(0,unknownFieldSet.asMap().size());
 		assertTrue(grpcChecker.checkFieldErrors(null,unknownFieldSet));
 		ArrayList<String> initializationErrors = new ArrayList<String>();
 		assertTrue(grpcChecker.checkFieldErrors(initializationErrors,unknownFieldSet));
@@ -198,6 +201,7 @@ public class TestGrpcChecker extends TestClass {
 		UnknownFieldSet unknownFieldSet = UnknownFieldSet.newBuilder()
 									.addField(1,field)
 									.build();
+		assertEquals(1,unknownFieldSet.asMap().size());
 		assertFalse(grpcChecker.checkFieldErrors(null,unknownFieldSet));
 		assertTrue(Libra4jLog.hasLogs());
 		assertEquals(1,Libra4jLog.getLogs().size());
@@ -218,21 +222,42 @@ public class TestGrpcChecker extends TestClass {
 		assertTrue(grpcChecker.checkExpectedFields(new Object(),0));
 	}
 	
-	/*
 	@Test
-	public void test008CheckExpectedFieldsOkForUInt64Value() {
+	public void test011CheckExpectedFieldsOkForUIntValues() {
 		GrpcChecker grpcChecker = new GrpcChecker();
+		long value = 12345L;
+		//
+		UInt32Value uint32Value = UInt32Value.newBuilder()
+									.setValue((int)value)
+									.build();
+		assertEquals(1, uint32Value.getAllFields().size());
+		assertEquals(value,uint32Value.getValue());
+		//assertTrue(grpcChecker.checkExpectedFields(uint64Value,1));
+		//
+		UInt32Value uint32ValueOrBuilder = UInt32Value.newBuilder()
+				.setValue((int)value)
+				.build();
+		assertEquals(1, uint32ValueOrBuilder.getAllFields().size());
+		assertEquals(value,uint32ValueOrBuilder.getValue());
+		//assertTrue(grpcChecker.checkExpectedFields(uint64Value,1));
+		//
+		UInt64ValueOrBuilder uint64ValueOrBuilder = UInt64Value.newBuilder()
+				.setValue(value)
+				.build();
+		assertEquals(1, uint64ValueOrBuilder.getAllFields().size());
+		assertEquals(value,uint64ValueOrBuilder.getValue());
+		//assertTrue(grpcChecker.checkExpectedFields(uint64Value,1));
 		//
 		UInt64Value uint64Value = UInt64Value.newBuilder()
-									.setValue(12345L)
+									.setValue(value)
 									.build();
 		assertEquals(1, uint64Value.getAllFields().size());
-		assertTrue(grpcChecker.checkExpectedFields(uint64Value,1));
+		assertEquals(value,uint64Value.getValue());
+		//assertTrue(grpcChecker.checkExpectedFields(uint64Value,1));
 	}
-	*/
 	
 	@Test
-	public void test011CheckExpectedFieldsOkForMessageOrBuilder() {
+	public void test012CheckExpectedFieldsOkForMessageOrBuilder() {
 		GrpcChecker grpcChecker = new GrpcChecker();
 		//
 		int expectedSize = 5;
@@ -255,7 +280,7 @@ public class TestGrpcChecker extends TestClass {
 	}
 	
 	@Test
-	public void test012CheckExpectedFieldsOkForRepeatedField() {
+	public void test013CheckExpectedFieldsOkForRepeatedField() {
 		GrpcChecker grpcChecker = new GrpcChecker();
 		//
 		int transactionExpectedFields = 1;
@@ -286,11 +311,10 @@ public class TestGrpcChecker extends TestClass {
 	}
 	
 	@Test
-	public void test012CheckExpectedFieldsKo() {
+	public void test014CheckExpectedFieldsKo() {
 		GrpcChecker grpcChecker = new GrpcChecker();
 		assertFalse(grpcChecker.checkExpectedFields(null,1));
 		assertFalse(grpcChecker.checkExpectedFields(new Object(),1));
-		//
 	}
-	
+
 }
