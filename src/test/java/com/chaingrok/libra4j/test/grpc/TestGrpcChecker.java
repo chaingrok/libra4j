@@ -23,9 +23,13 @@ import com.chaingrok.libra4j.types.AccountAddress;
 import com.chaingrok.libra4j.types.Hash;
 import com.chaingrok.libra4j.types.Signature;
 import com.google.protobuf.ByteString;
+import com.google.protobuf.DescriptorProtos.FieldDescriptorProto;
+import com.google.protobuf.Descriptors.Descriptor;
 import com.google.protobuf.Descriptors.FieldDescriptor;
+import com.google.protobuf.Descriptors.FileDescriptor;
 import com.google.protobuf.MessageOrBuilder;
 import com.google.protobuf.UInt32Value;
+import com.google.protobuf.UInt32Value.Builder;
 import com.google.protobuf.UInt32ValueOrBuilder;
 import com.google.protobuf.UInt64Value;
 import com.google.protobuf.UInt64ValueOrBuilder;
@@ -117,68 +121,7 @@ public class TestGrpcChecker extends TestClass {
 	
 	
 	@Test
-	public void test004CheckLedgerInfoEmpty() {
-		GrpcChecker grpcChecker = new GrpcChecker();
-		//
-		LedgerInfo ledgerInfo = LedgerInfo.newBuilder()
-									.build();
-		assertFalse(grpcChecker.checkLedgerInfo(ledgerInfo));
-		assertTrue(Libra4jLog.hasLogs());
-		assertEquals(5,Libra4jLog.getLogs().size());
-		Libra4jLog.purgeLogs();
-	}
-	
-	
-	@Test
-	public void test005CheckLedgerInfoOk() {
-		GrpcChecker grpcChecker = new GrpcChecker();
-		//
-		long version = 123L;
-		long timestampUsecs = 456789L;
-		ByteString consensusBlockId = ByteString.copyFrom(Utils.getByteArray(Hash.BYTE_LENGTH,0x11));
-		ByteString consensusDataHash = ByteString.copyFrom(Utils.getByteArray(Hash.BYTE_LENGTH,0x22));
-		ByteString transactionAccumulatorHash = ByteString.copyFrom(Utils.getByteArray(Hash.BYTE_LENGTH,0x33));
-		LedgerInfo ledgerInfo = LedgerInfo.newBuilder()
-									.setVersion(version)
-									.setTimestampUsecs(timestampUsecs)
-									.setConsensusBlockId(consensusBlockId)
-									.setConsensusDataHash(consensusDataHash)
-									.setTransactionAccumulatorHash(transactionAccumulatorHash)
-									.build();
-		assertTrue(grpcChecker.checkLedgerInfo(ledgerInfo));
-		assertFalse(Libra4jLog.hasLogs());
-	}
-	
-	@Test
-	public void test006CheckValidatorSignatureKo() {
-		GrpcChecker grpcChecker = new GrpcChecker();
-		//
-		ValidatorSignature validatorSignature = ValidatorSignature.newBuilder()
-									.build();
-		assertFalse(grpcChecker.checkValidatorSignature(validatorSignature));
-		assertTrue(Libra4jLog.hasLogs());
-		//System.out.println("logs: " + Libra4jLog.dumpLogs());
-		assertEquals(2,Libra4jLog.getLogs().size());
-		assertEquals(Type.INVALID_LENGTH,Libra4jLog.getLogs().get(0).getType());
-		assertEquals(Type.MISSING_DATA,Libra4jLog.getLogs().get(1).getType());
-		Libra4jLog.purgeLogs();
-	}
-	
-	@Test
-	public void test007CheckValidatorSignatureOk() {
-		GrpcChecker grpcChecker = new GrpcChecker();
-		//
-		ByteString accountAddress =ByteString.copyFrom(Utils.getByteArray(AccountAddress.BYTE_LENGTH,0x33));
-		ByteString signature = ByteString.copyFrom(Utils.getByteArray(Signature.BYTE_LENGTH,0x33));
-		ValidatorSignature validatorSignature = ValidatorSignature.newBuilder()
-									.setValidatorId(accountAddress)
-									.setSignature(signature)
-									.build();
-		assertTrue(grpcChecker.checkValidatorSignature(validatorSignature));
-	}
-	
-	@Test
-	public void test008CheckFieldErrorsOk() {
+	public void test004CheckFieldErrorsOk() {
 		GrpcChecker grpcChecker = new GrpcChecker();
 		//
 		assertTrue(grpcChecker.checkFieldErrors(null,null));
@@ -193,7 +136,7 @@ public class TestGrpcChecker extends TestClass {
 	}
 	
 	@Test
-	public void test009CheckFieldErrorsKo() {
+	public void test005CheckFieldErrorsKo() {
 		GrpcChecker grpcChecker = new GrpcChecker();
 		//
 		assertTrue(grpcChecker.checkFieldErrors(null,null));
@@ -214,6 +157,54 @@ public class TestGrpcChecker extends TestClass {
 		assertFalse(grpcChecker.checkFieldErrors(initializationErrors,null));
 		assertTrue(Libra4jLog.hasLogs());
 		assertEquals(1,Libra4jLog.getLogs().size());
+		Libra4jLog.purgeLogs();
+	}
+	
+	@Test
+	public void test006checkInt32FieldDescriptor() {
+		GrpcChecker grpcChecker = new GrpcChecker();
+		int value = 12345;
+		//
+		//with Int32ValueOrBuilder
+		com.google.protobuf.UInt32Value.Builder builder = UInt32Value.newBuilder()
+									.setValue(value);
+		assertEquals(1, builder.getAllFields().size());
+		assertFalse(grpcChecker.checkInt32FieldDescriptor(GrpcField.UPDATE_TO_LATEST_LEDGER_RESPONSE,(Object)builder));
+		assertEquals(1,Libra4jLog.getLogs().size());
+		assertEquals(Libra4jLog.Type.INVALID_CLASS,Libra4jLog.getLogs().get(0).getType());
+		Libra4jLog.purgeLogs();
+		//with Int32ValueOrBuilder
+		assertTrue(UInt32ValueOrBuilder.class.isAssignableFrom(UInt32Value.class));
+		UInt32Value uint32Value = builder.build();
+		assertEquals(1, uint32Value.getAllFields().size());
+		assertEquals(value,uint32Value.getValue());
+		assertFalse(grpcChecker.checkInt32FieldDescriptor(GrpcField.UPDATE_TO_LATEST_LEDGER_RESPONSE,(Object)uint32Value));
+		assertEquals(1,Libra4jLog.getLogs().size());
+		assertEquals(Libra4jLog.Type.INVALID_CLASS,Libra4jLog.getLogs().get(0).getType());
+		Libra4jLog.purgeLogs();
+	}
+	
+	@Test
+	public void test007checkInt64FieldDescriptor() {
+		GrpcChecker grpcChecker = new GrpcChecker();
+		long value = 12345L;
+		//
+		//with Int64ValueOrBuilder
+		 com.google.protobuf.UInt64Value.Builder builder = UInt64Value.newBuilder()
+									.setValue(value);
+		assertEquals(1, builder.getAllFields().size());
+		assertFalse(grpcChecker.checkInt64FieldDescriptor(GrpcField.UPDATE_TO_LATEST_LEDGER_RESPONSE,(Object)builder));
+		assertEquals(1,Libra4jLog.getLogs().size());
+		assertEquals(Libra4jLog.Type.INVALID_CLASS,Libra4jLog.getLogs().get(0).getType());
+		Libra4jLog.purgeLogs();
+		//with Int32ValueOrBuilder
+		assertTrue(UInt64ValueOrBuilder.class.isAssignableFrom(UInt64Value.class));
+		UInt64Value uint64Value = builder.build();
+		assertEquals(1, uint64Value.getAllFields().size());
+		assertEquals(value,uint64Value.getValue());
+		assertFalse(grpcChecker.checkInt64FieldDescriptor(GrpcField.UPDATE_TO_LATEST_LEDGER_RESPONSE,(Object)uint64Value));
+		assertEquals(1,Libra4jLog.getLogs().size());
+		assertEquals(Libra4jLog.Type.INVALID_CLASS,Libra4jLog.getLogs().get(0).getType());
 		Libra4jLog.purgeLogs();
 	}
 	
@@ -322,5 +313,79 @@ public class TestGrpcChecker extends TestClass {
 		assertTrue(transactionListWithProof instanceof MessageOrBuilder);
 		assertEquals(listExpectedFields,transactionListWithProof.getAllFields().size());
 		//assertTrue(grpcChecker.checkExpectedFields(transactionListWithProof,listExpectedFields));
+	}
+	
+	@Test
+	public void test0014CheckInt64FieldDescriptor() {
+		assertTrue(MessageOrBuilder.class.isAssignableFrom(UInt64Value.class));
+		assertTrue(MessageOrBuilder.class.isAssignableFrom(UInt32Value.class));
+		assertTrue(MessageOrBuilder.class.isAssignableFrom(UInt64ValueOrBuilder.class));
+		assertTrue(MessageOrBuilder.class.isAssignableFrom(UInt32ValueOrBuilder.class));
+		//
+		assertFalse(MessageOrBuilder.class.isAssignableFrom(ByteString.class));
+				
+		
+		
+	}
+	
+	@Test
+	public void test004CheckLedgerInfoEmpty() {
+		GrpcChecker grpcChecker = new GrpcChecker();
+		//
+		LedgerInfo ledgerInfo = LedgerInfo.newBuilder()
+									.build();
+		assertFalse(grpcChecker.checkLedgerInfo(ledgerInfo));
+		assertTrue(Libra4jLog.hasLogs());
+		assertEquals(5,Libra4jLog.getLogs().size());
+		Libra4jLog.purgeLogs();
+	}
+	
+	
+	@Test
+	public void test005CheckLedgerInfoOk() {
+		GrpcChecker grpcChecker = new GrpcChecker();
+		//
+		long version = 123L;
+		long timestampUsecs = 456789L;
+		ByteString consensusBlockId = ByteString.copyFrom(Utils.getByteArray(Hash.BYTE_LENGTH,0x11));
+		ByteString consensusDataHash = ByteString.copyFrom(Utils.getByteArray(Hash.BYTE_LENGTH,0x22));
+		ByteString transactionAccumulatorHash = ByteString.copyFrom(Utils.getByteArray(Hash.BYTE_LENGTH,0x33));
+		LedgerInfo ledgerInfo = LedgerInfo.newBuilder()
+									.setVersion(version)
+									.setTimestampUsecs(timestampUsecs)
+									.setConsensusBlockId(consensusBlockId)
+									.setConsensusDataHash(consensusDataHash)
+									.setTransactionAccumulatorHash(transactionAccumulatorHash)
+									.build();
+		assertTrue(grpcChecker.checkLedgerInfo(ledgerInfo));
+		assertFalse(Libra4jLog.hasLogs());
+	}
+	
+	@Test
+	public void test006CheckValidatorSignatureKo() {
+		GrpcChecker grpcChecker = new GrpcChecker();
+		//
+		ValidatorSignature validatorSignature = ValidatorSignature.newBuilder()
+									.build();
+		assertFalse(grpcChecker.checkValidatorSignature(validatorSignature));
+		assertTrue(Libra4jLog.hasLogs());
+		//System.out.println("logs: " + Libra4jLog.dumpLogs());
+		assertEquals(2,Libra4jLog.getLogs().size());
+		assertEquals(Type.INVALID_LENGTH,Libra4jLog.getLogs().get(0).getType());
+		assertEquals(Type.MISSING_DATA,Libra4jLog.getLogs().get(1).getType());
+		Libra4jLog.purgeLogs();
+	}
+	
+	@Test
+	public void test007CheckValidatorSignatureOk() {
+		GrpcChecker grpcChecker = new GrpcChecker();
+		//
+		ByteString accountAddress =ByteString.copyFrom(Utils.getByteArray(AccountAddress.BYTE_LENGTH,0x33));
+		ByteString signature = ByteString.copyFrom(Utils.getByteArray(Signature.BYTE_LENGTH,0x33));
+		ValidatorSignature validatorSignature = ValidatorSignature.newBuilder()
+									.setValidatorId(accountAddress)
+									.setSignature(signature)
+									.build();
+		assertTrue(grpcChecker.checkValidatorSignature(validatorSignature));
 	}
 }

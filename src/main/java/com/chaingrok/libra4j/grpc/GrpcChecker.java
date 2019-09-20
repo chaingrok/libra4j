@@ -15,13 +15,13 @@ import com.chaingrok.libra4j.types.AccountAddress;
 import com.chaingrok.libra4j.types.Hash;
 import com.chaingrok.libra4j.types.Signature;
 import com.google.protobuf.Descriptors.FieldDescriptor;
-import com.google.protobuf.Int64ValueOrBuilder;
-import com.google.protobuf.Int32ValueOrBuilder;
 import com.google.protobuf.Int64Value;
 import com.google.protobuf.Int32Value;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.Message;
 import com.google.protobuf.MessageOrBuilder;
+import com.google.protobuf.UInt32ValueOrBuilder;
+import com.google.protobuf.UInt64ValueOrBuilder;
 import com.google.protobuf.UnknownFieldSet;
 import com.google.protobuf.UnknownFieldSet.Field;
 
@@ -129,13 +129,13 @@ public class GrpcChecker {
 			if (grpcField.getFieldClass().isAssignableFrom(fieldObject.getClass())) {
 				result = true;
 			} else if (fieldObject instanceof MessageOrBuilder) {
-				checkRepeatedFieldDescriptor(grpcField,fieldObject);
+				checkMessageOrBuilderFieldDescriptor(grpcField,fieldObject);
 			} else if (fieldDescriptor.isRepeated()) {
 				checkRepeatedFieldDescriptor(grpcField,fieldObject);
-			} else if ((fieldObject instanceof Int64ValueOrBuilder)
+			} else if ((fieldObject instanceof UInt64ValueOrBuilder)
 						|| (fieldObject instanceof Int64Value)) {
 				checkInt64FieldDescriptor(grpcField,fieldObject);
-			} else if ((fieldObject instanceof Int32ValueOrBuilder)
+			} else if ((fieldObject instanceof UInt32ValueOrBuilder)
 						|| (fieldObject instanceof Int32Value)) {
 				checkInt32FieldDescriptor(grpcField,fieldObject);
 			} else {
@@ -146,7 +146,7 @@ public class GrpcChecker {
 		return result;
 	}
 	
-	public boolean checkMEssageOrBuilderFieldDescriptor(GrpcField grpcField,Object fieldObject) {
+	public boolean checkMessageOrBuilderFieldDescriptor(GrpcField grpcField,Object fieldObject) {
 		boolean result = true;
 		MessageOrBuilder fieldObjetMessageOfBuilder = (MessageOrBuilder) fieldObject;
 		Message defaultFieldInstance = fieldObjetMessageOfBuilder.getDefaultInstanceForType();
@@ -176,9 +176,7 @@ public class GrpcChecker {
 						+ " <> " 
 						+ grpcField.getFieldClass().getCanonicalName());
 				result = false;
-			} else {
-				result = true;
-			}
+			} 
 		} else {
 			new Libra4jError(Type.INVALID_CLASS,"listObject is not instanceOf MessageOrBuilder:" + listObject.getClass().getCanonicalName());
 			result = false;
@@ -188,33 +186,29 @@ public class GrpcChecker {
 	
 	public boolean checkInt64FieldDescriptor(GrpcField grpcField,Object fieldObject) {
 		boolean result = true;
-		Int64ValueOrBuilder i64GrpcItem = (Int64ValueOrBuilder) fieldObject;
-		 Message i64DefaultInstance = i64GrpcItem.getDefaultInstanceForType();
-		 if (!grpcField.getFieldClass().equals(i64DefaultInstance.getClass())) {
-			 new Libra4jError(Type.INVALID_CLASS,"returned field class is invalid: " + grpcField.getFullName() + ": " 
+		UInt64ValueOrBuilder i64GrpcItem = (UInt64ValueOrBuilder) fieldObject;
+		Message i64DefaultInstance = i64GrpcItem.getDefaultInstanceForType();
+		if (!grpcField.getFieldClass().equals(i64DefaultInstance.getClass())) {
+			new Libra4jError(Type.INVALID_CLASS,"returned field class is invalid: " + grpcField.getFullName() + ": " 
 						+ i64DefaultInstance.getClass().getCanonicalName()
 						+ " <> " 
 						+ grpcField.getFieldClass().getCanonicalName());
-			 result = false;
-			} else {
-				result = true;
-			}
+			result = false;
+		} 
 		return result;
 	}
 	
 	public boolean checkInt32FieldDescriptor(GrpcField grpcField,Object fieldObject) {
 		boolean result = true;
-		Int64ValueOrBuilder i32GrpcItem = (Int64ValueOrBuilder) fieldObject;
-		 Message i32DefaultInstance = i32GrpcItem.getDefaultInstanceForType();
-		 if (!grpcField.getFieldClass().equals(i32DefaultInstance.getClass())) {
-			 new Libra4jError(Type.INVALID_CLASS,"returned field class is invalid: " + grpcField.getFullName() + ": " 
+		UInt32ValueOrBuilder i32GrpcItem = (UInt32ValueOrBuilder) fieldObject;
+		Message i32DefaultInstance = i32GrpcItem.getDefaultInstanceForType();
+		if (!grpcField.getFieldClass().equals(i32DefaultInstance.getClass())) {
+			new Libra4jError(Type.INVALID_CLASS,"returned field class is invalid: " + grpcField.getFullName() + ": " 
 						+ i32DefaultInstance.getClass().getCanonicalName()
 						+ " <> " 
 						+ grpcField.getFieldClass().getCanonicalName());
-			 result = false;
-			} else {
-				result = true;
-			}
+			result = false;
+		} 
 		return result;
 	}
 	
