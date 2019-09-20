@@ -156,9 +156,7 @@ public class GrpcChecker {
 					+ " <> " 
 					+ grpcField.getFieldClass().getCanonicalName());
 			result = false;
-		} else {
-			result = true;
-		}
+		} 
 		return result;
 	}
 	

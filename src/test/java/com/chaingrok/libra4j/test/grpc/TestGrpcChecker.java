@@ -23,13 +23,9 @@ import com.chaingrok.libra4j.types.AccountAddress;
 import com.chaingrok.libra4j.types.Hash;
 import com.chaingrok.libra4j.types.Signature;
 import com.google.protobuf.ByteString;
-import com.google.protobuf.DescriptorProtos.FieldDescriptorProto;
-import com.google.protobuf.Descriptors.Descriptor;
 import com.google.protobuf.Descriptors.FieldDescriptor;
-import com.google.protobuf.Descriptors.FileDescriptor;
 import com.google.protobuf.MessageOrBuilder;
 import com.google.protobuf.UInt32Value;
-import com.google.protobuf.UInt32Value.Builder;
 import com.google.protobuf.UInt32ValueOrBuilder;
 import com.google.protobuf.UInt64Value;
 import com.google.protobuf.UInt64ValueOrBuilder;
@@ -206,6 +202,31 @@ public class TestGrpcChecker extends TestClass {
 		assertEquals(1,Libra4jLog.getLogs().size());
 		assertEquals(Libra4jLog.Type.INVALID_CLASS,Libra4jLog.getLogs().get(0).getType());
 		Libra4jLog.purgeLogs();
+	}
+	
+	@Test
+	public void test008checkRepeatedFieldDescriptor() {
+		GrpcChecker grpcChecker = new GrpcChecker();
+		//
+		TransactionInfo transactionInfo1 = TransactionInfo.newBuilder()
+				.build();
+		TransactionInfo transactionInfo2 = TransactionInfo.newBuilder()
+				.build();
+		assertTrue(transactionInfo2 instanceof MessageOrBuilder);
+		TransactionListWithProof transactionListWithProof = TransactionListWithProof.newBuilder()
+									.addInfos(0,transactionInfo1)
+									.addInfos(0,transactionInfo2)
+									.build();
+		assertEquals(1,transactionListWithProof.getAllFields().size());
+		Object object = transactionListWithProof.getAllFields().values().toArray()[0];
+		//ko case
+		assertFalse(grpcChecker.checkRepeatedFieldDescriptor(GrpcField.UPDATE_TO_LATEST_LEDGER_RESPONSE,object));
+		assertEquals(1,Libra4jLog.getLogs().size());
+		assertEquals(Libra4jLog.Type.INVALID_CLASS,Libra4jLog.getLogs().get(0).getType());
+		Libra4jLog.purgeLogs();
+		//ok case
+		assertTrue(grpcChecker.checkRepeatedFieldDescriptor(GrpcField.TRANSACTION_INFO,object));
+		
 	}
 	
 	@Test
