@@ -230,6 +230,25 @@ public class TestGrpcChecker extends TestClass {
 	}
 	
 	@Test
+	public void test009MessageOrBuilderFieldDescriptor() {
+		GrpcChecker grpcChecker = new GrpcChecker();
+		//
+		LedgerInfo ledgerInfo = LedgerInfo.newBuilder()
+				.build();
+		LedgerInfoWithSignatures ledgerInfoWithSignatures = LedgerInfoWithSignatures.newBuilder()
+				.setLedgerInfo(ledgerInfo)
+				.build();
+		assertEquals(1,ledgerInfoWithSignatures.getAllFields().size());
+		//test ok
+		assertTrue(grpcChecker.checkMessageOrBuilderFieldDescriptor(GrpcField.LEDGER_INFO_WITH_SIGS,ledgerInfoWithSignatures));
+		//test ko
+		assertFalse(grpcChecker.checkMessageOrBuilderFieldDescriptor(GrpcField.RESPONSE_ITEMS,ledgerInfoWithSignatures));
+		assertEquals(1,Libra4jLog.getLogs().size());
+		assertEquals(Libra4jLog.Type.INVALID_CLASS,Libra4jLog.getLogs().get(0).getType());
+		Libra4jLog.purgeLogs();
+	}
+	
+	@Test
 	public void test010CheckExpectedFieldsOkEdgeCases() {
 		GrpcChecker grpcChecker = new GrpcChecker();
 		assertFalse(grpcChecker.checkExpectedFields(null,0));
