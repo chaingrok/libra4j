@@ -219,13 +219,25 @@ public class TestGrpcChecker extends TestClass {
 									.build();
 		assertEquals(1,transactionListWithProof.getAllFields().size());
 		Object object = transactionListWithProof.getAllFields().values().toArray()[0];
-		//ko case
+		//ok case 1: empty list of any kind
+		assertTrue(grpcChecker.checkRepeatedFieldDescriptor(null,new ArrayList<Object>()));
+		//ok case 2: normal case
+		assertTrue(grpcChecker.checkRepeatedFieldDescriptor(GrpcField.TRANSACTION_INFO,object));
+		//ko case1
 		assertFalse(grpcChecker.checkRepeatedFieldDescriptor(GrpcField.UPDATE_TO_LATEST_LEDGER_RESPONSE,object));
 		assertEquals(1,Libra4jLog.getLogs().size());
 		assertEquals(Libra4jLog.Type.INVALID_CLASS,Libra4jLog.getLogs().get(0).getType());
+		assertTrue(((String)Libra4jLog.getLogs().get(0).getObject()).contains("returned field class is invalid"));
 		Libra4jLog.purgeLogs();
-		//ok case
-		assertTrue(grpcChecker.checkRepeatedFieldDescriptor(GrpcField.TRANSACTION_INFO,object));
+		//ko case2
+		ArrayList<Object> list = new ArrayList<Object>();
+		list.add(new Object());
+		assertFalse(grpcChecker.checkRepeatedFieldDescriptor(GrpcField.UPDATE_TO_LATEST_LEDGER_RESPONSE,list));
+		assertEquals(1,Libra4jLog.getLogs().size());
+		assertEquals(Libra4jLog.Type.INVALID_CLASS,Libra4jLog.getLogs().get(0).getType());
+		assertTrue(((String)Libra4jLog.getLogs().get(0).getObject()).contains("listObject is not instanceOf MessageOrBuilder"));
+		Libra4jLog.purgeLogs();
+		
 		
 	}
 	

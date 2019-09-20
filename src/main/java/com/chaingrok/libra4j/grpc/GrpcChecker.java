@@ -164,20 +164,22 @@ public class GrpcChecker {
 		boolean result = true;
 		@SuppressWarnings("rawtypes")
 		List list = (List)fieldObject;
-		Object listObject = list.get(0);
-		if (listObject instanceof MessageOrBuilder) {
-			MessageOrBuilder listGrpcItem = (MessageOrBuilder) listObject;
-			Message defaultListInstance = listGrpcItem.getDefaultInstanceForType();
-			if (!grpcField.getFieldClass().equals(defaultListInstance.getClass())) {
-				new Libra4jError(Type.INVALID_CLASS,"returned field class is invalid: " + grpcField.getFullName() + ": " 
-						+ defaultListInstance.getClass().getCanonicalName()
-						+ " <> " 
-						+ grpcField.getFieldClass().getCanonicalName());
+		if (list.size() > 0) {
+			Object listObject = list.get(0);
+			if (listObject instanceof MessageOrBuilder) {
+				MessageOrBuilder listGrpcItem = (MessageOrBuilder) listObject;
+				Message defaultListInstance = listGrpcItem.getDefaultInstanceForType();
+				if (!grpcField.getFieldClass().equals(defaultListInstance.getClass())) {
+					new Libra4jError(Type.INVALID_CLASS,"returned field class is invalid: " + grpcField.getFullName() + ": " 
+							+ defaultListInstance.getClass().getCanonicalName()
+							+ " <> " 
+							+ grpcField.getFieldClass().getCanonicalName());
+					result = false;
+				} 
+			} else {
+				new Libra4jError(Type.INVALID_CLASS,"listObject is not instanceOf MessageOrBuilder:" + listObject.getClass().getCanonicalName());
 				result = false;
-			} 
-		} else {
-			new Libra4jError(Type.INVALID_CLASS,"listObject is not instanceOf MessageOrBuilder:" + listObject.getClass().getCanonicalName());
-			result = false;
+			}
 		}
 		return result;
 	}
