@@ -165,18 +165,23 @@ public class TestGrpcChecker extends TestClass {
 		com.google.protobuf.UInt32Value.Builder builder = UInt32Value.newBuilder()
 									.setValue(value);
 		assertEquals(1, builder.getAllFields().size());
+		assertEquals(value,builder.getValue());
 		assertFalse(grpcChecker.checkInt32FieldDescriptor(GrpcField.UPDATE_TO_LATEST_LEDGER_RESPONSE,(Object)builder));
 		assertEquals(1,Libra4jLog.getLogs().size());
 		assertEquals(Libra4jLog.Type.INVALID_CLASS,Libra4jLog.getLogs().get(0).getType());
+		assertTrue(((String)(Libra4jLog.getLogs().get(0).getObject())).contains(GrpcField.UPDATE_TO_LATEST_LEDGER_RESPONSE.getFullName()));
 		Libra4jLog.purgeLogs();
 		//with Int32ValueOrBuilder
 		assertTrue(UInt32ValueOrBuilder.class.isAssignableFrom(UInt32Value.class));
 		UInt32Value uint32Value = builder.build();
+		assertEquals(value,uint32Value.getValue());
 		assertEquals(1, uint32Value.getAllFields().size());
+		assertEquals(value,builder.getValue());
 		assertEquals(value,uint32Value.getValue());
 		assertFalse(grpcChecker.checkInt32FieldDescriptor(GrpcField.UPDATE_TO_LATEST_LEDGER_RESPONSE,(Object)uint32Value));
 		assertEquals(1,Libra4jLog.getLogs().size());
 		assertEquals(Libra4jLog.Type.INVALID_CLASS,Libra4jLog.getLogs().get(0).getType());
+		assertTrue(((String)(Libra4jLog.getLogs().get(0).getObject())).contains(GrpcField.UPDATE_TO_LATEST_LEDGER_RESPONSE.getFullName()));
 		Libra4jLog.purgeLogs();
 	}
 	
@@ -184,19 +189,20 @@ public class TestGrpcChecker extends TestClass {
 	public void test007checkInt64FieldDescriptor() {
 		GrpcChecker grpcChecker = new GrpcChecker();
 		long value = 12345L;
-		//
 		//with Int64ValueOrBuilder
 		 com.google.protobuf.UInt64Value.Builder builder = UInt64Value.newBuilder()
 									.setValue(value);
 		assertEquals(1, builder.getAllFields().size());
+		assertEquals(value,builder.getValue());
 		assertFalse(grpcChecker.checkInt64FieldDescriptor(GrpcField.UPDATE_TO_LATEST_LEDGER_RESPONSE,(Object)builder));
 		assertEquals(1,Libra4jLog.getLogs().size());
 		assertEquals(Libra4jLog.Type.INVALID_CLASS,Libra4jLog.getLogs().get(0).getType());
 		Libra4jLog.purgeLogs();
-		//with Int32ValueOrBuilder
+		//with Int64ValueOrBuilder
 		assertTrue(UInt64ValueOrBuilder.class.isAssignableFrom(UInt64Value.class));
 		UInt64Value uint64Value = builder.build();
 		assertEquals(1, uint64Value.getAllFields().size());
+		assertEquals(uint64Value,builder.getValue());
 		assertEquals(value,uint64Value.getValue());
 		assertFalse(grpcChecker.checkInt64FieldDescriptor(GrpcField.UPDATE_TO_LATEST_LEDGER_RESPONSE,(Object)uint64Value));
 		assertEquals(1,Libra4jLog.getLogs().size());
