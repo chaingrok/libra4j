@@ -296,6 +296,23 @@ public class TestGrpcChecker extends TestClass {
 	}
 	
 	@Test
+	public void test012CheckFieldDescriptorOk() {
+		GrpcChecker grpcChecker = new GrpcChecker();
+		//test with MessageOrBuilder
+		LedgerInfo ledgerInfo = LedgerInfo.newBuilder()
+				.build();
+		LedgerInfoWithSignatures ledgerInfoWithSignatures = LedgerInfoWithSignatures.newBuilder()
+				.setLedgerInfo(ledgerInfo)
+				.build();
+		assertEquals(1,ledgerInfoWithSignatures.getAllFields().size());
+		Map<FieldDescriptor, Object> fieldDescriptors = ledgerInfoWithSignatures.getAllFields();
+		assertEquals(1,fieldDescriptors.size());
+		FieldDescriptor fieldDescriptor = (FieldDescriptor)fieldDescriptors.keySet().toArray()[0];
+		//test MessageOrBuilder ok
+		assertTrue(grpcChecker.checkFieldDescriptor(GrpcField.LEDGER_INFO.getParentFieldClass(),fieldDescriptor,fieldDescriptors));
+	}
+	
+	@Test
 	public void test010CheckExpectedFieldsOkEdgeCases() {
 		GrpcChecker grpcChecker = new GrpcChecker();
 		assertFalse(grpcChecker.checkExpectedFields(null,0));
