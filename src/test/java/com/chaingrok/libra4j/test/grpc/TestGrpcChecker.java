@@ -445,4 +445,5 @@ public class TestGrpcChecker extends TestClass {
 									.build();
 		assertTrue(grpcChecker.checkValidatorSignature(validatorSignature));
 	}
-}
+
+ }

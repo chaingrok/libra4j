@@ -111,26 +111,30 @@ public class GrpcChecker {
 	}
 	
 	public boolean checkFieldDescriptor(Class<?> grpcClass,FieldDescriptor fieldDescriptor, Map<FieldDescriptor,Object> fieldDescriptors) {
+		return checkFieldDescriptor(grpcClass,fieldDescriptor.getFullName(),fieldDescriptor.isRepeated(),fieldDescriptors.get(fieldDescriptor));
+	}
+	
+	public boolean checkFieldDescriptor(Class<?> grpcClass,String fieldFullName,boolean fieldIsRepeated,Object fieldObject) {
 		Boolean result = null;
-		String fieldFullName = fieldDescriptor.getFullName();
-		GrpcField grpcField = GrpcField.get(fieldDescriptor.getFullName());
+		GrpcField grpcField = GrpcField.get(fieldFullName);
 		if (grpcField == null) {
-			new Libra4jError(Type.UNKNOWN_VALUE,"no GrpcField for fullName: " + fieldDescriptor.getFullName());
+			new Libra4jError(Type.UNKNOWN_VALUE,"no GrpcField for fullName: " + fieldFullName);
 			result = false;
 		} else {
-			if (!grpcField.getParentFieldClass().equals(grpcClass)) {
-				new Libra4jError(Type.INVALID_CLASS,"returned field class is invalid: " + fieldFullName + ": " 
-						+ grpcClass.getCanonicalName()
-						+ " <> " 
-						+ grpcField.getParentFieldClass().getCanonicalName());
-				result = false;
+			if (grpcClass != null) {
+				if (!grpcField.getParentFieldClass().equals(grpcClass)) {
+					new Libra4jError(Type.INVALID_CLASS,"returned field class is invalid: " + fieldFullName + ": " 
+							+ grpcClass.getCanonicalName()
+							+ " <> " 
+							+ grpcField.getParentFieldClass().getCanonicalName());
+					result = false;
+				}
 			}
-			Object fieldObject = fieldDescriptors.get(fieldDescriptor);
 			if (grpcField.getFieldClass().isAssignableFrom(fieldObject.getClass())) {
 				result = true;
 			} else if (fieldObject instanceof MessageOrBuilder) {
 				checkMessageOrBuilderFieldDescriptor(grpcField,fieldObject);
-			} else if (fieldDescriptor.isRepeated()) {
+			} else if (fieldIsRepeated) {
 				checkRepeatedFieldDescriptor(grpcField,fieldObject);
 			} else if ((fieldObject instanceof UInt64ValueOrBuilder)
 						|| (fieldObject instanceof Int64Value)) {
