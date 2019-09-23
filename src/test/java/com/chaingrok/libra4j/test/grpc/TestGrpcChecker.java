@@ -267,7 +267,7 @@ public class TestGrpcChecker extends TestClass {
 	}
 	
 	@Test
-	public void test011CheckFieldDescriptorKo() {
+	public void test010CheckFieldDescriptorKo() {
 		GrpcChecker grpcChecker = new GrpcChecker();
 		//test with null rpcField
 		assertFalse(grpcChecker.checkFieldDescriptor((Class<?>)null,null,(Boolean)null,null));
@@ -296,7 +296,7 @@ public class TestGrpcChecker extends TestClass {
 	}
 	
 	@Test
-	public void test012CheckFieldDescriptorOk() {
+	public void test011CheckFieldDescriptorOk() {
 		GrpcChecker grpcChecker = new GrpcChecker();
 		//test with directlyassignable ok
 		LedgerInfo ledgerInfo = LedgerInfo.newBuilder()
@@ -339,7 +339,7 @@ public class TestGrpcChecker extends TestClass {
 	}
 	
 	@Test
-	public void test010CheckExpectedFieldsOkEdgeCases() {
+	public void test012CheckExpectedFieldsOkEdgeCases() {
 		GrpcChecker grpcChecker = new GrpcChecker();
 		assertFalse(grpcChecker.checkExpectedFields(null,0));
 		assertEquals(1,Libra4jLog.getLogs().size());
@@ -353,46 +353,7 @@ public class TestGrpcChecker extends TestClass {
 	
 	
 	@Test
-	public void test011CheckFieldDescrpitorOkForUIntValues() {
-		//GrpcChecker grpcChecker = new GrpcChecker();
-		long value = 12345L;
-		//
-		assertTrue(MessageOrBuilder.class.isAssignableFrom(UInt32Value.class));
-		UInt32Value uint32Value = UInt32Value.newBuilder()
-									.setValue((int)value)
-									.build();
-		assertEquals(1, uint32Value.getAllFields().size());
-		assertEquals(value,uint32Value.getValue());
-		//assertTrue(grpcChecker.checkExpectedFields(uint64Value,1));
-		//
-		assertTrue(MessageOrBuilder.class.isAssignableFrom(UInt32ValueOrBuilder.class));
-		UInt32ValueOrBuilder uint32ValueOrBuilder = UInt32Value.newBuilder()
-				.setValue((int)value)
-				.build();
-		assertEquals(1, uint32ValueOrBuilder.getAllFields().size());
-		assertEquals(value,uint32ValueOrBuilder.getValue());
-		//assertTrue(grpcChecker.checkExpectedFields(uint64Value,1));
-		//
-		//
-		assertTrue(MessageOrBuilder.class.isAssignableFrom(UInt64Value.class));
-		UInt64Value uint64Value = UInt64Value.newBuilder()
-									.setValue(value)
-									.build();
-		assertEquals(1, uint64Value.getAllFields().size());
-		assertEquals(value,uint64Value.getValue());
-		//assertTrue(grpcChecker.checkExpectedFields(uint64Value,1));
-		//
-		assertTrue(MessageOrBuilder.class.isAssignableFrom(UInt64ValueOrBuilder.class));
-		UInt64ValueOrBuilder uint64ValueOrBuilder = UInt64Value.newBuilder()
-				.setValue(value)
-				.build();
-		assertEquals(1, uint64ValueOrBuilder.getAllFields().size());
-		assertEquals(value,uint64ValueOrBuilder.getValue());
-		//assertTrue(grpcChecker.checkExpectedFields(uint64Value,1));
-	}
-	
-	@Test
-	public void test012CheckExpectedFieldsOkForMessageOrBuilder() {
+	public void test013CheckExpectedFieldsOkForMessageOrBuilder() {
 		GrpcChecker grpcChecker = new GrpcChecker();
 		//
 		int expectedSize = 5;
@@ -415,7 +376,7 @@ public class TestGrpcChecker extends TestClass {
 	}
 	
 	@Test
-	public void test013CheckExpectedFieldsOkForRepeatedField() {
+	public void test014CheckExpectedFieldsOkForRepeatedField() {
 		GrpcChecker grpcChecker = new GrpcChecker();
 		//
 		int transactionExpectedFields = 1;
@@ -442,24 +403,12 @@ public class TestGrpcChecker extends TestClass {
 									.build();
 		assertTrue(transactionListWithProof instanceof MessageOrBuilder);
 		assertEquals(listExpectedFields,transactionListWithProof.getAllFields().size());
-		//assertTrue(grpcChecker.checkExpectedFields(transactionListWithProof,listExpectedFields));
+		assertTrue(grpcChecker.checkExpectedFields(transactionListWithProof,listExpectedFields));
 	}
 	
-	@Test
-	public void test0014CheckInt64FieldDescriptor() {
-		assertTrue(MessageOrBuilder.class.isAssignableFrom(UInt64Value.class));
-		assertTrue(MessageOrBuilder.class.isAssignableFrom(UInt32Value.class));
-		assertTrue(MessageOrBuilder.class.isAssignableFrom(UInt64ValueOrBuilder.class));
-		assertTrue(MessageOrBuilder.class.isAssignableFrom(UInt32ValueOrBuilder.class));
-		//
-		assertFalse(MessageOrBuilder.class.isAssignableFrom(ByteString.class));
-				
-		
-		
-	}
 	
 	@Test
-	public void test004CheckLedgerInfoEmpty() {
+	public void test015CheckLedgerInfoEmpty() {
 		GrpcChecker grpcChecker = new GrpcChecker();
 		//
 		LedgerInfo ledgerInfo = LedgerInfo.newBuilder()
@@ -472,7 +421,7 @@ public class TestGrpcChecker extends TestClass {
 	
 	
 	@Test
-	public void test005CheckLedgerInfoOk() {
+	public void test016CheckLedgerInfoOk() {
 		GrpcChecker grpcChecker = new GrpcChecker();
 		//
 		long version = 123L;
@@ -492,7 +441,7 @@ public class TestGrpcChecker extends TestClass {
 	}
 	
 	@Test
-	public void test006CheckValidatorSignatureKo() {
+	public void test017CheckValidatorSignatureKo() {
 		GrpcChecker grpcChecker = new GrpcChecker();
 		//
 		ValidatorSignature validatorSignature = ValidatorSignature.newBuilder()
@@ -507,7 +456,7 @@ public class TestGrpcChecker extends TestClass {
 	}
 	
 	@Test
-	public void test007CheckValidatorSignatureOk() {
+	public void test018CheckValidatorSignatureOk() {
 		GrpcChecker grpcChecker = new GrpcChecker();
 		//
 		ByteString accountAddress =ByteString.copyFrom(Utils.getByteArray(AccountAddress.BYTE_LENGTH,0x33));
