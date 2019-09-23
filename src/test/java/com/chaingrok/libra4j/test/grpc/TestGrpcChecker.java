@@ -338,8 +338,33 @@ public class TestGrpcChecker extends TestClass {
 		assertTrue(grpcChecker.checkFieldDescriptor(GrpcField.TRANSACTIONS_LIST_INFOS.getParentFieldClass(),fieldDescriptor3,fieldDescriptors3));
 	}
 	
+	@Test 
+	public void test012CheckExpectedFieldsKoExpectedCount() {
+		GrpcChecker grpcChecker = new GrpcChecker();
+		//
+		int expectedSize = 5;
+		long version = 123L;
+		long timestampUsecs = 456789L;
+		ByteString consensusBlockId = ByteString.copyFrom(Utils.getByteArray(Hash.BYTE_LENGTH,0x11));
+		ByteString consensusDataHash = ByteString.copyFrom(Utils.getByteArray(Hash.BYTE_LENGTH,0x22));
+		ByteString transactionAccumulatorHash = ByteString.copyFrom(Utils.getByteArray(Hash.BYTE_LENGTH,0x33));
+		LedgerInfo ledgerInfo = LedgerInfo.newBuilder()
+									.setVersion(version)
+									.setTimestampUsecs(timestampUsecs)
+									.setConsensusBlockId(consensusBlockId)
+									.setConsensusDataHash(consensusDataHash)
+									.setTransactionAccumulatorHash(transactionAccumulatorHash)
+									.build();
+		Map<FieldDescriptor, Object> fields = ledgerInfo.getAllFields();
+		assertEquals(expectedSize,fields.size());
+		assertFalse(grpcChecker.checkExpectedFields(ledgerInfo,expectedSize-1));
+		assertEquals(1,Libra4jLog.getLogs().size());
+		assertTrue(((String)Libra4jLog.getLogs().get(0).getObject()).contains("count different from expected"));
+		Libra4jLog.purgeLogs();
+	}
+	
 	@Test
-	public void test012CheckExpectedFieldsOkEdgeCases() {
+	public void test013CheckExpectedFieldsOkEdgeCases() {
 		GrpcChecker grpcChecker = new GrpcChecker();
 		assertFalse(grpcChecker.checkExpectedFields(null,0));
 		assertEquals(1,Libra4jLog.getLogs().size());
@@ -349,11 +374,16 @@ public class TestGrpcChecker extends TestClass {
 		assertFalse(grpcChecker.checkExpectedFields(new Object(),0)); //non MessageOrBuilderObject
 		assertEquals(1,Libra4jLog.getLogs().size());
 		Libra4jLog.purgeLogs();
+		//Case withh 0 fields
+		LedgerInfo ledgerInfo = LedgerInfo.newBuilder()
+				.build();
+		assertEquals(0,ledgerInfo.getAllFields().size());
+		assertTrue(grpcChecker.checkExpectedFields(ledgerInfo,0));
 	}
 	
 	
 	@Test
-	public void test013CheckExpectedFieldsOkForMessageOrBuilder() {
+	public void test014CheckExpectedFieldsOkForMessageOrBuilder() {
 		GrpcChecker grpcChecker = new GrpcChecker();
 		//
 		int expectedSize = 5;
@@ -376,7 +406,7 @@ public class TestGrpcChecker extends TestClass {
 	}
 	
 	@Test
-	public void test014CheckExpectedFieldsOkForRepeatedField() {
+	public void test015CheckExpectedFieldsOkForRepeatedField() {
 		GrpcChecker grpcChecker = new GrpcChecker();
 		//
 		int transactionExpectedFields = 1;
@@ -408,7 +438,7 @@ public class TestGrpcChecker extends TestClass {
 	
 	
 	@Test
-	public void test015CheckLedgerInfoEmpty() {
+	public void test016CheckLedgerInfoEmpty() {
 		GrpcChecker grpcChecker = new GrpcChecker();
 		//
 		LedgerInfo ledgerInfo = LedgerInfo.newBuilder()
@@ -421,7 +451,7 @@ public class TestGrpcChecker extends TestClass {
 	
 	
 	@Test
-	public void test016CheckLedgerInfoOk() {
+	public void test017CheckLedgerInfoOk() {
 		GrpcChecker grpcChecker = new GrpcChecker();
 		//
 		long version = 123L;
@@ -441,7 +471,7 @@ public class TestGrpcChecker extends TestClass {
 	}
 	
 	@Test
-	public void test017CheckValidatorSignatureKo() {
+	public void test018CheckValidatorSignatureKo() {
 		GrpcChecker grpcChecker = new GrpcChecker();
 		//
 		ValidatorSignature validatorSignature = ValidatorSignature.newBuilder()
@@ -456,7 +486,7 @@ public class TestGrpcChecker extends TestClass {
 	}
 	
 	@Test
-	public void test018CheckValidatorSignatureOk() {
+	public void test019CheckValidatorSignatureOk() {
 		GrpcChecker grpcChecker = new GrpcChecker();
 		//
 		ByteString accountAddress =ByteString.copyFrom(Utils.getByteArray(AccountAddress.BYTE_LENGTH,0x33));
