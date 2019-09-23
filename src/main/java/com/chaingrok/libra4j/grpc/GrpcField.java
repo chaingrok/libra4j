@@ -59,7 +59,7 @@ public enum GrpcField {
 	TXN_LIST_EVENTS_FOR_VERSION("types.TransactionListWithProof.events_for_versions",EventsForVersions.class,TransactionListWithProof.class),
 	EVENTS_FOR_VERSION("types.EventsForVersions.events_for_version",EventsList.class,EventsForVersions.class),
 	TRANSACTIONS("types.TransactionListWithProof.transactions",SignedTransaction.class,TransactionListWithProof.class),
-	TRANSACTIONS_INFOS("types.TransactionListWithProof.infos",TransactionInfo.class,TransactionListWithProof.class),
+	TRANSACTIONS_LIST_INFOS("types.TransactionListWithProof.infos",TransactionInfo.class,TransactionListWithProof.class),
 	FIRST_TRANSACTION_VERSION("types.TransactionListWithProof.first_transaction_version",UInt64Value.class,TransactionListWithProof.class),
 	PROOF_OF_FIRST_TRANSACTION("types.TransactionListWithProof.proof_of_first_transaction",AccumulatorProof.class,TransactionListWithProof.class),
 	PROOF_OF_LAST_TRANSACTION("types.TransactionListWithProof.proof_of_last_transaction",AccumulatorProof.class,TransactionListWithProof.class),

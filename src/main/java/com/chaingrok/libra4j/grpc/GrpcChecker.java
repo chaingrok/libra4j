@@ -134,15 +134,15 @@ public class GrpcChecker {
 				if (grpcField.getFieldClass().isAssignableFrom(fieldObject.getClass())) {
 					result = true;
 				} else if (fieldObject instanceof MessageOrBuilder) {
-					checkMessageOrBuilderFieldDescriptor(grpcField,fieldObject);
+					result = checkMessageOrBuilderFieldDescriptor(grpcField,fieldObject);
 				} else if (fieldIsRepeated) {
-					checkRepeatedFieldDescriptor(grpcField,fieldObject);
+					result = checkRepeatedFieldDescriptor(grpcField,fieldObject);
 				} else if ((fieldObject instanceof UInt64ValueOrBuilder)
 							|| (fieldObject instanceof Int64Value)) {
-					checkInt64FieldDescriptor(grpcField,fieldObject);
+					result = checkInt64FieldDescriptor(grpcField,fieldObject);
 				} else if ((fieldObject instanceof UInt32ValueOrBuilder)
 							|| (fieldObject instanceof Int32Value)) {
-					checkInt32FieldDescriptor(grpcField,fieldObject);
+					result = checkInt32FieldDescriptor(grpcField,fieldObject);
 				} else {
 					new Libra4jError(Type.INVALID_CLASS,"field type checking is not implemented: " + fieldFullName + " (object class: " + fieldObject.getClass().getCanonicalName() + ")");
 					result = false;

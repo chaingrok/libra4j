@@ -221,7 +221,7 @@ public class TestGrpcChecker extends TestClass {
 		assertTrue(transactionInfo2 instanceof MessageOrBuilder);
 		TransactionListWithProof transactionListWithProof = TransactionListWithProof.newBuilder()
 									.addInfos(0,transactionInfo1)
-									.addInfos(0,transactionInfo2)
+									.addInfos(1,transactionInfo2)
 									.build();
 		assertEquals(1,transactionListWithProof.getAllFields().size());
 		Object object = transactionListWithProof.getAllFields().values().toArray()[0];
@@ -298,7 +298,7 @@ public class TestGrpcChecker extends TestClass {
 	@Test
 	public void test012CheckFieldDescriptorOk() {
 		GrpcChecker grpcChecker = new GrpcChecker();
-		//test with MessageOrBuilder
+		//test with MessageOrBuilder ok
 		LedgerInfo ledgerInfo = LedgerInfo.newBuilder()
 				.build();
 		LedgerInfoWithSignatures ledgerInfoWithSignatures = LedgerInfoWithSignatures.newBuilder()
@@ -308,8 +308,23 @@ public class TestGrpcChecker extends TestClass {
 		Map<FieldDescriptor, Object> fieldDescriptors = ledgerInfoWithSignatures.getAllFields();
 		assertEquals(1,fieldDescriptors.size());
 		FieldDescriptor fieldDescriptor = (FieldDescriptor)fieldDescriptors.keySet().toArray()[0];
-		//test MessageOrBuilder ok
 		assertTrue(grpcChecker.checkFieldDescriptor(GrpcField.LEDGER_INFO.getParentFieldClass(),fieldDescriptor,fieldDescriptors));
+		//test with repeated field
+		TransactionInfo transactionInfo1 = TransactionInfo.newBuilder()
+				.build();
+		TransactionInfo transactionInfo2 = TransactionInfo.newBuilder()
+				.build();
+		assertTrue(transactionInfo2 instanceof MessageOrBuilder);
+		TransactionListWithProof transactionListWithProof = TransactionListWithProof.newBuilder()
+									.addInfos(0,transactionInfo1)
+									.addInfos(1,transactionInfo2)
+									.build();
+		assertEquals(1,transactionListWithProof.getAllFields().size());
+		Map<FieldDescriptor, Object> fieldDescriptors2 = transactionListWithProof.getAllFields();
+		assertEquals(1,fieldDescriptors2.keySet().size());
+		FieldDescriptor fieldDescriptor2 = (FieldDescriptor)fieldDescriptors2.keySet().toArray()[0];
+		assertTrue(fieldDescriptor2.isRepeated());
+		assertTrue(grpcChecker.checkFieldDescriptor(GrpcField.TRANSACTIONS_LIST_INFOS.getParentFieldClass(),fieldDescriptor2,fieldDescriptors2));
 	}
 	
 	@Test
