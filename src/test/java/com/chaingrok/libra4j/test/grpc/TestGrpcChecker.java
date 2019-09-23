@@ -202,7 +202,6 @@ public class TestGrpcChecker extends TestClass {
 		assertTrue(UInt64ValueOrBuilder.class.isAssignableFrom(UInt64Value.class));
 		UInt64Value uint64Value = builder.build();
 		assertEquals(1, uint64Value.getAllFields().size());
-		assertEquals(uint64Value,builder.getValue());
 		assertEquals(value,uint64Value.getValue());
 		assertFalse(grpcChecker.checkInt64FieldDescriptor(GrpcField.UPDATE_TO_LATEST_LEDGER_RESPONSE,(Object)uint64Value));
 		assertEquals(1,Libra4jLog.getLogs().size());
