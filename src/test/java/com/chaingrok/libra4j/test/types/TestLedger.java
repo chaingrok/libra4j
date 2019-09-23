@@ -9,7 +9,6 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 
 import org.junit.FixMethodOrder;
-import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.libra.grpc.types.Transaction.RawTransaction;
 
@@ -51,7 +50,7 @@ public class TestLedger extends TestClass {
 	}
 	
 	//@Test
-	public void test002GetTransactionsWithEvents() {
+	public void test003GetTransactionsWithEvents() {
 		long version = 123L;
 		long count = 10;
 		boolean withEvents = true;
@@ -68,7 +67,7 @@ public class TestLedger extends TestClass {
 	}
 	
 	//@Test
-	public void test003GetTransactionWithoutEvents() {
+	public void test004GetTransactionWithoutEvents() {
 		long version = 1L;
 		boolean withEvents = false;
 		Ledger ledger = new Ledger(TestData.VALIDATOR_ENDPOINT);
@@ -80,7 +79,7 @@ public class TestLedger extends TestClass {
 	}
 	
 	//@Test
-	public void test004GetTransactionWithEvents() {
+	public void test005GetTransactionWithEvents() {
 		long version = 55L;
 		//long version = 1L;
 		boolean withEvents = true;
@@ -96,7 +95,7 @@ public class TestLedger extends TestClass {
 	
 	
 	//@Test
-	public void test005_getAccountState() {
+	public void test006GetAccountState() {
 		Ledger ledger = new Ledger(TestData.VALIDATOR_ENDPOINT);
 		AccountAddress accountAddress = AccountAddress.ACCOUNT_ZERO;
 		AccountState accountState = ledger.getAccountState(accountAddress);
@@ -107,7 +106,7 @@ public class TestLedger extends TestClass {
 	}
 	
 	//@Test
-	public void test006_getEventsbyEventAccessPath() {
+	public void test007GetEventsbyEventAccessPath() {
 		Ledger ledger = new Ledger(TestData.VALIDATOR_ENDPOINT);
 		AccountAddress accountAddress = AccountAddress.ACCOUNT_ZERO;
 		long count = 10L;
@@ -117,7 +116,7 @@ public class TestLedger extends TestClass {
 	}
 	
 	//@Test
-	public void test007_getAccountTransactionsBySequenceNumber() {
+	public void test008GetAccountTransactionsBySequenceNumber() {
 		Ledger ledger = new Ledger(TestData.VALIDATOR_ENDPOINT);
 		AccountAddress accountAddress = AccountAddress.ACCOUNT_ZERO;
 		//AccountAddress accountAddress = new AccountAddress("ab16ad163ec915ba9acd2e7c599fc04f3a70b3ee9df3780eea4cb7a9b9b07a9e");
@@ -134,7 +133,7 @@ public class TestLedger extends TestClass {
 	}
 	
 	//@Test
-	public void test008_getLedgerInfo() {
+	public void test009GetLedgerInfo() {
 		Ledger ledger = new Ledger(TestData.VALIDATOR_ENDPOINT);
 		LedgerInfo ledgerInfo = ledger.getLedgerInfo();
 		assertEquals(1L,ledger.getRequestCount());

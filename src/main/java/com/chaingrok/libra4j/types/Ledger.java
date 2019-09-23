@@ -140,6 +140,21 @@ public class Ledger {
 		return result;
 	}
 	
+	public Transaction getTransaction(long version) {
+		return getTransaction(version,true);
+	}
+	
+	public Transaction getTransaction(long version, boolean withEvents) {
+		Transaction result = null;
+		ArrayList<Transaction> list = getTransactions(version,1L,withEvents);
+		if (list.size() != 1) {
+			new Libra4jError(Type.LIST_TOO_LONG,"list size: " + list.size());
+		} else {
+			result = list.get(0);
+		}
+		return result;
+	}
+	
 	public Transaction getAccountTransactionBySequenceNumber(AccountAddress accountAddress,long sequence) {
 		return getAccountTransactionBySequenceNumber(accountAddress,sequence,false);
 	}
@@ -238,21 +253,6 @@ public class Ledger {
 			if (accountStateWithProof != null) {
 				result = processAccounStateWithProof(accountStateWithProof);
 			}
-		}
-		return result;
-	}
-	
-	public Transaction getTransaction(long version) {
-		return getTransaction(version,true);
-	}
-	
-	public Transaction getTransaction(long version, boolean withEvents) {
-		Transaction result = null;
-		ArrayList<Transaction> list = getTransactions(version,1L,withEvents);
-		if (list.size() != 1) {
-			new Libra4jError(Type.LIST_TOO_LONG,"list size: " + list.size());
-		} else {
-			result = list.get(0);
 		}
 		return result;
 	}

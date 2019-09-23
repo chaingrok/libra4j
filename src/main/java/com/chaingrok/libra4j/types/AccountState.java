@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 public class AccountState {
 	
-	Long version;
-	Transaction transaction;
-	byte[] blob = null;
-	byte[] bitmap = null;
-	ArrayList<byte[]> nonDefaultSiblingsLedgerInfoToTransactionInfoProof = new ArrayList<byte[]>();
-	ArrayList<byte[]> nonDefaultSiblingsTransactionInfoToAccountProof = new ArrayList<byte[]>();
+	private Long version;
+	private Transaction transaction;
+	private byte[] blob = null;
+	private byte[] bitmap = null;
+	private ArrayList<byte[]> nonDefaultSiblingsLedgerInfoToTransactionInfoProof = new ArrayList<byte[]>();
+	private ArrayList<byte[]> nonDefaultSiblingsTransactionInfoToAccountProof = new ArrayList<byte[]>();
 	
 	public Long getVersion() {
 		return version;
