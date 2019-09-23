@@ -163,7 +163,7 @@ public class TestGrpcChecker extends TestClass {
 		int value = 12345;
 		//
 		//with Int32ValueOrBuilder
-		com.google.protobuf.UInt32Value.Builder builder = UInt32Value.newBuilder()
+		UInt32Value.Builder builder = UInt32Value.newBuilder()
 									.setValue(value);
 		assertEquals(1, builder.getAllFields().size());
 		assertEquals(value,builder.getValue());
@@ -191,7 +191,7 @@ public class TestGrpcChecker extends TestClass {
 		GrpcChecker grpcChecker = new GrpcChecker();
 		long value = 12345L;
 		//with Int64ValueOrBuilder
-		 com.google.protobuf.UInt64Value.Builder builder = UInt64Value.newBuilder()
+		 UInt64Value.Builder builder = UInt64Value.newBuilder()
 									.setValue(value);
 		assertEquals(1, builder.getAllFields().size());
 		assertEquals(value,builder.getValue());
