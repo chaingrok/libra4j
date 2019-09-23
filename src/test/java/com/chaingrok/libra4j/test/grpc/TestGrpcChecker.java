@@ -32,6 +32,7 @@ import com.google.protobuf.UInt64ValueOrBuilder;
 import com.google.protobuf.UnknownFieldSet;
 import com.google.protobuf.UnknownFieldSet.Field;
 
+import org.libra.grpc.types.AccountStateBlobOuterClass.AccountStateBlob;
 import org.libra.grpc.types.GetWithProof.ResponseItem;
 import org.libra.grpc.types.GetWithProof.UpdateToLatestLedgerResponse;
 import org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfo;
@@ -266,6 +267,35 @@ public class TestGrpcChecker extends TestClass {
 	}
 	
 	@Test
+	public void test011CheckFieldDescriptorKo() {
+		GrpcChecker grpcChecker = new GrpcChecker();
+		//test with null rpcField
+		assertFalse(grpcChecker.checkFieldDescriptor((Class<?>)null,null,(Boolean)null,null));
+		assertEquals(2,Libra4jLog.getLogs().size());
+		assertEquals(Libra4jLog.Type.UNKNOWN_VALUE,Libra4jLog.getLogs().get(0).getType());
+		assertEquals(Libra4jLog.Type.UNKNOWN_VALUE,Libra4jLog.getLogs().get(1).getType());
+		Libra4jLog.purgeLogs();
+		assertFalse(Libra4jLog.hasLogs());
+		//
+		boolean isRepeated = false;
+		String fieldFullName = GrpcField.ACCOUNT_BLOB.getFullName();
+		//test with invalid grpcClass
+		assertFalse(grpcChecker.checkFieldDescriptor(Long.class,fieldFullName,isRepeated,null));
+		assertEquals(2,Libra4jLog.getLogs().size());
+		assertEquals(Libra4jLog.Type.INVALID_CLASS,Libra4jLog.getLogs().get(0).getType());
+		assertTrue(((String)Libra4jLog.getLogs().get(0).getObject()).contains("field descriptor class is invalid"));
+		assertEquals(Libra4jLog.Type.MISSING_DATA,Libra4jLog.getLogs().get(1).getType());
+		assertTrue(((String)Libra4jLog.getLogs().get(1).getObject()).contains("field object is null"));
+		Libra4jLog.purgeLogs();
+		//test with invalid fieldObject
+		assertFalse(grpcChecker.checkFieldDescriptor(AccountStateBlob.class,fieldFullName,isRepeated,new Object()));
+		assertEquals(1,Libra4jLog.getLogs().size());
+		assertEquals(Libra4jLog.Type.INVALID_CLASS,Libra4jLog.getLogs().get(0).getType());
+		assertTrue(((String)Libra4jLog.getLogs().get(0).getObject()).contains("field type checking is not implemented"));
+		Libra4jLog.purgeLogs();
+	}
+	
+	@Test
 	public void test010CheckExpectedFieldsOkEdgeCases() {
 		GrpcChecker grpcChecker = new GrpcChecker();
 		assertFalse(grpcChecker.checkExpectedFields(null,0));
@@ -276,8 +306,8 @@ public class TestGrpcChecker extends TestClass {
 		assertFalse(grpcChecker.checkExpectedFields(new Object(),0)); //non MessageOrBuilderObject
 		assertEquals(1,Libra4jLog.getLogs().size());
 		Libra4jLog.purgeLogs();
-		
 	}
+	
 	
 	@Test
 	public void test011CheckFieldDescrpitorOkForUIntValues() {

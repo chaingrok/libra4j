@@ -114,7 +114,7 @@ public class GrpcChecker {
 		return checkFieldDescriptor(grpcClass,fieldDescriptor.getFullName(),fieldDescriptor.isRepeated(),fieldDescriptors.get(fieldDescriptor));
 	}
 	
-	public boolean checkFieldDescriptor(Class<?> grpcClass,String fieldFullName,boolean fieldIsRepeated,Object fieldObject) {
+	public boolean checkFieldDescriptor(Class<?> grpcClass,String fieldFullName,Boolean fieldIsRepeated,Object fieldObject) {
 		Boolean result = null;
 		GrpcField grpcField = GrpcField.get(fieldFullName);
 		if (grpcField == null) {
@@ -123,27 +123,32 @@ public class GrpcChecker {
 		} else {
 			if (grpcClass != null) {
 				if (!grpcField.getParentFieldClass().equals(grpcClass)) {
-					new Libra4jError(Type.INVALID_CLASS,"returned field class is invalid: " + fieldFullName + ": " 
+					new Libra4jError(Type.INVALID_CLASS,"field descriptor class is invalid: " + fieldFullName + ": " 
 							+ grpcClass.getCanonicalName()
 							+ " <> " 
 							+ grpcField.getParentFieldClass().getCanonicalName());
 					result = false;
 				}
 			}
-			if (grpcField.getFieldClass().isAssignableFrom(fieldObject.getClass())) {
-				result = true;
-			} else if (fieldObject instanceof MessageOrBuilder) {
-				checkMessageOrBuilderFieldDescriptor(grpcField,fieldObject);
-			} else if (fieldIsRepeated) {
-				checkRepeatedFieldDescriptor(grpcField,fieldObject);
-			} else if ((fieldObject instanceof UInt64ValueOrBuilder)
-						|| (fieldObject instanceof Int64Value)) {
-				checkInt64FieldDescriptor(grpcField,fieldObject);
-			} else if ((fieldObject instanceof UInt32ValueOrBuilder)
-						|| (fieldObject instanceof Int32Value)) {
-				checkInt32FieldDescriptor(grpcField,fieldObject);
+			if (fieldObject != null) {
+				if (grpcField.getFieldClass().isAssignableFrom(fieldObject.getClass())) {
+					result = true;
+				} else if (fieldObject instanceof MessageOrBuilder) {
+					checkMessageOrBuilderFieldDescriptor(grpcField,fieldObject);
+				} else if (fieldIsRepeated) {
+					checkRepeatedFieldDescriptor(grpcField,fieldObject);
+				} else if ((fieldObject instanceof UInt64ValueOrBuilder)
+							|| (fieldObject instanceof Int64Value)) {
+					checkInt64FieldDescriptor(grpcField,fieldObject);
+				} else if ((fieldObject instanceof UInt32ValueOrBuilder)
+							|| (fieldObject instanceof Int32Value)) {
+					checkInt32FieldDescriptor(grpcField,fieldObject);
+				} else {
+					new Libra4jError(Type.INVALID_CLASS,"field type checking is not implemented: " + fieldFullName + " (object class: " + fieldObject.getClass().getCanonicalName() + ")");
+					result = false;
+				}
 			} else {
-				new Libra4jError(Type.INVALID_COUNT,"field type checking is not implemented: " + fieldFullName + " (object class: " + fieldObject.getClass().getCanonicalName() + ")");
+				new Libra4jError(Type.MISSING_DATA,"field object is null");
 				result = false;
 			}
 		}
