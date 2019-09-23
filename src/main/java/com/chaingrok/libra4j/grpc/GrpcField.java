@@ -70,7 +70,7 @@ public enum GrpcField {
 	RAW_TXN_BYTES("types.SignedTransaction.raw_txn_bytes",ByteString.class,SignedTransaction.class),
 	SENDER_PUBLIC_KEY("types.SignedTransaction.sender_public_key",ByteString.class,SignedTransaction.class),
 	SENDER_SIGNATURE("types.SignedTransaction.sender_signature",ByteString.class,SignedTransaction.class),
-	RAW_TRANSACTION("types.SignedTransaction.sender_signature.raw_transaction",RawTransaction.class,SignedTransaction.class), //TODO: check fullName and classes
+	RAW_TRANSACTION("types.SignedTransaction.raw_transaction",RawTransaction.class,SignedTransaction.class), //TODO: check fullName and classes
 	SENDER_ACCOUNT("types.RawTransaction.sender_account",ByteString.class,RawTransaction.class),
 	TRANSACTION_SEQUENCE_NUMBER("types.RawTransaction.sequence_number",Long.class,RawTransaction.class),
 	PROGRAM("types.RawTransaction.program",Program.class,RawTransaction.class),
