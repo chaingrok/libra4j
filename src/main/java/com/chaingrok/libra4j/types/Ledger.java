@@ -383,10 +383,10 @@ public class Ledger {
 					}
 					List<TransactionArgument> programArgumentsList = rawTransactionProgram.getArgumentsList();
 					if (programArgumentsList != null) {
-						ArrayList<com.chaingrok.libra4j.types.Argument> arguments = new ArrayList<com.chaingrok.libra4j.types.Argument>();
+						ArrayList<Argument> arguments = new ArrayList<Argument>();
 						for(TransactionArgument programArgument : programArgumentsList) {
 							grpcChecker.checkExpectedFields(programArgument,1,2);
-							com.chaingrok.libra4j.types.Argument argument = new com.chaingrok.libra4j.types.Argument();
+							Argument argument = new Argument();
 							argument.setType(Argument.Type.get(programArgument.getType()));
 							argument.setData(programArgument.getData().toByteArray());
 							arguments.add(argument);
