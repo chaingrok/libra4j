@@ -76,6 +76,7 @@ public class GrpcChecker {
 			result=false;
 		} else {
 			MessageOrBuilder messageOrBuilder = (MessageOrBuilder) object;
+			checkFieldErrors(messageOrBuilder.findInitializationErrors(),messageOrBuilder.getUnknownFields());
 			Class<? extends MessageOrBuilder> grpcClass = messageOrBuilder.getClass();
 			Map<FieldDescriptor, Object> fieldDescriptors = messageOrBuilder.getAllFields();
 			if (fieldDescriptors.size() != 0) {
