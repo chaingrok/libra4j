@@ -1,4 +1,3 @@
-// as of 2019-09-27
 //2019-09-27 - import structure
 ./admission_control/admission_control_proto/src/proto/admission_control.proto
     import "get_with_proof.proto";
