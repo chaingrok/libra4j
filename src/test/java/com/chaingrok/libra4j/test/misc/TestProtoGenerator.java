@@ -3,12 +3,10 @@ package com.chaingrok.libra4j.test.misc;
 import java.io.File;
 
 import org.junit.FixMethodOrder;
-import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import com.chaingrok.libra4j.misc.ProtoGenerator;
 
-@SuppressWarnings("unused")
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestProtoGenerator {
 	public static final File PROJECT_DIR = new File(System.getProperty("user.dir"));
@@ -22,13 +20,13 @@ public class TestProtoGenerator {
 	public static final String GRPC_DIR = System.getProperty("user.dir")  + File.separator + "gRPC";
 	
 	//@Test
-	public void test001_generateProtoFile() {
+	public void Test001GenerateProtoFile() {
 		ProtoGenerator protoGenerator = new ProtoGenerator(PROTO_FILES_DIR,GRPC_DIR,PROTOC_JAVA_PLUGIN);
 		protoGenerator.generateFile("admission_control.proto");
 	}
 	
 	//@Test
-	public void test002_generateProtoDirectory() {
+	public void test002GenerateProtoDirectory() {
 		ProtoGenerator protoGenerator = new ProtoGenerator(PROTO_FILES_DIR,GRPC_DIR,PROTOC_JAVA_PLUGIN);
 		protoGenerator.generateDirectory();
 	}
