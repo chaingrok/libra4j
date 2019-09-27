@@ -1,0 +1,43 @@
+// as of 2019-09-27
+//2019-09-27 - import structure
+./admission_control/admission_control_proto/src/proto/admission_control.proto
+    import "get_with_proof.proto";
+    		import "access_path.proto";
+			import "account_state_blob.proto";
+					import "proof.proto";
+			import "events.proto";
+					import "access_path.proto";
+					import "proof.proto";
+			import "ledger_info.proto";
+					import "validator_set.proto";
+			import "transaction.proto";
+					import "access_path.proto";
+					import "events.proto";
+					import "proof.proto";
+					import "transaction_info.proto";
+					import "google/protobuf/wrappers.proto";
+					import "validator_change.proto";
+						import "events.proto";
+						import "ledger_info.proto";
+    import "mempool_status.proto";
+    import "transaction.proto";
+    import "vm_errors.proto";
+    	import "language_storage.proto";
+    	
+    	
+ //2019-09-27 - resulting files
+ 
+access_path.proto
+account_state_blob.proto
+admission_control.proto
+events.proto
+get_with_proof.proto
+language_storage.proto
+ledger_info.proto
+mempool_status.proto
+proof.proto
+transaction_info.proto
+transaction.proto
+validator_change.proto
+validator_set.proto
+vm_errors.proto
