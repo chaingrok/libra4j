@@ -9,6 +9,7 @@ public class Transaction {
 	
 	private AccountAddress senderAccountAddress = null;
 	private Long version = null;
+	private Long majorStatus = null;
 	private Long sequenceNumber = null;
 	private PublicKey senderPublicKey = null;
 	private Signature signature;
@@ -50,6 +51,14 @@ public class Transaction {
 
 	public void setVersion(Long version) {
 		this.version = version;
+	}
+	
+	public Long getMajorStatus() {
+		return majorStatus;
+	}
+
+	public void setMajorStatus(Long majorStatus) {
+		this.majorStatus = majorStatus;
 	}
 
 	public Long getSequenceNumber() {

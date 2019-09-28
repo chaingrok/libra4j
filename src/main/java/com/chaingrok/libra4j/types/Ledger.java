@@ -317,6 +317,7 @@ public class Ledger {
 		}
 		if (transactionInfo != null) {
 			grpcChecker.checkExpectedFields(transactionInfo,3,4);
+			result.setMajorStatus(transactionInfo.getMajorStatus());
 			result.setSignedTransactionHash(new Hash(transactionInfo.getSignedTransactionHash()));
 			result.setEventRootHash(new Hash(transactionInfo.getEventRootHash()));
 			result.setStateRootHash(new Hash(transactionInfo.getStateRootHash()));
@@ -334,7 +335,6 @@ public class Ledger {
 	
 	private Transaction processSignedTransaction(SignedTransaction signedTransaction,Transaction transaction) {
 		Transaction result = null;
-		/* TODO: fix
 		if (transaction == null) {
 			result = new Transaction();
 		} else {
@@ -401,7 +401,6 @@ public class Ledger {
 		} else {
 			new Libra4jError(Type.MISSING_DATA,"signed transaction is null");
 		}
-		*/
 		return result;
 	}
 
@@ -422,7 +421,7 @@ public class Ledger {
 		grpcChecker.checkExpectedFields(event,2,3);
 		result.setData(new EventData(event.getEventData()));
 		result.setSequenceNumber(event.getSequenceNumber());
-		/* TODO: fix
+		/* TODO: access path now missing fix
 		AccessPath respAccessPath = event.getAccessPath();
 		if (respAccessPath != null) {
 			grpcChecker.checkExpectedFields(respAccessPath,2);
@@ -430,9 +429,9 @@ public class Ledger {
 			result.setAddress(new AccountAddress(respAccessPath.getAddress().toByteArray()));
 		
 		} else {
-			new Libra4jError(Type.MISSING_DATA,"event data is null");
+			new Libra4jError(Type.MISSING_DATA,"acccessPath is null");
 		}
-		*/ 
+		*/
 		return result;
 	}
 	
