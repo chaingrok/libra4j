@@ -4,6 +4,7 @@
 syntax = "proto3";
 
 package types;
+option java_package = "org.libra.grpc.types";
 
 // `TransactionInfo` is the object we store in the transaction accumulator. It
 // consists of the transaction as well as the execution result of this

@@ -4,6 +4,7 @@
 syntax = "proto3";
 
 package types;
+option java_package = "org.libra.grpc.types";
 
 import "proof.proto";
 

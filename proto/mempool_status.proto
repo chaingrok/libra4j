@@ -4,6 +4,7 @@
 syntax = "proto3";
 
 package mempool;
+option java_package = "org.libra.grpc.types";
 
 enum MempoolAddTransactionStatusCode {
   // Transaction was sent to Mempool

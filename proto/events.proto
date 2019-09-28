@@ -8,6 +8,7 @@
 syntax = "proto3";
 
 package types;
+option java_package = "org.libra.grpc.types";
 
 import "access_path.proto";
 import "proof.proto";
