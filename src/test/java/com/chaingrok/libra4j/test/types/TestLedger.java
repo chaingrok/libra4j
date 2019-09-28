@@ -9,6 +9,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 
 import org.junit.FixMethodOrder;
+import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import com.chaingrok.libra4j.grpc.GrpcField;
@@ -31,7 +32,7 @@ public class TestLedger extends TestClass {
 	}
 	
 	
-	//@Test
+	@Test
 	public void test002GetTransactionsWithoutEvents() {
 		long version = 123L;
 		long count = 1;

@@ -341,7 +341,7 @@ public class Ledger {
 			result = transaction;
 		}
 		if (signedTransaction != null) {
-			grpcChecker.checkExpectedFields(signedTransaction,3);
+			grpcChecker.checkExpectedFields(signedTransaction,1);
 			result.setSignedTxnSerializedSize(signedTransaction.getSerializedSize());
 			processSignedTransactionBytes(signedTransaction.getSignedTxn().toByteArray());
 		} else {
