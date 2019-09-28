@@ -39,4 +39,5 @@ transaction_info.proto
 transaction.proto
 validator_change.proto
 validator_set.proto
+validator_public_keys.proto
 vm_errors.proto
