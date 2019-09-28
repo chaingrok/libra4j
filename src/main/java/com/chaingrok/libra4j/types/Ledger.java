@@ -378,7 +378,7 @@ public class Ledger {
 		System.out.println("<SELF> (" + string.indexOf("<SELF>")  + ")");
 		System.out.println("ascii:" + string);
 		if (signedTransactionBytes.length != length) {
-			throw new Libra4jException("length mismatch: " + length + " <> " + signedTransactionBytes.length);
+			System.out.println("ERROR - length mismatch: " + length + " <> " + signedTransactionBytes.length);
 		}
 		
 		/*
