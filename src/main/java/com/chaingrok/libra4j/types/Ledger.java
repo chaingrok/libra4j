@@ -343,14 +343,14 @@ public class Ledger {
 		if (signedTransaction != null) {
 			grpcChecker.checkExpectedFields(signedTransaction,1);
 			result.setSignedTxnSerializedSize(signedTransaction.getSerializedSize());
-			processSignedTransactionBytes(signedTransaction.getSignedTxn().toByteArray());
+			processSignedTransactionBytes(signedTransaction.getSignedTxn().toByteArray(),result.getSignedTxnSerializedSize());
 		} else {
 			new Libra4jError(Type.MISSING_DATA,"signed transaction is null");
 		}
 		return result;
 	}
 	
-	private void processSignedTransactionBytes(byte[] signedTransactionBytes) {
+	private void processSignedTransactionBytes(byte[] signedTransactionBytes,int length) {
 		//based on types/src/transaction.rs in Libra project
 		
 		///// The raw transaction
@@ -364,17 +364,22 @@ public class Ledger {
 	    // transaction_length: usize,
 		
 		//RawTransaction
-		//  sender: AccountAddress,
-        //  sequence_number: u64,
+		//  sender: AccountAddress, 32 bytes
+        //  sequence_number: u64, 8 bytes
         //  payload: TransactionPayload,
-        //  max_gas_amount: u64,
-        //  gas_unit_price: u64,
-        // expiration_time: Duration,
+        //  max_gas_amount: u64, 8 bytes
+        //  gas_unit_price: u64, 8 bytes
+        //  expiration_time: Duration,
 		
 		//TransactionPayload
 		
 		System.out.println("txn bytes to process (" + signedTransactionBytes.length + "): " + Utils.byteArrayToHexString(signedTransactionBytes));
-		System.out.println("ascii:" + new String(signedTransactionBytes));
+		String string = new String(signedTransactionBytes);
+		System.out.println("<SELF> (" + string.indexOf("<SELF>")  + ")");
+		System.out.println("ascii:" + string);
+		if (signedTransactionBytes.length != length) {
+			throw new Libra4jException("length mismatch: " + length + " <> " + signedTransactionBytes.length);
+		}
 		
 		/*
 		transaction.setSenderPublicKey(KeyPair.publicKeyFromByteString(signedTransaction.getSenderPublicKey()));

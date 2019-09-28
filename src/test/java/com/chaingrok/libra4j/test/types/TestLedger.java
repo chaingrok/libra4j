@@ -28,7 +28,7 @@ public class TestLedger extends TestClass {
 	
 	@Test
 	public void test001GetTransactionsWithoutEvents() {
-		long version = 123L;
+		long version = 1L;
 		long count = 1;
 		boolean withEvents = false;
 		Ledger ledger = new Ledger(TestData.VALIDATOR_ENDPOINT);
