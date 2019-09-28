@@ -26,6 +26,7 @@ import org.libra.grpc.types.Proof.AccountStateProof;
 import org.libra.grpc.types.Proof.AccumulatorProof;
 import org.libra.grpc.types.Proof.SignedTransactionProof;
 import org.libra.grpc.types.Proof.SparseMerkleProof;
+import org.libra.grpc.types.Transaction;
 import org.libra.grpc.types.Transaction.TransactionListWithProof;
 import org.libra.grpc.types.Transaction.SignedTransaction;
 import org.libra.grpc.types.Transaction.SignedTransactionWithProof;
@@ -68,13 +69,13 @@ public enum GrpcField {
 	RAW_TXN_BYTES("types.SignedTransaction.raw_txn_bytes",ByteString.class,SignedTransaction.class),
 	SENDER_PUBLIC_KEY("types.SignedTransaction.sender_public_key",ByteString.class,SignedTransaction.class),
 	SENDER_SIGNATURE("types.SignedTransaction.sender_signature",ByteString.class,SignedTransaction.class),
-	//RAW_TRANSACTION("types.RawTransaction",RawTransaction.class,SignedTransaction.class), 
-	//SENDER_ACCOUNT("types.RawTransaction.sender_account",ByteString.class,RawTransaction.class),
-	//TRANSACTION_SEQUENCE_NUMBER("types.RawTransaction.sequence_number",Long.class,RawTransaction.class),
-	//PROGRAM("types.RawTransaction.program",Program.class,RawTransaction.class),
-	//MAX_GAS_AMOUNT("types.RawTransaction.max_gas_amount",Long.class,RawTransaction.class),
-	//GAS_UNIT_PRICE("types.RawTransaction.gas_unit_price",Long.class,RawTransaction.class),
-	//EXPIRATION_TIME("types.RawTransaction.expiration_time",Long.class,RawTransaction.class),
+	RAW_TRANSACTION("types.RawTransaction",Transaction.class,SignedTransaction.class), 
+	SENDER_ACCOUNT("types.RawTransaction.sender_account",ByteString.class,Transaction.class),
+	TRANSACTION_SEQUENCE_NUMBER("types.RawTransaction.sequence_number",Long.class,Transaction.class),
+	//PROGRAM("types.RawTransaction.program",Program.class,Transaction.class),
+	MAX_GAS_AMOUNT("types.RawTransaction.max_gas_amount",Long.class,Transaction.class),
+	GAS_UNIT_PRICE("types.RawTransaction.gas_unit_price",Long.class,Transaction.class),
+	EXPIRATION_TIME("types.RawTransaction.expiration_time",Long.class,Transaction.class),
 	//CODE("types.Program.code",ByteString.class,Program.class),
 	//ARGUMENTS("types.Program.arguments",TransactionArgument.class,Program.class),
 	TYPE("types.TransactionArgument.type",EnumValueDescriptor.class,TransactionArgument.class),
