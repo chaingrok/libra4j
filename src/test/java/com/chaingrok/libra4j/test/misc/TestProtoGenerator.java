@@ -5,7 +5,6 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 
 import org.junit.FixMethodOrder;
-import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import com.chaingrok.libra4j.misc.ProtoGenerator;
@@ -29,7 +28,7 @@ public class TestProtoGenerator {
 		assertTrue(protoGenerator.isOk());
 	}
 	
-	@Test
+	//@Test
 	public void test002GenerateProtoDirectory() {
 		ProtoGenerator protoGenerator = new ProtoGenerator(PROTO_FILES_DIR,GRPC_DIR,PROTOC_JAVA_PLUGIN);
 		assertTrue(protoGenerator.generateDirectory());
