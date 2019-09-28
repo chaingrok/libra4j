@@ -343,65 +343,72 @@ public class Ledger {
 		if (signedTransaction != null) {
 			grpcChecker.checkExpectedFields(signedTransaction,3);
 			result.setSignedTxnSerializedSize(signedTransaction.getSerializedSize());
-			//transaction.setSenderPublicKey(KeyPair.publicKeyFromByteString(signedTransaction.getSenderPublicKey()));
-			byte[] signatureBytes = signedTransaction.getSenderSignature().toByteArray();
-			if (signatureBytes.length == 0) {
-				new Libra4jError(Type.MISSING_DATA,"missing signature for transaction: " + result.getVersion());
-			} else {
-				result.setSignature(new Signature(signatureBytes));
-			}
-			ByteString rawTxnByteString = signedTransaction.getRawTxnBytes();
-			result.setRawTxnBytes(rawTxnByteString.toByteArray());
-			RawTransaction rawTransaction;
-			try {
-				rawTransaction = RawTransaction.newBuilder()
-					.mergeFrom(rawTxnByteString)
-					.build();
-			} catch (InvalidProtocolBufferException e) {
-				throw new Libra4jException(e);
-			}
-			if (rawTransaction != null) {
-				grpcChecker.checkExpectedFields(rawTransaction,3,6);
-				result.setSenderAccountAddress(new AccountAddress(rawTransaction.getSenderAccount()));
-				result.setSequenceNumber(rawTransaction.getSequenceNumber());
-				result.setMaxGasAmount(rawTransaction.getMaxGasAmount());
-				result.setExpirationTime(rawTransaction.getExpirationTime());
-				result.setGasUnitPrice(rawTransaction.getGasUnitPrice());
-				Program rawTransactionProgram = rawTransaction.getProgram();
-				com.chaingrok.libra4j.types.Program program = new com.chaingrok.libra4j.types.Program();
-				if (rawTransactionProgram != null) {
-					grpcChecker.checkExpectedFields(rawTransactionProgram,2);
-					program.setCode(new Code(rawTransactionProgram.getCode().toByteArray()));
-					List<ByteString> modulesList = rawTransactionProgram.getModulesList();
-					if (modulesList.size() != 0) {
-						ArrayList<Module> modules = new ArrayList<Module>();
-						for (ByteString module : modulesList) {
-							modules.add(new Module(module.toByteArray()));
-						}
-						program.setModules(modules);
-					}
-					List<TransactionArgument> programArgumentsList = rawTransactionProgram.getArgumentsList();
-					if (programArgumentsList != null) {
-						ArrayList<Argument> arguments = new ArrayList<Argument>();
-						for(TransactionArgument programArgument : programArgumentsList) {
-							grpcChecker.checkExpectedFields(programArgument,1,2);
-							Argument argument = new Argument();
-							argument.setType(Argument.Type.get(programArgument.getType()));
-							argument.setData(programArgument.getData().toByteArray());
-							arguments.add(argument);
-						}
-						program.setArguments(arguments);
-					}
-					result.setProgram(program);
-					result.setType(); //to set & check the type;
-				} else {
-					new Libra4jError(Type.MISSING_DATA,"raw transaction is null");
-				}
-			}
+			processSignedTransactionBytes(signedTransaction.getSignedTxn().toByteArray());
 		} else {
 			new Libra4jError(Type.MISSING_DATA,"signed transaction is null");
 		}
 		return result;
+	}
+	
+	private void processSignedTransactionBytes(byte[] signedTransactionBytes) {
+		System.out.println("txn bytes to process: " + signedTransactionBytes.length);
+		/*
+		transaction.setSenderPublicKey(KeyPair.publicKeyFromByteString(signedTransaction.getSenderPublicKey()));
+		byte[] signatureBytes = signedTransaction.getSenderSignature().toByteArray();
+		if (signatureBytes.length == 0) {
+			new Libra4jError(Type.MISSING_DATA,"missing signature for transaction: " + result.getVersion());
+		} else {
+			result.setSignature(new Signature(signatureBytes));
+		}
+		ByteString rawTxnByteString = signedTransaction.getRawTxnBytes();
+		result.setRawTxnBytes(rawTxnByteString.toByteArray());
+		RawTransaction rawTransaction = null;
+		try {
+			rawTransaction = RawTransaction.newBuilder()
+				.mergeFrom(rawTxnByteString)
+				.build();
+		} catch (InvalidProtocolBufferException e) {
+			throw new Libra4jException(e);
+		}
+		if (rawTransaction != null) {
+			grpcChecker.checkExpectedFields(rawTransaction,3,6);
+			result.setSenderAccountAddress(new AccountAddress(rawTransaction.getSenderAccount()));
+			result.setSequenceNumber(rawTransaction.getSequenceNumber());
+			result.setMaxGasAmount(rawTransaction.getMaxGasAmount());
+			result.setExpirationTime(rawTransaction.getExpirationTime());
+			result.setGasUnitPrice(rawTransaction.getGasUnitPrice());
+			Program rawTransactionProgram = rawTransaction.getProgram();
+			com.chaingrok.libra4j.types.Program program = new com.chaingrok.libra4j.types.Program();
+			if (rawTransactionProgram != null) {
+				grpcChecker.checkExpectedFields(rawTransactionProgram,2);
+				program.setCode(new Code(rawTransactionProgram.getCode().toByteArray()));
+				List<ByteString> modulesList = rawTransactionProgram.getModulesList();
+				if (modulesList.size() != 0) {
+					ArrayList<Module> modules = new ArrayList<Module>();
+					for (ByteString module : modulesList) {
+						modules.add(new Module(module.toByteArray()));
+					}
+					program.setModules(modules);
+				}
+				List<TransactionArgument> programArgumentsList = rawTransactionProgram.getArgumentsList();
+				if (programArgumentsList != null) {
+					ArrayList<Argument> arguments = new ArrayList<Argument>();
+					for(TransactionArgument programArgument : programArgumentsList) {
+						grpcChecker.checkExpectedFields(programArgument,1,2);
+						Argument argument = new Argument();
+						argument.setType(Argument.Type.get(programArgument.getType()));
+						argument.setData(programArgument.getData().toByteArray());
+						arguments.add(argument);
+					}
+					program.setArguments(arguments);
+				}
+				result.setProgram(program);
+				result.setType(); //to set & check the type;
+			} else {
+				new Libra4jError(Type.MISSING_DATA,"raw transaction is null");
+			}
+		}
+		*/
 	}
 
 	private ArrayList<com.chaingrok.libra4j.types.Event> processEventsList(EventsList eventsList) {
