@@ -351,7 +351,31 @@ public class Ledger {
 	}
 	
 	private void processSignedTransactionBytes(byte[] signedTransactionBytes) {
-		System.out.println("txn bytes to process: " + signedTransactionBytes.length);
+		//based on types/src/transaction.rs in Libra project
+		
+		///// The raw transaction
+	    // raw_txn: RawTransaction,
+	    ///// Sender's public key. When checking the signature, we first need to check whether this key
+	    ///// is indeed the pre-image of the pubkey hash stored under sender's account.
+	    // public_key: Ed25519PublicKey,
+	    ///// Signature of the transaction that correspond to the public key
+	    // signature: Ed25519Signature,
+	    ///// The transaction length is used by the VM to limit the size of transactions
+	    // transaction_length: usize,
+		
+		//RawTransaction
+		//  sender: AccountAddress,
+        //  sequence_number: u64,
+        //  payload: TransactionPayload,
+        //  max_gas_amount: u64,
+        //  gas_unit_price: u64,
+        // expiration_time: Duration,
+		
+		//TransactionPayload
+		
+		System.out.println("txn bytes to process (" + signedTransactionBytes.length + "): " + Utils.byteArrayToHexString(signedTransactionBytes));
+		System.out.println("ascii:" + new String(signedTransactionBytes));
+		
 		/*
 		transaction.setSenderPublicKey(KeyPair.publicKeyFromByteString(signedTransaction.getSenderPublicKey()));
 		byte[] signatureBytes = signedTransaction.getSenderSignature().toByteArray();

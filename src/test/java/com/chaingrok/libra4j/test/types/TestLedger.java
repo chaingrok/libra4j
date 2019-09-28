@@ -12,8 +12,8 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import com.chaingrok.libra4j.grpc.GrpcField;
 import com.chaingrok.libra4j.misc.Libra4jError;
+import com.chaingrok.libra4j.misc.Libra4jLog;
 import com.chaingrok.libra4j.test.TestClass;
 import com.chaingrok.libra4j.test.TestData;
 import com.chaingrok.libra4j.types.AccountAddress;
@@ -26,14 +26,8 @@ import com.chaingrok.libra4j.types.Transaction;
 public class TestLedger extends TestClass {
 	
 	
-	//@Test
-	public void test001GetRawTransactionsFullName() {
-		//assertEquals(GrpcField.RAW_TRANSACTION.getFullName(),RawTransaction.getDescriptor().getFullName());
-	}
-	
-	
 	@Test
-	public void test002GetTransactionsWithoutEvents() {
+	public void test001GetTransactionsWithoutEvents() {
 		long version = 123L;
 		long count = 1;
 		boolean withEvents = false;
@@ -47,10 +41,11 @@ public class TestLedger extends TestClass {
 			assertEquals(transaction.getVersion(),(Long)version++);
 			System.out.println(transaction.toString());
 		}
+		Libra4jLog.purgeLogs();
 	}
 	
 	//@Test
-	public void test003GetTransactionsWithEvents() {
+	public void test002GetTransactionsWithEvents() {
 		long version = 123L;
 		long count = 10;
 		boolean withEvents = true;
@@ -67,7 +62,7 @@ public class TestLedger extends TestClass {
 	}
 	
 	//@Test
-	public void test004GetTransactionWithoutEvents() {
+	public void test003GetTransactionWithoutEvents() {
 		long version = 1L;
 		boolean withEvents = false;
 		Ledger ledger = new Ledger(TestData.VALIDATOR_ENDPOINT);
@@ -79,7 +74,7 @@ public class TestLedger extends TestClass {
 	}
 	
 	//@Test
-	public void test005GetTransactionWithEvents() {
+	public void test004GetTransactionWithEvents() {
 		long version = 55L;
 		//long version = 1L;
 		boolean withEvents = true;
@@ -95,7 +90,7 @@ public class TestLedger extends TestClass {
 	
 	
 	//@Test
-	public void test006GetAccountState() {
+	public void test005GetAccountState() {
 		Ledger ledger = new Ledger(TestData.VALIDATOR_ENDPOINT);
 		AccountAddress accountAddress = AccountAddress.ACCOUNT_ZERO;
 		AccountState accountState = ledger.getAccountState(accountAddress);
@@ -106,7 +101,7 @@ public class TestLedger extends TestClass {
 	}
 	
 	//@Test
-	public void test007GetEventsbyEventAccessPath() {
+	public void test006GetEventsbyEventAccessPath() {
 		Ledger ledger = new Ledger(TestData.VALIDATOR_ENDPOINT);
 		AccountAddress accountAddress = AccountAddress.ACCOUNT_ZERO;
 		long count = 10L;
@@ -116,7 +111,7 @@ public class TestLedger extends TestClass {
 	}
 	
 	//@Test
-	public void test008GetAccountTransactionsBySequenceNumber() {
+	public void test007GetAccountTransactionsBySequenceNumber() {
 		Ledger ledger = new Ledger(TestData.VALIDATOR_ENDPOINT);
 		AccountAddress accountAddress = AccountAddress.ACCOUNT_ZERO;
 		//AccountAddress accountAddress = new AccountAddress("ab16ad163ec915ba9acd2e7c599fc04f3a70b3ee9df3780eea4cb7a9b9b07a9e");
@@ -133,7 +128,7 @@ public class TestLedger extends TestClass {
 	}
 	
 	//@Test
-	public void test009GetLedgerInfo() {
+	public void test008GetLedgerInfo() {
 		Ledger ledger = new Ledger(TestData.VALIDATOR_ENDPOINT);
 		LedgerInfo ledgerInfo = ledger.getLedgerInfo();
 		assertEquals(1L,ledger.getRequestCount());
