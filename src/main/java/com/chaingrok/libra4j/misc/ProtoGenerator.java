@@ -15,6 +15,7 @@ public class ProtoGenerator {
 	private File protoDir;
 	private File grpcDir;
 	private File javaPlugin;
+	private boolean isOk = false;
 	
 	public ProtoGenerator(String protoDirpath,String grpcDirpath,String javaPluginFilepath) {
 		protoDir = new File(protoDirpath);
@@ -37,16 +38,22 @@ public class ProtoGenerator {
 		}
 	}
 	
-	public void generateDirectory() {
+	public boolean generateDirectory() {
+		boolean result = true;
 		File[] protoFiles = protoDir.listFiles();
 		for (File protoFile : protoFiles) {
 			generateFile(protoFile.getName());
+			if (!isOk()) {
+				result = false;
+			}
 		}
+		return result;
 	}
 	
 	@SuppressWarnings("deprecation")
 	public File generateFile(String protoFilename) {
 		File result = null;
+		isOk = true;
 		File protoFile = new File(protoDir.getAbsolutePath() + File.separator + protoFilename);
 		if (!protoFile.exists()) {
 			throw new Libra4jException("Proto file does not exist: " + protoFile.getAbsolutePath());
@@ -67,19 +74,37 @@ public class ProtoGenerator {
 		} catch (IOException e) {
 			throw new Libra4jException(e);
 		}
-		InputStream outputStream = pr.getInputStream();
+		InputStream errorStream = pr.getErrorStream();
 		StringWriter writer = new StringWriter();
+		try {
+			IOUtils.copy(errorStream, writer);
+		} catch (IOException e) {
+			throw new Libra4jException(e);
+		}
+		String string  = writer.toString();
+		if ((string != null) 
+				&& (string.length()> 0)){
+				isOk = false;
+				System.out.println("ERROR - error stream from protoc (" + string.length() + "): " + string);
+			}
+		InputStream outputStream = pr.getInputStream();
+		writer = new StringWriter();
 		try {
 			IOUtils.copy(outputStream, writer);
 		} catch (IOException e) {
 			throw new Libra4jException(e);
 		}
-		String out = writer.toString();
-		if ((out != null) 
-			&& (out.length()> 0)){
-			System.out.println("Out from protoc (" + out.length() + "): " + out);
+		string = writer.toString();
+		if ((string != null) 
+			&& (string.length()> 0)){
+			isOk = false;
+			System.out.println("ERROR - out stream from protoc (" + string.length() + "): " + string);
 		}
 		return result;
+	}
+	
+	public boolean isOk() {
+		return isOk;
 	}
 
 }

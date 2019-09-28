@@ -1,8 +1,9 @@
 package com.chaingrok.libra4j.types;
 
-import org.libra.grpc.admission_control.AdmissionControlGrpc;
-import org.libra.grpc.admission_control.AdmissionControlGrpc.AdmissionControlBlockingStub;
-import org.libra.grpc.admission_control.AdmissionControlGrpc.AdmissionControlStub;
+
+import org.libra.grpc.types.AdmissionControlGrpc;
+import org.libra.grpc.types.AdmissionControlGrpc.AdmissionControlBlockingStub;
+import org.libra.grpc.types.AdmissionControlGrpc.AdmissionControlStub;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;

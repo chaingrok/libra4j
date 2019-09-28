@@ -30,8 +30,6 @@ import org.libra.grpc.types.Proof.AccumulatorProof;
 import org.libra.grpc.types.Proof.EventProof;
 import org.libra.grpc.types.Proof.SignedTransactionProof;
 import org.libra.grpc.types.Proof.SparseMerkleProof;
-import org.libra.grpc.types.Transaction.Program;
-import org.libra.grpc.types.Transaction.RawTransaction;
 import org.libra.grpc.types.Transaction.SignedTransaction;
 import org.libra.grpc.types.Transaction.SignedTransactionWithProof;
 import org.libra.grpc.types.Transaction.TransactionArgument;
@@ -336,6 +334,7 @@ public class Ledger {
 	
 	private Transaction processSignedTransaction(SignedTransaction signedTransaction,Transaction transaction) {
 		Transaction result = null;
+		/* TODO: fix
 		if (transaction == null) {
 			result = new Transaction();
 		} else {
@@ -402,6 +401,7 @@ public class Ledger {
 		} else {
 			new Libra4jError(Type.MISSING_DATA,"signed transaction is null");
 		}
+		*/
 		return result;
 	}
 
@@ -422,6 +422,7 @@ public class Ledger {
 		grpcChecker.checkExpectedFields(event,2,3);
 		result.setData(new EventData(event.getEventData()));
 		result.setSequenceNumber(event.getSequenceNumber());
+		/* TODO: fix
 		AccessPath respAccessPath = event.getAccessPath();
 		if (respAccessPath != null) {
 			grpcChecker.checkExpectedFields(respAccessPath,2);
@@ -431,6 +432,7 @@ public class Ledger {
 		} else {
 			new Libra4jError(Type.MISSING_DATA,"event data is null");
 		}
+		*/ 
 		return result;
 	}
 	

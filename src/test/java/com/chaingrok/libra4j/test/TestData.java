@@ -2,8 +2,8 @@ package com.chaingrok.libra4j.test;
 
 import java.util.ArrayList;
 
-import org.libra.grpc.admission_control.AdmissionControlGrpc.AdmissionControlBlockingStub;
-import org.libra.grpc.admission_control.AdmissionControlGrpc.AdmissionControlStub;
+import org.libra.grpc.types.AdmissionControlGrpc.AdmissionControlBlockingStub;
+import org.libra.grpc.types.AdmissionControlGrpc.AdmissionControlStub;
 
 import com.chaingrok.libra4j.types.AccountAddress;
 import com.chaingrok.libra4j.types.Program;

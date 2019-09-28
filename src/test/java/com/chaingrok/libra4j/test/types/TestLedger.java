@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 import org.junit.FixMethodOrder;
 import org.junit.runners.MethodSorters;
-import org.libra.grpc.types.Transaction.RawTransaction;
 
 import com.chaingrok.libra4j.grpc.GrpcField;
 import com.chaingrok.libra4j.misc.Libra4jError;
@@ -28,7 +27,7 @@ public class TestLedger extends TestClass {
 	
 	//@Test
 	public void test001GetRawTransactionsFullName() {
-		assertEquals(GrpcField.RAW_TRANSACTION.getFullName(),RawTransaction.getDescriptor().getFullName());
+		//assertEquals(GrpcField.RAW_TRANSACTION.getFullName(),RawTransaction.getDescriptor().getFullName());
 	}
 	
 	
