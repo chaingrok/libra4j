@@ -80,7 +80,7 @@ public class TestUInt64 extends TestClass {
 		ByteString byteString = ByteString.copyFrom(bytes);
 		try {
 			new UInt64(byteString).getAsLong();
-			fail("should fail wit arithmetic exception");
+			fail("should fail with arithmetic exception");
 		} catch (ArithmeticException e)  {
 			assertTrue(e.getMessage().startsWith("BigInteger out of long range"));
 		}
@@ -94,7 +94,7 @@ public class TestUInt64 extends TestClass {
 		byteString = ByteString.copyFrom(bytes);
 		try {
 			new UInt64(byteString).getAsLong();
-			fail("should fail wit arithmetic exception");
+			fail("should fail with arithmetic exception");
 		} catch (ArithmeticException e)  {
 			assertTrue(e.getMessage().startsWith("BigInteger out of long range"));
 		}
