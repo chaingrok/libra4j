@@ -70,8 +70,13 @@ public abstract class UInt {
 	}
 	
 	private void processBytes(byte[] bytes) {
-		if (bytes.length != getLength()) {
-			new Libra4jError(Type.INVALID_LENGTH,"byte array legnth is invalid: " + bytes.length + " <> " + getLength());
+		if (bytes != null) {
+			if (bytes.length != getLength()) {
+				new Libra4jError(Type.INVALID_LENGTH,"byte array length is invalid: " + bytes.length + " <> " + getLength());
+			}
+		}
+		else {
+			new Libra4jError(Type.INVALID_LENGTH,"byte array cannot be null");
 		}
 		this.bytes = bytes;
 	}
