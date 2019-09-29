@@ -25,14 +25,31 @@ public class TestUInt64 extends TestClass {
 	
 	@Test
 	public void test001WrongFormat() {
+		//null with byte[]
+		new UInt64((byte[])null);
+		assertEquals(1,Libra4jLog.getLogs().size());
+		assertEquals(Type.INVALID_LENGTH,Libra4jLog.getLogs().get(0).getType());
+		Libra4jLog.purgeLogs();
+		//null with ByteString
+		new UInt64((ByteString)null);
+		assertEquals(1,Libra4jLog.getLogs().size());
+		assertEquals(Type.INVALID_LENGTH,Libra4jLog.getLogs().get(0).getType());
+		Libra4jLog.purgeLogs();
+		//no bytes
 		byte[] bytes = {};
 		new UInt64(bytes);
 		assertEquals(1,Libra4jLog.getLogs().size());
 		assertEquals(Type.INVALID_LENGTH,Libra4jLog.getLogs().get(0).getType());
 		Libra4jLog.purgeLogs();
-		//
+		//not enough bytes
 		byte[] bytes2 = {0x00,0x01};
 		new UInt64(bytes2);
+		assertEquals(1,Libra4jLog.getLogs().size());
+		assertEquals(Type.INVALID_LENGTH,Libra4jLog.getLogs().get(0).getType());
+		Libra4jLog.purgeLogs();
+		//too many bytes
+		byte[] bytes3 = {0x00,0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08};
+		new UInt64(bytes3);
 		assertEquals(1,Libra4jLog.getLogs().size());
 		assertEquals(Type.INVALID_LENGTH,Libra4jLog.getLogs().get(0).getType());
 		Libra4jLog.purgeLogs();

@@ -11,7 +11,7 @@ public class UInt64 extends UInt {
 	
 	
 	public UInt64(ByteString byteString) {
-		this(byteString.toByteArray());
+		super(byteString);
 	}
 	
 	public UInt64(byte[] bytes) {
