@@ -12,6 +12,8 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import com.chaingrok.libra4j.misc.Libra4jException;
+import com.chaingrok.libra4j.misc.Libra4jLog;
+import com.chaingrok.libra4j.misc.Libra4jLog.Type;
 import com.chaingrok.libra4j.misc.Utils;
 import com.chaingrok.libra4j.test.TestClass;
 import com.chaingrok.libra4j.types.UInt64;
@@ -24,20 +26,16 @@ public class TestUInt64 extends TestClass {
 	@Test
 	public void test001WrongFormat() {
 		byte[] bytes = {};
-		try {
-			new UInt64(bytes);
-			fail("should fail on array size");
-		} catch (Libra4jException e){
-			assertEquals("UInt64 length is invalid: " + 0 + " <> " + UInt64.BYTE_LENGTH,e.getMessage());
-		}
+		new UInt64(bytes);
+		assertEquals(1,Libra4jLog.getLogs().size());
+		assertEquals(Type.INVALID_LENGTH,Libra4jLog.getLogs().get(0).getType());
+		Libra4jLog.purgeLogs();
 		//
 		byte[] bytes2 = {0x00,0x01};
-		try {
-			new UInt64(bytes2);
-			fail("should fail on array size");
-		} catch (Libra4jException e){
-			assertEquals("UInt64 length is invalid: " + 2 + " <> " + UInt64.BYTE_LENGTH,e.getMessage());
-		}
+		new UInt64(bytes2);
+		assertEquals(1,Libra4jLog.getLogs().size());
+		assertEquals(Type.INVALID_LENGTH,Libra4jLog.getLogs().get(0).getType());
+		Libra4jLog.purgeLogs();
 	}
 	
 	@Test
