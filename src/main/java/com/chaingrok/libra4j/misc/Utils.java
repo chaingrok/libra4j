@@ -14,6 +14,7 @@ import java.util.TimeZone;
 
 import javax.xml.bind.DatatypeConverter;
 
+import com.chaingrok.libra4j.misc.Libra4jLog.Type;
 import com.google.protobuf.ByteString;
 
 public class Utils {
@@ -86,9 +87,21 @@ public class Utils {
 	}
 	
 	public static byte[] longToByteArray(long x) {
+	    return longToByteArray(x,Long.BYTES);
+	}
+	
+	public static byte[] longToByteArray(long x,int length) {
+		byte[] result = null;
 	    ByteBuffer buffer = ByteBuffer.allocate(Long.BYTES);
 	    buffer.putLong(x);
-	    return buffer.array();
+	    byte[] bytes = buffer.array();
+	    if (length > Long.BYTES) {
+	    	new Libra4jError(Type.INVALID_LENGTH,"byte array too big: " + length + " <> " + Long.BYTES);
+	    } else {
+	    	result = new byte[length];
+	    	System.arraycopy(bytes,Long.BYTES-length,result,0, length);
+	    }
+	    return result;
 	}
 
 	public static long byteArrayToLong(byte[] bytes) {
