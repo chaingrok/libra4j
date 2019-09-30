@@ -2,6 +2,9 @@ package com.chaingrok.libra4j.test.types;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -165,6 +168,25 @@ public class TestUInt64 extends TestClass {
 		byte[] bytes = uint64.getBytes();
 		uint64 = new UInt64(bytes);
 		assertEquals(number,(Long)uint64.getAsLong());
-		
+	}
+	
+	@Test
+	public void test006Equals() {
+		long value = 9999L;
+		UInt64 uint_1 = new UInt64(value);
+		UInt64 uint_2 = new UInt64(value);
+		assertNotSame(uint_1,uint_2);
+		assertEquals(uint_1,uint_2);
+		//
+		uint_2 = new UInt64(value + 1L);
+		assertNotEquals(uint_1,uint_2);
+		//
+		assertFalse(uint_1.equals(null));
+		//
+		uint_1.equals(new Object());
+		assertEquals(1,Libra4jLog.getLogs().size());
+		assertEquals(Type.INVALID_CLASS,Libra4jLog.getLogs().get(0).getType());
+		assertTrue(((String)Libra4jLog.getLogs().get(0).getObject()).contains("cannot compare objects of different classes"));
+		Libra4jLog.purgeLogs();
 	}
 }
