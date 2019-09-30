@@ -80,8 +80,8 @@ public class TestUInt16 extends TestClass {
 		//
 		value = new Long(Short.MAX_VALUE) + 1L;
 		assertTrue(value > 0);
-		UInt16 uint32 = new UInt16(value);
-		assertEquals(value,uint32.getAsLong());
+		UInt16 uint16 = new UInt16(value);
+		assertEquals(value,uint16.getAsLong());
 	}
 	
 	@Test
