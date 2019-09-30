@@ -129,7 +129,7 @@ public class TestUInt64 extends TestClass {
 			new UInt64(value);
 			fail("should fail with negative value");
 		} catch (Libra4jException e) {
-			assertEquals("UInt64 cannot be constructed from negative long value: " + value,e.getMessage());
+			assertEquals("UInt cannot be constructed from negative long value: " + value,e.getMessage());
 		}
 	}
 	
