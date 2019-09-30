@@ -15,7 +15,6 @@ import com.chaingrok.libra4j.misc.Libra4jLog.Type;
 import com.chaingrok.libra4j.misc.Utils;
 import com.chaingrok.libra4j.test.TestClass;
 import com.chaingrok.libra4j.types.UInt32;
-import com.chaingrok.libra4j.types.UInt64;
 import com.google.protobuf.ByteString;
 
 
@@ -48,7 +47,7 @@ public class TestUInt32 extends TestClass {
 		Libra4jLog.purgeLogs();
 		//too many bytes
 		byte[] bytes3 = {0x00,0x01,0x02,0x03,0x04};
-		new UInt64(bytes3);
+		new UInt32(bytes3);
 		assertEquals(1,Libra4jLog.getLogs().size());
 		assertEquals(Type.INVALID_LENGTH,Libra4jLog.getLogs().get(0).getType());
 		Libra4jLog.purgeLogs();
