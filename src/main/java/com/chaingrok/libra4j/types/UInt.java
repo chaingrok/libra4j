@@ -25,7 +25,7 @@ public abstract class UInt {
 	
 	public UInt(Long value) {
 		if (value < 0) {
-			throw new Libra4jException("UInt64 cannot be constructed from negative long value: " + value);
+			throw new Libra4jException("UInt cannot be constructed from negative long value: " + value);
 		}
 		byte[] longBytes = Utils.longToByteArray(value);
 		if (longBytes.length <= getLength()) {
