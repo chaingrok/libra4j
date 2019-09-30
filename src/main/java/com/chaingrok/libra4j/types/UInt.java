@@ -81,4 +81,46 @@ public abstract class UInt {
 		this.bytes = bytes;
 	}
 	
+	@Override
+	public boolean equals(Object object) {
+		boolean result = false;
+		if (object != null) {
+			if (this.getClass().equals(object.getClass())) {
+				UInt uint = (UInt)object;
+				byte[] thisBytes = getBytes();
+				byte[] objBytes = uint.getBytes();
+				if (thisBytes.length == objBytes.length) {
+					int length = thisBytes.length;
+					boolean delta = false;
+					for (int i=0 ; i< length ; ++i) {
+						if (thisBytes[i] != objBytes[i]) {
+							delta = true;
+							break;
+						}
+					}
+					if (!delta) {
+						result = true;
+					}
+				}
+			} else {
+				new Libra4jError(Type.INVALID_CLASS,"cannot compare objects of different classes: " + this.getClass().getCanonicalName() +  " <> " + object.getClass().getCanonicalName());
+			}
+		}
+		return result;
+	}
+	
+	@Override
+	public int hashCode() {
+		int result = 0;
+		//hoping for randomness in bytes...
+		byte[] intBytes = new byte[Integer.BYTES];
+		if (bytes.length >=  Integer.BYTES) {
+			System.arraycopy(bytes, 0, intBytes, 0,Integer.BYTES);
+		} else {
+			System.arraycopy(bytes, 0, intBytes, 0,bytes.length);
+		}
+		result = Utils.byteArrayToInt(intBytes);
+		return result;
+	}
+	
 }
