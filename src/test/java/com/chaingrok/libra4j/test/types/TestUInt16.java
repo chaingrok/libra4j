@@ -153,6 +153,5 @@ public class TestUInt16 extends TestClass {
 		byte[] bytes = uint16.getBytes();
 		uint16 = new UInt16(bytes);
 		assertEquals(number,(Long)uint16.getAsLong());
-		
 	}
 }
