@@ -103,7 +103,7 @@ public class TestUInt64 extends TestClass {
 	}
 	
 	@Test
-	public void test004ContructFromLong() {
+	public void test004ConstructFromLong() {
 		long value = 0L;
 		UInt64 u64 = new UInt64(value);
 		assertEquals(value,u64.getAsLong());
