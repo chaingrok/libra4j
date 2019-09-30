@@ -58,27 +58,27 @@ public class TestUInt16 extends TestClass {
 	@Test
 	public void test002LongValues() {
 		long value = 0L;
-		byte[] bytes = Utils.longToByteArray(value,Integer.BYTES);
+		byte[] bytes = Utils.longToByteArray(value,UInt16.BYTE_LENGTH);
 		ByteString byteString = ByteString.copyFrom(bytes);
-		assertEquals(value,new UInt32(byteString).getAsLong());
+		assertEquals(value,new UInt16(byteString).getAsLong());
 		//
 		value = 1L;
-		bytes = Utils.longToByteArray(value,Integer.BYTES);
+		bytes = Utils.longToByteArray(value,UInt16.BYTE_LENGTH);
 		byteString = ByteString.copyFrom(bytes);
-		assertEquals(value,new UInt32(byteString).getAsLong());
+		assertEquals(value,new UInt16(byteString).getAsLong());
 		//
-		value = Integer.MAX_VALUE;
-		bytes = Utils.longToByteArray(value,Integer.BYTES);
+		value = Short.MAX_VALUE;
+		bytes = Utils.longToByteArray(value,UInt16.BYTE_LENGTH);
 		byteString = ByteString.copyFrom(bytes);
-		assertEquals(value,new UInt32(byteString).getAsLong());
+		assertEquals(value,new UInt16(byteString).getAsLong());
 	}
 	
 	@Test
 	public void test003BiggerThanIntegerValues() {
 		long value = -1L;
-		byte[] bytes = Utils.longToByteArray(value,4);
+		byte[] bytes = Utils.longToByteArray(value,Short.BYTES);
 		ByteString byteString = ByteString.copyFrom(bytes);
-		assertEquals(UInt32.MAX_VALUE.longValue(),new UInt32(byteString).getAsLong());
+		assertEquals(UInt16.MAX_VALUE.longValue(),new UInt16(byteString).getAsLong());
 		//
 		value = new Long(Integer.MAX_VALUE) + 1L;
 		assertTrue(value > 0);
@@ -89,32 +89,32 @@ public class TestUInt16 extends TestClass {
 	@Test
 	public void test004ContructFromLong() {
 		long value = 0L;
-		UInt32 u32 = new UInt32(value);
-		assertEquals(value,u32.getAsLong());
+		UInt16 u16 = new UInt16(value);
+		assertEquals(value,u16.getAsLong());
 		//
 		value = 1L;
-		u32 = new UInt32(value);
-		assertEquals(value,u32.getAsLong());
+		u16 = new UInt16(value);
+		assertEquals(value,u16.getAsLong());
 		//
 		value = 100L;
-		u32 = new UInt32(value);
-		assertEquals(value,u32.getAsLong());
+		u16 = new UInt16(value);
+		assertEquals(value,u16.getAsLong());
 		//
-		value = 123456L;
-		u32 = new UInt32(value);
-		assertEquals(value,u32.getAsLong());
+		value = 12345L;
+		u16 = new UInt16(value);
+		assertEquals(value,u16.getAsLong());
 		//
-		value = Integer.MAX_VALUE;
-		u32 = new UInt32(value);
-		assertEquals(value,u32.getAsLong());
+		value = Short.MAX_VALUE;
+		u16 = new UInt16(value);
+		assertEquals(value,u16.getAsLong());
 		//
-		value = UInt32.MAX_VALUE.longValue();
-		u32 = new UInt32(value);
-		assertEquals(value,u32.getAsLong());
+		value = UInt16.MAX_VALUE.longValue();
+		u16 = new UInt16(value);
+		assertEquals(value,u16.getAsLong());
 		//
 		value = -1L;
 		try {
-			new UInt32(value);
+			new UInt16(value);
 			fail("should fail with negative value");
 		} catch (Libra4jException e) {
 			assertEquals("UInt cannot be constructed from negative long value: " + value,e.getMessage());
@@ -124,35 +124,35 @@ public class TestUInt16 extends TestClass {
 	@Test
 	public void test005GetBytes() {
 		long value = 0L;
-		UInt32 u32 = new UInt32(value);
-		byte[] bytes = u32.getBytes();
-		assertEquals(UInt32.BYTE_LENGTH,bytes.length);
-		byte[] expected =  {0x00,0x00,0x00,0x00};
+		UInt16 u16 = new UInt16(value);
+		byte[] bytes = u16.getBytes();
+		assertEquals(UInt16.BYTE_LENGTH,bytes.length);
+		byte[] expected =  {0x00,0x00};
 		assertArrayEquals(expected,bytes);
 		//
 		value = 1L;
-		u32 = new UInt32(value);
-		bytes = u32.getBytes();
-		assertEquals(UInt32.BYTE_LENGTH,bytes.length);
-		byte[]  expected2 =  {0x00,0x00,0x00,0x01};
+		u16 = new UInt16(value);
+		bytes = u16.getBytes();
+		assertEquals(UInt16.BYTE_LENGTH,bytes.length);
+		byte[]  expected2 =  {0x00,0x01};
 		assertArrayEquals(expected2,bytes);
 		//
 		value = 100L;
-		u32 = new UInt32(value);
-		bytes = u32.getBytes();
-		assertEquals(UInt32.BYTE_LENGTH,bytes.length);
-		byte[]  expected3 =  {0x00,0x00,0x00,0x64};
+		u16 = new UInt16(value);
+		bytes = u16.getBytes();
+		assertEquals(UInt16.BYTE_LENGTH,bytes.length);
+		byte[]  expected3 =  {0x00,0x64};
 		assertArrayEquals(expected3,bytes);
 	}
 	
 	@Test
 	public void test005BytesVsLongValues() {
-		Long number = 123456L;
-		UInt32 uint32 = new UInt32(number);
-		assertEquals(number,(Long)uint32.getAsLong());
-		byte[] bytes = uint32.getBytes();
-		uint32 = new UInt32(bytes);
-		assertEquals(number,(Long)uint32.getAsLong());
+		Long number = 1234L;
+		UInt16 uint16 = new UInt16(number);
+		assertEquals(number,(Long)uint16.getAsLong());
+		byte[] bytes = uint16.getBytes();
+		uint16 = new UInt16(bytes);
+		assertEquals(number,(Long)uint16.getAsLong());
 		
 	}
 }
