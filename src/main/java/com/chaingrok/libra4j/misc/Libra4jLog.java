@@ -121,6 +121,7 @@ public abstract class Libra4jLog {
 		UNKNOWN_VALUE,
 		MISSING_DATA,
 		NODE_ERROR,
+		JAVA_ERROR,
 	}
 
 }
