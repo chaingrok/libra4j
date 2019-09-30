@@ -53,7 +53,11 @@ public class Utils {
 	}
 		
 	public static byte[] hexStringToByteArray(String hex) {
-		return DatatypeConverter.parseHexBinary(hex);
+		byte[] bytes = DatatypeConverter.parseHexBinary(hex);
+		if (bytes.length == 0) {
+			bytes = null;
+		}
+		return bytes;
 	}
 	
 	public static byte[] toBigEndian(byte[] bytes) {

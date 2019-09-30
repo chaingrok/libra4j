@@ -4,6 +4,7 @@ import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -25,7 +26,7 @@ import com.google.protobuf.ByteString;
 public class TestUtils extends TestClass {
 	
 	@Test
-    public void test001ByteToHex() {
+    public void test001ByteToHexString() {
 		byte[] bytes = {0x00};
     	assertEquals("00",Utils.byteArrayToHexString(bytes));
 		byte[] bytes2 = {0x74,0x65,0x73,0x74};
@@ -33,7 +34,9 @@ public class TestUtils extends TestClass {
     }
 	
 	@Test
-    public void test002HexToByte() {
+    public void test002HexSgtringToByte() {
+		assertNull(Utils.hexStringToByteArray(""));
+		//
 		byte[] bytes = {0x00};
     	assertArrayEquals(bytes,Utils.hexStringToByteArray("00"));
 		byte[] bytes2 = {0x74,0x65,0x73,0x74};
