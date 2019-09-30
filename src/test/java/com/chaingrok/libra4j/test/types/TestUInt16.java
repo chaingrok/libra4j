@@ -15,8 +15,6 @@ import com.chaingrok.libra4j.misc.Libra4jLog.Type;
 import com.chaingrok.libra4j.misc.Utils;
 import com.chaingrok.libra4j.test.TestClass;
 import com.chaingrok.libra4j.types.UInt16;
-import com.chaingrok.libra4j.types.UInt32;
-import com.chaingrok.libra4j.types.UInt64;
 import com.google.protobuf.ByteString;
 
 
@@ -80,9 +78,9 @@ public class TestUInt16 extends TestClass {
 		ByteString byteString = ByteString.copyFrom(bytes);
 		assertEquals(UInt16.MAX_VALUE.longValue(),new UInt16(byteString).getAsLong());
 		//
-		value = new Long(Integer.MAX_VALUE) + 1L;
+		value = new Long(Short.MAX_VALUE) + 1L;
 		assertTrue(value > 0);
-		UInt32 uint32 = new UInt32(value);
+		UInt16 uint32 = new UInt16(value);
 		assertEquals(value,uint32.getAsLong());
 	}
 	
