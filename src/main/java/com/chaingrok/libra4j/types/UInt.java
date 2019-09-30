@@ -32,7 +32,7 @@ public abstract class UInt {
 			bytes = new byte[getLength()];
 			System.arraycopy(longBytes, 0, bytes, bytes.length-longBytes.length, longBytes.length);
 		} else {
-			throw new Libra4jException("byte arrey is too big: " + longBytes.length + " - " + Utils.byteArrayToHexString(longBytes));
+			throw new Libra4jException("byte array is too big: " + longBytes.length + " <> " + getLength() + " - " + Utils.byteArrayToHexString(longBytes));
 		}
 	}
 	

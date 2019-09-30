@@ -91,14 +91,15 @@ public class TestUInt64 extends TestClass {
 		bigInt = bigInt.add(BigInteger.ONE);
 		bytes = new byte[8];
 		System.arraycopy(bigInt.toByteArray(), 1, bytes,0,8);
+		UInt64 uint64 = new UInt64(byteString); // must succeed
 		byteString = ByteString.copyFrom(bytes);
 		try {
-			new UInt64(byteString).getAsLong();
+			uint64.getAsLong();
 			fail("should fail with arithmetic exception");
 		} catch (ArithmeticException e)  {
 			assertTrue(e.getMessage().startsWith("BigInteger out of long range"));
 		}
-		assertEquals("9223372036854775808",new UInt64(byteString).getAsBigInt().toString()); // 9 223 372 036 854 775 808 = Long.MAX_INT + 1
+		assertEquals("9223372036854775808",new UInt64(byteString).getAsBigInt().toString()); // 9 223 372 036 854 775 808 = Long.MAX_VALUE + 1
 	}
 	
 	@Test
