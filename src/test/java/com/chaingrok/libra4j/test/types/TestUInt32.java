@@ -57,17 +57,17 @@ public class TestUInt32 extends TestClass {
 	@Test
 	public void test002LongValues() {
 		long value = 0L;
-		byte[] bytes = Utils.longToByteArray(value,Integer.BYTES);
+		byte[] bytes = Utils.longToByteArray(value,UInt32.BYTE_LENGTH);
 		ByteString byteString = ByteString.copyFrom(bytes);
 		assertEquals(value,new UInt32(byteString).getAsLong());
 		//
 		value = 1L;
-		bytes = Utils.longToByteArray(value,Integer.BYTES);
+		bytes = Utils.longToByteArray(value,UInt32.BYTE_LENGTH);
 		byteString = ByteString.copyFrom(bytes);
 		assertEquals(value,new UInt32(byteString).getAsLong());
 		//
 		value = Integer.MAX_VALUE;
-		bytes = Utils.longToByteArray(value,Integer.BYTES);
+		bytes = Utils.longToByteArray(value,UInt32.BYTE_LENGTH);
 		byteString = ByteString.copyFrom(bytes);
 		assertEquals(value,new UInt32(byteString).getAsLong());
 	}
@@ -75,7 +75,7 @@ public class TestUInt32 extends TestClass {
 	@Test
 	public void test003BiggerThanIntegerValues() {
 		long value = -1L;
-		byte[] bytes = Utils.longToByteArray(value,4);
+		byte[] bytes = Utils.longToByteArray(value,UInt32.BYTE_LENGTH);
 		ByteString byteString = ByteString.copyFrom(bytes);
 		assertEquals(UInt32.MAX_VALUE.longValue(),new UInt32(byteString).getAsLong());
 		//
