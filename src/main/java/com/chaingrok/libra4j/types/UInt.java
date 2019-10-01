@@ -37,15 +37,23 @@ public abstract class UInt {
 	}
 	
 	public final BigInteger getAsBigInt() {
-		BigInteger result = Utils.byteArraytoBigInt(bytes);
-		if (result.compareTo(getMaxValue()) > 0) {
-			new Libra4jError(Type.INVALID_VALUE,"UInt value greater than max value: " + result.toString() + " <> " + getMaxValue().toString());
+		BigInteger result = null;
+		if (bytes != null) {
+			result = Utils.byteArraytoBigInt(bytes);
+			if (result.compareTo(getMaxValue()) > 0) {
+				new Libra4jError(Type.INVALID_VALUE,"UInt value greater than max value: " + result.toString() + " <> " + getMaxValue().toString());
+			}
 		}
 		return result;
 	}
 	
-	public final long getAsLong() {
-		return getAsBigInt().longValueExact();
+	public final Long getAsLong() {
+		Long result = null;
+		BigInteger bigInt = getAsBigInt();
+		if (bigInt != null) {
+			result = getAsBigInt().longValueExact();
+		}
+		return result;
 	}
 	
 	public final byte[] getBytes() {
@@ -58,7 +66,7 @@ public abstract class UInt {
 	
 	@Override
 	public final String toString() {
-		return getAsLong() + "";
+		return getAsBigInt() + "";
 	}
 	
 	private void processByteString(ByteString byteString) {
@@ -74,8 +82,7 @@ public abstract class UInt {
 			if (bytes.length != getLength()) {
 				new Libra4jError(Type.INVALID_LENGTH,"byte array length is invalid: " + bytes.length + " <> " + getLength());
 			}
-		}
-		else {
+		} else {
 			new Libra4jError(Type.INVALID_LENGTH,"byte array cannot be null");
 		}
 		this.bytes = bytes;
