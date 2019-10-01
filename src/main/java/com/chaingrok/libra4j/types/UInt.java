@@ -107,11 +107,12 @@ public abstract class UInt {
 		if (bytes != null) {
 			if (bytes.length != getLength()) {
 				new Libra4jError(Type.INVALID_LENGTH,"byte array length is invalid: " + bytes.length + " <> " + getLength());
+			} else {
+				this.bytes = bytes;
 			}
 		} else {
 			new Libra4jError(Type.INVALID_LENGTH,"byte array cannot be null");
 		}
-		this.bytes = bytes;
 	}
 	
 	@Override
