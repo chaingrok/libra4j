@@ -6,6 +6,11 @@ import java.util.List;
 import org.libra.grpc.types.AccessPathOuterClass.AccessPath;
 import org.libra.grpc.types.AccountStateBlobOuterClass.AccountStateBlob;
 import org.libra.grpc.types.AccountStateBlobOuterClass.AccountStateWithProof;
+import org.libra.grpc.types.AdmissionControlGrpc.AdmissionControlBlockingStub;
+import org.libra.grpc.types.AdmissionControlOuterClass.AdmissionControlStatus;
+import org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionRequest;
+import org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionResponse;
+import org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionResponse.StatusCase;
 import org.libra.grpc.types.Events.Event;
 import org.libra.grpc.types.Events.EventWithProof;
 import org.libra.grpc.types.Events.EventsForVersions;
@@ -25,6 +30,8 @@ import org.libra.grpc.types.GetWithProof.UpdateToLatestLedgerResponse;
 import org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfo;
 import org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures;
 import org.libra.grpc.types.LedgerInfoOuterClass.ValidatorSignature;
+import org.libra.grpc.types.MempoolStatus.MempoolAddTransactionStatus;
+import org.libra.grpc.types.MempoolStatus.MempoolAddTransactionStatusCode;
 import org.libra.grpc.types.Proof.AccountStateProof;
 import org.libra.grpc.types.Proof.AccumulatorProof;
 import org.libra.grpc.types.Proof.EventProof;
@@ -32,20 +39,18 @@ import org.libra.grpc.types.Proof.SignedTransactionProof;
 import org.libra.grpc.types.Proof.SparseMerkleProof;
 import org.libra.grpc.types.Transaction.SignedTransaction;
 import org.libra.grpc.types.Transaction.SignedTransactionWithProof;
-import org.libra.grpc.types.Transaction.TransactionArgument;
 import org.libra.grpc.types.Transaction.TransactionListWithProof;
 import org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo;
+import org.libra.grpc.types.VmErrors.VMStatus;
 
 import com.chaingrok.libra4j.grpc.GrpcChecker;
 import com.chaingrok.libra4j.grpc.GrpcField;
 import com.chaingrok.libra4j.misc.Libra4jError;
-import com.chaingrok.libra4j.misc.Libra4jException;
 import com.chaingrok.libra4j.misc.Utils;
 import com.chaingrok.libra4j.misc.Libra4jLog.Type;
 
 
 import com.google.protobuf.ByteString;
-import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.UInt64Value;
 
 public class Ledger {
@@ -61,6 +66,34 @@ public class Ledger {
 	
 	public ArrayList<Transaction> getTransactions(long version, long count) {
 		return getTransactions(version,count,true);
+	}
+	
+	public void submitTransaction() {
+		ByteString signedTxnBytes = null;
+		SignedTransaction signedTransaction = SignedTransaction.newBuilder()
+				.setSignedTxn(signedTxnBytes)
+				.build();
+		SubmitTransactionRequest submitTransactionRequest = SubmitTransactionRequest.newBuilder()
+				.setSignedTxn(signedTransaction)
+				.build();
+		AdmissionControlBlockingStub blockingStub = validatorEndpoint.getBlockingStub();
+		SubmitTransactionResponse submitTransactionResponse = blockingStub.submitTransaction(submitTransactionRequest);
+		//
+		AdmissionControlStatus acStatus = submitTransactionResponse.getAcStatus();
+		acStatus.getCodeValue();
+		acStatus.getMessage();
+		//
+		MempoolAddTransactionStatus mempoolStatus = submitTransactionResponse.getMempoolStatus();
+		mempoolStatus.getCodeValue();
+		mempoolStatus.getMessage();
+		//
+		StatusCase statusCase = submitTransactionResponse.getStatusCase();
+		statusCase.getNumber();
+		//
+		VMStatus vmStatus = submitTransactionResponse.getVmStatus();
+		vmStatus.getMajorStatus();
+		vmStatus.getSubStatus();
+		vmStatus.getMessage();
 	}
 	
 	public ArrayList<Transaction> getTransactions(long version, long count, boolean withEvents) {
