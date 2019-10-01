@@ -17,7 +17,6 @@ import com.chaingrok.libra4j.misc.Libra4jLog;
 import com.chaingrok.libra4j.misc.Libra4jLog.Type;
 import com.chaingrok.libra4j.misc.Utils;
 import com.chaingrok.libra4j.test.TestClass;
-import com.chaingrok.libra4j.types.UInt16;
 import com.chaingrok.libra4j.types.UInt8;
 import com.google.protobuf.ByteString;
 

@@ -49,7 +49,7 @@ public class TestArgument extends TestClass {
 		//
 		argument.setType(Type.U64);
 		assertEquals(Type.U64,argument.getType());
-		long number = 123456L;
+		Long number = 123456L;
 		UInt64 uint64 = new UInt64(number);
 		argument.setData(uint64.getBytes());
 		assertEquals(number,uint64.getAsLong());

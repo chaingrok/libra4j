@@ -60,7 +60,7 @@ public class TestUInt64 extends TestClass {
 	
 	@Test
 	public void test002LongValues() {
-		long value = 0L;
+		Long value = 0L;
 		byte[] bytes = Utils.longToByteArray(value);
 		ByteString byteString = ByteString.copyFrom(bytes);
 		assertEquals(value,new UInt64(byteString).getAsLong());
@@ -107,7 +107,7 @@ public class TestUInt64 extends TestClass {
 	
 	@Test
 	public void test004ConstructFromLong() {
-		long value = 0L;
+		Long value = 0L;
 		UInt64 u64 = new UInt64(value);
 		assertEquals(value,u64.getAsLong());
 		//
