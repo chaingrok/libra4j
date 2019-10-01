@@ -53,7 +53,7 @@ public class TestUInt8 extends TestClass {
 	
 	@Test
 	public void test002LongValues() {
-		long value = 0L;
+		Long value = 0L;
 		byte[] bytes = Utils.longToByteArray(value,UInt8.BYTE_LENGTH);
 		ByteString byteString = ByteString.copyFrom(bytes);
 		assertEquals(value,new UInt8(byteString).getAsLong());
@@ -63,7 +63,7 @@ public class TestUInt8 extends TestClass {
 		byteString = ByteString.copyFrom(bytes);
 		assertEquals(value,new UInt8(byteString).getAsLong());
 		//
-		value = Byte.MAX_VALUE;
+		value = (long)Byte.MAX_VALUE;
 		bytes = Utils.longToByteArray(value,UInt8.BYTE_LENGTH);
 		byteString = ByteString.copyFrom(bytes);
 		assertEquals(value,new UInt8(byteString).getAsLong());
@@ -71,10 +71,10 @@ public class TestUInt8 extends TestClass {
 	
 	@Test
 	public void test003BiggerThanIntegerValues() {
-		long value = -1L;
+		Long value = -1L;
 		byte[] bytes = Utils.longToByteArray(value,UInt8.BYTE_LENGTH);
 		ByteString byteString = ByteString.copyFrom(bytes);
-		assertEquals(UInt8.MAX_VALUE.longValue(),new UInt8(byteString).getAsLong());
+		assertEquals((Long)UInt8.MAX_VALUE.longValue(),new UInt8(byteString).getAsLong());
 		//
 		value = new Long(Byte.MAX_VALUE) + 1L;
 		assertTrue(value > 0);
@@ -84,7 +84,7 @@ public class TestUInt8 extends TestClass {
 	
 	@Test
 	public void test004ContructFromLong() {
-		long value = 0L;
+		Long value = 0L;
 		UInt8 u8 = new UInt8(value);
 		assertEquals(value,u8.getAsLong());
 		//
@@ -119,12 +119,13 @@ public class TestUInt8 extends TestClass {
 	
 	@Test
 	public void test005GetBytes() {
-		long value = 0L;
+		Long value = 0L;
 		UInt8 u8 = new UInt8(value);
 		byte[] bytes = u8.getBytes();
 		assertEquals(UInt8.BYTE_LENGTH,bytes.length);
 		byte[] expected =  {0x00};
 		assertArrayEquals(expected,bytes);
+		assertEquals(value,u8.getAsLong());
 		//
 		value = 1L;
 		u8 = new UInt8(value);
@@ -132,6 +133,7 @@ public class TestUInt8 extends TestClass {
 		assertEquals(UInt8.BYTE_LENGTH,bytes.length);
 		byte[]  expected2 =  {0x01};
 		assertArrayEquals(expected2,bytes);
+		assertEquals(value,u8.getAsLong());
 		//
 		value = 100L;
 		u8 = new UInt8(value);
@@ -139,6 +141,15 @@ public class TestUInt8 extends TestClass {
 		assertEquals(UInt8.BYTE_LENGTH,bytes.length);
 		byte[]  expected3 =  {0x64};
 		assertArrayEquals(expected3,bytes);
+		assertEquals(value,u8.getAsLong());
+		//
+		value = UInt8.MAX_VALUE.longValue();
+		u8 = new UInt8(value);
+		bytes = u8.getBytes();
+		assertEquals(UInt8.BYTE_LENGTH,bytes.length);
+		byte[]  expected4 =  {(byte)0xff};
+		assertArrayEquals(expected4,bytes);
+		assertEquals(value,u8.getAsLong());
 	}
 	
 	@Test
