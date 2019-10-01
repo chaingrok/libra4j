@@ -21,6 +21,10 @@ public class UInt32 extends UInt  {
 		super(value);
 	}
 	
+	public UInt32(int value) {
+		super(value);
+	}
+
 	@Override
 	protected int getLength() {
 		return BYTE_LENGTH ;

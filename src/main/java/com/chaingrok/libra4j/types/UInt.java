@@ -23,6 +23,10 @@ public abstract class UInt {
 		processBytes(bytes);
 	}
 	
+	public UInt(int value) {
+		this((long)value);
+	}
+	
 	public UInt(Long value) {
 		if (value < 0) {
 			throw new Libra4jException("UInt cannot be constructed from negative long value: " + value);
