@@ -31,7 +31,6 @@ import org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfo;
 import org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures;
 import org.libra.grpc.types.LedgerInfoOuterClass.ValidatorSignature;
 import org.libra.grpc.types.MempoolStatus.MempoolAddTransactionStatus;
-import org.libra.grpc.types.MempoolStatus.MempoolAddTransactionStatusCode;
 import org.libra.grpc.types.Proof.AccountStateProof;
 import org.libra.grpc.types.Proof.AccumulatorProof;
 import org.libra.grpc.types.Proof.EventProof;
