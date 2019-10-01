@@ -75,7 +75,7 @@ public class TestUInt16 extends TestClass {
 	}
 	
 	@Test
-	public void test003BiggerThanIntegerValues() {
+	public void test003BiggerThanShortValues() {
 		Long value = -1L;
 		byte[] bytes = Utils.longToByteArray(value,UInt16.BYTE_LENGTH);
 		ByteString byteString = ByteString.copyFrom(bytes);
@@ -144,6 +144,13 @@ public class TestUInt16 extends TestClass {
 		assertEquals(UInt16.BYTE_LENGTH,bytes.length);
 		byte[]  expected3 =  {0x00,0x64};
 		assertArrayEquals(expected3,bytes);
+		//
+		value = UInt16.MAX_VALUE.longValue();
+		u16 = new UInt16(value);
+		bytes = u16.getBytes();
+		assertEquals(UInt16.BYTE_LENGTH,bytes.length);
+		byte[]  expected4 =  {(byte)0xff,(byte)0xff};
+		assertArrayEquals(expected4,bytes);
 	}
 	
 	@Test

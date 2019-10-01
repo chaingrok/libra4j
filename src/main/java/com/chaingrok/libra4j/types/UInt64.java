@@ -22,6 +22,10 @@ public class UInt64 extends UInt {
 		super(value);
 	}
 	
+	public UInt64(BigInteger value) {
+		super(value);
+	}
+	
 	@Override
 	protected int getLength() {
 		return BYTE_LENGTH ;

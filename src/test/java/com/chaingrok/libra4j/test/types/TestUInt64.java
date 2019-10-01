@@ -158,6 +158,13 @@ public class TestUInt64 extends TestClass {
 		assertEquals(UInt64.BYTE_LENGTH,bytes.length);
 		byte[]  expected3 =  {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x64};
 		assertArrayEquals(expected3,bytes);
+		//
+		BigInteger bigValue = UInt64.MAX_VALUE;
+		u64 = new UInt64(bigValue);
+		bytes = u64.getBytes();
+		assertEquals(UInt64.BYTE_LENGTH,bytes.length);
+		byte[]  expected4 =  {(byte)0xff,(byte)0xff,(byte)0xff,(byte)0xff,(byte)0xff,(byte)0xff,(byte)0xff,(byte)0xff};
+		assertArrayEquals(expected4,bytes);
 	}
 	
 	@Test

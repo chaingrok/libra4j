@@ -144,6 +144,14 @@ public class TestUInt32 extends TestClass {
 		assertEquals(UInt32.BYTE_LENGTH,bytes.length);
 		byte[]  expected3 =  {0x00,0x00,0x00,0x64};
 		assertArrayEquals(expected3,bytes);
+		//
+		//
+		value = UInt32.MAX_VALUE.longValue();
+		u32 = new UInt32(value);
+		bytes = u32.getBytes();
+		assertEquals(UInt32.BYTE_LENGTH,bytes.length);
+		byte[]  expected4 =  {(byte)0xff,(byte)0xff,(byte)0xff,(byte)0xff};
+		assertArrayEquals(expected4,bytes);
 	}
 	
 	@Test

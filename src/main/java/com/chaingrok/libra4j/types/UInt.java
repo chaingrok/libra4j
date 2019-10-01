@@ -36,6 +36,28 @@ public abstract class UInt {
 		}
 	}
 	
+	public UInt(BigInteger value) {
+		if (value != null) {
+			byte[] bytes = value.toByteArray();
+			if (bytes.length > getLength()) {
+				if (this.getClass().equals(UInt64.class)) {
+					if (bytes.length == UInt64.BYTE_LENGTH + 1) {
+						if (bytes[0] == 0x00) {
+							this.bytes = new byte[UInt64.BYTE_LENGTH];
+							System.arraycopy(bytes, 1, this.bytes, 0, UInt64.BYTE_LENGTH);
+						} else {
+							new Libra4jError(Type.INVALID_VALUE,"leading byte must be 0x00:" + bytes[0]);
+						}
+					} else {
+						new Libra4jError(Type.INVALID_VALUE,"bytes.lenghht too big:" + bytes.length + " <> " + UInt64.BYTE_LENGTH );
+					}
+				} else {
+					new Libra4jError(Type.INVALID_LENGTH,"too many bytes from BigInteger");
+				}
+			}
+		}
+	}
+	
 	public final BigInteger getAsBigInt() {
 		BigInteger result = null;
 		if (bytes != null) {
