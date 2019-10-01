@@ -58,7 +58,7 @@ public class TestUInt32 extends TestClass {
 	
 	@Test
 	public void test002LongValues() {
-		long value = 0L;
+		Long value = 0L;
 		byte[] bytes = Utils.longToByteArray(value,UInt32.BYTE_LENGTH);
 		ByteString byteString = ByteString.copyFrom(bytes);
 		assertEquals(value,new UInt32(byteString).getAsLong());
@@ -68,7 +68,7 @@ public class TestUInt32 extends TestClass {
 		byteString = ByteString.copyFrom(bytes);
 		assertEquals(value,new UInt32(byteString).getAsLong());
 		//
-		value = Integer.MAX_VALUE;
+		value = (long)Integer.MAX_VALUE;
 		bytes = Utils.longToByteArray(value,UInt32.BYTE_LENGTH);
 		byteString = ByteString.copyFrom(bytes);
 		assertEquals(value,new UInt32(byteString).getAsLong());
@@ -76,10 +76,10 @@ public class TestUInt32 extends TestClass {
 	
 	@Test
 	public void test003BiggerThanIntegerValues() {
-		long value = -1L;
+		Long value = -1L;
 		byte[] bytes = Utils.longToByteArray(value,UInt32.BYTE_LENGTH);
 		ByteString byteString = ByteString.copyFrom(bytes);
-		assertEquals(UInt32.MAX_VALUE.longValue(),new UInt32(byteString).getAsLong());
+		assertEquals((Long)UInt32.MAX_VALUE.longValue(),new UInt32(byteString).getAsLong());
 		//
 		value = new Long(Integer.MAX_VALUE) + 1L;
 		assertTrue(value > 0);
@@ -89,7 +89,7 @@ public class TestUInt32 extends TestClass {
 	
 	@Test
 	public void test004ContructFromLong() {
-		long value = 0L;
+		Long value = 0L;
 		UInt32 u32 = new UInt32(value);
 		assertEquals(value,u32.getAsLong());
 		//
@@ -105,7 +105,7 @@ public class TestUInt32 extends TestClass {
 		u32 = new UInt32(value);
 		assertEquals(value,u32.getAsLong());
 		//
-		value = Integer.MAX_VALUE;
+		value = (long)Integer.MAX_VALUE;
 		u32 = new UInt32(value);
 		assertEquals(value,u32.getAsLong());
 		//
