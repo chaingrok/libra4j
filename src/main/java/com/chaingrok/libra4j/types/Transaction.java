@@ -1,11 +1,8 @@
 package com.chaingrok.libra4j.types;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.security.PublicKey;
 import java.util.ArrayList;
 
-import com.chaingrok.libra4j.misc.LCSInterface;
 import com.chaingrok.libra4j.misc.Libra4jWarning;
 
 public class Transaction {
