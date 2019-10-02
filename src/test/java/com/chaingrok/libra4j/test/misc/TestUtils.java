@@ -35,7 +35,10 @@ public class TestUtils extends TestClass {
 	
 	@Test
     public void test002HexSgtringToByte() {
-		assertNull(Utils.hexStringToByteArray(""));
+		assertNull(Utils.hexStringToByteArray(null));
+		//
+		assertNotNull(Utils.hexStringToByteArray(""));
+		assertEquals(0,Utils.hexStringToByteArray("").length);
 		//
 		byte[] bytes = {0x00};
     	assertArrayEquals(bytes,Utils.hexStringToByteArray("00"));
