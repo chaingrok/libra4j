@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 import com.chaingrok.libra4j.misc.Libra4jLog.Type;
+import com.chaingrok.libra4j.types.AccountAddress;
 import com.chaingrok.libra4j.types.UInt16;
 import com.chaingrok.libra4j.types.UInt32;
 import com.chaingrok.libra4j.types.UInt64;
@@ -52,6 +53,13 @@ public class LCSProcessor {
 		return bis;
 	}
 	
+	public LCSProcessor encode(byte[] bytes) {
+		if (bytes != null) {
+			write(bytes);
+		}
+		return this;
+	}
+	
 	public LCSProcessor encode(Boolean b) {
 		if (b != null) {
 			if (b) {
@@ -83,18 +91,18 @@ public class LCSProcessor {
 	
 	public  LCSProcessor encode(String string) {
 		if (string != null) {
+			UInt32 length = new UInt32(string.getBytes().length);
+			encode(length);
 			write(string.getBytes());
 		}
 		return this;
 	}
 	
-	public String decodeString(UInt32 length) {
-		return decodeString((int)(long)length.getAsLong());
-	}
-	
-	public String decodeString(int length) {
+	public String decodeString() {
 		String result = null;
 		if (bis != null) {
+			UInt32 uint32Length = decodeUInt32();
+			int length = (int)(long)uint32Length.getAsLong();
 			byte[] bytes = new byte[length];
 			int count = bis.read(bytes,0,length);
 			if (count == length) {
@@ -117,7 +125,7 @@ public class LCSProcessor {
 		return this;
 	}
 	
-	public UInt64 decodeUint64() {
+	public UInt64 decodeUInt64() {
 		UInt64 result = null;
 		if (bis !=null) {
 			byte[] bytes = new byte[UInt64.BYTE_LENGTH];
@@ -131,14 +139,14 @@ public class LCSProcessor {
 		return result;
 	}
 	
-	public LCSProcessor encode (UInt32 uint32) {
+	public LCSProcessor encode(UInt32 uint32) {
 		if (uint32 != null) {
 			write(Utils.reverseByteOrder(uint32.getBytes()));
 		}
 		return this;
 	}
 	
-	public UInt32 decodeUint32() {
+	public UInt32 decodeUInt32() {
 		UInt32 result = null;
 		if (bis !=null) {
 			byte[] bytes = new byte[UInt32.BYTE_LENGTH];
@@ -159,7 +167,7 @@ public class LCSProcessor {
 		return this;
 	}
 	
-	public UInt16 decodeUint16() {
+	public UInt16 decodeUInt16() {
 		UInt16 result = null;
 		if (bis !=null) {
 			byte[] bytes = new byte[UInt16.BYTE_LENGTH];
@@ -180,7 +188,7 @@ public class LCSProcessor {
 		return this;
 	}
 	
-	public UInt8 decodeUint8() {
+	public UInt8 decodeUInt8() {
 		UInt8 result = null;
 		if (bis !=null) {
 			byte[] bytes = new byte[UInt8.BYTE_LENGTH];
@@ -189,6 +197,33 @@ public class LCSProcessor {
 				result = new UInt8(bytes);
 			} else {
 				new Libra4jError(Type.INVALID_LENGTH,"byte buffer read did not return proper number of bytes: " + count + " <> " + UInt8.BYTE_LENGTH);
+			}
+		}
+		return result;
+	}
+	
+	public LCSProcessor encode(AccountAddress accountAddress) {
+		if (accountAddress != null) {
+			UInt32 length = new UInt32(AccountAddress.BYTE_LENGTH);
+			encode(length);
+			write(accountAddress.getBytes());
+		}
+		return this;
+	}
+	
+	public AccountAddress decodeAccountAddress() {
+		AccountAddress result = null;
+		if (bis !=null) {
+			UInt32 length = decodeUInt32();
+			if (length.getAsLong() != AccountAddress.BYTE_LENGTH) {
+				new Libra4jError(Type.INVALID_LENGTH,"encoded length of AccountAddress is invalid: " + length.getAsLong() + " <> " + AccountAddress.BYTE_LENGTH);
+			}
+			byte[] bytes = new byte[AccountAddress.BYTE_LENGTH];
+			int count = bis.read(bytes, 0,AccountAddress.BYTE_LENGTH);
+			if (count == AccountAddress.BYTE_LENGTH) {
+				result = new AccountAddress(bytes);
+			} else {
+				new Libra4jError(Type.INVALID_LENGTH,"byte buffer read did not return proper number of bytes: " + count + " <> " + AccountAddress.BYTE_LENGTH);
 			}
 		}
 		return result;

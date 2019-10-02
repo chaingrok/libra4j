@@ -16,6 +16,7 @@ import com.chaingrok.libra4j.misc.Libra4jLog;
 import com.chaingrok.libra4j.misc.Libra4jLog.Type;
 import com.chaingrok.libra4j.misc.Utils;
 import com.chaingrok.libra4j.test.TestClass;
+import com.chaingrok.libra4j.types.AccountAddress;
 import com.chaingrok.libra4j.types.UInt16;
 import com.chaingrok.libra4j.types.UInt32;
 import com.chaingrok.libra4j.types.UInt64;
@@ -25,7 +26,7 @@ import com.chaingrok.libra4j.types.UInt8;
 public class TestLCSProcessor extends TestClass {
 	
 	@Test
-	public void tes001BooleanLCSEncondingDecoding() {
+	public void tes001BooleanLCSEncodingDecoding() {
 		boolean b = false;
 		byte[] bytes = LCSProcessor.buildEncoder()
 				.encode(b)
@@ -55,7 +56,7 @@ public class TestLCSProcessor extends TestClass {
 	}
 	
 	@Test
-	public void tes002StringLCSEncondingDecoding() {
+	public void tes002StringLCSEncodingDecoding() {
 		String string = null;
 		byte[] bytes = LCSProcessor.buildEncoder()
 				.encode(string)
@@ -66,50 +67,21 @@ public class TestLCSProcessor extends TestClass {
 		bytes = LCSProcessor.buildEncoder()
 				.encode(string)
 				.build();
-		assertArrayEquals(string.getBytes(),bytes);
 		LCSProcessor decoder = LCSProcessor.buildDecoder(bytes);
-		String result = decoder.decodeString(string.length());
-		assertEquals(string,result);
-		// string + length
-		string = "Hello, world";
-		UInt32 length = new UInt32(string.getBytes().length);
-		bytes = LCSProcessor.buildEncoder()
-				.encode(new UInt32(string.length()))
-				.encode(string)
-				.build();
-		assertEquals(string.getBytes().length + UInt32.BYTE_LENGTH,bytes.length);
-		decoder = LCSProcessor.buildDecoder(bytes);
-		UInt32 length2 = decoder.decodeUint32();
-		assertEquals(length,length2);
-		result = decoder.decodeString(length2);
-		assertEquals(string,result);
-		//UTF string
-		string = "ሰማይ አይታረስ ንጉሥ አይከሰስ።"; //based on test vectors supplied by LCS page above
-		length = new UInt32(string.getBytes().length);
-		assertEquals(20,string.length());
-		assertEquals(54,string.getBytes().length);
-		bytes = LCSProcessor.buildEncoder()
-				.encode(string)
-				.build();
-		assertArrayEquals(string.getBytes(),bytes);
-		decoder = LCSProcessor.buildDecoder(bytes);
-		result = decoder.decodeString(string.getBytes().length);
+		String result = decoder.decodeString();
 		assertEquals(string,result);
 		// string UTF-8 + length
 		string = "ሰማይ አይታረስ ንጉሥ አይከሰስ።";
 		assertEquals(20,string.length());
 		assertEquals(54,string.getBytes().length);
 		bytes = LCSProcessor.buildEncoder()
-				.encode(new UInt32(string.getBytes().length))
 				.encode(string)
 				.build();
 		assertEquals(string.getBytes().length + UInt32.BYTE_LENGTH,bytes.length);
 		byte[] testVector = Utils.hexStringToByteArray("36000000E188B0E1889BE18BAD20E18AA0E18BADE189B3E188A8E188B520E18A95E18C89E188A520E18AA0E18BADE18AA8E188B0E188B5E18DA2");
 		assertArrayEquals(testVector,bytes);
 		decoder = LCSProcessor.buildDecoder(bytes);
-		length2 = decoder.decodeUint32();
-		assertEquals(length,length2);
-		result = decoder.decodeString(length2);
+		result = decoder.decodeString();
 		assertEquals(string,result);
 	}
 	
@@ -146,35 +118,35 @@ public class TestLCSProcessor extends TestClass {
 	    assertNotNull(decoder.getBis());
 	    assertEquals(0,decoder.getBis().available());
 	    assertEquals(0,Libra4jLog.getLogs().size());
-		decoder.decodeUint8();
+		decoder.decodeUInt8();
 		assertEquals(1,Libra4jLog.getLogs().size());
 		assertEquals(Type.INVALID_LENGTH,Libra4jLog.getLogs().get(0).getType());
 		Libra4jLog.purgeLogs();
 		//
 		decoder = LCSProcessor.buildDecoder(Utils.hexStringToByteArray("00"));
 		assertEquals(0,Libra4jLog.getLogs().size());
-		decoder.decodeUint16();
+		decoder.decodeUInt16();
 		assertEquals(1,Libra4jLog.getLogs().size());
 		assertEquals(Type.INVALID_LENGTH,Libra4jLog.getLogs().get(0).getType());
 		Libra4jLog.purgeLogs();
 		//
 		decoder = LCSProcessor.buildDecoder(Utils.hexStringToByteArray("001122"));
 		assertEquals(0,Libra4jLog.getLogs().size());
-		decoder.decodeUint32();
+		decoder.decodeUInt32();
 		assertEquals(1,Libra4jLog.getLogs().size());
 		assertEquals(Type.INVALID_LENGTH,Libra4jLog.getLogs().get(0).getType());
 		Libra4jLog.purgeLogs();
 		//
 		decoder = LCSProcessor.buildDecoder(Utils.hexStringToByteArray("00112233445566"));
 		assertEquals(0,Libra4jLog.getLogs().size());
-		decoder.decodeUint64();
+		decoder.decodeUInt64();
 		assertEquals(1,Libra4jLog.getLogs().size());
 		assertEquals(Type.INVALID_LENGTH,Libra4jLog.getLogs().get(0).getType());
 		Libra4jLog.purgeLogs();
 	}
 	
 	@Test
-	public void tes004UInt8LCSEncondingDecoding() {
+	public void tes004UInt8LCSEncodingDecoding() {
 		Long longValue = 0L;
 		UInt8 uint8 = new UInt8(longValue);
 		byte[] bytes = LCSProcessor.buildEncoder()
@@ -184,7 +156,7 @@ public class TestLCSProcessor extends TestClass {
 		byte[] byteValue = {0x00};
 		assertArrayEquals(byteValue,bytes);
 		LCSProcessor decoder = LCSProcessor.buildDecoder(bytes);
-		UInt8 result = decoder.decodeUint8();
+		UInt8 result = decoder.decodeUInt8();
 		assertEquals(uint8,result);
 		assertEquals(longValue,result.getAsLong());
 		//
@@ -197,7 +169,7 @@ public class TestLCSProcessor extends TestClass {
 		byte[] byteValue2 = {0x01};
 		assertArrayEquals(byteValue2,bytes);
 		decoder = LCSProcessor.buildDecoder(bytes);
-		result = decoder.decodeUint8();
+		result = decoder.decodeUInt8();
 		assertEquals(uint8,result);
 		assertEquals(longValue,result.getAsLong());
 		//
@@ -210,7 +182,7 @@ public class TestLCSProcessor extends TestClass {
 		byte[] byteValue3 = {0x20};
 		assertArrayEquals(byteValue3,bytes);
 		decoder = LCSProcessor.buildDecoder(bytes);
-		result = decoder.decodeUint8();
+		result = decoder.decodeUInt8();
 		assertEquals(uint8,result);
 		assertEquals(longValue,result.getAsLong());
 		//
@@ -223,13 +195,13 @@ public class TestLCSProcessor extends TestClass {
 		byte[] byteValue4 = {(byte)0xff};
 		assertArrayEquals(byteValue4,bytes);
 		decoder = LCSProcessor.buildDecoder(bytes);
-		result = decoder.decodeUint8();
+		result = decoder.decodeUInt8();
 		assertEquals(uint8,result);
 		assertEquals(longValue,result.getAsLong());
 	}
 	
 	@Test
-	public void tes005UInt16LCSEncondingDecoding() {
+	public void tes005UInt16LCSEncodingDecoding() {
 		Long longValue = 0L;
 		UInt16 uint16 = new UInt16(longValue);
 		byte[] bytes = LCSProcessor.buildEncoder()
@@ -239,7 +211,7 @@ public class TestLCSProcessor extends TestClass {
 		byte[] byteValue = {0x00,0x00};
 		assertArrayEquals(byteValue,bytes);
 		LCSProcessor decoder = LCSProcessor.buildDecoder(bytes);
-		UInt16 result = decoder.decodeUint16();
+		UInt16 result = decoder.decodeUInt16();
 		assertEquals(uint16,result);
 		assertEquals(longValue,result.getAsLong());
 		//
@@ -252,7 +224,7 @@ public class TestLCSProcessor extends TestClass {
 		byte[] byteValue2 = {0x01,0x00};
 		assertArrayEquals(byteValue2,bytes);
 		decoder = LCSProcessor.buildDecoder(bytes);
-		result = decoder.decodeUint16();
+		result = decoder.decodeUInt16();
 		assertEquals(uint16,result);
 		assertEquals(longValue,result.getAsLong());
 		//
@@ -265,7 +237,7 @@ public class TestLCSProcessor extends TestClass {
 		byte[] byteValue3 = {0x20,0x00};
 		assertArrayEquals(byteValue3,bytes);
 		decoder = LCSProcessor.buildDecoder(bytes);
-		result = decoder.decodeUint16();
+		result = decoder.decodeUInt16();
 		assertEquals(uint16,result);
 		assertEquals(longValue,result.getAsLong());
 		//
@@ -278,7 +250,7 @@ public class TestLCSProcessor extends TestClass {
 		byte[] byteValue4 = {(byte)0xff,0x00};
 		assertArrayEquals(byteValue4,bytes);
 		decoder = LCSProcessor.buildDecoder(bytes);
-		result = decoder.decodeUint16();
+		result = decoder.decodeUInt16();
 		assertEquals(uint16,result);
 		assertEquals(longValue,result.getAsLong());
 		//
@@ -291,7 +263,7 @@ public class TestLCSProcessor extends TestClass {
 		byte[] byteValue5 = {(byte)0x34,(byte)0x12};
 		assertArrayEquals(byteValue5,bytes);
 		decoder = LCSProcessor.buildDecoder(bytes);
-		result = decoder.decodeUint16();
+		result = decoder.decodeUInt16();
 		assertEquals(uint16,result);
 		assertEquals(longValue,result.getAsLong());
 		//
@@ -304,13 +276,13 @@ public class TestLCSProcessor extends TestClass {
 		byte[] byteValue6 = {(byte)0xff,(byte)0xff};
 		assertArrayEquals(byteValue6,bytes);
 		decoder = LCSProcessor.buildDecoder(bytes);
-		result = decoder.decodeUint16();
+		result = decoder.decodeUInt16();
 		assertEquals(uint16,result);
 		assertEquals(longValue,result.getAsLong());
 	}
 	
 	@Test
-	public void tes006UInt32LCSEncondingDecoding() {
+	public void tes006UInt32LCSEncodingDecoding() {
 		Long longValue = 0L;
 		UInt32 uint32 = new UInt32(longValue);
 		byte[] bytes = LCSProcessor.buildEncoder()
@@ -320,7 +292,7 @@ public class TestLCSProcessor extends TestClass {
 		byte[] byteValue = {0x00,0x00,0x00,0x00};
 		assertArrayEquals(byteValue,bytes);
 		LCSProcessor decoder = LCSProcessor.buildDecoder(bytes);
-		UInt32 result = decoder.decodeUint32();
+		UInt32 result = decoder.decodeUInt32();
 		assertEquals(uint32,result);
 		assertEquals(longValue,result.getAsLong());
 		//
@@ -333,7 +305,7 @@ public class TestLCSProcessor extends TestClass {
 		byte[] byteValue2 = {0x01,0x00,0x00,0x00};
 		assertArrayEquals(byteValue2,bytes);
 		decoder = LCSProcessor.buildDecoder(bytes);
-		result = decoder.decodeUint32();
+		result = decoder.decodeUInt32();
 		assertEquals(uint32,result);
 		assertEquals(longValue,result.getAsLong());
 		//
@@ -346,7 +318,7 @@ public class TestLCSProcessor extends TestClass {
 		byte[] byteValue3 = {0x20,0x00,0x00,0x00};
 		assertArrayEquals(byteValue3,bytes);
 		decoder = LCSProcessor.buildDecoder(bytes);
-		result = decoder.decodeUint32();
+		result = decoder.decodeUInt32();
 		assertEquals(uint32,result);
 		assertEquals(longValue,result.getAsLong());
 		//
@@ -359,7 +331,7 @@ public class TestLCSProcessor extends TestClass {
 		byte[] byteValue4 = {(byte)0xff,0x00,0x00,0x00};
 		assertArrayEquals(byteValue4,bytes);
 		decoder = LCSProcessor.buildDecoder(bytes);
-		result = decoder.decodeUint32();
+		result = decoder.decodeUInt32();
 		assertEquals(uint32,result);
 		assertEquals(longValue,result.getAsLong());
 		//
@@ -372,7 +344,7 @@ public class TestLCSProcessor extends TestClass {
 		byte[] byteValue5 = {(byte)0x34,(byte)0x12,0x00,0x00};
 		assertArrayEquals(byteValue5,bytes);
 		decoder = LCSProcessor.buildDecoder(bytes);
-		result = decoder.decodeUint32();
+		result = decoder.decodeUInt32();
 		assertEquals(uint32,result);
 		assertEquals(longValue,result.getAsLong());
 		//
@@ -385,7 +357,7 @@ public class TestLCSProcessor extends TestClass {
 		byte[] byteValue6 = {(byte)0xff,(byte)0xff,0x00,0x00};
 		assertArrayEquals(byteValue6,bytes);
 		decoder = LCSProcessor.buildDecoder(bytes);
-		result = decoder.decodeUint32();
+		result = decoder.decodeUInt32();
 		assertEquals(uint32,result);
 		assertEquals(longValue,result.getAsLong());
 		//
@@ -398,7 +370,7 @@ public class TestLCSProcessor extends TestClass {
 		byte[] byteValue7 = {(byte)0xca,(byte)0xfe,(byte)0xd0,(byte)0x0d};
 		assertArrayEquals(byteValue7,bytes);
 		decoder = LCSProcessor.buildDecoder(bytes);
-		result = decoder.decodeUint32();
+		result = decoder.decodeUInt32();
 		assertEquals(uint32,result);
 		assertEquals(longValue,result.getAsLong());
 		//
@@ -411,7 +383,7 @@ public class TestLCSProcessor extends TestClass {
 		byte[] byteValue8 = {(byte)0x78,(byte)0x56,(byte)0x34,(byte)0x12};
 		assertArrayEquals(byteValue8,bytes);
 		decoder = LCSProcessor.buildDecoder(bytes);
-		result = decoder.decodeUint32();
+		result = decoder.decodeUInt32();
 		assertEquals(uint32,result);
 		assertEquals(longValue,result.getAsLong());
 		//
@@ -424,13 +396,13 @@ public class TestLCSProcessor extends TestClass {
 		byte[] byteValue9 = {(byte)0xff,(byte)0xff,(byte)0xff,(byte)0xff};
 		assertArrayEquals(byteValue9,bytes);
 		decoder = LCSProcessor.buildDecoder(bytes);
-		result = decoder.decodeUint32();
+		result = decoder.decodeUInt32();
 		assertEquals(uint32,result);
 		assertEquals(longValue,result.getAsLong());
 	}
 	
 	@Test
-	public void tes007UInt64LCSEncondingDecoding() {
+	public void tes007UInt64LCSEncodingDecoding() {
 		Long longValue = 0L;
 		UInt64 uint64 = new UInt64(longValue);
 		byte[] bytes = LCSProcessor.buildEncoder()
@@ -440,7 +412,7 @@ public class TestLCSProcessor extends TestClass {
 		byte[] byteValue = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
 		assertArrayEquals(byteValue,bytes);
 		LCSProcessor decoder = LCSProcessor.buildDecoder(bytes);
-		UInt64 result = decoder.decodeUint64();
+		UInt64 result = decoder.decodeUInt64();
 		assertEquals(uint64,result);
 		assertEquals(longValue,result.getAsLong());
 		//
@@ -453,7 +425,7 @@ public class TestLCSProcessor extends TestClass {
 		byte[] byteValue2 = {0x01,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
 		assertArrayEquals(byteValue2,bytes);
 		decoder = LCSProcessor.buildDecoder(bytes);
-		result = decoder.decodeUint64();
+		result = decoder.decodeUInt64();
 		assertEquals(uint64,result);
 		assertEquals(longValue,result.getAsLong());
 		//
@@ -466,7 +438,7 @@ public class TestLCSProcessor extends TestClass {
 		byte[] byteValue3 = {0x20,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
 		assertArrayEquals(byteValue3,bytes);
 		decoder = LCSProcessor.buildDecoder(bytes);
-		result = decoder.decodeUint64();
+		result = decoder.decodeUInt64();
 		assertEquals(uint64,result);
 		assertEquals(longValue,result.getAsLong());
 		//
@@ -479,7 +451,7 @@ public class TestLCSProcessor extends TestClass {
 		byte[] byteValue4 = {(byte)0xff,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
 		assertArrayEquals(byteValue4,bytes);
 		decoder = LCSProcessor.buildDecoder(bytes);
-		result = decoder.decodeUint64();
+		result = decoder.decodeUInt64();
 		assertEquals(uint64,result);
 		assertEquals(longValue,result.getAsLong());
 		//
@@ -492,7 +464,7 @@ public class TestLCSProcessor extends TestClass {
 		byte[] byteValue5 = {(byte)0x34,(byte)0x12,0x00,0x00,0x00,0x00,0x00,0x00};
 		assertArrayEquals(byteValue5,bytes);
 		decoder = LCSProcessor.buildDecoder(bytes);
-		result = decoder.decodeUint64();
+		result = decoder.decodeUInt64();
 		assertEquals(uint64,result);
 		assertEquals(longValue,result.getAsLong());
 		//
@@ -505,7 +477,7 @@ public class TestLCSProcessor extends TestClass {
 		byte[] byteValue6 = {(byte)0xff,(byte)0xff,0x00,0x00,0x00,0x00,0x00,0x00};
 		assertArrayEquals(byteValue6,bytes);
 		decoder = LCSProcessor.buildDecoder(bytes);
-		result = decoder.decodeUint64();
+		result = decoder.decodeUInt64();
 		assertEquals(uint64,result);
 		assertEquals(longValue,result.getAsLong());
 		//
@@ -518,7 +490,7 @@ public class TestLCSProcessor extends TestClass {
 		byte[] byteValue7 = {(byte)0xca,(byte)0xfe,(byte)0xd0,(byte)0x0d,0x00,0x00,0x00,0x00};
 		assertArrayEquals(byteValue7,bytes);
 		decoder = LCSProcessor.buildDecoder(bytes);
-		result = decoder.decodeUint64();
+		result = decoder.decodeUInt64();
 		assertEquals(uint64,result);
 		assertEquals(longValue,result.getAsLong());
 		//
@@ -531,7 +503,7 @@ public class TestLCSProcessor extends TestClass {
 		byte[] byteValue8 = {(byte)0x78,(byte)0x56,(byte)0x34,(byte)0x12,0x00,0x00,0x00,0x00};
 		assertArrayEquals(byteValue8,bytes);
 		decoder = LCSProcessor.buildDecoder(bytes);
-		result = decoder.decodeUint64();
+		result = decoder.decodeUInt64();
 		assertEquals(uint64,result);
 		assertEquals(longValue,result.getAsLong());
 		//
@@ -544,7 +516,7 @@ public class TestLCSProcessor extends TestClass {
 		byte[] byteValue9 = {(byte)0xff,(byte)0xff,(byte)0xff,(byte)0xff,0x00,0x00,0x00,0x00};
 		assertArrayEquals(byteValue9,bytes);
 		decoder = LCSProcessor.buildDecoder(bytes);
-		result = decoder.decodeUint64();
+		result = decoder.decodeUInt64();
 		assertEquals(uint64,result);
 		assertEquals(longValue,result.getAsLong());
 		//
@@ -557,7 +529,7 @@ public class TestLCSProcessor extends TestClass {
 		byte[] byteValue10 = {(byte)0x00,(byte)0xef,(byte)0xcd,(byte)0xab,(byte)0x78,(byte)0x56,(byte)0x34,(byte)0x12};
 		assertArrayEquals(byteValue10,bytes);
 		decoder = LCSProcessor.buildDecoder(bytes);
-		result = decoder.decodeUint64();
+		result = decoder.decodeUInt64();
 		assertEquals(uint64,result);
 		assertEquals(longValue,result.getAsLong());
 		//special case with UInt64.MAX_VALUE
@@ -569,14 +541,50 @@ public class TestLCSProcessor extends TestClass {
 		byte[] byteValue11 = {(byte)0xff,(byte)0xff,(byte)0xff,(byte)0xff,(byte)0xff,(byte)0xff,(byte)0xff,(byte)0xff};
 		assertArrayEquals(byteValue11,bytes);
 		decoder = LCSProcessor.buildDecoder(bytes);
-		result = decoder.decodeUint64();
+		result = decoder.decodeUInt64();
 		assertEquals(uint64,result);
+	}
+	
+	@Test
+	public void tes00AccountAddressLCSEncodingDecoding() {
+		String hex = "CA820BF9305EB97D0D784F71B3955457FBF6911F5300CEAA5D7E8621529EAE19";
+		AccountAddress accountAddress = new AccountAddress(hex);
+		byte[] bytes = LCSProcessor.buildEncoder()
+			.encode(accountAddress)
+			.build();
+		assertEquals(UInt32.BYTE_LENGTH + AccountAddress.BYTE_LENGTH,bytes.length);
+		LCSProcessor decoder = LCSProcessor.buildDecoder(bytes);
+		AccountAddress result = decoder.decodeAccountAddress();
+		assertEquals(accountAddress,result);
+		//
+		hex = "2C25991785343B23AE073A50E5FD809A2CD867526B3C1DB2B0BF5D1924C693ED";
+		accountAddress = new AccountAddress(hex);
+		bytes = LCSProcessor.buildEncoder()
+			.encode(accountAddress)
+			.build();
+		assertEquals(UInt32.BYTE_LENGTH + AccountAddress.BYTE_LENGTH,bytes.length);
+		decoder = LCSProcessor.buildDecoder(bytes);
+		result = decoder.decodeAccountAddress();
+		assertEquals(accountAddress,result);
+		//
+		hex = "2C25991785343B23AE073A50E5FD809A2CD867526B3C1DB2B0BF5D1924C693ED";
+		accountAddress = new AccountAddress(hex);
+		bytes = LCSProcessor.buildEncoder()
+				.encode(new UInt32(AccountAddress.BYTE_LENGTH + 10))
+				.encode(accountAddress.getBytes())
+				.build();
+		assertEquals(UInt32.BYTE_LENGTH + AccountAddress.BYTE_LENGTH,bytes.length);
+		decoder = LCSProcessor.buildDecoder(bytes);
+		assertFalse(Libra4jLog.hasLogs());
+		result = decoder.decodeAccountAddress();
+		assertEquals(1,Libra4jLog.getLogs().size());
+		assertEquals(Type.INVALID_LENGTH,Libra4jLog.getLogs().get(0).getType());
+		Libra4jLog.purgeLogs();
 	}
 	
 
 	public void testVectors() {
-		String s1 ="20000000CA820BF9305EB97D0D784F71B3955457FBF6911F5300CEAA5D7E8621529EAE19"; //address + length
-		String s3 = "{ADDRESS: 2c25991785343b23ae073a50e5fd809a2cd867526b3c1db2b0bf5d1924c693ed}" + "[01000000200000002C25991785343B23AE073A50E5FD809A2CD867526B3C1DB2B0BF5D1924C693ED]";
+		
 		String s5 = "{\n" + 
 				"  code: \"move\",\n" + 
 				"  args: [{STRING: CAFE D00D}, {STRING: cafe d00d}],\n" + 
