@@ -188,7 +188,8 @@ public class TestUInt64 extends TestClass {
 		uint_2 = new UInt64(value + 1L);
 		assertNotEquals(uint_1,uint_2);
 		//
-		assertFalse(uint_1.equals(null));
+		Object object = null;
+		assertFalse(uint_1.equals(object)); //test the overriden equals against null value.
 		//
 		uint_1.equals(new Object());
 		assertEquals(1,Libra4jLog.getLogs().size());
