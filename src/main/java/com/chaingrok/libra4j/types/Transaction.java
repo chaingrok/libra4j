@@ -1,8 +1,11 @@
 package com.chaingrok.libra4j.types;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.security.PublicKey;
 import java.util.ArrayList;
 
+import com.chaingrok.libra4j.misc.LCSInterface;
 import com.chaingrok.libra4j.misc.Libra4jWarning;
 
 public class Transaction {
@@ -260,6 +263,44 @@ public class Transaction {
 			}
 			return result;
 		}
+	}
+	
+	public class RawTransaction implements LCSInterface<RawTransaction> {
+
+		@Override
+		public ByteArrayOutputStream serializeToLCS(RawTransaction object) {
+			return null;
+		}
+
+		@Override
+		public ByteArrayOutputStream serializeToLCS(RawTransaction object, ByteArrayOutputStream bos) {
+			return null;
+		}
+
+		@Override
+		public RawTransaction deserializeFromLCS(ByteArrayInputStream bis, UInt32 length) {
+			return null;
+		}
+
+	}
+	
+	public class SignedTransaction implements LCSInterface<SignedTransaction> {
+
+		@Override
+		public ByteArrayOutputStream serializeToLCS(SignedTransaction object) {
+			return null;
+		}
+
+		@Override
+		public ByteArrayOutputStream serializeToLCS(SignedTransaction object, ByteArrayOutputStream bos) {
+			return null;
+		}
+
+		@Override
+		public SignedTransaction deserializeFromLCS(ByteArrayInputStream bis, UInt32 length) {
+			return null;
+		}
+
 	}
 	
 }
