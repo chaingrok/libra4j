@@ -117,7 +117,7 @@
 				<configuration>
                     <excludes>
                         <exclude>org/libra/grpc/**/*</exclude>
-                        <exclude>com/chaingrok/libra4j/misc/ProtoGenerator.java</exclude>
+                        <exclude>src/main/com/chaingrok/libra4j/misc/ProtoGenerator.java</exclude>
                     </excludes>
                 </configuration>
 				<executions>
