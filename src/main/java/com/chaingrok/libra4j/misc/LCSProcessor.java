@@ -13,27 +13,59 @@ import com.chaingrok.libra4j.types.UInt8;
 
 //source: https://github.com/libra/libra/tree/master/common/canonical_serialization
 
-public class LCSEncoder {
+public class LCSProcessor {
 	
-	public static ByteArrayOutputStream encodeBoolean(Boolean b) {
-		return encodeBoolean(b,null);
+	private boolean bosWritten = false;
+	private ByteArrayOutputStream bos = null;
+	private ByteArrayInputStream bis = null;
+	
+	private LCSProcessor() {
+		this.bos = new ByteArrayOutputStream();
 	}
 	
-	public static ByteArrayOutputStream encodeBoolean(Boolean b,ByteArrayOutputStream bos) {
-		if (bos == null) {
-			bos = new ByteArrayOutputStream();
+	private LCSProcessor(byte[] bytes) {
+		this.bis = new ByteArrayInputStream(bytes);
+	}
+	
+	public static LCSProcessor buildEncoder() {
+		return new LCSProcessor();
+	}
+	
+	public static LCSProcessor buildDecoder(byte[] bytes) {
+		return new LCSProcessor(bytes);
+	}
+	
+	public byte[] build() {
+		byte[] result = null;
+		if ((bos != null)
+				&& (bosWritten == true)) {
+			result = bos.toByteArray();
 		}
-		if (b != null) {
-			if (b == true) {
-				bos.write((byte)0x01);
-			} else {
-				bos.write((byte)0x00);
-			}
-		}
+		return result;
+	}
+	
+	public ByteArrayOutputStream getBos() {
 		return bos;
 	}
 	
-	public static Boolean decodeBoolean(ByteArrayInputStream bis) {
+	public ByteArrayInputStream getBis() {
+		return bis;
+	}
+	
+	public LCSProcessor encode(Boolean b) {
+		if (b != null) {
+			if (b == true) {
+				byte[] bytes = {0x01};
+				write(bytes);
+			} else {
+				byte[] bytes = {0x00};
+				write(bytes);
+			}
+		}
+		return this;
+	}
+	
+	public Boolean decodeBoolean() {
 		Boolean result = null;
 		if ((bis != null) 
 				&& (bis.available() >= 1)){
@@ -49,30 +81,18 @@ public class LCSEncoder {
 		return result;
 	}
 	
-	public static ByteArrayOutputStream encodeString(String string) {
-		return encodeString(string,null);
-	}
-	
-	public static ByteArrayOutputStream encodeString(String string,ByteArrayOutputStream bos) {
-		if (bos == null) {
-			bos = new ByteArrayOutputStream();
-		}
+	public  LCSProcessor encode(String string) {
 		if (string != null) {
-			byte[] bytes = string.getBytes();
-			try {
-				bos.write(bytes);
-			} catch (IOException e) {
-				new Libra4jError(Type.JAVA_ERROR,e);
-			}
+			write(string.getBytes());
 		}
-		return bos;
+		return this;
 	}
 	
-	public static String decodeString(ByteArrayInputStream bis, UInt32 length) {
-		return decodeString(bis,(int)(long)length.getAsLong());
+	public String decodeString(UInt32 length) {
+		return decodeString((int)(long)length.getAsLong());
 	}
 	
-	public static String decodeString(ByteArrayInputStream bis, int length) {
+	public String decodeString(int length) {
 		String result = null;
 		if (bis != null) {
 			byte[] bytes = new byte[length];
@@ -90,25 +110,14 @@ public class LCSEncoder {
 		return result;
 	}
 	
-	public static ByteArrayOutputStream encodeUInt64(UInt64 uint64) {
-		return encodeUInt64(uint64,null);
-	}
-	
-	public static ByteArrayOutputStream encodeUInt64(UInt64 uint64,ByteArrayOutputStream bos) {
-		if (bos == null) {
-			bos = new ByteArrayOutputStream();
-		}
+	public LCSProcessor encode(UInt64 uint64) {
 		if (uint64 != null) {
-			try {
-				bos.write(Utils.reverseByteOrder(uint64.getBytes()));
-			} catch (IOException e) {
-				new Libra4jError(Type.JAVA_ERROR,e);
-			}	
+			write(Utils.reverseByteOrder(uint64.getBytes()));
 		}
-		return bos;
+		return this;
 	}
 	
-	public static UInt64 decodeUint64(ByteArrayInputStream bis) {
+	public UInt64 decodeUint64() {
 		UInt64 result = null;
 		if (bis !=null) {
 			byte[] bytes = new byte[UInt64.BYTE_LENGTH];
@@ -122,27 +131,14 @@ public class LCSEncoder {
 		return result;
 	}
 	
-	
-	
-	public static ByteArrayOutputStream encodeUInt32(UInt32 uint32) {
-		return encodeUInt32(uint32,null);
-	}
-	
-	public static ByteArrayOutputStream encodeUInt32 (UInt32 uint32,ByteArrayOutputStream bos) {
-		if (bos == null) {
-			bos = new ByteArrayOutputStream();
-		}
+	public LCSProcessor encode (UInt32 uint32) {
 		if (uint32 != null) {
-			try {
-				bos.write(Utils.reverseByteOrder(uint32.getBytes()));
-			} catch (IOException e) {
-				new Libra4jError(Type.JAVA_ERROR,e);
-			}	
+			write(Utils.reverseByteOrder(uint32.getBytes()));
 		}
-		return bos;
+		return this;
 	}
 	
-	public static UInt32 decodeUint32(ByteArrayInputStream bis) {
+	public UInt32 decodeUint32() {
 		UInt32 result = null;
 		if (bis !=null) {
 			byte[] bytes = new byte[UInt32.BYTE_LENGTH];
@@ -156,25 +152,14 @@ public class LCSEncoder {
 		return result;
 	}
 	
-	public static ByteArrayOutputStream encodeUInt16(UInt16 uint16) {
-		return encodeUInt16(uint16,null);
-	}
-	
-	public static ByteArrayOutputStream encodeUInt16 (UInt16 uint16,ByteArrayOutputStream bos) {
-		if (bos == null) {
-			bos = new ByteArrayOutputStream();
-		}
+	public LCSProcessor encode(UInt16 uint16) {
 		if (uint16 != null) {
-			try {
-				bos.write(Utils.reverseByteOrder(uint16.getBytes()));
-			} catch (IOException e) {
-				new Libra4jError(Type.JAVA_ERROR,e);
-			}	
+			write(Utils.reverseByteOrder(uint16.getBytes()));
 		}
-		return bos;
+		return this;
 	}
 	
-	public static UInt16 decodeUint16(ByteArrayInputStream bis) {
+	public UInt16 decodeUint16() {
 		UInt16 result = null;
 		if (bis !=null) {
 			byte[] bytes = new byte[UInt16.BYTE_LENGTH];
@@ -187,26 +172,15 @@ public class LCSEncoder {
 		}
 		return result;
 	}
-	
-	public static ByteArrayOutputStream encodeUInt8(UInt8 uint8) {
-		return encodeUInt8(uint8,null);
-	}
-	
-	public static ByteArrayOutputStream encodeUInt8 (UInt8 uint8,ByteArrayOutputStream bos) {
-		if (bos == null) {
-			bos = new ByteArrayOutputStream();
-		}
+
+	public LCSProcessor encode(UInt8 uint8) {
 		if (uint8 != null) {
-			try {
-				bos.write(uint8.getBytes());
-			} catch (IOException e) {
-				new Libra4jError(Type.JAVA_ERROR,e);
-			}	
+			write(uint8.getBytes());
 		}
-		return bos;
+		return this;
 	}
 	
-	public static UInt8 decodeUint8(ByteArrayInputStream bis) {
+	public UInt8 decodeUint8() {
 		UInt8 result = null;
 		if (bis !=null) {
 			byte[] bytes = new byte[UInt8.BYTE_LENGTH];
@@ -219,6 +193,14 @@ public class LCSEncoder {
 		}
 		return result;
 	}
-
-
+	
+	private void write(byte[] bytes) {
+		try {
+			bos.write(bytes);
+		} catch (IOException e) {
+			new Libra4jError(Type.JAVA_ERROR,e);
+		}
+		bosWritten = true;
+	}
+	
 }

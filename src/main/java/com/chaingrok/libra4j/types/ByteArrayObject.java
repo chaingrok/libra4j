@@ -1,11 +1,16 @@
 package com.chaingrok.libra4j.types;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+
+import com.chaingrok.libra4j.misc.LCSInterface;
 import com.chaingrok.libra4j.misc.Libra4jError;
 import com.chaingrok.libra4j.misc.Libra4jLog.Type;
 import com.chaingrok.libra4j.misc.Utils;
 import com.google.protobuf.ByteString;
 
-public abstract class ByteArrayObject {
+public abstract class ByteArrayObject implements LCSInterface<ByteArrayObject> {
 	
 	protected byte[] bytes;
 	
@@ -29,6 +34,41 @@ public abstract class ByteArrayObject {
 		return ByteString.copyFrom(bytes);
 	}
 
+	@Override
+	public final ByteArrayOutputStream serializeToLCS(ByteArrayObject object) {
+		return serializeToLCS(object,null);
+	}
+
+	@Override
+	public final ByteArrayOutputStream serializeToLCS(ByteArrayObject object, ByteArrayOutputStream bos) {
+		if (bos == null) {
+			bos = new ByteArrayOutputStream();
+		}
+		if (bytes != null) {
+			try {
+				bos.write(bytes);
+			} catch (IOException e) {
+				new Libra4jError(Type.JAVA_ERROR,e);
+			}
+		}
+		return bos;
+	}
+
+	@Override
+	public final ByteArrayObject deserializeFromLCS(ByteArrayInputStream bis, UInt32 length) {
+		if (bis != null) {
+			if (length != null) {
+				bis.read(bytes,0,(int)(long)length.getAsLong());
+			} else {
+				new Libra4jError(Type.MISSING_DATA,"length cannot be null");
+			}
+		} else {
+			new Libra4jError(Type.MISSING_DATA,"byte input stream cannot be null");
+		}
+		return null;
+	}
+	
+	
 	@Override
 	public boolean equals(Object object) {
 		boolean result = false;

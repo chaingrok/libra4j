@@ -36,31 +36,4 @@ public class AccountAddress extends ByteArrayObject {
 		}
 		this.bytes = bytes;
 	}
-	
-	/*
-	@Override
-	public boolean equals(Object obj) {
-		boolean result = false;
-		if (obj != null) {
-			if (obj instanceof AccountAddress) {
-				AccountAddress address = (AccountAddress)obj;
-				boolean delta = false;
-				for (int i=0; i< BYTE_LENGTH ; ++i) {
-					if (this.getBytes()[i] != address.getBytes()[i]) {
-						delta = true;
-						break;
-					}
-				}
-				if (delta == false) {
-					result = true;
-				}
-			} else {
-				throw new Libra4jException("account address cannot compare to: " + obj.getClass().getCanonicalName() + " - toString: " + obj.toString());
-			}
-		} else {
-			throw new Libra4jException("equals for account address does not support null value");
-		}
-		return result;
-	}
-	*/	
 }
