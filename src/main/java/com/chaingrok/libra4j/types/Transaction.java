@@ -265,41 +265,11 @@ public class Transaction {
 		}
 	}
 	
-	public class RawTransaction implements LCSInterface<RawTransaction> {
-
-		@Override
-		public ByteArrayOutputStream serializeToLCS(RawTransaction object) {
-			return null;
-		}
-
-		@Override
-		public ByteArrayOutputStream serializeToLCS(RawTransaction object, ByteArrayOutputStream bos) {
-			return null;
-		}
-
-		@Override
-		public RawTransaction deserializeFromLCS(ByteArrayInputStream bis, UInt32 length) {
-			return null;
-		}
+	public class RawTransaction {
 
 	}
 	
-	public class SignedTransaction implements LCSInterface<SignedTransaction> {
-
-		@Override
-		public ByteArrayOutputStream serializeToLCS(SignedTransaction object) {
-			return null;
-		}
-
-		@Override
-		public ByteArrayOutputStream serializeToLCS(SignedTransaction object, ByteArrayOutputStream bos) {
-			return null;
-		}
-
-		@Override
-		public SignedTransaction deserializeFromLCS(ByteArrayInputStream bis, UInt32 length) {
-			return null;
-		}
+	public class SignedTransaction {
 
 	}
 	
