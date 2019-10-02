@@ -4,9 +4,15 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 
 import com.chaingrok.libra4j.misc.Libra4jLog.Type;
+import com.chaingrok.libra4j.types.AccessPath;
 import com.chaingrok.libra4j.types.AccountAddress;
+import com.chaingrok.libra4j.types.Argument;
+import com.chaingrok.libra4j.types.Code;
+import com.chaingrok.libra4j.types.Module;
+import com.chaingrok.libra4j.types.Program;
 import com.chaingrok.libra4j.types.UInt16;
 import com.chaingrok.libra4j.types.UInt32;
 import com.chaingrok.libra4j.types.UInt64;
@@ -227,6 +233,69 @@ public class LCSProcessor {
 			}
 		}
 		return result;
+	}
+	
+	public LCSProcessor encode(AccessPath accessPath) {
+		if (accessPath != null) {
+			UInt32 length = new UInt32(AccountAddress.BYTE_LENGTH);
+			encode(length);
+			//write(accessPath.getBytes());
+		}
+		return this;
+	}
+	
+	public AccessPath decodeAccessPath() {
+		AccessPath result = null;
+		if (bis !=null) {
+			UInt32 length = decodeUInt32();
+			if (length.getAsLong() != AccountAddress.BYTE_LENGTH) {
+				new Libra4jError(Type.INVALID_LENGTH,"encoded length of AccountAddress is invalid: " + length.getAsLong() + " <> " + AccountAddress.BYTE_LENGTH);
+			}
+			byte[] bytes = new byte[AccountAddress.BYTE_LENGTH];
+			int count = bis.read(bytes, 0,AccountAddress.BYTE_LENGTH);
+			if (count == AccountAddress.BYTE_LENGTH) {
+				result = new AccessPath(bytes);
+			} else {
+				new Libra4jError(Type.INVALID_LENGTH,"byte buffer read did not return proper number of bytes: " + count + " <> " + AccountAddress.BYTE_LENGTH);
+			}
+		}
+		return result;
+	}
+	
+	public LCSProcessor encode(Program program) {
+		if (program != null) {
+		}
+		return this;
+	}
+	
+	public LCSProcessor encodeCode(Code code) {
+		if (code != null) {
+		}
+		return this;
+	}
+	
+	public LCSProcessor encodeArgument(Argument argument) {
+		if (argument != null) {
+		}
+		return this;
+	}
+	
+	public LCSProcessor encodeArguments(ArrayList<Argument> arguments) {
+		if (arguments != null) {
+		}
+		return this;
+	}
+	
+	public LCSProcessor encodeModule(Module module) {
+		if (module != null) {
+		}
+		return this;
+	}
+	
+	public LCSProcessor encodeModules(ArrayList<Module> modules) {
+		if (modules != null) {
+		}
+		return this;
 	}
 	
 	private void write(byte[] bytes) {

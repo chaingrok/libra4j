@@ -16,6 +16,7 @@ import com.chaingrok.libra4j.misc.Libra4jLog;
 import com.chaingrok.libra4j.misc.Libra4jLog.Type;
 import com.chaingrok.libra4j.misc.Utils;
 import com.chaingrok.libra4j.test.TestClass;
+import com.chaingrok.libra4j.types.AccessPath;
 import com.chaingrok.libra4j.types.AccountAddress;
 import com.chaingrok.libra4j.types.UInt16;
 import com.chaingrok.libra4j.types.UInt32;
@@ -546,7 +547,7 @@ public class TestLCSProcessor extends TestClass {
 	}
 	
 	@Test
-	public void tes00AccountAddressLCSEncodingDecoding() {
+	public void tes008AccountAddressLCSEncodingDecoding() {
 		String hex = "CA820BF9305EB97D0D784F71B3955457FBF6911F5300CEAA5D7E8621529EAE19";
 		AccountAddress accountAddress = new AccountAddress(hex);
 		byte[] bytes = LCSProcessor.buildEncoder()
@@ -581,6 +582,38 @@ public class TestLCSProcessor extends TestClass {
 		assertEquals(Type.INVALID_LENGTH,Libra4jLog.getLogs().get(0).getType());
 		Libra4jLog.purgeLogs();
 	}
+	
+	/*
+	@Test
+	public void tes009AccessPathLCSEncodingDecoding() {
+		String hex = "200000009A1AD09742D1FFC62E659E9A7797808B206F956F131D07509449C01AD8220AD42100000001217DA6C6B3E19F1825CFB2676DAECCE3BF3DE03CF26647C78DF00B371B25CC97";
+		AccessPath accessPath = new AccessPath(hex);
+		byte[] bytes = LCSProcessor.buildEncoder()
+			.encode(accessPath)
+			.build();
+		assertEquals(Utils.hexStringToByteArray(hex).length,bytes.length);
+		LCSProcessor decoder = LCSProcessor.buildDecoder(bytes);
+		AccountAddress result = decoder.decodeAccountAddress();
+		assertEquals(accessPath,result);
+	    //
+		hex = "2C25991785343B23AE073A50E5FD809A2CD867526B3C1DB2B0BF5D1924C693ED";
+		accountAddress = new AccountAddress(hex);
+		bytes = LCSProcessor.buildEncoder()
+				.encode(new UInt32(AccountAddress.BYTE_LENGTH + 10))
+				.encode(accountAddress.getBytes())
+				.build();
+		assertEquals(UInt32.BYTE_LENGTH + AccountAddress.BYTE_LENGTH,bytes.length);
+		decoder = LCSProcessor.buildDecoder(bytes);
+		assertFalse(Libra4jLog.hasLogs());
+		result = decoder.decodeAccountAddress();
+		assertEquals(1,Libra4jLog.getLogs().size());
+		assertEquals(Type.INVALID_LENGTH,Libra4jLog.getLogs().get(0).getType());
+		Libra4jLog.purgeLogs();
+	}
+	*/
+	
+	
+	
 	
 
 	public void testVectors() {
