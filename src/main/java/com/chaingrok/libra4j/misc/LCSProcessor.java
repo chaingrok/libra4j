@@ -38,7 +38,7 @@ public class LCSProcessor {
 	public byte[] build() {
 		byte[] result = null;
 		if ((bos != null)
-				&& (bosWritten == true)) {
+				&& (bosWritten)) {
 			result = bos.toByteArray();
 		}
 		return result;
@@ -54,7 +54,7 @@ public class LCSProcessor {
 	
 	public LCSProcessor encode(Boolean b) {
 		if (b != null) {
-			if (b == true) {
+			if (b) {
 				byte[] bytes = {0x01};
 				write(bytes);
 			} else {

@@ -10,10 +10,10 @@ import com.google.protobuf.ByteString;
 
 public abstract class UInt {
 	
+	private byte[] bytes;
+	
 	protected abstract int getLength();
 	protected abstract BigInteger getMaxValue();
-	
-	private byte[] bytes;
 	
 	public UInt(ByteString byteString) {
 		processByteString(byteString);

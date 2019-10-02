@@ -55,7 +55,7 @@ public class Utils {
 	public static byte[] hexStringToByteArray(String hex) {
 		byte[] result = null;
 		if (hex != null) {
-			if (hex.equals("")) {
+			if ("".equals(hex)) {
 				result = new byte[0];
 			} else {
 				result = DatatypeConverter.parseHexBinary(hex);

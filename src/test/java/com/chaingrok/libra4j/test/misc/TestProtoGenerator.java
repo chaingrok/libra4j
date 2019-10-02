@@ -22,7 +22,7 @@ public class TestProtoGenerator {
 	public static final String GRPC_DIR = System.getProperty("user.dir")  + File.separator + "src" + File.separator + "grpc" + File.separator + "java";
 	
 	//@Test
-	public void Test001GenerateProtoFile() {
+	public void test001GenerateProtoFile() {
 		ProtoGenerator protoGenerator = new ProtoGenerator(PROTO_FILES_DIR,GRPC_DIR,PROTOC_JAVA_PLUGIN);
 		protoGenerator.generateFile("admission_control.proto");
 		assertTrue(protoGenerator.isOk());
