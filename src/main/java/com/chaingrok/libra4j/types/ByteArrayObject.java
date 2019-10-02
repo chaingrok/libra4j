@@ -41,9 +41,6 @@ public abstract class ByteArrayObject implements LCSInterface<ByteArrayObject> {
 
 	@Override
 	public final ByteArrayOutputStream serializeToLCS(ByteArrayObject object, ByteArrayOutputStream bos) {
-		if (bos == null) {
-			bos = new ByteArrayOutputStream();
-		}
 		if (bytes != null) {
 			try {
 				bos.write(bytes);
