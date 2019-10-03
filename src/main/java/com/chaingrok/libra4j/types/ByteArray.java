@@ -5,19 +5,19 @@ import com.chaingrok.libra4j.misc.Libra4jLog.Type;
 import com.chaingrok.libra4j.misc.Utils;
 import com.google.protobuf.ByteString;
 
-public abstract class ByteArrayObject {
+public abstract class ByteArray {
 	
 	protected byte[] bytes;
 	
-	public ByteArrayObject(String hex) {
+	public ByteArray(String hex) {
 		this(Utils.hexStringToByteArray(hex));
 	}
 		
-	public ByteArrayObject(ByteString byteString) {
+	public ByteArray(ByteString byteString) {
 		this(byteString.toByteArray());
 	}
 	
-	public ByteArrayObject(byte[] bytes) {
+	public ByteArray(byte[] bytes) {
 		this.bytes = bytes;
 	}
 	
@@ -34,7 +34,7 @@ public abstract class ByteArrayObject {
 		boolean result = false;
 		if (object != null) {
 			if (this.getClass().equals(object.getClass())) {
-				ByteArrayObject byteArrayObject = (ByteArrayObject)object;
+				ByteArray byteArrayObject = (ByteArray)object;
 				byte[] thisBytes = getBytes();
 				byte[] objBytes = byteArrayObject.getBytes();
 				if (thisBytes.length == objBytes.length) {

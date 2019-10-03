@@ -7,7 +7,7 @@ import com.chaingrok.libra4j.misc.Libra4jLog.Type;
 import com.chaingrok.libra4j.misc.Utils;
 import com.google.protobuf.ByteString;
 
-public class EventData extends ByteArrayObject {
+public class EventData extends ByteArray {
 	
 	public static final int ADDRESS_LENGTH_LENGTH = 4;
 	public static final byte[] ADDRESS_LENGTH = {0x20,0x00,0x00,0x00};

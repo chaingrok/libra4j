@@ -9,7 +9,7 @@ import com.google.protobuf.ByteString;
 
 //source : crypto/legacy_crypto/src/hash.rs
 
-public class Hash extends ByteArrayObject {
+public class Hash extends ByteArray {
 	
 	public static final int BYTE_LENGTH = 32;
 	

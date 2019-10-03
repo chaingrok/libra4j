@@ -5,7 +5,7 @@ import com.chaingrok.libra4j.misc.Libra4jLog.Type;
 import com.chaingrok.libra4j.misc.Utils;
 import com.google.protobuf.ByteString;
 
-public class ValidatorId extends ByteArrayObject {
+public class ValidatorId extends ByteArray {
 	
 	public static final int BYTE_LENGTH = 32;
 	

@@ -7,7 +7,7 @@ import com.google.protobuf.ByteString;
 
 //Soource : types/src/account_address.rs
 
-public class AccountAddress extends ByteArrayObject {
+public class AccountAddress extends ByteArray {
 	
 	public static final String ADDRESS_ZERO = "0000000000000000000000000000000000000000000000000000000000000000";
 	public static final AccountAddress ACCOUNT_ZERO = new AccountAddress(ADDRESS_ZERO);

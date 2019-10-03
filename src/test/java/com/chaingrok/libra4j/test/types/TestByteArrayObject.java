@@ -12,7 +12,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import com.chaingrok.libra4j.test.TestClass;
-import com.chaingrok.libra4j.types.ByteArrayObject;
+import com.chaingrok.libra4j.types.ByteArray;
 import com.chaingrok.libra4j.types.Code;
 import com.chaingrok.libra4j.types.EventData;
 import com.chaingrok.libra4j.types.Module;
@@ -24,15 +24,15 @@ public class TestByteArrayObject extends TestClass {
 	
 	@Test
 	public void test001IsAbstract() {
-		assertTrue(Modifier.isAbstract(ByteArrayObject.class.getModifiers()));
+		assertTrue(Modifier.isAbstract(ByteArray.class.getModifiers()));
 	}
 	
 	@Test 
 	public void test002ValidateHeritingClasses() {
-		assertTrue(ByteArrayObject.class.isAssignableFrom(Code.class));
-		assertTrue(ByteArrayObject.class.isAssignableFrom(Module.class));
-		assertTrue(ByteArrayObject.class.isAssignableFrom(EventData.class));
-		assertTrue(ByteArrayObject.class.isAssignableFrom(ValidatorId.class));
+		assertTrue(ByteArray.class.isAssignableFrom(Code.class));
+		assertTrue(ByteArray.class.isAssignableFrom(Module.class));
+		assertTrue(ByteArray.class.isAssignableFrom(EventData.class));
+		assertTrue(ByteArray.class.isAssignableFrom(ValidatorId.class));
 	}
 	
 	@Test
@@ -49,7 +49,7 @@ public class TestByteArrayObject extends TestClass {
 		assertNotEquals(byteArray1,byteArray4);
 	}
 	
-	private class ByteArrayObjectTest extends ByteArrayObject {
+	private class ByteArrayObjectTest extends ByteArray {
 
 		public ByteArrayObjectTest(byte[] bytes) {
 			super(bytes);
