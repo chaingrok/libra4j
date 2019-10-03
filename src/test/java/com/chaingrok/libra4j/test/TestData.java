@@ -52,11 +52,11 @@ public class TestData {
 			ArrayList<Argument> argList = new ArrayList<Argument>();
 			Argument arg1 = new Argument();
 			arg1.setType(Type.ADDRESS);
-			arg1.setData((new AccountAddress("bfbdc605cd15dfa8afc1c202cc1d51d0f768fdd9c67d42c332627cc9b9487392")).getBytes());
+			arg1.setBytes((new AccountAddress("bfbdc605cd15dfa8afc1c202cc1d51d0f768fdd9c67d42c332627cc9b9487392")).getBytes());
 			argList.add(arg1);
 			Argument arg2 = new Argument();
 			arg2.setType(Type.U64);
-			arg2.setData(new UInt64(0L).getBytes());
+			arg2.setBytes(new UInt64(0L).getBytes());
 			argList.add(arg2);
 			program.setArguments(argList);
 		}

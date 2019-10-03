@@ -158,7 +158,7 @@ public class TestTransaction extends TestClass {
 		argument.setType(Type.STRING);
 		String argValue = "foo_bar";
 		byte[] argBytes = argValue.getBytes();
-		argument.setData(argBytes);
+		argument.setBytes(argBytes);
 		ArrayList<Argument> arguments = new ArrayList<Argument>();
 		arguments.add(argument);
 		program.setArguments(arguments);
