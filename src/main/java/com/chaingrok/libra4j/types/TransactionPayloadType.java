@@ -1,9 +1,11 @@
 package com.chaingrok.libra4j.types;
 
+import com.chaingrok.libra4j.misc.LCSInterface;
+import com.chaingrok.libra4j.misc.LCSProcessor;
 import com.chaingrok.libra4j.misc.Libra4jError;
 import com.chaingrok.libra4j.misc.Libra4jLog.Type;
 
-public enum TransactionPayloadType {
+public enum TransactionPayloadType implements LCSInterface {
 	
 	PROGRAM(0),
 	WRITESET(1),
@@ -36,4 +38,11 @@ public enum TransactionPayloadType {
 		return result;
 	}
 
+	@Override
+	public LCSProcessor encodeToLCS(LCSProcessor lcsProcessor)  {
+		UInt32 uint32 = new UInt32(this.getType());
+		lcsProcessor.encode(uint32);
+		return lcsProcessor;
+	}
+	
 }

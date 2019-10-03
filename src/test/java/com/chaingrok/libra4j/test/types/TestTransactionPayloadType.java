@@ -1,13 +1,19 @@
 package com.chaingrok.libra4j.test.types;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import com.chaingrok.libra4j.misc.LCSProcessor;
+import com.chaingrok.libra4j.misc.Libra4jLog;
+import com.chaingrok.libra4j.misc.Libra4jLog.Type;
 import com.chaingrok.libra4j.test.TestClass;
 import com.chaingrok.libra4j.types.TransactionPayloadType;
+import com.chaingrok.libra4j.types.UInt32;
 
 
 
@@ -21,5 +27,37 @@ public class TestTransactionPayloadType extends TestClass {
 		assertEquals(TransactionPayloadType.SCRIPT,TransactionPayloadType.get(TransactionPayloadType.SCRIPT.getType()));
 		assertEquals(TransactionPayloadType.MODULE,TransactionPayloadType.get(TransactionPayloadType.MODULE.getType()));
 	}
+	
+	@Test
+	public void test002LCSEncodeDecode() {
+		TransactionPayloadType value = TransactionPayloadType.PROGRAM;
+		byte[] bytes = LCSProcessor.buildEncoder()
+			.encode(value)
+			.build();
+		assertEquals(bytes.length,UInt32.BYTE_LENGTH);
+		LCSProcessor decoder = LCSProcessor.buildDecoder(bytes);
+		TransactionPayloadType  result= decoder.decodeTransactionPayloadType();
+		assertEquals(value,result);
+		//
+		value = TransactionPayloadType.SCRIPT;
+		bytes = LCSProcessor.buildEncoder()
+			.encode(value)
+			.build();
+		assertEquals(bytes.length,UInt32.BYTE_LENGTH);
+		decoder = LCSProcessor.buildDecoder(bytes);
+		result= decoder.decodeTransactionPayloadType();
+		assertEquals(value,result);
+		//invalid type
+		assertFalse(Libra4jLog.hasLogs());
+		bytes = LCSProcessor.buildEncoder()
+				.encode(new UInt32(-1))
+				.build();
+		assertNull(bytes);
+		assertEquals(1,Libra4jLog.getLogs().size());
+		assertEquals(Type.INVALID_VALUE,Libra4jLog.getLogs().get(0).getType());
+		Libra4jLog.purgeLogs();
+	}
+	
+	
 
 }

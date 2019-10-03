@@ -13,6 +13,7 @@ import com.chaingrok.libra4j.types.Argument;
 import com.chaingrok.libra4j.types.Code;
 import com.chaingrok.libra4j.types.Module;
 import com.chaingrok.libra4j.types.Program;
+import com.chaingrok.libra4j.types.TransactionPayloadType;
 import com.chaingrok.libra4j.types.UInt16;
 import com.chaingrok.libra4j.types.UInt32;
 import com.chaingrok.libra4j.types.UInt64;
@@ -126,7 +127,9 @@ public class LCSProcessor {
 	
 	public LCSProcessor encode(UInt64 uint64) {
 		if (uint64 != null) {
-			write(Utils.reverseByteOrder(uint64.getBytes()));
+			if (uint64.getBytes() != null) {
+				write(Utils.reverseByteOrder(uint64.getBytes()));
+			}
 		}
 		return this;
 	}
@@ -147,7 +150,9 @@ public class LCSProcessor {
 	
 	public LCSProcessor encode(UInt32 uint32) {
 		if (uint32 != null) {
-			write(Utils.reverseByteOrder(uint32.getBytes()));
+			if (uint32.getBytes() != null) {
+				write(Utils.reverseByteOrder(uint32.getBytes()));
+			}
 		}
 		return this;
 	}
@@ -168,7 +173,9 @@ public class LCSProcessor {
 	
 	public LCSProcessor encode(UInt16 uint16) {
 		if (uint16 != null) {
-			write(Utils.reverseByteOrder(uint16.getBytes()));
+			if (uint16.getBytes() != null) {
+				write(Utils.reverseByteOrder(uint16.getBytes()));
+			}
 		}
 		return this;
 	}
@@ -189,7 +196,9 @@ public class LCSProcessor {
 
 	public LCSProcessor encode(UInt8 uint8) {
 		if (uint8 != null) {
-			write(uint8.getBytes());
+			if (uint8.getBytes() != null) {
+				write(uint8.getBytes());
+			}
 		}
 		return this;
 	}
@@ -257,6 +266,26 @@ public class LCSProcessor {
 				result = new AccessPath(bytes);
 			} else {
 				new Libra4jError(Type.INVALID_LENGTH,"byte buffer read did not return proper number of bytes: " + count + " <> " + AccountAddress.BYTE_LENGTH);
+			}
+		}
+		return result;
+	}
+	
+	public LCSProcessor encode(TransactionPayloadType transactionPayloadType) {
+		if (transactionPayloadType != null) {
+			transactionPayloadType.encodeToLCS(this);
+		}
+		return this;
+	}
+	
+	public TransactionPayloadType decodeTransactionPayloadType() {
+		TransactionPayloadType result = null;
+		if (bis !=null) {
+			UInt32 uint32 = decodeUInt32();
+			if (uint32 != null) {
+				result = TransactionPayloadType.get((int)(long)uint32.getAsLong());
+			} else {
+				new Libra4jError(Type.INVALID_VALUE,"paylod type is null");
 			}
 		}
 		return result;
