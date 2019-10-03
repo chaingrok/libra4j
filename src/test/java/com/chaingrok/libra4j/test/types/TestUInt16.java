@@ -18,6 +18,7 @@ import com.chaingrok.libra4j.misc.Libra4jLog.Type;
 import com.chaingrok.libra4j.misc.Utils;
 import com.chaingrok.libra4j.test.TestClass;
 import com.chaingrok.libra4j.types.UInt16;
+import com.chaingrok.libra4j.types.UInt8;
 import com.google.protobuf.ByteString;
 
 
@@ -114,12 +115,11 @@ public class TestUInt16 extends TestClass {
 		assertEquals(value,u16.getAsLong());
 		//
 		value = -1L;
-		try {
-			new UInt16(value);
-			fail("should fail with negative value");
-		} catch (Libra4jException e) {
-			assertEquals("UInt cannot be constructed from negative long value: " + value,e.getMessage());
-		}
+		assertFalse(Libra4jLog.hasLogs());
+		new UInt16(value);
+		assertEquals(1,Libra4jLog.getLogs().size());
+		assertEquals(Type.INVALID_VALUE,Libra4jLog.getLogs().get(0).getType());
+		Libra4jLog.purgeLogs();
 	}
 	
 	@Test

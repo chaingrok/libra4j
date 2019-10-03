@@ -108,12 +108,11 @@ public class TestUInt8 extends TestClass {
 		assertEquals(value,u8.getAsLong());
 		//
 		value = -1L;
-		try {
-			new UInt8(value);
-			fail("should fail with negative value");
-		} catch (Libra4jException e) {
-			assertEquals("UInt cannot be constructed from negative long value: " + value,e.getMessage());
-		}
+		assertFalse(Libra4jLog.hasLogs());
+		new UInt8(value);
+		assertEquals(1,Libra4jLog.getLogs().size());
+		assertEquals(Type.INVALID_VALUE,Libra4jLog.getLogs().get(0).getType());
+		Libra4jLog.purgeLogs();
 	}
 	
 	@Test

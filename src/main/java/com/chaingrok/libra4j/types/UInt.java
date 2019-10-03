@@ -29,14 +29,15 @@ public abstract class UInt {
 	
 	public UInt(Long value) {
 		if (value < 0) {
-			throw new Libra4jException("UInt cannot be constructed from negative long value: " + value);
-		}
-		byte[] longBytes = Utils.longToByteArray(value,getLength());
-		if (longBytes.length <= getLength()) {
-			bytes = new byte[getLength()];
-			System.arraycopy(longBytes, 0, bytes, bytes.length-longBytes.length, longBytes.length);
+			new Libra4jError(Type.INVALID_VALUE,"UInt cannot be constructed from negative long value: " + value);
 		} else {
-			throw new Libra4jException("byte array is too big: " + longBytes.length + " <> " + getLength() + " - " + Utils.byteArrayToHexString(longBytes));
+			byte[] longBytes = Utils.longToByteArray(value,getLength());
+			if (longBytes.length <= getLength()) {
+				bytes = new byte[getLength()];
+				System.arraycopy(longBytes, 0, bytes, bytes.length-longBytes.length, longBytes.length);
+			} else {
+				throw new Libra4jException("byte array is too big: " + longBytes.length + " <> " + getLength() + " - " + Utils.byteArrayToHexString(longBytes));
+			}
 		}
 	}
 	
