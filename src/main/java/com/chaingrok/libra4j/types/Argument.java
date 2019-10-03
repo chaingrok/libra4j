@@ -2,6 +2,8 @@ package com.chaingrok.libra4j.types;
 
 import org.libra.grpc.types.Transaction.TransactionArgument.ArgType;
 
+import com.chaingrok.libra4j.misc.LCSInterface;
+import com.chaingrok.libra4j.misc.LCSProcessor;
 import com.chaingrok.libra4j.misc.Libra4jError;
 import com.chaingrok.libra4j.misc.Utils;
 
@@ -45,7 +47,7 @@ public class Argument {
 		return result;
 	}
 	
-	public enum Type {
+	public enum Type implements LCSInterface {
 		
 		U64(ArgType.U64),
 		ADDRESS(ArgType.ADDRESS),
@@ -59,6 +61,10 @@ public class Argument {
 		
 		private Type(ArgType argType) {
 			this.argType = argType;
+		}
+		
+		public ArgType getArgType() {
+			return argType;
 		}
 		
 		public static Type get(ArgType argType) {
@@ -77,6 +83,31 @@ public class Argument {
 				result = Type.UNRECOGNIZED;
 			}
 			return result;
+		}
+		
+		public static Type getFromInt(int argTypeInt) {
+			Type result = null;
+			for (Type type : Type.values()) {
+				if (type.argType.getNumber() == argTypeInt) {
+					result = type;
+					break;
+				}
+			}
+			if (result == Type.UNRECOGNIZED) {
+				new Libra4jError(Libra4jError.Type.UNKNOWN_VALUE, "type: " + ArgType.UNRECOGNIZED + "found");
+			}
+			if (result == null) {
+				new Libra4jError(Libra4jError.Type.UNKNOWN_VALUE, "unrecognized ArgTypeInt: " + argTypeInt);
+				result = Type.UNRECOGNIZED;
+			}
+			return result;
+		}
+		
+		@Override
+		public LCSProcessor encodeToLCS(LCSProcessor lcsProcessor) {
+			UInt32 uint32 = new UInt32(this.getArgType().getNumber());
+			lcsProcessor.encode(uint32);
+			return lcsProcessor;
 		}
 
 	}

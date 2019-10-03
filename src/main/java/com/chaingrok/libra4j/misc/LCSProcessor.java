@@ -315,6 +315,26 @@ public class LCSProcessor {
 		return this;
 	}
 	
+	public LCSProcessor encode(Argument.Type transactionArgumentType) {
+		if (transactionArgumentType != null) {
+			transactionArgumentType.encodeToLCS(this);
+		}
+		return this;
+	}
+	
+	public Argument.Type decodeArgumentType() {
+		Argument.Type result = null;
+		if (bis !=null) {
+			UInt32 uint32 = decodeUInt32();
+			if (uint32 != null) {
+				result = Argument.Type.getFromInt((int)(long)uint32.getAsLong());
+			} else {
+				new Libra4jError(Type.INVALID_VALUE,"paylod type is null");
+			}
+		}
+		return result;
+	}
+	
 	public LCSProcessor encodeModule(Module module) {
 		if (module != null) {
 		}
