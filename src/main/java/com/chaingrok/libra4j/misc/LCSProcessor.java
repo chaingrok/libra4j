@@ -10,6 +10,7 @@ import com.chaingrok.libra4j.misc.Libra4jLog.Type;
 import com.chaingrok.libra4j.types.AccessPath;
 import com.chaingrok.libra4j.types.AccountAddress;
 import com.chaingrok.libra4j.types.Argument;
+import com.chaingrok.libra4j.types.ByteArray;
 import com.chaingrok.libra4j.types.Code;
 import com.chaingrok.libra4j.types.Module;
 import com.chaingrok.libra4j.types.Program;
@@ -65,6 +66,23 @@ public class LCSProcessor {
 			write(bytes);
 		}
 		return this;
+	}
+	
+	public byte[] decodeByteArray() {
+		byte[] result= null;
+		if ((bis != null) 
+				&& (bis.available() >= 1)){
+			UInt32 length = decodeUInt32();
+			int intLength = (int)(long)length.getAsLong();
+			byte[] bytes = new byte[intLength];
+			int count = bis.read(bytes, 0,AccountAddress.BYTE_LENGTH);
+			if (count == intLength) {
+				result = bytes;
+			} else {
+				new Libra4jError(Type.INVALID_LENGTH,"byte buffer read did not return proper number of bytes: " + count + " <> " + intLength);
+			}
+		}
+		return result;
 	}
 	
 	public LCSProcessor encode(Boolean b) {
@@ -305,8 +323,13 @@ public class LCSProcessor {
 	
 	public LCSProcessor encodeArgument(Argument argument) {
 		if (argument != null) {
+			argument.encodeToLCS(this);
 		}
 		return this;
+	}
+	
+	public Argument decodeArgument() {
+		return Argument.decode(this);
 	}
 	
 	public LCSProcessor encodeArguments(ArrayList<Argument> arguments) {
@@ -315,9 +338,9 @@ public class LCSProcessor {
 		return this;
 	}
 	
-	public LCSProcessor encode(Argument.Type transactionArgumentType) {
-		if (transactionArgumentType != null) {
-			transactionArgumentType.encodeToLCS(this);
+	public LCSProcessor encode(Argument.Type argumentType) {
+		if (argumentType != null) {
+			argumentType.encodeToLCS(this);
 		}
 		return this;
 	}

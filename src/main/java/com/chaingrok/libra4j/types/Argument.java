@@ -7,10 +7,10 @@ import com.chaingrok.libra4j.misc.LCSProcessor;
 import com.chaingrok.libra4j.misc.Libra4jError;
 import com.chaingrok.libra4j.misc.Utils;
 
-public class Argument {
+public class Argument implements LCSInterface {
 	
 	private Type type;
-	private byte[] data;
+	private byte[] bytes;
 	
 	public Type getType() {
 		return type;
@@ -20,12 +20,54 @@ public class Argument {
 		this.type = type;
 	}
 
-	public byte[] getData() {
-		return data;
+	public byte[] getBytes() {
+		return bytes;
 	}
 
-	public void setData(byte[] data) {
-		this.data = data;
+	public void setBytes(byte[] bytes) {
+		this.bytes = bytes;
+	}
+	
+	public void setString(String string) {
+		if (string != null) {
+			bytes = string.getBytes();
+		}
+	}
+	
+	public String getString() {
+		String result = null;
+		if (bytes != null) {
+			result = new String(bytes);
+		}
+		return result;
+	}
+	
+	public void setUInt64(UInt64 uint64) {
+		if (uint64 != null) {
+			bytes = uint64.getBytes();
+		}
+	}
+	
+	public UInt64 getUInt64() {
+		UInt64 result = null;
+		if (bytes != null) {
+			result = new UInt64(bytes);
+		}
+		return result;
+	}
+	
+	public void setAccountAddress(AccountAddress accountAddress) {
+		if (accountAddress != null) {
+			bytes = accountAddress.getBytes();
+		}
+	}
+	
+	public AccountAddress getAccountAddress() {
+		AccountAddress result = null;
+		if (bytes != null) {
+			result = new AccountAddress(bytes);
+		}
+		return result;
 	}
 
 	@Override
@@ -34,17 +76,56 @@ public class Argument {
 		String dataStr = "";
 		switch (type) {
 			case U64:
-				dataStr = (new UInt64(data)).getAsLong() +" (" + Utils.byteArrayToHexString(data) + ")";
+				dataStr = (new UInt64(bytes)).getAsLong() +" (" + Utils.byteArrayToHexString(bytes) + ")";
 				break;
 			case STRING:
-				dataStr = new String(data) + " (" + Utils.byteArrayToHexString(data) + ")";
+				dataStr = new String(bytes) + " (" + Utils.byteArrayToHexString(bytes) + ")";
 				break;
 			default:
-				dataStr = Utils.byteArrayToHexString(data);
+				dataStr = Utils.byteArrayToHexString(bytes);
 				break;
 		}
 		result += "argument: type = " +type + " - data = " + dataStr;
 		return result;
+	}
+	
+	@Override
+	public LCSProcessor encodeToLCS(LCSProcessor encoder) {
+		if (encoder != null) {
+			encoder.encode(type);
+			encoder.encode(bytes);
+		}
+		return encoder;
+	}
+	
+	public static Argument decode(LCSProcessor decoder) {
+		Argument result = null;
+		if (decoder != null) {
+			result  = new Argument();
+			Type argumentType = decoder.decodeArgumentType();
+			result.setType(argumentType);
+			switch(argumentType) {
+				case U64:
+					UInt64 uint64 = decoder.decodeUInt64();
+					result.setUInt64(uint64);
+					break;
+				case ADDRESS:
+					AccountAddress accountAddress = decoder.decodeAccountAddress();
+					result.setAccountAddress(accountAddress);
+					break;
+				case STRING:
+					String string = decoder.decodeString();
+					result.setString(string);
+					break;
+				case BYTE_ARRAY:
+					byte[] bytes = decoder.decodeByteArray();
+					result.setBytes(bytes);
+					break;
+				default:
+					break;
+			}
+		}
+		return null;
 	}
 	
 	public enum Type implements LCSInterface {

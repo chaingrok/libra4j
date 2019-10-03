@@ -14,6 +14,7 @@ import com.chaingrok.libra4j.misc.LCSProcessor;
 import com.chaingrok.libra4j.misc.Libra4jError;
 import com.chaingrok.libra4j.misc.Libra4jLog;
 import com.chaingrok.libra4j.test.TestClass;
+import com.chaingrok.libra4j.types.AccountAddress;
 import com.chaingrok.libra4j.types.Argument;
 import com.chaingrok.libra4j.types.UInt32;
 import com.chaingrok.libra4j.types.Argument.Type;
@@ -47,22 +48,47 @@ public class TestArgument extends TestClass {
 		assertEquals(Type.STRING,argument.getType());
 		String string = "foo";
 		byte[] bytes = string.getBytes();
-		argument.setData(bytes);
-		assertEquals(string,new String(argument.getData()));
-		assertTrue(argument.toString().contains(string));
+		argument.setBytes(bytes);
+		assertEquals(string,new String(argument.getBytes()));
+		assertTrue(argument.toString().contains(string + ""));
+		//
+		argument = new Argument();
+		argument.setType(Type.STRING);
+		assertEquals(Type.STRING,argument.getType());
+		string = "foo";
+		argument.setString(string);
+		assertEquals(string,argument.getString());
+		assertTrue(argument.toString().contains(string + ""));
 		//
 		argument.setType(Type.U64);
 		assertEquals(Type.U64,argument.getType());
 		Long number = 123456L;
 		UInt64 uint64 = new UInt64(number);
-		argument.setData(uint64.getBytes());
+		argument.setBytes(uint64.getBytes());
 		assertEquals(number,uint64.getAsLong());
 		System.out.println(argument.toString());
 		assertTrue(argument.toString().contains(number + ""));
+		//
+		argument.setType(Type.U64);
+		assertEquals(Type.U64,argument.getType());
+		number = 123456L;
+		uint64 = new UInt64(number);
+		assertEquals(number,uint64.getAsLong());
+		argument.setUInt64(uint64);
+		assertEquals(new UInt64(number),argument.getUInt64());
+		assertTrue(argument.toString().contains(number + ""));
+		//
+		String hex="2c25991785343b23ae073a50e5fd809a2cd867526b3c1db2b0bf5d1924c693ed";
+		argument.setType(Type.ADDRESS);
+		assertEquals(Type.ADDRESS,argument.getType());
+		AccountAddress accountAddress = new AccountAddress(hex);
+		argument.setAccountAddress(accountAddress);
+		assertEquals(accountAddress,argument.getAccountAddress());
+		assertTrue(argument.toString().contains(accountAddress.toString() + ""));
 	}
 	
 	@Test
-	public void test004LCSEncodeDecode() {
+	public void test004LCSEncodeDecodeArgumentType() {
 		Type value = Type.get(ArgType.U64);
 		byte[] bytes = LCSProcessor.buildEncoder()
 			.encode(value)
