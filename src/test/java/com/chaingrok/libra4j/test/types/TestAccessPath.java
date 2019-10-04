@@ -55,5 +55,10 @@ public class TestAccessPath {
 		assertEquals(new AccountAddress("217da6c6b3e19f1825cfb2676daecce3bf3de03cf26647c78df00b371b25cc97"),accessPath2.getAddress());
 		assertEquals(Path.Type.RECEIVED_EVENTS_COUNT,accessPath2.getPath().getPathType());
 	}
+	
+	@Test
+	public void test004AccessPathLCSEncodingDecoding() {
+		
+	}
 
 }

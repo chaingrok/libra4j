@@ -4,7 +4,7 @@ import com.chaingrok.libra4j.misc.Libra4jException;
 import com.chaingrok.libra4j.misc.Utils;
 import com.google.protobuf.ByteString;
 
-public class AccessPath implements Serialized {
+public class AccessPath {
 	
 	// Source : types/src/access_path.rs
 	// Source : types/src/unit_tests/access_path_test.rs
@@ -14,8 +14,8 @@ public class AccessPath implements Serialized {
 	public static final String SEPARATOR = "/";
 	
 	private byte tag;
-	private Path path;
 	private AccountAddress address;
+	private Path path;
 	
 	
 	public AccessPath(String hex) {
