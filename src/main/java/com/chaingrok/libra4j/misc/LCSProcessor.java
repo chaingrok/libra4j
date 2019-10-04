@@ -332,10 +332,25 @@ public class LCSProcessor {
 		return Argument.decode(this);
 	}
 	
-	public LCSProcessor encodeArguments(ArrayList<Argument> arguments) {
-		if (arguments != null) {
+	public LCSProcessor encode(ArrayList<Argument> arguments) {
+		if ((arguments != null) 
+				&& (arguments.size() >0)) {
+			encode(new UInt32(arguments.size()));
+			for (Argument argument : arguments) {
+				encode(argument);
+			}
 		}
 		return this;
+	}
+	public ArrayList<Argument> decodeArguments() {
+		ArrayList<Argument> result = new ArrayList<Argument>();
+		UInt32 uint32 = decodeUInt32();
+		int size = (int)(long)(uint32.getAsLong());
+		while (size > 0) {
+			--size;
+			result.add(decodeArgument());
+		}
+		return result;
 	}
 	
 	public LCSProcessor encode(Argument.Type argumentType) {

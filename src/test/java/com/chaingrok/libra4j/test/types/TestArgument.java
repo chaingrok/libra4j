@@ -3,9 +3,12 @@ package com.chaingrok.libra4j.test.types;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+
+import java.util.ArrayList;
 
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -130,7 +133,7 @@ public class TestArgument extends TestClass {
 		byte[] bytes = LCSProcessor.buildEncoder()
 			.encode(argument)
 			.build();
-		assertEquals(+ UInt32.BYTE_LENGTH + UInt64.BYTE_LENGTH ,bytes.length);
+		assertEquals(UInt32.BYTE_LENGTH + UInt64.BYTE_LENGTH ,bytes.length);
 		LCSProcessor decoder = LCSProcessor.buildDecoder(bytes);
 		Argument result = decoder.decodeArgument();
 		assertEquals(Type.U64,result.getType());
@@ -178,6 +181,45 @@ public class TestArgument extends TestClass {
 		result = decoder.decodeArgument();
 		assertEquals(Type.BYTE_ARRAY,result.getType());
 		assertArrayEquals(byteArrayValue,result.getBytes());
+	}
+	
+	@Test
+	public void test006LCSEncodeDecodeArguments() {
+		ArrayList<Argument> arguments = new ArrayList<Argument>();
+		byte[] bytes = LCSProcessor.buildEncoder()
+				.encode(arguments)
+				.build();
+		assertNull(bytes);
+		//
+		long longValue = 12345L;
+		UInt64 uint64 = new UInt64(longValue);
+		Argument argument0 = new Argument();
+		argument0.setType(Type.U64);
+		argument0.setUInt64(uint64);
+		assertEquals(longValue,(long)argument0.getUInt64().getAsLong());
+		//
+		String stringValue = "Hello, World!";
+		Argument argument1 = new Argument();
+		argument1.setType(Type.STRING);
+		argument1.setString(stringValue);
+		assertEquals(stringValue,argument1.getString());
+		//
+		arguments.add(argument0);
+		arguments.add(argument1);
+		bytes = LCSProcessor.buildEncoder()
+				.encode(arguments)
+				.build();
+		assertNotNull(bytes);
+		assertEquals(UInt32.BYTE_LENGTH + UInt32.BYTE_LENGTH + UInt64.BYTE_LENGTH + UInt32.BYTE_LENGTH + UInt32.BYTE_LENGTH + stringValue.getBytes().length,bytes.length);
+		LCSProcessor decoder = LCSProcessor.buildDecoder(bytes);
+		ArrayList<Argument> result = decoder.decodeArguments();
+		assertEquals(arguments.size(),result.size());
+		Argument result0 = arguments.get(0);
+		assertEquals(argument0.getType(),result0.getType());
+		assertEquals(argument0.getUInt64(),result0.getUInt64());
+		Argument result1 = arguments.get(1);
+		assertEquals(argument1.getType(),result1.getType());
+		assertEquals(argument1.getString(),result1.getString());
 	}
 	
 
