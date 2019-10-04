@@ -1,5 +1,6 @@
 package com.chaingrok.libra4j.test.types;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -8,10 +9,12 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import com.chaingrok.libra4j.misc.LCSProcessor;
 import com.chaingrok.libra4j.misc.Libra4jException;
 import com.chaingrok.libra4j.misc.Utils;
 import com.chaingrok.libra4j.test.TestClass;
 import com.chaingrok.libra4j.types.Path;
+import com.chaingrok.libra4j.types.UInt32;
 
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -68,5 +71,22 @@ public class TestPath extends TestClass {
 		} catch (Libra4jException e) {
 			assertTrue(e.getMessage().startsWith("path does not start with proper separator:"));
 		}
+	}
+	
+	@Test
+	public void test004PathLCSEncodingDecoding() { //based on https://github.com/libra/libra/tree/master/common/canonical_serialization
+		String testVector = "2100000001217DA6C6B3E19F1825CFB2676DAECCE3BF3DE03CF26647C78DF00B371B25CC97";
+		String pathHex = "01217da6c6b3e19f1825cfb2676daecce3bf3de03cf26647c78df00b371b25cc97";
+		byte[] bytes = Utils.hexStringToByteArray(testVector);
+		assertEquals(UInt32.BYTE_LENGTH + pathHex.getBytes().length/2,bytes.length);
+		LCSProcessor decoder = LCSProcessor.buildDecoder(bytes);
+		Path result = decoder.decodePath();
+		assertEquals(new Path(Utils.hexStringToByteArray(pathHex)),result);
+		//
+		bytes = LCSProcessor.buildEncoder()
+				.encode(new Path(Utils.hexStringToByteArray(pathHex)))
+				.build();
+		assertEquals(UInt32.BYTE_LENGTH + pathHex.getBytes().length/2,bytes.length);
+		assertArrayEquals(Utils.hexStringToByteArray(testVector),bytes);
 	}
 }

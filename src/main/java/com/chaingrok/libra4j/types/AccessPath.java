@@ -14,9 +14,11 @@ public class AccessPath {
 	public static final String SEPARATOR = "/";
 	
 	private byte tag;
-	private AccountAddress address;
+	private AccountAddress accountAddress;
 	private Path path;
 	
+	public AccessPath() {
+	}
 	
 	public AccessPath(String hex) {
 		this(Utils.hexStringToByteArray(hex));
@@ -38,10 +40,10 @@ public class AccessPath {
 		this(tag, new AccountAddress(address), new Path(path));
 	}
 	
-	public AccessPath(byte tag, AccountAddress address, Path path) {
+	public AccessPath(byte tag, AccountAddress accountAddress, Path path) {
 		this.setTag(tag);
 		this.path = path;
-		this.address = address;
+		this.accountAddress = accountAddress;
 	}
 	
 	private void setTag(byte tag) {
@@ -59,9 +61,17 @@ public class AccessPath {
 	public Path getPath() {
 		return path;
 	}
+	
+	public void setPath(Path path) {
+		this.path = path;
+	}
 
-	public AccountAddress getAddress() {
-		return address;
+	public AccountAddress getAccountAddress() {
+		return accountAddress;
+	}
+	
+	public void setAccountAddress(AccountAddress accountAddress) {
+		this.accountAddress = accountAddress;
 	}
 	
 	public void deserialize(byte[] bytes) {
@@ -70,14 +80,14 @@ public class AccessPath {
 		System.arraycopy(bytes, 1, addressBytes, 0, addressBytes.length);
 		byte[] pathBytes = new byte[bytes.length - 1 - AccountAddress.BYTE_LENGTH];
 		System.arraycopy(bytes, 1+addressBytes.length, pathBytes, 0, pathBytes.length);
-		address = new AccountAddress(addressBytes);
+		accountAddress = new AccountAddress(addressBytes);
 		path = new Path(pathBytes);
 	}
 	
 	@Override
 	public String toString() {
 		String result = "";
-		result += "access path - tag: " + tag + " - address: " + getAddress().toString() + " - path: " + getPath().toString();
+		result += "access path - tag: " + tag + " - address: " + getAccountAddress().toString() + " - path: " + getPath().toString();
 		return result;
 	}
 	

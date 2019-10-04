@@ -12,6 +12,7 @@ import com.chaingrok.libra4j.types.AccountAddress;
 import com.chaingrok.libra4j.types.Argument;
 import com.chaingrok.libra4j.types.Code;
 import com.chaingrok.libra4j.types.Module;
+import com.chaingrok.libra4j.types.Path;
 import com.chaingrok.libra4j.types.Program;
 import com.chaingrok.libra4j.types.TransactionPayloadType;
 import com.chaingrok.libra4j.types.UInt16;
@@ -268,11 +269,25 @@ public class LCSProcessor {
 		return result;
 	}
 	
+	public LCSProcessor encode(Path path) {
+		if (path != null) {
+			encode(path.getBytes());
+		}
+		return this;
+	}
+	
+	public Path decodePath() {
+		Path result = null;
+		if (bis !=null) {
+			result = new Path(decodeByteArray());
+		}
+		return result;
+	}
+	
 	public LCSProcessor encode(AccessPath accessPath) {
 		if (accessPath != null) {
-			UInt32 length = new UInt32(AccountAddress.BYTE_LENGTH);
-			encode(length);
-			//write(accessPath.getBytes());
+			encode(accessPath.getAccountAddress());
+			encode(accessPath.getPath().getBytes());
 		}
 		return this;
 	}
@@ -280,17 +295,9 @@ public class LCSProcessor {
 	public AccessPath decodeAccessPath() {
 		AccessPath result = null;
 		if (bis !=null) {
-			UInt32 length = decodeUInt32();
-			if (length.getAsLong() != AccountAddress.BYTE_LENGTH) {
-				new Libra4jError(Type.INVALID_LENGTH,"encoded length of AccountAddress is invalid: " + length.getAsLong() + " <> " + AccountAddress.BYTE_LENGTH);
-			}
-			byte[] bytes = new byte[AccountAddress.BYTE_LENGTH];
-			int count = bis.read(bytes, 0,AccountAddress.BYTE_LENGTH);
-			if (count == AccountAddress.BYTE_LENGTH) {
-				result = new AccessPath(bytes);
-			} else {
-				new Libra4jError(Type.INVALID_LENGTH,"byte buffer read did not return proper number of bytes: " + count + " <> " + AccountAddress.BYTE_LENGTH);
-			}
+			result = new AccessPath();
+			result.setAccountAddress(decodeAccountAddress());
+			result.setPath(decodePath());
 		}
 		return result;
 	}
@@ -389,6 +396,14 @@ public class LCSProcessor {
 		if (modules != null) {
 		}
 		return this;
+	}
+	
+	public int getUndecodedDataSize() {
+		int result = Integer.MAX_VALUE;
+		if (bis != null) {
+			result = bis.available();
+		}
+		return result;
 	}
 	
 	private void write(byte[] bytes) {

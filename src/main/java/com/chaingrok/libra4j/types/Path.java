@@ -9,7 +9,6 @@ public class Path extends ByteArray{
 	
 	public static final String SEPARATOR = "/";
 	
-	
 	public Path(String path) {
 		this(path.getBytes(),false);
 	}
