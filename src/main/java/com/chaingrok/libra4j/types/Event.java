@@ -45,7 +45,7 @@ public class Event {
 		result += "event: sequence number: " + getSequenceNumber() 
 			+ " - address: " + getAddress() 
 			+ " - " + getAccessPath().toString() 
-			+ " - data (" + getData().getBytes().length + " bytes): " +  getData().toString(getAccessPath().getPath().getType());
+			+ " - data (" + getData().getBytes().length + " bytes): " +  getData().toString(getAccessPath().getPath().getPathType());
 		return result;
 	}
 

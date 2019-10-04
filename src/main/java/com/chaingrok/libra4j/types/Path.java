@@ -5,41 +5,42 @@ import com.chaingrok.libra4j.misc.Utils;
 
 //Source : types/src/access_path.rs
 
-public class Path {
+public class Path extends ByteArray{
 	
 	public static final String SEPARATOR = "/";
 	
-	private byte[] path;
 	
 	public Path(String path) {
-		this(path.getBytes());
+		this(path.getBytes(),false);
 	}
 	
 	public Path(byte[] path) {
-		String str = new String(path);
-		if (!str.matches("[a-zA-Z0-9_\\/]+")) {
-			throw new Libra4jException("path contains invalid chars: " + Utils.byteArrayToHexString(path));
-		}
-		if (!str.startsWith(SEPARATOR)) {
-			throw new Libra4jException("path does not start with proper separator: " + Utils.byteArrayToHexString(path));
-		}
-		this.path = path;
+		this(path,true);
 	}
 	
-	public byte[] getBytes() {
-		return path;
+	public Path(byte[] path,boolean loose) {
+		super(path);
+		if (!loose) {
+			String str = new String(path);
+			if (!str.matches("[a-zA-Z0-9_\\/]+")) {
+				throw new Libra4jException("path contains invalid chars: " + Utils.byteArrayToHexString(path));
+			}
+			if (!str.startsWith(SEPARATOR)) {
+				throw new Libra4jException("path does not start with proper separator: " + Utils.byteArrayToHexString(path));
+			}
+		}
 	}
 	
-	public Type getType() {
-		return Type.get(new String(path));
+	public Type getPathType() {
+		return Type.get(new String(getBytes()));
 	}
 	
 	@Override
 	public String toString() {
 		String result = "";
-		result += getType().toString();
-		if (getType() == Type.UNKNOWN) {
-			result += " (" + new String(path) + " - " + Utils.byteArrayToHexString(path) + ")";
+		result += getPathType().toString();
+		if (getPathType() == Type.UNKNOWN) {
+			result += " (" + new String(getBytes()) + " - " + Utils.byteArrayToHexString(getBytes()) + ")";
 		}
 		return result;
 	}

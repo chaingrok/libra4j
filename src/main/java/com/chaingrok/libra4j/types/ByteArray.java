@@ -21,11 +21,11 @@ public abstract class ByteArray {
 		this.bytes = bytes;
 	}
 	
-	public byte[] getBytes() {
+	public final byte[] getBytes() {
 		return bytes;
 	}
 	
-	public ByteString getByteString() {
+	public final ByteString getByteString() {
 		return ByteString.copyFrom(bytes);
 	}
 	

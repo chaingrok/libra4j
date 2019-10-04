@@ -28,30 +28,30 @@ public class TestPath extends TestClass {
 	@Test
 	public void test002CheckFromHex() {
 		Path path = new Path(Utils.hexStringToByteArray("2f72656365697665645f6576656e74735f636f756e742f"));
-		assertEquals(Path.Type.RECEIVED_EVENTS_COUNT,path.getType());
+		assertEquals(Path.Type.RECEIVED_EVENTS_COUNT,path.getPathType());
 		path = new Path(Utils.hexStringToByteArray("2f73656e745f6576656e74735f636f756e742f"));
-		assertEquals(Path.Type.SENT_EVENTS_COUNT,path.getType());
+		assertEquals(Path.Type.SENT_EVENTS_COUNT,path.getPathType());
 	}
 	
 	@Test
 	public void test003InvalidCharInPath() {
 		byte[] path = {0x00};
 		try {
-			new Path(path);
+			new Path(path,false);
 			fail("should fail with invalid chars");
 		} catch (Libra4jException e) {
 			assertTrue(e.getMessage().startsWith("path contains invalid chars:"));
 		}
 		path = "!".getBytes();
 		try {
-			new Path(path);
+			new Path(path,false);
 			fail("should fail with invalid chars");
 		} catch (Libra4jException e) {
 			assertTrue(e.getMessage().startsWith("path contains invalid chars:"));
 		}
 		path = "-".getBytes();
 		try {
-			new Path(path);
+			new Path(path,false);
 			fail("should fail with invalid chars");
 		} catch (Libra4jException e) {
 			assertTrue(e.getMessage().startsWith("path contains invalid chars:"));
@@ -63,10 +63,16 @@ public class TestPath extends TestClass {
 	public void test004PathStart() {
 		byte[] path = "foo".getBytes();
 		try {
-			new Path(path);
+			new Path(path,false);
 			fail("should fail with invalid chars");
 		} catch (Libra4jException e) {
 			assertTrue(e.getMessage().startsWith("path does not start with proper separator:"));
 		}
+	}
+	
+	@Test
+	public void test005LCSVector() {
+		String hex = "01217da6c6b3e19f1825cfb2676daecce3bf3de03cf26647c78df00b371b25cc97";
+		Path path = new Path(Utils.hexStringToByteArray(hex));
 	}
 }
