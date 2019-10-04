@@ -61,8 +61,14 @@ public class LCSProcessor {
 	}
 	
 	public LCSProcessor encode(byte[] bytes) {
+		return encode(bytes,true);
+	}
+	
+	public LCSProcessor encode(byte[] bytes,boolean withLength) {
 		if (bytes != null) {
-			encode(new UInt32(bytes.length));
+			if (withLength) {
+				encode(new UInt32(bytes.length));
+			}
 			write(bytes);
 		}
 		return this;

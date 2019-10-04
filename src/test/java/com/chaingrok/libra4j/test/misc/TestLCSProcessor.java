@@ -16,7 +16,6 @@ import com.chaingrok.libra4j.misc.Libra4jLog;
 import com.chaingrok.libra4j.misc.Libra4jLog.Type;
 import com.chaingrok.libra4j.misc.Utils;
 import com.chaingrok.libra4j.test.TestClass;
-import com.chaingrok.libra4j.types.AccessPath;
 import com.chaingrok.libra4j.types.AccountAddress;
 import com.chaingrok.libra4j.types.UInt16;
 import com.chaingrok.libra4j.types.UInt32;
@@ -572,7 +571,7 @@ public class TestLCSProcessor extends TestClass {
 		accountAddress = new AccountAddress(hex);
 		bytes = LCSProcessor.buildEncoder()
 				.encode(new UInt32(AccountAddress.BYTE_LENGTH + 10))
-				.encode(accountAddress.getBytes())
+				.encode(accountAddress.getBytes(),false) //without length
 				.build();
 		assertEquals(UInt32.BYTE_LENGTH + AccountAddress.BYTE_LENGTH,bytes.length);
 		decoder = LCSProcessor.buildDecoder(bytes);
