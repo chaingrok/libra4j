@@ -187,7 +187,7 @@ public class GrpcChecker {
 					result = false;
 				} 
 			} else {
-				new Libra4jError(Type.INVALID_CLASS,"listObject is not instanceOf MessageOrBuilder:" + listObject.getClass().getCanonicalName());
+				new Libra4jError(Type.INVALID_CLASS,"listObject is not instanceOf MessageOrBuilder: " + listObject.getClass().getCanonicalName());
 				result = false;
 			}
 		}
