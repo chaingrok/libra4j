@@ -19,6 +19,8 @@ import com.chaingrok.libra4j.types.UInt16;
 import com.chaingrok.libra4j.types.UInt32;
 import com.chaingrok.libra4j.types.UInt64;
 import com.chaingrok.libra4j.types.UInt8;
+import com.chaingrok.libra4j.types.WriteOp;
+import com.chaingrok.libra4j.types.WriteSet;
 
 //source: https://github.com/libra/libra/tree/master/common/canonical_serialization
 
@@ -386,7 +388,54 @@ public class LCSProcessor {
 		return result;
 	}
 	
-	public LCSProcessor encodeModule(Module module) {
+	public LCSProcessor encode(WriteOp writeOp) {
+		if (writeOp != null) {
+		}
+		return this;
+	}
+	
+	public WriteSet decodeWriteSet() {
+		WriteSet result = null;
+		if (bis !=null) {
+			
+		}
+		return result;
+	}
+	
+	public LCSProcessor encode(WriteSet writeSet) {
+		if (writeSet != null) {
+		}
+		return this;
+	}
+	
+	public WriteOp decodeWriteOp() {
+		WriteOp result = null;
+		if (bis !=null) {
+			
+		}
+		return result;
+	}
+	
+	public LCSProcessor encode(WriteOp.Type writeOpType) {
+		if (writeOpType != null) {
+		}
+		return this;
+	}
+	
+	public WriteOp.Type decodeWriteOptType() {
+		WriteOp.Type result = null;
+		if (bis !=null) {
+			UInt32 uint32 = decodeUInt32();
+			if (uint32 != null) {
+				result = WriteOp.Type.get((int)(long)uint32.getAsLong());
+			} else {
+				new Libra4jError(Type.INVALID_VALUE,"writeOp type is null");
+			}
+		}
+		return result;
+	}
+	
+	public LCSProcessor encode(Module module) {
 		if (module != null) {
 		}
 		return this;

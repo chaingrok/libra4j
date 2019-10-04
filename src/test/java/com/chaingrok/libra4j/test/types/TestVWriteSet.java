@@ -36,6 +36,9 @@ public class TestVWriteSet extends TestClass {
 		assertNull(writeOp.getIsValue());
 		writeOp.setIsValue(true);
 		assertTrue(writeOp.getIsValue());
+		assertNull(writeOp.getOpType());
+		writeOp.setOpType(Type.WRITE);
+		assertEquals(Type.WRITE,writeOp.getOpType());
 	}
 
 }

@@ -7,7 +7,7 @@ import com.chaingrok.libra4j.misc.Libra4jError;
 public class WriteOp extends ByteArray implements LCSInterface {
 	
 	private Boolean isValue = null;
-	private Type type = null;
+	private Type opType = null;
 	
 	public WriteOp(byte[] bytes) {
 		super(bytes);
@@ -21,12 +21,12 @@ public class WriteOp extends ByteArray implements LCSInterface {
 		this.isValue = isValue;
 	}
 	
-	public void setType(Type type) {
-		this.type = type;
+	public void setOpType(Type opType) {
+		this.opType = opType;
 	}
 	
-	public Type getType() {
-		return type;
+	public Type getOpType() {
+		return opType;
 	}
 	
 	public enum Type implements LCSInterface {
@@ -79,7 +79,7 @@ public class WriteOp extends ByteArray implements LCSInterface {
 	@Override
 	public LCSProcessor encodeToLCS(LCSProcessor lcsProcessor) {
 		UInt32 uint32 = null;
-		uint32 = new UInt32(getType().getOpType());
+		uint32 = new UInt32(getOpType().getOpType());
 		lcsProcessor.encode(uint32);
 		lcsProcessor.encode(getBytes());
 		return lcsProcessor;
