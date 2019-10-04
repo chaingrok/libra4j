@@ -89,7 +89,7 @@ public class TestUInt64 extends TestClass {
 		assertEquals("18446744073709551615",new UInt64(byteString).getAsBigInt().toString()); //-1L -> positive due to 1 compl
 		//
 		value = Long.MAX_VALUE;
-		BigInteger bigInt = BigInteger.valueOf(value = Long.MAX_VALUE);
+		BigInteger bigInt = BigInteger.valueOf(Long.MAX_VALUE);
 		bigInt = bigInt.add(BigInteger.ONE);
 		bytes = new byte[8];
 		System.arraycopy(bigInt.toByteArray(), 1, bytes,0,8);
@@ -194,5 +194,15 @@ public class TestUInt64 extends TestClass {
 		assertEquals(Type.INVALID_CLASS,Libra4jLog.getLogs().get(0).getType());
 		assertTrue(((String)Libra4jLog.getLogs().get(0).getObject()).contains("cannot compare objects of different classes"));
 		Libra4jLog.purgeLogs();
+	}
+	
+	@Test
+	public void test007hashCode() {
+		UInt64 uint64 = new UInt64(0L);
+		assertEquals(0,uint64.hashCode());
+		uint64 = new UInt64(1L);
+		assertEquals(0,uint64.hashCode());
+		uint64 = new UInt64(UInt64.MAX_VALUE);
+		assertEquals(-1,uint64.hashCode());
 	}
 }

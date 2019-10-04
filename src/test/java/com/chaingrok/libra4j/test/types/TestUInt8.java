@@ -178,4 +178,14 @@ public class TestUInt8 extends TestClass {
 		assertTrue(((String)Libra4jLog.getLogs().get(0).getObject()).contains("cannot compare objects of different classes"));
 		Libra4jLog.purgeLogs();
 	}
+	
+	@Test
+	public void test007hashCode() {
+		UInt8 uint8 = new UInt8(0L);
+		assertEquals(0,uint8.hashCode());
+		uint8 = new UInt8(1L);
+		assertEquals(16777216,uint8.hashCode());
+		uint8 = new UInt8(UInt8.MAX_VALUE.longValue());
+		assertEquals(-16777216,uint8.hashCode());
+	}
 }

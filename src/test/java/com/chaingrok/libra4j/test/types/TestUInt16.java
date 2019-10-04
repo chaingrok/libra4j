@@ -16,7 +16,6 @@ import com.chaingrok.libra4j.misc.Libra4jLog.Type;
 import com.chaingrok.libra4j.misc.Utils;
 import com.chaingrok.libra4j.test.TestClass;
 import com.chaingrok.libra4j.types.UInt16;
-
 import com.google.protobuf.ByteString;
 
 
@@ -180,5 +179,15 @@ public class TestUInt16 extends TestClass {
 		assertEquals(Type.INVALID_CLASS,Libra4jLog.getLogs().get(0).getType());
 		assertTrue(((String)Libra4jLog.getLogs().get(0).getObject()).contains("cannot compare objects of different classes"));
 		Libra4jLog.purgeLogs();
+	}
+	
+	@Test
+	public void test007hashCode() {
+		UInt16 uint16 = new UInt16(0L);
+		assertEquals(0,uint16.hashCode());
+		uint16 = new UInt16(1L);
+		assertEquals(65536,uint16.hashCode());
+		uint16 = new UInt16(UInt16.MAX_VALUE.longValue());
+		assertEquals(-65536,uint16.hashCode());
 	}
 }
