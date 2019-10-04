@@ -10,7 +10,6 @@ import com.chaingrok.libra4j.misc.Libra4jLog.Type;
 import com.chaingrok.libra4j.types.AccessPath;
 import com.chaingrok.libra4j.types.AccountAddress;
 import com.chaingrok.libra4j.types.Argument;
-import com.chaingrok.libra4j.types.ByteArray;
 import com.chaingrok.libra4j.types.Code;
 import com.chaingrok.libra4j.types.Module;
 import com.chaingrok.libra4j.types.Program;
@@ -63,6 +62,7 @@ public class LCSProcessor {
 	
 	public LCSProcessor encode(byte[] bytes) {
 		if (bytes != null) {
+			encode(new UInt32(bytes.length));
 			write(bytes);
 		}
 		return this;
@@ -75,7 +75,7 @@ public class LCSProcessor {
 			UInt32 length = decodeUInt32();
 			int intLength = (int)(long)length.getAsLong();
 			byte[] bytes = new byte[intLength];
-			int count = bis.read(bytes, 0,AccountAddress.BYTE_LENGTH);
+			int count = bis.read(bytes,0,intLength);
 			if (count == intLength) {
 				result = bytes;
 			} else {
@@ -321,7 +321,7 @@ public class LCSProcessor {
 		return this;
 	}
 	
-	public LCSProcessor encodeArgument(Argument argument) {
+	public LCSProcessor encode(Argument argument) {
 		if (argument != null) {
 			argument.encodeToLCS(this);
 		}

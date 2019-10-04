@@ -1,9 +1,11 @@
 package com.chaingrok.libra4j.test.types;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -93,7 +95,7 @@ public class TestArgument extends TestClass {
 		byte[] bytes = LCSProcessor.buildEncoder()
 			.encode(value)
 			.build();
-		assertEquals(bytes.length,UInt32.BYTE_LENGTH);
+		assertEquals(UInt32.BYTE_LENGTH,bytes.length);
 		LCSProcessor decoder = LCSProcessor.buildDecoder(bytes);
 		Type result = decoder.decodeArgumentType();
 		assertEquals(value,result);
@@ -102,7 +104,7 @@ public class TestArgument extends TestClass {
 		bytes = LCSProcessor.buildEncoder()
 			.encode(value)
 			.build();
-		assertEquals(bytes.length,UInt32.BYTE_LENGTH);
+		assertEquals(UInt32.BYTE_LENGTH,bytes.length);
 		decoder = LCSProcessor.buildDecoder(bytes);
 		result = decoder.decodeArgumentType();
 		assertEquals(value,result);
@@ -115,6 +117,67 @@ public class TestArgument extends TestClass {
 		assertEquals(1,Libra4jLog.getLogs().size());
 		assertEquals(Libra4jLog.Type.INVALID_VALUE,Libra4jLog.getLogs().get(0).getType());
 		Libra4jLog.purgeLogs();
+	}
+	
+	@Test
+	public void test005LCSEncodeDecodeArgument() {
+		long longValue = 12345L;
+		UInt64 uint64 = new UInt64(longValue);
+		Argument argument = new Argument();
+		argument.setType(Type.U64);
+		argument.setUInt64(uint64);
+		assertEquals(longValue,(long)argument.getUInt64().getAsLong());
+		byte[] bytes = LCSProcessor.buildEncoder()
+			.encode(argument)
+			.build();
+		assertEquals(+ UInt32.BYTE_LENGTH + UInt64.BYTE_LENGTH ,bytes.length);
+		LCSProcessor decoder = LCSProcessor.buildDecoder(bytes);
+		Argument result = decoder.decodeArgument();
+		assertEquals(Type.U64,result.getType());
+		assertEquals(uint64,result.getUInt64());
+		//
+		String stringValue = "Hello, World!";
+		argument = new Argument();
+		argument.setType(Type.STRING);
+		argument.setString(stringValue);
+		assertEquals(stringValue,argument.getString());
+		bytes = LCSProcessor.buildEncoder()
+				.encode(argument)
+				.build();
+		assertEquals(UInt32.BYTE_LENGTH + UInt32.BYTE_LENGTH + stringValue.getBytes().length,bytes.length);
+		decoder = LCSProcessor.buildDecoder(bytes);
+		result = decoder.decodeArgument();
+		assertEquals(Type.STRING,result.getType());
+		assertEquals(stringValue,result.getString());
+		//
+		String hex="2c25991785343b23ae073a50e5fd809a2cd867526b3c1db2b0bf5d1924c693ed";
+		AccountAddress accountAddress = new AccountAddress(hex);
+		argument = new Argument();
+		argument.setType(Type.ADDRESS);
+		argument.setAccountAddress(accountAddress);
+		assertEquals(accountAddress,argument.getAccountAddress());
+		bytes = LCSProcessor.buildEncoder()
+				.encode(argument)
+				.build();
+		assertEquals(UInt32.BYTE_LENGTH + UInt32.BYTE_LENGTH + AccountAddress.BYTE_LENGTH,bytes.length);
+		decoder = LCSProcessor.buildDecoder(bytes);
+		result = decoder.decodeArgument();
+		assertEquals(Type.ADDRESS,result.getType());
+		assertEquals(accountAddress,result.getAccountAddress());
+		//
+		byte[] byteArrayValue = {0x00,0x01,0x02};
+		argument = new Argument();
+		argument.setType(Type.BYTE_ARRAY);
+		argument.setBytes(byteArrayValue);
+		assertArrayEquals(byteArrayValue,argument.getBytes());
+		bytes = LCSProcessor.buildEncoder()
+				.encode(argument)
+				.build();
+		assertEquals(UInt32.BYTE_LENGTH + UInt32.BYTE_LENGTH + byteArrayValue.length,bytes.length);
+		decoder = LCSProcessor.buildDecoder(bytes);
+		result = decoder.decodeArgument();
+		assertEquals(Type.BYTE_ARRAY,result.getType());
+		assertArrayEquals(byteArrayValue,result.getBytes());
 	}
 	
 

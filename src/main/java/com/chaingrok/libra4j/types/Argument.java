@@ -5,6 +5,7 @@ import org.libra.grpc.types.Transaction.TransactionArgument.ArgType;
 import com.chaingrok.libra4j.misc.LCSInterface;
 import com.chaingrok.libra4j.misc.LCSProcessor;
 import com.chaingrok.libra4j.misc.Libra4jError;
+import com.chaingrok.libra4j.misc.Libra4jLog;
 import com.chaingrok.libra4j.misc.Utils;
 
 public class Argument implements LCSInterface {
@@ -93,7 +94,24 @@ public class Argument implements LCSInterface {
 	public LCSProcessor encodeToLCS(LCSProcessor encoder) {
 		if (encoder != null) {
 			encoder.encode(type);
-			encoder.encode(bytes);
+			switch(type) {
+			case U64:
+				encoder.encode(getUInt64());
+				break;
+			case ADDRESS:
+				encoder.encode(getAccountAddress());
+				break;
+			case STRING:
+				encoder.encode(getString());
+				break;
+			case BYTE_ARRAY:
+				encoder.encode(bytes);
+				break;
+			default:
+				new Libra4jError(Libra4jLog.Type.UNKNOWN_VALUE,"unknown argument type to encode: " + getType() + " - " + Utils.byteArrayToHexString(bytes));
+				encoder.encode(bytes); //best effort...
+				break;
+			}
 		}
 		return encoder;
 	}
@@ -125,7 +143,7 @@ public class Argument implements LCSInterface {
 					break;
 			}
 		}
-		return null;
+		return result;
 	}
 	
 	public enum Type implements LCSInterface {
@@ -186,7 +204,8 @@ public class Argument implements LCSInterface {
 		
 		@Override
 		public LCSProcessor encodeToLCS(LCSProcessor lcsProcessor) {
-			UInt32 uint32 = new UInt32(this.getArgType().getNumber());
+			UInt32 uint32 = null;
+			uint32 = new UInt32(this.getArgType().getNumber());
 			lcsProcessor.encode(uint32);
 			return lcsProcessor;
 		}
