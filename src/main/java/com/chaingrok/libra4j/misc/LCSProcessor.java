@@ -333,10 +333,29 @@ public class LCSProcessor {
 		return this;
 	}
 	
+	public Program decodeProgram() {
+		Program result = null;
+		if (bis !=null) {
+			result = new Program();
+			result.setCode(decodeCode());
+			result.setArguments(decodeArguments());
+			result.setModules(decodeModules());
+		}
+		return result;
+	}
+	
 	public LCSProcessor encodeCode(Code code) {
 		if (code != null) {
 		}
 		return this;
+	}
+	
+	public Code decodeCode() {
+		Code result = null;
+		if (bis !=null) {
+			result = new Code(decodeByteArray());
+		}
+		return result;
 	}
 	
 	public LCSProcessor encode(Argument argument) {
@@ -360,6 +379,7 @@ public class LCSProcessor {
 		}
 		return this;
 	}
+	
 	public ArrayList<Argument> decodeArguments() {
 		ArrayList<Argument> result = new ArrayList<Argument>();
 		if (bis != null) {
@@ -455,10 +475,31 @@ public class LCSProcessor {
 		return this;
 	}
 	
+	public Module decodeModule() {
+		Module result = null;
+		if (bis !=null) {
+			result = new Module(decodeByteArray());
+		}
+		return result;
+	}
+	
 	public LCSProcessor encodeModules(ArrayList<Module> modules) {
 		if (modules != null) {
 		}
 		return this;
+	}
+	
+	public ArrayList<Module> decodeModules() {
+		ArrayList<Module> result = new ArrayList<Module>();
+		if (bis != null) {
+			UInt32 uint32 = decodeUInt32();
+			int size = (int)(long)(uint32.getAsLong());
+			while (size > 0) {
+				--size;
+				result.add(decodeModule());
+			}
+		}
+		return result;
 	}
 	
 	public int getUndecodedDataSize() {
