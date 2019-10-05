@@ -581,4 +581,5 @@ public class TestLCSProcessor extends TestClass {
 		assertEquals(Type.INVALID_LENGTH,Libra4jLog.getLogs().get(0).getType());
 		Libra4jLog.purgeLogs();
 	}
+	
 }

@@ -53,7 +53,31 @@ public class TestVWriteSet extends TestClass {
 	}
 	
 	@Test
-	public void test032WriteSetLCSDecoding() { // as per https://github.com/libra/libra/tree/master/common/canonical_serialization
+	public void test003LCSEncoding() {
+		LCSProcessor encoder = LCSProcessor.buildEncoder();
+		Type writeOpType = Type.DELETE;
+		writeOpType.encodeToLCS(encoder);
+		byte[] bytes = encoder.build();
+		LCSProcessor decoder = LCSProcessor.buildDecoder(bytes);
+		Type result = decoder.decodeWriteOpType();
+		assertEquals(writeOpType,result);
+		//
+		encoder = LCSProcessor.buildEncoder();
+		writeOpType = Type.WRITE;
+		byte[] value = {0x00,0x01,0x02};
+		WriteOp writeOp = new WriteOp(value);
+		writeOp.setOpType(writeOpType);
+		writeOp.encodeToLCS(encoder);
+		bytes = encoder.build();
+		decoder = LCSProcessor.buildDecoder(bytes);
+		WriteOp result2 = decoder.decodeWriteOp();
+		assertNotNull(result2);
+		assertEquals(Type.WRITE,result2.getOpType());
+		assertArrayEquals(value,result2.getBytes());
+	}
+	
+	@Test
+	public void test004WriteSetLCSDecoding() { // as per https://github.com/libra/libra/tree/master/common/canonical_serialization
 		String testVectorHex = "0200000020000000A71D76FAA2D2D5C3224EC3D41DEB293973564A791E55C6782BA76C2BF0495F9A2100000001217DA6C6B3E19F1825CFB2676DAECCE3BF3DE03CF26647C78DF00B371B25CC970000000020000000C4C63F80C74B11263E421EBF8486A4E398D0DBC09FA7D4F62CCDB309F3AEA81F0900000001217DA6C6B3E19F180100000004000000CAFED00D";
 		byte[] testVectorBytes = Utils.hexStringToByteArray(testVectorHex);
 		LCSProcessor decoder = LCSProcessor.buildDecoder(testVectorBytes);
