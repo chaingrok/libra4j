@@ -39,7 +39,7 @@ public class Path extends ByteArray{
 		String result = "";
 		result += getPathType().toString();
 		if (getPathType() == Type.UNKNOWN) {
-			result += " (" + new String(getBytes()) + " - " + Utils.byteArrayToHexString(getBytes()) + ")";
+			result += " (string: " + new String(getBytes()) + " - hex: " + Utils.byteArrayToHexString(getBytes()) + ")";
 		}
 		return result;
 	}

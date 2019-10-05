@@ -21,6 +21,7 @@ import com.chaingrok.libra4j.types.UInt64;
 import com.chaingrok.libra4j.types.UInt8;
 import com.chaingrok.libra4j.types.WriteOp;
 import com.chaingrok.libra4j.types.WriteSet;
+import com.chaingrok.libra4j.types.WriteSetTuple;
 
 //source: https://github.com/libra/libra/tree/master/common/canonical_serialization
 
@@ -265,7 +266,9 @@ public class LCSProcessor {
 			if (count == AccountAddress.BYTE_LENGTH) {
 				result = new AccountAddress(bytes);
 			} else {
-				new Libra4jError(Type.INVALID_LENGTH,"byte buffer read did not return proper number of bytes: " + count + " <> " + AccountAddress.BYTE_LENGTH);
+				new Libra4jError(Type.INVALID_LENGTH,"byte buffer read did not return proper number of bytes: " 
+							+ count + " <> " + AccountAddress.BYTE_LENGTH 
+							+ " (" + Utils.byteArrayToHexString(bytes) + ")");
 			}
 		}
 		return result;
@@ -359,11 +362,13 @@ public class LCSProcessor {
 	}
 	public ArrayList<Argument> decodeArguments() {
 		ArrayList<Argument> result = new ArrayList<Argument>();
-		UInt32 uint32 = decodeUInt32();
-		int size = (int)(long)(uint32.getAsLong());
-		while (size > 0) {
-			--size;
-			result.add(decodeArgument());
+		if (bis != null) {
+			UInt32 uint32 = decodeUInt32();
+			int size = (int)(long)(uint32.getAsLong());
+			while (size > 0) {
+				--size;
+				result.add(decodeArgument());
+			}
 		}
 		return result;
 	}
@@ -388,41 +393,50 @@ public class LCSProcessor {
 		return result;
 	}
 	
-	public LCSProcessor encode(WriteOp writeOp) {
-		if (writeOp != null) {
-		}
-		return this;
-	}
-	
 	public WriteSet decodeWriteSet() {
 		WriteSet result = null;
 		if (bis !=null) {
-			
+			result = new WriteSet();
+			UInt32 uint32 = decodeUInt32();
+			int size = (int)(long)(uint32.getAsLong());
+			//System.out.println("size:" + size);
+			while (size > 0) {
+				--size;
+				result.add(decodeWriteSetTuple());
+			}
 		}
 		return result;
 	}
 	
-	public LCSProcessor encode(WriteSet writeSet) {
-		if (writeSet != null) {
+	public WriteSetTuple decodeWriteSetTuple() {
+		WriteSetTuple result = null;
+		if (bis !=null) {
+			AccessPath accessPath = decodeAccessPath();
+			//System.out.println("access path: " + accessPath.toString());
+			WriteOp writeOp = decodeWriteOp();
+			//System.out.println("write op: " + writeOp.toString());
+			result = new WriteSetTuple();
+			result.setX(accessPath);
+			result.setY(writeOp);
 		}
-		return this;
+		return result;
 	}
 	
 	public WriteOp decodeWriteOp() {
 		WriteOp result = null;
 		if (bis !=null) {
-			
+			com.chaingrok.libra4j.types.WriteOp.Type writeOpType = decodeWriteOpType();
+			byte[] bytes = null;
+			if (writeOpType == WriteOp.Type.WRITE) {
+				bytes = decodeByteArray();
+			}
+			result = new WriteOp(bytes);
+			result.setOpType(writeOpType);
 		}
 		return result;
 	}
 	
-	public LCSProcessor encode(WriteOp.Type writeOpType) {
-		if (writeOpType != null) {
-		}
-		return this;
-	}
-	
-	public WriteOp.Type decodeWriteOptType() {
+	public WriteOp.Type decodeWriteOpType() {
 		WriteOp.Type result = null;
 		if (bis !=null) {
 			UInt32 uint32 = decodeUInt32();

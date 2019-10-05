@@ -3,22 +3,14 @@ package com.chaingrok.libra4j.types;
 import com.chaingrok.libra4j.misc.LCSInterface;
 import com.chaingrok.libra4j.misc.LCSProcessor;
 import com.chaingrok.libra4j.misc.Libra4jError;
+import com.chaingrok.libra4j.misc.Utils;
 
 public class WriteOp extends ByteArray implements LCSInterface {
 	
-	private Boolean isValue = null;
 	private Type opType = null;
 	
 	public WriteOp(byte[] bytes) {
 		super(bytes);
-	}
-	
-	public Boolean getIsValue() {
-		return isValue;
-	}
-	
-	public void setIsValue(Boolean isValue) {
-		this.isValue = isValue;
 	}
 	
 	public void setOpType(Type opType) {
@@ -31,8 +23,8 @@ public class WriteOp extends ByteArray implements LCSInterface {
 	
 	public enum Type implements LCSInterface {
 		
-		WRITE(0),
-		DELETE(1),
+		DELETE(0),
+		WRITE(1),
 		UNRECOGNIZED(-1)
 		
 		;
@@ -83,6 +75,18 @@ public class WriteOp extends ByteArray implements LCSInterface {
 		lcsProcessor.encode(uint32);
 		lcsProcessor.encode(getBytes());
 		return lcsProcessor;
+	}
+	
+	@Override
+	public String toString() {
+		String result = "";
+		result += "op type: " + getOpType();
+		String byteHex = "";
+		if (getBytes() != null) {
+			byteHex = Utils.byteArrayToHexString(getBytes());
+		}
+		result += " - value: " + byteHex;
+		return result; 
 	}
 	
 }
