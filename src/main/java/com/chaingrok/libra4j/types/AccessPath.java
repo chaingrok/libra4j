@@ -87,7 +87,15 @@ public class AccessPath {
 	@Override
 	public String toString() {
 		String result = "";
-		result += "access path - tag: " + tag + " - address: " + getAccountAddress().toString() + " - path: " + getPath().toString();
+		String accountAddress = "";
+		String path = "";
+		if (getAccountAddress() != null) {
+			accountAddress = getAccountAddress().toString();
+		}
+		if (getPath() != null) {
+			path = getPath().toString();
+		}
+		result += "access path - tag: " + tag + " - address: " + accountAddress + " - path: " + path;
 		return result;
 	}
 	
