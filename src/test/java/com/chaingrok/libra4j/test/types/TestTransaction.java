@@ -1,16 +1,20 @@
 package com.chaingrok.libra4j.test.types;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import com.chaingrok.libra4j.misc.LCSProcessor;
 import com.chaingrok.libra4j.misc.Libra4jLog;
 import com.chaingrok.libra4j.misc.Utils;
 import com.chaingrok.libra4j.test.TestClass;
@@ -26,6 +30,10 @@ import com.chaingrok.libra4j.types.Path;
 import com.chaingrok.libra4j.types.Program;
 import com.chaingrok.libra4j.types.Signature;
 import com.chaingrok.libra4j.types.Transaction;
+import com.chaingrok.libra4j.types.UInt64;
+import com.chaingrok.libra4j.types.WriteOp;
+import com.chaingrok.libra4j.types.WriteSet;
+import com.chaingrok.libra4j.types.WriteSetTuple;
 import com.chaingrok.libra4j.types.Argument.Type;
 import com.google.protobuf.ByteString;
 
@@ -41,24 +49,24 @@ public class TestTransaction extends TestClass {
 		assertSame(version,transaction.getVersion());
 		//
 		assertNull(transaction.getSequenceNumber());
-		Long sequenceNumber = new Long(0L);
+		UInt64 sequenceNumber = new UInt64(0L);
 		transaction.setSequenceNumber(sequenceNumber);
 		assertSame(sequenceNumber,transaction.getSequenceNumber());
 		//
 		assertNull(transaction.getSenderPublicKey()); //TODO
 		//
 		assertNull(transaction.getMaxGasAmount());
-		Long maxGasAmount = new Long(0L);
+		UInt64 maxGasAmount = new UInt64(0L);
 		transaction.setMaxGasAmount(maxGasAmount);
 		assertSame(maxGasAmount,transaction.getMaxGasAmount());
 		//
 		assertNull(transaction.getExpirationTime());
-		Long expirationTime = new Long(0L);
+		UInt64 expirationTime = new UInt64(0L);
 		transaction.setExpirationTime(expirationTime);
 		assertSame(expirationTime,transaction.getExpirationTime());
 		//
 		assertNull(transaction.getGasUnitPrice());
-		Long gasUnitPrice = new Long(0L);
+		UInt64 gasUnitPrice = new UInt64(0L);
 		transaction.setGasUnitPrice(gasUnitPrice);
 		assertSame(gasUnitPrice,transaction.getGasUnitPrice());
 		//
@@ -198,6 +206,49 @@ public class TestTransaction extends TestClass {
 		assertTrue(string.contains(Utils.byteArrayToHexString(argBytes)));
 		assertTrue(string.contains(Utils.byteArrayToHexString(signatureBytes)));
 		assertTrue(string.contains(Utils.byteArrayToHexString(accountAddressBytes)));
+	}
+	
+	@Test
+	public void test004TransactionLCSEncodingDecoding() throws IOException { //as per https://github.com/libra/libra/tree/master/common/canonical_serialization
+		String testVectorHex = "20000000C3398A599A6F3B9F30B635AF29F2BA046D3A752C26E9D0647B9647D1F4C04AD42000000000000000010000000200000020000000"
+									+ "A71D76FAA2D2D5C3224EC3D41DEB293973564A791E55C6782BA76C2BF0495F9A2100000001217DA6C6B3E19F1825CFB2676DAECCE3BF3DE03CF2664"
+									+ "7C78DF00B371B25CC970000000020000000C4C63F80C74B11263E421EBF8486A4E398D0DBC09FA7D4F62CCDB309F3AEA81F0900000001217DA6C6B3E"
+									+ "19F180100000004000000CAFED00D00000000000000000000000000000000FFFFFFFFFFFFFFFF";
+		byte[] testVectorBytes = Utils.hexStringToByteArray(testVectorHex);
+		LCSProcessor decoder = LCSProcessor.buildDecoder(testVectorBytes);
+		Transaction transaction = decoder.decodeTransaction();
+		assertNotNull(transaction);
+		assertEquals(new AccountAddress("c3398a599a6f3b9f30b635af29f2ba046d3a752c26e9d0647b9647d1f4c04ad4"),transaction.getSenderAccountAddress());
+		assertEquals(new UInt64(32L),transaction.getSequenceNumber());
+		//WriteSet
+		WriteSet writeSet = transaction.getWriteSet();
+		assertNotNull(writeSet);
+		assertEquals(2,writeSet.size());
+		//WriteOp 1
+		WriteSetTuple writeSetTuple = writeSet.get(0);
+		assertNotNull(writeSetTuple);
+		WriteOp writeOp = writeSetTuple.getY();
+		assertEquals(WriteOp.Type.DELETE,writeOp.getOpType());
+		assertNull(writeOp.getBytes());
+		AccessPath accessPath = writeSetTuple.getX();
+		assertNotNull(accessPath);
+		assertEquals(new AccountAddress("a71d76faa2d2d5c3224ec3d41deb293973564a791e55c6782ba76c2bf0495f9a"),accessPath.getAccountAddress());
+		assertEquals(new Path(Utils.hexStringToByteArray("01217da6c6b3e19f1825cfb2676daecce3bf3de03cf26647c78df00b371b25cc97")),accessPath.getPath());
+		//WriteOp 2
+		writeSetTuple = writeSet.get(1);
+		assertNotNull(writeSetTuple);
+		writeOp = writeSetTuple.getY();
+		assertEquals(WriteOp.Type.WRITE,writeOp.getOpType());
+		assertArrayEquals(Utils.hexStringToByteArray("cafed00d"),writeOp.getBytes());
+		accessPath = writeSetTuple.getX();
+		assertNotNull(accessPath);
+		assertEquals(new AccountAddress("c4c63f80c74b11263e421ebf8486a4e398d0dbc09fa7d4f62ccdb309f3aea81f"),accessPath.getAccountAddress());
+		assertEquals(new Path(Utils.hexStringToByteArray("01217da6c6b3e19f18")),accessPath.getPath());
+		//
+		assertEquals(new UInt64(0L),transaction.getMaxGasAmount());
+		assertEquals(new UInt64(0L),transaction.getGasUnitPrice());
+		assertEquals(new UInt64(UInt64.MAX_VALUE),transaction.getExpirationTime());
+		assertEquals(0,(int)decoder.getUndecodedDataSize());
 	}
 
 }

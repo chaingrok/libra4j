@@ -8,16 +8,19 @@ import com.chaingrok.libra4j.misc.Libra4jWarning;
 public class Transaction {
 	
 	private AccountAddress senderAccountAddress = null;
+	private UInt64 sequenceNumber = null;
+	private TransactionPayloadType transactionPayloadType = null;
+	private Program program = null;
+	private WriteSet writeSet = null;
+	private UInt64 maxGasAmount = null;
+	private UInt64 gasUnitPrice = null;
+	private UInt64 expirationTime = null;
+	//
 	private Long version = null;
 	private Long majorStatus = null;
-	private Long sequenceNumber = null;
 	private PublicKey senderPublicKey = null;
 	private Signature signature;
-	private Long maxGasAmount = null;
-	private Long expirationTime = null;
-	private Long gasUnitPrice = null;
 	private Long gasUsed =  null;
-	private Program program = null;
 	private Integer  txnInfoSerializedSize = null;
 	private Integer  signedTxnSerializedSize = null;
 	private Hash signedTransactionHash = null ;
@@ -35,7 +38,7 @@ public class Transaction {
 		Type.get(this);
 	}
 	
-	//
+	//raw transaction fields
 	
 	public AccountAddress getSenderAccountAddress() {
 		return senderAccountAddress;
@@ -44,7 +47,65 @@ public class Transaction {
 	public void setSenderAccountAddress(AccountAddress senderAccountAddress) {
 		this.senderAccountAddress = senderAccountAddress;
 	}
+	
+	public UInt64 getSequenceNumber() {
+		return sequenceNumber;
+	}
 
+	public void setSequenceNumber(UInt64 sequenceNumber) {
+		this.sequenceNumber = sequenceNumber;
+	}
+	
+	public TransactionPayloadType getTransactionPayloadType() {
+		return transactionPayloadType;
+	}
+
+	public void setTransactionPayloadType(TransactionPayloadType transactionPayloadType) {
+		this.transactionPayloadType = transactionPayloadType;
+	}
+	
+	public Program getProgram() {
+		return program;
+	}
+
+	public void setProgram(Program program) {
+		this.program = program;
+	}
+	
+	public WriteSet getWriteSet() {
+		return writeSet;
+	}
+
+	public void setWriteSet(WriteSet writeSet) {
+		this.writeSet = writeSet;
+	}
+	
+	public UInt64 getMaxGasAmount() {
+		return maxGasAmount;
+	}
+
+	public void setMaxGasAmount(UInt64 maxGasAmount) {
+		this.maxGasAmount = maxGasAmount;
+	}
+	
+	public UInt64 getGasUnitPrice() {
+		return gasUnitPrice;
+	}
+
+	public void setGasUnitPrice(UInt64 gasUnitPrice) {
+		this.gasUnitPrice = gasUnitPrice;
+	}
+	
+	public UInt64 getExpirationTime() {
+		return expirationTime;
+	}
+
+	public void setExpirationTime(UInt64 expirationTime) {
+		this.expirationTime = expirationTime;
+	}
+	
+	//signed transaction fields
+	
 	public Long getVersion() {
 		return version;
 	}
@@ -59,14 +120,6 @@ public class Transaction {
 
 	public void setMajorStatus(Long majorStatus) {
 		this.majorStatus = majorStatus;
-	}
-
-	public Long getSequenceNumber() {
-		return sequenceNumber;
-	}
-
-	public void setSequenceNumber(Long sequenceNumber) {
-		this.sequenceNumber = sequenceNumber;
 	}
 
 	public PublicKey getSenderPublicKey() {
@@ -85,44 +138,12 @@ public class Transaction {
 		this.signature = signature;
 	}
 
-	public Long getMaxGasAmount() {
-		return maxGasAmount;
-	}
-
-	public void setMaxGasAmount(Long maxGasAmount) {
-		this.maxGasAmount = maxGasAmount;
-	}
-
-	public Long getExpirationTime() {
-		return expirationTime;
-	}
-
-	public void setExpirationTime(Long expirationTime) {
-		this.expirationTime = expirationTime;
-	}
-
-	public Long getGasUnitPrice() {
-		return gasUnitPrice;
-	}
-
-	public void setGasUnitPrice(Long gasUnitPrice) {
-		this.gasUnitPrice = gasUnitPrice;
-	}
-
 	public Long getGasUsed() {
 		return gasUsed;
 	}
 
 	public void setGasUsed(Long gasUsed) {
 		this.gasUsed = gasUsed;
-	}
-
-	public Program getProgram() {
-		return program;
-	}
-
-	public void setProgram(Program program) {
-		this.program = program;
 	}
 
 	public Integer getTxnInfoSerializedSize() {

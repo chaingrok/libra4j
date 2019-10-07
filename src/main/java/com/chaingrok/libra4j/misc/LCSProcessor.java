@@ -500,6 +500,44 @@ public class LCSProcessor {
 		Transaction result = null;
 		if (bis != null) {
 			result = new Transaction();
+			result.setSenderAccountAddress(decodeAccountAddress());
+			result.setSequenceNumber(decodeUInt64());
+			TransactionPayloadType transactionPayloadType = decodeTransactionPayloadType();
+			result.setTransactionPayloadType(transactionPayloadType);
+			switch(transactionPayloadType) {
+				case PROGRAM:
+					result.setProgram(decodeProgram());
+					break;
+				case WRITESET:
+					result.setWriteSet(decodeWriteSet());
+					break;
+				case SCRIPT:
+					new Libra4jError(Type.NOT_IMPLEMENTED,"script payload decoding not implemented yet");
+					break;
+				case MODULE:
+					new Libra4jError(Type.NOT_IMPLEMENTED,"module payload decoding not implemented yet");
+					break;
+				default:
+					new Libra4jError(Type.NOT_IMPLEMENTED,"should not happen");
+					break;
+			}
+			result.setMaxGasAmount(decodeUInt64());		
+			result.setGasUnitPrice(decodeUInt64());	
+			result.setExpirationTime(decodeUInt64());	
+			/*
+			int remaining = getUndecodedDataSize();
+			byte[] bytes = new byte[remaining];
+			int count = 0;
+			try {
+				count = getBis().read(bytes);
+			} catch (IOException e) {
+				new Libra4jError(Type.JAVA_ERROR,e);
+			}
+			if (count != remaining) {
+				new Libra4jError(Type.INVALID_LENGTH, "count <> remaining:" + count + " <> " + remaining);
+			}
+			System.out.println("remaining: " + Utils.byteArrayToHexString(bytes));
+			*/
 		}
 		return result;
 	}
