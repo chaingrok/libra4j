@@ -122,6 +122,7 @@ public abstract class Libra4jLog {
 		MISSING_DATA,
 		NODE_ERROR,
 		JAVA_ERROR,
+		HTTP_ERROR,
 		NOT_IMPLEMENTED,
 	}
 
