@@ -1,13 +1,14 @@
 package com.chaingrok.libra4j.types;
 
-import java.util.ArrayList;
+import com.chaingrok.libra4j.misc.LCSInterface;
+import com.chaingrok.libra4j.misc.LCSProcessor;
 
-public class Program {
+public class Program implements LCSInterface {
 	
 	private Code code = null;
 	private Long codeSize = null;
-	private ArrayList<Argument> arguments = null;
-	private ArrayList<Module> modules = null;
+	private Arguments arguments = null;
+	private Modules modules = null;
 	
 	public Code getCode() {
 		return code;
@@ -25,20 +26,31 @@ public class Program {
 		this.codeSize = codeSize;
 	}
 	
-	public ArrayList<Argument> getArguments() {
+	public Arguments getArguments() {
 		return arguments;
 	}
 	
-	public void setArguments(ArrayList<Argument> arguments) {
+	public void setArguments(Arguments arguments) {
 		this.arguments = arguments;
 	}
 	
-	public ArrayList<Module> getModules() {
+	public Modules getModules() {
 		return modules;
 	}
 	
-	public void setModules(ArrayList<Module> modules) {
+	public void setModules(Modules modules) {
 		this.modules = modules;
+	}
+
+	@Override
+	public LCSProcessor encodeToLCS(LCSProcessor lcsProcessor) {
+		if (lcsProcessor != null) {
+			lcsProcessor
+				.encode(code)
+				.encode(arguments)
+				.encode(modules);
+		}
+		return lcsProcessor;
 	}
 	
 }

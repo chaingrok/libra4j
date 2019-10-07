@@ -144,5 +144,13 @@ public class TestLedger extends TestClass {
 		//assertNotNull(transaction.getVersion());
 		//assertTrue(transaction.getVersion() > 0);
 	}
+	
+	@Test
+	public void test008SubmitTransaction() {
+		Ledger ledger = new Ledger(TestData.VALIDATOR_ENDPOINT);
+		ledger.submitTransaction();
+		Libra4jLog.purgeLogs();
+	}
+	
 
 }

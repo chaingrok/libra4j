@@ -63,36 +63,47 @@ public class Ledger {
 		this.validatorEndpoint = validatorEndpoint;
 	}
 	
-	public ArrayList<Transaction> getTransactions(long version, long count) {
-		return getTransactions(version,count,true);
-	}
-	
 	public void submitTransaction() {
 		ByteString signedTxnBytes = null;
 		SignedTransaction signedTransaction = SignedTransaction.newBuilder()
-				.setSignedTxn(signedTxnBytes)
+				//.setSignedTxn(signedTxnBytes)
 				.build();
 		SubmitTransactionRequest submitTransactionRequest = SubmitTransactionRequest.newBuilder()
 				.setSignedTxn(signedTransaction)
 				.build();
 		AdmissionControlBlockingStub blockingStub = validatorEndpoint.getBlockingStub();
 		SubmitTransactionResponse submitTransactionResponse = blockingStub.submitTransaction(submitTransactionRequest);
+		grpcChecker.checkExpectedFields(submitTransactionResponse,1);
+		//
+		submitTransactionResponse.getValidatorId();
+		System.out.println("validator id: " +  Utils.byteArrayToHexString(submitTransactionResponse.getValidatorId().toByteArray()));
 		//
 		AdmissionControlStatus acStatus = submitTransactionResponse.getAcStatus();
+		System.out.println("acStatus:" +  acStatus.getCodeValue() + " - msg: " + acStatus.getMessage());
 		acStatus.getCodeValue();
 		acStatus.getMessage();
 		//
 		MempoolAddTransactionStatus mempoolStatus = submitTransactionResponse.getMempoolStatus();
+		System.out.println("mempoolStatus: " +  mempoolStatus.getCodeValue() + " - msg: " + mempoolStatus.getMessage());
 		mempoolStatus.getCodeValue();
 		mempoolStatus.getMessage();
 		//
 		StatusCase statusCase = submitTransactionResponse.getStatusCase();
 		statusCase.getNumber();
+		System.out.println("statusCase: " +  statusCase.getNumber());
+		
 		//
 		VMStatus vmStatus = submitTransactionResponse.getVmStatus();
 		vmStatus.getMajorStatus();
 		vmStatus.getSubStatus();
 		vmStatus.getMessage();
+		System.out.println("vmCase: " +  vmStatus.getMajorStatus() + " + " + vmStatus.getSubStatus() + " - " + vmStatus.getMessage());
+		//
+		submitTransactionResponse.getValidatorId();
+	}
+	
+	public ArrayList<Transaction> getTransactions(long version, long count) {
+		return getTransactions(version,count,true);
 	}
 	
 	public ArrayList<Transaction> getTransactions(long version, long count, boolean withEvents) {
@@ -158,7 +169,7 @@ public class Ledger {
 						int resCount = 0;
 						for (EventsList eventsList : listOfEventsList) {
 							Transaction transaction = result.get(resCount++);
-							ArrayList<com.chaingrok.libra4j.types.Event> events = processEventsList(eventsList);
+							Events events = processEventsList(eventsList);
 							transaction.setEventsList(events);
 						}
 					}
@@ -472,8 +483,8 @@ public class Ledger {
 		*/
 	}
 
-	private ArrayList<com.chaingrok.libra4j.types.Event> processEventsList(EventsList eventsList) {
-		ArrayList<com.chaingrok.libra4j.types.Event> result = new ArrayList<com.chaingrok.libra4j.types.Event>();
+	private Events processEventsList(EventsList eventsList) {
+		Events result = new Events();
 		grpcChecker.checkExpectedFields(eventsList,1);
 		List<Event> events = eventsList.getEventsList();
 		if (events != null) {

@@ -8,7 +8,6 @@ import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -24,8 +23,10 @@ import com.chaingrok.libra4j.types.Argument;
 import com.chaingrok.libra4j.types.Code;
 import com.chaingrok.libra4j.types.Event;
 import com.chaingrok.libra4j.types.EventData;
+import com.chaingrok.libra4j.types.Events;
 import com.chaingrok.libra4j.types.Hash;
 import com.chaingrok.libra4j.types.Module;
+import com.chaingrok.libra4j.types.Modules;
 import com.chaingrok.libra4j.types.Path;
 import com.chaingrok.libra4j.types.Program;
 import com.chaingrok.libra4j.types.Signature;
@@ -35,6 +36,7 @@ import com.chaingrok.libra4j.types.WriteOp;
 import com.chaingrok.libra4j.types.WriteSet;
 import com.chaingrok.libra4j.types.WriteSetTuple;
 import com.chaingrok.libra4j.types.Argument.Type;
+import com.chaingrok.libra4j.types.Arguments;
 import com.google.protobuf.ByteString;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -119,7 +121,7 @@ public class TestTransaction extends TestClass {
 		assertSame(rawTxnBytes,transaction.getRawTxnBytes());
 		//
 		assertNull(transaction.getEventsList());
-		ArrayList<Event> eventsList = new ArrayList<Event>();
+		Events eventsList = new Events();
 		transaction.setEventsList(eventsList);
 		assertSame(eventsList,transaction.getEventsList());
 		//
@@ -167,12 +169,12 @@ public class TestTransaction extends TestClass {
 		String argValue = "foo_bar";
 		byte[] argBytes = argValue.getBytes();
 		argument.setBytes(argBytes);
-		ArrayList<Argument> arguments = new ArrayList<Argument>();
+		Arguments arguments = new Arguments();
 		arguments.add(argument);
 		program.setArguments(arguments);
 		byte[] code = {0x00,0x01,0x0a,0x0b};
 		Module module = new Module(code);
-		ArrayList<Module> modules = new ArrayList<Module>();
+		Modules modules = new Modules();
 		modules.add(module);
 		program.setModules(modules);
 		byte[] signatureBytes = Utils.getByteArray(Signature.BYTE_LENGTH,0x55);
@@ -196,7 +198,7 @@ public class TestTransaction extends TestClass {
 		String testPath = "/test_path";
 		AccessPath accessPath = AccessPath.create((byte)0x00,new AccountAddress(AccountAddress.ADDRESS_ZERO),new Path(testPath));
 		event.setAccessPath(accessPath);
-		ArrayList<Event> events = new ArrayList<Event>();
+		Events events = new Events();
 		events.add(event);
 		//
 		String string = transaction.toString();

@@ -4,14 +4,15 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 
 import com.chaingrok.libra4j.misc.Libra4jLog.Type;
 import com.chaingrok.libra4j.types.AccessPath;
 import com.chaingrok.libra4j.types.AccountAddress;
 import com.chaingrok.libra4j.types.Argument;
+import com.chaingrok.libra4j.types.Arguments;
 import com.chaingrok.libra4j.types.Code;
 import com.chaingrok.libra4j.types.Module;
+import com.chaingrok.libra4j.types.Modules;
 import com.chaingrok.libra4j.types.Path;
 import com.chaingrok.libra4j.types.Program;
 import com.chaingrok.libra4j.types.Transaction;
@@ -322,6 +323,7 @@ public class LCSProcessor {
 	
 	public LCSProcessor encode(Program program) {
 		if (program != null) {
+			program.encodeToLCS(this);
 		}
 		return this;
 	}
@@ -337,8 +339,9 @@ public class LCSProcessor {
 		return result;
 	}
 	
-	public LCSProcessor encodeCode(Code code) {
+	public LCSProcessor encode(Code code) {
 		if (code != null) {
+			code.encodeToLCS(this);
 		}
 		return this;
 	}
@@ -362,7 +365,7 @@ public class LCSProcessor {
 		return Argument.decode(this);
 	}
 	
-	public LCSProcessor encode(ArrayList<Argument> arguments) {
+	public LCSProcessor encode(Arguments arguments) {
 		if ((arguments != null) 
 				&& (arguments.size() >0)) {
 			encode(new UInt32(arguments.size()));
@@ -373,8 +376,8 @@ public class LCSProcessor {
 		return this;
 	}
 	
-	public ArrayList<Argument> decodeArguments() {
-		ArrayList<Argument> result = new ArrayList<Argument>();
+	public Arguments decodeArguments() {
+		Arguments result = new Arguments();
 		if (bis != null) {
 			UInt32 uint32 = decodeUInt32();
 			int size = (int)(long)(uint32.getAsLong());
@@ -464,6 +467,7 @@ public class LCSProcessor {
 	
 	public LCSProcessor encode(Module module) {
 		if (module != null) {
+			
 		}
 		return this;
 	}
@@ -476,14 +480,20 @@ public class LCSProcessor {
 		return result;
 	}
 	
-	public LCSProcessor encodeModules(ArrayList<Module> modules) {
-		if (modules != null) {
+	
+	public LCSProcessor encode(Modules modules) {
+		if ((modules != null) 
+				&& (modules.size() >0)) {
+			encode(new UInt32(modules.size()));
+			for (Module argument : modules) {
+				encode(argument);
+			}
 		}
 		return this;
 	}
 	
-	public ArrayList<Module> decodeModules() {
-		ArrayList<Module> result = new ArrayList<Module>();
+	public Modules decodeModules() {
+		Modules result = new Modules();
 		if (bis != null) {
 			UInt32 uint32 = decodeUInt32();
 			int size = (int)(long)(uint32.getAsLong());
@@ -494,7 +504,6 @@ public class LCSProcessor {
 		}
 		return result;
 	}
-	
 	
 	public Transaction decodeTransaction() {
 		Transaction result = null;

@@ -7,8 +7,6 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
-
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
@@ -22,6 +20,7 @@ import com.chaingrok.libra4j.types.AccountAddress;
 import com.chaingrok.libra4j.types.Argument;
 import com.chaingrok.libra4j.types.UInt32;
 import com.chaingrok.libra4j.types.Argument.Type;
+import com.chaingrok.libra4j.types.Arguments;
 import com.chaingrok.libra4j.types.UInt64;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -184,7 +183,7 @@ public class TestArgument extends TestClass {
 	
 	@Test
 	public void test006LCSEncodeDecodeArguments() {
-		ArrayList<Argument> arguments = new ArrayList<Argument>();
+		Arguments arguments = new Arguments();
 		byte[] bytes = LCSProcessor.buildEncoder()
 				.encode(arguments)
 				.build();
@@ -211,7 +210,7 @@ public class TestArgument extends TestClass {
 		assertNotNull(bytes);
 		assertEquals(UInt32.BYTE_LENGTH + UInt32.BYTE_LENGTH + UInt64.BYTE_LENGTH + UInt32.BYTE_LENGTH + UInt32.BYTE_LENGTH + stringValue.getBytes().length,bytes.length);
 		LCSProcessor decoder = LCSProcessor.buildDecoder(bytes);
-		ArrayList<Argument> result = decoder.decodeArguments();
+		Arguments result = decoder.decodeArguments();
 		assertEquals(arguments.size(),result.size());
 		Argument result0 = arguments.get(0);
 		assertEquals(argument0.getType(),result0.getType());

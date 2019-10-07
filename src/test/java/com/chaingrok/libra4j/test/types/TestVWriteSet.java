@@ -40,7 +40,6 @@ public class TestVWriteSet extends TestClass {
 	@Test
 	public void test002WriteOpInstanceOk() {
 		byte[] bytes = {0x00,0x01};
-		boolean isValue = true;
 		WriteOp writeOp = new WriteOp(bytes);
 		assertSame(bytes,writeOp.getBytes());
 		assertNull(writeOp.getOpType());

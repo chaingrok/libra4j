@@ -8,10 +8,17 @@ import com.chaingrok.libra4j.misc.Libra4jError;
 import com.chaingrok.libra4j.misc.Libra4jLog;
 import com.chaingrok.libra4j.misc.Utils;
 
-public class Argument implements LCSInterface {
+public class Argument extends ByteArray implements LCSInterface {
 	
 	private Type type;
-	private byte[] bytes;
+	
+	public Argument() {
+		super((byte[])null);
+	}
+	
+	public Argument(byte[] bytes) {
+		super(bytes);
+	}
 	
 	public Type getType() {
 		return type;
@@ -19,10 +26,6 @@ public class Argument implements LCSInterface {
 
 	public void setType(Type type) {
 		this.type = type;
-	}
-
-	public byte[] getBytes() {
-		return bytes;
 	}
 
 	public void setBytes(byte[] bytes) {

@@ -1,11 +1,12 @@
 package com.chaingrok.libra4j.types;
 
 import java.security.PublicKey;
-import java.util.ArrayList;
 
+import com.chaingrok.libra4j.misc.LCSInterface;
+import com.chaingrok.libra4j.misc.LCSProcessor;
 import com.chaingrok.libra4j.misc.Libra4jWarning;
 
-public class Transaction {
+public class Transaction implements LCSInterface {
 	
 	private AccountAddress senderAccountAddress = null;
 	private UInt64 sequenceNumber = null;
@@ -28,7 +29,7 @@ public class Transaction {
 	private Hash stateRootHash = null;
 	private byte[] fullTxnBytes = null;
 	private byte[] rawTxnBytes = null;
-	private ArrayList<Event> eventsList = null;
+	private Events events = null;
 	
 	public Type getType() {
 		return Type.get(this);
@@ -202,12 +203,12 @@ public class Transaction {
 		this.rawTxnBytes = rawTxnBytes;
 	}
 
-	public ArrayList<Event> getEventsList() {
-		return eventsList;
+	public Events getEventsList() {
+		return events;
 	}
 
-	public void setEventsList(ArrayList<Event> eventsList) {
-		this.eventsList = eventsList;
+	public void setEventsList(Events eventsList) {
+		this.events = eventsList;
 	}
 
 	@Override
@@ -227,14 +228,14 @@ public class Transaction {
 		result += "   gas unit price: "  + getGasUnitPrice() + "\n";
 		result += "   program: " +  "\n";
 		if (program != null) {
-			ArrayList<Argument> arguments = getProgram().getArguments();
+			Arguments arguments = getProgram().getArguments();
 			if ((arguments != null)
 				&& (arguments.size() > 0)) {
 				for (Argument argument : arguments) {
 					result += "      argument: " +  argument + "\n";
 				}
 			}
-			ArrayList<Module> modules = program.getModules();
+			Modules modules = program.getModules();
 			if ((modules != null)
 				&& (modules.size() > 0)) {
 				for (Module module : modules) {
@@ -246,7 +247,7 @@ public class Transaction {
 				result += "      code (" + code.getBytes().length+ " bytes): " +  code + "\n";
 			}
 		}
-		ArrayList<Event> events = getEventsList();
+		Events events = getEventsList();
 		if ((events != null) 
 				&& (events.size() > 0)) {
 			result += "   events: " + ":\n";
@@ -282,13 +283,20 @@ public class Transaction {
 			return result;
 		}
 	}
-	
-	public class RawTransaction {
 
+	@Override
+	public LCSProcessor encodeToLCS(LCSProcessor lcsProcessor) {
+		if (lcsProcessor != null) {
+			lcsProcessor.encode(getSenderAccountAddress())
+				.encode(getSequenceNumber())
+				.encode(getProgram())
+				.encode(getMaxGasAmount())
+				.encode(getGasUnitPrice())
+				.encode(getExpirationTime());
+		}
+		return lcsProcessor;
 	}
 	
-	public class SignedTransaction {
-
-	}
+	
 	
 }

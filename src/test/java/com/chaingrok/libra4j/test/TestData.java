@@ -9,6 +9,7 @@ import com.chaingrok.libra4j.types.AccountAddress;
 import com.chaingrok.libra4j.types.Program;
 import com.chaingrok.libra4j.types.Argument;
 import com.chaingrok.libra4j.types.Argument.Type;
+import com.chaingrok.libra4j.types.Arguments;
 import com.chaingrok.libra4j.types.Transaction;
 import com.chaingrok.libra4j.types.UInt64;
 import com.chaingrok.libra4j.types.ValidatorEndpoint;
@@ -49,14 +50,12 @@ public class TestData {
 			program.setCodeSize(195L);
 			TXN1.setProgram(program);
 			//
-			ArrayList<Argument> argList = new ArrayList<Argument>();
-			Argument arg1 = new Argument();
+			Arguments argList = new Arguments();
+			Argument arg1 = new Argument((new AccountAddress("bfbdc605cd15dfa8afc1c202cc1d51d0f768fdd9c67d42c332627cc9b9487392")).getBytes());
 			arg1.setType(Type.ADDRESS);
-			arg1.setBytes((new AccountAddress("bfbdc605cd15dfa8afc1c202cc1d51d0f768fdd9c67d42c332627cc9b9487392")).getBytes());
 			argList.add(arg1);
-			Argument arg2 = new Argument();
+			Argument arg2 = new Argument(new UInt64(0L).getBytes());
 			arg2.setType(Type.U64);
-			arg2.setBytes(new UInt64(0L).getBytes());
 			argList.add(arg2);
 			program.setArguments(argList);
 		}
