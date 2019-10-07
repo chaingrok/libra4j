@@ -36,11 +36,11 @@ public class TestData {
 			TXN1 = new Transaction();
 			//
 			TXN1.setVersion(123L);
-			TXN1.setSequenceNumber(121L);
+			TXN1.setSequenceNumber(new UInt64(121L));
 			TXN1.setSenderAccountAddress(new AccountAddress("0000000000000000000000000000000000000000000000000000000000000000"));
-			TXN1.setMaxGasAmount(100000L);
-			TXN1.setExpirationTime(1564593713L);
-			TXN1.setGasUnitPrice(0L);
+			TXN1.setMaxGasAmount(new UInt64(100000L));
+			TXN1.setExpirationTime(new UInt64(1564593713L));
+			TXN1.setGasUnitPrice(new UInt64(0L));
 			TXN1.setGasUsed(0L);
 			TXN1.setTxnInfoSerializedSize(102);
 			TXN1.setSignedTxnSerializedSize(400);
