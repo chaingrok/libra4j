@@ -14,6 +14,7 @@ import com.chaingrok.libra4j.types.Code;
 import com.chaingrok.libra4j.types.Module;
 import com.chaingrok.libra4j.types.Path;
 import com.chaingrok.libra4j.types.Program;
+import com.chaingrok.libra4j.types.Transaction;
 import com.chaingrok.libra4j.types.TransactionPayloadType;
 import com.chaingrok.libra4j.types.UInt16;
 import com.chaingrok.libra4j.types.UInt32;
@@ -54,14 +55,6 @@ public class LCSProcessor {
 			result = bos.toByteArray();
 		}
 		return result;
-	}
-	
-	public ByteArrayOutputStream getBos() {
-		return bos;
-	}
-	
-	public ByteArrayInputStream getBis() {
-		return bis;
 	}
 	
 	public LCSProcessor encode(byte[] bytes) {
@@ -321,7 +314,7 @@ public class LCSProcessor {
 			if (uint32 != null) {
 				result = TransactionPayloadType.get((int)(long)uint32.getAsLong());
 			} else {
-				new Libra4jError(Type.INVALID_VALUE,"paylod type is null");
+				new Libra4jError(Type.INVALID_VALUE,"payload type is null");
 			}
 		}
 		return result;
@@ -502,14 +495,15 @@ public class LCSProcessor {
 		return result;
 	}
 	
-	public int getUndecodedDataSize() {
-		int result = Integer.MAX_VALUE;
+	
+	public Transaction decodeTransaction() {
+		Transaction result = null;
 		if (bis != null) {
-			result = bis.available();
+			result = new Transaction();
 		}
 		return result;
 	}
-	
+
 	private void write(byte[] bytes) {
 		try {
 			bos.write(bytes);
@@ -517,6 +511,30 @@ public class LCSProcessor {
 			new Libra4jError(Type.JAVA_ERROR,e);
 		}
 		bosWritten = true;
+	}
+	
+	public ByteArrayOutputStream getBos() {
+		return bos;
+	}
+	
+	public Integer getEncodedDataSize() {
+		Integer result = null;
+		if (bos != null) {
+			result = bos.size();
+		}
+		return result;
+	}
+	
+	public ByteArrayInputStream getBis() {
+		return bis;
+	}
+	
+	public Integer getUndecodedDataSize() {
+		Integer result = null;
+		if (bis != null) {
+			result = bis.available();
+		}
+		return result;
 	}
 	
 }

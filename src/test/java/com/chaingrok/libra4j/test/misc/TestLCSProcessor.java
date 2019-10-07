@@ -25,8 +25,28 @@ import com.chaingrok.libra4j.types.UInt8;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestLCSProcessor extends TestClass {
 	
+	
 	@Test
-	public void tes001BooleanLCSEncodingDecoding() {
+	public void test001HelperFunctions() {
+		LCSProcessor encoder = LCSProcessor.buildEncoder();
+		assertNotNull(encoder);
+		assertNotNull(encoder.getBos());
+		assertEquals(0,(int)encoder.getEncodedDataSize());
+		encoder.encode(true);
+		assertNotNull(encoder.getBos());
+		assertEquals(1,(int)encoder.getEncodedDataSize());
+		encoder.encode(new UInt64(1L));
+		assertEquals(9,(int)encoder.getEncodedDataSize());
+		//
+		byte[] bytes = {0x01,0x02};
+		LCSProcessor decoder = LCSProcessor.buildDecoder(bytes);
+		assertNotNull(decoder);
+		assertNotNull(decoder.getBis());
+		assertEquals(2,(int)decoder.getUndecodedDataSize());
+	}
+	
+	@Test
+	public void test002BooleanLCSEncodingDecoding() {
 		boolean b = false;
 		byte[] bytes = LCSProcessor.buildEncoder()
 				.encode(b)
@@ -56,7 +76,7 @@ public class TestLCSProcessor extends TestClass {
 	}
 	
 	@Test
-	public void tes002StringLCSEncodingDecoding() {
+	public void test003StringLCSEncodingDecoding() {
 		String string = null;
 		byte[] bytes = LCSProcessor.buildEncoder()
 				.encode(string)
@@ -86,7 +106,7 @@ public class TestLCSProcessor extends TestClass {
 	}
 	
 	@Test
-	public void tes003UIntLCSEncodingDecodingEdgeCases() {
+	public void test004UIntLCSEncodingDecodingEdgeCases() {
 		UInt8 uint8 = null;
 		byte[] bytes = LCSProcessor.buildEncoder()
 				.encode(uint8)
@@ -146,7 +166,7 @@ public class TestLCSProcessor extends TestClass {
 	}
 	
 	@Test
-	public void tes004UInt8LCSEncodingDecoding() {
+	public void test005UInt8LCSEncodingDecoding() {
 		Long longValue = 0L;
 		UInt8 uint8 = new UInt8(longValue);
 		byte[] bytes = LCSProcessor.buildEncoder()
@@ -201,7 +221,7 @@ public class TestLCSProcessor extends TestClass {
 	}
 	
 	@Test
-	public void tes005UInt16LCSEncodingDecoding() {
+	public void test006UInt16LCSEncodingDecoding() {
 		Long longValue = 0L;
 		UInt16 uint16 = new UInt16(longValue);
 		byte[] bytes = LCSProcessor.buildEncoder()
@@ -282,7 +302,7 @@ public class TestLCSProcessor extends TestClass {
 	}
 	
 	@Test
-	public void tes006UInt32LCSEncodingDecoding() {
+	public void test007UInt32LCSEncodingDecoding() {
 		Long longValue = 0L;
 		UInt32 uint32 = new UInt32(longValue);
 		byte[] bytes = LCSProcessor.buildEncoder()
@@ -402,7 +422,7 @@ public class TestLCSProcessor extends TestClass {
 	}
 	
 	@Test
-	public void tes007UInt64LCSEncodingDecoding() {
+	public void test008UInt64LCSEncodingDecoding() {
 		Long longValue = 0L;
 		UInt64 uint64 = new UInt64(longValue);
 		byte[] bytes = LCSProcessor.buildEncoder()
@@ -546,7 +566,7 @@ public class TestLCSProcessor extends TestClass {
 	}
 	
 	@Test
-	public void tes008AccountAddressLCSEncodingDecoding() {
+	public void test009AccountAddressLCSEncodingDecoding() {
 		String hex = "CA820BF9305EB97D0D784F71B3955457FBF6911F5300CEAA5D7E8621529EAE19";
 		AccountAddress accountAddress = new AccountAddress(hex);
 		byte[] bytes = LCSProcessor.buildEncoder()
