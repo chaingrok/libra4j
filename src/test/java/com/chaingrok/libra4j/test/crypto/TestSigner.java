@@ -15,8 +15,11 @@ import com.chaingrok.libra4j.crypto.Signer;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestSigner {
 	
-    @Test
-    public void test001_validateSignatureOneSigner() {
+	
+    
+	
+	@Test
+    public void test002ValidateSignatureOneSigner() {
     	KeyPair keyPair = KeyPair.random();
     	Signer signer = new Signer(KeyPair.ED25519,keyPair.getPrivateKey(),keyPair.getPublicKey());
     	//
@@ -30,7 +33,7 @@ public class TestSigner {
     
     
     @Test
-    public void test002_validateSignatureTwoSigners() {
+    public void test003ValidateSignatureTwoSigners() {
     	KeyPair keyPair = KeyPair.random();
     	Signer signer = new Signer(KeyPair.ED25519,keyPair.getPrivateKey());
     	//
@@ -45,7 +48,7 @@ public class TestSigner {
     }
     
     @Test
-    public void test003_rejectSignatureOneSigner() {
+    public void test004RejectSignatureOneSigner() {
     	KeyPair keyPair = KeyPair.random();
     	Signer signer = new Signer(KeyPair.ED25519,keyPair.getPrivateKey(),keyPair.getPublicKey());
     	//
@@ -59,7 +62,7 @@ public class TestSigner {
     }
     
     @Test
-    public void test004_rejectSignatureTwoSigner2() {
+    public void test005RejectSignatureTwoSigners() {
     	KeyPair keyPair = KeyPair.random();
     	Signer signer = new Signer(KeyPair.ED25519,keyPair.getPrivateKey(),keyPair.getPublicKey());
     	//

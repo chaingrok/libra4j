@@ -20,13 +20,13 @@ import com.chaingrok.libra4j.test.TestData;
 public class TestKeyPair {
 	
 	@Test
-    public void test001_validateTestData() {
+    public void test001ValidateTestData() {
     	assertEquals(KeyPair.UNCOMPRESSED_KEY_LENGTH,TestData.TEST_PRIVATE_KEY_HEX1.length()/2);
 		assertEquals(KeyPair.COMPRESSED_KEY_LENGTH,TestData.TEST_PUBLIC_KEY_HEX1.length()/2); 
     }
     
     @Test
-	public void test002_HexToPrivateKeyAndBack() {
+	public void test002HexToPrivateKeyAndBack() {
         PrivateKey privateKey = KeyPair.privateKeyFromHexString(TestData.TEST_PRIVATE_KEY_HEX1);
         assertNotNull(privateKey);
         assertEquals(KeyPair.UNCOMPRESSED_KEY_LENGTH,privateKey.getEncoded().length);
@@ -34,7 +34,7 @@ public class TestKeyPair {
     }
     
     @Test
-	public void test003_HexToPublicKeyAndBack() {
+	public void test003HexToPublicKeyAndBack() {
         PublicKey publicKey = KeyPair.publicKeyFromHexString(TestData.TEST_PUBLIC_KEY_HEX1);
         assertNotNull(publicKey);
         assertEquals(KeyPair.COMPRESSED_KEY_LENGTH,publicKey.getEncoded().length);
@@ -42,7 +42,7 @@ public class TestKeyPair {
     }
     
     @Test
-	public void test004_PublicKeyToAddressAndBack() {
+	public void test004PublicKeyToAddressAndBack() {
         PublicKey publicKey = KeyPair.publicKeyFromHexString(TestData.TEST_PUBLIC_KEY_HEX1);
         assertNotNull(publicKey);
         assertEquals(TestData.TEST_ADDRESS1,KeyPair.toLibraAddress(publicKey));
@@ -52,7 +52,7 @@ public class TestKeyPair {
     
     
     @Test
-	public void test005_generateRandomKeyPair() {
+	public void test005GenerateRandomKeyPair() {
 		KeyPair keyPair = KeyPair.random();
 		assertEquals(KeyPair.ED25519, keyPair.getAlgortihhm());
 		assertNotNull(keyPair.getPrivateKey());
@@ -62,7 +62,7 @@ public class TestKeyPair {
     }
     
     @Test
-    public void test006_validateKeyPairOk() {
+    public void test006ValidateKeyPairOk() {
     	KeyPair keyPair = KeyPair.random();
     	assertTrue(KeyPair.validatePair(keyPair.getPrivateKey(), keyPair.getPublicKey()));
     	//
