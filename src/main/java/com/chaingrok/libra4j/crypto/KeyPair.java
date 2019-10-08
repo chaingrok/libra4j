@@ -26,7 +26,7 @@ public class KeyPair {
 	public static final int COMPRESSED_KEY_LENGTH = PUBLIC_KEY_PREFIX_LENGTH  + PUBLIC_KEY_STRIPPED_LENGTH;
 	
 	static {
-		Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
+		Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider()); //to automatically initialize for BountyCastle
 	}
 	
 	private PrivateKey privateKey;
@@ -87,7 +87,22 @@ public class KeyPair {
         return result;
     }
 	
-	public static byte[] toLibraAddressBytes(PublicKey publicKey) {
+	public static byte[] stripPrefix(byte[] publicKeyUnstrippedBytes) {
+        byte[] publicKeyStripped = new byte[PUBLIC_KEY_STRIPPED_LENGTH];
+        System.arraycopy(publicKeyUnstrippedBytes, PUBLIC_KEY_PREFIX_LENGTH, publicKeyStripped, 0, PUBLIC_KEY_STRIPPED_LENGTH);
+        return publicKeyStripped;
+    }
+	
+	
+	
+	public static String toLibraAddress(PublicKey publicKey) {
+		String result = null;
+        byte[] bytes = toLibraAddressByteArray(publicKey);
+        result = Utils.byteArrayToHexString(bytes);
+        return result;
+    }
+	
+	public static byte[] toLibraAddressByteArray(PublicKey publicKey) {
 		byte[] result = null;
         SHA3.DigestSHA3 digestSHA3 = new SHA3.Digest256();
         byte[] strippedPublicKey = stripPrefix(publicKey.getEncoded());
@@ -95,18 +110,6 @@ public class KeyPair {
         return result;
     }
 	
-	public static byte[] stripPrefix(byte[] publicKeyUnstrippedBytes) {
-        byte[] publicKeyStripped = new byte[PUBLIC_KEY_STRIPPED_LENGTH];
-        System.arraycopy(publicKeyUnstrippedBytes, PUBLIC_KEY_PREFIX_LENGTH, publicKeyStripped, 0, PUBLIC_KEY_STRIPPED_LENGTH);
-        return publicKeyStripped;
-    }
-	
-	public static String toLibraAddress(PublicKey publicKey) {
-		String result = null;
-        byte[] bytes = toLibraAddressBytes(publicKey);
-        result = Utils.byteArrayToHexString(bytes);
-        return result;
-    }
     
     public static PrivateKey privateKeyFromHexString(String privateKeyHexString) {
 		PrivateKey result = null;
