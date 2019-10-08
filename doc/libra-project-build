@@ -1,3 +1,4 @@
 //from libra project top directory
-./scripts/cli/start_cli_testnet.sh
-./scripts/dev_setup.sh
+scripts/cli/start_cli_testnet.sh
+scripts/dev_setup.sh
+cargo build --bin compiler
