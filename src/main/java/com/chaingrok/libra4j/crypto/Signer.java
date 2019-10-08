@@ -59,6 +59,10 @@ public class Signer {
 		this.publicKey = publicKey;
 	}
 	
+	public String getCryptoAlgorithm() {
+		return cryptoAlgorithm;
+	}
+	
 	public byte[] signRawTransaction(Transaction rawTransaction, PrivateKey privateKey) {
         SHA3.DigestSHA3 digestSHA3 = new SHA3.Digest256();
         byte[] hashSuffix = digestSHA3.digest(LIBRA_HASH_SUFFIX.getBytes());

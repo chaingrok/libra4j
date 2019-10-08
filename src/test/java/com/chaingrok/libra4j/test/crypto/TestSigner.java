@@ -16,12 +16,17 @@ import com.chaingrok.libra4j.crypto.Signer;
 public class TestSigner {
 	
 	
-    
+    @Test
+    public void test001CheckSignerAlgo() {
+    	KeyPair keyPair = KeyPair.random();
+    	Signer signer = new Signer(keyPair.getPrivateKey());
+    	assertEquals(Signer.DEFAULT_ALGORITHM,signer.getCryptoAlgorithm());
+    }
 	
 	@Test
     public void test002ValidateSignatureOneSigner() {
     	KeyPair keyPair = KeyPair.random();
-    	Signer signer = new Signer(KeyPair.ED25519,keyPair.getPrivateKey(),keyPair.getPublicKey());
+    	Signer signer = new Signer(keyPair.getPrivateKey(),keyPair.getPublicKey());
     	//
     	String content = "foo";
     	byte[] signature = signer.sign(content.getBytes());
@@ -35,7 +40,7 @@ public class TestSigner {
     @Test
     public void test003ValidateSignatureTwoSigners() {
     	KeyPair keyPair = KeyPair.random();
-    	Signer signer = new Signer(KeyPair.ED25519,keyPair.getPrivateKey());
+    	Signer signer = new Signer(keyPair.getPrivateKey());
     	//
     	String content = "foo";
     	String content2 = "bar";
@@ -43,14 +48,14 @@ public class TestSigner {
     	assertNotNull(signature);
     	assertEquals(64,signature.length);
     	//
-    	Signer signer2 = new Signer(KeyPair.ED25519,keyPair.getPublicKey());
+    	Signer signer2 = new Signer(keyPair.getPublicKey());
     	assertFalse(signer2.verify(signature, content2.getBytes()));
     }
     
     @Test
     public void test004RejectSignatureOneSigner() {
     	KeyPair keyPair = KeyPair.random();
-    	Signer signer = new Signer(KeyPair.ED25519,keyPair.getPrivateKey(),keyPair.getPublicKey());
+    	Signer signer = new Signer(keyPair.getPrivateKey(),keyPair.getPublicKey());
     	//
     	String content = "foo";
     	String content2 = "bar";
@@ -64,7 +69,7 @@ public class TestSigner {
     @Test
     public void test005RejectSignatureTwoSigners() {
     	KeyPair keyPair = KeyPair.random();
-    	Signer signer = new Signer(KeyPair.ED25519,keyPair.getPrivateKey(),keyPair.getPublicKey());
+    	Signer signer = new Signer(keyPair.getPrivateKey(),keyPair.getPublicKey());
     	//
     	String content = "foo";
     	String content2 = "bar";
@@ -72,7 +77,7 @@ public class TestSigner {
     	assertNotNull(signature);
     	assertEquals(64,signature.length);
     	//
-    	Signer signer2 = new Signer(KeyPair.ED25519,keyPair.getPublicKey());
+    	Signer signer2 = new Signer(keyPair.getPublicKey());
     	assertFalse(signer2.verify(signature, content2.getBytes()));
     }
     
