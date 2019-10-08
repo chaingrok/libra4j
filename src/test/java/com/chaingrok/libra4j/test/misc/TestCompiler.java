@@ -18,7 +18,7 @@ public class TestCompiler {
 	public static final String MVIR_DIR = ""; //
 	public static final String MVBC_DIR = "";
 	
-	@Test
+	//@Test
 	public void test001_compileGetVersion() {
 		Compiler compiler = new Compiler(LIBRA_DIR);
 		assertTrue(compiler.getVersion().startsWith(Compiler.VERSION_PREFIX));
