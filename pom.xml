@@ -123,6 +123,7 @@
                     <excludes>
                         <exclude>**/*org/libra/grpc/**</exclude>
                         <exclude>**/*com/chaingrok/libra4j/misc/ProtoGenerator.class</exclude>
+                        <exclude>**/*com/chaingrok/libra4j/misc/Compiler.class</exclude>
                     </excludes>
                 </configuration>
 				<executions>
