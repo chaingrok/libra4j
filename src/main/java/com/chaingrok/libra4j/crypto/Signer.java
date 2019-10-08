@@ -18,9 +18,9 @@ public class Signer {
 	public static final String DEFAULT_ALGORITHM = KeyPair.ED25519;
 	public static final String LIBRA_HASH_SUFFIX = "RawTransaction@@$$LIBRA$$@@"; // cf crypto/legacy_crypto/src/hash.rs
 	
-	String cryptoAlgorithm = null;
-	PrivateKey privateKey = null;
-	PublicKey publicKey = null;
+	private String cryptoAlgorithm = null;
+	private PrivateKey privateKey = null;
+	private PublicKey publicKey = null;
 	
 	public Signer(PrivateKey privateKey) {
 		this(DEFAULT_ALGORITHM,privateKey);

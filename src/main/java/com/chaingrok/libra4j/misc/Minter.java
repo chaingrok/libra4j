@@ -19,10 +19,6 @@ public class Minter {
 		    .host("faucet.testnet.libra.org");
 	private final OkHttpClient okHttpClient = new OkHttpClient();
 	
-	
-	public Minter() {
-	}
-	
 	public int mint(AccountAddress accountAddress,long microLibras) {
 		int result = -1;
 		
