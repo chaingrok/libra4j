@@ -14,7 +14,6 @@ import org.bouncycastle.jcajce.provider.digest.SHA3;
 
 import com.chaingrok.libra4j.misc.Libra4jException;
 import com.chaingrok.libra4j.misc.Utils;
-import com.google.protobuf.ByteString;
 
 public class KeyPair {
 	
@@ -41,16 +40,8 @@ public class KeyPair {
 		return privateKey;
 	}
 
-	public void setPrivateKey(PrivateKey privateKey) {
-		this.privateKey = privateKey;
-	}
-
 	public PublicKey getPublicKey() {
 		return publicKey;
-	}
-
-	public void setPublicKey(PublicKey publicKey) {
-		this.publicKey = publicKey;
 	}
 	
 	public byte[] getLibraAddress() {
@@ -81,10 +72,6 @@ public class KeyPair {
         return publicKeyFromByteArray(Utils.hexStringToByteArray(publicKeyHexString));
     }
 	
-	public static PublicKey publicKeyFromByteString(ByteString pkByteString) {
-		return publicKeyFromByteArray(pkByteString.toByteArray());
-	}
-	
 	public static PublicKey publicKeyFromByteArray(byte[] pkBytes) {
     	PublicKey result = null;
         try {
@@ -100,8 +87,6 @@ public class KeyPair {
         System.arraycopy(publicKeyUnstrippedBytes, PUBLIC_KEY_PREFIX_LENGTH, publicKeyStripped, 0, PUBLIC_KEY_STRIPPED_LENGTH);
         return publicKeyStripped;
     }
-	
-	
 	
 	public static String toLibraAddress(PublicKey publicKey) {
 		String result = null;

@@ -16,8 +16,6 @@ import com.chaingrok.libra4j.crypto.KeyPair;
 import com.chaingrok.libra4j.misc.Utils;
 import com.chaingrok.libra4j.test.TestData;
 
-
-
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestKeyPair {
 	
