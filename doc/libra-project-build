@@ -1,0 +1,3 @@
+//from libra project top directory
+./scripts/cli/start_cli_testnet.sh
+./scripts/dev_setup.sh
