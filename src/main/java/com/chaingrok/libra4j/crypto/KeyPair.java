@@ -53,6 +53,14 @@ public class KeyPair {
 		this.publicKey = publicKey;
 	}
 	
+	public byte[] getLibraAddress() {
+		byte[] result = null;
+		if (this.publicKey != null) {
+			result = KeyPair.toLibraAddressByteArray(getPublicKey());
+		}
+		return result;
+	}
+	
 	public String getAlgortihhm() {
 		String result = null;
 		if (publicKey != null) {

@@ -18,8 +18,8 @@ public class TestMinter extends TestClass {
 	@Test
 	public void test001HelperFunctions() {
 		KeyPair keyPair = KeyPair.random();
-		byte[] bytes = KeyPair.toLibraAddressByteArray(keyPair.getPublicKey());
-		AccountAddress accountAddress = new AccountAddress(bytes);
+		//
+		AccountAddress accountAddress = new AccountAddress(keyPair.getLibraAddress());
 		long microLibras = 10_000_000L;
 		Minter minter = new Minter();
 		assertEquals(200,minter.mint(accountAddress, microLibras));
