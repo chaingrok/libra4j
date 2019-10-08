@@ -11,6 +11,7 @@ public class Compiler {
 	
 	
 	public static final String COMPILER_REL_FILEPATH = "target" + File.separator + "debug" + File.separator + "compiler";
+	
 	public static final String VERSION_PREFIX = "IR Compiler ";
 	private String compilerFilepath ;
 	private int majorVersion;
@@ -54,31 +55,30 @@ public class Compiler {
 		return versionStr;
 	}
 	
-	public String createCompileCommand(String srcFilepath,String binFilepath) {
+	public String createCompileCommand(String srcFilepath) {
 		String command = "";
 		command += compilerFilepath;
-		command += " --output ";
-		command += " " + binFilepath;
 		command += " " + srcFilepath;
 		return command;
 	}
 	
 	@SuppressWarnings("deprecation")
-	public File compile(String srcFilepath,String binFilepath) {
+	public File compile(String srcFilepath) {
 		File srcFile = new File(srcFilepath);
 		if (!srcFile.exists()) {
 			throw  new Libra4jException("move src file does not exist: " + srcFile.getAbsolutePath());
 		}
-		File binFile = new File(binFilepath);
-		File binDir = binFile.getParentFile();
-		if (!binDir.exists()) {
-			throw  new Libra4jException("directory for binaries does not exist: " + binDir.getAbsolutePath());
+		File compDir = srcFile.getParentFile();
+		if (!compDir.exists()) {
+			throw  new Libra4jException("directory for compiled file does not exist: " + compDir.getAbsolutePath());
 		}
-		if (binFile.exists()) {
-			binFile.delete();
+		File compFile = new File(compDir.getAbsolutePath() + File.separator + srcFile.getName().replace("mvir", "mv"));
+		System.out.println("compiled file:" + compFile.getAbsolutePath());
+		if (compFile.exists()) {
+			compFile.delete();
 		}
 		//
-		String command = createCompileCommand(srcFilepath,binFilepath);
+		String command = createCompileCommand(srcFilepath);
 		Runtime rt = Runtime.getRuntime();
 		Process pr;
 		try {
@@ -99,10 +99,10 @@ public class Compiler {
 			System.out.println(msg);
 			throw new Libra4jException(msg);
 		}
-		if (!binFile.exists()) {
-			throw new Libra4jException("Bin contract file not created: " + binFile.getAbsolutePath());
+		if (!compFile.exists()) {
+			throw new Libra4jException("Bin contract file not created: " + compFile.getAbsolutePath());
 		}
-		return binFile;
+		return compFile;
 	}
 
 	public String getCompilerFilepath() {
