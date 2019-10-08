@@ -505,6 +505,13 @@ public class LCSProcessor {
 		return result;
 	}
 	
+	public LCSProcessor encode(Transaction transaction) {
+		if (transaction != null)  {
+			transaction.encodeToLCS(this);
+		}
+		return this;
+	}
+	
 	public Transaction decodeTransaction() {
 		Transaction result = null;
 		if (bis != null) {

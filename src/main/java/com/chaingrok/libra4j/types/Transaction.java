@@ -7,7 +7,7 @@ import com.chaingrok.libra4j.misc.LCSProcessor;
 import com.chaingrok.libra4j.misc.Libra4jWarning;
 
 public class Transaction implements LCSInterface {
-	
+	//raw transaction
 	private AccountAddress senderAccountAddress = null;
 	private UInt64 sequenceNumber = null;
 	private TransactionPayloadType transactionPayloadType = null;
@@ -296,7 +296,4 @@ public class Transaction implements LCSInterface {
 		}
 		return lcsProcessor;
 	}
-	
-	
-	
 }
