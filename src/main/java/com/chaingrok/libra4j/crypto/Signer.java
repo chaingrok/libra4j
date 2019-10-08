@@ -12,7 +12,6 @@ import org.bouncycastle.jcajce.provider.digest.SHA3;
 import com.chaingrok.libra4j.misc.Libra4jException;
 import com.chaingrok.libra4j.types.Signature;
 import com.chaingrok.libra4j.types.Transaction;
-import com.google.protobuf.ByteString;
 
 public class Signer {
 	
@@ -30,10 +29,6 @@ public class Signer {
 	public Signer(String cryptoAlgorithm,PrivateKey privateKey) {
 		this.cryptoAlgorithm = cryptoAlgorithm;
 		this.privateKey = privateKey;
-	}
-	
-	public Signer(ByteString publicKeyByteString) {
-		this(publicKeyByteString.toByteArray());
 	}
 	
 	public Signer(byte[] publicKeyBytes) {
@@ -101,10 +96,6 @@ public class Signer {
 			throw new Libra4jException(e);
 		}
         return result;
-	}
-	
-	public boolean verify(Signature signature, ByteString content) {
-		return verify(signature.getBytes(),content.toByteArray());
 	}
 	
 	public boolean verify(Signature signature, byte[] content) {

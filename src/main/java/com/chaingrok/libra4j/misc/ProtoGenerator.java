@@ -10,7 +10,7 @@ import org.apache.commons.io.IOUtils;
 
 public class ProtoGenerator {
 	
-	public static final String PROTO_COMMAND = "/usr/local/bin/protoc";
+	public static final String PROTO_COMMAND = "/usr/local/bin/protoc"; //assuming running on a Mac
 	
 	private File protoDir;
 	private File grpcDir;
