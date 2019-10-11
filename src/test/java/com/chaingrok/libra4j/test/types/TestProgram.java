@@ -3,13 +3,18 @@ package com.chaingrok.libra4j.test.types;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
+
+import java.io.File;
 
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import com.chaingrok.libra4j.misc.LCSProcessor;
+import com.chaingrok.libra4j.misc.Libra4jConfig;
 import com.chaingrok.libra4j.misc.Utils;
 import com.chaingrok.libra4j.test.TestClass;
 import com.chaingrok.libra4j.types.Argument;
@@ -73,5 +78,18 @@ public class TestProgram extends TestClass {
 		byte[] testVectorModule2 = {(byte)0x0d};
 		assertArrayEquals(testVectorModule2,module2.getBytes());
 	}
+	
+	@Test
+	public void test003ProgramCodeDeserializeFromFile() { 
+		Program program = new Program();
+		String filePath = Libra4jConfig.MVIR_DIR + File.separator + Program.KEY_ROTATE + "." + Program.MV_EXT;
+		File mvFile = new File(filePath);
+		assertTrue("file does exist: " + mvFile.getAbsolutePath(),mvFile.exists());
+		assertNull(program.getCode());
+		byte[] bytes = program.deserializeFromFile(filePath);
+		assertTrue(bytes.length > 100);
+		assertArrayEquals(bytes,program.getCode().getBytes());
+	}
+		
 
 }

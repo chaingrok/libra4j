@@ -16,9 +16,6 @@ import com.chaingrok.libra4j.misc.Libra4jLog.Type;
 import com.chaingrok.libra4j.test.TestClass;
 import com.chaingrok.libra4j.types.MoveIR;
 
-
-
-
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestMoveIR extends TestClass {
 	
