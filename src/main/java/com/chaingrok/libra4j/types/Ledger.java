@@ -416,6 +416,7 @@ public class Ledger {
 		Transaction result = null;
 		//System.out.println("txn bytes to process (" + signedTransactionBytes.length + "): " + Utils.byteArrayToHexString(signedTransactionBytes));
 		LCSProcessor decoder = LCSProcessor.buildDecoder(signedTransactionBytes);
+		/*
 		result = decoder.decodeTransaction();
 		result.setSignedTransactionBytes(signedTransactionBytes);
 		if (decoder.getUndecodedDataSize() > 0) {
@@ -424,6 +425,7 @@ public class Ledger {
 		if (signedTransactionBytes.length != length) {
 			System.out.println("ERROR - length mismatch: " + length + " <> " + signedTransactionBytes.length);
 		}
+		*/
 		return result;
 	}
 
