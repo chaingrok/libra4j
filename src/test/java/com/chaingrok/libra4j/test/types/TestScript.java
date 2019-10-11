@@ -49,8 +49,8 @@ public class TestScript extends TestClass {
 		assertEquals(new UInt64(12000000L),argument1.getUInt64());
 		//
 		assertEquals(128,(int)decoder.getUndecodedDataSize());
-		assertEquals(new UInt64(1000000L),decoder.decodeUInt64());
-		assertEquals(new UInt64(1L),decoder.decodeUInt64());
+		assertEquals(new UInt64(1000000L),decoder.decodeUInt64()); //max gas amount
+		assertEquals(new UInt64(1L),decoder.decodeUInt64()); //gas sunit price
 		assertEquals(new UInt64(1570633176L),decoder.decodeUInt64()); // expiration time
 		decoder.decodePublicKey();
 		decoder.decodeSignature();
