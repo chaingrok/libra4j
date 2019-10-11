@@ -414,11 +414,11 @@ public class Ledger {
 	
 	private Transaction processSignedTransactionBytes(byte[] signedTransactionBytes,int length) {
 		Transaction result = null;
-		//System.out.println("txn bytes to process (" + signedTransactionBytes.length + "): " + Utils.byteArrayToHexString(signedTransactionBytes));
+		System.out.println("signed txn bytes to process (" + signedTransactionBytes.length + "): " + Utils.byteArrayToHexString(signedTransactionBytes));
 		LCSProcessor decoder = LCSProcessor.buildDecoder(signedTransactionBytes);
-		/*
 		result = decoder.decodeTransaction();
 		result.setSignedTransactionBytes(signedTransactionBytes);
+		/*
 		if (decoder.getUndecodedDataSize() > 0) {
 			new Libra4jError(Type.INVALID_LENGTH,"remaining undecoded data:  (" + decoder.getUndecodedDataSize() + "):" + Utils.byteArrayToHexString(signedTransactionBytes) );
 		}

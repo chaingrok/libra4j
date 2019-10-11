@@ -44,7 +44,7 @@ public class TestLedger extends TestClass {
 	
 	//@Test
 	public void test002GetTransactionWithoutEvents() {
-		long version = 1L;
+		long version = 31167L;
 		boolean withEvents = false;
 		Ledger ledger = new Ledger(TestData.VALIDATOR_ENDPOINT);
 		Transaction transaction = ledger.getTransaction(version,withEvents);

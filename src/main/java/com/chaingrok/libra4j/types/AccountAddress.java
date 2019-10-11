@@ -34,6 +34,5 @@ public class AccountAddress extends ByteArray {
 				new Libra4jError(Type.INVALID_LENGTH,"invalid account address size: " + bytes.length +  " <> " + BYTE_LENGTH);
 			}
 		}
-		this.bytes = bytes;
 	}
 }

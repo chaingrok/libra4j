@@ -74,7 +74,8 @@ public class Program implements LCSInterface {
 			lcsProcessor
 				.encode(code)
 				.encode(arguments)
-				.encode(modules);
+				.encode(modules)
+				;
 		}
 		return lcsProcessor;
 	}

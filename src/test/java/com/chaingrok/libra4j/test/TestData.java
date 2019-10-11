@@ -41,8 +41,6 @@ public class TestData {
 			TXN1.setExpirationTime(new UInt64(1564593713L));
 			TXN1.setGasUnitPrice(new UInt64(0L));
 			TXN1.setGasUsed(0L);
-			TXN1.setTxnInfoSerializedSize(102);
-			TXN1.setSignedTxnSerializedSize(400);
 			//
 			Program program = new Program();
 			program.setCodeSize(195L);

@@ -110,16 +110,6 @@ public class TestTransaction extends TestClass {
 		transaction.setStateRootHash(stateRootHash);
 		assertSame(stateRootHash,transaction.getStateRootHash());
 		//
-		assertNull(transaction.getFullTxnBytes());
-		byte[] fullTxnBytes = Utils.getByteArray(50);
-		transaction.setFullTxnBytes(fullTxnBytes);
-		assertSame(fullTxnBytes,transaction.getFullTxnBytes());
-		//
-		assertNull(transaction.getRawTxnBytes());
-		byte[] rawTxnBytes = Utils.getByteArray(30);
-		transaction.setRawTxnBytes(rawTxnBytes);
-		assertSame(rawTxnBytes,transaction.getRawTxnBytes());
-		//
 		assertNull(transaction.getEventsList());
 		Events eventsList = new Events();
 		transaction.setEventsList(eventsList);

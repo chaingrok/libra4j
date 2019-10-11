@@ -26,6 +26,12 @@ public class Script implements LCSInterface {
 
 	@Override
 	public LCSProcessor encodeToLCS(LCSProcessor lcsProcessor) {
+		if (lcsProcessor != null) {
+			lcsProcessor
+				.encode(code)
+				.encode(arguments)
+				;
+		}
 		return lcsProcessor;
 	}
 

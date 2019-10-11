@@ -15,7 +15,9 @@ import com.chaingrok.libra4j.types.Module;
 import com.chaingrok.libra4j.types.Modules;
 import com.chaingrok.libra4j.types.Path;
 import com.chaingrok.libra4j.types.Program;
+import com.chaingrok.libra4j.types.PubKey;
 import com.chaingrok.libra4j.types.Script;
+import com.chaingrok.libra4j.types.Signature;
 import com.chaingrok.libra4j.types.Transaction;
 import com.chaingrok.libra4j.types.TransactionPayloadType;
 import com.chaingrok.libra4j.types.UInt16;
@@ -79,7 +81,6 @@ public class LCSProcessor {
 				&& (bis.available() >= 1)){
 			UInt32 length = decodeUInt32();
 			int intLength = (int)(long)length.getAsLong();
-			System.out.println("byte array length:" + intLength);
 			byte[] bytes = new byte[intLength];
 			int count = bis.read(bytes,0,intLength);
 			if (count == intLength) {
@@ -88,7 +89,6 @@ public class LCSProcessor {
 				new Libra4jError(Type.INVALID_LENGTH,"byte buffer read did not return proper number of bytes: " + count + " <> " + intLength);
 			}
 		}
-		int avail = bis.available();
 		return result;
 	}
 	
@@ -271,6 +271,46 @@ public class LCSProcessor {
 		return result;
 	}
 	
+	public Signature decodeSignature() {
+		Signature result = null;
+		if (bis !=null) {
+			UInt32 length = decodeUInt32();
+			if (length.getAsLong() != Signature.BYTE_LENGTH) {
+				new Libra4jError(Type.INVALID_LENGTH,"encoded length of Signature is invalid: " + length.getAsLong() + " <> " + Signature.BYTE_LENGTH);
+			}
+			byte[] bytes = new byte[Signature.BYTE_LENGTH];
+			int count = bis.read(bytes, 0,Signature.BYTE_LENGTH);
+			if (count == Signature.BYTE_LENGTH) {
+				result = new Signature(bytes);
+			} else {
+				new Libra4jError(Type.INVALID_LENGTH,"byte buffer read did not return proper number of bytes: " 
+							+ count + " <> " + Signature.BYTE_LENGTH 
+							+ " (" + Utils.byteArrayToHexString(bytes) + ")");
+			}
+		}
+		return result;
+	}
+	
+	public PubKey decodePublicKey() {
+		PubKey result = null;
+		if (bis !=null) {
+			UInt32 length = decodeUInt32();
+			if (length.getAsLong() != PubKey.BYTE_LENGTH) {
+				new Libra4jError(Type.INVALID_LENGTH,"encoded length of PubKey is invalid: " + length.getAsLong() + " <> " + PubKey.BYTE_LENGTH);
+			}
+			byte[] bytes = new byte[PubKey.BYTE_LENGTH];
+			int count = bis.read(bytes, 0,PubKey.BYTE_LENGTH);
+			if (count == PubKey.BYTE_LENGTH) {
+				result = new PubKey(bytes);
+			} else {
+				new Libra4jError(Type.INVALID_LENGTH,"byte buffer read did not return proper number of bytes: " 
+							+ count + " <> " + PubKey.BYTE_LENGTH 
+							+ " (" + Utils.byteArrayToHexString(bytes) + ")");
+			}
+		}
+		return result;
+	}
+	
 	public LCSProcessor encode(Path path) {
 		if (path != null) {
 			encode(path.getBytes());
@@ -333,7 +373,7 @@ public class LCSProcessor {
 	
 	public Program decodeProgram() {
 		Program result = null;
-		if (bis !=null) {
+		if (bis != null) {
 			result = new Program();
 			result.setCode(decodeCode());
 			result.setArguments(decodeArguments());
@@ -344,11 +384,10 @@ public class LCSProcessor {
 	
 	public Script decodeScript() {
 		Script result = null;
-		if (bis !=null) {
+		if (bis != null) {
 			result = new Script();
-			System.out.println("script bytes (" + getUndecodedDataSize() +  "): " + Utils.byteArrayToHexString(getUndecodedBytes()));
 			result.setCode(decodeCode());
-			//result.setArguments(decodeArguments());
+			result.setArguments(decodeArguments());
 		}
 		return result;
 	}
@@ -395,7 +434,6 @@ public class LCSProcessor {
 		if (bis != null) {
 			UInt32 uint32 = decodeUInt32();
 			int size = (int)(long)(uint32.getAsLong());
-			System.out.println("arguments: " + size);
 			while (size > 0) {
 				--size;
 				result.add(decodeArgument());
@@ -531,6 +569,7 @@ public class LCSProcessor {
 		Transaction result = null;
 		if (bis != null) {
 			result = new Transaction();
+			//raw transaction fields
 			result.setSenderAccountAddress(decodeAccountAddress());
 			result.setSequenceNumber(decodeUInt64());
 			TransactionPayloadType transactionPayloadType = decodeTransactionPayloadType();
@@ -554,7 +593,7 @@ public class LCSProcessor {
 			}
 			result.setMaxGasAmount(decodeUInt64());		
 			result.setGasUnitPrice(decodeUInt64());	
-			result.setExpirationTime(decodeUInt64());	
+			result.setExpirationTime(decodeUInt64());
 		}
 		return result;
 	}

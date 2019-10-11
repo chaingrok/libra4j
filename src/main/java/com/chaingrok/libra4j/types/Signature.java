@@ -16,8 +16,12 @@ public class Signature {
 	}
 	
 	public Signature(byte[] bytes) {
-		if (bytes.length != BYTE_LENGTH)  {
-			new Libra4jError(Type.INVALID_LENGTH,"invalid length for signature: " + bytes.length + " <> " + BYTE_LENGTH + " (" + Utils.byteArrayToHexString(bytes) + ")");
+		if (bytes == null) {
+			new Libra4jError(Type.NULL_DATA,"input byte array cannot be null for signature");
+		} else {
+			if (bytes.length != BYTE_LENGTH)  {
+				new Libra4jError(Type.INVALID_LENGTH,"invalid length for signature: " + bytes.length + " <> " + BYTE_LENGTH + " (" + Utils.byteArrayToHexString(bytes) + ")");
+			}
 		}
 		this.bytes = bytes;
 	}

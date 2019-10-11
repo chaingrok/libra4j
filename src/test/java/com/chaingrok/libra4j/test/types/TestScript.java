@@ -10,17 +10,22 @@ import org.junit.runners.MethodSorters;
 import com.chaingrok.libra4j.misc.LCSProcessor;
 import com.chaingrok.libra4j.misc.Utils;
 import com.chaingrok.libra4j.test.TestClass;
+import com.chaingrok.libra4j.types.AccountAddress;
+import com.chaingrok.libra4j.types.Argument;
+import com.chaingrok.libra4j.types.Arguments;
 import com.chaingrok.libra4j.types.Code;
-import com.chaingrok.libra4j.types.Program;
 import com.chaingrok.libra4j.types.Script;
+import com.chaingrok.libra4j.types.UInt64;
+import com.chaingrok.libra4j.types.Argument.Type;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestScript extends TestClass {
 	
+	
 	//@Test
-	public void test001SCriptLCSEncodingDecoding() { 
-		String testVectorHex = "c40000004c49425241564d0a010007014a000000060000000350000000060000000d56000000060000000e5c0000000600000005620000003300000004950000002000000008b50000000f000000000000010002000300010400020002040200030204020300063c53454c463e0c4c696272614163636f756e74094c69627261436f696e046d61696e0f6d696e745f746f5f616464726573730000000000000000000000000000000000000000000000000000000000000000000100020004000c000c011301010202000000010000002000000019ec9d6b9c90d4283260e125d69682bc1551e15f8466b1aff0b9d417a3a4fb750000000000e1f50500000000e02202000000000000000000000000007f14955d0000000020000000664f6e8f36eacb1770fa879d86c2c1d0fafea145e84fa7d671ab7a011a54d509400000006f8f4268092f574591f5a6a2a9ea7e4c54d6fc1cb7368c0550f51203efa32e5316c626ce06e0998f51e35f139b55b8d8ef9618ec7d35c33b4ce01cd1e16f2701";
-		int vecLength = 384;
+	public void test001ScriptLCSDecoding() { //transaction 31167 as per October 11th 2019
+		String testVectorHex = "b80000004c49425241564d0a010007014a00000004000000034e000000060000000d54000000060000000e5a0000000600000005600000002900000004890000002000000008a90000000f00000000000001000200010300020002040200030204020300063c53454c463e0c4c696272614163636f756e74046d61696e0f7061795f66726f6d5f73656e6465720000000000000000000000000000000000000000000000000000000000000000000100020004000c000c0113010102020000000100000020000000768175a4c6b30855a0983a99d17139cee8f9010623443fbf2cb7dd84b4d146d600000000001bb7000000000040420f00000000000100000000000000d8f59d5d00000000200000007746108532981e8183c37125d70e2b70e917121c8688dc2ffd32e89c03f006324000000016782895c9544233865df1da02addd685f193b127a315499aca1a682cc0b8a4b9445cc06ec471eb0b581169234e7f68a87d306fb8097275c4491ffd384fe630a";
+		int vecLength = 372;
 		byte[] bytes = Utils.hexStringToByteArray(testVectorHex);
 		assertEquals(vecLength,bytes.length);
 		LCSProcessor decoder = LCSProcessor.buildDecoder(bytes);
@@ -31,16 +36,23 @@ public class TestScript extends TestClass {
 		Code code = script.getCode();
 		assertNotNull(code);
 		assertNotNull(code.getBytes());
-		assertEquals(0,code.getBytes().length);
+		assertEquals(184,code.getBytes().length);
 		//
-		/*
 		Arguments arguments = script.getArguments();
 		assertNotNull(arguments);
 		assertEquals(2,arguments.size());
 		Argument argument0 = arguments.get(0);
-		assertEquals("CAFE D00D",argument0.getString());
+		assertEquals(Type.ADDRESS,argument0.getType());
+		assertEquals(new AccountAddress("768175a4c6b30855a0983a99d17139cee8f9010623443fbf2cb7dd84b4d146d6"),argument0.getAccountAddress());
 		Argument argument1 = arguments.get(1);
-		assertEquals("cafe d00d",argument1.getString());
-		*/
+		assertEquals(Type.U64,argument1.getType());
+		assertEquals(new UInt64(12000000L),argument1.getUInt64());
+		//
+		assertEquals(128,(int)decoder.getUndecodedDataSize());
+		decoder.decodePublicKey();
+		decoder.decodeSignature();
+		//
+		assertEquals(24,(int)decoder.getUndecodedDataSize());
 	}
+	
 }

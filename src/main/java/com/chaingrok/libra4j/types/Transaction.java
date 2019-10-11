@@ -1,13 +1,11 @@
 package com.chaingrok.libra4j.types;
 
-import java.security.PublicKey;
-
 import com.chaingrok.libra4j.misc.LCSInterface;
 import com.chaingrok.libra4j.misc.LCSProcessor;
 import com.chaingrok.libra4j.misc.Libra4jWarning;
 
 public class Transaction implements LCSInterface {
-	//raw transaction
+	//raw transaction fields
 	private byte[] signedTransactionBytes = null;
 	private AccountAddress senderAccountAddress = null;
 	private UInt64 sequenceNumber = null;
@@ -18,20 +16,21 @@ public class Transaction implements LCSInterface {
 	private UInt64 maxGasAmount = null;
 	private UInt64 gasUnitPrice = null;
 	private UInt64 expirationTime = null;
-	//transaction info
-	//
+	//transaction fields
+	private PubKey senderPublicKey = null;
+	private Signature signature = null;
+	//transactionInfo fields
 	private Long version = null;
 	private Long majorStatus = null;
-	private PublicKey senderPublicKey = null;
-	private Signature signature;
 	private Long gasUsed =  null;
-	private Integer  txnInfoSerializedSize = null;
-	private Integer  signedTxnSerializedSize = null;
 	private Hash signedTransactionHash = null ;
 	private Hash eventRootHash = null;
 	private Hash stateRootHash = null;
-	private byte[] fullTxnBytes = null;
-	private byte[] rawTxnBytes = null;
+	//
+	private Integer  txnInfoSerializedSize = null;
+	private Integer  signedTxnSerializedSize = null;
+	//private byte[] fullTxnBytes = null;
+	//
 	private Events events = null;
 	
 	public Type getType() {
@@ -142,11 +141,11 @@ public class Transaction implements LCSInterface {
 		this.majorStatus = majorStatus;
 	}
 
-	public PublicKey getSenderPublicKey() {
+	public PubKey getSenderPublicKey() {
 		return senderPublicKey;
 	}
 
-	public void setSenderPublicKey(PublicKey senderPublicKey) {
+	public void setSenderPublicKey(PubKey senderPublicKey) {
 		this.senderPublicKey = senderPublicKey;
 	}
 
@@ -204,22 +203,6 @@ public class Transaction implements LCSInterface {
 
 	public void setStateRootHash(Hash stateRootHash) {
 		this.stateRootHash = stateRootHash;
-	}
-
-	public byte[] getFullTxnBytes() {
-		return fullTxnBytes;
-	}
-
-	public void setFullTxnBytes(byte[] fullTxnBytes) {
-		this.fullTxnBytes = fullTxnBytes;
-	}
-
-	public byte[] getRawTxnBytes() {
-		return rawTxnBytes;
-	}
-
-	public void setRawTxnBytes(byte[] rawTxnBytes) {
-		this.rawTxnBytes = rawTxnBytes;
 	}
 
 	public Events getEventsList() {
