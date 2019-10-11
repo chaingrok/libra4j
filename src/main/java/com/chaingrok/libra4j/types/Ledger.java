@@ -404,6 +404,7 @@ public class Ledger {
     // signature: Ed25519Signature,
     ///// The transaction length is used by the VM to limit the size of transactions
     // transaction_length: usize,
+	//
 	//RawTransaction
 	//  sender: AccountAddress, 32 bytes
     //  sequence_number: u64, 8 bytes
