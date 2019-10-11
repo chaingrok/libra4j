@@ -64,6 +64,18 @@ public class Utils {
 		return result;
 	}
 	
+	public static byte[] intArrayToByteArray(int[] intArray) {
+		byte[] result = null;
+		if (intArray != null) {
+			result = new byte[intArray.length];
+			int count = 0;
+			for(int i : intArray) {
+				result[count++] = (byte)i;
+			}
+		}	
+		return result;
+	}
+	
 	public static byte[] toBigEndian(byte[] bytes) {
 		byte[] result = null;
 		if (bytes.length == 4) {

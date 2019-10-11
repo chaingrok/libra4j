@@ -67,7 +67,14 @@ public class TestUtils extends TestClass {
     }
 	
 	@Test
-	public void test005ReverseByteOrder() {
+	public void test005IntArrayToByteArray() {
+		int[] integers = {0,1,64,127,128,192,255};
+		byte[] bytes = {0x00,0x01,0x40,0x7f,(byte)0x80,(byte)0xc0,(byte)0xff};
+		assertArrayEquals(bytes,Utils.intArrayToByteArray(integers));
+	}
+	
+	@Test
+	public void test006ReverseByteOrder() {
 		//even number of bytes
 		byte[] bytes = {0x12,0x34,0x56,0x78};
 		byte[] bytes2 = {0x78,0x56,0x34,0x12};
@@ -84,7 +91,7 @@ public class TestUtils extends TestClass {
 	}
 	
 	@Test
-	public void test006ReadWriteFile() throws IOException {
+	public void test007ReadWriteFile() throws IOException {
 		File file = File.createTempFile("tmpFile", "tmp");
 		assertTrue(file.delete());
 		assertFalse(file.exists());
@@ -96,7 +103,7 @@ public class TestUtils extends TestClass {
 	}
 	
 	@Test
-	public void test007ReadWritErrors() throws IOException {
+	public void test008ReadWritErrors() throws IOException {
 		try {
 			Utils.readFile("");
 			fail("empty filepath should fail");
@@ -114,7 +121,7 @@ public class TestUtils extends TestClass {
 	}
 	
 	@Test
-	public void test008ByteArrayToLong() {
+	public void test009ByteArrayToLong() {
 		long value = 0L;
 		assertEquals(value,Utils.byteArrayToLong(Utils.longToByteArray(value)));
 		value = 1L;
@@ -128,7 +135,7 @@ public class TestUtils extends TestClass {
 	}
 	
 	@Test
-	public void test009ByteArrayToInt() {
+	public void test010ByteArrayToInt() {
 		int value = 0;
 		assertEquals(value,Utils.byteArrayToInt(Utils.intToByteArray(value)));
 		value = 1;
@@ -142,7 +149,7 @@ public class TestUtils extends TestClass {
 	}
 	
 	@Test
-	public void test0010ByteArrayToBigInt() {
+	public void test0011ByteArrayToBigInt() {
 		byte[] bytes={0x00};
 		assertEquals(BigInteger.valueOf(0),Utils.byteArraytoBigInt(bytes));
 		byte[] bytes2={0x00,0x01};
@@ -163,14 +170,14 @@ public class TestUtils extends TestClass {
 	}
 	
 	@Test
-	public void test011TimestampMillisTotString() {
+	public void test012TimestampMillisTotString() {
 		long millis = 1568003223154L;
 		String dateString = Utils.timestampMillisToDateString(millis);
 		assertEquals("2019-09-09 04:27:03",dateString);
 	}
 	
 	@Test
-	public void test012GetByteArray() {
+	public void test013GetByteArray() {
 		int l = 10;
 		byte[] bytes = Utils.getByteArray(l);
 		assertEquals(l,bytes.length);
