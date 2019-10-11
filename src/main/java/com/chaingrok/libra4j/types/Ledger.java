@@ -44,6 +44,7 @@ import org.libra.grpc.types.VmErrors.VMStatus;
 
 import com.chaingrok.libra4j.grpc.GrpcChecker;
 import com.chaingrok.libra4j.grpc.GrpcField;
+import com.chaingrok.libra4j.misc.LCSProcessor;
 import com.chaingrok.libra4j.misc.Libra4jError;
 import com.chaingrok.libra4j.misc.Utils;
 import com.chaingrok.libra4j.misc.Libra4jLog.Type;
@@ -393,94 +394,37 @@ public class Ledger {
 		return result;
 	}
 	
-	private void processSignedTransactionBytes(byte[] signedTransactionBytes,int length) {
-		//based on types/src/transaction.rs in Libra project
-		
-		///// The raw transaction
-	    // raw_txn: RawTransaction,
-	    ///// Sender's public key. When checking the signature, we first need to check whether this key
-	    ///// is indeed the pre-image of the pubkey hash stored under sender's account.
-	    // public_key: Ed25519PublicKey,
-	    ///// Signature of the transaction that correspond to the public key
-	    // signature: Ed25519Signature,
-	    ///// The transaction length is used by the VM to limit the size of transactions
-	    // transaction_length: usize,
-		
-		//RawTransaction
-		//  sender: AccountAddress, 32 bytes
-        //  sequence_number: u64, 8 bytes
-        //  payload: TransactionPayload,
-        //  max_gas_amount: u64, 8 bytes
-        //  gas_unit_price: u64, 8 bytes
-        //  expiration_time: Duration,
-		
-		//TransactionPayload
-		
-		System.out.println("txn bytes to process (" + signedTransactionBytes.length + "): " + Utils.byteArrayToHexString(signedTransactionBytes));
-		String string = new String(signedTransactionBytes);
-		System.out.println("<SELF> (" + string.indexOf("<SELF>")  + ")");
-		System.out.println("ascii:" + string);
+	//based on types/src/transaction.rs in Libra project
+	///// The raw transaction
+    // raw_txn: RawTransaction,
+    ///// Sender's public key. When checking the signature, we first need to check whether this key
+    ///// is indeed the pre-image of the pubkey hash stored under sender's account.
+    // public_key: Ed25519PublicKey,
+    ///// Signature of the transaction that correspond to the public key
+    // signature: Ed25519Signature,
+    ///// The transaction length is used by the VM to limit the size of transactions
+    // transaction_length: usize,
+	//RawTransaction
+	//  sender: AccountAddress, 32 bytes
+    //  sequence_number: u64, 8 bytes
+    //  payload: TransactionPayload,
+    //  max_gas_amount: u64, 8 bytes
+    //  gas_unit_price: u64, 8 bytes
+    //  expiration_time: Duration,
+	
+	private Transaction processSignedTransactionBytes(byte[] signedTransactionBytes,int length) {
+		Transaction result = null;
+		//System.out.println("txn bytes to process (" + signedTransactionBytes.length + "): " + Utils.byteArrayToHexString(signedTransactionBytes));
+		LCSProcessor decoder = LCSProcessor.buildDecoder(signedTransactionBytes);
+		result = decoder.decodeTransaction();
+		result.setSignedTransactionBytes(signedTransactionBytes);
+		if (decoder.getUndecodedDataSize() > 0) {
+			new Libra4jError(Type.INVALID_LENGTH,"remaining undecoded data:  (" + decoder.getUndecodedDataSize() + "):" + Utils.byteArrayToHexString(signedTransactionBytes) );
+		}
 		if (signedTransactionBytes.length != length) {
 			System.out.println("ERROR - length mismatch: " + length + " <> " + signedTransactionBytes.length);
 		}
-		
-		/*
-		transaction.setSenderPublicKey(KeyPair.publicKeyFromByteString(signedTransaction.getSenderPublicKey()));
-		byte[] signatureBytes = signedTransaction.getSenderSignature().toByteArray();
-		if (signatureBytes.length == 0) {
-			new Libra4jError(Type.MISSING_DATA,"missing signature for transaction: " + result.getVersion());
-		} else {
-			result.setSignature(new Signature(signatureBytes));
-		}
-		ByteString rawTxnByteString = signedTransaction.getRawTxnBytes();
-		result.setRawTxnBytes(rawTxnByteString.toByteArray());
-		RawTransaction rawTransaction = null;
-		try {
-			rawTransaction = RawTransaction.newBuilder()
-				.mergeFrom(rawTxnByteString)
-				.build();
-		} catch (InvalidProtocolBufferException e) {
-			throw new Libra4jException(e);
-		}
-		if (rawTransaction != null) {
-			grpcChecker.checkExpectedFields(rawTransaction,3,6);
-			result.setSenderAccountAddress(new AccountAddress(rawTransaction.getSenderAccount()));
-			result.setSequenceNumber(rawTransaction.getSequenceNumber());
-			result.setMaxGasAmount(rawTransaction.getMaxGasAmount());
-			result.setExpirationTime(rawTransaction.getExpirationTime());
-			result.setGasUnitPrice(rawTransaction.getGasUnitPrice());
-			Program rawTransactionProgram = rawTransaction.getProgram();
-			com.chaingrok.libra4j.types.Program program = new com.chaingrok.libra4j.types.Program();
-			if (rawTransactionProgram != null) {
-				grpcChecker.checkExpectedFields(rawTransactionProgram,2);
-				program.setCode(new Code(rawTransactionProgram.getCode().toByteArray()));
-				List<ByteString> modulesList = rawTransactionProgram.getModulesList();
-				if (modulesList.size() != 0) {
-					ArrayList<Module> modules = new ArrayList<Module>();
-					for (ByteString module : modulesList) {
-						modules.add(new Module(module.toByteArray()));
-					}
-					program.setModules(modules);
-				}
-				List<TransactionArgument> programArgumentsList = rawTransactionProgram.getArgumentsList();
-				if (programArgumentsList != null) {
-					ArrayList<Argument> arguments = new ArrayList<Argument>();
-					for(TransactionArgument programArgument : programArgumentsList) {
-						grpcChecker.checkExpectedFields(programArgument,1,2);
-						Argument argument = new Argument();
-						argument.setType(Argument.Type.get(programArgument.getType()));
-						argument.setData(programArgument.getData().toByteArray());
-						arguments.add(argument);
-					}
-					program.setArguments(arguments);
-				}
-				result.setProgram(program);
-				result.setType(); //to set & check the type;
-			} else {
-				new Libra4jError(Type.MISSING_DATA,"raw transaction is null");
-			}
-		}
-		*/
+		return result;
 	}
 
 	private Events processEventsList(EventsList eventsList) {

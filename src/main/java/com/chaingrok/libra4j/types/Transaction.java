@@ -8,14 +8,17 @@ import com.chaingrok.libra4j.misc.Libra4jWarning;
 
 public class Transaction implements LCSInterface {
 	//raw transaction
+	private byte[] signedTransactionBytes = null;
 	private AccountAddress senderAccountAddress = null;
 	private UInt64 sequenceNumber = null;
 	private TransactionPayloadType transactionPayloadType = null;
 	private Program program = null;
 	private WriteSet writeSet = null;
+	private Script script = null;
 	private UInt64 maxGasAmount = null;
 	private UInt64 gasUnitPrice = null;
 	private UInt64 expirationTime = null;
+	//transaction info
 	//
 	private Long version = null;
 	private Long majorStatus = null;
@@ -40,6 +43,14 @@ public class Transaction implements LCSInterface {
 	}
 	
 	//raw transaction fields
+	
+	public byte[] getSignedTransactionBytes() {
+		return signedTransactionBytes;
+	}
+
+	public void setSignedTransactionBytes(byte[] signedTransactionBytes) {
+		this.signedTransactionBytes = signedTransactionBytes;
+	}
 	
 	public AccountAddress getSenderAccountAddress() {
 		return senderAccountAddress;
@@ -81,6 +92,14 @@ public class Transaction implements LCSInterface {
 		this.writeSet = writeSet;
 	}
 	
+	public Script getScript() {
+		return script;
+	}
+
+	public void setScript(Script script) {
+		this.script = script;
+	}
+
 	public UInt64 getMaxGasAmount() {
 		return maxGasAmount;
 	}

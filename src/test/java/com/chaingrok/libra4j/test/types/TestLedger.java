@@ -21,10 +21,38 @@ import com.chaingrok.libra4j.types.AccountState;
 import com.chaingrok.libra4j.types.Ledger;
 import com.chaingrok.libra4j.types.LedgerInfo;
 import com.chaingrok.libra4j.types.Transaction;
+import com.chaingrok.libra4j.types.UInt64;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestLedger extends TestClass {
 	
+	
+	@Test
+	public void test001GetTransactionWithoutEvents() {
+		long version = 1L;
+		boolean withEvents = false;
+		Ledger ledger = new Ledger(TestData.VALIDATOR_ENDPOINT);
+		Transaction transaction = ledger.getTransaction(version,withEvents);
+		assertEquals(1L,ledger.getRequestCount());
+		assertFalse(Libra4jError.hasLogs());
+		assertNotNull(transaction);
+		assertEquals(version,(long)transaction.getVersion());
+		assertEquals(UInt64.MAX_VALUE,transaction.getExpirationTime());
+	}
+	
+	//@Test
+	public void test002GetTransactionWithEvents() {
+		long version = 55L;
+		//long version = 1L;
+		boolean withEvents = true;
+		Ledger ledger = new Ledger(TestData.VALIDATOR_ENDPOINT);
+		Transaction transaction = ledger.getTransaction(version,withEvents);
+		assertEquals(1L,ledger.getRequestCount());
+		assertNotNull(transaction);
+		assertEquals(version,(long)transaction.getVersion());
+		System.out.println(transaction.toString());
+		assertFalse(Libra4jError.hasLogs());
+	}
 	
 	@Test
 	public void test001GetLedgerInfo() {
@@ -44,7 +72,7 @@ public class TestLedger extends TestClass {
 	@Test
 	public void test002GetTransactionsWithoutEvents() {
 		long version = 1L;
-		long count = 1;
+		long count = 10;
 		boolean withEvents = false;
 		Ledger ledger = new Ledger(TestData.VALIDATOR_ENDPOINT);
 		ArrayList<Transaction> transactions = ledger.getTransactions(version,count,withEvents);
@@ -75,34 +103,6 @@ public class TestLedger extends TestClass {
 			System.out.println(transaction.toString());
 		}
 	}
-	
-	@Test
-	public void test003GetTransactionWithoutEvents() {
-		long version = 1L;
-		boolean withEvents = false;
-		Ledger ledger = new Ledger(TestData.VALIDATOR_ENDPOINT);
-		Transaction transaction = ledger.getTransaction(version,withEvents);
-		assertEquals(1L,ledger.getRequestCount());
-		assertFalse(Libra4jError.hasLogs());
-		assertNotNull(transaction);
-		assertEquals(version,(long)transaction.getVersion());
-	}
-	
-	//@Test
-	public void test004GetTransactionWithEvents() {
-		long version = 55L;
-		//long version = 1L;
-		boolean withEvents = true;
-		Ledger ledger = new Ledger(TestData.VALIDATOR_ENDPOINT);
-		Transaction transaction = ledger.getTransaction(version,withEvents);
-		assertEquals(1L,ledger.getRequestCount());
-		assertNotNull(transaction);
-		assertEquals(version,(long)transaction.getVersion());
-		System.out.println(transaction.toString());
-		assertFalse(Libra4jError.hasLogs());
-	}
-	
-	
 	
 	@Test
 	public void test005GetAccountState() {

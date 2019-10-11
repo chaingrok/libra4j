@@ -43,6 +43,7 @@ public class TestLCSProcessor extends TestClass {
 		assertNotNull(decoder);
 		assertNotNull(decoder.getBis());
 		assertEquals(2,(int)decoder.getUndecodedDataSize());
+		assertArrayEquals(bytes,decoder.getUndecodedBytes());
 	}
 	
 	@Test

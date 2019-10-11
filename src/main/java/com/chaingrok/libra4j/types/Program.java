@@ -11,8 +11,8 @@ import com.chaingrok.libra4j.misc.Utils;
 public class Program implements LCSInterface {
 	
 	public static final String MV_EXT = "mv";
-	public static final String KEY_ROTATE = "key_rotate";
-	public static final String P2P_TRANSFER = "p2p_transfer";
+	public static final String ROTATE_AUTHENTICATION_KEY = "rotate_authentication_key";
+	public static final String PEER_2_PEER_TRANSFER = "peer_2_peer_transfer";
 	
 	private Code code = null;
 	private Long codeSize = null;

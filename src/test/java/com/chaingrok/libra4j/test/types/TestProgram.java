@@ -82,11 +82,20 @@ public class TestProgram extends TestClass {
 	@Test
 	public void test003ProgramCodeDeserializeFromFile() { 
 		Program program = new Program();
-		String filePath = Libra4jConfig.MVIR_DIR + File.separator + Program.KEY_ROTATE + "." + Program.MV_EXT;
+		String filePath = Libra4jConfig.MVIR_DIR + File.separator + Program.ROTATE_AUTHENTICATION_KEY + "." + Program.MV_EXT;
 		File mvFile = new File(filePath);
 		assertTrue("file does exist: " + mvFile.getAbsolutePath(),mvFile.exists());
 		assertNull(program.getCode());
 		byte[] bytes = program.deserializeFromFile(filePath);
+		assertTrue(bytes.length > 100);
+		assertArrayEquals(bytes,program.getCode().getBytes());
+		//
+		program = new Program();
+		filePath = Libra4jConfig.MVIR_DIR + File.separator + Program.PEER_2_PEER_TRANSFER + "." + Program.MV_EXT;
+		mvFile = new File(filePath);
+		assertTrue("file does exist: " + mvFile.getAbsolutePath(),mvFile.exists());
+		assertNull(program.getCode());
+		bytes = program.deserializeFromFile(filePath);
 		assertTrue(bytes.length > 100);
 		assertArrayEquals(bytes,program.getCode().getBytes());
 	}

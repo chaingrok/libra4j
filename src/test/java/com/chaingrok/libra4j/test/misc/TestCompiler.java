@@ -29,7 +29,7 @@ public class TestCompiler {
 	
 	//@Test
 	public void test002CompileReturnSample() {
-		String mvirFilepath = Libra4jConfig.MVIR_DIR + File.separator + "p2p_transfer.mvir";
+		String mvirFilepath = Libra4jConfig.MVIR_DIR + File.separator + "rotate_authentication_key.mvir";
 		String mvbcFilepath = "";
 		Compiler compiler = new Compiler(LIBRA_DIR);
 		System.out.println("Print commmand: " + compiler.createCompileCommand(mvirFilepath));

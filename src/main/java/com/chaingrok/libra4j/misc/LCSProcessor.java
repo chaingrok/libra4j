@@ -15,6 +15,7 @@ import com.chaingrok.libra4j.types.Module;
 import com.chaingrok.libra4j.types.Modules;
 import com.chaingrok.libra4j.types.Path;
 import com.chaingrok.libra4j.types.Program;
+import com.chaingrok.libra4j.types.Script;
 import com.chaingrok.libra4j.types.Transaction;
 import com.chaingrok.libra4j.types.TransactionPayloadType;
 import com.chaingrok.libra4j.types.UInt16;
@@ -78,6 +79,7 @@ public class LCSProcessor {
 				&& (bis.available() >= 1)){
 			UInt32 length = decodeUInt32();
 			int intLength = (int)(long)length.getAsLong();
+			System.out.println("byte array length:" + intLength);
 			byte[] bytes = new byte[intLength];
 			int count = bis.read(bytes,0,intLength);
 			if (count == intLength) {
@@ -86,6 +88,7 @@ public class LCSProcessor {
 				new Libra4jError(Type.INVALID_LENGTH,"byte buffer read did not return proper number of bytes: " + count + " <> " + intLength);
 			}
 		}
+		int avail = bis.available();
 		return result;
 	}
 	
@@ -339,6 +342,17 @@ public class LCSProcessor {
 		return result;
 	}
 	
+	public Script decodeScript() {
+		Script result = null;
+		if (bis !=null) {
+			result = new Script();
+			System.out.println("script bytes (" + getUndecodedDataSize() +  "): " + Utils.byteArrayToHexString(getUndecodedBytes()));
+			result.setCode(decodeCode());
+			//result.setArguments(decodeArguments());
+		}
+		return result;
+	}
+	
 	public LCSProcessor encode(Code code) {
 		if (code != null) {
 			code.encodeToLCS(this);
@@ -348,7 +362,7 @@ public class LCSProcessor {
 	
 	public Code decodeCode() {
 		Code result = null;
-		if (bis !=null) {
+		if (bis != null) {
 			result = new Code(decodeByteArray());
 		}
 		return result;
@@ -381,6 +395,7 @@ public class LCSProcessor {
 		if (bis != null) {
 			UInt32 uint32 = decodeUInt32();
 			int size = (int)(long)(uint32.getAsLong());
+			System.out.println("arguments: " + size);
 			while (size > 0) {
 				--size;
 				result.add(decodeArgument());
@@ -528,7 +543,7 @@ public class LCSProcessor {
 					result.setWriteSet(decodeWriteSet());
 					break;
 				case SCRIPT:
-					new Libra4jError(Type.NOT_IMPLEMENTED,"script payload decoding not implemented yet");
+					result.setScript(decodeScript());
 					break;
 				case MODULE:
 					new Libra4jError(Type.NOT_IMPLEMENTED,"module payload decoding not implemented yet");
@@ -540,20 +555,6 @@ public class LCSProcessor {
 			result.setMaxGasAmount(decodeUInt64());		
 			result.setGasUnitPrice(decodeUInt64());	
 			result.setExpirationTime(decodeUInt64());	
-			/*
-			int remaining = getUndecodedDataSize();
-			byte[] bytes = new byte[remaining];
-			int count = 0;
-			try {
-				count = getBis().read(bytes);
-			} catch (IOException e) {
-				new Libra4jError(Type.JAVA_ERROR,e);
-			}
-			if (count != remaining) {
-				new Libra4jError(Type.INVALID_LENGTH, "count <> remaining:" + count + " <> " + remaining);
-			}
-			System.out.println("remaining: " + Utils.byteArrayToHexString(bytes));
-			*/
 		}
 		return result;
 	}
@@ -588,6 +589,23 @@ public class LCSProcessor {
 		if (bis != null) {
 			result = bis.available();
 		}
+		return result;
+	}
+	
+	public byte[] getUndecodedBytes() {
+		byte[] result = null;
+		int remaining = getUndecodedDataSize();
+		result = new byte[remaining];
+		int count = 0;
+		try {
+			count = getBis().read(result);
+		} catch (IOException e) {
+			new Libra4jError(Type.JAVA_ERROR,e);
+		}
+		if (count != remaining) {
+			new Libra4jError(Type.INVALID_LENGTH, "count <> remaining:" + count + " <> " + remaining);
+		}
+		//System.out.println("remaining: " + Utils.byteArrayToHexString(bytes));
 		return result;
 	}
 	
