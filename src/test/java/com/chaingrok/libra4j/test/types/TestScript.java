@@ -9,8 +9,8 @@ import org.junit.runners.MethodSorters;
 
 import com.chaingrok.lib.UInt64;
 import com.chaingrok.lib.Utils;
+import com.chaingrok.lib.test.TestClass;
 import com.chaingrok.libra4j.misc.LCSProcessor;
-import com.chaingrok.libra4j.test.TestClass;
 import com.chaingrok.libra4j.types.AccountAddress;
 import com.chaingrok.libra4j.types.Argument;
 import com.chaingrok.libra4j.types.Arguments;

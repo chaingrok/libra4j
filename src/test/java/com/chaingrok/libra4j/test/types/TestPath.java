@@ -12,8 +12,8 @@ import org.junit.runners.MethodSorters;
 import com.chaingrok.lib.ChaingrokException;
 import com.chaingrok.lib.UInt32;
 import com.chaingrok.lib.Utils;
+import com.chaingrok.lib.test.TestClass;
 import com.chaingrok.libra4j.misc.LCSProcessor;
-import com.chaingrok.libra4j.test.TestClass;
 import com.chaingrok.libra4j.types.Path;
 
 

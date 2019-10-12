@@ -10,7 +10,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import com.chaingrok.lib.Utils;
-import com.chaingrok.libra4j.test.TestClass;
+import com.chaingrok.lib.test.TestClass;
 import com.chaingrok.libra4j.types.Hash;
 import com.chaingrok.libra4j.types.LedgerInfo;
 import com.chaingrok.libra4j.types.Validator;

@@ -16,7 +16,6 @@ import com.chaingrok.lib.ChaingrokInfo;
 import com.chaingrok.lib.ChaingrokLog;
 import com.chaingrok.lib.ChaingrokWarning;
 import com.chaingrok.lib.ChaingrokLog.Type;
-import com.chaingrok.libra4j.test.TestClass;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestChaingrokLogs extends TestClass {

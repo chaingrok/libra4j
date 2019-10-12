@@ -18,8 +18,8 @@ import com.chaingrok.lib.UInt64;
 import com.chaingrok.lib.UInt8;
 import com.chaingrok.lib.Utils;
 import com.chaingrok.lib.ChaingrokLog.Type;
+import com.chaingrok.lib.test.TestClass;
 import com.chaingrok.libra4j.misc.LCSProcessor;
-import com.chaingrok.libra4j.test.TestClass;
 import com.chaingrok.libra4j.types.AccountAddress;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)

@@ -14,8 +14,8 @@ import org.junit.runners.MethodSorters;
 
 import com.chaingrok.lib.ChaingrokLog;
 import com.chaingrok.lib.Utils;
+import com.chaingrok.lib.test.TestClass;
 import com.chaingrok.libra4j.misc.LCSProcessor;
-import com.chaingrok.libra4j.test.TestClass;
 import com.chaingrok.libra4j.types.WriteOp;
 import com.chaingrok.libra4j.types.WriteOp.Type;
 import com.chaingrok.libra4j.types.WriteSet;

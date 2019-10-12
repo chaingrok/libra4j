@@ -11,8 +11,8 @@ import org.junit.runners.MethodSorters;
 import com.chaingrok.lib.ChaingrokLog;
 import com.chaingrok.lib.UInt32;
 import com.chaingrok.lib.ChaingrokLog.Type;
+import com.chaingrok.lib.test.TestClass;
 import com.chaingrok.libra4j.misc.LCSProcessor;
-import com.chaingrok.libra4j.test.TestClass;
 import com.chaingrok.libra4j.types.TransactionPayloadType;
 
 

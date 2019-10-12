@@ -9,7 +9,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import com.chaingrok.lib.Utils;
-import com.chaingrok.libra4j.test.TestClass;
+import com.chaingrok.lib.test.TestClass;
 import com.chaingrok.libra4j.types.AccountAddress;
 import com.chaingrok.libra4j.types.EventData;
 import com.chaingrok.libra4j.types.Path.Type;

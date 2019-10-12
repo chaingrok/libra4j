@@ -1,4 +1,4 @@
-package com.chaingrok.libra4j.test;
+package com.chaingrok.lib.test;
 
 import org.junit.After;
 

@@ -19,8 +19,8 @@ import org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfo;
 import com.chaingrok.lib.ChaingrokError;
 import com.chaingrok.lib.ChaingrokException;
 import com.chaingrok.lib.ChaingrokLog;
+import com.chaingrok.lib.test.TestClass;
 import com.chaingrok.libra4j.grpc.GrpcField;
-import com.chaingrok.libra4j.test.TestClass;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestGrpcField extends TestClass {

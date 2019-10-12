@@ -15,7 +15,7 @@ import org.junit.runners.MethodSorters;
 
 import com.chaingrok.lib.ChaingrokError;
 import com.chaingrok.lib.ChaingrokLog;
-import com.chaingrok.libra4j.test.TestClass;
+import com.chaingrok.lib.test.TestClass;
 import com.chaingrok.libra4j.types.AccountAddress;
 import com.google.protobuf.ByteString;
 

@@ -18,7 +18,6 @@ import com.chaingrok.lib.ChaingrokLog;
 import com.chaingrok.lib.UInt64;
 import com.chaingrok.lib.Utils;
 import com.chaingrok.lib.ChaingrokLog.Type;
-import com.chaingrok.libra4j.test.TestClass;
 import com.google.protobuf.ByteString;
 
 
