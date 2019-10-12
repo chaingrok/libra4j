@@ -1,4 +1,4 @@
-package com.chaingrok.libra4j.test.types;
+package com.chaingrok.lib.test;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
@@ -12,7 +12,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import com.chaingrok.lib.Libra4jLog;
-import com.chaingrok.lib.UInt16;
+import com.chaingrok.lib.UInt32;
 import com.chaingrok.lib.Utils;
 import com.chaingrok.lib.Libra4jLog.Type;
 import com.chaingrok.libra4j.test.TestClass;
@@ -20,35 +20,35 @@ import com.google.protobuf.ByteString;
 
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class TestUInt16 extends TestClass {
+public class TestUInt32 extends TestClass {
 	
 	@Test
 	public void test001WrongFormat() {
 		//null with byte[]
-		new UInt16((byte[])null);
+		new UInt32((byte[])null);
 		assertEquals(1,Libra4jLog.getLogs().size());
 		assertEquals(Type.INVALID_LENGTH,Libra4jLog.getLogs().get(0).getType());
 		Libra4jLog.purgeLogs();
 		//null with ByteString
-		new UInt16((ByteString)null);
+		new UInt32((ByteString)null);
 		assertEquals(1,Libra4jLog.getLogs().size());
 		assertEquals(Type.INVALID_LENGTH,Libra4jLog.getLogs().get(0).getType());
 		Libra4jLog.purgeLogs();
 		//no bytes
 		byte[] bytes = {};
-		new UInt16(bytes);
+		new UInt32(bytes);
 		assertEquals(1,Libra4jLog.getLogs().size());
 		assertEquals(Type.INVALID_LENGTH,Libra4jLog.getLogs().get(0).getType());
 		Libra4jLog.purgeLogs();
 		//not enough bytes
-		byte[] bytes2 = {0x00};
-		new UInt16(bytes2);
+		byte[] bytes2 = {0x00,0x01};
+		new UInt32(bytes2);
 		assertEquals(1,Libra4jLog.getLogs().size());
 		assertEquals(Type.INVALID_LENGTH,Libra4jLog.getLogs().get(0).getType());
 		Libra4jLog.purgeLogs();
 		//too many bytes
-		byte[] bytes3 = {0x00,0x01,0x02};
-		new UInt16(bytes3);
+		byte[] bytes3 = {0x00,0x01,0x02,0x03,0x04};
+		new UInt32(bytes3);
 		assertEquals(1,Libra4jLog.getLogs().size());
 		assertEquals(Type.INVALID_LENGTH,Libra4jLog.getLogs().get(0).getType());
 		Libra4jLog.purgeLogs();
@@ -57,63 +57,63 @@ public class TestUInt16 extends TestClass {
 	@Test
 	public void test002LongValues() {
 		Long value = 0L;
-		byte[] bytes = Utils.longToByteArray(value,UInt16.BYTE_LENGTH);
+		byte[] bytes = Utils.longToByteArray(value,UInt32.BYTE_LENGTH);
 		ByteString byteString = ByteString.copyFrom(bytes);
-		assertEquals(value,new UInt16(byteString).getAsLong());
+		assertEquals(value,new UInt32(byteString).getAsLong());
 		//
 		value = 1L;
-		bytes = Utils.longToByteArray(value,UInt16.BYTE_LENGTH);
+		bytes = Utils.longToByteArray(value,UInt32.BYTE_LENGTH);
 		byteString = ByteString.copyFrom(bytes);
-		assertEquals(value,new UInt16(byteString).getAsLong());
+		assertEquals(value,new UInt32(byteString).getAsLong());
 		//
-		value = (long)Short.MAX_VALUE;
-		bytes = Utils.longToByteArray(value,UInt16.BYTE_LENGTH);
+		value = (long)Integer.MAX_VALUE;
+		bytes = Utils.longToByteArray(value,UInt32.BYTE_LENGTH);
 		byteString = ByteString.copyFrom(bytes);
-		assertEquals(value,new UInt16(byteString).getAsLong());
+		assertEquals(value,new UInt32(byteString).getAsLong());
 	}
 	
 	@Test
-	public void test003BiggerThanShortValues() {
+	public void test003BiggerThanIntegerValues() {
 		Long value = -1L;
-		byte[] bytes = Utils.longToByteArray(value,UInt16.BYTE_LENGTH);
+		byte[] bytes = Utils.longToByteArray(value,UInt32.BYTE_LENGTH);
 		ByteString byteString = ByteString.copyFrom(bytes);
-		assertEquals((Long)UInt16.MAX_VALUE.longValue(),new UInt16(byteString).getAsLong());
+		assertEquals((Long)UInt32.MAX_VALUE.longValue(),new UInt32(byteString).getAsLong());
 		//
-		value = new Long(Short.MAX_VALUE) + 1L;
+		value = new Long(Integer.MAX_VALUE) + 1L;
 		assertTrue(value > 0);
-		UInt16 uint16 = new UInt16(value);
-		assertEquals(value,uint16.getAsLong());
+		UInt32 uint32 = new UInt32(value);
+		assertEquals(value,uint32.getAsLong());
 	}
 	
 	@Test
 	public void test004ContructFromLong() {
 		Long value = 0L;
-		UInt16 u16 = new UInt16(value);
-		assertEquals(value,u16.getAsLong());
+		UInt32 u32 = new UInt32(value);
+		assertEquals(value,u32.getAsLong());
 		//
 		value = 1L;
-		u16 = new UInt16(value);
-		assertEquals(value,u16.getAsLong());
+		u32 = new UInt32(value);
+		assertEquals(value,u32.getAsLong());
 		//
 		value = 100L;
-		u16 = new UInt16(value);
-		assertEquals(value,u16.getAsLong());
+		u32 = new UInt32(value);
+		assertEquals(value,u32.getAsLong());
 		//
-		value = 12345L;
-		u16 = new UInt16(value);
-		assertEquals(value,u16.getAsLong());
+		value = 123456L;
+		u32 = new UInt32(value);
+		assertEquals(value,u32.getAsLong());
 		//
-		value = (long)Short.MAX_VALUE;
-		u16 = new UInt16(value);
-		assertEquals(value,u16.getAsLong());
+		value = (long)Integer.MAX_VALUE;
+		u32 = new UInt32(value);
+		assertEquals(value,u32.getAsLong());
 		//
-		value = UInt16.MAX_VALUE.longValue();
-		u16 = new UInt16(value);
-		assertEquals(value,u16.getAsLong());
+		value = UInt32.MAX_VALUE.longValue();
+		u32 = new UInt32(value);
+		assertEquals(value,u32.getAsLong());
 		//
 		value = -1L;
 		assertFalse(Libra4jLog.hasLogs());
-		new UInt16(value);
+		new UInt32(value);
 		assertEquals(1,Libra4jLog.getLogs().size());
 		assertEquals(Type.INVALID_VALUE,Libra4jLog.getLogs().get(0).getType());
 		Libra4jLog.purgeLogs();
@@ -122,53 +122,55 @@ public class TestUInt16 extends TestClass {
 	@Test
 	public void test005GetBytes() {
 		long value = 0L;
-		UInt16 u16 = new UInt16(value);
-		byte[] bytes = u16.getBytes();
-		assertEquals(UInt16.BYTE_LENGTH,bytes.length);
-		byte[] expected =  {0x00,0x00};
+		UInt32 u32 = new UInt32(value);
+		byte[] bytes = u32.getBytes();
+		assertEquals(UInt32.BYTE_LENGTH,bytes.length);
+		byte[] expected =  {0x00,0x00,0x00,0x00};
 		assertArrayEquals(expected,bytes);
 		//
 		value = 1L;
-		u16 = new UInt16(value);
-		bytes = u16.getBytes();
-		assertEquals(UInt16.BYTE_LENGTH,bytes.length);
-		byte[]  expected2 =  {0x00,0x01};
+		u32 = new UInt32(value);
+		bytes = u32.getBytes();
+		assertEquals(UInt32.BYTE_LENGTH,bytes.length);
+		byte[]  expected2 =  {0x00,0x00,0x00,0x01};
 		assertArrayEquals(expected2,bytes);
 		//
 		value = 100L;
-		u16 = new UInt16(value);
-		bytes = u16.getBytes();
-		assertEquals(UInt16.BYTE_LENGTH,bytes.length);
-		byte[]  expected3 =  {0x00,0x64};
+		u32 = new UInt32(value);
+		bytes = u32.getBytes();
+		assertEquals(UInt32.BYTE_LENGTH,bytes.length);
+		byte[]  expected3 =  {0x00,0x00,0x00,0x64};
 		assertArrayEquals(expected3,bytes);
 		//
-		value = UInt16.MAX_VALUE.longValue();
-		u16 = new UInt16(value);
-		bytes = u16.getBytes();
-		assertEquals(UInt16.BYTE_LENGTH,bytes.length);
-		byte[]  expected4 =  {(byte)0xff,(byte)0xff};
+		//
+		value = UInt32.MAX_VALUE.longValue();
+		u32 = new UInt32(value);
+		bytes = u32.getBytes();
+		assertEquals(UInt32.BYTE_LENGTH,bytes.length);
+		byte[]  expected4 =  {(byte)0xff,(byte)0xff,(byte)0xff,(byte)0xff};
 		assertArrayEquals(expected4,bytes);
 	}
 	
 	@Test
 	public void test005BytesVsLongValues() {
-		Long number = 1234L;
-		UInt16 uint16 = new UInt16(number);
-		assertEquals(number,(Long)uint16.getAsLong());
-		byte[] bytes = uint16.getBytes();
-		uint16 = new UInt16(bytes);
-		assertEquals(number,(Long)uint16.getAsLong());
+		Long number = 123456L;
+		UInt32 uint32 = new UInt32(number);
+		assertEquals(number,(Long)uint32.getAsLong());
+		byte[] bytes = uint32.getBytes();
+		uint32 = new UInt32(bytes);
+		assertEquals(number,(Long)uint32.getAsLong());
+		
 	}
 	
 	@Test
 	public void test006Equals() {
-		long value = 999L;
-		UInt16 uint_1 = new UInt16(value);
-		UInt16 uint_2 = new UInt16(value);
+		long value = 9999L;
+		UInt32 uint_1 = new UInt32(value);
+		UInt32 uint_2 = new UInt32(value);
 		assertNotSame(uint_1,uint_2);
 		assertEquals(uint_1,uint_2);
 		//
-		uint_2 = new UInt16(value + 1L);
+		uint_2 = new UInt32(value + 1L);
 		assertNotEquals(uint_1,uint_2);
 		//
 		Object object = null;
@@ -183,11 +185,11 @@ public class TestUInt16 extends TestClass {
 	
 	@Test
 	public void test007hashCode() {
-		UInt16 uint16 = new UInt16(0L);
-		assertEquals(0,uint16.hashCode());
-		uint16 = new UInt16(1L);
-		assertEquals(65536,uint16.hashCode());
-		uint16 = new UInt16(UInt16.MAX_VALUE.longValue());
-		assertEquals(-65536,uint16.hashCode());
+		UInt32 uint32 = new UInt32(0L);
+		assertEquals(0,uint32.hashCode());
+		uint32 = new UInt32(1L);
+		assertEquals(1,uint32.hashCode());
+		uint32 = new UInt32(UInt32.MAX_VALUE.longValue());
+		assertEquals(-1,uint32.hashCode());
 	}
 }

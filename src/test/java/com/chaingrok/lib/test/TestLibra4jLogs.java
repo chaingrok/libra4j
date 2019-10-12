@@ -1,4 +1,4 @@
-package com.chaingrok.libra4j.test.misc;
+package com.chaingrok.lib.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

@@ -1,4 +1,4 @@
-package com.chaingrok.libra4j.test.types;
+package com.chaingrok.lib.test;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
