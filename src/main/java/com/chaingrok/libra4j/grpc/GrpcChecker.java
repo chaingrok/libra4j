@@ -144,6 +144,8 @@ public class GrpcChecker {
 				} else if ((fieldObject instanceof UInt32ValueOrBuilder)
 							|| (fieldObject instanceof Int32Value)) {
 					result = checkInt32FieldDescriptor(grpcField,fieldObject);
+				} else if (fieldObject instanceof ByteString) { //will also match com.google.protobuf.ByteString.LiteralByteString (not visible)
+					result = checkByteStringFieldDescriptor(grpcField,fieldObject);
 				} else {
 					new ChaingrokError(Type.INVALID_CLASS,"field type checking is not implemented: " + fieldFullName + " (object class: " + fieldObject.getClass().getCanonicalName() + ")");
 					result = false;
@@ -186,6 +188,8 @@ public class GrpcChecker {
 							+ grpcField.getFieldClass().getCanonicalName());
 					result = false;
 				} 
+			} else if (listObject instanceof ByteString){
+				result = checkByteStringFieldDescriptor(grpcField,listObject);
 			} else {
 				new ChaingrokError(Type.INVALID_CLASS,"listObject is not instanceOf MessageOrBuilder: " + listObject.getClass().getCanonicalName());
 				result = false;
@@ -219,6 +223,18 @@ public class GrpcChecker {
 						+ grpcField.getFieldClass().getCanonicalName());
 			result = false;
 		} 
+		return result;
+	}
+	
+	public boolean checkByteStringFieldDescriptor(GrpcField grpcField,Object fieldObject) {
+		boolean result = true;
+		if (!grpcField.getFieldClass().isAssignableFrom(fieldObject.getClass())) {
+			new ChaingrokError(Type.INVALID_CLASS,"returned field class is invalid: " + grpcField.getFullName() + ": " 
+						+ fieldObject.getClass()
+						+ " <> " 
+						+ grpcField.getFieldClass().getCanonicalName());
+			result = false;
+		}
 		return result;
 	}
 	

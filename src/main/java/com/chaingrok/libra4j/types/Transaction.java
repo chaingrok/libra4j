@@ -1,7 +1,9 @@
 package com.chaingrok.libra4j.types;
 
-import com.chaingrok.lib.ChaingrokWarning;
+import com.chaingrok.lib.ChaingrokError;
 import com.chaingrok.lib.UInt64;
+import com.chaingrok.lib.Utils;
+import com.chaingrok.lib.ChaingrokLog;
 import com.chaingrok.libra4j.misc.LCSInterface;
 import com.chaingrok.libra4j.misc.LCSProcessor;
 
@@ -36,10 +38,6 @@ public class Transaction implements LCSInterface {
 	
 	public Type getType() {
 		return Type.get(this);
-	}
-	
-	public void setType() {
-		Type.get(this);
 	}
 	
 	//raw transaction fields
@@ -229,26 +227,59 @@ public class Transaction implements LCSInterface {
 		result += "   gas used: "  + getGasUsed() + "\n";
 		result += "   max gas amount: "  + getMaxGasAmount() + "\n";
 		result += "   gas unit price: "  + getGasUnitPrice() + "\n";
-		result += "   program: " +  "\n";
-		if (program != null) {
-			Arguments arguments = getProgram().getArguments();
-			if ((arguments != null)
-				&& (arguments.size() > 0)) {
-				for (Argument argument : arguments) {
-					result += "      argument: " +  argument + "\n";
+		Long expirationTime = getExpirationTime().getAsLong();
+		result += "   expiration time: "  + Utils.timestampMillisToDateString(expirationTime*1000) + " (" + expirationTime + ")" +"\n";
+		TransactionPayloadType transactionPayloadType = getTransactionPayloadType();
+		result += "   payload type: " + transactionPayloadType + "\n";
+		switch (transactionPayloadType) {
+			case PROGRAM:
+				result += "   program: " +  "\n";
+				if (program != null) {
+					Arguments arguments = getProgram().getArguments();
+					if ((arguments != null)
+						&& (arguments.size() > 0)) {
+						for (Argument argument : arguments) {
+							result += "      argument: " +  argument + "\n";
+						}
+					}
+					Modules modules = program.getModules();
+					if ((modules != null)
+						&& (modules.size() > 0)) {
+						for (Module module : modules) {
+							result += "      module (" + module.getBytes().length+ " bytes): " +  module + "\n";
+						}
+					}
+					Code code = getProgram().getCode();
+					if (code != null) {
+						result += "      code (" + code.getBytes().length + " bytes): " +  code + "\n";
+					}
 				}
-			}
-			Modules modules = program.getModules();
-			if ((modules != null)
-				&& (modules.size() > 0)) {
-				for (Module module : modules) {
-					result += "      module (" + module.getBytes().length+ " bytes): " +  module + "\n";
+				break;
+			case WRITESET:
+				new ChaingrokError(ChaingrokLog.Type.NOT_IMPLEMENTED,"toString not implemented yet for write set");
+				break;
+			case SCRIPT:
+				result += "   script: " +  "\n";
+				if (script != null) {
+					Arguments arguments = getScript().getArguments();
+					if ((arguments != null)
+						&& (arguments.size() > 0)) {
+						for (Argument argument : arguments) {
+							result += "      argument: " +  argument + "\n";
+						}
+					}
+					Code code = getScript().getCode();
+					if (code != null) {
+						result += "      code (" + code.getBytes().length + " bytes): " +  code + "\n";
+					}
 				}
-			}
-			Code code = getProgram().getCode();
-			if (code != null) {
-				result += "      code (" + code.getBytes().length+ " bytes): " +  code + "\n";
-			}
+				break;
+			case MODULE:
+				new ChaingrokError(ChaingrokLog.Type.NOT_IMPLEMENTED,"tranasaction type discovery not implemented yet for module");
+				break;
+			default:
+				new ChaingrokError(ChaingrokLog.Type.NOT_IMPLEMENTED,"should not happen");
+				break;
 		}
 		Events events = getEventsList();
 		if ((events != null) 
@@ -273,15 +304,38 @@ public class Transaction implements LCSInterface {
 		
 		public static Type get(Transaction transaction) {
 			Type result = UNKNOWN;
-			if (transaction.getProgram() != null) {
-				if (Code.MINT.equals(transaction.getProgram().getCode())) {
-					result = MINT;
-				} else if (Code.PEER_TO_PEER_TRANSFER.equals(transaction.getProgram().getCode())) {
-					result = PEER_TO_PEER_TRANSFER;
+			Code code = null;
+			TransactionPayloadType transactionPayloadType = transaction.getTransactionPayloadType();
+			if (transactionPayloadType != null) {
+				switch (transactionPayloadType) {
+					case PROGRAM:
+						code = transaction.getProgram().getCode();
+						break;
+					case WRITESET:
+						new ChaingrokError(ChaingrokLog.Type.NOT_IMPLEMENTED,"tranasaction type discovery not implemented yet for write set");
+						break;
+					case SCRIPT:
+						code = transaction.getScript().getCode();
+						break;
+					case MODULE:
+						new ChaingrokError(ChaingrokLog.Type.NOT_IMPLEMENTED,"tranasaction type discovery not implemented yet for module");
+						break;
+					default:
+						new ChaingrokError(ChaingrokLog.Type.NOT_IMPLEMENTED,"should not happen");
+						break;
 				}
+				if (Code.MINT.equals(code)) {
+					result = MINT;
+				} else if (Code.PEER_TO_PEER_TRANSFER.equals(code)) {
+					result = PEER_TO_PEER_TRANSFER;
+				} 
 			}
 			if (result == UNKNOWN) {
-				new ChaingrokWarning(com.chaingrok.lib.ChaingrokLog.Type.UNKNOWN_VALUE,"Transaction type is unknown: " + transaction.getVersion());
+				String msg = "transaction type is unknown for transaction version: " + transaction.getVersion();
+				if (code != null) {
+					msg += " - code: " + Utils.byteArrayToHexString(code.getBytes());
+				}
+				new ChaingrokError(com.chaingrok.lib.ChaingrokLog.Type.UNKNOWN_VALUE,msg);
 			}
 			return result;
 		}

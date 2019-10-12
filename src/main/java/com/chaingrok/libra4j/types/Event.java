@@ -43,9 +43,14 @@ public class Event {
 	public String toString() {
 		String result = "";
 		result += "event: sequence number: " + getSequenceNumber() 
-			+ " - address: " + getAddress() 
-			+ " - " + getAccessPath().toString() 
-			+ " - data (" + getData().getBytes().length + " bytes): " +  getData().toString(getAccessPath().getPath().getPathType());
+			+ " - address: " + getAddress();
+		if (getAccessPath() != null) {
+			result +=  " - " + getAccessPath().toString();
+		}
+		if (getData() != null) {
+			result +=  " - data (" + getData().getBytes().length 
+							+ "): " +  getData().toString();
+		}
 		return result;
 	}
 

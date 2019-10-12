@@ -568,9 +568,18 @@ public class LCSProcessor {
 	}
 	
 	public Transaction decodeTransaction() {
+		return decodeTransaction(null);
+	}
+	
+	public Transaction decodeTransaction(Transaction transaction) {
 		Transaction result = null;
+		if (transaction != null) {
+			result = transaction;
+		}
 		if (bis != null) {
-			result = new Transaction();
+			if (result == null) {
+				result = new Transaction();
+			}
 			//raw transaction fields
 			result.setSenderAccountAddress(decodeAccountAddress());
 			result.setSequenceNumber(decodeUInt64());

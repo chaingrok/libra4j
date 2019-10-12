@@ -358,7 +358,7 @@ public class Ledger {
 			result = transaction;
 		}
 		if (transactionInfo != null) {
-			grpcChecker.checkExpectedFields(transactionInfo,3,4);
+			grpcChecker.checkExpectedFields(transactionInfo,4,5);
 			result.setMajorStatus(transactionInfo.getMajorStatus());
 			result.setSignedTransactionHash(new Hash(transactionInfo.getSignedTransactionHash()));
 			result.setEventRootHash(new Hash(transactionInfo.getEventRootHash()));
@@ -385,7 +385,12 @@ public class Ledger {
 		if (signedTransaction != null) {
 			grpcChecker.checkExpectedFields(signedTransaction,1);
 			result.setSignedTxnSerializedSize(signedTransaction.getSerializedSize());
-			processSignedTransactionBytes(signedTransaction.getSignedTxn().toByteArray(),result.getSignedTxnSerializedSize());
+			/*
+			if (result.getSignedTxnSerializedSize() != signedTransaction.getSignedTxn().toByteArray().length) {
+				new ChaingrokError(Type.INVALID_LENGTH,"transaction size mismatch: " + result.getSignedTxnSerializedSize() + " <> " + signedTransaction.getSignedTxn().toByteArray().length);
+			}
+			*/
+			processSignedTransactionBytes(signedTransaction.getSignedTxn().toByteArray(),transaction);
 		} else {
 			new ChaingrokError(Type.MISSING_DATA,"signed transaction is null");
 		}
@@ -411,20 +416,21 @@ public class Ledger {
     //  gas_unit_price: u64, 8 bytes
     //  expiration_time: Duration,
 	
-	private Transaction processSignedTransactionBytes(byte[] signedTransactionBytes,int length) {
-		Transaction result = null;
+	private Transaction processSignedTransactionBytes(byte[] signedTransactionBytes,Transaction transaction) {
+		Transaction result = transaction;
 		System.out.println("signed txn bytes to process (" + signedTransactionBytes.length + "): " + Utils.byteArrayToHexString(signedTransactionBytes));
 		LCSProcessor decoder = LCSProcessor.buildDecoder(signedTransactionBytes);
-		result = decoder.decodeTransaction();
-		result.setSignedTransactionBytes(signedTransactionBytes);
-		/*
+		result = decoder.decodeTransaction(transaction);
+		if (result != null) {
+			result.setSignedTransactionBytes(signedTransactionBytes);
+			result.setSenderPublicKey(decoder.decodePublicKey());
+			result.setSignature(decoder.decodeSignature());
+		} else {
+			new ChaingrokError(Type.MISSING_DATA,"transaction is null for bytes: " + Utils.byteArrayToHexString(signedTransactionBytes));
+		}
 		if (decoder.getUndecodedDataSize() > 0) {
-			new Libra4jError(Type.INVALID_LENGTH,"remaining undecoded data:  (" + decoder.getUndecodedDataSize() + "):" + Utils.byteArrayToHexString(signedTransactionBytes) );
+			new ChaingrokError(Type.INVALID_LENGTH,"remaining undecoded data:  (" + decoder.getUndecodedDataSize() + "):" + Utils.byteArrayToHexString(signedTransactionBytes) );
 		}
-		if (signedTransactionBytes.length != length) {
-			System.out.println("ERROR - length mismatch: " + length + " <> " + signedTransactionBytes.length);
-		}
-		*/
 		return result;
 	}
 
@@ -533,7 +539,7 @@ public class Ledger {
 		}
 		TransactionInfo transactionInfo = accountStateProof.getTransactionInfo();
 		grpcChecker.checkFieldErrors(transactionInfo.findInitializationErrors(),transactionInfo.getUnknownFields());
-		grpcChecker.checkExpectedFields(transactionInfo,3);
+		grpcChecker.checkExpectedFields(transactionInfo,4);
 		Transaction transaction = new Transaction();
 		transaction.setSignedTransactionHash(new Hash(transactionInfo.getSignedTransactionHash()));
 		transaction.setEventRootHash(new Hash(transactionInfo.getEventRootHash()));

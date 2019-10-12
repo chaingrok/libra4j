@@ -32,6 +32,7 @@ import com.chaingrok.libra4j.types.Path;
 import com.chaingrok.libra4j.types.Program;
 import com.chaingrok.libra4j.types.Signature;
 import com.chaingrok.libra4j.types.Transaction;
+import com.chaingrok.libra4j.types.TransactionPayloadType;
 import com.chaingrok.libra4j.types.WriteOp;
 import com.chaingrok.libra4j.types.WriteSet;
 import com.chaingrok.libra4j.types.WriteSetTuple;
@@ -133,6 +134,7 @@ public class TestTransaction extends TestClass {
 		Transaction transaction = new Transaction();
 		Program program= new Program();
 		program.setCode(Code.MINT);
+		transaction.setTransactionPayloadType(TransactionPayloadType.PROGRAM);
 		transaction.setProgram(program);
 		assertEquals(Transaction.Type.MINT,Transaction.Type.get(transaction));
 		//
@@ -150,6 +152,10 @@ public class TestTransaction extends TestClass {
 		//
 		Long version = new Long(12345678L);
 		transaction.setVersion(version);
+		TransactionPayloadType transactionPayloadType = TransactionPayloadType.PROGRAM;
+		transaction.setTransactionPayloadType(transactionPayloadType);
+		long expirationTime = System.currentTimeMillis() * 1000;
+		transaction.setExpirationTime(new UInt64(expirationTime));
 		//
 		Program program = new Program();
 		program.setCode(Code.MINT);
@@ -192,6 +198,9 @@ public class TestTransaction extends TestClass {
 		events.add(event);
 		//
 		String string = transaction.toString();
+		System.out.println(string);
+		assertTrue(string.contains(transactionPayloadType + ""));
+		assertTrue(string.contains(expirationTime + ""));
 		assertTrue(string.contains(version + ""));
 		assertTrue(string.contains(Transaction.Type.MINT + ""));
 		assertTrue(string.contains(argValue));
