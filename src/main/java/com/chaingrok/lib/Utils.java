@@ -1,4 +1,4 @@
-package com.chaingrok.libra4j.misc;
+package com.chaingrok.lib;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,7 +14,7 @@ import java.util.TimeZone;
 
 import javax.xml.bind.DatatypeConverter;
 
-import com.chaingrok.libra4j.misc.Libra4jLog.Type;
+import com.chaingrok.lib.Libra4jLog.Type;
 import com.google.protobuf.ByteString;
 
 public class Utils {
@@ -24,7 +24,7 @@ public class Utils {
 		try {
 			bytes = Files.readAllBytes(Paths.get(path));
 		} catch (IOException e) {
-			throw new Libra4jException(e);
+			throw new ChaingrokException(e);
 		}
 		return bytes;
 	}
@@ -37,7 +37,7 @@ public class Utils {
 		try (PrintWriter out = new PrintWriter(filepath)) {
 		    out.println(string);
 		} catch (FileNotFoundException e) {
-			throw new Libra4jException(e);
+			throw new ChaingrokException(e);
 		}
 	}
 	
@@ -82,7 +82,7 @@ public class Utils {
 			result = ByteBuffer.allocate(4).putInt(Integer.reverseBytes(new BigInteger(bytes).intValue())).array();
 			
 		} else {
-			throw new Libra4jException("not implemented!");
+			throw new ChaingrokException("not implemented!");
 		}
 		return result;
 	}
@@ -116,7 +116,7 @@ public class Utils {
 	    buffer.putLong(x);
 	    byte[] bytes = buffer.array();
 	    if (length > Long.BYTES) {
-	    	new Libra4jError(Type.INVALID_LENGTH,"byte array too big: " + length + " <> " + Long.BYTES);
+	    	new ChaingrokError(Type.INVALID_LENGTH,"byte array too big: " + length + " <> " + Long.BYTES);
 	    } else {
 	    	result = new byte[length];
 	    	System.arraycopy(bytes,Long.BYTES-length,result,0, length);

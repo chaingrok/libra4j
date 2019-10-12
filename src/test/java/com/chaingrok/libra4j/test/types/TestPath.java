@@ -9,12 +9,12 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import com.chaingrok.lib.ChaingrokException;
+import com.chaingrok.lib.UInt32;
+import com.chaingrok.lib.Utils;
 import com.chaingrok.libra4j.misc.LCSProcessor;
-import com.chaingrok.libra4j.misc.Libra4jException;
-import com.chaingrok.libra4j.misc.Utils;
 import com.chaingrok.libra4j.test.TestClass;
 import com.chaingrok.libra4j.types.Path;
-import com.chaingrok.libra4j.types.UInt32;
 
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -42,21 +42,21 @@ public class TestPath extends TestClass {
 		try {
 			new Path(path,false);
 			fail("should fail with invalid chars");
-		} catch (Libra4jException e) {
+		} catch (ChaingrokException e) {
 			assertTrue(e.getMessage().startsWith("path contains invalid chars:"));
 		}
 		path = "!".getBytes();
 		try {
 			new Path(path,false);
 			fail("should fail with invalid chars");
-		} catch (Libra4jException e) {
+		} catch (ChaingrokException e) {
 			assertTrue(e.getMessage().startsWith("path contains invalid chars:"));
 		}
 		path = "-".getBytes();
 		try {
 			new Path(path,false);
 			fail("should fail with invalid chars");
-		} catch (Libra4jException e) {
+		} catch (ChaingrokException e) {
 			assertTrue(e.getMessage().startsWith("path contains invalid chars:"));
 		}
 		
@@ -68,7 +68,7 @@ public class TestPath extends TestClass {
 		try {
 			new Path(path,false);
 			fail("should fail with invalid chars");
-		} catch (Libra4jException e) {
+		} catch (ChaingrokException e) {
 			assertTrue(e.getMessage().startsWith("path does not start with proper separator:"));
 		}
 	}

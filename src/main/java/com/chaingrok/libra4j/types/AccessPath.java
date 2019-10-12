@@ -1,7 +1,7 @@
 package com.chaingrok.libra4j.types;
 
-import com.chaingrok.libra4j.misc.Libra4jException;
-import com.chaingrok.libra4j.misc.Utils;
+import com.chaingrok.lib.ChaingrokException;
+import com.chaingrok.lib.Utils;
 import com.google.protobuf.ByteString;
 
 public class AccessPath {
@@ -49,7 +49,7 @@ public class AccessPath {
 	private void setTag(byte tag) {
 		if ((tag != CODE_TAG) 
 				&& (tag != RESOURCE_TAG)) {
-			throw new Libra4jException("invalid tag for access path:" + tag);
+			throw new ChaingrokException("invalid tag for access path:" + tag);
 		}
 		this.tag = tag;
 	}

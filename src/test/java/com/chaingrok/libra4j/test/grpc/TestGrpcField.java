@@ -16,10 +16,10 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfo;
 
+import com.chaingrok.lib.ChaingrokError;
+import com.chaingrok.lib.ChaingrokException;
+import com.chaingrok.lib.Libra4jLog;
 import com.chaingrok.libra4j.grpc.GrpcField;
-import com.chaingrok.libra4j.misc.Libra4jError;
-import com.chaingrok.libra4j.misc.Libra4jException;
-import com.chaingrok.libra4j.misc.Libra4jLog;
 import com.chaingrok.libra4j.test.TestClass;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -46,7 +46,7 @@ public class TestGrpcField extends TestClass {
 		ArrayList<Libra4jLog> logs = Libra4jLog.getLogs();
 		assertEquals(1,logs.size());
 		Libra4jLog log = logs.get(0);
-		assertTrue(log instanceof Libra4jError);
+		assertTrue(log instanceof ChaingrokError);
 		Libra4jLog.purgeLogs();
 	}
 	
@@ -74,7 +74,7 @@ public class TestGrpcField extends TestClass {
 			String fullName = grpcField.getFullName();
 			String[] chunks = fullName.split("\\.");
 			if (chunks.length < 2) {
-				throw new Libra4jException("at least 2 chunks expected: " + fullName);
+				throw new ChaingrokException("at least 2 chunks expected: " + fullName);
 			}
 			String suffix = chunks[chunks.length-1];
 			GrpcField value = map.get(suffix);

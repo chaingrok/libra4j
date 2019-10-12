@@ -7,6 +7,8 @@ import java.io.StringWriter;
 
 import org.apache.commons.io.IOUtils;
 
+import com.chaingrok.lib.ChaingrokException;
+
 
 public class ProtoGenerator {
 	
@@ -20,21 +22,21 @@ public class ProtoGenerator {
 	public ProtoGenerator(String protoDirpath,String grpcDirpath,String javaPluginFilepath) {
 		protoDir = new File(protoDirpath);
 		if (!protoDir.exists()) {
-			throw new Libra4jException("proto dir does not exist: " + protoDir.getAbsolutePath());
+			throw new ChaingrokException("proto dir does not exist: " + protoDir.getAbsolutePath());
 		}
 		if (!protoDir.isDirectory()) {
-			throw new Libra4jException("proto dir is not a directory: " + protoDir.getAbsolutePath());
+			throw new ChaingrokException("proto dir is not a directory: " + protoDir.getAbsolutePath());
 		}
 		grpcDir = new File(grpcDirpath);
 		if (!grpcDir.exists()) {
-			throw new Libra4jException("grpc dir does not exist: " + grpcDir.getAbsolutePath());
+			throw new ChaingrokException("grpc dir does not exist: " + grpcDir.getAbsolutePath());
 		}
 		if (!grpcDir.isDirectory()) {
-			throw new Libra4jException("grpc dir is not a directory: " + grpcDir.getAbsolutePath());
+			throw new ChaingrokException("grpc dir is not a directory: " + grpcDir.getAbsolutePath());
 		} 
 		javaPlugin = new File(javaPluginFilepath);
 		if (!javaPlugin.exists()) {
-			throw new Libra4jException("java plugin does not exist: " + javaPlugin.exists());
+			throw new ChaingrokException("java plugin does not exist: " + javaPlugin.exists());
 		}
 	}
 	
@@ -56,7 +58,7 @@ public class ProtoGenerator {
 		isOk = true;
 		File protoFile = new File(protoDir.getAbsolutePath() + File.separator + protoFilename);
 		if (!protoFile.exists()) {
-			throw new Libra4jException("Proto file does not exist: " + protoFile.getAbsolutePath());
+			throw new ChaingrokException("Proto file does not exist: " + protoFile.getAbsolutePath());
 		}
 		String command = PROTO_COMMAND 
 				+ " --proto_path=" + protoDir.getAbsolutePath() 
@@ -72,14 +74,14 @@ public class ProtoGenerator {
 		try {
 			pr = rt.exec(command);
 		} catch (IOException e) {
-			throw new Libra4jException(e);
+			throw new ChaingrokException(e);
 		}
 		InputStream errorStream = pr.getErrorStream();
 		StringWriter writer = new StringWriter();
 		try {
 			IOUtils.copy(errorStream, writer);
 		} catch (IOException e) {
-			throw new Libra4jException(e);
+			throw new ChaingrokException(e);
 		}
 		String string  = writer.toString();
 		if ((string != null) 
@@ -92,7 +94,7 @@ public class ProtoGenerator {
 		try {
 			IOUtils.copy(outputStream, writer);
 		} catch (IOException e) {
-			throw new Libra4jException(e);
+			throw new ChaingrokException(e);
 		}
 		string = writer.toString();
 		if ((string != null) 

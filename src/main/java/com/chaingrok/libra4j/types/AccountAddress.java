@@ -1,8 +1,8 @@
 package com.chaingrok.libra4j.types;
 
-import com.chaingrok.libra4j.misc.Libra4jError;
-import com.chaingrok.libra4j.misc.Libra4jLog.Type;
-import com.chaingrok.libra4j.misc.Utils;
+import com.chaingrok.lib.ChaingrokError;
+import com.chaingrok.lib.Utils;
+import com.chaingrok.lib.Libra4jLog.Type;
 import com.google.protobuf.ByteString;
 
 //Soource : types/src/account_address.rs
@@ -28,10 +28,10 @@ public class AccountAddress extends ByteArray {
 	public AccountAddress(byte[] bytes) {
 		super(bytes);
 		if (bytes == null) {
-			new Libra4jError(Type.NULL_DATA,"input byte array cannot be null for account address");
+			new ChaingrokError(Type.NULL_DATA,"input byte array cannot be null for account address");
 		} else {
 			if (bytes.length != BYTE_LENGTH) {
-				new Libra4jError(Type.INVALID_LENGTH,"invalid account address size: " + bytes.length +  " <> " + BYTE_LENGTH);
+				new ChaingrokError(Type.INVALID_LENGTH,"invalid account address size: " + bytes.length +  " <> " + BYTE_LENGTH);
 			}
 		}
 	}

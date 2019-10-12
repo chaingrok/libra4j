@@ -2,11 +2,13 @@ package com.chaingrok.libra4j.types;
 
 import org.libra.grpc.types.Transaction.TransactionArgument.ArgType;
 
+import com.chaingrok.lib.ChaingrokError;
+import com.chaingrok.lib.Libra4jLog;
+import com.chaingrok.lib.UInt32;
+import com.chaingrok.lib.UInt64;
+import com.chaingrok.lib.Utils;
 import com.chaingrok.libra4j.misc.LCSInterface;
 import com.chaingrok.libra4j.misc.LCSProcessor;
-import com.chaingrok.libra4j.misc.Libra4jError;
-import com.chaingrok.libra4j.misc.Libra4jLog;
-import com.chaingrok.libra4j.misc.Utils;
 
 public class Argument extends ByteArray implements LCSInterface {
 	
@@ -111,7 +113,7 @@ public class Argument extends ByteArray implements LCSInterface {
 				encoder.encode(bytes);
 				break;
 			default:
-				new Libra4jError(Libra4jLog.Type.UNKNOWN_VALUE,"unknown argument type to encode: " + getType() + " - " + Utils.byteArrayToHexString(bytes));
+				new ChaingrokError(Libra4jLog.Type.UNKNOWN_VALUE,"unknown argument type to encode: " + getType() + " - " + Utils.byteArrayToHexString(bytes));
 				encoder.encode(bytes); //best effort...
 				break;
 			}
@@ -178,10 +180,10 @@ public class Argument extends ByteArray implements LCSInterface {
 				}
 			}
 			if (result == Type.UNRECOGNIZED) {
-				new Libra4jError(Libra4jError.Type.UNKNOWN_VALUE, "type: " + ArgType.UNRECOGNIZED + "found");
+				new ChaingrokError(ChaingrokError.Type.UNKNOWN_VALUE, "type: " + ArgType.UNRECOGNIZED + "found");
 			}
 			if (result == null) {
-				new Libra4jError(Libra4jError.Type.UNKNOWN_VALUE, "unrecognized ArgType: " + argType);
+				new ChaingrokError(ChaingrokError.Type.UNKNOWN_VALUE, "unrecognized ArgType: " + argType);
 				result = Type.UNRECOGNIZED;
 			}
 			return result;
@@ -196,10 +198,10 @@ public class Argument extends ByteArray implements LCSInterface {
 				}
 			}
 			if (result == Type.UNRECOGNIZED) {
-				new Libra4jError(Libra4jError.Type.UNKNOWN_VALUE, "type: " + ArgType.UNRECOGNIZED + "found");
+				new ChaingrokError(ChaingrokError.Type.UNKNOWN_VALUE, "type: " + ArgType.UNRECOGNIZED + "found");
 			}
 			if (result == null) {
-				new Libra4jError(Libra4jError.Type.UNKNOWN_VALUE, "unrecognized ArgTypeInt: " + argTypeInt);
+				new ChaingrokError(ChaingrokError.Type.UNKNOWN_VALUE, "unrecognized ArgTypeInt: " + argTypeInt);
 				result = Type.UNRECOGNIZED;
 			}
 			return result;

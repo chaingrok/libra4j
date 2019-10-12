@@ -1,9 +1,10 @@
 package com.chaingrok.libra4j.types;
 
+import com.chaingrok.lib.ChaingrokError;
+import com.chaingrok.lib.UInt32;
+import com.chaingrok.lib.Utils;
 import com.chaingrok.libra4j.misc.LCSInterface;
 import com.chaingrok.libra4j.misc.LCSProcessor;
-import com.chaingrok.libra4j.misc.Libra4jError;
-import com.chaingrok.libra4j.misc.Utils;
 
 public class WriteOp extends ByteArray implements LCSInterface {
 	
@@ -48,10 +49,10 @@ public class WriteOp extends ByteArray implements LCSInterface {
 				}
 			}
 			if (result == Type.UNRECOGNIZED) {
-				new Libra4jError(Libra4jError.Type.UNKNOWN_VALUE, "type: " + Type.UNRECOGNIZED + "found");
+				new ChaingrokError(ChaingrokError.Type.UNKNOWN_VALUE, "type: " + Type.UNRECOGNIZED + "found");
 			}
 			if (result == null) {
-				new Libra4jError(Libra4jError.Type.UNKNOWN_VALUE, "unrecognized opType: " + opType);
+				new ChaingrokError(ChaingrokError.Type.UNKNOWN_VALUE, "unrecognized opType: " + opType);
 				result = Type.UNRECOGNIZED;
 			}
 			return result;

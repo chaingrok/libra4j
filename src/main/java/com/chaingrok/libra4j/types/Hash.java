@@ -2,8 +2,8 @@ package com.chaingrok.libra4j.types;
 
 import org.bouncycastle.jcajce.provider.digest.SHA3;
 
-import com.chaingrok.libra4j.misc.Libra4jError;
-import com.chaingrok.libra4j.misc.Libra4jLog.Type;
+import com.chaingrok.lib.ChaingrokError;
+import com.chaingrok.lib.Libra4jLog.Type;
 import com.google.protobuf.ByteString;
 
 
@@ -20,7 +20,7 @@ public class Hash extends ByteArray {
 	public Hash(byte[] bytes) {
 		super(bytes);
 		if (bytes.length != BYTE_LENGTH) {
-			new Libra4jError(Type.INVALID_LENGTH,"invalid hash size: " + bytes.length +  " <> " + BYTE_LENGTH);
+			new ChaingrokError(Type.INVALID_LENGTH,"invalid hash size: " + bytes.length +  " <> " + BYTE_LENGTH);
 		}
 	}
 	

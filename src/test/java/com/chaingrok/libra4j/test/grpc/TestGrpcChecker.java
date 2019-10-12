@@ -12,12 +12,12 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import com.chaingrok.lib.ChaingrokError;
+import com.chaingrok.lib.Libra4jLog;
+import com.chaingrok.lib.Utils;
+import com.chaingrok.lib.Libra4jLog.Type;
 import com.chaingrok.libra4j.grpc.GrpcChecker;
 import com.chaingrok.libra4j.grpc.GrpcField;
-import com.chaingrok.libra4j.misc.Libra4jError;
-import com.chaingrok.libra4j.misc.Libra4jLog;
-import com.chaingrok.libra4j.misc.Libra4jLog.Type;
-import com.chaingrok.libra4j.misc.Utils;
 import com.chaingrok.libra4j.test.TestClass;
 import com.chaingrok.libra4j.types.AccountAddress;
 import com.chaingrok.libra4j.types.Hash;
@@ -370,7 +370,7 @@ public class TestGrpcChecker extends TestClass {
 		assertEquals(1,Libra4jLog.getLogs().size());
 		Libra4jLog.purgeLogs();
 		//
-		assertFalse(Libra4jError.hasLogs());
+		assertFalse(ChaingrokError.hasLogs());
 		assertFalse(grpcChecker.checkExpectedFields(new Object(),0)); //non MessageOrBuilderObject
 		assertEquals(1,Libra4jLog.getLogs().size());
 		Libra4jLog.purgeLogs();

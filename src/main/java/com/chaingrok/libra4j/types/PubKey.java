@@ -1,8 +1,8 @@
 package com.chaingrok.libra4j.types;
 
+import com.chaingrok.lib.ChaingrokError;
+import com.chaingrok.lib.Libra4jLog.Type;
 import com.chaingrok.libra4j.crypto.KeyPair;
-import com.chaingrok.libra4j.misc.Libra4jError;
-import com.chaingrok.libra4j.misc.Libra4jLog.Type;
 
 public class PubKey extends ByteArray {
 	
@@ -11,10 +11,10 @@ public class PubKey extends ByteArray {
 	public PubKey(byte[] bytes) {
 		super(bytes);
 		if (bytes == null) {
-			new Libra4jError(Type.NULL_DATA,"input byte array cannot be null for piblic key");
+			new ChaingrokError(Type.NULL_DATA,"input byte array cannot be null for piblic key");
 		} else {
 			if (bytes.length != BYTE_LENGTH) {
-				new Libra4jError(Type.INVALID_LENGTH,"invalid public key size: " + bytes.length +  " <> " + BYTE_LENGTH);
+				new ChaingrokError(Type.INVALID_LENGTH,"invalid public key size: " + bytes.length +  " <> " + BYTE_LENGTH);
 			}
 		}
 	}

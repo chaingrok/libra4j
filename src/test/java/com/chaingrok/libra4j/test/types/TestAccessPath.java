@@ -8,12 +8,12 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import com.chaingrok.lib.UInt32;
+import com.chaingrok.lib.Utils;
 import com.chaingrok.libra4j.misc.LCSProcessor;
-import com.chaingrok.libra4j.misc.Utils;
 import com.chaingrok.libra4j.types.AccessPath;
 import com.chaingrok.libra4j.types.AccountAddress;
 import com.chaingrok.libra4j.types.Path;
-import com.chaingrok.libra4j.types.UInt32;
 import com.google.protobuf.ByteString;
 
 

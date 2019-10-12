@@ -1,4 +1,4 @@
-package com.chaingrok.libra4j.misc;
+package com.chaingrok.lib;
 
 public class Libra4jWarning extends Libra4jLog {
 

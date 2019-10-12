@@ -1,5 +1,7 @@
 package com.chaingrok.libra4j.grpc;
 
+import com.chaingrok.lib.ChaingrokError;
+import com.chaingrok.lib.Libra4jLog.Type;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.UInt64Value;
 import com.google.protobuf.Descriptors.EnumValueDescriptor;
@@ -32,9 +34,6 @@ import org.libra.grpc.types.Transaction.SignedTransaction;
 import org.libra.grpc.types.Transaction.SignedTransactionWithProof;
 import org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo;
 import org.libra.grpc.types.Transaction.TransactionArgument;
-
-import com.chaingrok.libra4j.misc.Libra4jError;
-import com.chaingrok.libra4j.misc.Libra4jLog.Type;
 
 public enum GrpcField {
 	UPDATE_TO_LATEST_LEDGER_RESPONSE("types.UpdateToLatestLedgerResponse",UpdateToLatestLedgerResponse.class,null), //TODO: check fullname root node 
@@ -142,7 +141,7 @@ public enum GrpcField {
 			}
 		}
 		if (result == null) {
-			new Libra4jError(Type.UNKNOWN_VALUE,"unknown " + GrpcField.class.getCanonicalName() + ":" + fullName);
+			new ChaingrokError(Type.UNKNOWN_VALUE,"unknown " + GrpcField.class.getCanonicalName() + ":" + fullName);
 		}
 		return result;
 	}

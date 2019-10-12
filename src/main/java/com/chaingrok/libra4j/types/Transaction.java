@@ -1,8 +1,9 @@
 package com.chaingrok.libra4j.types;
 
+import com.chaingrok.lib.Libra4jWarning;
+import com.chaingrok.lib.UInt64;
 import com.chaingrok.libra4j.misc.LCSInterface;
 import com.chaingrok.libra4j.misc.LCSProcessor;
-import com.chaingrok.libra4j.misc.Libra4jWarning;
 
 public class Transaction implements LCSInterface {
 	//raw transaction fields
@@ -280,7 +281,7 @@ public class Transaction implements LCSInterface {
 				}
 			}
 			if (result == UNKNOWN) {
-				new Libra4jWarning(com.chaingrok.libra4j.misc.Libra4jLog.Type.UNKNOWN_VALUE,"Transaction type is unknown: " + transaction.getVersion());
+				new Libra4jWarning(com.chaingrok.lib.Libra4jLog.Type.UNKNOWN_VALUE,"Transaction type is unknown: " + transaction.getVersion());
 			}
 			return result;
 		}

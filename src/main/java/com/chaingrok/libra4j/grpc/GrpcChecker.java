@@ -9,8 +9,8 @@ import org.libra.grpc.types.GetWithProof.UpdateToLatestLedgerResponse;
 import org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfo;
 import org.libra.grpc.types.LedgerInfoOuterClass.ValidatorSignature;
 
-import com.chaingrok.libra4j.misc.Libra4jError;
-import com.chaingrok.libra4j.misc.Libra4jLog.Type;
+import com.chaingrok.lib.ChaingrokError;
+import com.chaingrok.lib.Libra4jLog.Type;
 import com.chaingrok.libra4j.types.AccountAddress;
 import com.chaingrok.libra4j.types.Hash;
 import com.chaingrok.libra4j.types.Signature;
@@ -33,12 +33,12 @@ public class GrpcChecker {
 		boolean result = true;
 		long version = ledgerInfo.getVersion();
 		if (version <= 0) {
-			new Libra4jError(Type.INVALID_VERSION,"ledger info version invalid:" + version);
+			new ChaingrokError(Type.INVALID_VERSION,"ledger info version invalid:" + version);
 			result = false;
 		}
 		long timestamp = ledgerInfo.getTimestampUsecs();
 		if (timestamp <= 0) {
-			new Libra4jError(Type.INVALID_TIMESTAMP,"timestamp invalid:" + timestamp);
+			new ChaingrokError(Type.INVALID_TIMESTAMP,"timestamp invalid:" + timestamp);
 			result = false;
 		}
 		new Hash(ledgerInfo.getConsensusBlockId());
@@ -52,7 +52,7 @@ public class GrpcChecker {
 		new AccountAddress(validatorSignature.getValidatorId());
 		ByteString signed = validatorSignature.getSignature();
 		if (signed.size() == 0) {
-			new Libra4jError(Type.MISSING_DATA,"validator signature invalid: signed is null");
+			new ChaingrokError(Type.MISSING_DATA,"validator signature invalid: signed is null");
 			result = false;
 		} else {
 			Signature signature = new Signature(signed);
@@ -69,9 +69,9 @@ public class GrpcChecker {
 		Boolean result = null;
 		if (!(object instanceof MessageOrBuilder)) {
 			if (object != null) {
-				new Libra4jError(Type.INVALID_CLASS,"trying to check fields of non MessageOrBuilder: " + object.getClass().getCanonicalName());
+				new ChaingrokError(Type.INVALID_CLASS,"trying to check fields of non MessageOrBuilder: " + object.getClass().getCanonicalName());
 			} else {
-				new Libra4jError(Type.MISSING_DATA,"trying to check fields of null object");
+				new ChaingrokError(Type.MISSING_DATA,"trying to check fields of null object");
 			}
 			result=false;
 		} else {
@@ -88,7 +88,7 @@ public class GrpcChecker {
 				}
 				if ((fieldDescriptors.size() < minExpectedItemsCount) 
 						|| (fieldDescriptors.size() >  maxExpectedItemsCount)) {
-					new Libra4jError(Type.INVALID_COUNT,"count different from expected for " + object.getClass() + ": " + minExpectedItemsCount + " <= " + fieldDescriptors.size() + " <= " + maxExpectedItemsCount);
+					new ChaingrokError(Type.INVALID_COUNT,"count different from expected for " + object.getClass() + ": " + minExpectedItemsCount + " <= " + fieldDescriptors.size() + " <= " + maxExpectedItemsCount);
 					result = false;
 				}
 				if (result == null) {
@@ -119,12 +119,12 @@ public class GrpcChecker {
 		Boolean result = null;
 		GrpcField grpcField = GrpcField.get(fieldFullName);
 		if (grpcField == null) {
-			new Libra4jError(Type.UNKNOWN_VALUE,"no GrpcField for fullName: " + fieldFullName);
+			new ChaingrokError(Type.UNKNOWN_VALUE,"no GrpcField for fullName: " + fieldFullName);
 			result = false;
 		} else {
 			if (grpcClass != null) {
 				if (!grpcField.getParentFieldClass().equals(grpcClass)) {
-					new Libra4jError(Type.INVALID_CLASS,"field descriptor class is invalid: " + fieldFullName + ": " 
+					new ChaingrokError(Type.INVALID_CLASS,"field descriptor class is invalid: " + fieldFullName + ": " 
 							+ grpcClass.getCanonicalName()
 							+ " <> " 
 							+ grpcField.getParentFieldClass().getCanonicalName());
@@ -145,11 +145,11 @@ public class GrpcChecker {
 							|| (fieldObject instanceof Int32Value)) {
 					result = checkInt32FieldDescriptor(grpcField,fieldObject);
 				} else {
-					new Libra4jError(Type.INVALID_CLASS,"field type checking is not implemented: " + fieldFullName + " (object class: " + fieldObject.getClass().getCanonicalName() + ")");
+					new ChaingrokError(Type.INVALID_CLASS,"field type checking is not implemented: " + fieldFullName + " (object class: " + fieldObject.getClass().getCanonicalName() + ")");
 					result = false;
 				}
 			} else {
-				new Libra4jError(Type.MISSING_DATA,"field object is null");
+				new ChaingrokError(Type.MISSING_DATA,"field object is null");
 				result = false;
 			}
 		}
@@ -161,7 +161,7 @@ public class GrpcChecker {
 		MessageOrBuilder fieldObjetMessageOfBuilder = (MessageOrBuilder) fieldObject;
 		Message defaultFieldInstance = fieldObjetMessageOfBuilder.getDefaultInstanceForType();
 		if (!grpcField.getFieldClass().equals(defaultFieldInstance.getClass())) {
-			new Libra4jError(Type.INVALID_CLASS,"returned field class is invalid: " + grpcField.getFullName() + ": " 
+			new ChaingrokError(Type.INVALID_CLASS,"returned field class is invalid: " + grpcField.getFullName() + ": " 
 					+ defaultFieldInstance.getClass().getCanonicalName()
 					+ " <> " 
 					+ grpcField.getFieldClass().getCanonicalName());
@@ -180,14 +180,14 @@ public class GrpcChecker {
 				MessageOrBuilder listGrpcItem = (MessageOrBuilder) listObject;
 				Message defaultListInstance = listGrpcItem.getDefaultInstanceForType();
 				if (!grpcField.getFieldClass().equals(defaultListInstance.getClass())) {
-					new Libra4jError(Type.INVALID_CLASS,"returned field class is invalid: " + grpcField.getFullName() + ": " 
+					new ChaingrokError(Type.INVALID_CLASS,"returned field class is invalid: " + grpcField.getFullName() + ": " 
 							+ defaultListInstance.getClass().getCanonicalName()
 							+ " <> " 
 							+ grpcField.getFieldClass().getCanonicalName());
 					result = false;
 				} 
 			} else {
-				new Libra4jError(Type.INVALID_CLASS,"listObject is not instanceOf MessageOrBuilder: " + listObject.getClass().getCanonicalName());
+				new ChaingrokError(Type.INVALID_CLASS,"listObject is not instanceOf MessageOrBuilder: " + listObject.getClass().getCanonicalName());
 				result = false;
 			}
 		}
@@ -199,7 +199,7 @@ public class GrpcChecker {
 		UInt64ValueOrBuilder i64GrpcItem = (UInt64ValueOrBuilder) fieldObject;
 		Message i64DefaultInstance = i64GrpcItem.getDefaultInstanceForType();
 		if (!grpcField.getFieldClass().equals(i64DefaultInstance.getClass())) {
-			new Libra4jError(Type.INVALID_CLASS,"returned field class is invalid: " + grpcField.getFullName() + ": " 
+			new ChaingrokError(Type.INVALID_CLASS,"returned field class is invalid: " + grpcField.getFullName() + ": " 
 						+ i64DefaultInstance.getClass().getCanonicalName()
 						+ " <> " 
 						+ grpcField.getFieldClass().getCanonicalName());
@@ -213,7 +213,7 @@ public class GrpcChecker {
 		UInt32ValueOrBuilder i32GrpcItem = (UInt32ValueOrBuilder) fieldObject;
 		Message i32DefaultInstance = i32GrpcItem.getDefaultInstanceForType();
 		if (!grpcField.getFieldClass().equals(i32DefaultInstance.getClass())) {
-			new Libra4jError(Type.INVALID_CLASS,"returned field class is invalid: " + grpcField.getFullName() + ": " 
+			new ChaingrokError(Type.INVALID_CLASS,"returned field class is invalid: " + grpcField.getFullName() + ": " 
 						+ i32DefaultInstance.getClass().getCanonicalName()
 						+ " <> " 
 						+ grpcField.getFieldClass().getCanonicalName());
@@ -239,7 +239,7 @@ public class GrpcChecker {
 				for (GrpcField mandatoryField : mandatoryFields) {
 					if (!isFieldSet(mandatoryField,messageOrBuilder,fieldDescriptorMap)) {
 							result = false; //no loop break to collect all potential errors
-							new Libra4jError(Type.MISSING_DATA,"mandatory field missing for " + messageOrBuilder.getClass().getCanonicalName() + ":" + mandatoryField);
+							new ChaingrokError(Type.MISSING_DATA,"mandatory field missing for " + messageOrBuilder.getClass().getCanonicalName() + ":" + mandatoryField);
 					}
 				}
 				//}
@@ -253,13 +253,13 @@ public class GrpcChecker {
 		if (unknownFieldSet != null) {
 			Map<Integer, Field> map = unknownFieldSet.asMap();
 			if (map.keySet().size() != 0) {
-				new Libra4jError(Type.INIT_ERROR,unknownFieldSet);
+				new ChaingrokError(Type.INIT_ERROR,unknownFieldSet);
 				result = false;
 			}
 		} 
 		if ((initializationErrors != null) 
 			&& (initializationErrors.size() != 0)) {
-			new Libra4jError(Type.INIT_ERROR,initializationErrors);
+			new ChaingrokError(Type.INIT_ERROR,initializationErrors);
 			result = false;
 		}
 		if (result == null) {
@@ -274,7 +274,7 @@ public class GrpcChecker {
 			String fullName = field.getFullName();
 			if (object != null)  {
 				if (objectFieldsMap == null) {
-					new Libra4jError(Type.NULL_DATA,"field descriptor map not set for object: " + object.getClass().getCanonicalName());
+					new ChaingrokError(Type.NULL_DATA,"field descriptor map not set for object: " + object.getClass().getCanonicalName());
 				} else {
 					for (FieldDescriptor fieldDescriptor : objectFieldsMap.keySet()) {
 						if (fieldDescriptor.getFullName().equals(fullName)) {

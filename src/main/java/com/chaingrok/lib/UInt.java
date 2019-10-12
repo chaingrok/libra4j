@@ -1,11 +1,8 @@
-package com.chaingrok.libra4j.types;
+package com.chaingrok.lib;
 
 import java.math.BigInteger;
 
-import com.chaingrok.libra4j.misc.Libra4jError;
-import com.chaingrok.libra4j.misc.Libra4jException;
-import com.chaingrok.libra4j.misc.Utils;
-import com.chaingrok.libra4j.misc.Libra4jLog.Type;
+import com.chaingrok.lib.Libra4jLog.Type;
 import com.google.protobuf.ByteString;
 
 public abstract class UInt {
@@ -29,14 +26,14 @@ public abstract class UInt {
 	
 	public UInt(Long value) {
 		if (value < 0) {
-			new Libra4jError(Type.INVALID_VALUE,"UInt cannot be constructed from negative long value: " + value);
+			new ChaingrokError(Type.INVALID_VALUE,"UInt cannot be constructed from negative long value: " + value);
 		} else {
 			byte[] longBytes = Utils.longToByteArray(value,getLength());
 			if (longBytes.length <= getLength()) {
 				bytes = new byte[getLength()];
 				System.arraycopy(longBytes, 0, bytes, bytes.length-longBytes.length, longBytes.length);
 			} else {
-				throw new Libra4jException("byte array is too big: " + longBytes.length + " <> " + getLength() + " - " + Utils.byteArrayToHexString(longBytes));
+				throw new ChaingrokException("byte array is too big: " + longBytes.length + " <> " + getLength() + " - " + Utils.byteArrayToHexString(longBytes));
 			}
 		}
 	}
@@ -51,13 +48,13 @@ public abstract class UInt {
 							this.bytes = new byte[UInt64.BYTE_LENGTH];
 							System.arraycopy(bytes, 1, this.bytes, 0, UInt64.BYTE_LENGTH);
 						} else {
-							new Libra4jError(Type.INVALID_VALUE,"leading byte must be 0x00:" + bytes[0]);
+							new ChaingrokError(Type.INVALID_VALUE,"leading byte must be 0x00:" + bytes[0]);
 						}
 					} else {
-						new Libra4jError(Type.INVALID_VALUE,"bytes.lenghht too big:" + bytes.length + " <> " + UInt64.BYTE_LENGTH );
+						new ChaingrokError(Type.INVALID_VALUE,"bytes.lenghht too big:" + bytes.length + " <> " + UInt64.BYTE_LENGTH );
 					}
 				} else {
-					new Libra4jError(Type.INVALID_LENGTH,"too many bytes from BigInteger");
+					new ChaingrokError(Type.INVALID_LENGTH,"too many bytes from BigInteger");
 				}
 			}
 		}
@@ -68,7 +65,7 @@ public abstract class UInt {
 		if (bytes != null) {
 			result = Utils.byteArraytoBigInt(bytes);
 			if (result.compareTo(getMaxValue()) > 0) {
-				new Libra4jError(Type.INVALID_VALUE,"UInt value greater than max value: " + result.toString() + " <> " + getMaxValue().toString());
+				new ChaingrokError(Type.INVALID_VALUE,"UInt value greater than max value: " + result.toString() + " <> " + getMaxValue().toString());
 			}
 		}
 		return result;
@@ -100,19 +97,19 @@ public abstract class UInt {
 		if (byteString != null) {
 			processBytes(byteString.toByteArray());
 		} else {
-			new Libra4jError(Type.INVALID_LENGTH,"ByteString cannot be null");
+			new ChaingrokError(Type.INVALID_LENGTH,"ByteString cannot be null");
 		}
 	}
 	
 	private void processBytes(byte[] bytes) {
 		if (bytes != null) {
 			if (bytes.length != getLength()) {
-				new Libra4jError(Type.INVALID_LENGTH,"byte array length is invalid: " + bytes.length + " <> " + getLength());
+				new ChaingrokError(Type.INVALID_LENGTH,"byte array length is invalid: " + bytes.length + " <> " + getLength());
 			} else {
 				this.bytes = bytes;
 			}
 		} else {
-			new Libra4jError(Type.INVALID_LENGTH,"byte array cannot be null");
+			new ChaingrokError(Type.INVALID_LENGTH,"byte array cannot be null");
 		}
 	}
 	
@@ -138,7 +135,7 @@ public abstract class UInt {
 					}
 				}
 			} else {
-				new Libra4jError(Type.INVALID_CLASS,"cannot compare objects of different classes: " + this.getClass().getCanonicalName() +  " <> " + object.getClass().getCanonicalName());
+				new ChaingrokError(Type.INVALID_CLASS,"cannot compare objects of different classes: " + this.getClass().getCanonicalName() +  " <> " + object.getClass().getCanonicalName());
 			}
 		}
 		return result;

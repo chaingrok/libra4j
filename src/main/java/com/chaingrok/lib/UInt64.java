@@ -1,4 +1,4 @@
-package com.chaingrok.libra4j.types;
+package com.chaingrok.lib;
 
 import java.math.BigInteger;
 

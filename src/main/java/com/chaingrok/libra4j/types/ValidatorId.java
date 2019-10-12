@@ -1,8 +1,8 @@
 package com.chaingrok.libra4j.types;
 
-import com.chaingrok.libra4j.misc.Libra4jError;
-import com.chaingrok.libra4j.misc.Libra4jLog.Type;
-import com.chaingrok.libra4j.misc.Utils;
+import com.chaingrok.lib.ChaingrokError;
+import com.chaingrok.lib.Utils;
+import com.chaingrok.lib.Libra4jLog.Type;
 import com.google.protobuf.ByteString;
 
 public class ValidatorId extends ByteArray {
@@ -12,7 +12,7 @@ public class ValidatorId extends ByteArray {
 	public ValidatorId(ByteString byteString) {
 		super(byteString);
 		if (getBytes().length != BYTE_LENGTH) {
-			new Libra4jError(Type.INVALID_LENGTH,"invalid validator id length: " + getBytes().length + " <> " + BYTE_LENGTH + "(" + Utils.byteArrayToHexString(bytes) + ")");
+			new ChaingrokError(Type.INVALID_LENGTH,"invalid validator id length: " + getBytes().length + " <> " + BYTE_LENGTH + "(" + Utils.byteArrayToHexString(bytes) + ")");
 		}
 	}
 	

@@ -1,9 +1,10 @@
 package com.chaingrok.libra4j.types;
 
+import com.chaingrok.lib.ChaingrokError;
+import com.chaingrok.lib.UInt32;
+import com.chaingrok.lib.Libra4jLog.Type;
 import com.chaingrok.libra4j.misc.LCSInterface;
 import com.chaingrok.libra4j.misc.LCSProcessor;
-import com.chaingrok.libra4j.misc.Libra4jError;
-import com.chaingrok.libra4j.misc.Libra4jLog.Type;
 
 public enum TransactionPayloadType implements LCSInterface {
 	
@@ -33,7 +34,7 @@ public enum TransactionPayloadType implements LCSInterface {
 			}
 		}
 		if (result == null) {
-			new Libra4jError(Type.UNKNOWN_VALUE,"unknown value for payload type: " + type);
+			new ChaingrokError(Type.UNKNOWN_VALUE,"unknown value for payload type: " + type);
 		}
 		return result;
 	}

@@ -2,11 +2,11 @@ package com.chaingrok.libra4j.types;
 
 import java.io.File;
 
+import com.chaingrok.lib.ChaingrokError;
+import com.chaingrok.lib.Utils;
+import com.chaingrok.lib.Libra4jLog.Type;
 import com.chaingrok.libra4j.misc.LCSInterface;
 import com.chaingrok.libra4j.misc.LCSProcessor;
-import com.chaingrok.libra4j.misc.Libra4jError;
-import com.chaingrok.libra4j.misc.Libra4jLog.Type;
-import com.chaingrok.libra4j.misc.Utils;
 
 public class Program implements LCSInterface {
 	
@@ -63,7 +63,7 @@ public class Program implements LCSInterface {
 			result = moveIR.toByteArray();
 			setCode(new Code(result));
 		} else {
-			new Libra4jError(Type.INVALID_VALUE,"file to be deserialized does not exist: " + file.getAbsolutePath());
+			new ChaingrokError(Type.INVALID_VALUE,"file to be deserialized does not exist: " + file.getAbsolutePath());
 		}
 		return result;
 	}

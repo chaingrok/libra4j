@@ -5,7 +5,13 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
-import com.chaingrok.libra4j.misc.Libra4jLog.Type;
+import com.chaingrok.lib.ChaingrokError;
+import com.chaingrok.lib.UInt16;
+import com.chaingrok.lib.UInt32;
+import com.chaingrok.lib.UInt64;
+import com.chaingrok.lib.UInt8;
+import com.chaingrok.lib.Utils;
+import com.chaingrok.lib.Libra4jLog.Type;
 import com.chaingrok.libra4j.types.AccessPath;
 import com.chaingrok.libra4j.types.AccountAddress;
 import com.chaingrok.libra4j.types.Argument;
@@ -20,10 +26,6 @@ import com.chaingrok.libra4j.types.Script;
 import com.chaingrok.libra4j.types.Signature;
 import com.chaingrok.libra4j.types.Transaction;
 import com.chaingrok.libra4j.types.TransactionPayloadType;
-import com.chaingrok.libra4j.types.UInt16;
-import com.chaingrok.libra4j.types.UInt32;
-import com.chaingrok.libra4j.types.UInt64;
-import com.chaingrok.libra4j.types.UInt8;
 import com.chaingrok.libra4j.types.WriteOp;
 import com.chaingrok.libra4j.types.WriteSet;
 import com.chaingrok.libra4j.types.WriteSetTuple;
@@ -86,7 +88,7 @@ public class LCSProcessor {
 			if (count == intLength) {
 				result = bytes;
 			} else {
-				new Libra4jError(Type.INVALID_LENGTH,"byte buffer read did not return proper number of bytes: " + count + " <> " + intLength);
+				new ChaingrokError(Type.INVALID_LENGTH,"byte buffer read did not return proper number of bytes: " + count + " <> " + intLength);
 			}
 		}
 		return result;
@@ -115,7 +117,7 @@ public class LCSProcessor {
 			} else if (b == 1) {
 				result = true;
 			} else {
-				new Libra4jError(Type.UNKNOWN_VALUE,"boolean must be 0 or 1");
+				new ChaingrokError(Type.UNKNOWN_VALUE,"boolean must be 0 or 1");
 			}
 		}
 		return result;
@@ -141,10 +143,10 @@ public class LCSProcessor {
 				try {
 					result = new String(bytes,"UTF8");
 				} catch (UnsupportedEncodingException e) {
-					new Libra4jError(Type.UNKNOWN_VALUE,e);
+					new ChaingrokError(Type.UNKNOWN_VALUE,e);
 				}
 			} else {
-				new Libra4jError(Type.INVALID_LENGTH,"byte buffer read did not return proper number of bytes: " + count + " <> " + length);
+				new ChaingrokError(Type.INVALID_LENGTH,"byte buffer read did not return proper number of bytes: " + count + " <> " + length);
 			}
 		}
 		return result;
@@ -167,7 +169,7 @@ public class LCSProcessor {
 			if (count == UInt64.BYTE_LENGTH) {
 				result = new UInt64(Utils.reverseByteOrder(bytes));
 			} else {
-				new Libra4jError(Type.INVALID_LENGTH,"byte buffer read did not return proper number of bytes: " + count + " <> " + UInt64.BYTE_LENGTH);
+				new ChaingrokError(Type.INVALID_LENGTH,"byte buffer read did not return proper number of bytes: " + count + " <> " + UInt64.BYTE_LENGTH);
 			}
 		}
 		return result;
@@ -190,7 +192,7 @@ public class LCSProcessor {
 			if (count == UInt32.BYTE_LENGTH) {
 				result = new UInt32(Utils.reverseByteOrder(bytes));
 			} else {
-				new Libra4jError(Type.INVALID_LENGTH,"byte buffer read did not return proper number of bytes: " + count + " <> " + UInt32.BYTE_LENGTH);
+				new ChaingrokError(Type.INVALID_LENGTH,"byte buffer read did not return proper number of bytes: " + count + " <> " + UInt32.BYTE_LENGTH);
 			}
 		}
 		return result;
@@ -213,7 +215,7 @@ public class LCSProcessor {
 			if (count == UInt16.BYTE_LENGTH) {
 				result = new UInt16(Utils.reverseByteOrder(bytes));
 			} else {
-				new Libra4jError(Type.INVALID_LENGTH,"byte buffer read did not return proper number of bytes: " + count + " <> " + UInt16.BYTE_LENGTH);
+				new ChaingrokError(Type.INVALID_LENGTH,"byte buffer read did not return proper number of bytes: " + count + " <> " + UInt16.BYTE_LENGTH);
 			}
 		}
 		return result;
@@ -236,7 +238,7 @@ public class LCSProcessor {
 			if (count == UInt8.BYTE_LENGTH) {
 				result = new UInt8(bytes);
 			} else {
-				new Libra4jError(Type.INVALID_LENGTH,"byte buffer read did not return proper number of bytes: " + count + " <> " + UInt8.BYTE_LENGTH);
+				new ChaingrokError(Type.INVALID_LENGTH,"byte buffer read did not return proper number of bytes: " + count + " <> " + UInt8.BYTE_LENGTH);
 			}
 		}
 		return result;
@@ -256,14 +258,14 @@ public class LCSProcessor {
 		if (bis !=null) {
 			UInt32 length = decodeUInt32();
 			if (length.getAsLong() != AccountAddress.BYTE_LENGTH) {
-				new Libra4jError(Type.INVALID_LENGTH,"encoded length of AccountAddress is invalid: " + length.getAsLong() + " <> " + AccountAddress.BYTE_LENGTH);
+				new ChaingrokError(Type.INVALID_LENGTH,"encoded length of AccountAddress is invalid: " + length.getAsLong() + " <> " + AccountAddress.BYTE_LENGTH);
 			}
 			byte[] bytes = new byte[AccountAddress.BYTE_LENGTH];
 			int count = bis.read(bytes, 0,AccountAddress.BYTE_LENGTH);
 			if (count == AccountAddress.BYTE_LENGTH) {
 				result = new AccountAddress(bytes);
 			} else {
-				new Libra4jError(Type.INVALID_LENGTH,"byte buffer read did not return proper number of bytes: " 
+				new ChaingrokError(Type.INVALID_LENGTH,"byte buffer read did not return proper number of bytes: " 
 							+ count + " <> " + AccountAddress.BYTE_LENGTH 
 							+ " (" + Utils.byteArrayToHexString(bytes) + ")");
 			}
@@ -276,14 +278,14 @@ public class LCSProcessor {
 		if (bis !=null) {
 			UInt32 length = decodeUInt32();
 			if (length.getAsLong() != Signature.BYTE_LENGTH) {
-				new Libra4jError(Type.INVALID_LENGTH,"encoded length of Signature is invalid: " + length.getAsLong() + " <> " + Signature.BYTE_LENGTH);
+				new ChaingrokError(Type.INVALID_LENGTH,"encoded length of Signature is invalid: " + length.getAsLong() + " <> " + Signature.BYTE_LENGTH);
 			}
 			byte[] bytes = new byte[Signature.BYTE_LENGTH];
 			int count = bis.read(bytes, 0,Signature.BYTE_LENGTH);
 			if (count == Signature.BYTE_LENGTH) {
 				result = new Signature(bytes);
 			} else {
-				new Libra4jError(Type.INVALID_LENGTH,"byte buffer read did not return proper number of bytes: " 
+				new ChaingrokError(Type.INVALID_LENGTH,"byte buffer read did not return proper number of bytes: " 
 							+ count + " <> " + Signature.BYTE_LENGTH 
 							+ " (" + Utils.byteArrayToHexString(bytes) + ")");
 			}
@@ -296,14 +298,14 @@ public class LCSProcessor {
 		if (bis !=null) {
 			UInt32 length = decodeUInt32();
 			if (length.getAsLong() != PubKey.BYTE_LENGTH) {
-				new Libra4jError(Type.INVALID_LENGTH,"encoded length of PubKey is invalid: " + length.getAsLong() + " <> " + PubKey.BYTE_LENGTH);
+				new ChaingrokError(Type.INVALID_LENGTH,"encoded length of PubKey is invalid: " + length.getAsLong() + " <> " + PubKey.BYTE_LENGTH);
 			}
 			byte[] bytes = new byte[PubKey.BYTE_LENGTH];
 			int count = bis.read(bytes, 0,PubKey.BYTE_LENGTH);
 			if (count == PubKey.BYTE_LENGTH) {
 				result = new PubKey(bytes);
 			} else {
-				new Libra4jError(Type.INVALID_LENGTH,"byte buffer read did not return proper number of bytes: " 
+				new ChaingrokError(Type.INVALID_LENGTH,"byte buffer read did not return proper number of bytes: " 
 							+ count + " <> " + PubKey.BYTE_LENGTH 
 							+ " (" + Utils.byteArrayToHexString(bytes) + ")");
 			}
@@ -358,7 +360,7 @@ public class LCSProcessor {
 			if (uint32 != null) {
 				result = TransactionPayloadType.get((int)(long)uint32.getAsLong());
 			} else {
-				new Libra4jError(Type.INVALID_VALUE,"payload type is null");
+				new ChaingrokError(Type.INVALID_VALUE,"payload type is null");
 			}
 		}
 		return result;
@@ -456,7 +458,7 @@ public class LCSProcessor {
 			if (uint32 != null) {
 				result = Argument.Type.getFromInt((int)(long)uint32.getAsLong());
 			} else {
-				new Libra4jError(Type.INVALID_VALUE,"paylod type is null");
+				new ChaingrokError(Type.INVALID_VALUE,"paylod type is null");
 			}
 		}
 		return result;
@@ -512,7 +514,7 @@ public class LCSProcessor {
 			if (uint32 != null) {
 				result = WriteOp.Type.get((int)(long)uint32.getAsLong());
 			} else {
-				new Libra4jError(Type.INVALID_VALUE,"writeOp type is null");
+				new ChaingrokError(Type.INVALID_VALUE,"writeOp type is null");
 			}
 		}
 		return result;
@@ -585,10 +587,10 @@ public class LCSProcessor {
 					result.setScript(decodeScript());
 					break;
 				case MODULE:
-					new Libra4jError(Type.NOT_IMPLEMENTED,"module payload decoding not implemented yet");
+					new ChaingrokError(Type.NOT_IMPLEMENTED,"module payload decoding not implemented yet");
 					break;
 				default:
-					new Libra4jError(Type.NOT_IMPLEMENTED,"should not happen");
+					new ChaingrokError(Type.NOT_IMPLEMENTED,"should not happen");
 					break;
 			}
 			result.setMaxGasAmount(decodeUInt64());		
@@ -602,7 +604,7 @@ public class LCSProcessor {
 		try {
 			bos.write(bytes);
 		} catch (IOException e) {
-			new Libra4jError(Type.JAVA_ERROR,e);
+			new ChaingrokError(Type.JAVA_ERROR,e);
 		}
 		bosWritten = true;
 	}
@@ -639,10 +641,10 @@ public class LCSProcessor {
 		try {
 			count = getBis().read(result);
 		} catch (IOException e) {
-			new Libra4jError(Type.JAVA_ERROR,e);
+			new ChaingrokError(Type.JAVA_ERROR,e);
 		}
 		if (count != remaining) {
-			new Libra4jError(Type.INVALID_LENGTH, "count <> remaining:" + count + " <> " + remaining);
+			new ChaingrokError(Type.INVALID_LENGTH, "count <> remaining:" + count + " <> " + remaining);
 		}
 		//System.out.println("remaining: " + Utils.byteArrayToHexString(bytes));
 		return result;

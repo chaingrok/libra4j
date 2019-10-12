@@ -1,7 +1,7 @@
 package com.chaingrok.libra4j.types;
 
-import com.chaingrok.libra4j.misc.Libra4jError;
-import com.chaingrok.libra4j.misc.Libra4jLog.Type;
+import com.chaingrok.lib.ChaingrokError;
+import com.chaingrok.lib.Libra4jLog.Type;
 import com.google.gson.Gson;
 
 public class MoveIR {
@@ -22,17 +22,17 @@ public class MoveIR {
 	private void check() {
 		if (!checked) {
 			if (code == null) {
-				new Libra4jError(Type.NULL_DATA,"code array is null");
+				new ChaingrokError(Type.NULL_DATA,"code array is null");
 			} else {
 				if (code.length == 0) {
-					new Libra4jError(Type.INVALID_VALUE,"code array cannot be empty");
+					new ChaingrokError(Type.INVALID_VALUE,"code array cannot be empty");
 				}
 			}
 			if (args == null) {
-				new Libra4jError(Type.NULL_DATA,"args array is null");
+				new ChaingrokError(Type.NULL_DATA,"args array is null");
 			} else {
 				if (args.length != 0) {
-					new Libra4jError(Type.INVALID_VALUE,"args array should be empty");
+					new ChaingrokError(Type.INVALID_VALUE,"args array should be empty");
 				}
 			}
 		}

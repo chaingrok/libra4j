@@ -2,6 +2,9 @@ package com.chaingrok.libra4j.misc;
 
 import java.io.IOException;
 
+import com.chaingrok.lib.ChaingrokError;
+import com.chaingrok.lib.Libra4jLog;
+import com.chaingrok.lib.Utils;
 import com.chaingrok.libra4j.types.AccountAddress;
 
 import okhttp3.FormBody;
@@ -37,7 +40,7 @@ public class Minter {
         try {
 			response = okHttpClient.newCall(request).execute();
 		} catch (IOException e) {
-			new Libra4jError(Libra4jLog.Type.HTTP_ERROR,e);
+			new ChaingrokError(Libra4jLog.Type.HTTP_ERROR,e);
 		}
         if (response != null) {
         	result = response.code();

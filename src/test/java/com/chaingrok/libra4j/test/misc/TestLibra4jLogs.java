@@ -11,11 +11,11 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import com.chaingrok.libra4j.misc.Libra4jError;
-import com.chaingrok.libra4j.misc.Libra4jInfo;
-import com.chaingrok.libra4j.misc.Libra4jLog;
-import com.chaingrok.libra4j.misc.Libra4jLog.Type;
-import com.chaingrok.libra4j.misc.Libra4jWarning;
+import com.chaingrok.lib.ChaingrokError;
+import com.chaingrok.lib.ChaingrokInfo;
+import com.chaingrok.lib.Libra4jLog;
+import com.chaingrok.lib.Libra4jWarning;
+import com.chaingrok.lib.Libra4jLog.Type;
 import com.chaingrok.libra4j.test.TestClass;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -28,9 +28,9 @@ public class TestLibra4jLogs extends TestClass {
 	
 	@Test
 	public void test002CheckInheritance() {
-		assertTrue(Libra4jLog.class.isAssignableFrom(Libra4jError.class));
+		assertTrue(Libra4jLog.class.isAssignableFrom(ChaingrokError.class));
 		assertTrue(Libra4jLog.class.isAssignableFrom(Libra4jWarning.class));
-		assertTrue(Libra4jLog.class.isAssignableFrom(Libra4jInfo.class));
+		assertTrue(Libra4jLog.class.isAssignableFrom(ChaingrokInfo.class));
 	}
 	
 	@Test
@@ -40,14 +40,14 @@ public class TestLibra4jLogs extends TestClass {
 		assertEquals(0,Libra4jLog.getLogs().size());
 		//
 		assertFalse(Libra4jLog.hasLogs());
-		new Libra4jError(Type.INIT_ERROR); // log code only 
+		new ChaingrokError(Type.INIT_ERROR); // log code only 
 		assertEquals(1,Libra4jLog.getLogs().size());
 		assertTrue(Libra4jLog.hasLogs());
 		//
-		new Libra4jError(Type.INVALID_CLASS,1L); //log code + transaction version
+		new ChaingrokError(Type.INVALID_CLASS,1L); //log code + transaction version
 		assertEquals(2,Libra4jLog.getLogs().size());
 		//
-		new Libra4jError(Type.MISSING_DATA,2L,new Object()); //log code + transaction version + error object
+		new ChaingrokError(Type.MISSING_DATA,2L,new Object()); //log code + transaction version + error object
 		assertEquals(3,Libra4jLog.getLogs().size());
 		//
 		assertTrue(Libra4jLog.hasLogs());
@@ -55,9 +55,9 @@ public class TestLibra4jLogs extends TestClass {
 		String content = Libra4jLog.dumpLogs();
 		assertNotNull(content);
 		assertTrue(content.length() > 0);
-		assertTrue(content.contains(Libra4jError.class.getSimpleName() + " #"));
+		assertTrue(content.contains(ChaingrokError.class.getSimpleName() + " #"));
 		assertFalse(content.contains(Libra4jWarning.class.getSimpleName() + " #"));
-		assertFalse(content.contains(Libra4jInfo.class.getSimpleName() + " #"));
+		assertFalse(content.contains(ChaingrokInfo.class.getSimpleName() + " #"));
 		//
 		Libra4jLog.purgeLogs();
 		assertEquals(0,Libra4jLog.getLogs().size());
@@ -86,9 +86,9 @@ public class TestLibra4jLogs extends TestClass {
 		String content = Libra4jLog.dumpLogs();
 		assertNotNull(content);
 		assertTrue(content.length() > 0);
-		assertFalse(content.contains(Libra4jError.class.getSimpleName() + " #"));
+		assertFalse(content.contains(ChaingrokError.class.getSimpleName() + " #"));
 		assertTrue(content.contains(Libra4jWarning.class.getSimpleName() + " #"));
-		assertFalse(content.contains(Libra4jInfo.class.getSimpleName() + " #"));
+		assertFalse(content.contains(ChaingrokInfo.class.getSimpleName() + " #"));
 		//
 		Libra4jLog.purgeLogs();
 		assertEquals(0,Libra4jLog.getLogs().size());
@@ -102,17 +102,17 @@ public class TestLibra4jLogs extends TestClass {
 		assertEquals(0,Libra4jLog.getLogs().size());
 		//
 		assertFalse(Libra4jLog.hasLogs());
-		new Libra4jInfo(Type.INIT_ERROR); // log code only 
+		new ChaingrokInfo(Type.INIT_ERROR); // log code only 
 		assertEquals(1,Libra4jLog.getLogs().size());
 		assertTrue(Libra4jLog.hasLogs());
 		//
-		new Libra4jInfo(Type.INVALID_CLASS,1L); //log code + transaction version
+		new ChaingrokInfo(Type.INVALID_CLASS,1L); //log code + transaction version
 		assertEquals(2,Libra4jLog.getLogs().size());
 		//
-		new Libra4jInfo(Type.INVALID_CLASS,new Object()); //log code + error object
+		new ChaingrokInfo(Type.INVALID_CLASS,new Object()); //log code + error object
 		assertEquals(3,Libra4jLog.getLogs().size());
 		//
-		new Libra4jInfo(Type.MISSING_DATA,2L,new Object()); //log code + transaction version + error object
+		new ChaingrokInfo(Type.MISSING_DATA,2L,new Object()); //log code + transaction version + error object
 		assertEquals(4,Libra4jLog.getLogs().size());
 		//
 		assertTrue(Libra4jLog.hasLogs());
@@ -120,9 +120,9 @@ public class TestLibra4jLogs extends TestClass {
 		String content = Libra4jLog.dumpLogs();
 		assertNotNull(content);
 		assertTrue(content.length() > 0);
-		assertFalse(content.contains(Libra4jError.class.getSimpleName() + " #"));
+		assertFalse(content.contains(ChaingrokError.class.getSimpleName() + " #"));
 		assertFalse(content.contains(Libra4jWarning.class.getSimpleName() + " #"));
-		assertTrue(content.contains(Libra4jInfo.class.getSimpleName() + " #"));
+		assertTrue(content.contains(ChaingrokInfo.class.getSimpleName() + " #"));
 		//
 		Libra4jLog.purgeLogs();
 		assertEquals(0,Libra4jLog.getLogs().size());

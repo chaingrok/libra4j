@@ -7,15 +7,15 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import com.chaingrok.lib.UInt64;
+import com.chaingrok.lib.Utils;
 import com.chaingrok.libra4j.misc.LCSProcessor;
-import com.chaingrok.libra4j.misc.Utils;
 import com.chaingrok.libra4j.test.TestClass;
 import com.chaingrok.libra4j.types.AccountAddress;
 import com.chaingrok.libra4j.types.Argument;
 import com.chaingrok.libra4j.types.Arguments;
 import com.chaingrok.libra4j.types.Code;
 import com.chaingrok.libra4j.types.Script;
-import com.chaingrok.libra4j.types.UInt64;
 import com.chaingrok.libra4j.types.Argument.Type;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -47,7 +47,7 @@ public class TestScript extends TestClass {
 		Argument argument1 = arguments.get(1);
 		assertEquals(Type.U64,argument1.getType());
 		assertEquals(new UInt64(12000000L),argument1.getUInt64());
-		//
+		//Transaction trail
 		assertEquals(128,(int)decoder.getUndecodedDataSize());
 		assertEquals(new UInt64(1000000L),decoder.decodeUInt64()); //max gas amount
 		assertEquals(new UInt64(1L),decoder.decodeUInt64()); //gas sunit price

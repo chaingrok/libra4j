@@ -11,8 +11,8 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import com.chaingrok.libra4j.misc.Libra4jError;
-import com.chaingrok.libra4j.misc.Libra4jLog;
+import com.chaingrok.lib.ChaingrokError;
+import com.chaingrok.lib.Libra4jLog;
 import com.chaingrok.libra4j.test.TestClass;
 import com.chaingrok.libra4j.types.ValidatorId;
 import com.google.protobuf.ByteString;
@@ -37,7 +37,7 @@ public class TestValidatorId extends TestClass {
 		ArrayList<Libra4jLog> logs = Libra4jLog.getLogs();
 		assertEquals(1,logs.size());
 		Libra4jLog log = logs.get(0);
-		assertTrue(log instanceof Libra4jError);
+		assertTrue(log instanceof ChaingrokError);
 		Libra4jLog.purgeLogs();
 	}
 

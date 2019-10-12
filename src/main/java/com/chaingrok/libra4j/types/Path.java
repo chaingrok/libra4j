@@ -1,7 +1,7 @@
 package com.chaingrok.libra4j.types;
 
-import com.chaingrok.libra4j.misc.Libra4jException;
-import com.chaingrok.libra4j.misc.Utils;
+import com.chaingrok.lib.ChaingrokException;
+import com.chaingrok.lib.Utils;
 
 //Source : types/src/access_path.rs
 
@@ -22,10 +22,10 @@ public class Path extends ByteArray{
 		if (!loose) {
 			String str = new String(path);
 			if (!str.matches("[a-zA-Z0-9_\\/]+")) {
-				throw new Libra4jException("path contains invalid chars: " + Utils.byteArrayToHexString(path));
+				throw new ChaingrokException("path contains invalid chars: " + Utils.byteArrayToHexString(path));
 			}
 			if (!str.startsWith(SEPARATOR)) {
-				throw new Libra4jException("path does not start with proper separator: " + Utils.byteArrayToHexString(path));
+				throw new ChaingrokException("path does not start with proper separator: " + Utils.byteArrayToHexString(path));
 			}
 		}
 	}

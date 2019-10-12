@@ -12,8 +12,9 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import com.chaingrok.libra4j.misc.Libra4jError;
-import com.chaingrok.libra4j.misc.Libra4jLog;
+import com.chaingrok.lib.ChaingrokError;
+import com.chaingrok.lib.Libra4jLog;
+import com.chaingrok.lib.UInt64;
 import com.chaingrok.libra4j.test.TestClass;
 import com.chaingrok.libra4j.test.TestData;
 import com.chaingrok.libra4j.types.AccountAddress;
@@ -21,7 +22,6 @@ import com.chaingrok.libra4j.types.AccountState;
 import com.chaingrok.libra4j.types.Ledger;
 import com.chaingrok.libra4j.types.LedgerInfo;
 import com.chaingrok.libra4j.types.Transaction;
-import com.chaingrok.libra4j.types.UInt64;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestLedger extends TestClass {
@@ -32,7 +32,7 @@ public class TestLedger extends TestClass {
 		Ledger ledger = new Ledger(TestData.VALIDATOR_ENDPOINT);
 		LedgerInfo ledgerInfo = ledger.getLedgerInfo();
 		assertEquals(1L,ledger.getRequestCount());
-		assertFalse(Libra4jError.hasLogs());
+		assertFalse(ChaingrokError.hasLogs());
 		assertNotNull(ledgerInfo);
 		assertTrue(ledgerInfo.getValidators().size() >= 5);
 		assertTrue(ledgerInfo.getTimestampUsecs() > (System.currentTimeMillis() -15000)*1000);
@@ -49,7 +49,7 @@ public class TestLedger extends TestClass {
 		Ledger ledger = new Ledger(TestData.VALIDATOR_ENDPOINT);
 		Transaction transaction = ledger.getTransaction(version,withEvents);
 		assertEquals(1L,ledger.getRequestCount());
-		assertFalse(Libra4jError.hasLogs());
+		assertFalse(ChaingrokError.hasLogs());
 		assertNotNull(transaction);
 		assertEquals(version,(long)transaction.getVersion());
 		assertEquals(UInt64.MAX_VALUE,transaction.getExpirationTime());
@@ -66,7 +66,7 @@ public class TestLedger extends TestClass {
 		assertNotNull(transaction);
 		assertEquals(version,(long)transaction.getVersion());
 		System.out.println(transaction.toString());
-		assertFalse(Libra4jError.hasLogs());
+		assertFalse(ChaingrokError.hasLogs());
 	}
 	
 	@Test
@@ -77,7 +77,7 @@ public class TestLedger extends TestClass {
 		Ledger ledger = new Ledger(TestData.VALIDATOR_ENDPOINT);
 		ArrayList<Transaction> transactions = ledger.getTransactions(version,count,withEvents);
 		assertEquals(1L,ledger.getRequestCount());
-		assertFalse(Libra4jError.hasLogs());
+		assertFalse(ChaingrokError.hasLogs());
 		assertNotNull(transactions);
 		assertEquals(transactions.size(),count);
 		for (Transaction transaction : transactions) {
@@ -95,7 +95,7 @@ public class TestLedger extends TestClass {
 		Ledger ledger = new Ledger(TestData.VALIDATOR_ENDPOINT);
 		ArrayList<Transaction> transactions = ledger.getTransactions(version,count,withEvents);
 		assertEquals(1L,ledger.getRequestCount());
-		assertFalse(Libra4jError.hasLogs());
+		assertFalse(ChaingrokError.hasLogs());
 		assertNotNull(transactions);
 		assertEquals(transactions.size(),count);
 		for (Transaction transaction : transactions) {
@@ -124,7 +124,7 @@ public class TestLedger extends TestClass {
 		long count = 10L;
 		ledger.getEventsbyEventAccessPath(accountAddress,count);
 		assertEquals(1L,ledger.getRequestCount());
-		assertFalse(Libra4jError.hasLogs());
+		assertFalse(ChaingrokError.hasLogs());
 	}
 	
 	@Test

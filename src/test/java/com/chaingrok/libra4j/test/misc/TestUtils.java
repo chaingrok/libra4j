@@ -16,8 +16,8 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import com.chaingrok.libra4j.misc.Libra4jException;
-import com.chaingrok.libra4j.misc.Utils;
+import com.chaingrok.lib.ChaingrokException;
+import com.chaingrok.lib.Utils;
 import com.chaingrok.libra4j.test.TestClass;
 import com.google.protobuf.ByteString;
 
@@ -107,14 +107,14 @@ public class TestUtils extends TestClass {
 		try {
 			Utils.readFile("");
 			fail("empty filepath should fail");
-		} catch (Libra4jException e) {
+		} catch (ChaingrokException e) {
 			assertNotNull(e.getThrowable());
 			assertTrue(e.getThrowable() instanceof IOException);
 		}
 		try {
 			Utils.writeFile(" ","");
 			fail("empty filepath should fail");
-		} catch (Libra4jException e) {
+		} catch (ChaingrokException e) {
 			assertNotNull(e.getThrowable());
 			assertTrue(e.getThrowable() instanceof IOException);
 		}

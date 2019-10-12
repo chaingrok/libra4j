@@ -42,14 +42,12 @@ import org.libra.grpc.types.Transaction.TransactionListWithProof;
 import org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo;
 import org.libra.grpc.types.VmErrors.VMStatus;
 
+import com.chaingrok.lib.ChaingrokError;
+import com.chaingrok.lib.Utils;
+import com.chaingrok.lib.Libra4jLog.Type;
 import com.chaingrok.libra4j.grpc.GrpcChecker;
 import com.chaingrok.libra4j.grpc.GrpcField;
 import com.chaingrok.libra4j.misc.LCSProcessor;
-import com.chaingrok.libra4j.misc.Libra4jError;
-import com.chaingrok.libra4j.misc.Utils;
-import com.chaingrok.libra4j.misc.Libra4jLog.Type;
-
-
 import com.google.protobuf.ByteString;
 import com.google.protobuf.UInt64Value;
 
@@ -154,7 +152,7 @@ public class Ledger {
 				List<SignedTransaction> signedTransactions = transactionListWithProof.getTransactionsList();
 				if (signedTransactions != null) {
 					if (signedTransactions.size() != result.size()) {
-						new Libra4jError(Type.INVALID_LENGTH,"result size <> signedTransactions size: " + result.size() + " <> " + signedTransactions.size());
+						new ChaingrokError(Type.INVALID_LENGTH,"result size <> signedTransactions size: " + result.size() + " <> " + signedTransactions.size());
 					}
 					int resCount = 0;
 					for (SignedTransaction signedTransaction : signedTransactions) {
@@ -177,7 +175,7 @@ public class Ledger {
 				}
 			}
 		} else {
-			new Libra4jError(Type.NULL_DATA,request);
+			new ChaingrokError(Type.NULL_DATA,request);
 		}
 		return result;
 	}
@@ -190,7 +188,7 @@ public class Ledger {
 		Transaction result = null;
 		ArrayList<Transaction> list = getTransactions(version,1L,withEvents);
 		if (list.size() != 1) {
-			new Libra4jError(Type.LIST_TOO_LONG,"list size: " + list.size());
+			new ChaingrokError(Type.LIST_TOO_LONG,"list size: " + list.size());
 		} else {
 			result = list.get(0);
 		}
@@ -234,10 +232,10 @@ public class Ledger {
 				TransactionInfo transactionInfo = signedTransactionProof.getTransactionInfo();
 				result = processTransactionInfo(transactionInfo,transaction);
 			} else {
-				new Libra4jError(Type.MISSING_DATA,"expected field missing in " + accountTransactionBySequenceNumberResponse.getClass().getCanonicalName() + ": " + GrpcField.SIGNED_TRANSACTION);
+				new ChaingrokError(Type.MISSING_DATA,"expected field missing in " + accountTransactionBySequenceNumberResponse.getClass().getCanonicalName() + ": " + GrpcField.SIGNED_TRANSACTION);
 			}
 		} else {
-			new Libra4jError(Type.MISSING_DATA,"expected field missing in " + responseItem.getClass().getCanonicalName() + ": " + GrpcField.GET_ACCOUNT_TRANSACTION_BY_SEQUENCE_NUMBER_RESPONSE_PROOF);
+			new ChaingrokError(Type.MISSING_DATA,"expected field missing in " + responseItem.getClass().getCanonicalName() + ": " + GrpcField.GET_ACCOUNT_TRANSACTION_BY_SEQUENCE_NUMBER_RESPONSE_PROOF);
 		}
 		return result;
 	}
@@ -304,7 +302,7 @@ public class Ledger {
 			getTransaction(1L,false); //should be needed only if 1st request on ledger otherwise last request is used
 		}
 		if (getLedgerInfoWithSignatures() == null) {
-			new Libra4jError(Type.NULL_DATA,"ledger info was not obtained");
+			new ChaingrokError(Type.NULL_DATA,"ledger info was not obtained");
 		}
 		return processLedgerInfo(getLedgerInfoWithSignatures());
 	}
@@ -368,7 +366,7 @@ public class Ledger {
 			result.setGasUsed(transactionInfo.getGasUsed());
 			result.setTxnInfoSerializedSize(transactionInfo.getSerializedSize());
 		} else {
-			new Libra4jError(Type.MISSING_DATA,"transaction info is null");
+			new ChaingrokError(Type.MISSING_DATA,"transaction info is null");
 		}
 		return result;
 	}
@@ -389,7 +387,7 @@ public class Ledger {
 			result.setSignedTxnSerializedSize(signedTransaction.getSerializedSize());
 			processSignedTransactionBytes(signedTransaction.getSignedTxn().toByteArray(),result.getSignedTxnSerializedSize());
 		} else {
-			new Libra4jError(Type.MISSING_DATA,"signed transaction is null");
+			new ChaingrokError(Type.MISSING_DATA,"signed transaction is null");
 		}
 		return result;
 	}
@@ -472,7 +470,7 @@ public class Ledger {
 			ArrayList<byte[]> nonDefaultSiblings = new ArrayList<byte[]>();
 			for (ByteString sibling : siblings) {
 				if (sibling.size() == 0) {
-					new Libra4jError(Type.INVALID_LENGTH,"sibling size cannot be 0");
+					new ChaingrokError(Type.INVALID_LENGTH,"sibling size cannot be 0");
 					nonDefaultSiblings.add(null);
 				} else {
 					nonDefaultSiblings.add(sibling.toByteArray());
@@ -505,7 +503,7 @@ public class Ledger {
 			ArrayList<byte[]> nonDefaultSiblings = new ArrayList<byte[]>();
 			for (ByteString sibling : siblings) {
 				if (sibling.size() == 0) {
-					new Libra4jError(Type.INVALID_LENGTH,"sibling size cannot be 0");
+					new ChaingrokError(Type.INVALID_LENGTH,"sibling size cannot be 0");
 					nonDefaultSiblings.add(null);
 				} else {
 					nonDefaultSiblings.add(sibling.toByteArray());
@@ -525,7 +523,7 @@ public class Ledger {
 			ArrayList<byte[]> nonDefaultSiblings = new ArrayList<byte[]>();
 			for (ByteString sibling : siblings) {
 				if (sibling.size() == 0) {
-					new Libra4jError(Type.INVALID_LENGTH,"sibling size cannot be 0");
+					new ChaingrokError(Type.INVALID_LENGTH,"sibling size cannot be 0");
 					nonDefaultSiblings.add(null);
 				} else {
 					nonDefaultSiblings.add(sibling.toByteArray());
@@ -560,7 +558,7 @@ public class Ledger {
 		if (responseItemsList != null) {
 			if (responseItemsList.size() > 0) {
 				if (responseItemsList.size() > 1) {
-					new Libra4jError(Type.TOO_MANY_ITEMS,responseItemsList);
+					new ChaingrokError(Type.TOO_MANY_ITEMS,responseItemsList);
 				}
 				ResponseItem responseItem = responseItemsList.get(0);
 				grpcChecker.checkFieldErrors(responseItem.findInitializationErrors(),responseItem.getUnknownFields());

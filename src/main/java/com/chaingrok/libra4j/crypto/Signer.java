@@ -9,7 +9,7 @@ import java.security.SignatureException;
 
 import org.bouncycastle.jcajce.provider.digest.SHA3;
 
-import com.chaingrok.libra4j.misc.Libra4jException;
+import com.chaingrok.lib.ChaingrokException;
 import com.chaingrok.libra4j.types.Signature;
 import com.chaingrok.libra4j.types.Transaction;
 
@@ -78,22 +78,22 @@ public class Signer {
 		try {
 			signature = java.security.Signature.getInstance(this.cryptoAlgorithm,"BC");
 		} catch (NoSuchAlgorithmException | NoSuchProviderException e) {
-			throw new Libra4jException(e);
+			throw new ChaingrokException(e);
 		}
         try {
 			signature.initSign(privateKey);
 		} catch (InvalidKeyException e) {
-			throw new Libra4jException(e);
+			throw new ChaingrokException(e);
 		}
         try {
 			signature.update(contentToSign);
 		} catch (SignatureException e) {
-			throw new Libra4jException(e);
+			throw new ChaingrokException(e);
 		}
         try {
 			result = signature.sign();
 		} catch (SignatureException e) {
-			throw new Libra4jException(e);
+			throw new ChaingrokException(e);
 		}
         return result;
 	}
@@ -108,22 +108,22 @@ public class Signer {
 		try {
 			signature = java.security.Signature.getInstance(this.cryptoAlgorithm,"BC");
 		} catch (NoSuchAlgorithmException | NoSuchProviderException e) {
-			throw new Libra4jException(e);
+			throw new ChaingrokException(e);
 		}
 		try {
 			signature.initVerify(publicKey);
 		} catch (InvalidKeyException e) {
-			throw new Libra4jException(e);
+			throw new ChaingrokException(e);
 		}
 		try {
 			signature.update(content);
 		} catch (SignatureException e) {
-			throw new Libra4jException(e);
+			throw new ChaingrokException(e);
 		}
 		try {
 			result = signature.verify(signed);
 		} catch (SignatureException e) {
-			throw new Libra4jException(e);
+			throw new ChaingrokException(e);
 		}
 		return result;
 	}

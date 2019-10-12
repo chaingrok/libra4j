@@ -3,13 +3,13 @@ package com.chaingrok.libra4j.test;
 import org.libra.grpc.types.AdmissionControlGrpc.AdmissionControlBlockingStub;
 import org.libra.grpc.types.AdmissionControlGrpc.AdmissionControlStub;
 
+import com.chaingrok.lib.UInt64;
 import com.chaingrok.libra4j.types.AccountAddress;
 import com.chaingrok.libra4j.types.Program;
 import com.chaingrok.libra4j.types.Argument;
 import com.chaingrok.libra4j.types.Argument.Type;
 import com.chaingrok.libra4j.types.Arguments;
 import com.chaingrok.libra4j.types.Transaction;
-import com.chaingrok.libra4j.types.UInt64;
 import com.chaingrok.libra4j.types.ValidatorEndpoint;
 
 public class TestData {

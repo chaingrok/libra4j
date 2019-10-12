@@ -11,16 +11,16 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import com.chaingrok.lib.Libra4jLog;
+import com.chaingrok.lib.UInt16;
+import com.chaingrok.lib.UInt32;
+import com.chaingrok.lib.UInt64;
+import com.chaingrok.lib.UInt8;
+import com.chaingrok.lib.Utils;
+import com.chaingrok.lib.Libra4jLog.Type;
 import com.chaingrok.libra4j.misc.LCSProcessor;
-import com.chaingrok.libra4j.misc.Libra4jLog;
-import com.chaingrok.libra4j.misc.Libra4jLog.Type;
-import com.chaingrok.libra4j.misc.Utils;
 import com.chaingrok.libra4j.test.TestClass;
 import com.chaingrok.libra4j.types.AccountAddress;
-import com.chaingrok.libra4j.types.UInt16;
-import com.chaingrok.libra4j.types.UInt32;
-import com.chaingrok.libra4j.types.UInt64;
-import com.chaingrok.libra4j.types.UInt8;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestLCSProcessor extends TestClass {

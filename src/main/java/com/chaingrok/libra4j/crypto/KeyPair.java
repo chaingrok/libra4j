@@ -12,8 +12,8 @@ import java.security.spec.X509EncodedKeySpec;
 
 import org.bouncycastle.jcajce.provider.digest.SHA3;
 
-import com.chaingrok.libra4j.misc.Libra4jException;
-import com.chaingrok.libra4j.misc.Utils;
+import com.chaingrok.lib.ChaingrokException;
+import com.chaingrok.lib.Utils;
 
 public class KeyPair {
 	
@@ -77,7 +77,7 @@ public class KeyPair {
         try {
             result = getKeyFactory().generatePublic(new X509EncodedKeySpec(pkBytes));
         } catch (InvalidKeySpecException e) {
-        	throw new Libra4jException(e);
+        	throw new ChaingrokException(e);
         }
         return result;
     }
@@ -110,7 +110,7 @@ public class KeyPair {
         try {
             result = getKeyFactory().generatePrivate(new PKCS8EncodedKeySpec(privateKeyBytes));
         } catch (InvalidKeySpecException e) {
-            throw new Libra4jException(e);
+            throw new ChaingrokException(e);
         }
         return result;
     }
@@ -122,7 +122,7 @@ public class KeyPair {
 		try {
 			keyGen = KeyPairGenerator.getInstance(ED25519);
 		} catch (NoSuchAlgorithmException e) {
-			throw new Libra4jException(e);
+			throw new ChaingrokException(e);
 		}
         java.security.KeyPair keyPair = keyGen.generateKeyPair();
         PrivateKey privateKey = keyPair.getPrivate();
@@ -136,7 +136,7 @@ public class KeyPair {
 		try {
             result = KeyFactory.getInstance(ED25519);
         } catch (NoSuchAlgorithmException e) {
-            throw new Libra4jException(e);
+            throw new ChaingrokException(e);
         }
 		return result;
 	}

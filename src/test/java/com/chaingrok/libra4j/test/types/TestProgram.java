@@ -13,9 +13,9 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import com.chaingrok.lib.Utils;
 import com.chaingrok.libra4j.misc.LCSProcessor;
 import com.chaingrok.libra4j.misc.Libra4jConfig;
-import com.chaingrok.libra4j.misc.Utils;
 import com.chaingrok.libra4j.test.TestClass;
 import com.chaingrok.libra4j.types.Argument;
 import com.chaingrok.libra4j.types.Arguments;

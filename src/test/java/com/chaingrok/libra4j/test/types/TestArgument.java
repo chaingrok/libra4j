@@ -12,16 +12,16 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.libra.grpc.types.Transaction.TransactionArgument.ArgType;
 
+import com.chaingrok.lib.ChaingrokError;
+import com.chaingrok.lib.Libra4jLog;
+import com.chaingrok.lib.UInt32;
+import com.chaingrok.lib.UInt64;
 import com.chaingrok.libra4j.misc.LCSProcessor;
-import com.chaingrok.libra4j.misc.Libra4jError;
-import com.chaingrok.libra4j.misc.Libra4jLog;
 import com.chaingrok.libra4j.test.TestClass;
 import com.chaingrok.libra4j.types.AccountAddress;
 import com.chaingrok.libra4j.types.Argument;
-import com.chaingrok.libra4j.types.UInt32;
 import com.chaingrok.libra4j.types.Argument.Type;
 import com.chaingrok.libra4j.types.Arguments;
-import com.chaingrok.libra4j.types.UInt64;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestArgument extends TestClass {
@@ -32,15 +32,15 @@ public class TestArgument extends TestClass {
 		assertEquals(Type.ADDRESS,Type.get(ArgType.ADDRESS));
 		assertEquals(Type.STRING,Type.get(ArgType.STRING));
 		assertEquals(Type.BYTE_ARRAY,Type.get(ArgType.BYTEARRAY));
-		assertEquals(0,Libra4jError.getLogs().size());
+		assertEquals(0,ChaingrokError.getLogs().size());
 	}
 	
 	@Test
 	public void test002FailArgumentType() {
 		assertEquals(Type.UNRECOGNIZED,Type.get(ArgType.UNRECOGNIZED));
-		assertEquals(1,Libra4jError.getLogs().size());
+		assertEquals(1,ChaingrokError.getLogs().size());
 		Libra4jLog error = Libra4jLog.getLogs().get(0);
-		assertEquals(Libra4jError.Type.UNKNOWN_VALUE,error.getType());
+		assertEquals(ChaingrokError.Type.UNKNOWN_VALUE,error.getType());
 		Libra4jLog.purgeLogs();
 	}
 	

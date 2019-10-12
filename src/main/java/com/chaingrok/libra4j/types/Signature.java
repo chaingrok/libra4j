@@ -1,8 +1,8 @@
 package com.chaingrok.libra4j.types;
 
-import com.chaingrok.libra4j.misc.Libra4jError;
-import com.chaingrok.libra4j.misc.Libra4jLog.Type;
-import com.chaingrok.libra4j.misc.Utils;
+import com.chaingrok.lib.ChaingrokError;
+import com.chaingrok.lib.Utils;
+import com.chaingrok.lib.Libra4jLog.Type;
 import com.google.protobuf.ByteString;
 
 public class Signature {
@@ -17,10 +17,10 @@ public class Signature {
 	
 	public Signature(byte[] bytes) {
 		if (bytes == null) {
-			new Libra4jError(Type.NULL_DATA,"input byte array cannot be null for signature");
+			new ChaingrokError(Type.NULL_DATA,"input byte array cannot be null for signature");
 		} else {
 			if (bytes.length != BYTE_LENGTH)  {
-				new Libra4jError(Type.INVALID_LENGTH,"invalid length for signature: " + bytes.length + " <> " + BYTE_LENGTH + " (" + Utils.byteArrayToHexString(bytes) + ")");
+				new ChaingrokError(Type.INVALID_LENGTH,"invalid length for signature: " + bytes.length + " <> " + BYTE_LENGTH + " (" + Utils.byteArrayToHexString(bytes) + ")");
 			}
 		}
 		this.bytes = bytes;

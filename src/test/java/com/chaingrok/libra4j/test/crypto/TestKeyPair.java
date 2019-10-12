@@ -12,8 +12,8 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import com.chaingrok.lib.Utils;
 import com.chaingrok.libra4j.crypto.KeyPair;
-import com.chaingrok.libra4j.misc.Utils;
 import com.chaingrok.libra4j.test.TestData;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)

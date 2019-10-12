@@ -2,7 +2,7 @@ package com.chaingrok.libra4j.types;
 
 import java.util.ArrayList;
 
-import com.chaingrok.libra4j.misc.Utils;
+import com.chaingrok.lib.Utils;
 
 public class LedgerInfo {
 	
