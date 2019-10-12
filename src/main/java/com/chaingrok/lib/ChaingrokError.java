@@ -1,6 +1,6 @@
 package com.chaingrok.lib;
 
-public class ChaingrokError extends Libra4jLog {
+public class ChaingrokError extends ChaingrokLog {
 
 	public ChaingrokError(Type type) {
 		super(type);

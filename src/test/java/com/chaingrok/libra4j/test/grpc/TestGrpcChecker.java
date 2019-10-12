@@ -13,9 +13,9 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import com.chaingrok.lib.ChaingrokError;
-import com.chaingrok.lib.Libra4jLog;
+import com.chaingrok.lib.ChaingrokLog;
 import com.chaingrok.lib.Utils;
-import com.chaingrok.lib.Libra4jLog.Type;
+import com.chaingrok.lib.ChaingrokLog.Type;
 import com.chaingrok.libra4j.grpc.GrpcChecker;
 import com.chaingrok.libra4j.grpc.GrpcField;
 import com.chaingrok.libra4j.test.TestClass;
@@ -73,12 +73,12 @@ public class TestGrpcChecker extends TestClass {
 		GrpcChecker grpcChecker = new GrpcChecker();
 		//
 		assertFalse(grpcChecker.isFieldSet(null,null, null));
-		assertFalse(Libra4jLog.hasLogs());
+		assertFalse(ChaingrokLog.hasLogs());
 		assertFalse(grpcChecker.isFieldSet(GrpcField.ACCOUNT_BLOB,null, null));
-		assertFalse(Libra4jLog.hasLogs());
+		assertFalse(ChaingrokLog.hasLogs());
 		assertFalse(grpcChecker.isFieldSet(GrpcField.ACCOUNT_BLOB,new Object(), null));
-		assertEquals(1,Libra4jLog.getLogs().size());
-		Libra4jLog.purgeLogs();
+		assertEquals(1,ChaingrokLog.getLogs().size());
+		ChaingrokLog.purgeLogs();
 		//
 		LedgerInfo ledgerInfo = LedgerInfo.newBuilder()
 				.build();
@@ -102,8 +102,8 @@ public class TestGrpcChecker extends TestClass {
 													.build();
 		assertFalse(grpcChecker.checkMandatoryFields(updateToLatestLedgerResponse));
 		//System.out.println("logs: " + Libra4jLog.dumpLogs());
-		assertEquals(2,Libra4jLog.getLogs().size());
-		Libra4jLog.purgeLogs();
+		assertEquals(2,ChaingrokLog.getLogs().size());
+		ChaingrokLog.purgeLogs();
 		//
 		ResponseItem responseItem = ResponseItem.newBuilder()
 				.build();
@@ -145,16 +145,16 @@ public class TestGrpcChecker extends TestClass {
 									.build();
 		assertEquals(1,unknownFieldSet.asMap().size());
 		assertFalse(grpcChecker.checkFieldErrors(null,unknownFieldSet));
-		assertTrue(Libra4jLog.hasLogs());
-		assertEquals(1,Libra4jLog.getLogs().size());
-		Libra4jLog.purgeLogs();
+		assertTrue(ChaingrokLog.hasLogs());
+		assertEquals(1,ChaingrokLog.getLogs().size());
+		ChaingrokLog.purgeLogs();
 		//
 		ArrayList<String> initializationErrors = new ArrayList<String>();
 		initializationErrors.add("error");
 		assertFalse(grpcChecker.checkFieldErrors(initializationErrors,null));
-		assertTrue(Libra4jLog.hasLogs());
-		assertEquals(1,Libra4jLog.getLogs().size());
-		Libra4jLog.purgeLogs();
+		assertTrue(ChaingrokLog.hasLogs());
+		assertEquals(1,ChaingrokLog.getLogs().size());
+		ChaingrokLog.purgeLogs();
 	}
 	
 	@Test
@@ -168,10 +168,10 @@ public class TestGrpcChecker extends TestClass {
 		assertEquals(1, builder.getAllFields().size());
 		assertEquals(value,builder.getValue());
 		assertFalse(grpcChecker.checkInt32FieldDescriptor(GrpcField.UPDATE_TO_LATEST_LEDGER_RESPONSE,(Object)builder));
-		assertEquals(1,Libra4jLog.getLogs().size());
-		assertEquals(Libra4jLog.Type.INVALID_CLASS,Libra4jLog.getLogs().get(0).getType());
-		assertTrue(((String)(Libra4jLog.getLogs().get(0).getObject())).contains(GrpcField.UPDATE_TO_LATEST_LEDGER_RESPONSE.getFullName()));
-		Libra4jLog.purgeLogs();
+		assertEquals(1,ChaingrokLog.getLogs().size());
+		assertEquals(ChaingrokLog.Type.INVALID_CLASS,ChaingrokLog.getLogs().get(0).getType());
+		assertTrue(((String)(ChaingrokLog.getLogs().get(0).getObject())).contains(GrpcField.UPDATE_TO_LATEST_LEDGER_RESPONSE.getFullName()));
+		ChaingrokLog.purgeLogs();
 		//with Int32ValueOrBuilder
 		assertTrue(UInt32ValueOrBuilder.class.isAssignableFrom(UInt32Value.class));
 		UInt32Value uint32Value = builder.build();
@@ -180,10 +180,10 @@ public class TestGrpcChecker extends TestClass {
 		assertEquals(value,builder.getValue());
 		assertEquals(value,uint32Value.getValue());
 		assertFalse(grpcChecker.checkInt32FieldDescriptor(GrpcField.UPDATE_TO_LATEST_LEDGER_RESPONSE,(Object)uint32Value));
-		assertEquals(1,Libra4jLog.getLogs().size());
-		assertEquals(Libra4jLog.Type.INVALID_CLASS,Libra4jLog.getLogs().get(0).getType());
-		assertTrue(((String)(Libra4jLog.getLogs().get(0).getObject())).contains(GrpcField.UPDATE_TO_LATEST_LEDGER_RESPONSE.getFullName()));
-		Libra4jLog.purgeLogs();
+		assertEquals(1,ChaingrokLog.getLogs().size());
+		assertEquals(ChaingrokLog.Type.INVALID_CLASS,ChaingrokLog.getLogs().get(0).getType());
+		assertTrue(((String)(ChaingrokLog.getLogs().get(0).getObject())).contains(GrpcField.UPDATE_TO_LATEST_LEDGER_RESPONSE.getFullName()));
+		ChaingrokLog.purgeLogs();
 	}
 	
 	@Test
@@ -196,18 +196,18 @@ public class TestGrpcChecker extends TestClass {
 		assertEquals(1, builder.getAllFields().size());
 		assertEquals(value,builder.getValue());
 		assertFalse(grpcChecker.checkInt64FieldDescriptor(GrpcField.UPDATE_TO_LATEST_LEDGER_RESPONSE,(Object)builder));
-		assertEquals(1,Libra4jLog.getLogs().size());
-		assertEquals(Libra4jLog.Type.INVALID_CLASS,Libra4jLog.getLogs().get(0).getType());
-		Libra4jLog.purgeLogs();
+		assertEquals(1,ChaingrokLog.getLogs().size());
+		assertEquals(ChaingrokLog.Type.INVALID_CLASS,ChaingrokLog.getLogs().get(0).getType());
+		ChaingrokLog.purgeLogs();
 		//with Int64ValueOrBuilder
 		assertTrue(UInt64ValueOrBuilder.class.isAssignableFrom(UInt64Value.class));
 		UInt64Value uint64Value = builder.build();
 		assertEquals(1, uint64Value.getAllFields().size());
 		assertEquals(value,uint64Value.getValue());
 		assertFalse(grpcChecker.checkInt64FieldDescriptor(GrpcField.UPDATE_TO_LATEST_LEDGER_RESPONSE,(Object)uint64Value));
-		assertEquals(1,Libra4jLog.getLogs().size());
-		assertEquals(Libra4jLog.Type.INVALID_CLASS,Libra4jLog.getLogs().get(0).getType());
-		Libra4jLog.purgeLogs();
+		assertEquals(1,ChaingrokLog.getLogs().size());
+		assertEquals(ChaingrokLog.Type.INVALID_CLASS,ChaingrokLog.getLogs().get(0).getType());
+		ChaingrokLog.purgeLogs();
 	}
 	
 	@Test
@@ -231,18 +231,18 @@ public class TestGrpcChecker extends TestClass {
 		assertTrue(grpcChecker.checkRepeatedFieldDescriptor(GrpcField.TRANSACTION_INFO,object));
 		//ko case1
 		assertFalse(grpcChecker.checkRepeatedFieldDescriptor(GrpcField.UPDATE_TO_LATEST_LEDGER_RESPONSE,object));
-		assertEquals(1,Libra4jLog.getLogs().size());
-		assertEquals(Libra4jLog.Type.INVALID_CLASS,Libra4jLog.getLogs().get(0).getType());
-		assertTrue(((String)Libra4jLog.getLogs().get(0).getObject()).contains("returned field class is invalid"));
-		Libra4jLog.purgeLogs();
+		assertEquals(1,ChaingrokLog.getLogs().size());
+		assertEquals(ChaingrokLog.Type.INVALID_CLASS,ChaingrokLog.getLogs().get(0).getType());
+		assertTrue(((String)ChaingrokLog.getLogs().get(0).getObject()).contains("returned field class is invalid"));
+		ChaingrokLog.purgeLogs();
 		//ko case2
 		ArrayList<Object> list = new ArrayList<Object>();
 		list.add(new Object());
 		assertFalse(grpcChecker.checkRepeatedFieldDescriptor(GrpcField.UPDATE_TO_LATEST_LEDGER_RESPONSE,list));
-		assertEquals(1,Libra4jLog.getLogs().size());
-		assertEquals(Libra4jLog.Type.INVALID_CLASS,Libra4jLog.getLogs().get(0).getType());
-		assertTrue(((String)Libra4jLog.getLogs().get(0).getObject()).contains("listObject is not instanceOf MessageOrBuilder"));
-		Libra4jLog.purgeLogs();
+		assertEquals(1,ChaingrokLog.getLogs().size());
+		assertEquals(ChaingrokLog.Type.INVALID_CLASS,ChaingrokLog.getLogs().get(0).getType());
+		assertTrue(((String)ChaingrokLog.getLogs().get(0).getObject()).contains("listObject is not instanceOf MessageOrBuilder"));
+		ChaingrokLog.purgeLogs();
 		
 		
 	}
@@ -261,9 +261,9 @@ public class TestGrpcChecker extends TestClass {
 		assertTrue(grpcChecker.checkMessageOrBuilderFieldDescriptor(GrpcField.LEDGER_INFO_WITH_SIGS,ledgerInfoWithSignatures));
 		//test ko
 		assertFalse(grpcChecker.checkMessageOrBuilderFieldDescriptor(GrpcField.RESPONSE_ITEMS,ledgerInfoWithSignatures));
-		assertEquals(1,Libra4jLog.getLogs().size());
-		assertEquals(Libra4jLog.Type.INVALID_CLASS,Libra4jLog.getLogs().get(0).getType());
-		Libra4jLog.purgeLogs();
+		assertEquals(1,ChaingrokLog.getLogs().size());
+		assertEquals(ChaingrokLog.Type.INVALID_CLASS,ChaingrokLog.getLogs().get(0).getType());
+		ChaingrokLog.purgeLogs();
 	}
 	
 	@Test
@@ -271,28 +271,28 @@ public class TestGrpcChecker extends TestClass {
 		GrpcChecker grpcChecker = new GrpcChecker();
 		//test with null rpcField
 		assertFalse(grpcChecker.checkFieldDescriptor((Class<?>)null,null,(Boolean)null,null));
-		assertEquals(2,Libra4jLog.getLogs().size());
-		assertEquals(Libra4jLog.Type.UNKNOWN_VALUE,Libra4jLog.getLogs().get(0).getType());
-		assertEquals(Libra4jLog.Type.UNKNOWN_VALUE,Libra4jLog.getLogs().get(1).getType());
-		Libra4jLog.purgeLogs();
-		assertFalse(Libra4jLog.hasLogs());
+		assertEquals(2,ChaingrokLog.getLogs().size());
+		assertEquals(ChaingrokLog.Type.UNKNOWN_VALUE,ChaingrokLog.getLogs().get(0).getType());
+		assertEquals(ChaingrokLog.Type.UNKNOWN_VALUE,ChaingrokLog.getLogs().get(1).getType());
+		ChaingrokLog.purgeLogs();
+		assertFalse(ChaingrokLog.hasLogs());
 		//
 		boolean isRepeated = false;
 		String fieldFullName = GrpcField.ACCOUNT_BLOB.getFullName();
 		//test with invalid grpcClass
 		assertFalse(grpcChecker.checkFieldDescriptor(Long.class,fieldFullName,isRepeated,null));
-		assertEquals(2,Libra4jLog.getLogs().size());
-		assertEquals(Libra4jLog.Type.INVALID_CLASS,Libra4jLog.getLogs().get(0).getType());
-		assertTrue(((String)Libra4jLog.getLogs().get(0).getObject()).contains("field descriptor class is invalid"));
-		assertEquals(Libra4jLog.Type.MISSING_DATA,Libra4jLog.getLogs().get(1).getType());
-		assertTrue(((String)Libra4jLog.getLogs().get(1).getObject()).contains("field object is null"));
-		Libra4jLog.purgeLogs();
+		assertEquals(2,ChaingrokLog.getLogs().size());
+		assertEquals(ChaingrokLog.Type.INVALID_CLASS,ChaingrokLog.getLogs().get(0).getType());
+		assertTrue(((String)ChaingrokLog.getLogs().get(0).getObject()).contains("field descriptor class is invalid"));
+		assertEquals(ChaingrokLog.Type.MISSING_DATA,ChaingrokLog.getLogs().get(1).getType());
+		assertTrue(((String)ChaingrokLog.getLogs().get(1).getObject()).contains("field object is null"));
+		ChaingrokLog.purgeLogs();
 		//test with invalid fieldObject
 		assertFalse(grpcChecker.checkFieldDescriptor(AccountStateBlob.class,fieldFullName,isRepeated,new Object()));
-		assertEquals(1,Libra4jLog.getLogs().size());
-		assertEquals(Libra4jLog.Type.INVALID_CLASS,Libra4jLog.getLogs().get(0).getType());
-		assertTrue(((String)Libra4jLog.getLogs().get(0).getObject()).contains("field type checking is not implemented"));
-		Libra4jLog.purgeLogs();
+		assertEquals(1,ChaingrokLog.getLogs().size());
+		assertEquals(ChaingrokLog.Type.INVALID_CLASS,ChaingrokLog.getLogs().get(0).getType());
+		assertTrue(((String)ChaingrokLog.getLogs().get(0).getObject()).contains("field type checking is not implemented"));
+		ChaingrokLog.purgeLogs();
 	}
 	
 	@Test
@@ -358,22 +358,22 @@ public class TestGrpcChecker extends TestClass {
 		Map<FieldDescriptor, Object> fields = ledgerInfo.getAllFields();
 		assertEquals(expectedSize,fields.size());
 		assertFalse(grpcChecker.checkExpectedFields(ledgerInfo,expectedSize-1));
-		assertEquals(1,Libra4jLog.getLogs().size());
-		assertTrue(((String)Libra4jLog.getLogs().get(0).getObject()).contains("count different from expected"));
-		Libra4jLog.purgeLogs();
+		assertEquals(1,ChaingrokLog.getLogs().size());
+		assertTrue(((String)ChaingrokLog.getLogs().get(0).getObject()).contains("count different from expected"));
+		ChaingrokLog.purgeLogs();
 	}
 	
 	@Test
 	public void test013CheckExpectedFieldsOkEdgeCases() {
 		GrpcChecker grpcChecker = new GrpcChecker();
 		assertFalse(grpcChecker.checkExpectedFields(null,0));
-		assertEquals(1,Libra4jLog.getLogs().size());
-		Libra4jLog.purgeLogs();
+		assertEquals(1,ChaingrokLog.getLogs().size());
+		ChaingrokLog.purgeLogs();
 		//
 		assertFalse(ChaingrokError.hasLogs());
 		assertFalse(grpcChecker.checkExpectedFields(new Object(),0)); //non MessageOrBuilderObject
-		assertEquals(1,Libra4jLog.getLogs().size());
-		Libra4jLog.purgeLogs();
+		assertEquals(1,ChaingrokLog.getLogs().size());
+		ChaingrokLog.purgeLogs();
 		//Case withh 0 fields
 		LedgerInfo ledgerInfo = LedgerInfo.newBuilder()
 				.build();
@@ -444,9 +444,9 @@ public class TestGrpcChecker extends TestClass {
 		LedgerInfo ledgerInfo = LedgerInfo.newBuilder()
 									.build();
 		assertFalse(grpcChecker.checkLedgerInfo(ledgerInfo));
-		assertTrue(Libra4jLog.hasLogs());
-		assertEquals(5,Libra4jLog.getLogs().size());
-		Libra4jLog.purgeLogs();
+		assertTrue(ChaingrokLog.hasLogs());
+		assertEquals(5,ChaingrokLog.getLogs().size());
+		ChaingrokLog.purgeLogs();
 	}
 	
 	
@@ -467,7 +467,7 @@ public class TestGrpcChecker extends TestClass {
 									.setTransactionAccumulatorHash(transactionAccumulatorHash)
 									.build();
 		assertTrue(grpcChecker.checkLedgerInfo(ledgerInfo));
-		assertFalse(Libra4jLog.hasLogs());
+		assertFalse(ChaingrokLog.hasLogs());
 	}
 	
 	@Test
@@ -477,12 +477,12 @@ public class TestGrpcChecker extends TestClass {
 		ValidatorSignature validatorSignature = ValidatorSignature.newBuilder()
 									.build();
 		assertFalse(grpcChecker.checkValidatorSignature(validatorSignature));
-		assertTrue(Libra4jLog.hasLogs());
+		assertTrue(ChaingrokLog.hasLogs());
 		//System.out.println("logs: " + Libra4jLog.dumpLogs());
-		assertEquals(2,Libra4jLog.getLogs().size());
-		assertEquals(Type.INVALID_LENGTH,Libra4jLog.getLogs().get(0).getType());
-		assertEquals(Type.MISSING_DATA,Libra4jLog.getLogs().get(1).getType());
-		Libra4jLog.purgeLogs();
+		assertEquals(2,ChaingrokLog.getLogs().size());
+		assertEquals(Type.INVALID_LENGTH,ChaingrokLog.getLogs().get(0).getType());
+		assertEquals(Type.MISSING_DATA,ChaingrokLog.getLogs().get(1).getType());
+		ChaingrokLog.purgeLogs();
 	}
 	
 	@Test

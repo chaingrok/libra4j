@@ -13,7 +13,7 @@ import org.junit.runners.MethodSorters;
 import org.libra.grpc.types.Transaction.TransactionArgument.ArgType;
 
 import com.chaingrok.lib.ChaingrokError;
-import com.chaingrok.lib.Libra4jLog;
+import com.chaingrok.lib.ChaingrokLog;
 import com.chaingrok.lib.UInt32;
 import com.chaingrok.lib.UInt64;
 import com.chaingrok.libra4j.misc.LCSProcessor;
@@ -39,9 +39,9 @@ public class TestArgument extends TestClass {
 	public void test002FailArgumentType() {
 		assertEquals(Type.UNRECOGNIZED,Type.get(ArgType.UNRECOGNIZED));
 		assertEquals(1,ChaingrokError.getLogs().size());
-		Libra4jLog error = Libra4jLog.getLogs().get(0);
+		ChaingrokLog error = ChaingrokLog.getLogs().get(0);
 		assertEquals(ChaingrokError.Type.UNKNOWN_VALUE,error.getType());
-		Libra4jLog.purgeLogs();
+		ChaingrokLog.purgeLogs();
 	}
 	
 	@Test
@@ -110,14 +110,14 @@ public class TestArgument extends TestClass {
 		result = decoder.decodeArgumentType();
 		assertEquals(value,result);
 		//invalid type
-		assertFalse(Libra4jLog.hasLogs());
+		assertFalse(ChaingrokLog.hasLogs());
 		bytes = LCSProcessor.buildEncoder()
 				.encode(new UInt32(-1))
 				.build();
 		assertNull(bytes);
-		assertEquals(1,Libra4jLog.getLogs().size());
-		assertEquals(Libra4jLog.Type.INVALID_VALUE,Libra4jLog.getLogs().get(0).getType());
-		Libra4jLog.purgeLogs();
+		assertEquals(1,ChaingrokLog.getLogs().size());
+		assertEquals(ChaingrokLog.Type.INVALID_VALUE,ChaingrokLog.getLogs().get(0).getType());
+		ChaingrokLog.purgeLogs();
 	}
 	
 	@Test

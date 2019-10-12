@@ -11,13 +11,13 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import com.chaingrok.lib.Libra4jLog;
+import com.chaingrok.lib.ChaingrokLog;
 import com.chaingrok.lib.UInt16;
 import com.chaingrok.lib.UInt32;
 import com.chaingrok.lib.UInt64;
 import com.chaingrok.lib.UInt8;
 import com.chaingrok.lib.Utils;
-import com.chaingrok.lib.Libra4jLog.Type;
+import com.chaingrok.lib.ChaingrokLog.Type;
 import com.chaingrok.libra4j.misc.LCSProcessor;
 import com.chaingrok.libra4j.test.TestClass;
 import com.chaingrok.libra4j.types.AccountAddress;
@@ -69,11 +69,11 @@ public class TestLCSProcessor extends TestClass {
 		assertEquals(b,decoder.decodeBoolean());
 		//
 		byte[] bytes3 = {0x02};
-		assertFalse(Libra4jLog.hasLogs());
+		assertFalse(ChaingrokLog.hasLogs());
 		decoder = LCSProcessor.buildDecoder(bytes3);
 		assertNull(decoder.decodeBoolean());
-		assertTrue(Libra4jLog.hasLogs());
-		Libra4jLog.purgeLogs();
+		assertTrue(ChaingrokLog.hasLogs());
+		ChaingrokLog.purgeLogs();
 	}
 	
 	@Test
@@ -138,32 +138,32 @@ public class TestLCSProcessor extends TestClass {
 	    LCSProcessor decoder = LCSProcessor.buildDecoder(bytes);
 	    assertNotNull(decoder.getBis());
 	    assertEquals(0,decoder.getBis().available());
-	    assertEquals(0,Libra4jLog.getLogs().size());
+	    assertEquals(0,ChaingrokLog.getLogs().size());
 		decoder.decodeUInt8();
-		assertEquals(1,Libra4jLog.getLogs().size());
-		assertEquals(Type.INVALID_LENGTH,Libra4jLog.getLogs().get(0).getType());
-		Libra4jLog.purgeLogs();
+		assertEquals(1,ChaingrokLog.getLogs().size());
+		assertEquals(Type.INVALID_LENGTH,ChaingrokLog.getLogs().get(0).getType());
+		ChaingrokLog.purgeLogs();
 		//
 		decoder = LCSProcessor.buildDecoder(Utils.hexStringToByteArray("00"));
-		assertEquals(0,Libra4jLog.getLogs().size());
+		assertEquals(0,ChaingrokLog.getLogs().size());
 		decoder.decodeUInt16();
-		assertEquals(1,Libra4jLog.getLogs().size());
-		assertEquals(Type.INVALID_LENGTH,Libra4jLog.getLogs().get(0).getType());
-		Libra4jLog.purgeLogs();
+		assertEquals(1,ChaingrokLog.getLogs().size());
+		assertEquals(Type.INVALID_LENGTH,ChaingrokLog.getLogs().get(0).getType());
+		ChaingrokLog.purgeLogs();
 		//
 		decoder = LCSProcessor.buildDecoder(Utils.hexStringToByteArray("001122"));
-		assertEquals(0,Libra4jLog.getLogs().size());
+		assertEquals(0,ChaingrokLog.getLogs().size());
 		decoder.decodeUInt32();
-		assertEquals(1,Libra4jLog.getLogs().size());
-		assertEquals(Type.INVALID_LENGTH,Libra4jLog.getLogs().get(0).getType());
-		Libra4jLog.purgeLogs();
+		assertEquals(1,ChaingrokLog.getLogs().size());
+		assertEquals(Type.INVALID_LENGTH,ChaingrokLog.getLogs().get(0).getType());
+		ChaingrokLog.purgeLogs();
 		//
 		decoder = LCSProcessor.buildDecoder(Utils.hexStringToByteArray("00112233445566"));
-		assertEquals(0,Libra4jLog.getLogs().size());
+		assertEquals(0,ChaingrokLog.getLogs().size());
 		decoder.decodeUInt64();
-		assertEquals(1,Libra4jLog.getLogs().size());
-		assertEquals(Type.INVALID_LENGTH,Libra4jLog.getLogs().get(0).getType());
-		Libra4jLog.purgeLogs();
+		assertEquals(1,ChaingrokLog.getLogs().size());
+		assertEquals(Type.INVALID_LENGTH,ChaingrokLog.getLogs().get(0).getType());
+		ChaingrokLog.purgeLogs();
 	}
 	
 	@Test
@@ -596,11 +596,11 @@ public class TestLCSProcessor extends TestClass {
 				.build();
 		assertEquals(UInt32.BYTE_LENGTH + AccountAddress.BYTE_LENGTH,bytes.length);
 		decoder = LCSProcessor.buildDecoder(bytes);
-		assertFalse(Libra4jLog.hasLogs());
+		assertFalse(ChaingrokLog.hasLogs());
 		result = decoder.decodeAccountAddress();
-		assertEquals(1,Libra4jLog.getLogs().size());
-		assertEquals(Type.INVALID_LENGTH,Libra4jLog.getLogs().get(0).getType());
-		Libra4jLog.purgeLogs();
+		assertEquals(1,ChaingrokLog.getLogs().size());
+		assertEquals(Type.INVALID_LENGTH,ChaingrokLog.getLogs().get(0).getType());
+		ChaingrokLog.purgeLogs();
 	}
 	
 }

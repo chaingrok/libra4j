@@ -11,8 +11,8 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import com.chaingrok.lib.Libra4jLog;
-import com.chaingrok.lib.Libra4jLog.Type;
+import com.chaingrok.lib.ChaingrokLog;
+import com.chaingrok.lib.ChaingrokLog.Type;
 import com.chaingrok.libra4j.test.TestClass;
 import com.chaingrok.libra4j.types.MoveIR;
 
@@ -26,36 +26,36 @@ public class TestMoveIR extends TestClass {
 		assertNull(moveIR);
 		//
 		string = "{}";
-		assertFalse(Libra4jLog.hasLogs());
+		assertFalse(ChaingrokLog.hasLogs());
 		moveIR = MoveIR.fromJson("{}");
 		assertNull(moveIR.getCode());
 		assertNull(moveIR.getArgs());
-		assertEquals(2,Libra4jLog.getLogs().size());
-		assertEquals(Type.NULL_DATA,Libra4jLog.getLogs().get(0).getType());
-		assertTrue(((String)Libra4jLog.getLogs().get(0).getObject()).contains("code array"));
-		assertEquals(Type.NULL_DATA,Libra4jLog.getLogs().get(1).getType());
-		assertTrue(((String)Libra4jLog.getLogs().get(1).getObject()).contains("args array"));
-		Libra4jLog.purgeLogs();
+		assertEquals(2,ChaingrokLog.getLogs().size());
+		assertEquals(Type.NULL_DATA,ChaingrokLog.getLogs().get(0).getType());
+		assertTrue(((String)ChaingrokLog.getLogs().get(0).getObject()).contains("code array"));
+		assertEquals(Type.NULL_DATA,ChaingrokLog.getLogs().get(1).getType());
+		assertTrue(((String)ChaingrokLog.getLogs().get(1).getObject()).contains("args array"));
+		ChaingrokLog.purgeLogs();
 		//
 		string = "{\"code\":[]}";
 		moveIR = MoveIR.fromJson(string);
 		assertEquals(0,moveIR.getCode().length);
-		assertEquals(2,Libra4jLog.getLogs().size());
-		assertEquals(Type.INVALID_VALUE,Libra4jLog.getLogs().get(0).getType());
-		assertTrue(((String)Libra4jLog.getLogs().get(0).getObject()).contains("code array"));
-		assertEquals(Type.NULL_DATA,Libra4jLog.getLogs().get(1).getType());
-		assertTrue(((String)Libra4jLog.getLogs().get(1).getObject()).contains("args array"));
-		Libra4jLog.purgeLogs();
+		assertEquals(2,ChaingrokLog.getLogs().size());
+		assertEquals(Type.INVALID_VALUE,ChaingrokLog.getLogs().get(0).getType());
+		assertTrue(((String)ChaingrokLog.getLogs().get(0).getObject()).contains("code array"));
+		assertEquals(Type.NULL_DATA,ChaingrokLog.getLogs().get(1).getType());
+		assertTrue(((String)ChaingrokLog.getLogs().get(1).getObject()).contains("args array"));
+		ChaingrokLog.purgeLogs();
 		//
 		string = "{\"args\":[1]}";
 		moveIR = MoveIR.fromJson(string);
 		assertEquals(1,moveIR.getArgs().length);
-		assertEquals(2,Libra4jLog.getLogs().size());
-		assertEquals(Type.NULL_DATA,Libra4jLog.getLogs().get(0).getType());
-		assertTrue(((String)Libra4jLog.getLogs().get(0).getObject()).contains("code array"));
-		assertEquals(Type.INVALID_VALUE,Libra4jLog.getLogs().get(1).getType());
-		assertTrue(((String)Libra4jLog.getLogs().get(1).getObject()).contains("args array"));
-		Libra4jLog.purgeLogs();
+		assertEquals(2,ChaingrokLog.getLogs().size());
+		assertEquals(Type.NULL_DATA,ChaingrokLog.getLogs().get(0).getType());
+		assertTrue(((String)ChaingrokLog.getLogs().get(0).getObject()).contains("code array"));
+		assertEquals(Type.INVALID_VALUE,ChaingrokLog.getLogs().get(1).getType());
+		assertTrue(((String)ChaingrokLog.getLogs().get(1).getObject()).contains("args array"));
+		ChaingrokLog.purgeLogs();
 	}
 	
 	@Test

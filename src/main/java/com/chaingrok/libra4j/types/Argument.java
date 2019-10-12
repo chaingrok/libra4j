@@ -3,7 +3,7 @@ package com.chaingrok.libra4j.types;
 import org.libra.grpc.types.Transaction.TransactionArgument.ArgType;
 
 import com.chaingrok.lib.ChaingrokError;
-import com.chaingrok.lib.Libra4jLog;
+import com.chaingrok.lib.ChaingrokLog;
 import com.chaingrok.lib.UInt32;
 import com.chaingrok.lib.UInt64;
 import com.chaingrok.lib.Utils;
@@ -113,7 +113,7 @@ public class Argument extends ByteArray implements LCSInterface {
 				encoder.encode(bytes);
 				break;
 			default:
-				new ChaingrokError(Libra4jLog.Type.UNKNOWN_VALUE,"unknown argument type to encode: " + getType() + " - " + Utils.byteArrayToHexString(bytes));
+				new ChaingrokError(ChaingrokLog.Type.UNKNOWN_VALUE,"unknown argument type to encode: " + getType() + " - " + Utils.byteArrayToHexString(bytes));
 				encoder.encode(bytes); //best effort...
 				break;
 			}

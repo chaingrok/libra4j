@@ -1,6 +1,6 @@
 package com.chaingrok.lib;
 
-public class ChaingrokInfo extends Libra4jLog {
+public class ChaingrokInfo extends ChaingrokLog {
 
 	public ChaingrokInfo(Type type) {
 		super(type);

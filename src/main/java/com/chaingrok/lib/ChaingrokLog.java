@@ -3,33 +3,33 @@ package com.chaingrok.lib;
 import java.util.ArrayList;
 
 
-public abstract class Libra4jLog {  
+public abstract class ChaingrokLog {  
 	
-	private static ArrayList<Libra4jLog> errorLog = new ArrayList<Libra4jLog>();
+	private static ArrayList<ChaingrokLog> errorLog = new ArrayList<ChaingrokLog>();
 	
 	private Type type;
 	private Long version;
 	private Object object;
 	private StackTraceElement stackTrace[] = null;
 	
-	public Libra4jLog(Type type) {
+	public ChaingrokLog(Type type) {
 		this.type = type;
 		log(this);
 	}
 	
-	public Libra4jLog(Type type,Long version) {
+	public ChaingrokLog(Type type,Long version) {
 		this.type = type;
 		this.version = version;
 		log(this);
 	}
 	
-    public Libra4jLog(Type type, Object object) {
+    public ChaingrokLog(Type type, Object object) {
     	this.type = type;
 		this.object = object;
 		log(this);
 	}
     
-    public Libra4jLog(Type type, Long version, Object object) {
+    public ChaingrokLog(Type type, Long version, Object object) {
     	this.type = type;
     	this.version = version;
 		this.object = object;
@@ -53,7 +53,7 @@ public abstract class Libra4jLog {
 	}
 
 	
-	private void log(Libra4jLog log) {
+	private void log(ChaingrokLog log) {
 		try
 		{
 			throw new Throwable(); //to obtain the call stack
@@ -63,7 +63,7 @@ public abstract class Libra4jLog {
 		errorLog.add(log);
 	}
 
-	public static ArrayList<Libra4jLog> getLogs() {
+	public static ArrayList<ChaingrokLog> getLogs() {
 		return errorLog;
 	}
 	
@@ -79,7 +79,7 @@ public abstract class Libra4jLog {
 	public static String dumpLogs() {
 		String result = "";
 		int count = 0;
-		for (Libra4jLog log : Libra4jLog.getLogs()) {
+		for (ChaingrokLog log : ChaingrokLog.getLogs()) {
 			result += log.getClass().getSimpleName() + " #" + ++count + ": " + log.getType().toString();
 			if (log.getObject() != null) {
 				result += " -- " + log.getObject().toString();
@@ -104,7 +104,7 @@ public abstract class Libra4jLog {
 	}
 	
 	public static void purgeLogs() {
-		errorLog = new ArrayList<Libra4jLog>();
+		errorLog = new ArrayList<ChaingrokLog>();
 	}
 
 	public enum Type {

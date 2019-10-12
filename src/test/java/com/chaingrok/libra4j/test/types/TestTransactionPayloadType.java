@@ -8,9 +8,9 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import com.chaingrok.lib.Libra4jLog;
+import com.chaingrok.lib.ChaingrokLog;
 import com.chaingrok.lib.UInt32;
-import com.chaingrok.lib.Libra4jLog.Type;
+import com.chaingrok.lib.ChaingrokLog.Type;
 import com.chaingrok.libra4j.misc.LCSProcessor;
 import com.chaingrok.libra4j.test.TestClass;
 import com.chaingrok.libra4j.types.TransactionPayloadType;
@@ -48,14 +48,14 @@ public class TestTransactionPayloadType extends TestClass {
 		result= decoder.decodeTransactionPayloadType();
 		assertEquals(value,result);
 		//invalid type
-		assertFalse(Libra4jLog.hasLogs());
+		assertFalse(ChaingrokLog.hasLogs());
 		bytes = LCSProcessor.buildEncoder()
 				.encode(new UInt32(-1))
 				.build();
 		assertNull(bytes);
-		assertEquals(1,Libra4jLog.getLogs().size());
-		assertEquals(Type.INVALID_VALUE,Libra4jLog.getLogs().get(0).getType());
-		Libra4jLog.purgeLogs();
+		assertEquals(1,ChaingrokLog.getLogs().size());
+		assertEquals(Type.INVALID_VALUE,ChaingrokLog.getLogs().get(0).getType());
+		ChaingrokLog.purgeLogs();
 	}
 	
 	

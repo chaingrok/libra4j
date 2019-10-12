@@ -12,7 +12,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import com.chaingrok.lib.ChaingrokError;
-import com.chaingrok.lib.Libra4jLog;
+import com.chaingrok.lib.ChaingrokLog;
 import com.chaingrok.libra4j.test.TestClass;
 import com.chaingrok.libra4j.types.ValidatorId;
 import com.google.protobuf.ByteString;
@@ -29,16 +29,16 @@ public class TestValidatorId extends TestClass {
 	
 	@Test
 	public void test002NewInstanceKo() {
-		assertFalse(Libra4jLog.hasLogs());
+		assertFalse(ChaingrokLog.hasLogs());
 		byte[] id = {0x00};
 		ValidatorId validatorId  = new ValidatorId(ByteString.copyFrom(id));
 		assertArrayEquals(id,validatorId.getBytes());
-		assertTrue(Libra4jLog.hasLogs());
-		ArrayList<Libra4jLog> logs = Libra4jLog.getLogs();
+		assertTrue(ChaingrokLog.hasLogs());
+		ArrayList<ChaingrokLog> logs = ChaingrokLog.getLogs();
 		assertEquals(1,logs.size());
-		Libra4jLog log = logs.get(0);
+		ChaingrokLog log = logs.get(0);
 		assertTrue(log instanceof ChaingrokError);
-		Libra4jLog.purgeLogs();
+		ChaingrokLog.purgeLogs();
 	}
 
 }

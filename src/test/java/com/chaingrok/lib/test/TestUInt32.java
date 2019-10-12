@@ -11,10 +11,10 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import com.chaingrok.lib.Libra4jLog;
+import com.chaingrok.lib.ChaingrokLog;
 import com.chaingrok.lib.UInt32;
 import com.chaingrok.lib.Utils;
-import com.chaingrok.lib.Libra4jLog.Type;
+import com.chaingrok.lib.ChaingrokLog.Type;
 import com.chaingrok.libra4j.test.TestClass;
 import com.google.protobuf.ByteString;
 
@@ -26,32 +26,32 @@ public class TestUInt32 extends TestClass {
 	public void test001WrongFormat() {
 		//null with byte[]
 		new UInt32((byte[])null);
-		assertEquals(1,Libra4jLog.getLogs().size());
-		assertEquals(Type.INVALID_LENGTH,Libra4jLog.getLogs().get(0).getType());
-		Libra4jLog.purgeLogs();
+		assertEquals(1,ChaingrokLog.getLogs().size());
+		assertEquals(Type.INVALID_LENGTH,ChaingrokLog.getLogs().get(0).getType());
+		ChaingrokLog.purgeLogs();
 		//null with ByteString
 		new UInt32((ByteString)null);
-		assertEquals(1,Libra4jLog.getLogs().size());
-		assertEquals(Type.INVALID_LENGTH,Libra4jLog.getLogs().get(0).getType());
-		Libra4jLog.purgeLogs();
+		assertEquals(1,ChaingrokLog.getLogs().size());
+		assertEquals(Type.INVALID_LENGTH,ChaingrokLog.getLogs().get(0).getType());
+		ChaingrokLog.purgeLogs();
 		//no bytes
 		byte[] bytes = {};
 		new UInt32(bytes);
-		assertEquals(1,Libra4jLog.getLogs().size());
-		assertEquals(Type.INVALID_LENGTH,Libra4jLog.getLogs().get(0).getType());
-		Libra4jLog.purgeLogs();
+		assertEquals(1,ChaingrokLog.getLogs().size());
+		assertEquals(Type.INVALID_LENGTH,ChaingrokLog.getLogs().get(0).getType());
+		ChaingrokLog.purgeLogs();
 		//not enough bytes
 		byte[] bytes2 = {0x00,0x01};
 		new UInt32(bytes2);
-		assertEquals(1,Libra4jLog.getLogs().size());
-		assertEquals(Type.INVALID_LENGTH,Libra4jLog.getLogs().get(0).getType());
-		Libra4jLog.purgeLogs();
+		assertEquals(1,ChaingrokLog.getLogs().size());
+		assertEquals(Type.INVALID_LENGTH,ChaingrokLog.getLogs().get(0).getType());
+		ChaingrokLog.purgeLogs();
 		//too many bytes
 		byte[] bytes3 = {0x00,0x01,0x02,0x03,0x04};
 		new UInt32(bytes3);
-		assertEquals(1,Libra4jLog.getLogs().size());
-		assertEquals(Type.INVALID_LENGTH,Libra4jLog.getLogs().get(0).getType());
-		Libra4jLog.purgeLogs();
+		assertEquals(1,ChaingrokLog.getLogs().size());
+		assertEquals(Type.INVALID_LENGTH,ChaingrokLog.getLogs().get(0).getType());
+		ChaingrokLog.purgeLogs();
 	}
 	
 	@Test
@@ -112,11 +112,11 @@ public class TestUInt32 extends TestClass {
 		assertEquals(value,u32.getAsLong());
 		//
 		value = -1L;
-		assertFalse(Libra4jLog.hasLogs());
+		assertFalse(ChaingrokLog.hasLogs());
 		new UInt32(value);
-		assertEquals(1,Libra4jLog.getLogs().size());
-		assertEquals(Type.INVALID_VALUE,Libra4jLog.getLogs().get(0).getType());
-		Libra4jLog.purgeLogs();
+		assertEquals(1,ChaingrokLog.getLogs().size());
+		assertEquals(Type.INVALID_VALUE,ChaingrokLog.getLogs().get(0).getType());
+		ChaingrokLog.purgeLogs();
 	}
 	
 	@Test
@@ -177,10 +177,10 @@ public class TestUInt32 extends TestClass {
 		assertFalse(uint_1.equals(object)); //test the overriden equals against null value.
 		//
 		uint_1.equals(new Object());
-		assertEquals(1,Libra4jLog.getLogs().size());
-		assertEquals(Type.INVALID_CLASS,Libra4jLog.getLogs().get(0).getType());
-		assertTrue(((String)Libra4jLog.getLogs().get(0).getObject()).contains("cannot compare objects of different classes"));
-		Libra4jLog.purgeLogs();
+		assertEquals(1,ChaingrokLog.getLogs().size());
+		assertEquals(Type.INVALID_CLASS,ChaingrokLog.getLogs().get(0).getType());
+		assertTrue(((String)ChaingrokLog.getLogs().get(0).getObject()).contains("cannot compare objects of different classes"));
+		ChaingrokLog.purgeLogs();
 	}
 	
 	@Test

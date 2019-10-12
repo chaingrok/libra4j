@@ -10,7 +10,7 @@ import org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfo;
 import org.libra.grpc.types.LedgerInfoOuterClass.ValidatorSignature;
 
 import com.chaingrok.lib.ChaingrokError;
-import com.chaingrok.lib.Libra4jLog.Type;
+import com.chaingrok.lib.ChaingrokLog.Type;
 import com.chaingrok.libra4j.types.AccountAddress;
 import com.chaingrok.libra4j.types.Hash;
 import com.chaingrok.libra4j.types.Signature;

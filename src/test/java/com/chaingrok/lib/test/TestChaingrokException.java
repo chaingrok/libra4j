@@ -12,7 +12,7 @@ import com.chaingrok.lib.ChaingrokException;
 import com.chaingrok.libra4j.test.TestClass;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class TestLibra4jException extends TestClass {
+public class TestChaingrokException extends TestClass {
 	
 	@Test
 	public void tes001ThrowException() {

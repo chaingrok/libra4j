@@ -11,7 +11,7 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import com.chaingrok.lib.Libra4jLog;
+import com.chaingrok.lib.ChaingrokLog;
 import com.chaingrok.lib.Utils;
 import com.chaingrok.libra4j.test.TestClass;
 import com.chaingrok.libra4j.types.Signature;
@@ -38,9 +38,9 @@ public class TestSignature extends TestClass {
 		byte[] bytes = Utils.getByteArray(Signature.BYTE_LENGTH-1,0x00);
 		Signature signature = new Signature(bytes);
 		assertFalse(signature.isValid());
-		assertTrue(Libra4jLog.hasLogs());
-		assertEquals(1,Libra4jLog.getLogs().size());
-		Libra4jLog.purgeLogs();
+		assertTrue(ChaingrokLog.hasLogs());
+		assertEquals(1,ChaingrokLog.getLogs().size());
+		ChaingrokLog.purgeLogs();
 	}
 	
 	@Test

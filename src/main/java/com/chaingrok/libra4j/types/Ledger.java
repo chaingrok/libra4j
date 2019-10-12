@@ -44,7 +44,7 @@ import org.libra.grpc.types.VmErrors.VMStatus;
 
 import com.chaingrok.lib.ChaingrokError;
 import com.chaingrok.lib.Utils;
-import com.chaingrok.lib.Libra4jLog.Type;
+import com.chaingrok.lib.ChaingrokLog.Type;
 import com.chaingrok.libra4j.grpc.GrpcChecker;
 import com.chaingrok.libra4j.grpc.GrpcField;
 import com.chaingrok.libra4j.misc.LCSProcessor;

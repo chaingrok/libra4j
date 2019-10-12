@@ -13,7 +13,7 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import com.chaingrok.lib.Libra4jLog;
+import com.chaingrok.lib.ChaingrokLog;
 import com.chaingrok.lib.UInt64;
 import com.chaingrok.lib.Utils;
 import com.chaingrok.libra4j.misc.LCSProcessor;
@@ -140,8 +140,8 @@ public class TestTransaction extends TestClass {
 		Code code = new Code(bytes);
 		program.setCode(code);
 		assertEquals(Transaction.Type.UNKNOWN,Transaction.Type.get(transaction));
-		assertTrue(Libra4jLog.hasLogs());
-		Libra4jLog.purgeLogs();
+		assertTrue(ChaingrokLog.hasLogs());
+		ChaingrokLog.purgeLogs();
 	}
 	
 	@Test

@@ -14,7 +14,7 @@ import java.util.TimeZone;
 
 import javax.xml.bind.DatatypeConverter;
 
-import com.chaingrok.lib.Libra4jLog.Type;
+import com.chaingrok.lib.ChaingrokLog.Type;
 import com.google.protobuf.ByteString;
 
 public class Utils {

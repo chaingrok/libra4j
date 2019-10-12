@@ -11,7 +11,7 @@ import com.chaingrok.lib.UInt32;
 import com.chaingrok.lib.UInt64;
 import com.chaingrok.lib.UInt8;
 import com.chaingrok.lib.Utils;
-import com.chaingrok.lib.Libra4jLog.Type;
+import com.chaingrok.lib.ChaingrokLog.Type;
 import com.chaingrok.libra4j.types.AccessPath;
 import com.chaingrok.libra4j.types.AccountAddress;
 import com.chaingrok.libra4j.types.Argument;

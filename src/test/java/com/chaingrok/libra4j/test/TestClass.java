@@ -3,15 +3,15 @@ package com.chaingrok.libra4j.test;
 import org.junit.After;
 
 import com.chaingrok.lib.ChaingrokException;
-import com.chaingrok.lib.Libra4jLog;
+import com.chaingrok.lib.ChaingrokLog;
 
 public class TestClass {
 	
 	@After
 	public void checkErrors() {
-		if (Libra4jLog.hasLogs()) {
-			System.out.println(Libra4jLog.dumpLogs());
-			Libra4jLog.purgeLogs();
+		if (ChaingrokLog.hasLogs()) {
+			System.out.println(ChaingrokLog.dumpLogs());
+			ChaingrokLog.purgeLogs();
 			throw new ChaingrokException("errors in test");
 		}
 	}

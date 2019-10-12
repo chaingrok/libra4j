@@ -1,7 +1,7 @@
 package com.chaingrok.libra4j.grpc;
 
 import com.chaingrok.lib.ChaingrokError;
-import com.chaingrok.lib.Libra4jLog.Type;
+import com.chaingrok.lib.ChaingrokLog.Type;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.UInt64Value;
 import com.google.protobuf.Descriptors.EnumValueDescriptor;

@@ -5,7 +5,7 @@ import java.math.BigInteger;
 import com.chaingrok.lib.ChaingrokError;
 import com.chaingrok.lib.UInt64;
 import com.chaingrok.lib.Utils;
-import com.chaingrok.lib.Libra4jLog.Type;
+import com.chaingrok.lib.ChaingrokLog.Type;
 import com.google.protobuf.ByteString;
 
 public class EventData extends ByteArray {

@@ -13,7 +13,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import com.chaingrok.lib.ChaingrokError;
-import com.chaingrok.lib.Libra4jLog;
+import com.chaingrok.lib.ChaingrokLog;
 import com.chaingrok.lib.UInt64;
 import com.chaingrok.libra4j.test.TestClass;
 import com.chaingrok.libra4j.test.TestData;
@@ -84,7 +84,7 @@ public class TestLedger extends TestClass {
 			assertEquals(transaction.getVersion(),(Long)version++);
 			System.out.println(transaction.toString());
 		}
-		Libra4jLog.purgeLogs();
+		ChaingrokLog.purgeLogs();
 	}
 	
 	//@Test
@@ -113,7 +113,7 @@ public class TestLedger extends TestClass {
 		//assertFalse(Libra4jError.hasLogs());
 		assertNotNull(accountState);
 		assertTrue(accountState.getVersion() > 0);
-		Libra4jLog.purgeLogs();
+		ChaingrokLog.purgeLogs();
 		
 	}
 	
@@ -135,7 +135,7 @@ public class TestLedger extends TestClass {
 		long sequence = 1L;
 		Transaction transaction = ledger.getAccountTransactionBySequenceNumber(accountAddress,sequence);
 		assertEquals(1L,ledger.getRequestCount());
-		Libra4jLog.purgeLogs();
+		ChaingrokLog.purgeLogs();
 		//assertFalse(Libra4jError.hasLogs());
 		//assertNotNull(transaction);
 		//assertTrue(transaction.getRawTxnBytes().length > 0);
@@ -149,7 +149,7 @@ public class TestLedger extends TestClass {
 	public void test008SubmitTransaction() {
 		Ledger ledger = new Ledger(TestData.VALIDATOR_ENDPOINT);
 		ledger.submitTransaction();
-		Libra4jLog.purgeLogs();
+		ChaingrokLog.purgeLogs();
 	}
 	
 

@@ -2,7 +2,7 @@ package com.chaingrok.lib;
 
 import java.math.BigInteger;
 
-import com.chaingrok.lib.Libra4jLog.Type;
+import com.chaingrok.lib.ChaingrokLog.Type;
 import com.google.protobuf.ByteString;
 
 public abstract class UInt {

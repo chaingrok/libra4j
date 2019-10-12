@@ -14,7 +14,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import com.chaingrok.lib.ChaingrokError;
-import com.chaingrok.lib.Libra4jLog;
+import com.chaingrok.lib.ChaingrokLog;
 import com.chaingrok.libra4j.test.TestClass;
 import com.chaingrok.libra4j.types.AccountAddress;
 import com.google.protobuf.ByteString;
@@ -26,16 +26,16 @@ public class TestAccountAddress extends TestClass {
 	
 	@Test
 	public void test001TestLength() {
-		assertFalse(Libra4jLog.hasLogs());
+		assertFalse(ChaingrokLog.hasLogs());
 		new AccountAddress((byte[])null);
-		assertTrue(Libra4jLog.hasLogs());
-		ArrayList<Libra4jLog> logs = Libra4jLog.getLogs();
+		assertTrue(ChaingrokLog.hasLogs());
+		ArrayList<ChaingrokLog> logs = ChaingrokLog.getLogs();
 		assertEquals(1,logs.size());
-		Libra4jLog log = logs.get(0);
+		ChaingrokLog log = logs.get(0);
 		assertTrue(log instanceof ChaingrokError);
-		Libra4jLog.purgeLogs();
+		ChaingrokLog.purgeLogs();
 		//
-		assertFalse(Libra4jLog.hasLogs());
+		assertFalse(ChaingrokLog.hasLogs());
 		ByteString byteString = null;
 		try {
 			new AccountAddress(byteString);
@@ -47,14 +47,14 @@ public class TestAccountAddress extends TestClass {
 	
 	@Test
 	public void test002TestLength() {
-		assertFalse(Libra4jLog.hasLogs());
+		assertFalse(ChaingrokLog.hasLogs());
 		new AccountAddress("00");
-		assertTrue(Libra4jLog.hasLogs());
-		ArrayList<Libra4jLog> logs = Libra4jLog.getLogs();
+		assertTrue(ChaingrokLog.hasLogs());
+		ArrayList<ChaingrokLog> logs = ChaingrokLog.getLogs();
 		assertEquals(1,logs.size());
-		Libra4jLog log = logs.get(0);
+		ChaingrokLog log = logs.get(0);
 		assertTrue(log instanceof ChaingrokError);
-		Libra4jLog.purgeLogs();
+		ChaingrokLog.purgeLogs();
 	}
 	
 	@Test

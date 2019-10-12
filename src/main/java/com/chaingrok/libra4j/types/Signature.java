@@ -2,7 +2,7 @@ package com.chaingrok.libra4j.types;
 
 import com.chaingrok.lib.ChaingrokError;
 import com.chaingrok.lib.Utils;
-import com.chaingrok.lib.Libra4jLog.Type;
+import com.chaingrok.lib.ChaingrokLog.Type;
 import com.google.protobuf.ByteString;
 
 public class Signature {
