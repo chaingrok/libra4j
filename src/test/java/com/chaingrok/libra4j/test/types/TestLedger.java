@@ -133,12 +133,11 @@ public class TestLedger extends TestClass {
 	public void test007GetAccountTransactionsBySequenceNumber() {
 		Ledger ledger = new Ledger(TestData.VALIDATOR_ENDPOINT);
 		AccountAddress accountAddress = AccountAddress.ACCOUNT_ZERO;
-		//AccountAddress accountAddress = new AccountAddress("ab16ad163ec915ba9acd2e7c599fc04f3a70b3ee9df3780eea4cb7a9b9b07a9e");
 		long sequence = 1L;
 		Transaction transaction = ledger.getAccountTransactionBySequenceNumber(accountAddress,sequence);
 		assertEquals(1L,ledger.getRequestCount());
 		ChaingrokLog.purgeLogs();
-		//assertFalse(Libra4jError.hasLogs());
+		assertFalse(ChaingrokLog.hasLogs());
 		//assertNotNull(transaction);
 		//assertTrue(transaction.getRawTxnBytes().length > 0);
 		//assertNotNull(transaction.getProgram());
