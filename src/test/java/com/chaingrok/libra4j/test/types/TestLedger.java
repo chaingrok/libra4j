@@ -51,10 +51,32 @@ public class TestLedger extends TestClass {
 		assertEquals(1L,ledger.getRequestCount());
 		assertFalse(ChaingrokError.hasLogs());
 		assertNotNull(transaction);
+		assertEquals(version,(long)transaction.getVersion());
+		assertNull(transaction.getEventsList());
+		//
 		System.out.println(transaction.toString());
 		assertEquals(version,(long)transaction.getVersion());
+		assertNotNull(transaction.getSignedTransactionBytes());
+		assertNotNull(transaction.getSenderAccountAddress());
+		assertNotNull(transaction.getSequenceNumber());
+		assertNotNull(transaction.getTransactionPayloadType());
+		assertTrue((transaction.getScript() != null)
+				|| (transaction.getProgram() != null)
+				|| (transaction.getWriteSet() != null)
+					);
+		assertNotNull(transaction.getMaxGasAmount());
+		assertNotNull(transaction.getGasUnitPrice());
 		assertNotNull(transaction.getExpirationTime());
-		assertNull(transaction.getEventsList());
+		assertNotNull(transaction.getSenderPublicKey());
+		assertNotNull(transaction.getSignature());
+		assertNotNull(transaction.getVersion());
+		assertNotNull(transaction.getMajorStatus());
+		assertNotNull(transaction.getGasUsed());
+		assertNotNull(transaction.getSignedTransactionHash());
+		assertNotNull(transaction.getEventRootHash());
+		assertNotNull(transaction.getStateRootHash());
+		assertNotNull(transaction.getTxnInfoSerializedSize());
+		assertNotNull(transaction.getSignedTxnSerializedSize());
 	}
 	
 	@Test
