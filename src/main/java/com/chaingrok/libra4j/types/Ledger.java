@@ -210,22 +210,20 @@ public class Ledger {
 			.setGetAccountTransactionBySequenceNumberRequest(getAccountTransactionBySequenceNumberRequest)
 			.build();
 		ResponseItem responseItem = getResponseItem(requestItem);
-		grpcChecker.checkFieldErrors(responseItem.findInitializationErrors(),responseItem.getUnknownFields());
 		grpcChecker.checkExpectedFields(responseItem,1);
-		if (grpcChecker.isFieldSet(GrpcField.GET_ACCOUNT_TRANSACTION_BY_SEQUENCE_NUMBER_RESPONSE,responseItem,responseItem.getAllFields())) {
+		//if (grpcChecker.isFieldSet(GrpcField.GET_ACCOUNT_TRANSACTION_BY_SEQUENCE_NUMBER_RESPONSE,responseItem,responseItem.getAllFields())) {
+		if (true) {
 			GetAccountTransactionBySequenceNumberResponse accountTransactionBySequenceNumberResponse = responseItem.getGetAccountTransactionBySequenceNumberResponse();
-			grpcChecker.checkFieldErrors(accountTransactionBySequenceNumberResponse.findInitializationErrors(),accountTransactionBySequenceNumberResponse.getUnknownFields());
 			grpcChecker.checkExpectedFields(accountTransactionBySequenceNumberResponse,1);
-			if (grpcChecker.isFieldSet(GrpcField.SIGNED_TRANSACTION_WITH_PROOF,accountTransactionBySequenceNumberResponse,accountTransactionBySequenceNumberResponse.getAllFields())) {
+			//if (grpcChecker.isFieldSet(GrpcField.SIGNED_TRANSACTION_WITH_PROOF,accountTransactionBySequenceNumberResponse,accountTransactionBySequenceNumberResponse.getAllFields())) {
+			if (true) {
 				SignedTransactionWithProof signedTransactionWithProof = accountTransactionBySequenceNumberResponse.getSignedTransactionWithProof();
-				grpcChecker.checkFieldErrors(signedTransactionWithProof.findInitializationErrors(),signedTransactionWithProof.getUnknownFields());
 				grpcChecker.checkExpectedFields(signedTransactionWithProof,3);
 				EventsList eventsList = signedTransactionWithProof.getEvents();
 				processEventsList(eventsList);
 				SignedTransaction signedTransaction = signedTransactionWithProof.getSignedTransaction();
 				Transaction transaction = processSignedTransaction(signedTransaction);
 				SignedTransactionProof signedTransactionProof = signedTransactionWithProof.getProof();
-				grpcChecker.checkFieldErrors(signedTransactionProof.findInitializationErrors(),signedTransactionProof.getUnknownFields());
 				grpcChecker.checkExpectedFields(signedTransactionProof,2);
 				AccumulatorProof accumulatorProof = signedTransactionProof.getLedgerInfoToTransactionInfoProof();
 				processAccumulatorProof(accumulatorProof);
@@ -240,9 +238,10 @@ public class Ledger {
 		return result;
 	}
 	
-	public void getEventsbyEventAccessPath(AccountAddress accountAddress, long count) {
+	public void getEventsbyEventAccessPath(AccountAddress accountAddress, byte[] path, long count) {
 		AccessPath accessPath = AccessPath.newBuilder()
 				.setAddress(accountAddress.getByteString())
+				.setPath(ByteString.copyFrom(path))
 				.build();
 		GetEventsByEventAccessPathRequest getEventsByAccesspathRequest = GetEventsByEventAccessPathRequest.newBuilder()
 				.setAccessPath(accessPath)
@@ -253,7 +252,6 @@ public class Ledger {
 				.build();
 		ResponseItem responseItem = getResponseItem(requestItem);
 		GetEventsByEventAccessPathResponse eventsByEventAccessPathResponse = responseItem.getGetEventsByEventAccessPathResponse();
-		grpcChecker.checkFieldErrors(eventsByEventAccessPathResponse.findInitializationErrors(),eventsByEventAccessPathResponse.getUnknownFields());
 		grpcChecker.checkExpectedFields(eventsByEventAccessPathResponse,1);
 		AccountStateWithProof proofOfLatestEvent = eventsByEventAccessPathResponse.getProofOfLatestEvent();
 		processAccounStateWithProof(proofOfLatestEvent);
@@ -261,12 +259,10 @@ public class Ledger {
 		if ((eventsWithProofList != null)
 				&& (eventsWithProofList.size() > 0)) {
 			for(EventWithProof eventWithProof : eventsWithProofList) {
-				grpcChecker.checkFieldErrors(eventWithProof.findInitializationErrors(),eventWithProof.getUnknownFields());
 				grpcChecker.checkExpectedFields(eventWithProof,2);
 				Event provedEvent = eventWithProof.getEvent();
 				processEvent(provedEvent);
 				EventProof eventProof = eventWithProof.getProof();
-				grpcChecker.checkFieldErrors(eventProof.findInitializationErrors(),eventProof.getUnknownFields());
 				grpcChecker.checkExpectedFields(eventProof,2);
 				TransactionInfo transactionInfo = eventProof.getTransactionInfo();
 				processTransactionInfo(transactionInfo);
@@ -287,7 +283,6 @@ public class Ledger {
 		ResponseItem responseItem = getResponseItem(requestItem);
 		GetAccountStateResponse accountStateResponse = responseItem.getGetAccountStateResponse();
 		if (accountStateResponse != null) {
-			grpcChecker.checkFieldErrors(accountStateResponse.findInitializationErrors(),accountStateResponse.getUnknownFields());
 			grpcChecker.checkExpectedFields(accountStateResponse,1);
 			AccountStateWithProof accountStateWithProof = accountStateResponse.getAccountStateWithProof();
 			if (accountStateWithProof != null) {
@@ -311,7 +306,6 @@ public class Ledger {
 		com.chaingrok.libra4j.types.LedgerInfo result = new com.chaingrok.libra4j.types.LedgerInfo();
 		//
 		LedgerInfo ledgerInfo = ledgerInfoWithSignatures.getLedgerInfo();
-		grpcChecker.checkFieldErrors(ledgerInfo.findInitializationErrors(),ledgerInfo.getUnknownFields());
 		grpcChecker.checkExpectedFields(ledgerInfo,5);
 		grpcChecker.checkLedgerInfo(ledgerInfo);
 		result.setConsensusBlockId(new Hash(ledgerInfo.getConsensusBlockId().toByteArray()));
@@ -325,7 +319,6 @@ public class Ledger {
 		if (signaturesList.size() > 0 ) {
 			ArrayList<Validator> validators = new ArrayList<Validator>();
 			for(ValidatorSignature signature : signaturesList) {
-				grpcChecker.checkFieldErrors(signature.findInitializationErrors(),signature.getUnknownFields());
 				grpcChecker.checkExpectedFields(signature,2);
 				Validator validator = new Validator();
 				validator.setValidatorId(new ValidatorId(signature.getValidatorId()));
@@ -451,6 +444,7 @@ public class Ledger {
 		grpcChecker.checkExpectedFields(event,2,3);
 		result.setData(new EventData(event.getEventData()));
 		result.setSequenceNumber(event.getSequenceNumber());
+		System.out.println("event key:" + Utils.byteArrayToHexString(event.getKey().toByteArray()) + " - " + new String(event.getKey().toByteArray()));
 		/* TODO: access path now missing fix
 		AccessPath respAccessPath = event.getAccessPath();
 		if (respAccessPath != null) {
@@ -466,7 +460,6 @@ public class Ledger {
 	}
 	
 	private void processAccumulatorProof(AccumulatorProof accumulatorProof) {
-		grpcChecker.checkFieldErrors(accumulatorProof.findInitializationErrors(),accumulatorProof.getUnknownFields());
 		grpcChecker.checkExpectedFields(accumulatorProof,2);
 		long bitmap = accumulatorProof.getBitmap();
 		//result.setBitmap(Utils.longToByteArray(bitmap));
@@ -488,18 +481,14 @@ public class Ledger {
 	
 	private AccountState processAccounStateWithProof(AccountStateWithProof accountStateWithProof) {
 		AccountState result = new AccountState();
-		grpcChecker.checkFieldErrors(accountStateWithProof.findInitializationErrors(),accountStateWithProof.getUnknownFields());
 		grpcChecker.checkExpectedFields(accountStateWithProof,2,3);
 		result.setVersion(accountStateWithProof.getVersion());
 		AccountStateBlob accountStateBlob = accountStateWithProof.getBlob();
-		grpcChecker.checkFieldErrors(accountStateBlob.findInitializationErrors(),accountStateBlob.getUnknownFields());
 		grpcChecker.checkExpectedFields(accountStateBlob,1);
 		result.setBlob(accountStateBlob.getBlob().toByteArray());
 		AccountStateProof accountStateProof = accountStateWithProof.getProof();
-		grpcChecker.checkFieldErrors(accountStateProof.findInitializationErrors(),accountStateProof.getUnknownFields());
 		grpcChecker.checkExpectedFields(accountStateProof,3);
 		AccumulatorProof ledgerInfoToTransactionInfoProof = accountStateProof.getLedgerInfoToTransactionInfoProof();
-		grpcChecker.checkFieldErrors(ledgerInfoToTransactionInfoProof.findInitializationErrors(),ledgerInfoToTransactionInfoProof.getUnknownFields());
 		grpcChecker.checkExpectedFields(ledgerInfoToTransactionInfoProof,2);
 		long bitmap = ledgerInfoToTransactionInfoProof.getBitmap();
 		result.setBitmap(Utils.longToByteArray(bitmap));
@@ -519,7 +508,6 @@ public class Ledger {
 		}
 		accountStateProof.getLedgerInfoToTransactionInfoProof();
 		SparseMerkleProof transactionInfoToAccountProof = accountStateProof.getTransactionInfoToAccountProof();
-		grpcChecker.checkFieldErrors(transactionInfoToAccountProof.findInitializationErrors(),transactionInfoToAccountProof.getUnknownFields());
 		grpcChecker.checkExpectedFields(transactionInfoToAccountProof,3);
 		transactionInfoToAccountProof.getBitmap().toByteArray();
 		transactionInfoToAccountProof.getLeaf().toByteArray();
@@ -538,7 +526,6 @@ public class Ledger {
 			result.setNonDefaultSiblingsTransactionInfoToAccountProof(nonDefaultSiblings);
 		}
 		TransactionInfo transactionInfo = accountStateProof.getTransactionInfo();
-		grpcChecker.checkFieldErrors(transactionInfo.findInitializationErrors(),transactionInfo.getUnknownFields());
 		grpcChecker.checkExpectedFields(transactionInfo,4);
 		Transaction transaction = new Transaction();
 		transaction.setSignedTransactionHash(new Hash(transactionInfo.getSignedTransactionHash()));
@@ -557,7 +544,6 @@ public class Ledger {
 				.build();
 		//
 		UpdateToLatestLedgerResponse response = validatorEndpoint.getBlockingStub().updateToLatestLedger(request);
-		grpcChecker.checkFieldErrors(response.findInitializationErrors(),response.getUnknownFields());
 		grpcChecker.checkExpectedFields(response,2);
 		setLedgerInfoWithSignatures(response.getLedgerInfoWithSigs());
 		List<ResponseItem> responseItemsList = response.getResponseItemsList();
@@ -567,7 +553,6 @@ public class Ledger {
 					new ChaingrokError(Type.TOO_MANY_ITEMS,responseItemsList);
 				}
 				ResponseItem responseItem = responseItemsList.get(0);
-				grpcChecker.checkFieldErrors(responseItem.findInitializationErrors(),responseItem.getUnknownFields());
 				grpcChecker.checkExpectedFields(responseItem,1);
 				result = responseItem;
 			}
