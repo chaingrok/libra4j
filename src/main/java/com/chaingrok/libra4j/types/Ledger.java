@@ -383,7 +383,13 @@ public class Ledger {
 				new ChaingrokError(Type.INVALID_LENGTH,"transaction size mismatch: " + result.getSignedTxnSerializedSize() + " <> " + signedTransaction.getSignedTxn().toByteArray().length);
 			}
 			*/
-			processSignedTransactionBytes(signedTransaction.getSignedTxn().toByteArray(),transaction);
+			byte[] signedTransactionBytes = signedTransaction.getSignedTxn().toByteArray();
+			if ((signedTransactionBytes != null) 
+					&& (signedTransactionBytes.length > 0)) {
+				processSignedTransactionBytes(signedTransactionBytes,transaction);
+			} else {
+				new ChaingrokError(Type.INVALID_LENGTH,"no bytes to process for signed transaction: " + transaction.getVersion());
+			}
 		} else {
 			new ChaingrokError(Type.MISSING_DATA,"signed transaction is null");
 		}
@@ -444,18 +450,7 @@ public class Ledger {
 		grpcChecker.checkExpectedFields(event,2,3);
 		result.setData(new EventData(event.getEventData()));
 		result.setSequenceNumber(event.getSequenceNumber());
-		System.out.println("event key:" + Utils.byteArrayToHexString(event.getKey().toByteArray()) + " - " + new String(event.getKey().toByteArray()));
-		/* TODO: access path now missing fix
-		AccessPath respAccessPath = event.getAccessPath();
-		if (respAccessPath != null) {
-			grpcChecker.checkExpectedFields(respAccessPath,2);
-			result.setAccessPath(new com.chaingrok.libra4j.types.AccessPath(respAccessPath.getPath()));
-			result.setAddress(new AccountAddress(respAccessPath.getAddress().toByteArray()));
-		
-		} else {
-			new Libra4jError(Type.MISSING_DATA,"acccessPath is null");
-		}
-		*/
+		result.setEventKey(new EventKey(event.getKey().toByteArray()));
 		return result;
 	}
 	

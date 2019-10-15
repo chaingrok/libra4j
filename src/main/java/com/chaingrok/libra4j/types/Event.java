@@ -4,6 +4,7 @@ public class Event {
 
 	private AccountAddress address;
 	private Long sequenceNumber;
+	private EventKey eventKey;
 	private AccessPath accessPath;
 	private EventData data;
 	
@@ -21,6 +22,14 @@ public class Event {
 
 	public void setSequenceNumber(Long sequenceNumber) {
 		this.sequenceNumber = sequenceNumber;
+	}
+
+	public EventKey getEventKey() {
+		return eventKey;
+	}
+
+	public void setEventKey(EventKey eventKey) {
+		this.eventKey = eventKey;
 	}
 
 	public AccessPath getAccessPath() {
