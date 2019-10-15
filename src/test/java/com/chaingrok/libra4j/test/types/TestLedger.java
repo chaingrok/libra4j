@@ -14,10 +14,13 @@ import org.junit.runners.MethodSorters;
 
 import com.chaingrok.lib.ChaingrokError;
 import com.chaingrok.lib.ChaingrokLog;
+import com.chaingrok.lib.Utils;
 import com.chaingrok.lib.test.TestClass;
 import com.chaingrok.libra4j.test.TestData;
 import com.chaingrok.libra4j.types.AccountAddress;
 import com.chaingrok.libra4j.types.AccountState;
+import com.chaingrok.libra4j.types.Event;
+import com.chaingrok.libra4j.types.Events;
 import com.chaingrok.libra4j.types.Ledger;
 import com.chaingrok.libra4j.types.LedgerInfo;
 import com.chaingrok.libra4j.types.Transaction;
@@ -54,29 +57,7 @@ public class TestLedger extends TestClass {
 		assertEquals(version,(long)transaction.getVersion());
 		assertNull(transaction.getEventsList());
 		//
-		System.out.println(transaction.toString());
-		assertEquals(version,(long)transaction.getVersion());
-		assertNotNull(transaction.getSignedTransactionBytes());
-		assertNotNull(transaction.getSenderAccountAddress());
-		assertNotNull(transaction.getSequenceNumber());
-		assertNotNull(transaction.getTransactionPayloadType());
-		assertTrue((transaction.getScript() != null)
-				|| (transaction.getProgram() != null)
-				|| (transaction.getWriteSet() != null)
-					);
-		assertNotNull(transaction.getMaxGasAmount());
-		assertNotNull(transaction.getGasUnitPrice());
-		assertNotNull(transaction.getExpirationTime());
-		assertNotNull(transaction.getSenderPublicKey());
-		assertNotNull(transaction.getSignature());
-		assertNotNull(transaction.getVersion());
-		assertNotNull(transaction.getMajorStatus());
-		assertNotNull(transaction.getGasUsed());
-		assertNotNull(transaction.getSignedTransactionHash());
-		assertNotNull(transaction.getEventRootHash());
-		assertNotNull(transaction.getStateRootHash());
-		assertNotNull(transaction.getTxnInfoSerializedSize());
-		assertNotNull(transaction.getSignedTxnSerializedSize());
+		validateTransaction(transaction,version);
 	}
 	
 	@Test
@@ -87,9 +68,16 @@ public class TestLedger extends TestClass {
 		Transaction transaction = ledger.getTransaction(version,withEvents);
 		assertEquals(1L,ledger.getRequestCount());
 		assertNotNull(transaction);
-		assertEquals(version,(long)transaction.getVersion());
+		validateTransaction(transaction,version);
+		Events events = transaction.getEventsList();
 		assertEquals(2,transaction.getEventsList().size());
-		System.out.println(transaction.toString());
+		for (Event event : events ) {
+			//assertNotNull(event.getAccessPath());
+			//assertNotNull(event.getAddress());
+			assertNotNull(event.getData());
+			System.out.println("event data x: " + Utils.byteArrayToHexString(event.getData().getBytes()));
+			assertNotNull(event.getSequenceNumber());
+		}
 		assertFalse(ChaingrokError.hasLogs());
 	}
 	
@@ -141,12 +129,14 @@ public class TestLedger extends TestClass {
 		
 	}
 	
-	//@Test
+	@Test
 	public void test006GetEventsbyEventAccessPath() {
 		Ledger ledger = new Ledger(TestData.VALIDATOR_ENDPOINT);
 		AccountAddress accountAddress = AccountAddress.ACCOUNT_ZERO;
+		accountAddress = new AccountAddress("19ec9d6b9c90d4283260e125d69682bc1551e15f8466b1aff0b9d417a3a4fb75");
+		byte[] path = "/received_events_count/".getBytes();
 		long count = 10L;
-		ledger.getEventsbyEventAccessPath(accountAddress,count);
+		ledger.getEventsbyEventAccessPath(accountAddress,path,count);
 		assertEquals(1L,ledger.getRequestCount());
 		assertFalse(ChaingrokError.hasLogs());
 	}
@@ -155,10 +145,11 @@ public class TestLedger extends TestClass {
 	public void test007GetAccountTransactionsBySequenceNumber() {
 		Ledger ledger = new Ledger(TestData.VALIDATOR_ENDPOINT);
 		AccountAddress accountAddress = AccountAddress.ACCOUNT_ZERO;
+		accountAddress = new AccountAddress("19ec9d6b9c90d4283260e125d69682bc1551e15f8466b1aff0b9d417a3a4fb75");
 		long sequence = 1L;
 		Transaction transaction = ledger.getAccountTransactionBySequenceNumber(accountAddress,sequence);
 		assertEquals(1L,ledger.getRequestCount());
-		ChaingrokLog.purgeLogs();
+		//ChaingrokLog.purgeLogs();
 		assertFalse(ChaingrokLog.hasLogs());
 		//assertNotNull(transaction);
 		//assertTrue(transaction.getRawTxnBytes().length > 0);
@@ -173,6 +164,32 @@ public class TestLedger extends TestClass {
 		Ledger ledger = new Ledger(TestData.VALIDATOR_ENDPOINT);
 		ledger.submitTransaction();
 		ChaingrokLog.purgeLogs();
+	}
+	
+	public void validateTransaction(Transaction transaction, long version) {
+		System.out.println(transaction.toString());
+		assertEquals(version,(long)transaction.getVersion());
+		assertNotNull(transaction.getSignedTransactionBytes());
+		assertNotNull(transaction.getSenderAccountAddress());
+		assertNotNull(transaction.getSequenceNumber());
+		assertNotNull(transaction.getTransactionPayloadType());
+		assertTrue((transaction.getScript() != null)
+				|| (transaction.getProgram() != null)
+				|| (transaction.getWriteSet() != null)
+					);
+		assertNotNull(transaction.getMaxGasAmount());
+		assertNotNull(transaction.getGasUnitPrice());
+		assertNotNull(transaction.getExpirationTime());
+		assertNotNull(transaction.getSenderPublicKey());
+		assertNotNull(transaction.getSignature());
+		assertNotNull(transaction.getVersion());
+		assertNotNull(transaction.getMajorStatus());
+		assertNotNull(transaction.getGasUsed());
+		assertNotNull(transaction.getSignedTransactionHash());
+		assertNotNull(transaction.getEventRootHash());
+		assertNotNull(transaction.getStateRootHash());
+		assertNotNull(transaction.getTxnInfoSerializedSize());
+		assertNotNull(transaction.getSignedTxnSerializedSize());
 	}
 	
 
