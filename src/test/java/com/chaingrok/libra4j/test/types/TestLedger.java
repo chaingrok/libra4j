@@ -129,7 +129,7 @@ public class TestLedger extends TestClass {
 		
 	}
 	
-	@Test
+	//@Test
 	public void test006GetEventsbyEventAccessPath() {
 		Ledger ledger = new Ledger(TestData.VALIDATOR_ENDPOINT);
 		AccountAddress accountAddress = AccountAddress.ACCOUNT_ZERO;
@@ -141,7 +141,7 @@ public class TestLedger extends TestClass {
 		assertFalse(ChaingrokError.hasLogs());
 	}
 	
-	@Test
+	//@Test
 	public void test007GetAccountTransactionsBySequenceNumber() {
 		Ledger ledger = new Ledger(TestData.VALIDATOR_ENDPOINT);
 		AccountAddress accountAddress = AccountAddress.ACCOUNT_ZERO;
