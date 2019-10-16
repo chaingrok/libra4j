@@ -114,9 +114,6 @@ public class Ledger {
 		RequestItem requestItem = RequestItem.newBuilder()
 				.setGetTransactionsRequest(getTransactionsRequest)
 				.build();
-		UpdateToLatestLedgerRequest request = UpdateToLatestLedgerRequest.newBuilder()
-			.addRequestedItems(requestItem)
-			.build();
 		//
 		ResponseItem responseItem = getResponseItem(requestItem);
 		GetTransactionsResponse transactionsResponse = responseItem.getGetTransactionsResponse();
@@ -173,9 +170,7 @@ public class Ledger {
 					}
 				}
 			}
-		} else {
-			new ChaingrokError(Type.NULL_DATA,request);
-		}
+		} 
 		return result;
 	}
 	
