@@ -20,7 +20,7 @@ import com.chaingrok.libra4j.types.ValidatorId;
 
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class TestByteArrayObject extends TestClass {
+public class TestByteArray extends TestClass {
 	
 	@Test
 	public void test001IsAbstract() {

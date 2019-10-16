@@ -129,26 +129,30 @@ public class TestLedger extends TestClass {
 		assertFalse(ChaingrokError.hasLogs());
 	}
 	
-	//@Test
-	public void test008GetAccountTransactionsBySequenceNumber() {
+	@Test
+	public void test008GetAccountTransactionBySequenceNumber() {
 		Ledger ledger = new Ledger(TestData.VALIDATOR_ENDPOINT);
 		AccountAddress accountAddress = AccountAddress.ACCOUNT_ZERO;
 		accountAddress = new AccountAddress("19ec9d6b9c90d4283260e125d69682bc1551e15f8466b1aff0b9d417a3a4fb75");
-		long sequence = 1L;
-		Transaction transaction = ledger.getAccountTransactionBySequenceNumber(accountAddress,sequence);
+		long sequence = 0L;
+		boolean withEvents = true;
+		Transaction transaction = ledger.getAccountTransactionBySequenceNumber(accountAddress,sequence,withEvents);
 		assertEquals(1L,ledger.getRequestCount());
-		//ChaingrokLog.purgeLogs();
+		ChaingrokLog.purgeLogs();
 		assertFalse(ChaingrokLog.hasLogs());
-		//assertNotNull(transaction);
-		//assertTrue(transaction.getRawTxnBytes().length > 0);
-		//assertNotNull(transaction.getProgram());
-		//assertTrue(transaction.getProgram().getArguments().size() > 0);
-		//assertNotNull(transaction.getVersion());
-		//assertTrue(transaction.getVersion() > 0);
+		assertNotNull(transaction);
+		/*
+		assertNotNull(transaction.getVersion());
+		assertEquals(0L,(long)transaction.getMajorStatus());
+		assertTrue((long)transaction.getGasUsed() == 0);
+		assertNotNull(transaction.getSignedTransactionHash());
+		assertNotNull(transaction.getStateRootHash());
+		assertNotNull(transaction.getEventRootHash());
+		*/
 	}
 	
 	@Test
-	public void test008SubmitTransaction() {
+	public void test009SubmitTransaction() {
 		Ledger ledger = new Ledger(TestData.VALIDATOR_ENDPOINT);
 		ledger.submitTransaction();
 		ChaingrokLog.purgeLogs();

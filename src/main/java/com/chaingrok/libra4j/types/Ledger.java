@@ -46,7 +46,6 @@ import com.chaingrok.lib.ChaingrokError;
 import com.chaingrok.lib.Utils;
 import com.chaingrok.lib.ChaingrokLog.Type;
 import com.chaingrok.libra4j.grpc.GrpcChecker;
-import com.chaingrok.libra4j.grpc.GrpcField;
 import com.chaingrok.libra4j.misc.LCSProcessor;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.UInt64Value;
@@ -200,7 +199,7 @@ public class Ledger {
 	}
 	
 	public Transaction getAccountTransactionBySequenceNumber(AccountAddress accountAddress,long sequence, boolean withEvents) {
-		Transaction result = null;
+		Transaction result = new Transaction();
 		GetAccountTransactionBySequenceNumberRequest getAccountTransactionBySequenceNumberRequest = GetAccountTransactionBySequenceNumberRequest.newBuilder()
 			.setAccount(accountAddress.getByteString())
 			.setFetchEvents(withEvents)
@@ -211,29 +210,34 @@ public class Ledger {
 			.build();
 		ResponseItem responseItem = getResponseItem(requestItem);
 		grpcChecker.checkExpectedFields(responseItem,1);
-		//if (grpcChecker.isFieldSet(GrpcField.GET_ACCOUNT_TRANSACTION_BY_SEQUENCE_NUMBER_RESPONSE,responseItem,responseItem.getAllFields())) {
-		if (true) {
+		if (responseItem != null) {
 			GetAccountTransactionBySequenceNumberResponse accountTransactionBySequenceNumberResponse = responseItem.getGetAccountTransactionBySequenceNumberResponse();
 			grpcChecker.checkExpectedFields(accountTransactionBySequenceNumberResponse,1);
-			//if (grpcChecker.isFieldSet(GrpcField.SIGNED_TRANSACTION_WITH_PROOF,accountTransactionBySequenceNumberResponse,accountTransactionBySequenceNumberResponse.getAllFields())) {
-			if (true) {
+			if (accountTransactionBySequenceNumberResponse != null) {
 				SignedTransactionWithProof signedTransactionWithProof = accountTransactionBySequenceNumberResponse.getSignedTransactionWithProof();
 				grpcChecker.checkExpectedFields(signedTransactionWithProof,3);
-				EventsList eventsList = signedTransactionWithProof.getEvents();
-				processEventsList(eventsList);
 				SignedTransaction signedTransaction = signedTransactionWithProof.getSignedTransaction();
-				Transaction transaction = processSignedTransaction(signedTransaction);
+				result = processSignedTransaction(signedTransaction,result);
+				if (withEvents) {
+					EventsList eventsList = signedTransactionWithProof.getEvents();
+					result.setEventsList(processEventsList(eventsList));
+				}
 				SignedTransactionProof signedTransactionProof = signedTransactionWithProof.getProof();
 				grpcChecker.checkExpectedFields(signedTransactionProof,2);
+				TransactionInfo transactionInfo = signedTransactionProof.getTransactionInfo();
+				result = processTransactionInfo(transactionInfo,result);
 				AccumulatorProof accumulatorProof = signedTransactionProof.getLedgerInfoToTransactionInfoProof();
 				processAccumulatorProof(accumulatorProof);
-				TransactionInfo transactionInfo = signedTransactionProof.getTransactionInfo();
-				result = processTransactionInfo(transactionInfo,transaction);
+				//
+				AccountStateWithProof accountStateWithProof = accountTransactionBySequenceNumberResponse.getProofOfCurrentSequenceNumber();
+				if (accountStateWithProof != null) {
+					processAccountStateWithProof(accountStateWithProof);
+				} 
 			} else {
-				new ChaingrokError(Type.MISSING_DATA,"expected field missing in " + accountTransactionBySequenceNumberResponse.getClass().getCanonicalName() + ": " + GrpcField.SIGNED_TRANSACTION);
+				new ChaingrokError(Type.MISSING_DATA,"expected field missing in " + ResponseItem.class.getCanonicalName() + ": " + GetAccountTransactionBySequenceNumberResponse.class.getCanonicalName());
 			}
 		} else {
-			new ChaingrokError(Type.MISSING_DATA,"expected field missing in " + responseItem.getClass().getCanonicalName() + ": " + GrpcField.GET_ACCOUNT_TRANSACTION_BY_SEQUENCE_NUMBER_RESPONSE_PROOF);
+			new ChaingrokError(Type.MISSING_DATA,"expected field missing: " + ResponseItem.class.getCanonicalName());
 		}
 		return result;
 	}
@@ -353,19 +357,30 @@ public class Ledger {
 		if (transactionInfo != null) {
 			grpcChecker.checkExpectedFields(transactionInfo,4,5);
 			result.setMajorStatus(transactionInfo.getMajorStatus());
-			result.setSignedTransactionHash(new Hash(transactionInfo.getSignedTransactionHash()));
-			result.setEventRootHash(new Hash(transactionInfo.getEventRootHash()));
-			result.setStateRootHash(new Hash(transactionInfo.getStateRootHash()));
 			result.setGasUsed(transactionInfo.getGasUsed());
 			result.setTxnInfoSerializedSize(transactionInfo.getSerializedSize());
+			ByteString hash = transactionInfo.getSignedTransactionHash();
+			if ((hash != null) 
+					&& (hash.toByteArray() != null)
+					&& (hash.toByteArray().length > 0)) {
+				result.setSignedTransactionHash(new Hash(hash));
+			}
+			hash = transactionInfo.getEventRootHash();
+			if ((hash != null) 
+					&& (hash.toByteArray() != null)
+					&& (hash.toByteArray().length > 0)) {
+				result.setEventRootHash(new Hash(hash));
+			}
+			hash = transactionInfo.getStateRootHash();
+			if ((hash != null) 
+					&& (hash.toByteArray() != null)
+					&& (hash.toByteArray().length > 0)) {
+				result.setStateRootHash(new Hash(hash));
+			}
 		} else {
 			new ChaingrokError(Type.MISSING_DATA,"transaction info is null");
 		}
 		return result;
-	}
-	
-	private Transaction processSignedTransaction(SignedTransaction signedTransaction) {
-		return processSignedTransaction(signedTransaction,null);
 	}
 	
 	private Transaction processSignedTransaction(SignedTransaction signedTransaction,Transaction transaction) {
@@ -470,7 +485,7 @@ public class Ledger {
 					nonDefaultSiblings.add(sibling.toByteArray());
 				}
 			}
-			//result.setNonDefaultSiblings(nonDefaultSiblings);
+			//result.setNon;
 		}
 	}
 	
