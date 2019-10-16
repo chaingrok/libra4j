@@ -227,59 +227,66 @@ public class Transaction implements LCSInterface {
 		result += "   gas used: "  + getGasUsed() + "\n";
 		result += "   max gas amount: "  + getMaxGasAmount() + "\n";
 		result += "   gas unit price: "  + getGasUnitPrice() + "\n";
-		Long expirationTime = getExpirationTime().getAsLong();
-		result += "   expiration time: "  + Utils.timestampMillisToDateString(expirationTime*1000) + " (" + expirationTime + ")" +"\n";
+		Long expirationTime = null;
+		if (getExpirationTime() != null) {
+			expirationTime = getExpirationTime().getAsLong();
+			result += "   expiration time: "  + Utils.timestampMillisToDateString(expirationTime*1000) + " (" + expirationTime + ")" +"\n";
+		} else {
+			result += "   expiration time: " +"\n";
+		}
 		TransactionPayloadType transactionPayloadType = getTransactionPayloadType();
 		result += "   payload type: " + transactionPayloadType + "\n";
-		switch (transactionPayloadType) {
-			case PROGRAM:
-				result += "   program: " +  "\n";
-				if (program != null) {
-					Arguments arguments = getProgram().getArguments();
-					if ((arguments != null)
-						&& (arguments.size() > 0)) {
-						for (Argument argument : arguments) {
-							result += "      argument: " +  argument + "\n";
+		if (transactionPayloadType != null) {
+			switch (transactionPayloadType) {
+				case PROGRAM:
+					result += "   program: " +  "\n";
+					if (program != null) {
+						Arguments arguments = getProgram().getArguments();
+						if ((arguments != null)
+							&& (arguments.size() > 0)) {
+							for (Argument argument : arguments) {
+								result += "      argument: " +  argument + "\n";
+							}
+						}
+						Modules modules = program.getModules();
+						if ((modules != null)
+							&& (modules.size() > 0)) {
+							for (Module module : modules) {
+								result += "      module (" + module.getBytes().length+ " bytes): " +  module + "\n";
+							}
+						}
+						Code code = getProgram().getCode();
+						if (code != null) {
+							result += "      code (" + code.getBytes().length + " bytes): " +  code + "\n";
 						}
 					}
-					Modules modules = program.getModules();
-					if ((modules != null)
-						&& (modules.size() > 0)) {
-						for (Module module : modules) {
-							result += "      module (" + module.getBytes().length+ " bytes): " +  module + "\n";
+					break;
+				case WRITESET:
+					new ChaingrokError(ChaingrokLog.Type.NOT_IMPLEMENTED,"toString not implemented yet for write set");
+					break;
+				case SCRIPT:
+					result += "   script: " +  "\n";
+					if (script != null) {
+						Arguments arguments = getScript().getArguments();
+						if ((arguments != null)
+							&& (arguments.size() > 0)) {
+							for (Argument argument : arguments) {
+								result += "      argument: " +  argument + "\n";
+							}
+						}
+						Code code = getScript().getCode();
+						if (code != null) {
+							result += "      code (" + code.getBytes().length + " bytes): " +  code + "\n";
 						}
 					}
-					Code code = getProgram().getCode();
-					if (code != null) {
-						result += "      code (" + code.getBytes().length + " bytes): " +  code + "\n";
-					}
-				}
-				break;
-			case WRITESET:
-				new ChaingrokError(ChaingrokLog.Type.NOT_IMPLEMENTED,"toString not implemented yet for write set");
-				break;
-			case SCRIPT:
-				result += "   script: " +  "\n";
-				if (script != null) {
-					Arguments arguments = getScript().getArguments();
-					if ((arguments != null)
-						&& (arguments.size() > 0)) {
-						for (Argument argument : arguments) {
-							result += "      argument: " +  argument + "\n";
-						}
-					}
-					Code code = getScript().getCode();
-					if (code != null) {
-						result += "      code (" + code.getBytes().length + " bytes): " +  code + "\n";
-					}
-				}
-				break;
-			case MODULE:
-				new ChaingrokError(ChaingrokLog.Type.NOT_IMPLEMENTED,"tranasaction type discovery not implemented yet for module");
-				break;
-			default:
-				new ChaingrokError(ChaingrokLog.Type.NOT_IMPLEMENTED,"should not happen");
-				break;
+					break;
+				case MODULE:
+					new ChaingrokError(ChaingrokLog.Type.NOT_IMPLEMENTED,"tranasaction type discovery not implemented yet for module");
+					break;
+				default:
+					new ChaingrokError(ChaingrokLog.Type.NOT_IMPLEMENTED,"should not happen");
+					break;
+			}
 		}
 		Events events = getEventsList();
 		if ((events != null) 
