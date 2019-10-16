@@ -115,9 +115,6 @@ public class TestLedger extends TestClass {
 		assertNotNull(accountState.getBitmap());
 		assertNotNull(accountState.getNonDefaultSiblingsLedgerInfoToTransactionInfoProof());
 		assertNotNull(accountState.getNonDefaultSiblingsTransactionInfoToAccountProof());
-		
-		ChaingrokLog.purgeLogs();
-		
 	}
 	
 	//@Test
