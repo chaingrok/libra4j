@@ -254,7 +254,7 @@ public class Ledger {
 		GetEventsByEventAccessPathResponse eventsByEventAccessPathResponse = responseItem.getGetEventsByEventAccessPathResponse();
 		grpcChecker.checkExpectedFields(eventsByEventAccessPathResponse,1);
 		AccountStateWithProof proofOfLatestEvent = eventsByEventAccessPathResponse.getProofOfLatestEvent();
-		processAccounStateWithProof(proofOfLatestEvent);
+		processAccountStateWithProof(proofOfLatestEvent);
 		List<EventWithProof> eventsWithProofList = eventsByEventAccessPathResponse.getEventsWithProofList();
 		if ((eventsWithProofList != null)
 				&& (eventsWithProofList.size() > 0)) {
@@ -286,7 +286,7 @@ public class Ledger {
 			grpcChecker.checkExpectedFields(accountStateResponse,1);
 			AccountStateWithProof accountStateWithProof = accountStateResponse.getAccountStateWithProof();
 			if (accountStateWithProof != null) {
-				result = processAccounStateWithProof(accountStateWithProof);
+				result = processAccountStateWithProof(accountStateWithProof);
 			}
 		}
 		return result;
@@ -474,7 +474,7 @@ public class Ledger {
 		}
 	}
 	
-	private AccountState processAccounStateWithProof(AccountStateWithProof accountStateWithProof) {
+	private AccountState processAccountStateWithProof(AccountStateWithProof accountStateWithProof) {
 		AccountState result = new AccountState();
 		grpcChecker.checkExpectedFields(accountStateWithProof,2,3);
 		result.setVersion(accountStateWithProof.getVersion());

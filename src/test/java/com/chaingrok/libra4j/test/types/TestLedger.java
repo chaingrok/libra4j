@@ -3,7 +3,6 @@ package com.chaingrok.libra4j.test.types;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
@@ -14,7 +13,6 @@ import org.junit.runners.MethodSorters;
 
 import com.chaingrok.lib.ChaingrokError;
 import com.chaingrok.lib.ChaingrokLog;
-import com.chaingrok.lib.Utils;
 import com.chaingrok.lib.test.TestClass;
 import com.chaingrok.libra4j.test.TestData;
 import com.chaingrok.libra4j.types.AccountAddress;
@@ -112,6 +110,12 @@ public class TestLedger extends TestClass {
 		assertFalse(ChaingrokError.hasLogs());
 		assertNotNull(accountState);
 		assertTrue(accountState.getVersion() > 0);
+		assertNotNull(accountState.getTransaction());
+		assertNotNull(accountState.getBlob());
+		assertNotNull(accountState.getBitmap());
+		assertNotNull(accountState.getNonDefaultSiblingsLedgerInfoToTransactionInfoProof());
+		assertNotNull(accountState.getNonDefaultSiblingsTransactionInfoToAccountProof());
+		
 		ChaingrokLog.purgeLogs();
 		
 	}
