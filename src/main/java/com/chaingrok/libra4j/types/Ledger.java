@@ -31,14 +31,15 @@ import org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfo;
 import org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures;
 import org.libra.grpc.types.LedgerInfoOuterClass.ValidatorSignature;
 import org.libra.grpc.types.MempoolStatus.MempoolAddTransactionStatus;
+import org.libra.grpc.types.Proof.AccumulatorConsistencyProof;
 import org.libra.grpc.types.Proof.AccountStateProof;
 import org.libra.grpc.types.Proof.AccumulatorProof;
 import org.libra.grpc.types.Proof.EventProof;
 import org.libra.grpc.types.Proof.SignedTransactionProof;
 import org.libra.grpc.types.Proof.SparseMerkleProof;
-import org.libra.grpc.types.Transaction.SignedTransaction;
-import org.libra.grpc.types.Transaction.SignedTransactionWithProof;
-import org.libra.grpc.types.Transaction.TransactionListWithProof;
+import org.libra.grpc.types.TransactionOuterClass.SignedTransaction;
+import org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof;
+import org.libra.grpc.types.TransactionOuterClass.TransactionListWithProof;
 import org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo;
 import org.libra.grpc.types.VmErrors.VMStatus;
 
@@ -55,6 +56,7 @@ public class Ledger {
 	private ValidatorEndpoint validatorEndpoint;
 	private GrpcChecker grpcChecker = new GrpcChecker();
 	private LedgerInfoWithSignatures ledgerInfoWithSignatures;
+	private AccumulatorConsistencyProof ledgerConsistencyProof;
 	private long requestCount = 0;
 	
 	public Ledger(ValidatorEndpoint validatorEndpoint) {
@@ -120,7 +122,8 @@ public class Ledger {
 		if (transactionsResponse != null) {
 			grpcChecker.checkExpectedFields(transactionsResponse,1);
 			TransactionListWithProof transactionListWithProof = transactionsResponse.getTxnListWithProof();
-			if (transactionListWithProof != null) {
+			if ((transactionListWithProof != null) 
+				&& (transactionListWithProof.getTransactionsCount() > 0)) {
 				if (count == 1) {
 					if (withEvents) {
 						grpcChecker.checkExpectedFields(transactionListWithProof,5);
@@ -169,6 +172,10 @@ public class Ledger {
 						}
 					}
 				}
+			} else {
+				if (count > 0) {
+					new ChaingrokError(Type.INVALID_LENGTH,"no transaction found for version: " + version  +  "(count: " + count + ")");
+				}
 			}
 		} 
 		return result;
@@ -181,7 +188,7 @@ public class Ledger {
 	public Transaction getTransaction(long version, boolean withEvents) {
 		Transaction result = null;
 		ArrayList<Transaction> list = getTransactions(version,1L,withEvents);
-		if (list.size() != 1) {
+		if (list.size() > 1) {
 			new ChaingrokError(Type.LIST_TOO_LONG,"list size: " + list.size());
 		} else {
 			result = list.get(0);
@@ -310,7 +317,7 @@ public class Ledger {
 		result.setConsensusBlockId(new Hash(ledgerInfo.getConsensusBlockId().toByteArray()));
 		result.setConsensusDataHash(new Hash(ledgerInfo.getConsensusDataHash()));
 		result.setTransactionAccumulatorHash(new Hash(ledgerInfo.getTransactionAccumulatorHash()));
-		result.setEpochNum(ledgerInfo.getEpochNum());
+		result.setEpochNum(ledgerInfo.getEpoch());
 		result.setTimestampUsecs(ledgerInfo.getTimestampUsecs());
 		result.setVersion(ledgerInfo.getVersion());
 		//
@@ -338,6 +345,15 @@ public class Ledger {
 		this.ledgerInfoWithSignatures = ledgerInfoWithSignatures;
 	}
 	
+	
+	public AccumulatorConsistencyProof getLedgerConsistencyProof() {
+		return ledgerConsistencyProof;
+	}
+
+	public void setLedgerConsistencyProof(AccumulatorConsistencyProof ledgerConsistencyProof) {
+		this.ledgerConsistencyProof = ledgerConsistencyProof;
+	}
+
 	private Transaction processTransactionInfo(TransactionInfo transactionInfo) {
 		return processTransactionInfo(transactionInfo,null);
 	}
@@ -549,7 +565,8 @@ public class Ledger {
 				.build();
 		//
 		UpdateToLatestLedgerResponse response = validatorEndpoint.getBlockingStub().updateToLatestLedger(request);
-		grpcChecker.checkExpectedFields(response,2);
+		grpcChecker.checkExpectedFields(response,3);
+		setLedgerConsistencyProof(response.getLedgerConsistencyProof());
 		setLedgerInfoWithSignatures(response.getLedgerInfoWithSigs());
 		List<ResponseItem> responseItemsList = response.getResponseItemsList();
 		if (responseItemsList != null) {

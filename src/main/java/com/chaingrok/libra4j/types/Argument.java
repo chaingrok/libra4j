@@ -1,6 +1,6 @@
 package com.chaingrok.libra4j.types;
 
-import org.libra.grpc.types.Transaction.TransactionArgument.ArgType;
+import org.libra.grpc.types.TransactionOuterClass.TransactionArgument.ArgType;
 
 import com.chaingrok.lib.ChaingrokError;
 import com.chaingrok.lib.ChaingrokLog;

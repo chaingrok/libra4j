@@ -26,18 +26,20 @@ import org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures;
 import org.libra.grpc.types.LedgerInfoOuterClass.ValidatorSignature;
 import org.libra.grpc.types.Proof.AccountStateProof;
 import org.libra.grpc.types.Proof.AccumulatorProof;
+import org.libra.grpc.types.Proof.AccumulatorConsistencyProof;
 import org.libra.grpc.types.Proof.SignedTransactionProof;
 import org.libra.grpc.types.Proof.SparseMerkleProof;
-import org.libra.grpc.types.Transaction;
-import org.libra.grpc.types.Transaction.TransactionListWithProof;
-import org.libra.grpc.types.Transaction.SignedTransaction;
-import org.libra.grpc.types.Transaction.SignedTransactionWithProof;
+import org.libra.grpc.types.TransactionOuterClass.Transaction;
+import org.libra.grpc.types.TransactionOuterClass.TransactionListWithProof;
+import org.libra.grpc.types.TransactionOuterClass.SignedTransaction;
+import org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof;
 import org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo;
-import org.libra.grpc.types.Transaction.TransactionArgument;
+import org.libra.grpc.types.TransactionOuterClass.TransactionArgument;
 
 public enum GrpcField {
 	UPDATE_TO_LATEST_LEDGER_RESPONSE("types.UpdateToLatestLedgerResponse",UpdateToLatestLedgerResponse.class,null), //TODO: check fullname root node 
 	RESPONSE_ITEMS("types.UpdateToLatestLedgerResponse.response_items",ResponseItem.class,UpdateToLatestLedgerResponse.class),
+	LEDGER_CONSISTENCY_PROOF("types.UpdateToLatestLedgerResponse.ledger_consistency_proof",AccumulatorConsistencyProof.class,UpdateToLatestLedgerResponse.class),
 	LEDGER_INFO_WITH_SIGS("types.UpdateToLatestLedgerResponse.ledger_info_with_sigs",LedgerInfoWithSignatures.class,UpdateToLatestLedgerResponse.class),
 	SIGNATURES("types.LedgerInfoWithSignatures.signatures",ValidatorSignature.class,LedgerInfoWithSignatures.class),
 	LEDGER_INFO("types.LedgerInfoWithSignatures.ledger_info",LedgerInfo.class,LedgerInfoWithSignatures.class),

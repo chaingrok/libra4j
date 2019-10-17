@@ -70,9 +70,9 @@ public final class LedgerInfoOuterClass {
      * quorum. The very first epoch number is 0.
      * </pre>
      *
-     * <code>uint64 epoch = 5;</code>
+     * <code>uint64 epoch_num = 5;</code>
      */
-    long getEpoch();
+    long getEpochNum();
 
     /**
      * <pre>
@@ -204,7 +204,7 @@ public final class LedgerInfoOuterClass {
             }
             case 40: {
 
-              epoch_ = input.readUInt64();
+              epochNum_ = input.readUInt64();
               break;
             }
             case 48: {
@@ -313,8 +313,8 @@ public final class LedgerInfoOuterClass {
       return consensusBlockId_;
     }
 
-    public static final int EPOCH_FIELD_NUMBER = 5;
-    private long epoch_;
+    public static final int EPOCH_NUM_FIELD_NUMBER = 5;
+    private long epochNum_;
     /**
      * <pre>
      * Epoch number corresponds to the set of validators that are active for this
@@ -327,10 +327,10 @@ public final class LedgerInfoOuterClass {
      * quorum. The very first epoch number is 0.
      * </pre>
      *
-     * <code>uint64 epoch = 5;</code>
+     * <code>uint64 epoch_num = 5;</code>
      */
-    public long getEpoch() {
-      return epoch_;
+    public long getEpochNum() {
+      return epochNum_;
     }
 
     public static final int TIMESTAMP_USECS_FIELD_NUMBER = 6;
@@ -412,8 +412,8 @@ public final class LedgerInfoOuterClass {
       if (!consensusBlockId_.isEmpty()) {
         output.writeBytes(4, consensusBlockId_);
       }
-      if (epoch_ != 0L) {
-        output.writeUInt64(5, epoch_);
+      if (epochNum_ != 0L) {
+        output.writeUInt64(5, epochNum_);
       }
       if (timestampUsecs_ != 0L) {
         output.writeUInt64(6, timestampUsecs_);
@@ -446,9 +446,9 @@ public final class LedgerInfoOuterClass {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(4, consensusBlockId_);
       }
-      if (epoch_ != 0L) {
+      if (epochNum_ != 0L) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt64Size(5, epoch_);
+          .computeUInt64Size(5, epochNum_);
       }
       if (timestampUsecs_ != 0L) {
         size += com.google.protobuf.CodedOutputStream
@@ -481,8 +481,8 @@ public final class LedgerInfoOuterClass {
           .equals(other.getConsensusDataHash())) return false;
       if (!getConsensusBlockId()
           .equals(other.getConsensusBlockId())) return false;
-      if (getEpoch()
-          != other.getEpoch()) return false;
+      if (getEpochNum()
+          != other.getEpochNum()) return false;
       if (getTimestampUsecs()
           != other.getTimestampUsecs()) return false;
       if (hasNextValidatorSet() != other.hasNextValidatorSet()) return false;
@@ -510,9 +510,9 @@ public final class LedgerInfoOuterClass {
       hash = (53 * hash) + getConsensusDataHash().hashCode();
       hash = (37 * hash) + CONSENSUS_BLOCK_ID_FIELD_NUMBER;
       hash = (53 * hash) + getConsensusBlockId().hashCode();
-      hash = (37 * hash) + EPOCH_FIELD_NUMBER;
+      hash = (37 * hash) + EPOCH_NUM_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          getEpoch());
+          getEpochNum());
       hash = (37 * hash) + TIMESTAMP_USECS_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getTimestampUsecs());
@@ -686,7 +686,7 @@ public final class LedgerInfoOuterClass {
 
         consensusBlockId_ = com.google.protobuf.ByteString.EMPTY;
 
-        epoch_ = 0L;
+        epochNum_ = 0L;
 
         timestampUsecs_ = 0L;
 
@@ -726,7 +726,7 @@ public final class LedgerInfoOuterClass {
         result.transactionAccumulatorHash_ = transactionAccumulatorHash_;
         result.consensusDataHash_ = consensusDataHash_;
         result.consensusBlockId_ = consensusBlockId_;
-        result.epoch_ = epoch_;
+        result.epochNum_ = epochNum_;
         result.timestampUsecs_ = timestampUsecs_;
         if (nextValidatorSetBuilder_ == null) {
           result.nextValidatorSet_ = nextValidatorSet_;
@@ -793,8 +793,8 @@ public final class LedgerInfoOuterClass {
         if (other.getConsensusBlockId() != com.google.protobuf.ByteString.EMPTY) {
           setConsensusBlockId(other.getConsensusBlockId());
         }
-        if (other.getEpoch() != 0L) {
-          setEpoch(other.getEpoch());
+        if (other.getEpochNum() != 0L) {
+          setEpochNum(other.getEpochNum());
         }
         if (other.getTimestampUsecs() != 0L) {
           setTimestampUsecs(other.getTimestampUsecs());
@@ -1004,7 +1004,7 @@ public final class LedgerInfoOuterClass {
         return this;
       }
 
-      private long epoch_ ;
+      private long epochNum_ ;
       /**
        * <pre>
        * Epoch number corresponds to the set of validators that are active for this
@@ -1017,10 +1017,10 @@ public final class LedgerInfoOuterClass {
        * quorum. The very first epoch number is 0.
        * </pre>
        *
-       * <code>uint64 epoch = 5;</code>
+       * <code>uint64 epoch_num = 5;</code>
        */
-      public long getEpoch() {
-        return epoch_;
+      public long getEpochNum() {
+        return epochNum_;
       }
       /**
        * <pre>
@@ -1034,11 +1034,11 @@ public final class LedgerInfoOuterClass {
        * quorum. The very first epoch number is 0.
        * </pre>
        *
-       * <code>uint64 epoch = 5;</code>
+       * <code>uint64 epoch_num = 5;</code>
        */
-      public Builder setEpoch(long value) {
+      public Builder setEpochNum(long value) {
         
-        epoch_ = value;
+        epochNum_ = value;
         onChanged();
         return this;
       }
@@ -1054,11 +1054,11 @@ public final class LedgerInfoOuterClass {
        * quorum. The very first epoch number is 0.
        * </pre>
        *
-       * <code>uint64 epoch = 5;</code>
+       * <code>uint64 epoch_num = 5;</code>
        */
-      public Builder clearEpoch() {
+      public Builder clearEpochNum() {
         
-        epoch_ = 0L;
+        epochNum_ = 0L;
         onChanged();
         return this;
       }
@@ -3027,17 +3027,17 @@ public final class LedgerInfoOuterClass {
   static {
     java.lang.String[] descriptorData = {
       "\n\021ledger_info.proto\022\005types\032\023validator_se" +
-      "t.proto\"\325\001\n\nLedgerInfo\022\017\n\007version\030\001 \001(\004\022" +
+      "t.proto\"\331\001\n\nLedgerInfo\022\017\n\007version\030\001 \001(\004\022" +
       "$\n\034transaction_accumulator_hash\030\002 \001(\014\022\033\n" +
       "\023consensus_data_hash\030\003 \001(\014\022\032\n\022consensus_" +
-      "block_id\030\004 \001(\014\022\r\n\005epoch\030\005 \001(\004\022\027\n\017timesta" +
-      "mp_usecs\030\006 \001(\004\022/\n\022next_validator_set\030\007 \001" +
-      "(\0132\023.types.ValidatorSet\"q\n\030LedgerInfoWit" +
-      "hSignatures\022-\n\nsignatures\030\001 \003(\0132\031.types." +
-      "ValidatorSignature\022&\n\013ledger_info\030\002 \001(\0132" +
-      "\021.types.LedgerInfo\"=\n\022ValidatorSignature" +
-      "\022\024\n\014validator_id\030\001 \001(\014\022\021\n\tsignature\030\002 \001(" +
-      "\014B\026\n\024org.libra.grpc.typesb\006proto3"
+      "block_id\030\004 \001(\014\022\021\n\tepoch_num\030\005 \001(\004\022\027\n\017tim" +
+      "estamp_usecs\030\006 \001(\004\022/\n\022next_validator_set" +
+      "\030\007 \001(\0132\023.types.ValidatorSet\"q\n\030LedgerInf" +
+      "oWithSignatures\022-\n\nsignatures\030\001 \003(\0132\031.ty" +
+      "pes.ValidatorSignature\022&\n\013ledger_info\030\002 " +
+      "\001(\0132\021.types.LedgerInfo\"=\n\022ValidatorSigna" +
+      "ture\022\024\n\014validator_id\030\001 \001(\014\022\021\n\tsignature\030" +
+      "\002 \001(\014B\026\n\024org.libra.grpc.typesb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3057,7 +3057,7 @@ public final class LedgerInfoOuterClass {
     internal_static_types_LedgerInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_types_LedgerInfo_descriptor,
-        new java.lang.String[] { "Version", "TransactionAccumulatorHash", "ConsensusDataHash", "ConsensusBlockId", "Epoch", "TimestampUsecs", "NextValidatorSet", });
+        new java.lang.String[] { "Version", "TransactionAccumulatorHash", "ConsensusDataHash", "ConsensusBlockId", "EpochNum", "TimestampUsecs", "NextValidatorSet", });
     internal_static_types_LedgerInfoWithSignatures_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_types_LedgerInfoWithSignatures_fieldAccessorTable = new

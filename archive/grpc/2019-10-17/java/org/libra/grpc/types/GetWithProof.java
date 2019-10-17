@@ -2515,34 +2515,6 @@ public final class GetWithProof {
      */
     org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProofOrBuilder getValidatorChangeEventsOrBuilder(
         int index);
-
-    /**
-     * <pre>
-     * A proof that shows the latest ledger accumulator is consistent with the
-     * old accumulator at "client_known_version".
-     * </pre>
-     *
-     * <code>.types.AccumulatorConsistencyProof ledger_consistency_proof = 4;</code>
-     */
-    boolean hasLedgerConsistencyProof();
-    /**
-     * <pre>
-     * A proof that shows the latest ledger accumulator is consistent with the
-     * old accumulator at "client_known_version".
-     * </pre>
-     *
-     * <code>.types.AccumulatorConsistencyProof ledger_consistency_proof = 4;</code>
-     */
-    org.libra.grpc.types.Proof.AccumulatorConsistencyProof getLedgerConsistencyProof();
-    /**
-     * <pre>
-     * A proof that shows the latest ledger accumulator is consistent with the
-     * old accumulator at "client_known_version".
-     * </pre>
-     *
-     * <code>.types.AccumulatorConsistencyProof ledger_consistency_proof = 4;</code>
-     */
-    org.libra.grpc.types.Proof.AccumulatorConsistencyProofOrBuilder getLedgerConsistencyProofOrBuilder();
   }
   /**
    * <pre>
@@ -2618,19 +2590,6 @@ public final class GetWithProof {
               }
               validatorChangeEvents_.add(
                   input.readMessage(org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof.parser(), extensionRegistry));
-              break;
-            }
-            case 34: {
-              org.libra.grpc.types.Proof.AccumulatorConsistencyProof.Builder subBuilder = null;
-              if (ledgerConsistencyProof_ != null) {
-                subBuilder = ledgerConsistencyProof_.toBuilder();
-              }
-              ledgerConsistencyProof_ = input.readMessage(org.libra.grpc.types.Proof.AccumulatorConsistencyProof.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(ledgerConsistencyProof_);
-                ledgerConsistencyProof_ = subBuilder.buildPartial();
-              }
-
               break;
             }
             default: {
@@ -2836,42 +2795,6 @@ public final class GetWithProof {
       return validatorChangeEvents_.get(index);
     }
 
-    public static final int LEDGER_CONSISTENCY_PROOF_FIELD_NUMBER = 4;
-    private org.libra.grpc.types.Proof.AccumulatorConsistencyProof ledgerConsistencyProof_;
-    /**
-     * <pre>
-     * A proof that shows the latest ledger accumulator is consistent with the
-     * old accumulator at "client_known_version".
-     * </pre>
-     *
-     * <code>.types.AccumulatorConsistencyProof ledger_consistency_proof = 4;</code>
-     */
-    public boolean hasLedgerConsistencyProof() {
-      return ledgerConsistencyProof_ != null;
-    }
-    /**
-     * <pre>
-     * A proof that shows the latest ledger accumulator is consistent with the
-     * old accumulator at "client_known_version".
-     * </pre>
-     *
-     * <code>.types.AccumulatorConsistencyProof ledger_consistency_proof = 4;</code>
-     */
-    public org.libra.grpc.types.Proof.AccumulatorConsistencyProof getLedgerConsistencyProof() {
-      return ledgerConsistencyProof_ == null ? org.libra.grpc.types.Proof.AccumulatorConsistencyProof.getDefaultInstance() : ledgerConsistencyProof_;
-    }
-    /**
-     * <pre>
-     * A proof that shows the latest ledger accumulator is consistent with the
-     * old accumulator at "client_known_version".
-     * </pre>
-     *
-     * <code>.types.AccumulatorConsistencyProof ledger_consistency_proof = 4;</code>
-     */
-    public org.libra.grpc.types.Proof.AccumulatorConsistencyProofOrBuilder getLedgerConsistencyProofOrBuilder() {
-      return getLedgerConsistencyProof();
-    }
-
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -2895,9 +2818,6 @@ public final class GetWithProof {
       for (int i = 0; i < validatorChangeEvents_.size(); i++) {
         output.writeMessage(3, validatorChangeEvents_.get(i));
       }
-      if (ledgerConsistencyProof_ != null) {
-        output.writeMessage(4, getLedgerConsistencyProof());
-      }
       unknownFields.writeTo(output);
     }
 
@@ -2918,10 +2838,6 @@ public final class GetWithProof {
       for (int i = 0; i < validatorChangeEvents_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(3, validatorChangeEvents_.get(i));
-      }
-      if (ledgerConsistencyProof_ != null) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, getLedgerConsistencyProof());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -2947,11 +2863,6 @@ public final class GetWithProof {
       }
       if (!getValidatorChangeEventsList()
           .equals(other.getValidatorChangeEventsList())) return false;
-      if (hasLedgerConsistencyProof() != other.hasLedgerConsistencyProof()) return false;
-      if (hasLedgerConsistencyProof()) {
-        if (!getLedgerConsistencyProof()
-            .equals(other.getLedgerConsistencyProof())) return false;
-      }
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -2974,10 +2885,6 @@ public final class GetWithProof {
       if (getValidatorChangeEventsCount() > 0) {
         hash = (37 * hash) + VALIDATOR_CHANGE_EVENTS_FIELD_NUMBER;
         hash = (53 * hash) + getValidatorChangeEventsList().hashCode();
-      }
-      if (hasLedgerConsistencyProof()) {
-        hash = (37 * hash) + LEDGER_CONSISTENCY_PROOF_FIELD_NUMBER;
-        hash = (53 * hash) + getLedgerConsistencyProof().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -3136,12 +3043,6 @@ public final class GetWithProof {
         } else {
           validatorChangeEventsBuilder_.clear();
         }
-        if (ledgerConsistencyProofBuilder_ == null) {
-          ledgerConsistencyProof_ = null;
-        } else {
-          ledgerConsistencyProof_ = null;
-          ledgerConsistencyProofBuilder_ = null;
-        }
         return this;
       }
 
@@ -3192,11 +3093,6 @@ public final class GetWithProof {
           result.validatorChangeEvents_ = validatorChangeEvents_;
         } else {
           result.validatorChangeEvents_ = validatorChangeEventsBuilder_.build();
-        }
-        if (ledgerConsistencyProofBuilder_ == null) {
-          result.ledgerConsistencyProof_ = ledgerConsistencyProof_;
-        } else {
-          result.ledgerConsistencyProof_ = ledgerConsistencyProofBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -3301,9 +3197,6 @@ public final class GetWithProof {
               validatorChangeEventsBuilder_.addAllMessages(other.validatorChangeEvents_);
             }
           }
-        }
-        if (other.hasLedgerConsistencyProof()) {
-          mergeLedgerConsistencyProof(other.getLedgerConsistencyProof());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -4182,168 +4075,6 @@ public final class GetWithProof {
           validatorChangeEvents_ = null;
         }
         return validatorChangeEventsBuilder_;
-      }
-
-      private org.libra.grpc.types.Proof.AccumulatorConsistencyProof ledgerConsistencyProof_;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          org.libra.grpc.types.Proof.AccumulatorConsistencyProof, org.libra.grpc.types.Proof.AccumulatorConsistencyProof.Builder, org.libra.grpc.types.Proof.AccumulatorConsistencyProofOrBuilder> ledgerConsistencyProofBuilder_;
-      /**
-       * <pre>
-       * A proof that shows the latest ledger accumulator is consistent with the
-       * old accumulator at "client_known_version".
-       * </pre>
-       *
-       * <code>.types.AccumulatorConsistencyProof ledger_consistency_proof = 4;</code>
-       */
-      public boolean hasLedgerConsistencyProof() {
-        return ledgerConsistencyProofBuilder_ != null || ledgerConsistencyProof_ != null;
-      }
-      /**
-       * <pre>
-       * A proof that shows the latest ledger accumulator is consistent with the
-       * old accumulator at "client_known_version".
-       * </pre>
-       *
-       * <code>.types.AccumulatorConsistencyProof ledger_consistency_proof = 4;</code>
-       */
-      public org.libra.grpc.types.Proof.AccumulatorConsistencyProof getLedgerConsistencyProof() {
-        if (ledgerConsistencyProofBuilder_ == null) {
-          return ledgerConsistencyProof_ == null ? org.libra.grpc.types.Proof.AccumulatorConsistencyProof.getDefaultInstance() : ledgerConsistencyProof_;
-        } else {
-          return ledgerConsistencyProofBuilder_.getMessage();
-        }
-      }
-      /**
-       * <pre>
-       * A proof that shows the latest ledger accumulator is consistent with the
-       * old accumulator at "client_known_version".
-       * </pre>
-       *
-       * <code>.types.AccumulatorConsistencyProof ledger_consistency_proof = 4;</code>
-       */
-      public Builder setLedgerConsistencyProof(org.libra.grpc.types.Proof.AccumulatorConsistencyProof value) {
-        if (ledgerConsistencyProofBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ledgerConsistencyProof_ = value;
-          onChanged();
-        } else {
-          ledgerConsistencyProofBuilder_.setMessage(value);
-        }
-
-        return this;
-      }
-      /**
-       * <pre>
-       * A proof that shows the latest ledger accumulator is consistent with the
-       * old accumulator at "client_known_version".
-       * </pre>
-       *
-       * <code>.types.AccumulatorConsistencyProof ledger_consistency_proof = 4;</code>
-       */
-      public Builder setLedgerConsistencyProof(
-          org.libra.grpc.types.Proof.AccumulatorConsistencyProof.Builder builderForValue) {
-        if (ledgerConsistencyProofBuilder_ == null) {
-          ledgerConsistencyProof_ = builderForValue.build();
-          onChanged();
-        } else {
-          ledgerConsistencyProofBuilder_.setMessage(builderForValue.build());
-        }
-
-        return this;
-      }
-      /**
-       * <pre>
-       * A proof that shows the latest ledger accumulator is consistent with the
-       * old accumulator at "client_known_version".
-       * </pre>
-       *
-       * <code>.types.AccumulatorConsistencyProof ledger_consistency_proof = 4;</code>
-       */
-      public Builder mergeLedgerConsistencyProof(org.libra.grpc.types.Proof.AccumulatorConsistencyProof value) {
-        if (ledgerConsistencyProofBuilder_ == null) {
-          if (ledgerConsistencyProof_ != null) {
-            ledgerConsistencyProof_ =
-              org.libra.grpc.types.Proof.AccumulatorConsistencyProof.newBuilder(ledgerConsistencyProof_).mergeFrom(value).buildPartial();
-          } else {
-            ledgerConsistencyProof_ = value;
-          }
-          onChanged();
-        } else {
-          ledgerConsistencyProofBuilder_.mergeFrom(value);
-        }
-
-        return this;
-      }
-      /**
-       * <pre>
-       * A proof that shows the latest ledger accumulator is consistent with the
-       * old accumulator at "client_known_version".
-       * </pre>
-       *
-       * <code>.types.AccumulatorConsistencyProof ledger_consistency_proof = 4;</code>
-       */
-      public Builder clearLedgerConsistencyProof() {
-        if (ledgerConsistencyProofBuilder_ == null) {
-          ledgerConsistencyProof_ = null;
-          onChanged();
-        } else {
-          ledgerConsistencyProof_ = null;
-          ledgerConsistencyProofBuilder_ = null;
-        }
-
-        return this;
-      }
-      /**
-       * <pre>
-       * A proof that shows the latest ledger accumulator is consistent with the
-       * old accumulator at "client_known_version".
-       * </pre>
-       *
-       * <code>.types.AccumulatorConsistencyProof ledger_consistency_proof = 4;</code>
-       */
-      public org.libra.grpc.types.Proof.AccumulatorConsistencyProof.Builder getLedgerConsistencyProofBuilder() {
-        
-        onChanged();
-        return getLedgerConsistencyProofFieldBuilder().getBuilder();
-      }
-      /**
-       * <pre>
-       * A proof that shows the latest ledger accumulator is consistent with the
-       * old accumulator at "client_known_version".
-       * </pre>
-       *
-       * <code>.types.AccumulatorConsistencyProof ledger_consistency_proof = 4;</code>
-       */
-      public org.libra.grpc.types.Proof.AccumulatorConsistencyProofOrBuilder getLedgerConsistencyProofOrBuilder() {
-        if (ledgerConsistencyProofBuilder_ != null) {
-          return ledgerConsistencyProofBuilder_.getMessageOrBuilder();
-        } else {
-          return ledgerConsistencyProof_ == null ?
-              org.libra.grpc.types.Proof.AccumulatorConsistencyProof.getDefaultInstance() : ledgerConsistencyProof_;
-        }
-      }
-      /**
-       * <pre>
-       * A proof that shows the latest ledger accumulator is consistent with the
-       * old accumulator at "client_known_version".
-       * </pre>
-       *
-       * <code>.types.AccumulatorConsistencyProof ledger_consistency_proof = 4;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          org.libra.grpc.types.Proof.AccumulatorConsistencyProof, org.libra.grpc.types.Proof.AccumulatorConsistencyProof.Builder, org.libra.grpc.types.Proof.AccumulatorConsistencyProofOrBuilder> 
-          getLedgerConsistencyProofFieldBuilder() {
-        if (ledgerConsistencyProofBuilder_ == null) {
-          ledgerConsistencyProofBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              org.libra.grpc.types.Proof.AccumulatorConsistencyProof, org.libra.grpc.types.Proof.AccumulatorConsistencyProof.Builder, org.libra.grpc.types.Proof.AccumulatorConsistencyProofOrBuilder>(
-                  getLedgerConsistencyProof(),
-                  getParentForChildren(),
-                  isClean());
-          ledgerConsistencyProof_ = null;
-        }
-        return ledgerConsistencyProofBuilder_;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -7670,7 +7401,7 @@ public final class GetWithProof {
      *
      * <code>.types.SignedTransactionWithProof signed_transaction_with_proof = 2;</code>
      */
-    org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof getSignedTransactionWithProof();
+    org.libra.grpc.types.Transaction.SignedTransactionWithProof getSignedTransactionWithProof();
     /**
      * <pre>
      * When the transaction requested is committed, return the committed
@@ -7679,7 +7410,7 @@ public final class GetWithProof {
      *
      * <code>.types.SignedTransactionWithProof signed_transaction_with_proof = 2;</code>
      */
-    org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProofOrBuilder getSignedTransactionWithProofOrBuilder();
+    org.libra.grpc.types.Transaction.SignedTransactionWithProofOrBuilder getSignedTransactionWithProofOrBuilder();
 
     /**
      * <pre>
@@ -7757,11 +7488,11 @@ public final class GetWithProof {
               done = true;
               break;
             case 18: {
-              org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof.Builder subBuilder = null;
+              org.libra.grpc.types.Transaction.SignedTransactionWithProof.Builder subBuilder = null;
               if (signedTransactionWithProof_ != null) {
                 subBuilder = signedTransactionWithProof_.toBuilder();
               }
-              signedTransactionWithProof_ = input.readMessage(org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof.parser(), extensionRegistry);
+              signedTransactionWithProof_ = input.readMessage(org.libra.grpc.types.Transaction.SignedTransactionWithProof.parser(), extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(signedTransactionWithProof_);
                 signedTransactionWithProof_ = subBuilder.buildPartial();
@@ -7815,7 +7546,7 @@ public final class GetWithProof {
     }
 
     public static final int SIGNED_TRANSACTION_WITH_PROOF_FIELD_NUMBER = 2;
-    private org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof signedTransactionWithProof_;
+    private org.libra.grpc.types.Transaction.SignedTransactionWithProof signedTransactionWithProof_;
     /**
      * <pre>
      * When the transaction requested is committed, return the committed
@@ -7835,8 +7566,8 @@ public final class GetWithProof {
      *
      * <code>.types.SignedTransactionWithProof signed_transaction_with_proof = 2;</code>
      */
-    public org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof getSignedTransactionWithProof() {
-      return signedTransactionWithProof_ == null ? org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof.getDefaultInstance() : signedTransactionWithProof_;
+    public org.libra.grpc.types.Transaction.SignedTransactionWithProof getSignedTransactionWithProof() {
+      return signedTransactionWithProof_ == null ? org.libra.grpc.types.Transaction.SignedTransactionWithProof.getDefaultInstance() : signedTransactionWithProof_;
     }
     /**
      * <pre>
@@ -7846,7 +7577,7 @@ public final class GetWithProof {
      *
      * <code>.types.SignedTransactionWithProof signed_transaction_with_proof = 2;</code>
      */
-    public org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProofOrBuilder getSignedTransactionWithProofOrBuilder() {
+    public org.libra.grpc.types.Transaction.SignedTransactionWithProofOrBuilder getSignedTransactionWithProofOrBuilder() {
       return getSignedTransactionWithProof();
     }
 
@@ -8239,9 +7970,9 @@ public final class GetWithProof {
         return this;
       }
 
-      private org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof signedTransactionWithProof_;
+      private org.libra.grpc.types.Transaction.SignedTransactionWithProof signedTransactionWithProof_;
       private com.google.protobuf.SingleFieldBuilderV3<
-          org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof, org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof.Builder, org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProofOrBuilder> signedTransactionWithProofBuilder_;
+          org.libra.grpc.types.Transaction.SignedTransactionWithProof, org.libra.grpc.types.Transaction.SignedTransactionWithProof.Builder, org.libra.grpc.types.Transaction.SignedTransactionWithProofOrBuilder> signedTransactionWithProofBuilder_;
       /**
        * <pre>
        * When the transaction requested is committed, return the committed
@@ -8261,9 +7992,9 @@ public final class GetWithProof {
        *
        * <code>.types.SignedTransactionWithProof signed_transaction_with_proof = 2;</code>
        */
-      public org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof getSignedTransactionWithProof() {
+      public org.libra.grpc.types.Transaction.SignedTransactionWithProof getSignedTransactionWithProof() {
         if (signedTransactionWithProofBuilder_ == null) {
-          return signedTransactionWithProof_ == null ? org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof.getDefaultInstance() : signedTransactionWithProof_;
+          return signedTransactionWithProof_ == null ? org.libra.grpc.types.Transaction.SignedTransactionWithProof.getDefaultInstance() : signedTransactionWithProof_;
         } else {
           return signedTransactionWithProofBuilder_.getMessage();
         }
@@ -8276,7 +8007,7 @@ public final class GetWithProof {
        *
        * <code>.types.SignedTransactionWithProof signed_transaction_with_proof = 2;</code>
        */
-      public Builder setSignedTransactionWithProof(org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof value) {
+      public Builder setSignedTransactionWithProof(org.libra.grpc.types.Transaction.SignedTransactionWithProof value) {
         if (signedTransactionWithProofBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -8298,7 +8029,7 @@ public final class GetWithProof {
        * <code>.types.SignedTransactionWithProof signed_transaction_with_proof = 2;</code>
        */
       public Builder setSignedTransactionWithProof(
-          org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof.Builder builderForValue) {
+          org.libra.grpc.types.Transaction.SignedTransactionWithProof.Builder builderForValue) {
         if (signedTransactionWithProofBuilder_ == null) {
           signedTransactionWithProof_ = builderForValue.build();
           onChanged();
@@ -8316,11 +8047,11 @@ public final class GetWithProof {
        *
        * <code>.types.SignedTransactionWithProof signed_transaction_with_proof = 2;</code>
        */
-      public Builder mergeSignedTransactionWithProof(org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof value) {
+      public Builder mergeSignedTransactionWithProof(org.libra.grpc.types.Transaction.SignedTransactionWithProof value) {
         if (signedTransactionWithProofBuilder_ == null) {
           if (signedTransactionWithProof_ != null) {
             signedTransactionWithProof_ =
-              org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof.newBuilder(signedTransactionWithProof_).mergeFrom(value).buildPartial();
+              org.libra.grpc.types.Transaction.SignedTransactionWithProof.newBuilder(signedTransactionWithProof_).mergeFrom(value).buildPartial();
           } else {
             signedTransactionWithProof_ = value;
           }
@@ -8358,7 +8089,7 @@ public final class GetWithProof {
        *
        * <code>.types.SignedTransactionWithProof signed_transaction_with_proof = 2;</code>
        */
-      public org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof.Builder getSignedTransactionWithProofBuilder() {
+      public org.libra.grpc.types.Transaction.SignedTransactionWithProof.Builder getSignedTransactionWithProofBuilder() {
         
         onChanged();
         return getSignedTransactionWithProofFieldBuilder().getBuilder();
@@ -8371,12 +8102,12 @@ public final class GetWithProof {
        *
        * <code>.types.SignedTransactionWithProof signed_transaction_with_proof = 2;</code>
        */
-      public org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProofOrBuilder getSignedTransactionWithProofOrBuilder() {
+      public org.libra.grpc.types.Transaction.SignedTransactionWithProofOrBuilder getSignedTransactionWithProofOrBuilder() {
         if (signedTransactionWithProofBuilder_ != null) {
           return signedTransactionWithProofBuilder_.getMessageOrBuilder();
         } else {
           return signedTransactionWithProof_ == null ?
-              org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof.getDefaultInstance() : signedTransactionWithProof_;
+              org.libra.grpc.types.Transaction.SignedTransactionWithProof.getDefaultInstance() : signedTransactionWithProof_;
         }
       }
       /**
@@ -8388,11 +8119,11 @@ public final class GetWithProof {
        * <code>.types.SignedTransactionWithProof signed_transaction_with_proof = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof, org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof.Builder, org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProofOrBuilder> 
+          org.libra.grpc.types.Transaction.SignedTransactionWithProof, org.libra.grpc.types.Transaction.SignedTransactionWithProof.Builder, org.libra.grpc.types.Transaction.SignedTransactionWithProofOrBuilder> 
           getSignedTransactionWithProofFieldBuilder() {
         if (signedTransactionWithProofBuilder_ == null) {
           signedTransactionWithProofBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof, org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof.Builder, org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProofOrBuilder>(
+              org.libra.grpc.types.Transaction.SignedTransactionWithProof, org.libra.grpc.types.Transaction.SignedTransactionWithProof.Builder, org.libra.grpc.types.Transaction.SignedTransactionWithProofOrBuilder>(
                   getSignedTransactionWithProof(),
                   getParentForChildren(),
                   isClean());
@@ -11459,11 +11190,11 @@ public final class GetWithProof {
     /**
      * <code>.types.TransactionListWithProof txn_list_with_proof = 1;</code>
      */
-    org.libra.grpc.types.TransactionOuterClass.TransactionListWithProof getTxnListWithProof();
+    org.libra.grpc.types.Transaction.TransactionListWithProof getTxnListWithProof();
     /**
      * <code>.types.TransactionListWithProof txn_list_with_proof = 1;</code>
      */
-    org.libra.grpc.types.TransactionOuterClass.TransactionListWithProofOrBuilder getTxnListWithProofOrBuilder();
+    org.libra.grpc.types.Transaction.TransactionListWithProofOrBuilder getTxnListWithProofOrBuilder();
   }
   /**
    * Protobuf type {@code types.GetTransactionsResponse}
@@ -11505,11 +11236,11 @@ public final class GetWithProof {
               done = true;
               break;
             case 10: {
-              org.libra.grpc.types.TransactionOuterClass.TransactionListWithProof.Builder subBuilder = null;
+              org.libra.grpc.types.Transaction.TransactionListWithProof.Builder subBuilder = null;
               if (txnListWithProof_ != null) {
                 subBuilder = txnListWithProof_.toBuilder();
               }
-              txnListWithProof_ = input.readMessage(org.libra.grpc.types.TransactionOuterClass.TransactionListWithProof.parser(), extensionRegistry);
+              txnListWithProof_ = input.readMessage(org.libra.grpc.types.Transaction.TransactionListWithProof.parser(), extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(txnListWithProof_);
                 txnListWithProof_ = subBuilder.buildPartial();
@@ -11550,7 +11281,7 @@ public final class GetWithProof {
     }
 
     public static final int TXN_LIST_WITH_PROOF_FIELD_NUMBER = 1;
-    private org.libra.grpc.types.TransactionOuterClass.TransactionListWithProof txnListWithProof_;
+    private org.libra.grpc.types.Transaction.TransactionListWithProof txnListWithProof_;
     /**
      * <code>.types.TransactionListWithProof txn_list_with_proof = 1;</code>
      */
@@ -11560,13 +11291,13 @@ public final class GetWithProof {
     /**
      * <code>.types.TransactionListWithProof txn_list_with_proof = 1;</code>
      */
-    public org.libra.grpc.types.TransactionOuterClass.TransactionListWithProof getTxnListWithProof() {
-      return txnListWithProof_ == null ? org.libra.grpc.types.TransactionOuterClass.TransactionListWithProof.getDefaultInstance() : txnListWithProof_;
+    public org.libra.grpc.types.Transaction.TransactionListWithProof getTxnListWithProof() {
+      return txnListWithProof_ == null ? org.libra.grpc.types.Transaction.TransactionListWithProof.getDefaultInstance() : txnListWithProof_;
     }
     /**
      * <code>.types.TransactionListWithProof txn_list_with_proof = 1;</code>
      */
-    public org.libra.grpc.types.TransactionOuterClass.TransactionListWithProofOrBuilder getTxnListWithProofOrBuilder() {
+    public org.libra.grpc.types.Transaction.TransactionListWithProofOrBuilder getTxnListWithProofOrBuilder() {
       return getTxnListWithProof();
     }
 
@@ -11885,9 +11616,9 @@ public final class GetWithProof {
         return this;
       }
 
-      private org.libra.grpc.types.TransactionOuterClass.TransactionListWithProof txnListWithProof_;
+      private org.libra.grpc.types.Transaction.TransactionListWithProof txnListWithProof_;
       private com.google.protobuf.SingleFieldBuilderV3<
-          org.libra.grpc.types.TransactionOuterClass.TransactionListWithProof, org.libra.grpc.types.TransactionOuterClass.TransactionListWithProof.Builder, org.libra.grpc.types.TransactionOuterClass.TransactionListWithProofOrBuilder> txnListWithProofBuilder_;
+          org.libra.grpc.types.Transaction.TransactionListWithProof, org.libra.grpc.types.Transaction.TransactionListWithProof.Builder, org.libra.grpc.types.Transaction.TransactionListWithProofOrBuilder> txnListWithProofBuilder_;
       /**
        * <code>.types.TransactionListWithProof txn_list_with_proof = 1;</code>
        */
@@ -11897,9 +11628,9 @@ public final class GetWithProof {
       /**
        * <code>.types.TransactionListWithProof txn_list_with_proof = 1;</code>
        */
-      public org.libra.grpc.types.TransactionOuterClass.TransactionListWithProof getTxnListWithProof() {
+      public org.libra.grpc.types.Transaction.TransactionListWithProof getTxnListWithProof() {
         if (txnListWithProofBuilder_ == null) {
-          return txnListWithProof_ == null ? org.libra.grpc.types.TransactionOuterClass.TransactionListWithProof.getDefaultInstance() : txnListWithProof_;
+          return txnListWithProof_ == null ? org.libra.grpc.types.Transaction.TransactionListWithProof.getDefaultInstance() : txnListWithProof_;
         } else {
           return txnListWithProofBuilder_.getMessage();
         }
@@ -11907,7 +11638,7 @@ public final class GetWithProof {
       /**
        * <code>.types.TransactionListWithProof txn_list_with_proof = 1;</code>
        */
-      public Builder setTxnListWithProof(org.libra.grpc.types.TransactionOuterClass.TransactionListWithProof value) {
+      public Builder setTxnListWithProof(org.libra.grpc.types.Transaction.TransactionListWithProof value) {
         if (txnListWithProofBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -11924,7 +11655,7 @@ public final class GetWithProof {
        * <code>.types.TransactionListWithProof txn_list_with_proof = 1;</code>
        */
       public Builder setTxnListWithProof(
-          org.libra.grpc.types.TransactionOuterClass.TransactionListWithProof.Builder builderForValue) {
+          org.libra.grpc.types.Transaction.TransactionListWithProof.Builder builderForValue) {
         if (txnListWithProofBuilder_ == null) {
           txnListWithProof_ = builderForValue.build();
           onChanged();
@@ -11937,11 +11668,11 @@ public final class GetWithProof {
       /**
        * <code>.types.TransactionListWithProof txn_list_with_proof = 1;</code>
        */
-      public Builder mergeTxnListWithProof(org.libra.grpc.types.TransactionOuterClass.TransactionListWithProof value) {
+      public Builder mergeTxnListWithProof(org.libra.grpc.types.Transaction.TransactionListWithProof value) {
         if (txnListWithProofBuilder_ == null) {
           if (txnListWithProof_ != null) {
             txnListWithProof_ =
-              org.libra.grpc.types.TransactionOuterClass.TransactionListWithProof.newBuilder(txnListWithProof_).mergeFrom(value).buildPartial();
+              org.libra.grpc.types.Transaction.TransactionListWithProof.newBuilder(txnListWithProof_).mergeFrom(value).buildPartial();
           } else {
             txnListWithProof_ = value;
           }
@@ -11969,7 +11700,7 @@ public final class GetWithProof {
       /**
        * <code>.types.TransactionListWithProof txn_list_with_proof = 1;</code>
        */
-      public org.libra.grpc.types.TransactionOuterClass.TransactionListWithProof.Builder getTxnListWithProofBuilder() {
+      public org.libra.grpc.types.Transaction.TransactionListWithProof.Builder getTxnListWithProofBuilder() {
         
         onChanged();
         return getTxnListWithProofFieldBuilder().getBuilder();
@@ -11977,23 +11708,23 @@ public final class GetWithProof {
       /**
        * <code>.types.TransactionListWithProof txn_list_with_proof = 1;</code>
        */
-      public org.libra.grpc.types.TransactionOuterClass.TransactionListWithProofOrBuilder getTxnListWithProofOrBuilder() {
+      public org.libra.grpc.types.Transaction.TransactionListWithProofOrBuilder getTxnListWithProofOrBuilder() {
         if (txnListWithProofBuilder_ != null) {
           return txnListWithProofBuilder_.getMessageOrBuilder();
         } else {
           return txnListWithProof_ == null ?
-              org.libra.grpc.types.TransactionOuterClass.TransactionListWithProof.getDefaultInstance() : txnListWithProof_;
+              org.libra.grpc.types.Transaction.TransactionListWithProof.getDefaultInstance() : txnListWithProof_;
         }
       }
       /**
        * <code>.types.TransactionListWithProof txn_list_with_proof = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          org.libra.grpc.types.TransactionOuterClass.TransactionListWithProof, org.libra.grpc.types.TransactionOuterClass.TransactionListWithProof.Builder, org.libra.grpc.types.TransactionOuterClass.TransactionListWithProofOrBuilder> 
+          org.libra.grpc.types.Transaction.TransactionListWithProof, org.libra.grpc.types.Transaction.TransactionListWithProof.Builder, org.libra.grpc.types.Transaction.TransactionListWithProofOrBuilder> 
           getTxnListWithProofFieldBuilder() {
         if (txnListWithProofBuilder_ == null) {
           txnListWithProofBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              org.libra.grpc.types.TransactionOuterClass.TransactionListWithProof, org.libra.grpc.types.TransactionOuterClass.TransactionListWithProof.Builder, org.libra.grpc.types.TransactionOuterClass.TransactionListWithProofOrBuilder>(
+              org.libra.grpc.types.Transaction.TransactionListWithProof, org.libra.grpc.types.Transaction.TransactionListWithProof.Builder, org.libra.grpc.types.Transaction.TransactionListWithProofOrBuilder>(
                   getTxnListWithProof(),
                   getParentForChildren(),
                   isClean());
@@ -12125,61 +11856,59 @@ public final class GetWithProof {
     java.lang.String[] descriptorData = {
       "\n\024get_with_proof.proto\022\005types\032\021access_pa" +
       "th.proto\032\030account_state_blob.proto\032\014even" +
-      "ts.proto\032\021ledger_info.proto\032\013proof.proto" +
-      "\032\021transaction.proto\032\026validator_change.pr" +
-      "oto\"h\n\033UpdateToLatestLedgerRequest\022\034\n\024cl" +
-      "ient_known_version\030\001 \001(\004\022+\n\017requested_it" +
-      "ems\030\002 \003(\0132\022.types.RequestItem\"\367\002\n\013Reques" +
-      "tItem\022B\n\031get_account_state_request\030\001 \001(\013" +
-      "2\035.types.GetAccountStateRequestH\000\022q\n2get" +
-      "_account_transaction_by_sequence_number_" +
-      "request\030\002 \001(\01323.types.GetAccountTransact" +
-      "ionBySequenceNumberRequestH\000\022[\n\'get_even" +
-      "ts_by_event_access_path_request\030\003 \001(\0132(." +
-      "types.GetEventsByEventAccessPathRequestH" +
-      "\000\022A\n\030get_transactions_request\030\004 \001(\0132\035.ty" +
-      "pes.GetTransactionsRequestH\000B\021\n\017requeste" +
-      "d_items\"\230\002\n\034UpdateToLatestLedgerResponse" +
-      "\022+\n\016response_items\030\001 \003(\0132\023.types.Respons" +
-      "eItem\022>\n\025ledger_info_with_sigs\030\002 \001(\0132\037.t" +
-      "ypes.LedgerInfoWithSignatures\022E\n\027validat" +
-      "or_change_events\030\003 \003(\0132$.types.Validator" +
-      "ChangeEventWithProof\022D\n\030ledger_consisten" +
-      "cy_proof\030\004 \001(\0132\".types.AccumulatorConsis" +
-      "tencyProof\"\377\002\n\014ResponseItem\022D\n\032get_accou" +
-      "nt_state_response\030\003 \001(\0132\036.types.GetAccou" +
-      "ntStateResponseH\000\022s\n3get_account_transac" +
-      "tion_by_sequence_number_response\030\004 \001(\01324" +
-      ".types.GetAccountTransactionBySequenceNu" +
-      "mberResponseH\000\022]\n(get_events_by_event_ac" +
-      "cess_path_response\030\005 \001(\0132).types.GetEven" +
-      "tsByEventAccessPathResponseH\000\022C\n\031get_tra" +
-      "nsactions_response\030\006 \001(\0132\036.types.GetTran" +
-      "sactionsResponseH\000B\020\n\016response_items\")\n\026" +
-      "GetAccountStateRequest\022\017\n\007address\030\001 \001(\014\"" +
-      "Y\n\027GetAccountStateResponse\022>\n\030account_st" +
-      "ate_with_proof\030\001 \001(\0132\034.types.AccountStat" +
-      "eWithProof\"n\n,GetAccountTransactionBySeq" +
-      "uenceNumberRequest\022\017\n\007account\030\001 \001(\014\022\027\n\017s" +
-      "equence_number\030\002 \001(\004\022\024\n\014fetch_events\030\003 \001" +
-      "(\010\"\301\001\n-GetAccountTransactionBySequenceNu" +
-      "mberResponse\022H\n\035signed_transaction_with_" +
-      "proof\030\002 \001(\0132!.types.SignedTransactionWit" +
-      "hProof\022F\n proof_of_current_sequence_numb" +
-      "er\030\003 \001(\0132\034.types.AccountStateWithProof\"\212" +
-      "\001\n!GetEventsByEventAccessPathRequest\022&\n\013" +
-      "access_path\030\001 \001(\0132\021.types.AccessPath\022\033\n\023" +
-      "start_event_seq_num\030\002 \001(\004\022\021\n\tascending\030\003" +
-      " \001(\010\022\r\n\005limit\030\004 \001(\004\"\223\001\n\"GetEventsByEvent" +
-      "AccessPathResponse\0220\n\021events_with_proof\030" +
-      "\001 \003(\0132\025.types.EventWithProof\022;\n\025proof_of" +
-      "_latest_event\030\002 \001(\0132\034.types.AccountState" +
-      "WithProof\"T\n\026GetTransactionsRequest\022\025\n\rs" +
-      "tart_version\030\001 \001(\004\022\r\n\005limit\030\002 \001(\004\022\024\n\014fet" +
-      "ch_events\030\003 \001(\010\"W\n\027GetTransactionsRespon" +
-      "se\022<\n\023txn_list_with_proof\030\001 \001(\0132\037.types." +
-      "TransactionListWithProofB\026\n\024org.libra.gr" +
-      "pc.typesb\006proto3"
+      "ts.proto\032\021ledger_info.proto\032\021transaction" +
+      ".proto\032\026validator_change.proto\"h\n\033Update" +
+      "ToLatestLedgerRequest\022\034\n\024client_known_ve" +
+      "rsion\030\001 \001(\004\022+\n\017requested_items\030\002 \003(\0132\022.t" +
+      "ypes.RequestItem\"\367\002\n\013RequestItem\022B\n\031get_" +
+      "account_state_request\030\001 \001(\0132\035.types.GetA" +
+      "ccountStateRequestH\000\022q\n2get_account_tran" +
+      "saction_by_sequence_number_request\030\002 \001(\013" +
+      "23.types.GetAccountTransactionBySequence" +
+      "NumberRequestH\000\022[\n\'get_events_by_event_a" +
+      "ccess_path_request\030\003 \001(\0132(.types.GetEven" +
+      "tsByEventAccessPathRequestH\000\022A\n\030get_tran" +
+      "sactions_request\030\004 \001(\0132\035.types.GetTransa" +
+      "ctionsRequestH\000B\021\n\017requested_items\"\322\001\n\034U" +
+      "pdateToLatestLedgerResponse\022+\n\016response_" +
+      "items\030\001 \003(\0132\023.types.ResponseItem\022>\n\025ledg" +
+      "er_info_with_sigs\030\002 \001(\0132\037.types.LedgerIn" +
+      "foWithSignatures\022E\n\027validator_change_eve" +
+      "nts\030\003 \003(\0132$.types.ValidatorChangeEventWi" +
+      "thProof\"\377\002\n\014ResponseItem\022D\n\032get_account_" +
+      "state_response\030\003 \001(\0132\036.types.GetAccountS" +
+      "tateResponseH\000\022s\n3get_account_transactio" +
+      "n_by_sequence_number_response\030\004 \001(\01324.ty" +
+      "pes.GetAccountTransactionBySequenceNumbe" +
+      "rResponseH\000\022]\n(get_events_by_event_acces" +
+      "s_path_response\030\005 \001(\0132).types.GetEventsB" +
+      "yEventAccessPathResponseH\000\022C\n\031get_transa" +
+      "ctions_response\030\006 \001(\0132\036.types.GetTransac" +
+      "tionsResponseH\000B\020\n\016response_items\")\n\026Get" +
+      "AccountStateRequest\022\017\n\007address\030\001 \001(\014\"Y\n\027" +
+      "GetAccountStateResponse\022>\n\030account_state" +
+      "_with_proof\030\001 \001(\0132\034.types.AccountStateWi" +
+      "thProof\"n\n,GetAccountTransactionBySequen" +
+      "ceNumberRequest\022\017\n\007account\030\001 \001(\014\022\027\n\017sequ" +
+      "ence_number\030\002 \001(\004\022\024\n\014fetch_events\030\003 \001(\010\"" +
+      "\301\001\n-GetAccountTransactionBySequenceNumbe" +
+      "rResponse\022H\n\035signed_transaction_with_pro" +
+      "of\030\002 \001(\0132!.types.SignedTransactionWithPr" +
+      "oof\022F\n proof_of_current_sequence_number\030" +
+      "\003 \001(\0132\034.types.AccountStateWithProof\"\212\001\n!" +
+      "GetEventsByEventAccessPathRequest\022&\n\013acc" +
+      "ess_path\030\001 \001(\0132\021.types.AccessPath\022\033\n\023sta" +
+      "rt_event_seq_num\030\002 \001(\004\022\021\n\tascending\030\003 \001(" +
+      "\010\022\r\n\005limit\030\004 \001(\004\"\223\001\n\"GetEventsByEventAcc" +
+      "essPathResponse\0220\n\021events_with_proof\030\001 \003" +
+      "(\0132\025.types.EventWithProof\022;\n\025proof_of_la" +
+      "test_event\030\002 \001(\0132\034.types.AccountStateWit" +
+      "hProof\"T\n\026GetTransactionsRequest\022\025\n\rstar" +
+      "t_version\030\001 \001(\004\022\r\n\005limit\030\002 \001(\004\022\024\n\014fetch_" +
+      "events\030\003 \001(\010\"W\n\027GetTransactionsResponse\022" +
+      "<\n\023txn_list_with_proof\030\001 \001(\0132\037.types.Tra" +
+      "nsactionListWithProofB\026\n\024org.libra.grpc." +
+      "typesb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -12196,8 +11925,7 @@ public final class GetWithProof {
           org.libra.grpc.types.AccountStateBlobOuterClass.getDescriptor(),
           org.libra.grpc.types.Events.getDescriptor(),
           org.libra.grpc.types.LedgerInfoOuterClass.getDescriptor(),
-          org.libra.grpc.types.Proof.getDescriptor(),
-          org.libra.grpc.types.TransactionOuterClass.getDescriptor(),
+          org.libra.grpc.types.Transaction.getDescriptor(),
           org.libra.grpc.types.ValidatorChange.getDescriptor(),
         }, assigner);
     internal_static_types_UpdateToLatestLedgerRequest_descriptor =
@@ -12217,7 +11945,7 @@ public final class GetWithProof {
     internal_static_types_UpdateToLatestLedgerResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_types_UpdateToLatestLedgerResponse_descriptor,
-        new java.lang.String[] { "ResponseItems", "LedgerInfoWithSigs", "ValidatorChangeEvents", "LedgerConsistencyProof", });
+        new java.lang.String[] { "ResponseItems", "LedgerInfoWithSigs", "ValidatorChangeEvents", });
     internal_static_types_ResponseItem_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_types_ResponseItem_fieldAccessorTable = new
@@ -12276,8 +12004,7 @@ public final class GetWithProof {
     org.libra.grpc.types.AccountStateBlobOuterClass.getDescriptor();
     org.libra.grpc.types.Events.getDescriptor();
     org.libra.grpc.types.LedgerInfoOuterClass.getDescriptor();
-    org.libra.grpc.types.Proof.getDescriptor();
-    org.libra.grpc.types.TransactionOuterClass.getDescriptor();
+    org.libra.grpc.types.Transaction.getDescriptor();
     org.libra.grpc.types.ValidatorChange.getDescriptor();
   }
 

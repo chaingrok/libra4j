@@ -15,7 +15,7 @@ public final class MempoolStatus {
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
   /**
-   * Protobuf enum {@code mempool_status.MempoolAddTransactionStatusCode}
+   * Protobuf enum {@code mempool.MempoolAddTransactionStatusCode}
    */
   public enum MempoolAddTransactionStatusCode
       implements com.google.protobuf.ProtocolMessageEnum {
@@ -193,19 +193,19 @@ public final class MempoolStatus {
       this.value = value;
     }
 
-    // @@protoc_insertion_point(enum_scope:mempool_status.MempoolAddTransactionStatusCode)
+    // @@protoc_insertion_point(enum_scope:mempool.MempoolAddTransactionStatusCode)
   }
 
   public interface MempoolAddTransactionStatusOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:mempool_status.MempoolAddTransactionStatus)
+      // @@protoc_insertion_point(interface_extends:mempool.MempoolAddTransactionStatus)
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>.mempool_status.MempoolAddTransactionStatusCode code = 1;</code>
+     * <code>.mempool.MempoolAddTransactionStatusCode code = 1;</code>
      */
     int getCodeValue();
     /**
-     * <code>.mempool_status.MempoolAddTransactionStatusCode code = 1;</code>
+     * <code>.mempool.MempoolAddTransactionStatusCode code = 1;</code>
      */
     org.libra.grpc.types.MempoolStatus.MempoolAddTransactionStatusCode getCode();
 
@@ -220,11 +220,11 @@ public final class MempoolStatus {
         getMessageBytes();
   }
   /**
-   * Protobuf type {@code mempool_status.MempoolAddTransactionStatus}
+   * Protobuf type {@code mempool.MempoolAddTransactionStatus}
    */
   public  static final class MempoolAddTransactionStatus extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:mempool_status.MempoolAddTransactionStatus)
+      // @@protoc_insertion_point(message_implements:mempool.MempoolAddTransactionStatus)
       MempoolAddTransactionStatusOrBuilder {
   private static final long serialVersionUID = 0L;
     // Use MempoolAddTransactionStatus.newBuilder() to construct.
@@ -293,13 +293,13 @@ public final class MempoolStatus {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return org.libra.grpc.types.MempoolStatus.internal_static_mempool_status_MempoolAddTransactionStatus_descriptor;
+      return org.libra.grpc.types.MempoolStatus.internal_static_mempool_MempoolAddTransactionStatus_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return org.libra.grpc.types.MempoolStatus.internal_static_mempool_status_MempoolAddTransactionStatus_fieldAccessorTable
+      return org.libra.grpc.types.MempoolStatus.internal_static_mempool_MempoolAddTransactionStatus_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               org.libra.grpc.types.MempoolStatus.MempoolAddTransactionStatus.class, org.libra.grpc.types.MempoolStatus.MempoolAddTransactionStatus.Builder.class);
     }
@@ -307,13 +307,13 @@ public final class MempoolStatus {
     public static final int CODE_FIELD_NUMBER = 1;
     private int code_;
     /**
-     * <code>.mempool_status.MempoolAddTransactionStatusCode code = 1;</code>
+     * <code>.mempool.MempoolAddTransactionStatusCode code = 1;</code>
      */
     public int getCodeValue() {
       return code_;
     }
     /**
-     * <code>.mempool_status.MempoolAddTransactionStatusCode code = 1;</code>
+     * <code>.mempool.MempoolAddTransactionStatusCode code = 1;</code>
      */
     public org.libra.grpc.types.MempoolStatus.MempoolAddTransactionStatusCode getCode() {
       @SuppressWarnings("deprecation")
@@ -520,21 +520,21 @@ public final class MempoolStatus {
       return builder;
     }
     /**
-     * Protobuf type {@code mempool_status.MempoolAddTransactionStatus}
+     * Protobuf type {@code mempool.MempoolAddTransactionStatus}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:mempool_status.MempoolAddTransactionStatus)
+        // @@protoc_insertion_point(builder_implements:mempool.MempoolAddTransactionStatus)
         org.libra.grpc.types.MempoolStatus.MempoolAddTransactionStatusOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return org.libra.grpc.types.MempoolStatus.internal_static_mempool_status_MempoolAddTransactionStatus_descriptor;
+        return org.libra.grpc.types.MempoolStatus.internal_static_mempool_MempoolAddTransactionStatus_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return org.libra.grpc.types.MempoolStatus.internal_static_mempool_status_MempoolAddTransactionStatus_fieldAccessorTable
+        return org.libra.grpc.types.MempoolStatus.internal_static_mempool_MempoolAddTransactionStatus_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 org.libra.grpc.types.MempoolStatus.MempoolAddTransactionStatus.class, org.libra.grpc.types.MempoolStatus.MempoolAddTransactionStatus.Builder.class);
       }
@@ -567,7 +567,7 @@ public final class MempoolStatus {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return org.libra.grpc.types.MempoolStatus.internal_static_mempool_status_MempoolAddTransactionStatus_descriptor;
+        return org.libra.grpc.types.MempoolStatus.internal_static_mempool_MempoolAddTransactionStatus_descriptor;
       }
 
       @java.lang.Override
@@ -675,13 +675,13 @@ public final class MempoolStatus {
 
       private int code_ = 0;
       /**
-       * <code>.mempool_status.MempoolAddTransactionStatusCode code = 1;</code>
+       * <code>.mempool.MempoolAddTransactionStatusCode code = 1;</code>
        */
       public int getCodeValue() {
         return code_;
       }
       /**
-       * <code>.mempool_status.MempoolAddTransactionStatusCode code = 1;</code>
+       * <code>.mempool.MempoolAddTransactionStatusCode code = 1;</code>
        */
       public Builder setCodeValue(int value) {
         code_ = value;
@@ -689,7 +689,7 @@ public final class MempoolStatus {
         return this;
       }
       /**
-       * <code>.mempool_status.MempoolAddTransactionStatusCode code = 1;</code>
+       * <code>.mempool.MempoolAddTransactionStatusCode code = 1;</code>
        */
       public org.libra.grpc.types.MempoolStatus.MempoolAddTransactionStatusCode getCode() {
         @SuppressWarnings("deprecation")
@@ -697,7 +697,7 @@ public final class MempoolStatus {
         return result == null ? org.libra.grpc.types.MempoolStatus.MempoolAddTransactionStatusCode.UNRECOGNIZED : result;
       }
       /**
-       * <code>.mempool_status.MempoolAddTransactionStatusCode code = 1;</code>
+       * <code>.mempool.MempoolAddTransactionStatusCode code = 1;</code>
        */
       public Builder setCode(org.libra.grpc.types.MempoolStatus.MempoolAddTransactionStatusCode value) {
         if (value == null) {
@@ -709,7 +709,7 @@ public final class MempoolStatus {
         return this;
       }
       /**
-       * <code>.mempool_status.MempoolAddTransactionStatusCode code = 1;</code>
+       * <code>.mempool.MempoolAddTransactionStatusCode code = 1;</code>
        */
       public Builder clearCode() {
         
@@ -799,10 +799,10 @@ public final class MempoolStatus {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:mempool_status.MempoolAddTransactionStatus)
+      // @@protoc_insertion_point(builder_scope:mempool.MempoolAddTransactionStatus)
     }
 
-    // @@protoc_insertion_point(class_scope:mempool_status.MempoolAddTransactionStatus)
+    // @@protoc_insertion_point(class_scope:mempool.MempoolAddTransactionStatus)
     private static final org.libra.grpc.types.MempoolStatus.MempoolAddTransactionStatus DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new org.libra.grpc.types.MempoolStatus.MempoolAddTransactionStatus();
@@ -840,10 +840,10 @@ public final class MempoolStatus {
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_mempool_status_MempoolAddTransactionStatus_descriptor;
+    internal_static_mempool_MempoolAddTransactionStatus_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_mempool_status_MempoolAddTransactionStatus_fieldAccessorTable;
+      internal_static_mempool_MempoolAddTransactionStatus_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -853,15 +853,15 @@ public final class MempoolStatus {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\024mempool_status.proto\022\016mempool_status\"m" +
-      "\n\033MempoolAddTransactionStatus\022=\n\004code\030\001 " +
-      "\001(\0162/.mempool_status.MempoolAddTransacti" +
-      "onStatusCode\022\017\n\007message\030\002 \001(\t*\232\001\n\037Mempoo" +
-      "lAddTransactionStatusCode\022\t\n\005Valid\020\000\022\027\n\023" +
-      "InsufficientBalance\020\001\022\024\n\020InvalidSeqNumbe" +
-      "r\020\002\022\021\n\rMempoolIsFull\020\003\022\027\n\023TooManyTransac" +
-      "tions\020\004\022\021\n\rInvalidUpdate\020\005B\026\n\024org.libra." +
-      "grpc.typesb\006proto3"
+      "\n\024mempool_status.proto\022\007mempool\"f\n\033Mempo" +
+      "olAddTransactionStatus\0226\n\004code\030\001 \001(\0162(.m" +
+      "empool.MempoolAddTransactionStatusCode\022\017" +
+      "\n\007message\030\002 \001(\t*\232\001\n\037MempoolAddTransactio" +
+      "nStatusCode\022\t\n\005Valid\020\000\022\027\n\023InsufficientBa" +
+      "lance\020\001\022\024\n\020InvalidSeqNumber\020\002\022\021\n\rMempool" +
+      "IsFull\020\003\022\027\n\023TooManyTransactions\020\004\022\021\n\rInv" +
+      "alidUpdate\020\005B\026\n\024org.libra.grpc.typesb\006pr" +
+      "oto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -875,11 +875,11 @@ public final class MempoolStatus {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         }, assigner);
-    internal_static_mempool_status_MempoolAddTransactionStatus_descriptor =
+    internal_static_mempool_MempoolAddTransactionStatus_descriptor =
       getDescriptor().getMessageTypes().get(0);
-    internal_static_mempool_status_MempoolAddTransactionStatus_fieldAccessorTable = new
+    internal_static_mempool_MempoolAddTransactionStatus_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_mempool_status_MempoolAddTransactionStatus_descriptor,
+        internal_static_mempool_MempoolAddTransactionStatus_descriptor,
         new java.lang.String[] { "Code", "Message", });
   }
 

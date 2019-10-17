@@ -38,7 +38,7 @@ import org.libra.grpc.types.GetWithProof.UpdateToLatestLedgerResponse;
 import org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfo;
 import org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures;
 import org.libra.grpc.types.LedgerInfoOuterClass.ValidatorSignature;
-import org.libra.grpc.types.Transaction.TransactionListWithProof;
+import org.libra.grpc.types.TransactionOuterClass.TransactionListWithProof;
 import org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)

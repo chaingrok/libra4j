@@ -150,928 +150,6 @@ public final class AdmissionControlOuterClass {
     // @@protoc_insertion_point(enum_scope:admission_control.AdmissionControlStatusCode)
   }
 
-  public interface AdmissionControlMsgOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:admission_control.AdmissionControlMsg)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>.admission_control.SubmitTransactionRequest submit_transaction_request = 1;</code>
-     */
-    boolean hasSubmitTransactionRequest();
-    /**
-     * <code>.admission_control.SubmitTransactionRequest submit_transaction_request = 1;</code>
-     */
-    org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionRequest getSubmitTransactionRequest();
-    /**
-     * <code>.admission_control.SubmitTransactionRequest submit_transaction_request = 1;</code>
-     */
-    org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionRequestOrBuilder getSubmitTransactionRequestOrBuilder();
-
-    /**
-     * <code>.admission_control.SubmitTransactionResponse submit_transaction_response = 2;</code>
-     */
-    boolean hasSubmitTransactionResponse();
-    /**
-     * <code>.admission_control.SubmitTransactionResponse submit_transaction_response = 2;</code>
-     */
-    org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionResponse getSubmitTransactionResponse();
-    /**
-     * <code>.admission_control.SubmitTransactionResponse submit_transaction_response = 2;</code>
-     */
-    org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionResponseOrBuilder getSubmitTransactionResponseOrBuilder();
-
-    public org.libra.grpc.types.AdmissionControlOuterClass.AdmissionControlMsg.MessageCase getMessageCase();
-  }
-  /**
-   * <pre>
-   * The request for submitting a transaction to an upstream validator or full node.
-   * </pre>
-   *
-   * Protobuf type {@code admission_control.AdmissionControlMsg}
-   */
-  public  static final class AdmissionControlMsg extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:admission_control.AdmissionControlMsg)
-      AdmissionControlMsgOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use AdmissionControlMsg.newBuilder() to construct.
-    private AdmissionControlMsg(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private AdmissionControlMsg() {
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private AdmissionControlMsg(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-              org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionRequest.Builder subBuilder = null;
-              if (messageCase_ == 1) {
-                subBuilder = ((org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionRequest) message_).toBuilder();
-              }
-              message_ =
-                  input.readMessage(org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionRequest.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom((org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionRequest) message_);
-                message_ = subBuilder.buildPartial();
-              }
-              messageCase_ = 1;
-              break;
-            }
-            case 18: {
-              org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionResponse.Builder subBuilder = null;
-              if (messageCase_ == 2) {
-                subBuilder = ((org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionResponse) message_).toBuilder();
-              }
-              message_ =
-                  input.readMessage(org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionResponse.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom((org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionResponse) message_);
-                message_ = subBuilder.buildPartial();
-              }
-              messageCase_ = 2;
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return org.libra.grpc.types.AdmissionControlOuterClass.internal_static_admission_control_AdmissionControlMsg_descriptor;
-    }
-
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return org.libra.grpc.types.AdmissionControlOuterClass.internal_static_admission_control_AdmissionControlMsg_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              org.libra.grpc.types.AdmissionControlOuterClass.AdmissionControlMsg.class, org.libra.grpc.types.AdmissionControlOuterClass.AdmissionControlMsg.Builder.class);
-    }
-
-    private int messageCase_ = 0;
-    private java.lang.Object message_;
-    public enum MessageCase
-        implements com.google.protobuf.Internal.EnumLite {
-      SUBMIT_TRANSACTION_REQUEST(1),
-      SUBMIT_TRANSACTION_RESPONSE(2),
-      MESSAGE_NOT_SET(0);
-      private final int value;
-      private MessageCase(int value) {
-        this.value = value;
-      }
-      /**
-       * @deprecated Use {@link #forNumber(int)} instead.
-       */
-      @java.lang.Deprecated
-      public static MessageCase valueOf(int value) {
-        return forNumber(value);
-      }
-
-      public static MessageCase forNumber(int value) {
-        switch (value) {
-          case 1: return SUBMIT_TRANSACTION_REQUEST;
-          case 2: return SUBMIT_TRANSACTION_RESPONSE;
-          case 0: return MESSAGE_NOT_SET;
-          default: return null;
-        }
-      }
-      public int getNumber() {
-        return this.value;
-      }
-    };
-
-    public MessageCase
-    getMessageCase() {
-      return MessageCase.forNumber(
-          messageCase_);
-    }
-
-    public static final int SUBMIT_TRANSACTION_REQUEST_FIELD_NUMBER = 1;
-    /**
-     * <code>.admission_control.SubmitTransactionRequest submit_transaction_request = 1;</code>
-     */
-    public boolean hasSubmitTransactionRequest() {
-      return messageCase_ == 1;
-    }
-    /**
-     * <code>.admission_control.SubmitTransactionRequest submit_transaction_request = 1;</code>
-     */
-    public org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionRequest getSubmitTransactionRequest() {
-      if (messageCase_ == 1) {
-         return (org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionRequest) message_;
-      }
-      return org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionRequest.getDefaultInstance();
-    }
-    /**
-     * <code>.admission_control.SubmitTransactionRequest submit_transaction_request = 1;</code>
-     */
-    public org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionRequestOrBuilder getSubmitTransactionRequestOrBuilder() {
-      if (messageCase_ == 1) {
-         return (org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionRequest) message_;
-      }
-      return org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionRequest.getDefaultInstance();
-    }
-
-    public static final int SUBMIT_TRANSACTION_RESPONSE_FIELD_NUMBER = 2;
-    /**
-     * <code>.admission_control.SubmitTransactionResponse submit_transaction_response = 2;</code>
-     */
-    public boolean hasSubmitTransactionResponse() {
-      return messageCase_ == 2;
-    }
-    /**
-     * <code>.admission_control.SubmitTransactionResponse submit_transaction_response = 2;</code>
-     */
-    public org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionResponse getSubmitTransactionResponse() {
-      if (messageCase_ == 2) {
-         return (org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionResponse) message_;
-      }
-      return org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionResponse.getDefaultInstance();
-    }
-    /**
-     * <code>.admission_control.SubmitTransactionResponse submit_transaction_response = 2;</code>
-     */
-    public org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionResponseOrBuilder getSubmitTransactionResponseOrBuilder() {
-      if (messageCase_ == 2) {
-         return (org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionResponse) message_;
-      }
-      return org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionResponse.getDefaultInstance();
-    }
-
-    private byte memoizedIsInitialized = -1;
-    @java.lang.Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    @java.lang.Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (messageCase_ == 1) {
-        output.writeMessage(1, (org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionRequest) message_);
-      }
-      if (messageCase_ == 2) {
-        output.writeMessage(2, (org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionResponse) message_);
-      }
-      unknownFields.writeTo(output);
-    }
-
-    @java.lang.Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (messageCase_ == 1) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, (org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionRequest) message_);
-      }
-      if (messageCase_ == 2) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, (org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionResponse) message_);
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof org.libra.grpc.types.AdmissionControlOuterClass.AdmissionControlMsg)) {
-        return super.equals(obj);
-      }
-      org.libra.grpc.types.AdmissionControlOuterClass.AdmissionControlMsg other = (org.libra.grpc.types.AdmissionControlOuterClass.AdmissionControlMsg) obj;
-
-      if (!getMessageCase().equals(other.getMessageCase())) return false;
-      switch (messageCase_) {
-        case 1:
-          if (!getSubmitTransactionRequest()
-              .equals(other.getSubmitTransactionRequest())) return false;
-          break;
-        case 2:
-          if (!getSubmitTransactionResponse()
-              .equals(other.getSubmitTransactionResponse())) return false;
-          break;
-        case 0:
-        default:
-      }
-      if (!unknownFields.equals(other.unknownFields)) return false;
-      return true;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      switch (messageCase_) {
-        case 1:
-          hash = (37 * hash) + SUBMIT_TRANSACTION_REQUEST_FIELD_NUMBER;
-          hash = (53 * hash) + getSubmitTransactionRequest().hashCode();
-          break;
-        case 2:
-          hash = (37 * hash) + SUBMIT_TRANSACTION_RESPONSE_FIELD_NUMBER;
-          hash = (53 * hash) + getSubmitTransactionResponse().hashCode();
-          break;
-        case 0:
-        default:
-      }
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static org.libra.grpc.types.AdmissionControlOuterClass.AdmissionControlMsg parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static org.libra.grpc.types.AdmissionControlOuterClass.AdmissionControlMsg parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static org.libra.grpc.types.AdmissionControlOuterClass.AdmissionControlMsg parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static org.libra.grpc.types.AdmissionControlOuterClass.AdmissionControlMsg parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static org.libra.grpc.types.AdmissionControlOuterClass.AdmissionControlMsg parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static org.libra.grpc.types.AdmissionControlOuterClass.AdmissionControlMsg parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static org.libra.grpc.types.AdmissionControlOuterClass.AdmissionControlMsg parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static org.libra.grpc.types.AdmissionControlOuterClass.AdmissionControlMsg parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static org.libra.grpc.types.AdmissionControlOuterClass.AdmissionControlMsg parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static org.libra.grpc.types.AdmissionControlOuterClass.AdmissionControlMsg parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static org.libra.grpc.types.AdmissionControlOuterClass.AdmissionControlMsg parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static org.libra.grpc.types.AdmissionControlOuterClass.AdmissionControlMsg parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(org.libra.grpc.types.AdmissionControlOuterClass.AdmissionControlMsg prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * <pre>
-     * The request for submitting a transaction to an upstream validator or full node.
-     * </pre>
-     *
-     * Protobuf type {@code admission_control.AdmissionControlMsg}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:admission_control.AdmissionControlMsg)
-        org.libra.grpc.types.AdmissionControlOuterClass.AdmissionControlMsgOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return org.libra.grpc.types.AdmissionControlOuterClass.internal_static_admission_control_AdmissionControlMsg_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return org.libra.grpc.types.AdmissionControlOuterClass.internal_static_admission_control_AdmissionControlMsg_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                org.libra.grpc.types.AdmissionControlOuterClass.AdmissionControlMsg.class, org.libra.grpc.types.AdmissionControlOuterClass.AdmissionControlMsg.Builder.class);
-      }
-
-      // Construct using org.libra.grpc.types.AdmissionControlOuterClass.AdmissionControlMsg.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      @java.lang.Override
-      public Builder clear() {
-        super.clear();
-        messageCase_ = 0;
-        message_ = null;
-        return this;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return org.libra.grpc.types.AdmissionControlOuterClass.internal_static_admission_control_AdmissionControlMsg_descriptor;
-      }
-
-      @java.lang.Override
-      public org.libra.grpc.types.AdmissionControlOuterClass.AdmissionControlMsg getDefaultInstanceForType() {
-        return org.libra.grpc.types.AdmissionControlOuterClass.AdmissionControlMsg.getDefaultInstance();
-      }
-
-      @java.lang.Override
-      public org.libra.grpc.types.AdmissionControlOuterClass.AdmissionControlMsg build() {
-        org.libra.grpc.types.AdmissionControlOuterClass.AdmissionControlMsg result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      @java.lang.Override
-      public org.libra.grpc.types.AdmissionControlOuterClass.AdmissionControlMsg buildPartial() {
-        org.libra.grpc.types.AdmissionControlOuterClass.AdmissionControlMsg result = new org.libra.grpc.types.AdmissionControlOuterClass.AdmissionControlMsg(this);
-        if (messageCase_ == 1) {
-          if (submitTransactionRequestBuilder_ == null) {
-            result.message_ = message_;
-          } else {
-            result.message_ = submitTransactionRequestBuilder_.build();
-          }
-        }
-        if (messageCase_ == 2) {
-          if (submitTransactionResponseBuilder_ == null) {
-            result.message_ = message_;
-          } else {
-            result.message_ = submitTransactionResponseBuilder_.build();
-          }
-        }
-        result.messageCase_ = messageCase_;
-        onBuilt();
-        return result;
-      }
-
-      @java.lang.Override
-      public Builder clone() {
-        return super.clone();
-      }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.setField(field, value);
-      }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.addRepeatedField(field, value);
-      }
-      @java.lang.Override
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof org.libra.grpc.types.AdmissionControlOuterClass.AdmissionControlMsg) {
-          return mergeFrom((org.libra.grpc.types.AdmissionControlOuterClass.AdmissionControlMsg)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(org.libra.grpc.types.AdmissionControlOuterClass.AdmissionControlMsg other) {
-        if (other == org.libra.grpc.types.AdmissionControlOuterClass.AdmissionControlMsg.getDefaultInstance()) return this;
-        switch (other.getMessageCase()) {
-          case SUBMIT_TRANSACTION_REQUEST: {
-            mergeSubmitTransactionRequest(other.getSubmitTransactionRequest());
-            break;
-          }
-          case SUBMIT_TRANSACTION_RESPONSE: {
-            mergeSubmitTransactionResponse(other.getSubmitTransactionResponse());
-            break;
-          }
-          case MESSAGE_NOT_SET: {
-            break;
-          }
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      @java.lang.Override
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        org.libra.grpc.types.AdmissionControlOuterClass.AdmissionControlMsg parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (org.libra.grpc.types.AdmissionControlOuterClass.AdmissionControlMsg) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int messageCase_ = 0;
-      private java.lang.Object message_;
-      public MessageCase
-          getMessageCase() {
-        return MessageCase.forNumber(
-            messageCase_);
-      }
-
-      public Builder clearMessage() {
-        messageCase_ = 0;
-        message_ = null;
-        onChanged();
-        return this;
-      }
-
-
-      private com.google.protobuf.SingleFieldBuilderV3<
-          org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionRequest, org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionRequest.Builder, org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionRequestOrBuilder> submitTransactionRequestBuilder_;
-      /**
-       * <code>.admission_control.SubmitTransactionRequest submit_transaction_request = 1;</code>
-       */
-      public boolean hasSubmitTransactionRequest() {
-        return messageCase_ == 1;
-      }
-      /**
-       * <code>.admission_control.SubmitTransactionRequest submit_transaction_request = 1;</code>
-       */
-      public org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionRequest getSubmitTransactionRequest() {
-        if (submitTransactionRequestBuilder_ == null) {
-          if (messageCase_ == 1) {
-            return (org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionRequest) message_;
-          }
-          return org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionRequest.getDefaultInstance();
-        } else {
-          if (messageCase_ == 1) {
-            return submitTransactionRequestBuilder_.getMessage();
-          }
-          return org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionRequest.getDefaultInstance();
-        }
-      }
-      /**
-       * <code>.admission_control.SubmitTransactionRequest submit_transaction_request = 1;</code>
-       */
-      public Builder setSubmitTransactionRequest(org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionRequest value) {
-        if (submitTransactionRequestBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          message_ = value;
-          onChanged();
-        } else {
-          submitTransactionRequestBuilder_.setMessage(value);
-        }
-        messageCase_ = 1;
-        return this;
-      }
-      /**
-       * <code>.admission_control.SubmitTransactionRequest submit_transaction_request = 1;</code>
-       */
-      public Builder setSubmitTransactionRequest(
-          org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionRequest.Builder builderForValue) {
-        if (submitTransactionRequestBuilder_ == null) {
-          message_ = builderForValue.build();
-          onChanged();
-        } else {
-          submitTransactionRequestBuilder_.setMessage(builderForValue.build());
-        }
-        messageCase_ = 1;
-        return this;
-      }
-      /**
-       * <code>.admission_control.SubmitTransactionRequest submit_transaction_request = 1;</code>
-       */
-      public Builder mergeSubmitTransactionRequest(org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionRequest value) {
-        if (submitTransactionRequestBuilder_ == null) {
-          if (messageCase_ == 1 &&
-              message_ != org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionRequest.getDefaultInstance()) {
-            message_ = org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionRequest.newBuilder((org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionRequest) message_)
-                .mergeFrom(value).buildPartial();
-          } else {
-            message_ = value;
-          }
-          onChanged();
-        } else {
-          if (messageCase_ == 1) {
-            submitTransactionRequestBuilder_.mergeFrom(value);
-          }
-          submitTransactionRequestBuilder_.setMessage(value);
-        }
-        messageCase_ = 1;
-        return this;
-      }
-      /**
-       * <code>.admission_control.SubmitTransactionRequest submit_transaction_request = 1;</code>
-       */
-      public Builder clearSubmitTransactionRequest() {
-        if (submitTransactionRequestBuilder_ == null) {
-          if (messageCase_ == 1) {
-            messageCase_ = 0;
-            message_ = null;
-            onChanged();
-          }
-        } else {
-          if (messageCase_ == 1) {
-            messageCase_ = 0;
-            message_ = null;
-          }
-          submitTransactionRequestBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <code>.admission_control.SubmitTransactionRequest submit_transaction_request = 1;</code>
-       */
-      public org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionRequest.Builder getSubmitTransactionRequestBuilder() {
-        return getSubmitTransactionRequestFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>.admission_control.SubmitTransactionRequest submit_transaction_request = 1;</code>
-       */
-      public org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionRequestOrBuilder getSubmitTransactionRequestOrBuilder() {
-        if ((messageCase_ == 1) && (submitTransactionRequestBuilder_ != null)) {
-          return submitTransactionRequestBuilder_.getMessageOrBuilder();
-        } else {
-          if (messageCase_ == 1) {
-            return (org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionRequest) message_;
-          }
-          return org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionRequest.getDefaultInstance();
-        }
-      }
-      /**
-       * <code>.admission_control.SubmitTransactionRequest submit_transaction_request = 1;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionRequest, org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionRequest.Builder, org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionRequestOrBuilder> 
-          getSubmitTransactionRequestFieldBuilder() {
-        if (submitTransactionRequestBuilder_ == null) {
-          if (!(messageCase_ == 1)) {
-            message_ = org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionRequest.getDefaultInstance();
-          }
-          submitTransactionRequestBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionRequest, org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionRequest.Builder, org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionRequestOrBuilder>(
-                  (org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionRequest) message_,
-                  getParentForChildren(),
-                  isClean());
-          message_ = null;
-        }
-        messageCase_ = 1;
-        onChanged();;
-        return submitTransactionRequestBuilder_;
-      }
-
-      private com.google.protobuf.SingleFieldBuilderV3<
-          org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionResponse, org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionResponse.Builder, org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionResponseOrBuilder> submitTransactionResponseBuilder_;
-      /**
-       * <code>.admission_control.SubmitTransactionResponse submit_transaction_response = 2;</code>
-       */
-      public boolean hasSubmitTransactionResponse() {
-        return messageCase_ == 2;
-      }
-      /**
-       * <code>.admission_control.SubmitTransactionResponse submit_transaction_response = 2;</code>
-       */
-      public org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionResponse getSubmitTransactionResponse() {
-        if (submitTransactionResponseBuilder_ == null) {
-          if (messageCase_ == 2) {
-            return (org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionResponse) message_;
-          }
-          return org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionResponse.getDefaultInstance();
-        } else {
-          if (messageCase_ == 2) {
-            return submitTransactionResponseBuilder_.getMessage();
-          }
-          return org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionResponse.getDefaultInstance();
-        }
-      }
-      /**
-       * <code>.admission_control.SubmitTransactionResponse submit_transaction_response = 2;</code>
-       */
-      public Builder setSubmitTransactionResponse(org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionResponse value) {
-        if (submitTransactionResponseBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          message_ = value;
-          onChanged();
-        } else {
-          submitTransactionResponseBuilder_.setMessage(value);
-        }
-        messageCase_ = 2;
-        return this;
-      }
-      /**
-       * <code>.admission_control.SubmitTransactionResponse submit_transaction_response = 2;</code>
-       */
-      public Builder setSubmitTransactionResponse(
-          org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionResponse.Builder builderForValue) {
-        if (submitTransactionResponseBuilder_ == null) {
-          message_ = builderForValue.build();
-          onChanged();
-        } else {
-          submitTransactionResponseBuilder_.setMessage(builderForValue.build());
-        }
-        messageCase_ = 2;
-        return this;
-      }
-      /**
-       * <code>.admission_control.SubmitTransactionResponse submit_transaction_response = 2;</code>
-       */
-      public Builder mergeSubmitTransactionResponse(org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionResponse value) {
-        if (submitTransactionResponseBuilder_ == null) {
-          if (messageCase_ == 2 &&
-              message_ != org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionResponse.getDefaultInstance()) {
-            message_ = org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionResponse.newBuilder((org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionResponse) message_)
-                .mergeFrom(value).buildPartial();
-          } else {
-            message_ = value;
-          }
-          onChanged();
-        } else {
-          if (messageCase_ == 2) {
-            submitTransactionResponseBuilder_.mergeFrom(value);
-          }
-          submitTransactionResponseBuilder_.setMessage(value);
-        }
-        messageCase_ = 2;
-        return this;
-      }
-      /**
-       * <code>.admission_control.SubmitTransactionResponse submit_transaction_response = 2;</code>
-       */
-      public Builder clearSubmitTransactionResponse() {
-        if (submitTransactionResponseBuilder_ == null) {
-          if (messageCase_ == 2) {
-            messageCase_ = 0;
-            message_ = null;
-            onChanged();
-          }
-        } else {
-          if (messageCase_ == 2) {
-            messageCase_ = 0;
-            message_ = null;
-          }
-          submitTransactionResponseBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <code>.admission_control.SubmitTransactionResponse submit_transaction_response = 2;</code>
-       */
-      public org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionResponse.Builder getSubmitTransactionResponseBuilder() {
-        return getSubmitTransactionResponseFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>.admission_control.SubmitTransactionResponse submit_transaction_response = 2;</code>
-       */
-      public org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionResponseOrBuilder getSubmitTransactionResponseOrBuilder() {
-        if ((messageCase_ == 2) && (submitTransactionResponseBuilder_ != null)) {
-          return submitTransactionResponseBuilder_.getMessageOrBuilder();
-        } else {
-          if (messageCase_ == 2) {
-            return (org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionResponse) message_;
-          }
-          return org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionResponse.getDefaultInstance();
-        }
-      }
-      /**
-       * <code>.admission_control.SubmitTransactionResponse submit_transaction_response = 2;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionResponse, org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionResponse.Builder, org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionResponseOrBuilder> 
-          getSubmitTransactionResponseFieldBuilder() {
-        if (submitTransactionResponseBuilder_ == null) {
-          if (!(messageCase_ == 2)) {
-            message_ = org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionResponse.getDefaultInstance();
-          }
-          submitTransactionResponseBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionResponse, org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionResponse.Builder, org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionResponseOrBuilder>(
-                  (org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionResponse) message_,
-                  getParentForChildren(),
-                  isClean());
-          message_ = null;
-        }
-        messageCase_ = 2;
-        onChanged();;
-        return submitTransactionResponseBuilder_;
-      }
-      @java.lang.Override
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      @java.lang.Override
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:admission_control.AdmissionControlMsg)
-    }
-
-    // @@protoc_insertion_point(class_scope:admission_control.AdmissionControlMsg)
-    private static final org.libra.grpc.types.AdmissionControlOuterClass.AdmissionControlMsg DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new org.libra.grpc.types.AdmissionControlOuterClass.AdmissionControlMsg();
-    }
-
-    public static org.libra.grpc.types.AdmissionControlOuterClass.AdmissionControlMsg getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<AdmissionControlMsg>
-        PARSER = new com.google.protobuf.AbstractParser<AdmissionControlMsg>() {
-      @java.lang.Override
-      public AdmissionControlMsg parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new AdmissionControlMsg(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<AdmissionControlMsg> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<AdmissionControlMsg> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public org.libra.grpc.types.AdmissionControlOuterClass.AdmissionControlMsg getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
   public interface SubmitTransactionRequestOrBuilder extends
       // @@protoc_insertion_point(interface_extends:admission_control.SubmitTransactionRequest)
       com.google.protobuf.MessageOrBuilder {
@@ -1091,7 +169,7 @@ public final class AdmissionControlOuterClass {
      *
      * <code>.types.SignedTransaction signed_txn = 1;</code>
      */
-    org.libra.grpc.types.TransactionOuterClass.SignedTransaction getSignedTxn();
+    org.libra.grpc.types.Transaction.SignedTransaction getSignedTxn();
     /**
      * <pre>
      * Transaction signed by wallet.
@@ -1099,7 +177,7 @@ public final class AdmissionControlOuterClass {
      *
      * <code>.types.SignedTransaction signed_txn = 1;</code>
      */
-    org.libra.grpc.types.TransactionOuterClass.SignedTransactionOrBuilder getSignedTxnOrBuilder();
+    org.libra.grpc.types.Transaction.SignedTransactionOrBuilder getSignedTxnOrBuilder();
   }
   /**
    * <pre>
@@ -1148,11 +226,11 @@ public final class AdmissionControlOuterClass {
               done = true;
               break;
             case 10: {
-              org.libra.grpc.types.TransactionOuterClass.SignedTransaction.Builder subBuilder = null;
+              org.libra.grpc.types.Transaction.SignedTransaction.Builder subBuilder = null;
               if (signedTxn_ != null) {
                 subBuilder = signedTxn_.toBuilder();
               }
-              signedTxn_ = input.readMessage(org.libra.grpc.types.TransactionOuterClass.SignedTransaction.parser(), extensionRegistry);
+              signedTxn_ = input.readMessage(org.libra.grpc.types.Transaction.SignedTransaction.parser(), extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(signedTxn_);
                 signedTxn_ = subBuilder.buildPartial();
@@ -1193,7 +271,7 @@ public final class AdmissionControlOuterClass {
     }
 
     public static final int SIGNED_TXN_FIELD_NUMBER = 1;
-    private org.libra.grpc.types.TransactionOuterClass.SignedTransaction signedTxn_;
+    private org.libra.grpc.types.Transaction.SignedTransaction signedTxn_;
     /**
      * <pre>
      * Transaction signed by wallet.
@@ -1211,8 +289,8 @@ public final class AdmissionControlOuterClass {
      *
      * <code>.types.SignedTransaction signed_txn = 1;</code>
      */
-    public org.libra.grpc.types.TransactionOuterClass.SignedTransaction getSignedTxn() {
-      return signedTxn_ == null ? org.libra.grpc.types.TransactionOuterClass.SignedTransaction.getDefaultInstance() : signedTxn_;
+    public org.libra.grpc.types.Transaction.SignedTransaction getSignedTxn() {
+      return signedTxn_ == null ? org.libra.grpc.types.Transaction.SignedTransaction.getDefaultInstance() : signedTxn_;
     }
     /**
      * <pre>
@@ -1221,7 +299,7 @@ public final class AdmissionControlOuterClass {
      *
      * <code>.types.SignedTransaction signed_txn = 1;</code>
      */
-    public org.libra.grpc.types.TransactionOuterClass.SignedTransactionOrBuilder getSignedTxnOrBuilder() {
+    public org.libra.grpc.types.Transaction.SignedTransactionOrBuilder getSignedTxnOrBuilder() {
       return getSignedTxn();
     }
 
@@ -1547,9 +625,9 @@ public final class AdmissionControlOuterClass {
         return this;
       }
 
-      private org.libra.grpc.types.TransactionOuterClass.SignedTransaction signedTxn_;
+      private org.libra.grpc.types.Transaction.SignedTransaction signedTxn_;
       private com.google.protobuf.SingleFieldBuilderV3<
-          org.libra.grpc.types.TransactionOuterClass.SignedTransaction, org.libra.grpc.types.TransactionOuterClass.SignedTransaction.Builder, org.libra.grpc.types.TransactionOuterClass.SignedTransactionOrBuilder> signedTxnBuilder_;
+          org.libra.grpc.types.Transaction.SignedTransaction, org.libra.grpc.types.Transaction.SignedTransaction.Builder, org.libra.grpc.types.Transaction.SignedTransactionOrBuilder> signedTxnBuilder_;
       /**
        * <pre>
        * Transaction signed by wallet.
@@ -1567,9 +645,9 @@ public final class AdmissionControlOuterClass {
        *
        * <code>.types.SignedTransaction signed_txn = 1;</code>
        */
-      public org.libra.grpc.types.TransactionOuterClass.SignedTransaction getSignedTxn() {
+      public org.libra.grpc.types.Transaction.SignedTransaction getSignedTxn() {
         if (signedTxnBuilder_ == null) {
-          return signedTxn_ == null ? org.libra.grpc.types.TransactionOuterClass.SignedTransaction.getDefaultInstance() : signedTxn_;
+          return signedTxn_ == null ? org.libra.grpc.types.Transaction.SignedTransaction.getDefaultInstance() : signedTxn_;
         } else {
           return signedTxnBuilder_.getMessage();
         }
@@ -1581,7 +659,7 @@ public final class AdmissionControlOuterClass {
        *
        * <code>.types.SignedTransaction signed_txn = 1;</code>
        */
-      public Builder setSignedTxn(org.libra.grpc.types.TransactionOuterClass.SignedTransaction value) {
+      public Builder setSignedTxn(org.libra.grpc.types.Transaction.SignedTransaction value) {
         if (signedTxnBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -1602,7 +680,7 @@ public final class AdmissionControlOuterClass {
        * <code>.types.SignedTransaction signed_txn = 1;</code>
        */
       public Builder setSignedTxn(
-          org.libra.grpc.types.TransactionOuterClass.SignedTransaction.Builder builderForValue) {
+          org.libra.grpc.types.Transaction.SignedTransaction.Builder builderForValue) {
         if (signedTxnBuilder_ == null) {
           signedTxn_ = builderForValue.build();
           onChanged();
@@ -1619,11 +697,11 @@ public final class AdmissionControlOuterClass {
        *
        * <code>.types.SignedTransaction signed_txn = 1;</code>
        */
-      public Builder mergeSignedTxn(org.libra.grpc.types.TransactionOuterClass.SignedTransaction value) {
+      public Builder mergeSignedTxn(org.libra.grpc.types.Transaction.SignedTransaction value) {
         if (signedTxnBuilder_ == null) {
           if (signedTxn_ != null) {
             signedTxn_ =
-              org.libra.grpc.types.TransactionOuterClass.SignedTransaction.newBuilder(signedTxn_).mergeFrom(value).buildPartial();
+              org.libra.grpc.types.Transaction.SignedTransaction.newBuilder(signedTxn_).mergeFrom(value).buildPartial();
           } else {
             signedTxn_ = value;
           }
@@ -1659,7 +737,7 @@ public final class AdmissionControlOuterClass {
        *
        * <code>.types.SignedTransaction signed_txn = 1;</code>
        */
-      public org.libra.grpc.types.TransactionOuterClass.SignedTransaction.Builder getSignedTxnBuilder() {
+      public org.libra.grpc.types.Transaction.SignedTransaction.Builder getSignedTxnBuilder() {
         
         onChanged();
         return getSignedTxnFieldBuilder().getBuilder();
@@ -1671,12 +749,12 @@ public final class AdmissionControlOuterClass {
        *
        * <code>.types.SignedTransaction signed_txn = 1;</code>
        */
-      public org.libra.grpc.types.TransactionOuterClass.SignedTransactionOrBuilder getSignedTxnOrBuilder() {
+      public org.libra.grpc.types.Transaction.SignedTransactionOrBuilder getSignedTxnOrBuilder() {
         if (signedTxnBuilder_ != null) {
           return signedTxnBuilder_.getMessageOrBuilder();
         } else {
           return signedTxn_ == null ?
-              org.libra.grpc.types.TransactionOuterClass.SignedTransaction.getDefaultInstance() : signedTxn_;
+              org.libra.grpc.types.Transaction.SignedTransaction.getDefaultInstance() : signedTxn_;
         }
       }
       /**
@@ -1687,11 +765,11 @@ public final class AdmissionControlOuterClass {
        * <code>.types.SignedTransaction signed_txn = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          org.libra.grpc.types.TransactionOuterClass.SignedTransaction, org.libra.grpc.types.TransactionOuterClass.SignedTransaction.Builder, org.libra.grpc.types.TransactionOuterClass.SignedTransactionOrBuilder> 
+          org.libra.grpc.types.Transaction.SignedTransaction, org.libra.grpc.types.Transaction.SignedTransaction.Builder, org.libra.grpc.types.Transaction.SignedTransactionOrBuilder> 
           getSignedTxnFieldBuilder() {
         if (signedTxnBuilder_ == null) {
           signedTxnBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              org.libra.grpc.types.TransactionOuterClass.SignedTransaction, org.libra.grpc.types.TransactionOuterClass.SignedTransaction.Builder, org.libra.grpc.types.TransactionOuterClass.SignedTransactionOrBuilder>(
+              org.libra.grpc.types.Transaction.SignedTransaction, org.libra.grpc.types.Transaction.SignedTransaction.Builder, org.libra.grpc.types.Transaction.SignedTransactionOrBuilder>(
                   getSignedTxn(),
                   getParentForChildren(),
                   isClean());
@@ -2434,15 +1512,15 @@ public final class AdmissionControlOuterClass {
     org.libra.grpc.types.AdmissionControlOuterClass.AdmissionControlStatusOrBuilder getAcStatusOrBuilder();
 
     /**
-     * <code>.mempool_status.MempoolAddTransactionStatus mempool_status = 3;</code>
+     * <code>.mempool.MempoolAddTransactionStatus mempool_status = 3;</code>
      */
     boolean hasMempoolStatus();
     /**
-     * <code>.mempool_status.MempoolAddTransactionStatus mempool_status = 3;</code>
+     * <code>.mempool.MempoolAddTransactionStatus mempool_status = 3;</code>
      */
     org.libra.grpc.types.MempoolStatus.MempoolAddTransactionStatus getMempoolStatus();
     /**
-     * <code>.mempool_status.MempoolAddTransactionStatus mempool_status = 3;</code>
+     * <code>.mempool.MempoolAddTransactionStatus mempool_status = 3;</code>
      */
     org.libra.grpc.types.MempoolStatus.MempoolAddTransactionStatusOrBuilder getMempoolStatusOrBuilder();
 
@@ -2687,13 +1765,13 @@ public final class AdmissionControlOuterClass {
 
     public static final int MEMPOOL_STATUS_FIELD_NUMBER = 3;
     /**
-     * <code>.mempool_status.MempoolAddTransactionStatus mempool_status = 3;</code>
+     * <code>.mempool.MempoolAddTransactionStatus mempool_status = 3;</code>
      */
     public boolean hasMempoolStatus() {
       return statusCase_ == 3;
     }
     /**
-     * <code>.mempool_status.MempoolAddTransactionStatus mempool_status = 3;</code>
+     * <code>.mempool.MempoolAddTransactionStatus mempool_status = 3;</code>
      */
     public org.libra.grpc.types.MempoolStatus.MempoolAddTransactionStatus getMempoolStatus() {
       if (statusCase_ == 3) {
@@ -2702,7 +1780,7 @@ public final class AdmissionControlOuterClass {
       return org.libra.grpc.types.MempoolStatus.MempoolAddTransactionStatus.getDefaultInstance();
     }
     /**
-     * <code>.mempool_status.MempoolAddTransactionStatus mempool_status = 3;</code>
+     * <code>.mempool.MempoolAddTransactionStatus mempool_status = 3;</code>
      */
     public org.libra.grpc.types.MempoolStatus.MempoolAddTransactionStatusOrBuilder getMempoolStatusOrBuilder() {
       if (statusCase_ == 3) {
@@ -3428,13 +2506,13 @@ public final class AdmissionControlOuterClass {
       private com.google.protobuf.SingleFieldBuilderV3<
           org.libra.grpc.types.MempoolStatus.MempoolAddTransactionStatus, org.libra.grpc.types.MempoolStatus.MempoolAddTransactionStatus.Builder, org.libra.grpc.types.MempoolStatus.MempoolAddTransactionStatusOrBuilder> mempoolStatusBuilder_;
       /**
-       * <code>.mempool_status.MempoolAddTransactionStatus mempool_status = 3;</code>
+       * <code>.mempool.MempoolAddTransactionStatus mempool_status = 3;</code>
        */
       public boolean hasMempoolStatus() {
         return statusCase_ == 3;
       }
       /**
-       * <code>.mempool_status.MempoolAddTransactionStatus mempool_status = 3;</code>
+       * <code>.mempool.MempoolAddTransactionStatus mempool_status = 3;</code>
        */
       public org.libra.grpc.types.MempoolStatus.MempoolAddTransactionStatus getMempoolStatus() {
         if (mempoolStatusBuilder_ == null) {
@@ -3450,7 +2528,7 @@ public final class AdmissionControlOuterClass {
         }
       }
       /**
-       * <code>.mempool_status.MempoolAddTransactionStatus mempool_status = 3;</code>
+       * <code>.mempool.MempoolAddTransactionStatus mempool_status = 3;</code>
        */
       public Builder setMempoolStatus(org.libra.grpc.types.MempoolStatus.MempoolAddTransactionStatus value) {
         if (mempoolStatusBuilder_ == null) {
@@ -3466,7 +2544,7 @@ public final class AdmissionControlOuterClass {
         return this;
       }
       /**
-       * <code>.mempool_status.MempoolAddTransactionStatus mempool_status = 3;</code>
+       * <code>.mempool.MempoolAddTransactionStatus mempool_status = 3;</code>
        */
       public Builder setMempoolStatus(
           org.libra.grpc.types.MempoolStatus.MempoolAddTransactionStatus.Builder builderForValue) {
@@ -3480,7 +2558,7 @@ public final class AdmissionControlOuterClass {
         return this;
       }
       /**
-       * <code>.mempool_status.MempoolAddTransactionStatus mempool_status = 3;</code>
+       * <code>.mempool.MempoolAddTransactionStatus mempool_status = 3;</code>
        */
       public Builder mergeMempoolStatus(org.libra.grpc.types.MempoolStatus.MempoolAddTransactionStatus value) {
         if (mempoolStatusBuilder_ == null) {
@@ -3502,7 +2580,7 @@ public final class AdmissionControlOuterClass {
         return this;
       }
       /**
-       * <code>.mempool_status.MempoolAddTransactionStatus mempool_status = 3;</code>
+       * <code>.mempool.MempoolAddTransactionStatus mempool_status = 3;</code>
        */
       public Builder clearMempoolStatus() {
         if (mempoolStatusBuilder_ == null) {
@@ -3521,13 +2599,13 @@ public final class AdmissionControlOuterClass {
         return this;
       }
       /**
-       * <code>.mempool_status.MempoolAddTransactionStatus mempool_status = 3;</code>
+       * <code>.mempool.MempoolAddTransactionStatus mempool_status = 3;</code>
        */
       public org.libra.grpc.types.MempoolStatus.MempoolAddTransactionStatus.Builder getMempoolStatusBuilder() {
         return getMempoolStatusFieldBuilder().getBuilder();
       }
       /**
-       * <code>.mempool_status.MempoolAddTransactionStatus mempool_status = 3;</code>
+       * <code>.mempool.MempoolAddTransactionStatus mempool_status = 3;</code>
        */
       public org.libra.grpc.types.MempoolStatus.MempoolAddTransactionStatusOrBuilder getMempoolStatusOrBuilder() {
         if ((statusCase_ == 3) && (mempoolStatusBuilder_ != null)) {
@@ -3540,7 +2618,7 @@ public final class AdmissionControlOuterClass {
         }
       }
       /**
-       * <code>.mempool_status.MempoolAddTransactionStatus mempool_status = 3;</code>
+       * <code>.mempool.MempoolAddTransactionStatus mempool_status = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           org.libra.grpc.types.MempoolStatus.MempoolAddTransactionStatus, org.libra.grpc.types.MempoolStatus.MempoolAddTransactionStatus.Builder, org.libra.grpc.types.MempoolStatus.MempoolAddTransactionStatusOrBuilder> 
@@ -3655,11 +2733,6 @@ public final class AdmissionControlOuterClass {
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_admission_control_AdmissionControlMsg_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_admission_control_AdmissionControlMsg_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_admission_control_SubmitTransactionRequest_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -3686,31 +2759,25 @@ public final class AdmissionControlOuterClass {
       "\n\027admission_control.proto\022\021admission_con" +
       "trol\032\024get_with_proof.proto\032\024mempool_stat" +
       "us.proto\032\021transaction.proto\032\017vm_errors.p" +
-      "roto\"\310\001\n\023AdmissionControlMsg\022Q\n\032submit_t" +
-      "ransaction_request\030\001 \001(\0132+.admission_con" +
-      "trol.SubmitTransactionRequestH\000\022S\n\033submi" +
-      "t_transaction_response\030\002 \001(\0132,.admission" +
-      "_control.SubmitTransactionResponseH\000B\t\n\007" +
-      "message\"H\n\030SubmitTransactionRequest\022,\n\ns" +
-      "igned_txn\030\001 \001(\0132\030.types.SignedTransactio" +
-      "n\"f\n\026AdmissionControlStatus\022;\n\004code\030\001 \001(" +
-      "\0162-.admission_control.AdmissionControlSt" +
-      "atusCode\022\017\n\007message\030\002 \001(\t\"\350\001\n\031SubmitTran" +
-      "sactionResponse\022$\n\tvm_status\030\001 \001(\0132\017.typ" +
-      "es.VMStatusH\000\022>\n\tac_status\030\002 \001(\0132).admis" +
-      "sion_control.AdmissionControlStatusH\000\022E\n" +
-      "\016mempool_status\030\003 \001(\0132+.mempool_status.M" +
-      "empoolAddTransactionStatusH\000\022\024\n\014validato" +
-      "r_id\030\004 \001(\014B\010\n\006status*I\n\032AdmissionControl" +
-      "StatusCode\022\014\n\010Accepted\020\000\022\017\n\013Blacklisted\020" +
-      "\001\022\014\n\010Rejected\020\0022\347\001\n\020AdmissionControl\022p\n\021" +
-      "SubmitTransaction\022+.admission_control.Su" +
-      "bmitTransactionRequest\032,.admission_contr" +
-      "ol.SubmitTransactionResponse\"\000\022a\n\024Update" +
-      "ToLatestLedger\022\".types.UpdateToLatestLed" +
-      "gerRequest\032#.types.UpdateToLatestLedgerR" +
-      "esponse\"\000B\026\n\024org.libra.grpc.typesb\006proto" +
-      "3"
+      "roto\"H\n\030SubmitTransactionRequest\022,\n\nsign" +
+      "ed_txn\030\001 \001(\0132\030.types.SignedTransaction\"f" +
+      "\n\026AdmissionControlStatus\022;\n\004code\030\001 \001(\0162-" +
+      ".admission_control.AdmissionControlStatu" +
+      "sCode\022\017\n\007message\030\002 \001(\t\"\341\001\n\031SubmitTransac" +
+      "tionResponse\022$\n\tvm_status\030\001 \001(\0132\017.types." +
+      "VMStatusH\000\022>\n\tac_status\030\002 \001(\0132).admissio" +
+      "n_control.AdmissionControlStatusH\000\022>\n\016me" +
+      "mpool_status\030\003 \001(\0132$.mempool.MempoolAddT" +
+      "ransactionStatusH\000\022\024\n\014validator_id\030\004 \001(\014" +
+      "B\010\n\006status*I\n\032AdmissionControlStatusCode" +
+      "\022\014\n\010Accepted\020\000\022\017\n\013Blacklisted\020\001\022\014\n\010Rejec" +
+      "ted\020\0022\347\001\n\020AdmissionControl\022p\n\021SubmitTran" +
+      "saction\022+.admission_control.SubmitTransa" +
+      "ctionRequest\032,.admission_control.SubmitT" +
+      "ransactionResponse\"\000\022a\n\024UpdateToLatestLe" +
+      "dger\022\".types.UpdateToLatestLedgerRequest" +
+      "\032#.types.UpdateToLatestLedgerResponse\"\000B" +
+      "\026\n\024org.libra.grpc.typesb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3725,36 +2792,30 @@ public final class AdmissionControlOuterClass {
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           org.libra.grpc.types.GetWithProof.getDescriptor(),
           org.libra.grpc.types.MempoolStatus.getDescriptor(),
-          org.libra.grpc.types.TransactionOuterClass.getDescriptor(),
+          org.libra.grpc.types.Transaction.getDescriptor(),
           org.libra.grpc.types.VmErrors.getDescriptor(),
         }, assigner);
-    internal_static_admission_control_AdmissionControlMsg_descriptor =
-      getDescriptor().getMessageTypes().get(0);
-    internal_static_admission_control_AdmissionControlMsg_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_admission_control_AdmissionControlMsg_descriptor,
-        new java.lang.String[] { "SubmitTransactionRequest", "SubmitTransactionResponse", "Message", });
     internal_static_admission_control_SubmitTransactionRequest_descriptor =
-      getDescriptor().getMessageTypes().get(1);
+      getDescriptor().getMessageTypes().get(0);
     internal_static_admission_control_SubmitTransactionRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_admission_control_SubmitTransactionRequest_descriptor,
         new java.lang.String[] { "SignedTxn", });
     internal_static_admission_control_AdmissionControlStatus_descriptor =
-      getDescriptor().getMessageTypes().get(2);
+      getDescriptor().getMessageTypes().get(1);
     internal_static_admission_control_AdmissionControlStatus_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_admission_control_AdmissionControlStatus_descriptor,
         new java.lang.String[] { "Code", "Message", });
     internal_static_admission_control_SubmitTransactionResponse_descriptor =
-      getDescriptor().getMessageTypes().get(3);
+      getDescriptor().getMessageTypes().get(2);
     internal_static_admission_control_SubmitTransactionResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_admission_control_SubmitTransactionResponse_descriptor,
         new java.lang.String[] { "VmStatus", "AcStatus", "MempoolStatus", "ValidatorId", "Status", });
     org.libra.grpc.types.GetWithProof.getDescriptor();
     org.libra.grpc.types.MempoolStatus.getDescriptor();
-    org.libra.grpc.types.TransactionOuterClass.getDescriptor();
+    org.libra.grpc.types.Transaction.getDescriptor();
     org.libra.grpc.types.VmErrors.getDescriptor();
   }
 

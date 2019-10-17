@@ -38,19 +38,10 @@ public final class ValidatorPublicKeysOuterClass {
 
     /**
      * <pre>
-     * Validator voting power for consensus
-     * </pre>
-     *
-     * <code>uint64 consensus_voting_power = 3;</code>
-     */
-    long getConsensusVotingPower();
-
-    /**
-     * <pre>
      * Network signing publick key
      * </pre>
      *
-     * <code>bytes network_signing_public_key = 4;</code>
+     * <code>bytes network_signing_public_key = 3;</code>
      */
     com.google.protobuf.ByteString getNetworkSigningPublicKey();
 
@@ -59,7 +50,7 @@ public final class ValidatorPublicKeysOuterClass {
      *&#47; Network identity publick key
      * </pre>
      *
-     * <code>bytes network_identity_public_key = 5;</code>
+     * <code>bytes network_identity_public_key = 4;</code>
      */
     com.google.protobuf.ByteString getNetworkIdentityPublicKey();
   }
@@ -120,17 +111,12 @@ public final class ValidatorPublicKeysOuterClass {
               consensusPublicKey_ = input.readBytes();
               break;
             }
-            case 24: {
-
-              consensusVotingPower_ = input.readUInt64();
-              break;
-            }
-            case 34: {
+            case 26: {
 
               networkSigningPublicKey_ = input.readBytes();
               break;
             }
-            case 42: {
+            case 34: {
 
               networkIdentityPublicKey_ = input.readBytes();
               break;
@@ -193,40 +179,27 @@ public final class ValidatorPublicKeysOuterClass {
       return consensusPublicKey_;
     }
 
-    public static final int CONSENSUS_VOTING_POWER_FIELD_NUMBER = 3;
-    private long consensusVotingPower_;
-    /**
-     * <pre>
-     * Validator voting power for consensus
-     * </pre>
-     *
-     * <code>uint64 consensus_voting_power = 3;</code>
-     */
-    public long getConsensusVotingPower() {
-      return consensusVotingPower_;
-    }
-
-    public static final int NETWORK_SIGNING_PUBLIC_KEY_FIELD_NUMBER = 4;
+    public static final int NETWORK_SIGNING_PUBLIC_KEY_FIELD_NUMBER = 3;
     private com.google.protobuf.ByteString networkSigningPublicKey_;
     /**
      * <pre>
      * Network signing publick key
      * </pre>
      *
-     * <code>bytes network_signing_public_key = 4;</code>
+     * <code>bytes network_signing_public_key = 3;</code>
      */
     public com.google.protobuf.ByteString getNetworkSigningPublicKey() {
       return networkSigningPublicKey_;
     }
 
-    public static final int NETWORK_IDENTITY_PUBLIC_KEY_FIELD_NUMBER = 5;
+    public static final int NETWORK_IDENTITY_PUBLIC_KEY_FIELD_NUMBER = 4;
     private com.google.protobuf.ByteString networkIdentityPublicKey_;
     /**
      * <pre>
      *&#47; Network identity publick key
      * </pre>
      *
-     * <code>bytes network_identity_public_key = 5;</code>
+     * <code>bytes network_identity_public_key = 4;</code>
      */
     public com.google.protobuf.ByteString getNetworkIdentityPublicKey() {
       return networkIdentityPublicKey_;
@@ -252,14 +225,11 @@ public final class ValidatorPublicKeysOuterClass {
       if (!consensusPublicKey_.isEmpty()) {
         output.writeBytes(2, consensusPublicKey_);
       }
-      if (consensusVotingPower_ != 0L) {
-        output.writeUInt64(3, consensusVotingPower_);
-      }
       if (!networkSigningPublicKey_.isEmpty()) {
-        output.writeBytes(4, networkSigningPublicKey_);
+        output.writeBytes(3, networkSigningPublicKey_);
       }
       if (!networkIdentityPublicKey_.isEmpty()) {
-        output.writeBytes(5, networkIdentityPublicKey_);
+        output.writeBytes(4, networkIdentityPublicKey_);
       }
       unknownFields.writeTo(output);
     }
@@ -278,17 +248,13 @@ public final class ValidatorPublicKeysOuterClass {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(2, consensusPublicKey_);
       }
-      if (consensusVotingPower_ != 0L) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt64Size(3, consensusVotingPower_);
-      }
       if (!networkSigningPublicKey_.isEmpty()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(4, networkSigningPublicKey_);
+          .computeBytesSize(3, networkSigningPublicKey_);
       }
       if (!networkIdentityPublicKey_.isEmpty()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(5, networkIdentityPublicKey_);
+          .computeBytesSize(4, networkIdentityPublicKey_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -309,8 +275,6 @@ public final class ValidatorPublicKeysOuterClass {
           .equals(other.getAccountAddress())) return false;
       if (!getConsensusPublicKey()
           .equals(other.getConsensusPublicKey())) return false;
-      if (getConsensusVotingPower()
-          != other.getConsensusVotingPower()) return false;
       if (!getNetworkSigningPublicKey()
           .equals(other.getNetworkSigningPublicKey())) return false;
       if (!getNetworkIdentityPublicKey()
@@ -330,9 +294,6 @@ public final class ValidatorPublicKeysOuterClass {
       hash = (53 * hash) + getAccountAddress().hashCode();
       hash = (37 * hash) + CONSENSUS_PUBLIC_KEY_FIELD_NUMBER;
       hash = (53 * hash) + getConsensusPublicKey().hashCode();
-      hash = (37 * hash) + CONSENSUS_VOTING_POWER_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          getConsensusVotingPower());
       hash = (37 * hash) + NETWORK_SIGNING_PUBLIC_KEY_FIELD_NUMBER;
       hash = (53 * hash) + getNetworkSigningPublicKey().hashCode();
       hash = (37 * hash) + NETWORK_IDENTITY_PUBLIC_KEY_FIELD_NUMBER;
@@ -478,8 +439,6 @@ public final class ValidatorPublicKeysOuterClass {
 
         consensusPublicKey_ = com.google.protobuf.ByteString.EMPTY;
 
-        consensusVotingPower_ = 0L;
-
         networkSigningPublicKey_ = com.google.protobuf.ByteString.EMPTY;
 
         networkIdentityPublicKey_ = com.google.protobuf.ByteString.EMPTY;
@@ -512,7 +471,6 @@ public final class ValidatorPublicKeysOuterClass {
         org.libra.grpc.types.ValidatorPublicKeysOuterClass.ValidatorPublicKeys result = new org.libra.grpc.types.ValidatorPublicKeysOuterClass.ValidatorPublicKeys(this);
         result.accountAddress_ = accountAddress_;
         result.consensusPublicKey_ = consensusPublicKey_;
-        result.consensusVotingPower_ = consensusVotingPower_;
         result.networkSigningPublicKey_ = networkSigningPublicKey_;
         result.networkIdentityPublicKey_ = networkIdentityPublicKey_;
         onBuilt();
@@ -568,9 +526,6 @@ public final class ValidatorPublicKeysOuterClass {
         }
         if (other.getConsensusPublicKey() != com.google.protobuf.ByteString.EMPTY) {
           setConsensusPublicKey(other.getConsensusPublicKey());
-        }
-        if (other.getConsensusVotingPower() != 0L) {
-          setConsensusVotingPower(other.getConsensusVotingPower());
         }
         if (other.getNetworkSigningPublicKey() != com.google.protobuf.ByteString.EMPTY) {
           setNetworkSigningPublicKey(other.getNetworkSigningPublicKey());
@@ -689,51 +644,13 @@ public final class ValidatorPublicKeysOuterClass {
         return this;
       }
 
-      private long consensusVotingPower_ ;
-      /**
-       * <pre>
-       * Validator voting power for consensus
-       * </pre>
-       *
-       * <code>uint64 consensus_voting_power = 3;</code>
-       */
-      public long getConsensusVotingPower() {
-        return consensusVotingPower_;
-      }
-      /**
-       * <pre>
-       * Validator voting power for consensus
-       * </pre>
-       *
-       * <code>uint64 consensus_voting_power = 3;</code>
-       */
-      public Builder setConsensusVotingPower(long value) {
-        
-        consensusVotingPower_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       * Validator voting power for consensus
-       * </pre>
-       *
-       * <code>uint64 consensus_voting_power = 3;</code>
-       */
-      public Builder clearConsensusVotingPower() {
-        
-        consensusVotingPower_ = 0L;
-        onChanged();
-        return this;
-      }
-
       private com.google.protobuf.ByteString networkSigningPublicKey_ = com.google.protobuf.ByteString.EMPTY;
       /**
        * <pre>
        * Network signing publick key
        * </pre>
        *
-       * <code>bytes network_signing_public_key = 4;</code>
+       * <code>bytes network_signing_public_key = 3;</code>
        */
       public com.google.protobuf.ByteString getNetworkSigningPublicKey() {
         return networkSigningPublicKey_;
@@ -743,7 +660,7 @@ public final class ValidatorPublicKeysOuterClass {
        * Network signing publick key
        * </pre>
        *
-       * <code>bytes network_signing_public_key = 4;</code>
+       * <code>bytes network_signing_public_key = 3;</code>
        */
       public Builder setNetworkSigningPublicKey(com.google.protobuf.ByteString value) {
         if (value == null) {
@@ -759,7 +676,7 @@ public final class ValidatorPublicKeysOuterClass {
        * Network signing publick key
        * </pre>
        *
-       * <code>bytes network_signing_public_key = 4;</code>
+       * <code>bytes network_signing_public_key = 3;</code>
        */
       public Builder clearNetworkSigningPublicKey() {
         
@@ -774,7 +691,7 @@ public final class ValidatorPublicKeysOuterClass {
        *&#47; Network identity publick key
        * </pre>
        *
-       * <code>bytes network_identity_public_key = 5;</code>
+       * <code>bytes network_identity_public_key = 4;</code>
        */
       public com.google.protobuf.ByteString getNetworkIdentityPublicKey() {
         return networkIdentityPublicKey_;
@@ -784,7 +701,7 @@ public final class ValidatorPublicKeysOuterClass {
        *&#47; Network identity publick key
        * </pre>
        *
-       * <code>bytes network_identity_public_key = 5;</code>
+       * <code>bytes network_identity_public_key = 4;</code>
        */
       public Builder setNetworkIdentityPublicKey(com.google.protobuf.ByteString value) {
         if (value == null) {
@@ -800,7 +717,7 @@ public final class ValidatorPublicKeysOuterClass {
        *&#47; Network identity publick key
        * </pre>
        *
-       * <code>bytes network_identity_public_key = 5;</code>
+       * <code>bytes network_identity_public_key = 4;</code>
        */
       public Builder clearNetworkIdentityPublicKey() {
         
@@ -875,13 +792,12 @@ public final class ValidatorPublicKeysOuterClass {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\033validator_public_keys.proto\022\005types\"\265\001\n" +
+      "\n\033validator_public_keys.proto\022\005types\"\225\001\n" +
       "\023ValidatorPublicKeys\022\027\n\017account_address\030" +
-      "\001 \001(\014\022\034\n\024consensus_public_key\030\002 \001(\014\022\036\n\026c" +
-      "onsensus_voting_power\030\003 \001(\004\022\"\n\032network_s" +
-      "igning_public_key\030\004 \001(\014\022#\n\033network_ident" +
-      "ity_public_key\030\005 \001(\014B\026\n\024org.libra.grpc.t" +
-      "ypesb\006proto3"
+      "\001 \001(\014\022\034\n\024consensus_public_key\030\002 \001(\014\022\"\n\032n" +
+      "etwork_signing_public_key\030\003 \001(\014\022#\n\033netwo" +
+      "rk_identity_public_key\030\004 \001(\014B\026\n\024org.libr" +
+      "a.grpc.typesb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -900,7 +816,7 @@ public final class ValidatorPublicKeysOuterClass {
     internal_static_types_ValidatorPublicKeys_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_types_ValidatorPublicKeys_descriptor,
-        new java.lang.String[] { "AccountAddress", "ConsensusPublicKey", "ConsensusVotingPower", "NetworkSigningPublicKey", "NetworkIdentityPublicKey", });
+        new java.lang.String[] { "AccountAddress", "ConsensusPublicKey", "NetworkSigningPublicKey", "NetworkIdentityPublicKey", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)
