@@ -6,7 +6,7 @@ syntax = "proto3";
 package types;
 option java_package = "org.libra.grpc.types";
 
-//import "language_storage.proto"; -- ChainGrok: unused -> commented out
+//import "language_storage.proto"; //ChainGrok: commenting out (unused)
 
 // The statuses and errors produced by the VM can be categorized into a
 // couple different types:
