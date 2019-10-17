@@ -25,7 +25,7 @@ import com.chaingrok.libra4j.grpc.GrpcField;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestGrpcField extends TestClass {
 	
-	public static final int GRPC_FIELD_COUNT = 65;
+	public static final int GRPC_FIELD_COUNT = 66;
 	
 	@Test
 	public void test001FieldSize() {
