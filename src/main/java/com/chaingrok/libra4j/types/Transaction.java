@@ -296,7 +296,9 @@ public class Transaction implements LCSInterface {
 				result += "         " + event.toString() +  "\n";
 			}
 		}
-		result += "   type = " + getType() +  "\n";
+		if (transactionPayloadType != null) {
+			result += "   type = " + getType() +  "\n";
+		}
 		return result;
 	}
 	

@@ -2,6 +2,8 @@ package com.chaingrok.libra4j.types;
 
 import java.util.ArrayList;
 
+import com.chaingrok.lib.Utils;
+
 public class AccountState {
 	
 	private Long version;
@@ -59,5 +61,30 @@ public class AccountState {
 	public void setNonDefaultSiblingsTransactionInfoToAccountProof(
 			ArrayList<byte[]> nonDefaultSiblingsTransactionInfoToAccountProof) {
 		this.nonDefaultSiblingsTransactionInfoToAccountProof = nonDefaultSiblingsTransactionInfoToAccountProof;
+	}
+	
+	@Override
+	public String toString() {
+		String result = "";
+		if (transaction != null) {
+			result += transaction.toString();
+		}
+		result += "blob (" + blob.length + "): " + Utils.byteArrayToHexString(blob) + "\n";
+		result += "bitmap (" + bitmap.length + "): " + Utils.byteArrayToHexString(bitmap) + "\n";
+		if ((nonDefaultSiblingsLedgerInfoToTransactionInfoProof != null) 
+				&& (nonDefaultSiblingsLedgerInfoToTransactionInfoProof.size() > 0)) {
+			result += "nonDefaultSiblingsLedgerInfoToTransactionInfoProof: " + "\n";
+			for (byte[] sibling :nonDefaultSiblingsLedgerInfoToTransactionInfoProof) {
+				result += "   sibling (" + sibling.length + "): " + Utils.byteArrayToHexString(sibling)+ "\n";
+			}
+		}
+		if ((nonDefaultSiblingsTransactionInfoToAccountProof != null) 
+				&& (nonDefaultSiblingsTransactionInfoToAccountProof.size() > 0)) {
+			result += "nonDefaultSiblingsTransactionInfoToAccountProof: " + "\n";
+			for (byte[] sibling :nonDefaultSiblingsTransactionInfoToAccountProof) {
+				result += "   sibling (" + sibling.length + "): " + Utils.byteArrayToHexString(sibling) + "\n";
+			}
+		}
+		return result;
 	}
 }
