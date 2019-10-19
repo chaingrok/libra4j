@@ -12,6 +12,8 @@ import java.util.HashMap;
 import org.libra.grpc.types.AccessPathOuterClass.AccessPath;
 import org.libra.grpc.types.AccountStateBlobOuterClass.AccountStateBlob;
 import org.libra.grpc.types.AccountStateBlobOuterClass.AccountStateWithProof;
+import org.libra.grpc.types.AdmissionControlOuterClass.AdmissionControlStatus;
+import org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionResponse;
 import org.libra.grpc.types.Events.Event;
 import org.libra.grpc.types.Events.EventsForVersions;
 import org.libra.grpc.types.Events.EventsList;
@@ -38,6 +40,8 @@ import org.libra.grpc.types.TransactionOuterClass.TransactionArgument;
 
 public enum GrpcField {
 	UPDATE_TO_LATEST_LEDGER_RESPONSE("types.UpdateToLatestLedgerResponse",UpdateToLatestLedgerResponse.class,null), //TODO: check fullname root node 
+	SUBMIT_TRANSACTION_RESPONSE("types.SubmitTransactionResponse",SubmitTransactionResponse.class,null), //TODO: check fullname root node 
+	AC_STATUS("admission_control.SubmitTransactionResponse.ac_status",AdmissionControlStatus.class,SubmitTransactionResponse.class),
 	RESPONSE_ITEMS("types.UpdateToLatestLedgerResponse.response_items",ResponseItem.class,UpdateToLatestLedgerResponse.class),
 	LEDGER_CONSISTENCY_PROOF("types.UpdateToLatestLedgerResponse.ledger_consistency_proof",AccumulatorConsistencyProof.class,UpdateToLatestLedgerResponse.class),
 	LEDGER_INFO_WITH_SIGS("types.UpdateToLatestLedgerResponse.ledger_info_with_sigs",LedgerInfoWithSignatures.class,UpdateToLatestLedgerResponse.class),
