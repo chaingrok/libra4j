@@ -3,10 +3,10 @@ package com.chaingrok.libra4j.test.types;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -14,7 +14,6 @@ import org.junit.runners.MethodSorters;
 
 import com.chaingrok.lib.ChaingrokError;
 import com.chaingrok.lib.ChaingrokLog;
-import com.chaingrok.lib.ChaingrokLog.Type;
 import com.chaingrok.lib.test.TestClass;
 import com.chaingrok.libra4j.test.TestData;
 import com.chaingrok.libra4j.types.AccountAddress;
@@ -24,14 +23,12 @@ import com.chaingrok.libra4j.types.Events;
 import com.chaingrok.libra4j.types.Ledger;
 import com.chaingrok.libra4j.types.LedgerInfo;
 import com.chaingrok.libra4j.types.Transaction;
-import com.google.protobuf.UnknownFieldSet;
-import com.google.protobuf.UnknownFieldSet.Field;
+
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class TestLedger extends TestClass {
+public class TestLedgerGet extends TestClass {
 	
 	private Long expectedEventSequenceNumber = null;
-	
 	
 	@Test
 	public void test001GetLedgerInfo() {
@@ -73,30 +70,16 @@ public class TestLedger extends TestClass {
 		validateTransaction(transaction,version,withEvents);
 	}
 	
-	//@Test
+	@Test
 	public void test004GetTransactionKo() {
-		long version = -1L;
-		boolean withEvents = false;
+		long version = -1L; //invalid version
+		boolean withEvents = true;
 		Ledger ledger = new Ledger(TestData.VALIDATOR_ENDPOINT);
-		ledger.getTransaction(version,withEvents);
-		assertEquals(1L,ledger.getRequestCount());
-		assertTrue(ChaingrokError.hasLogs());
-		assertEquals(1,ChaingrokLog.getLogs().size());
-		ChaingrokLog error = ChaingrokLog.getLogs().get(0);
-		assertEquals(Type.LIST_TOO_LONG,error.getType());
-		assertEquals(UnknownFieldSet.class,error.getObject().getClass());
-		UnknownFieldSet unknownFieldSet = (UnknownFieldSet) error.getObject();
-		Map<Integer, Field> fieldSetMap = unknownFieldSet.asMap();
-		assertEquals(1,fieldSetMap.size());
-		for (Integer i : fieldSetMap.keySet()) {
-			Field unknownField = fieldSetMap.get(i);
-			System.out.println("init error: field " + i + " - length: " + unknownField.toByteString(i).toByteArray().length);
-		}
-		ChaingrokLog.purgeLogs();
+		assertNull(ledger.getTransaction(version,withEvents));
 	}
 	
 	@Test
-	public void test004GetTransactionsWithoutEvents() {
+	public void test005GetTransactionsWithoutEvents() {
 		long version = 1L;
 		long count = 10;
 		boolean withEvents = false;
@@ -112,7 +95,7 @@ public class TestLedger extends TestClass {
 	}
 	
 	@Test
-	public void test005GetTransactionsWithEvents() {
+	public void test006GetTransactionsWithEvents() {
 		long version = 123L;
 		long count = 10;
 		boolean withEvents = true;
@@ -128,23 +111,59 @@ public class TestLedger extends TestClass {
 	}
 	
 	@Test
-	public void test006GetAccountState() {
+	public void test007GetTransactionsKo() {
+		long version = -1L; //invalid version
+		long count = 10;
+		boolean withEvents = true;
+		Ledger ledger = new Ledger(TestData.VALIDATOR_ENDPOINT);
+		assertNull(ledger.getTransactions(version,count,withEvents));
+	}
+	
+	@Test
+	public void test008GetAccountState() {
 		Ledger ledger = new Ledger(TestData.VALIDATOR_ENDPOINT);
 		AccountAddress accountAddress = AccountAddress.ACCOUNT_ZERO;
 		AccountState accountState = ledger.getAccountState(accountAddress);
+		System.out.println("account state " + accountAddress + ":" + "\n");
+		System.out.println(accountState.toString());
 		assertEquals(1L,ledger.getRequestCount());
 		assertFalse(ChaingrokError.hasLogs());
 		assertNotNull(accountState);
-		assertTrue(accountState.getVersion() > 0);
-		assertNotNull(accountState.getTransaction());
+		Long version = accountState.getVersion();
+		assertTrue(version > 0);
 		assertNotNull(accountState.getBlob());
+		assertTrue(accountState.getBlob().length > 0);
 		assertNotNull(accountState.getBitmap());
-		assertNotNull(accountState.getNonDefaultSiblingsLedgerInfoToTransactionInfoProof());
-		assertNotNull(accountState.getNonDefaultSiblingsTransactionInfoToAccountProof());
+		assertTrue(accountState.getBitmap().length > 0);
+		ArrayList<byte[]> siblings = accountState.getNonDefaultSiblingsLedgerInfoToTransactionInfoProof();
+		assertNotNull(siblings);
+		assertTrue(siblings.size() > 0);
+		for (byte[] sibling : siblings) {
+			assertTrue(sibling.length > 0);
+		}
+		siblings = accountState.getNonDefaultSiblingsTransactionInfoToAccountProof();
+		assertNotNull(siblings);
+		assertTrue(siblings.size() > 0);
+		for (byte[] sibling : siblings) {
+			assertTrue(sibling.length > 0);
+		}
+		Transaction transaction = accountState.getTransaction();
+		assertNotNull(transaction);
+		//check consistency between transaction version and account state version
+		assertNull(transaction.getVersion()); //info not provided in TransactionInfo when analyzing account state
+		assertNotNull(transaction.getSignedTransactionHash());
+		Transaction transaction2 = ledger.getTransaction(version);
+		assertNotNull(transaction2);
+		byte[] signedTransactionBytes = transaction2.getSignedTransactionBytes();
+		assertNotNull(signedTransactionBytes);
+		assertTrue(signedTransactionBytes.length > 0);
+		//Hash hash = Hash.hash(signedTransactionBytes);
+		//assertEquals(transaction.getSignedTransactionHash(),hash);
+		//System.out.println("to string:" + new String(accountState.getBlob()));
 	}
 	
 	//@Test
-	public void test007GetEventsbyEventAccessPath() {
+	public void test009GetEventsbyEventAccessPath() {
 		Ledger ledger = new Ledger(TestData.VALIDATOR_ENDPOINT);
 		AccountAddress accountAddress = AccountAddress.ACCOUNT_ZERO;
 		accountAddress = new AccountAddress("19ec9d6b9c90d4283260e125d69682bc1551e15f8466b1aff0b9d417a3a4fb75");
@@ -156,7 +175,7 @@ public class TestLedger extends TestClass {
 	}
 	
 	@Test
-	public void test008GetAccountTransactionBySequenceNumber() {
+	public void test010GetAccountTransactionBySequenceNumber() {
 		Ledger ledger = new Ledger(TestData.VALIDATOR_ENDPOINT);
 		AccountAddress accountAddress = AccountAddress.ACCOUNT_ZERO;
 		accountAddress = new AccountAddress("19ec9d6b9c90d4283260e125d69682bc1551e15f8466b1aff0b9d417a3a4fb75");
@@ -176,13 +195,6 @@ public class TestLedger extends TestClass {
 		assertNotNull(transaction.getStateRootHash());
 		assertNotNull(transaction.getEventRootHash());
 		*/
-	}
-	
-	@Test
-	public void test009SubmitTransaction() {
-		Ledger ledger = new Ledger(TestData.VALIDATOR_ENDPOINT);
-		ledger.submitTransaction();
-		ChaingrokLog.purgeLogs();
 	}
 	
 	public void validateTransaction(Transaction transaction, long version, boolean withEvents) {

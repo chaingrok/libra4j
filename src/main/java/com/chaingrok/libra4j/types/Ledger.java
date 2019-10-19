@@ -66,7 +66,7 @@ public class Ledger {
 	public void submitTransaction() {
 		ByteString signedTxnBytes = null;
 		SignedTransaction signedTransaction = SignedTransaction.newBuilder()
-				//.setSignedTxn(signedTxnBytes)
+				.setSignedTxn(signedTxnBytes)
 				.build();
 		SubmitTransactionRequest submitTransactionRequest = SubmitTransactionRequest.newBuilder()
 				.setSignedTxn(signedTransaction)
@@ -172,12 +172,11 @@ public class Ledger {
 						}
 					}
 				}
-			} else {
-				if (count > 0) {
-					new ChaingrokError(Type.INVALID_LENGTH,"no transaction found for version: " + version  +  "(count: " + count + ")");
-				}
-			}
+			} 
 		} 
+		if (result.size() == 0) {
+			result = null;
+		}
 		return result;
 	}
 	
@@ -188,10 +187,14 @@ public class Ledger {
 	public Transaction getTransaction(long version, boolean withEvents) {
 		Transaction result = null;
 		ArrayList<Transaction> list = getTransactions(version,1L,withEvents);
-		if (list.size() > 1) {
-			new ChaingrokError(Type.LIST_TOO_LONG,"list size: " + list.size());
-		} else {
-			result = list.get(0);
+		if (list !=null) {
+			if (list.size() > 1) {
+				new ChaingrokError(Type.LIST_TOO_LONG,"list size: " + list.size());
+			} else {
+				if (list.size() == 1) {
+					result = list.get(0);
+				}
+			}
 		}
 		return result;
 	}
@@ -527,7 +530,6 @@ public class Ledger {
 			}
 			result.setNonDefaultSiblingsLedgerInfoToTransactionInfoProof(nonDefaultSiblings);
 		}
-		accountStateProof.getLedgerInfoToTransactionInfoProof();
 		SparseMerkleProof transactionInfoToAccountProof = accountStateProof.getTransactionInfoToAccountProof();
 		grpcChecker.checkExpectedFields(transactionInfoToAccountProof,3);
 		transactionInfoToAccountProof.getBitmap().toByteArray();
@@ -553,6 +555,7 @@ public class Ledger {
 		transaction.setEventRootHash(new Hash(transactionInfo.getEventRootHash()));
 		transaction.setStateRootHash(new Hash(transactionInfo.getStateRootHash()));
 		transaction.setGasUsed(transactionInfo.getGasUsed());
+		transaction.setMajorStatus(transactionInfo.getMajorStatus());
 		transaction.setTxnInfoSerializedSize(transactionInfo.getSerializedSize());
 		result.setTransaction(transaction);
 		return result;
