@@ -68,16 +68,16 @@ public class Ledger {
 		this.validatorEndpoint = validatorEndpoint;
 	}
 	
-	public void submitTransaction(Transaction transaction, AccountAddress senderAccount, long maxGasAmount, Long gasUnitPrice) {
+	public void submitTransaction(Transaction transaction) {
 		statusCase = null;
 		mempoolStatus = null;
 		acStatus = null;
 		vmStatus =  null;
 		validator = null;
 		//
-		ByteString signedTxnBytes = null;
+		//byte[] signedTransactionBytes = transaction.getSignedTransactionBytes();
 		SignedTransaction signedTransaction = SignedTransaction.newBuilder()
-				//.setSignedTxn(signedTxnBytes)
+				//.setSignedTxn(ByteString.copyFrom(signedTransactionBytes))
 				.build();
 		SubmitTransactionRequest submitTransactionRequest = SubmitTransactionRequest.newBuilder()
 				.setSignedTxn(signedTransaction)

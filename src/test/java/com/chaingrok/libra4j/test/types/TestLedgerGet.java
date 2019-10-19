@@ -185,6 +185,11 @@ public class TestLedgerGet extends TestClass {
 		*/
 	}
 	
+	@Test
+	public void test999testShutdown() throws InterruptedException {
+		//assertTrue(ledger.shutdown());
+	}
+	
 	public void validateTransaction(Transaction transaction, long version, boolean withEvents) {
 		System.out.println(transaction.toString());
 		assertEquals(version,(long)transaction.getVersion());
