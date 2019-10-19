@@ -57,16 +57,27 @@ public class Ledger {
 	private GrpcChecker grpcChecker = new GrpcChecker();
 	private LedgerInfoWithSignatures ledgerInfoWithSignatures;
 	private AccumulatorConsistencyProof ledgerConsistencyProof;
+	private StatusCase statusCase = null;
+	private MempoolAddTransactionStatus mempoolStatus = null;
+	private AdmissionControlStatus acStatus = null;
+	private VMStatus vmStatus =  null;
+	private Validator validator = null;
 	private long requestCount = 0;
 	
 	public Ledger(ValidatorEndpoint validatorEndpoint) {
 		this.validatorEndpoint = validatorEndpoint;
 	}
 	
-	public void submitTransaction() {
+	public void submitTransaction(Transaction transaction, AccountAddress senderAccount, long maxGasAmount, Long gasUnitPrice) {
+		statusCase = null;
+		mempoolStatus = null;
+		acStatus = null;
+		vmStatus =  null;
+		validator = null;
+		//
 		ByteString signedTxnBytes = null;
 		SignedTransaction signedTransaction = SignedTransaction.newBuilder()
-				.setSignedTxn(signedTxnBytes)
+				//.setSignedTxn(signedTxnBytes)
 				.build();
 		SubmitTransactionRequest submitTransactionRequest = SubmitTransactionRequest.newBuilder()
 				.setSignedTxn(signedTransaction)
@@ -75,31 +86,18 @@ public class Ledger {
 		SubmitTransactionResponse submitTransactionResponse = blockingStub.submitTransaction(submitTransactionRequest);
 		grpcChecker.checkExpectedFields(submitTransactionResponse,1);
 		//
-		submitTransactionResponse.getValidatorId();
-		System.out.println("validator id: " +  Utils.byteArrayToHexString(submitTransactionResponse.getValidatorId().toByteArray()));
-		//
-		AdmissionControlStatus acStatus = submitTransactionResponse.getAcStatus();
-		System.out.println("acStatus:" +  acStatus.getCodeValue() + " - msg: " + acStatus.getMessage());
+		acStatus = submitTransactionResponse.getAcStatus();
 		acStatus.getCodeValue();
 		acStatus.getMessage();
 		//
-		MempoolAddTransactionStatus mempoolStatus = submitTransactionResponse.getMempoolStatus();
-		System.out.println("mempoolStatus: " +  mempoolStatus.getCodeValue() + " - msg: " + mempoolStatus.getMessage());
-		mempoolStatus.getCodeValue();
-		mempoolStatus.getMessage();
-		//
-		StatusCase statusCase = submitTransactionResponse.getStatusCase();
-		statusCase.getNumber();
-		System.out.println("statusCase: " +  statusCase.getNumber());
-		
-		//
-		VMStatus vmStatus = submitTransactionResponse.getVmStatus();
-		vmStatus.getMajorStatus();
-		vmStatus.getSubStatus();
-		vmStatus.getMessage();
-		System.out.println("vmCase: " +  vmStatus.getMajorStatus() + " + " + vmStatus.getSubStatus() + " - " + vmStatus.getMessage());
-		//
-		submitTransactionResponse.getValidatorId();
+		mempoolStatus = submitTransactionResponse.getMempoolStatus();
+		statusCase = submitTransactionResponse.getStatusCase();
+		vmStatus = submitTransactionResponse.getVmStatus();
+		if ((submitTransactionResponse.getValidatorId() != null) 
+			&& (submitTransactionResponse.getValidatorId().toByteArray().length > 0)) {
+			validator = new Validator().setValidatorId(new ValidatorId(submitTransactionResponse.getValidatorId()));
+		}
+		submitTransactionResponse.getSerializedSize();
 	}
 	
 	public ArrayList<Transaction> getTransactions(long version, long count) {
@@ -586,7 +584,96 @@ public class Ledger {
 		return result;
 	}
 	
+	public Boolean submitOk() {
+		Boolean result = null;
+		if (statusCase != null) { 
+			if (result == null) {
+				result = true;
+			}
+			if (statusCase.getNumber() != 0) {
+				result = false;
+			}
+		}
+		if (acStatus != null) { 
+				if (result == null) {
+					result = true;
+				}
+				if (acStatus.getCodeValue() != 0) {
+					result = false;
+					acStatus.getMessage();
+				}
+		}
+		if (vmStatus != null) {
+			if (result == null) {
+				result = true;
+			}
+			if (vmStatus.getMajorStatus() != 0) {
+				result = false;
+				vmStatus.getMessage();
+			}
+			if (vmStatus.getSubStatus() != 0) {
+				result = false;
+				vmStatus.getMessage();
+			}
+		}
+		if (mempoolStatus != null) {
+			if (mempoolStatus.getCodeValue() != 0) {
+				result = false;
+				mempoolStatus.getMessage();
+			}
+		}
+		return result;
+	}
+	
+	public Integer getStatusCaseNumber() {
+		Integer result = null;
+		if (statusCase != null) {
+			result = statusCase.getNumber();
+		}
+		return result;
+	}
+	
+	public Integer getAcStatusCodeValue() {
+		Integer result = null;
+		if (acStatus != null) {
+			result = acStatus.getCodeValue();
+		}
+		return result;
+	}
+	
+	public Long getVmStatusMajorStatus() {
+		Long result = null;
+		if (vmStatus != null) {
+			result = vmStatus.getMajorStatus();
+		}
+		return result;
+	}
+	
+	public Long getVmStatusSubStatus() {
+		Long result = null;
+		if (vmStatus != null) {
+			result = vmStatus.getSubStatus();
+		}
+		return result;
+	}
+	
+	public Integer getMempoolStatusCodeValue() {
+		Integer result = null;
+		if (mempoolStatus != null) {
+			result = mempoolStatus.getCodeValue();
+		}
+		return result;
+	}
+	
+	public Validator getValidator() {
+		return validator;
+	}
+	
 	public long getRequestCount() {
 		return requestCount;
+	}
+	
+	public boolean shutdown() {
+		return validatorEndpoint.shutdown();
 	}
 }
