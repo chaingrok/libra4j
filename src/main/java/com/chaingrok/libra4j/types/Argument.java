@@ -26,18 +26,21 @@ public class Argument extends ByteArray implements LCSInterface {
 		return type;
 	}
 
-	public void setType(Type type) {
+	public Argument setType(Type type) {
 		this.type = type;
+		return this;
 	}
 
 	public void setBytes(byte[] bytes) {
 		this.bytes = bytes;
 	}
 	
-	public void setString(String string) {
+	public Argument setString(String string) {
 		if (string != null) {
 			bytes = string.getBytes();
 		}
+		setType(Type.STRING);
+		return this;
 	}
 	
 	public String getString() {
@@ -48,10 +51,12 @@ public class Argument extends ByteArray implements LCSInterface {
 		return result;
 	}
 	
-	public void setUInt64(UInt64 uint64) {
+	public Argument setUInt64(UInt64 uint64) {
 		if (uint64 != null) {
 			bytes = uint64.getBytes();
 		}
+		setType(Type.U64);
+		return this;
 	}
 	
 	public UInt64 getUInt64() {
@@ -62,10 +67,12 @@ public class Argument extends ByteArray implements LCSInterface {
 		return result;
 	}
 	
-	public void setAccountAddress(AccountAddress accountAddress) {
+	public Argument setAccountAddress(AccountAddress accountAddress) {
 		if (accountAddress != null) {
 			bytes = accountAddress.getBytes();
 		}
+		setType(Type.ADDRESS);
+		return this;
 	}
 	
 	public AccountAddress getAccountAddress() {
