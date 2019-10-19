@@ -15,12 +15,10 @@ import org.junit.runners.MethodSorters;
 import com.chaingrok.lib.ChaingrokError;
 import com.chaingrok.lib.ChaingrokLog;
 import com.chaingrok.lib.test.TestClass;
-import com.chaingrok.libra4j.test.TestData;
 import com.chaingrok.libra4j.types.AccountAddress;
 import com.chaingrok.libra4j.types.AccountState;
 import com.chaingrok.libra4j.types.Event;
 import com.chaingrok.libra4j.types.Events;
-import com.chaingrok.libra4j.types.Ledger;
 import com.chaingrok.libra4j.types.LedgerInfo;
 import com.chaingrok.libra4j.types.Transaction;
 
@@ -32,7 +30,6 @@ public class TestLedgerGet extends TestClass {
 	
 	@Test
 	public void test001GetLedgerInfo() {
-		Ledger ledger = new Ledger(TestData.VALIDATOR_ENDPOINT);
 		LedgerInfo ledgerInfo = ledger.getLedgerInfo();
 		assertEquals(1L,ledger.getRequestCount());
 		assertFalse(ChaingrokError.hasLogs());
@@ -50,7 +47,6 @@ public class TestLedgerGet extends TestClass {
 	public void test002GetTransactionWithoutEvents() {
 		long version = 1L;
 		boolean withEvents = false;
-		Ledger ledger = new Ledger(TestData.VALIDATOR_ENDPOINT);
 		Transaction transaction = ledger.getTransaction(version,withEvents);
 		assertEquals(1L,ledger.getRequestCount());
 		assertFalse(ChaingrokError.hasLogs());
@@ -62,7 +58,6 @@ public class TestLedgerGet extends TestClass {
 	public void test003GetTransactionWithEvents() {
 		long version = 1L;
 		boolean withEvents = true;
-		Ledger ledger = new Ledger(TestData.VALIDATOR_ENDPOINT);
 		Transaction transaction = ledger.getTransaction(version,withEvents);
 		assertEquals(1L,ledger.getRequestCount());
 		assertFalse(ChaingrokError.hasLogs());
@@ -74,7 +69,6 @@ public class TestLedgerGet extends TestClass {
 	public void test004GetTransactionKo() {
 		long version = -1L; //invalid version
 		boolean withEvents = true;
-		Ledger ledger = new Ledger(TestData.VALIDATOR_ENDPOINT);
 		assertNull(ledger.getTransaction(version,withEvents));
 	}
 	
@@ -83,7 +77,6 @@ public class TestLedgerGet extends TestClass {
 		long version = 1L;
 		long count = 10;
 		boolean withEvents = false;
-		Ledger ledger = new Ledger(TestData.VALIDATOR_ENDPOINT);
 		ArrayList<Transaction> transactions = ledger.getTransactions(version,count,withEvents);
 		assertEquals(1L,ledger.getRequestCount());
 		assertFalse(ChaingrokError.hasLogs());
@@ -99,7 +92,6 @@ public class TestLedgerGet extends TestClass {
 		long version = 123L;
 		long count = 10;
 		boolean withEvents = true;
-		Ledger ledger = new Ledger(TestData.VALIDATOR_ENDPOINT);
 		ArrayList<Transaction> transactions = ledger.getTransactions(version,count,withEvents);
 		assertEquals(1L,ledger.getRequestCount());
 		assertFalse(ChaingrokError.hasLogs());
@@ -115,13 +107,11 @@ public class TestLedgerGet extends TestClass {
 		long version = -1L; //invalid version
 		long count = 10;
 		boolean withEvents = true;
-		Ledger ledger = new Ledger(TestData.VALIDATOR_ENDPOINT);
 		assertNull(ledger.getTransactions(version,count,withEvents));
 	}
 	
 	@Test
 	public void test008GetAccountState() {
-		Ledger ledger = new Ledger(TestData.VALIDATOR_ENDPOINT);
 		AccountAddress accountAddress = AccountAddress.ACCOUNT_ZERO;
 		AccountState accountState = ledger.getAccountState(accountAddress);
 		System.out.println("account state " + accountAddress + ":" + "\n");
@@ -164,7 +154,6 @@ public class TestLedgerGet extends TestClass {
 	
 	//@Test
 	public void test009GetEventsbyEventAccessPath() {
-		Ledger ledger = new Ledger(TestData.VALIDATOR_ENDPOINT);
 		AccountAddress accountAddress = AccountAddress.ACCOUNT_ZERO;
 		accountAddress = new AccountAddress("19ec9d6b9c90d4283260e125d69682bc1551e15f8466b1aff0b9d417a3a4fb75");
 		byte[] path = "/received_events_count/".getBytes();
@@ -176,7 +165,6 @@ public class TestLedgerGet extends TestClass {
 	
 	@Test
 	public void test010GetAccountTransactionBySequenceNumber() {
-		Ledger ledger = new Ledger(TestData.VALIDATOR_ENDPOINT);
 		AccountAddress accountAddress = AccountAddress.ACCOUNT_ZERO;
 		accountAddress = new AccountAddress("19ec9d6b9c90d4283260e125d69682bc1551e15f8466b1aff0b9d417a3a4fb75");
 		long sequence = 1L;
