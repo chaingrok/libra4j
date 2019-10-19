@@ -23,32 +23,36 @@ public class Program implements LCSInterface {
 		return code;
 	}
 	
-	public void setCode(Code code) {
+	public Program setCode(Code code) {
 		this.code = code;
+		return this;
 	}
 	
 	public Long getCodeSize() {
 		return codeSize;
 	}
 	
-	public void setCodeSize(Long codeSize) {
+	public Program setCodeSize(Long codeSize) {
 		this.codeSize = codeSize;
+		return this;
 	}
 	
 	public Arguments getArguments() {
 		return arguments;
 	}
 	
-	public void setArguments(Arguments arguments) {
+	public Program setArguments(Arguments arguments) {
 		this.arguments = arguments;
+		return this;
 	}
 	
 	public Modules getModules() {
 		return modules;
 	}
 	
-	public void setModules(Modules modules) {
+	public Program setModules(Modules modules) {
 		this.modules = modules;
+		return this;
 	}
 	
 	public byte[] deserializeFromFile(String filepath) {

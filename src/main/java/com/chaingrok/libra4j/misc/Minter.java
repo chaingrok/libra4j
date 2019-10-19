@@ -17,14 +17,17 @@ import okhttp3.Response;
 
 public class Minter {
 	
+	public static final int HTTP_OK = 200;
+	
 	private final Builder builder = new HttpUrl.Builder()
 		    .scheme("http")
 		    .host("faucet.testnet.libra.org");
 	private final OkHttpClient okHttpClient = new OkHttpClient();
 	
-	public int mint(AccountAddress accountAddress,long microLibras) {
-		int result = -1;
-		
+	private int httpCode = -1;
+	
+	public Minter mint(AccountAddress accountAddress,long microLibras) {
+		httpCode = -1;
 		HttpUrl url = builder
 					.addQueryParameter("address",Utils.byteArrayToHexString(accountAddress.getBytes()))
 					.addQueryParameter("amount",microLibras + "")
@@ -43,9 +46,16 @@ public class Minter {
 			new ChaingrokError(ChaingrokLog.Type.HTTP_ERROR,e);
 		}
         if (response != null) {
-        	result = response.code();
+        	httpCode = response.code();
+        	if (httpCode != HTTP_OK) {
+        		new ChaingrokError(ChaingrokLog.Type.HTTP_ERROR,"http response code: " + httpCode);
+        	}
         }
-        return result;
+        return this;
+	}
+	
+	public int getHttpCode() {
+		return httpCode;
 	}
 
 }

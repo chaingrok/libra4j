@@ -46,80 +46,90 @@ public class Transaction implements LCSInterface {
 		return signedTransactionBytes;
 	}
 
-	public void setSignedTransactionBytes(byte[] signedTransactionBytes) {
+	public Transaction setSignedTransactionBytes(byte[] signedTransactionBytes) {
 		this.signedTransactionBytes = signedTransactionBytes;
+		return this;
 	}
 	
 	public AccountAddress getSenderAccountAddress() {
 		return senderAccountAddress;
 	}
 
-	public void setSenderAccountAddress(AccountAddress senderAccountAddress) {
+	public Transaction setSenderAccountAddress(AccountAddress senderAccountAddress) {
 		this.senderAccountAddress = senderAccountAddress;
+		return this;
 	}
 	
 	public UInt64 getSequenceNumber() {
 		return sequenceNumber;
 	}
 
-	public void setSequenceNumber(UInt64 sequenceNumber) {
+	public Transaction setSequenceNumber(UInt64 sequenceNumber) {
 		this.sequenceNumber = sequenceNumber;
+		return this;
 	}
 	
 	public TransactionPayloadType getTransactionPayloadType() {
 		return transactionPayloadType;
 	}
 
-	public void setTransactionPayloadType(TransactionPayloadType transactionPayloadType) {
+	public Transaction setTransactionPayloadType(TransactionPayloadType transactionPayloadType) {
 		this.transactionPayloadType = transactionPayloadType;
+		return this;
 	}
 	
 	public Program getProgram() {
 		return program;
 	}
 
-	public void setProgram(Program program) {
+	public Transaction setProgram(Program program) {
 		this.program = program;
+		return this;
 	}
 	
 	public WriteSet getWriteSet() {
 		return writeSet;
 	}
 
-	public void setWriteSet(WriteSet writeSet) {
+	public Transaction setWriteSet(WriteSet writeSet) {
 		this.writeSet = writeSet;
+		return this;
 	}
 	
 	public Script getScript() {
 		return script;
 	}
 
-	public void setScript(Script script) {
+	public Transaction setScript(Script script) {
 		this.script = script;
+		return this;
 	}
 
 	public UInt64 getMaxGasAmount() {
 		return maxGasAmount;
 	}
 
-	public void setMaxGasAmount(UInt64 maxGasAmount) {
+	public Transaction setMaxGasAmount(UInt64 maxGasAmount) {
 		this.maxGasAmount = maxGasAmount;
+		return this;
 	}
 	
 	public UInt64 getGasUnitPrice() {
 		return gasUnitPrice;
 	}
 
-	public void setGasUnitPrice(UInt64 gasUnitPrice) {
+	public Transaction setGasUnitPrice(UInt64 gasUnitPrice) {
 		this.gasUnitPrice = gasUnitPrice;
+		return this;
 	}
 	
 	public UInt64 getExpirationTime() {
 		return expirationTime;
 	}
 
-	public void setExpirationTime(UInt64 expirationTime) {
+	public Transaction setExpirationTime(UInt64 expirationTime) {
 		this.expirationTime = expirationTime;
+		return this;
 	}
 	
 	//signed transaction fields
@@ -128,88 +138,99 @@ public class Transaction implements LCSInterface {
 		return version;
 	}
 
-	public void setVersion(Long version) {
+	public Transaction setVersion(Long version) {
 		this.version = version;
+		return this;
 	}
 	
 	public Long getMajorStatus() {
 		return majorStatus;
 	}
 
-	public void setMajorStatus(Long majorStatus) {
+	public Transaction setMajorStatus(Long majorStatus) {
 		this.majorStatus = majorStatus;
+		return this;
 	}
 
 	public PubKey getSenderPublicKey() {
 		return senderPublicKey;
 	}
 
-	public void setSenderPublicKey(PubKey senderPublicKey) {
+	public Transaction setSenderPublicKey(PubKey senderPublicKey) {
 		this.senderPublicKey = senderPublicKey;
+		return this;
 	}
 
 	public Signature getSignature() {
 		return signature;
 	}
 
-	public void setSignature(Signature signature) {
+	public Transaction setSignature(Signature signature) {
 		this.signature = signature;
+		return this;
 	}
 
 	public Long getGasUsed() {
 		return gasUsed;
 	}
 
-	public void setGasUsed(Long gasUsed) {
+	public Transaction setGasUsed(Long gasUsed) {
 		this.gasUsed = gasUsed;
+		return this;
 	}
 
 	public Integer getTxnInfoSerializedSize() {
 		return txnInfoSerializedSize;
 	}
 
-	public void setTxnInfoSerializedSize(Integer txnInfoSerializedSize) {
+	public Transaction setTxnInfoSerializedSize(Integer txnInfoSerializedSize) {
 		this.txnInfoSerializedSize = txnInfoSerializedSize;
+		return this;
 	}
 
 	public Integer getSignedTxnSerializedSize() {
 		return signedTxnSerializedSize;
 	}
 
-	public void setSignedTxnSerializedSize(Integer signedTxnSerializedSize) {
+	public Transaction setSignedTxnSerializedSize(Integer signedTxnSerializedSize) {
 		this.signedTxnSerializedSize = signedTxnSerializedSize;
+		return this;
 	}
 
 	public Hash getSignedTransactionHash() {
 		return signedTransactionHash;
 	}
 
-	public void setSignedTransactionHash(Hash signedTransactionHash) {
+	public Transaction setSignedTransactionHash(Hash signedTransactionHash) {
 		this.signedTransactionHash = signedTransactionHash;
+		return this;
 	}
 
 	public Hash getEventRootHash() {
 		return eventRootHash;
 	}
 
-	public void setEventRootHash(Hash eventRootHash) {
+	public Transaction setEventRootHash(Hash eventRootHash) {
 		this.eventRootHash = eventRootHash;
+		return this;
 	}
 
 	public Hash getStateRootHash() {
 		return stateRootHash;
 	}
 
-	public void setStateRootHash(Hash stateRootHash) {
+	public Transaction setStateRootHash(Hash stateRootHash) {
 		this.stateRootHash = stateRootHash;
+		return this;
 	}
 
 	public Events getEventsList() {
 		return events;
 	}
 
-	public void setEventsList(Events eventsList) {
+	public Transaction setEventsList(Events eventsList) {
 		this.events = eventsList;
+		return this;
 	}
 
 	@Override
