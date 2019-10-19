@@ -9,16 +9,18 @@ public class Validator {
 		return id;
 	}
 	
-	public void setValidatorId(ValidatorId id) {
+	public Validator setValidatorId(ValidatorId id) {
 		this.id = id;
+		return this;
 	}
 	
 	public Signature getSignature() {
 		return signature;
 	}
 	
-	public void setSignature(Signature signature) {
+	public Validator setSignature(Signature signature) {
 		this.signature = signature;
+		return this;
 	}
 
 }

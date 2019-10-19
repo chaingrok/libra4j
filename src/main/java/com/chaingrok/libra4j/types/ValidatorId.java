@@ -12,7 +12,7 @@ public class ValidatorId extends ByteArray {
 	public ValidatorId(ByteString byteString) {
 		super(byteString);
 		if (getBytes().length != BYTE_LENGTH) {
-			new ChaingrokError(Type.INVALID_LENGTH,"invalid validator id length: " + getBytes().length + " <> " + BYTE_LENGTH + "(" + Utils.byteArrayToHexString(bytes) + ")");
+			new ChaingrokError(Type.INVALID_LENGTH,"invalid validator id length: " + getBytes().length + " <> " + BYTE_LENGTH + " (" + Utils.byteArrayToHexString(bytes) + ")");
 		}
 	}
 	
