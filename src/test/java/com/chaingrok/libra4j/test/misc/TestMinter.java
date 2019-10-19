@@ -16,13 +16,13 @@ public class TestMinter extends TestClass {
 	
 	
 	@Test
-	public void test001HelperFunctions() {
+	public void test001Mint() {
 		KeyPair keyPair = KeyPair.random();
 		//
 		AccountAddress accountAddress = new AccountAddress(keyPair.getLibraAddress());
 		long microLibras = 10_000_000L;
 		Minter minter = new Minter();
-		assertEquals(200,minter.mint(accountAddress, microLibras));
+		assertEquals(Minter.HTTP_OK,minter.mint(accountAddress, microLibras).getHttpCode());
 		//TODO: check account amount
 	}
 }
