@@ -42,6 +42,14 @@ public class Transaction implements LCSInterface {
 	
 	//raw transaction fields
 	
+	public byte[] serialize() {
+		byte[] result = LCSProcessor.buildEncoder()
+				.encode(this)
+				.build();
+		//TODO: to be completed
+		return result;
+	}
+	
 	public byte[] getSignedTransactionBytes() {
 		return signedTransactionBytes;
 	}
