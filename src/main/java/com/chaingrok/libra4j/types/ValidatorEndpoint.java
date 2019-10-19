@@ -1,9 +1,13 @@
 package com.chaingrok.libra4j.types;
 
 
+import java.util.concurrent.TimeUnit;
+
 import org.libra.grpc.types.AdmissionControlGrpc;
 import org.libra.grpc.types.AdmissionControlGrpc.AdmissionControlBlockingStub;
 import org.libra.grpc.types.AdmissionControlGrpc.AdmissionControlStub;
+
+import com.chaingrok.lib.ChaingrokException;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
@@ -42,7 +46,16 @@ public class ValidatorEndpoint {
 	}
 	
 	public boolean shutdown() {
-		return channel.shutdown().isShutdown();
+		channel.shutdownNow();
+		boolean terminated = false;
+		while (!terminated) {
+			try {
+				terminated = channel.awaitTermination(100L, TimeUnit.MILLISECONDS);
+			} catch (InterruptedException e) {
+				new ChaingrokException(e);
+			}
+		}
+		return channel.isShutdown();
 	}
 	
 }
