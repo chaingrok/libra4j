@@ -44,16 +44,21 @@ public class Hash extends ByteArray {
 		byte[] allBytes = new byte[bytes.length + saltBytes.length];
         System.arraycopy(bytes, 0, allBytes, 0, bytes.length);
         System.arraycopy(saltBytes, 0, allBytes, bytes.length, saltBytes.length);
-        Hash result = new Hash(digestSHA3.digest(bytes));
+        Hash result = new Hash(digestSHA3.digest(allBytes));
         return result;
 	}
 	
-	public enum HashSalt {
+	public enum HashSalt {  //as per crypto/crypto/src/hash.rs - see define_hasher functions()
 		
 		ACCOUNT_ADDRESS("AccountAddress"),
+		ACCOUNT_STATE_BLOB("AccountStateBlob"),
 		RAW_TRANSACTION("RawTransaction"),
+		SIGNED_TRANSACTION("SignedTransaction"),
+		TRANSACTION_INFO("TransactionInfo"),
 		
 		;
+		
+		public static final String LIBRA_HASH_SUFFIX = "@@$$LIBRA$$@@";  //as per crypto/crypto/src/hash.rs
 		
 		private String salt = null;
 		
@@ -62,7 +67,7 @@ public class Hash extends ByteArray {
 		}
 		
 		public String getSalt() {
-			return salt;
+			return salt + LIBRA_HASH_SUFFIX ;
 		}
 
 	}
