@@ -49,7 +49,7 @@ public class GrpcChecker {
 	
 	public boolean checkValidatorSignature(ValidatorSignature validatorSignature) {
 		boolean result = true;
-		new AccountAddress(validatorSignature.getValidatorId());
+		new AccountAddress(validatorSignature.getValidatorId().toByteArray());
 		ByteString signed = validatorSignature.getSignature();
 		if (signed.size() == 0) {
 			new ChaingrokError(Type.MISSING_DATA,"validator signature invalid: signed is null");

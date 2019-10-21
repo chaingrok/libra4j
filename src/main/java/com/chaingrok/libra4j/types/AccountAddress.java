@@ -3,7 +3,6 @@ package com.chaingrok.libra4j.types;
 import com.chaingrok.lib.ChaingrokError;
 import com.chaingrok.lib.Utils;
 import com.chaingrok.lib.ChaingrokLog.Type;
-import com.google.protobuf.ByteString;
 
 //Soource : types/src/account_address.rs
 
@@ -16,10 +15,6 @@ public class AccountAddress extends ByteArray {
 	
 	public static final int BYTE_LENGTH = 32;
 	public static final String LIBRA_NETWORK_ID_SHORT = "lb";
-	
-	public AccountAddress(ByteString bytes) {
-			this(bytes.toByteArray());  //TODO: bytes == null will throw exception
-	}
 	
 	public AccountAddress(String hex) {
 		this(Utils.hexStringToByteArray(hex));  // NullException fine if bytes is null

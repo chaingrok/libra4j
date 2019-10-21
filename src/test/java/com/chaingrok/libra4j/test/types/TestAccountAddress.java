@@ -3,9 +3,8 @@ package com.chaingrok.libra4j.test.types;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+
 
 import java.util.ArrayList;
 
@@ -17,7 +16,6 @@ import com.chaingrok.lib.ChaingrokError;
 import com.chaingrok.lib.ChaingrokLog;
 import com.chaingrok.lib.test.TestClass;
 import com.chaingrok.libra4j.types.AccountAddress;
-import com.google.protobuf.ByteString;
 
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -34,15 +32,6 @@ public class TestAccountAddress extends TestClass {
 		ChaingrokLog log = logs.get(0);
 		assertTrue(log instanceof ChaingrokError);
 		ChaingrokLog.purgeLogs();
-		//
-		assertFalse(ChaingrokLog.hasLogs());
-		ByteString byteString = null;
-		try {
-			new AccountAddress(byteString);
-			fail("should throw NullPointerException");
-		} catch (NullPointerException e) {
-			assertNull(e.getMessage());
-		}
 	}
 	
 	@Test
