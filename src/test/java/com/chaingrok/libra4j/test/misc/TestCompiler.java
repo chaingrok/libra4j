@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 
 import org.junit.FixMethodOrder;
+import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import com.chaingrok.libra4j.misc.Compiler;
@@ -15,7 +16,7 @@ import com.chaingrok.libra4j.test.TestConfig;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestCompiler {
 	
-	public static final String LIBRA_DIR = TestConfig.HOME_DIR_PATH + File.separator + "libra-master-2019-09-27"; // libra project dir
+	public static final String LIBRA_DIR = TestConfig.HOME_DIR_PATH + File.separator + "libra-master-2019-10-17"; // libra project dir
 	
 	//Those tests fail on Travis CI as libra project is required in order to have compiler
 	
@@ -28,15 +29,23 @@ public class TestCompiler {
 	}
 	
 	//@Test
-	public void test002CompileReturnSample() {
-		String mvirFilepath = Libra4jConfig.MVIR_DIR + File.separator + "rotate_authentication_key.mvir";
-		String mvbcFilepath = "";
-		Compiler compiler = new Compiler(LIBRA_DIR);
-		System.out.println("Print commmand: " + compiler.createCompileCommand(mvirFilepath));
-		File mvbcFile = compiler.compile(mvirFilepath);
-		assertTrue(mvbcFile.exists());
-		assertTrue(mvbcFile.getAbsolutePath().endsWith(mvbcFilepath));
-		//assertTrue(mvbcFile.delete());
+	public void test002CompileStandardTransactionScripts() { //as per /language/stblib/transaction_scripts
+		String[] scripts = {
+				"create_account.mvir",
+				"mint.mvir",
+				"peer_to_peer_transfer.mvir",
+				"rotate_authentication_key.mvir",
+		};
+		for(String script : scripts) {
+			String mvirFilepath = Libra4jConfig.MVIR_DIR + File.separator + script;
+			String mvbcFilepath = ".mv";
+			Compiler compiler = new Compiler(LIBRA_DIR);
+			System.out.println("Print commmand: " + compiler.createCompileCommand(mvirFilepath));
+			File mvbcFile = compiler.compile(mvirFilepath);
+			assertTrue(mvbcFile.exists());
+			assertTrue(mvbcFile.getAbsolutePath().endsWith(mvbcFilepath));
+			//assertTrue(mvbcFile.delete());
+		}
 	}
 
 }
