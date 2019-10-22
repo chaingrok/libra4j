@@ -11,9 +11,9 @@ import org.junit.runners.MethodSorters;
 
 import com.chaingrok.lib.ChaingrokLog;
 import com.chaingrok.lib.UInt64;
-import com.chaingrok.lib.test.TestClass;
 import com.chaingrok.libra4j.crypto.KeyPair;
 import com.chaingrok.libra4j.misc.Minter;
+import com.chaingrok.libra4j.test.TestClassLibra;
 import com.chaingrok.libra4j.types.AccountAddress;
 import com.chaingrok.libra4j.types.Argument;
 import com.chaingrok.libra4j.types.Arguments;
@@ -23,7 +23,7 @@ import com.chaingrok.libra4j.types.Transaction;
 
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class TestLedgerSubmit extends TestClass {
+public class TestLedgerSubmit extends TestClassLibra {
 	
 	
 	@Test
@@ -40,9 +40,11 @@ public class TestLedgerSubmit extends TestClass {
 	
 	@Test
 	public void test002SubmitTransferTransaction() {
+		long sequenceNumber = 1L;
 		long gasUnitPrice = 1L;
 		long maxGasAmount = 200_000L;
-		long microLibras = 10_000_000L;
+		long expirationTime = System.currentTimeMillis() / 1000 + 120; //120s until expiration
+		long mintedMicroLibras = 10_000_000L;
 		//
 		KeyPair senderKeyPair = KeyPair.random();
 		KeyPair receiverKeyPair = KeyPair.random();
@@ -53,10 +55,10 @@ public class TestLedgerSubmit extends TestClass {
 		System.out.println(receiverAccountAddress.toString());
 		//
 		new Minter()
-				.mint(senderAccountAddress, microLibras)
-				.mint(receiverAccountAddress, microLibras);
+				.mint(senderAccountAddress, mintedMicroLibras)
+				.mint(receiverAccountAddress, mintedMicroLibras);
 		//
-		long transferredAmount = microLibras / 10;
+		long transferredAmount = mintedMicroLibras / 10;
 		Argument amountArgument = new Argument()
 				.setUInt64(new UInt64(transferredAmount));
 		Argument receiverArgument = new Argument()
@@ -68,10 +70,13 @@ public class TestLedgerSubmit extends TestClass {
 				.setCode(Code.PEER_TO_PEER_TRANSFER)
 				.setArguments(arguments);
 		Transaction transaction = new Transaction()
+				.setSenderAccountAddress(senderAccountAddress)
+				.setSequenceNumber(new UInt64(sequenceNumber))
+				.setProgram(program)
 				.setMaxGasAmount(new UInt64(maxGasAmount))
 				.setGasUnitPrice(new UInt64(gasUnitPrice))
-				.setSenderAccountAddress(senderAccountAddress)
-				.setProgram(program);
+				.setExpirationTime(new UInt64(expirationTime))
+				;
 		ledger.submitTransaction(transaction);
 		ChaingrokLog.purgeLogs();
 	}
