@@ -12,6 +12,7 @@ import org.junit.runners.MethodSorters;
 import com.chaingrok.libra4j.misc.Compiler;
 import com.chaingrok.libra4j.misc.Libra4jConfig;
 import com.chaingrok.libra4j.test.TestConfig;
+import com.chaingrok.libra4j.types.Program;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestCompiler {
@@ -30,14 +31,8 @@ public class TestCompiler {
 	
 	//@Test
 	public void test002CompileStandardTransactionScripts() { //as per /language/stblib/transaction_scripts
-		String[] scripts = {
-				"create_account.mvir",
-				"mint.mvir",
-				"peer_to_peer_transfer.mvir",
-				"rotate_authentication_key.mvir",
-		};
-		for(String script : scripts) {
-			String mvirFilepath = Libra4jConfig.MVIR_DIR + File.separator + script;
+		for(String program : Program.PROGRAMS) {
+			String mvirFilepath = Libra4jConfig.MVIR_DIR + File.separator + program + ".mvir";
 			String mvbcFilepath = ".mv";
 			Compiler compiler = new Compiler(LIBRA_DIR);
 			System.out.println("Print commmand: " + compiler.createCompileCommand(mvirFilepath));
