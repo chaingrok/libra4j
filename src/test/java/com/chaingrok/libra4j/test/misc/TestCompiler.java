@@ -6,13 +6,13 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 
 import org.junit.FixMethodOrder;
-import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import com.chaingrok.libra4j.misc.Compiler;
 import com.chaingrok.libra4j.misc.Libra4jConfig;
 import com.chaingrok.libra4j.test.TestConfig;
-import com.chaingrok.libra4j.types.Program;
+import com.chaingrok.libra4j.types.Transaction;
+import com.chaingrok.libra4j.types.Transaction.Type;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestCompiler {
@@ -31,15 +31,17 @@ public class TestCompiler {
 	
 	//@Test
 	public void test002CompileStandardTransactionScripts() { //as per /language/stblib/transaction_scripts
-		for(String program : Program.PROGRAMS) {
-			String mvirFilepath = Libra4jConfig.MVIR_DIR + File.separator + program + ".mvir";
-			String mvbcFilepath = ".mv";
-			Compiler compiler = new Compiler(LIBRA_DIR);
-			System.out.println("Print commmand: " + compiler.createCompileCommand(mvirFilepath));
-			File mvbcFile = compiler.compile(mvirFilepath);
-			assertTrue(mvbcFile.exists());
-			assertTrue(mvbcFile.getAbsolutePath().endsWith(mvbcFilepath));
-			//assertTrue(mvbcFile.delete());
+		for(Type type  : Transaction.Type.values()) {
+			if (!Transaction.Type.UNKNOWN.equals(type)) {
+				String mvirSourceCode = type.getMvirSourceCode();
+				String mvirFilepath = Libra4jConfig.MVIR_DIR + File.separator + mvirSourceCode + ".mvir";
+				String mvbcFilepath = ".mv";
+				Compiler compiler = new Compiler(LIBRA_DIR);
+				System.out.println("Print commmand: " + compiler.createCompileCommand(mvirFilepath));
+				File mvbcFile = compiler.compile(mvirFilepath);
+				assertTrue(mvbcFile.exists());
+				assertTrue(mvbcFile.getAbsolutePath().endsWith(mvbcFilepath));
+			}
 		}
 	}
 

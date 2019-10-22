@@ -23,6 +23,7 @@ import com.chaingrok.libra4j.types.Code;
 import com.chaingrok.libra4j.types.Module;
 import com.chaingrok.libra4j.types.Modules;
 import com.chaingrok.libra4j.types.Program;
+import com.chaingrok.libra4j.types.Transaction;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestProgram extends TestClass {
@@ -81,17 +82,19 @@ public class TestProgram extends TestClass {
 	
 	@Test
 	public void test003ProgramCodeDeserializeFromFile() { 
-		for (String programName : Program.PROGRAMS) {
-			Program program = new Program();
-			String filePath = Libra4jConfig.MVIR_DIR + File.separator + programName + "." + Program.MV_EXT;
-			File mvFile = new File(filePath);
-			assertTrue("file does not exist: " + mvFile.getAbsolutePath(),mvFile.exists());
-			assertNull(program.getCode());
-			byte[] bytes = program.deserializeFromFile(filePath);
-			assertTrue(bytes.length > 100);
-			assertArrayEquals(bytes,program.getCode().getBytes());
-			System.out.println("program: " + programName + " - bytes: " + Utils.byteArrayToHexString(bytes));
-			assertArrayEquals(Code.CODES.get(programName).getBytes(),bytes);
+		for (Transaction.Type type : Transaction.Type.values()) {
+			if (!Transaction.Type.UNKNOWN.equals(type)) {
+				Program program = new Program();
+				String filePath = Libra4jConfig.MVIR_DIR + File.separator + type.getMvirSourceCode() + "." + Program.MV_EXT;
+				File mvFile = new File(filePath);
+				assertTrue("file does not exist: " + mvFile.getAbsolutePath(),mvFile.exists());
+				assertNull(program.getCode());
+				byte[] bytes = program.deserializeFromFile(filePath);
+				assertTrue(bytes.length > 100);
+				assertArrayEquals(bytes,program.getCode().getBytes());
+				System.out.println("program: " + type.getMvirSourceCode() + " - bytes: " + Utils.byteArrayToHexString(bytes));
+				assertArrayEquals(type.getCode().getBytes(),bytes);
+			}
 		}
 	}
 		

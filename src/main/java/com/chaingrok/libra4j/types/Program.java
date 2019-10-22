@@ -12,18 +12,6 @@ public class Program implements LCSInterface {
 	
 	public static final String MV_EXT = "mv";
 	
-	public static final String CREATE_ACCOUNT = "create_account";
-	public static final String MINT = "mint";
-	public static final String PEER_TO_PEER_TRANSFER = "peer_to_peer_transfer";
-	public static final String ROTATE_AUTHENTICATION_KEY = "rotate_authentication_key";
-	
-	public static final String[] PROGRAMS = {
-			CREATE_ACCOUNT,
-			MINT,
-			PEER_TO_PEER_TRANSFER,
-			ROTATE_AUTHENTICATION_KEY,
-	};
-	
 	private Code code = null;
 	private Long codeSize = null;
 	private Arguments arguments = null;

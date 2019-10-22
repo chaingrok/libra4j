@@ -1,9 +1,12 @@
 package com.chaingrok.libra4j.types;
 
+import java.security.PrivateKey;
+
 import com.chaingrok.lib.ChaingrokError;
 import com.chaingrok.lib.UInt64;
 import com.chaingrok.lib.Utils;
 import com.chaingrok.lib.ChaingrokLog;
+import com.chaingrok.libra4j.crypto.Signer;
 import com.chaingrok.libra4j.misc.LCSInterface;
 import com.chaingrok.libra4j.misc.LCSProcessor;
 
@@ -331,14 +334,32 @@ public class Transaction implements LCSInterface {
 		return result;
 	}
 	
-	public enum Type {
-		MINT,
-		PEER_TO_PEER_TRANSFER,
-		CREATE_ACCOUNT,
-		ROTATE_AUTHENTICATION_KEY,
+	public enum Type { // as per /language/stblib/transaction_scripts
+		CREATE_ACCOUNT("create_account",Code.CREATE_ACCOUNT),
+		MINT("mint",Code.MINT),
+		PEER_TO_PEER_TRANSFER("peer_to_peer_transfer",Code.PEER_TO_PEER_TRANSFER),
+		ROTATE_AUTHENTICATION_KEY("rotate_authentication_key",Code.ROTATE_AUTHENTICATION_KEY),
 		UNKNOWN,
 		
 		;
+		
+		String mvirSourceCode = null;
+		Code code = null;
+		
+		private Type() {};
+		
+		private Type(String mvirSourceCode,Code code) {
+			this.mvirSourceCode = mvirSourceCode;
+			this.code = code;
+		}
+		
+		public String getMvirSourceCode() {
+			return mvirSourceCode;
+		}
+		
+		public Code getCode() {
+			return code;
+		}
 		
 		public static Type get(Transaction transaction) {
 			Type result = UNKNOWN;
@@ -362,11 +383,13 @@ public class Transaction implements LCSInterface {
 						new ChaingrokError(ChaingrokLog.Type.NOT_IMPLEMENTED,"should not happen");
 						break;
 				}
-				if (Code.MINT.equals(code)) {
-					result = MINT;
-				} else if (Code.PEER_TO_PEER_TRANSFER.equals(code)) {
-					result = PEER_TO_PEER_TRANSFER;
-				} 
+				for (Type type : Type.values()) {
+					if ((!Type.UNKNOWN.equals(type)) 
+							&& (type.getCode().equals(code))) {
+						result = type;
+						break;
+					}
+				}
 			}
 			if (result == UNKNOWN) {
 				String msg = "transaction type is unknown for transaction version: " + transaction.getVersion();
@@ -377,17 +400,31 @@ public class Transaction implements LCSInterface {
 			}
 			return result;
 		}
+	} 
+	
+	public byte[] sign(PrivateKey privateKey ) {
+		byte[] result = null;
+		byte[] rawTransactionBytes = LCSProcessor
+				.buildEncoder()
+				.encode(this)
+				.build();
+		Signer signer = new Signer(privateKey);
+		signer.sign(rawTransactionBytes);
+		return result;
 	}
 
 	@Override
 	public LCSProcessor encodeToLCS(LCSProcessor lcsProcessor) {
 		if (lcsProcessor != null) {
-			lcsProcessor.encode(getSenderAccountAddress())
+			lcsProcessor
+				//fields for raw transaction
+				.encode(getSenderAccountAddress())
 				.encode(getSequenceNumber())
 				.encode(getProgram())
 				.encode(getMaxGasAmount())
 				.encode(getGasUnitPrice())
-				.encode(getExpirationTime());
+				.encode(getExpirationTime())
+				;
 		}
 		return lcsProcessor;
 	}
