@@ -7,10 +7,12 @@ import static org.junit.Assert.assertTrue;
 import com.chaingrok.lib.test.TestClass;
 import com.chaingrok.libra4j.types.Event;
 import com.chaingrok.libra4j.types.Events;
+import com.chaingrok.libra4j.types.Ledger;
 import com.chaingrok.libra4j.types.Transaction;
 
 public class TestClassLibra extends TestClass {
 	
+	protected Ledger ledger = new Ledger(TestData.VALIDATOR_ENDPOINT);
 	private Long expectedEventSequenceNumber = null;
 	
 	public boolean validateTransaction(Transaction transaction, long version, boolean withEvents) {
