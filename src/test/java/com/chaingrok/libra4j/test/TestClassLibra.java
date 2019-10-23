@@ -2,9 +2,13 @@ package com.chaingrok.libra4j.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
+
 import com.chaingrok.lib.test.TestClass;
+import com.chaingrok.libra4j.types.AccountState;
 import com.chaingrok.libra4j.types.Event;
 import com.chaingrok.libra4j.types.Events;
 import com.chaingrok.libra4j.types.Ledger;
@@ -50,6 +54,34 @@ public class TestClassLibra extends TestClass {
 				}
 			}
 		}
+		return true;
+	}
+	
+	public boolean validateAccountState(AccountState accountState) {
+		assertNotNull(accountState);
+		Long version = accountState.getVersion();
+		assertTrue(version > 0);
+		assertNotNull(accountState.getBlob());
+		assertTrue(accountState.getBlob().length > 0);
+		assertNotNull(accountState.getBitmap());
+		assertTrue(accountState.getBitmap().length > 0);
+		ArrayList<byte[]> siblings = accountState.getNonDefaultSiblingsLedgerInfoToTransactionInfoProof();
+		assertNotNull(siblings);
+		assertTrue(siblings.size() > 0);
+		for (byte[] sibling : siblings) {
+			assertTrue(sibling.length > 0);
+		}
+		siblings = accountState.getNonDefaultSiblingsTransactionInfoToAccountProof();
+		assertNotNull(siblings);
+		assertTrue(siblings.size() > 0);
+		for (byte[] sibling : siblings) {
+			assertTrue(sibling.length > 0);
+		}
+		Transaction transaction = accountState.getTransaction();
+		assertNotNull(transaction);
+		//check consistency between transaction version and account state version
+		assertNull(transaction.getVersion()); //info not provided in TransactionInfo when analyzing account state
+		assertNotNull(transaction.getSignedTransactionHash());
 		return true;
 	}
 	
