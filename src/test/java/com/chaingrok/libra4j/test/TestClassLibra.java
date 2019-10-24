@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 
+import com.chaingrok.lib.UInt64;
 import com.chaingrok.lib.test.TestClass;
 import com.chaingrok.libra4j.types.AccountState;
 import com.chaingrok.libra4j.types.Event;
@@ -19,12 +20,18 @@ public class TestClassLibra extends TestClass {
 	protected Ledger ledger = new Ledger(TestData.VALIDATOR_ENDPOINT);
 	private Long expectedEventSequenceNumber = null;
 	
-	public boolean validateTransaction(Transaction transaction, long version, boolean withEvents) {
+	public boolean validateTransaction(Transaction transaction, Long version, Long sequenceNumber, boolean withEvents) {
 		System.out.println(transaction.toString());
-		assertEquals(version,(long)transaction.getVersion());
+		if (version != null) {  //version is never returned by ledger, it comes from getTransactions() only
+			assertEquals(version,transaction.getVersion());
+		} 
 		assertNotNull(transaction.getSignedTransactionBytes());
 		assertNotNull(transaction.getSenderAccountAddress());
-		assertNotNull(transaction.getSequenceNumber());
+		if (sequenceNumber != null) {
+			assertEquals(new UInt64(sequenceNumber),transaction.getSequenceNumber());
+		} else {
+			assertNotNull(transaction.getSequenceNumber());
+		}
 		assertNotNull(transaction.getTransactionPayloadType());
 		assertTrue((transaction.getScript() != null)
 				|| (transaction.getProgram() != null)
@@ -35,7 +42,6 @@ public class TestClassLibra extends TestClass {
 		assertNotNull(transaction.getExpirationTime());
 		assertNotNull(transaction.getSenderPublicKey());
 		assertNotNull(transaction.getSignature());
-		assertNotNull(transaction.getVersion());
 		assertNotNull(transaction.getMajorStatus());
 		assertNotNull(transaction.getGasUsed());
 		assertNotNull(transaction.getSignedTransactionHash());

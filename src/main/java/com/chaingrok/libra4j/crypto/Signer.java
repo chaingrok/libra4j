@@ -7,16 +7,12 @@ import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.SignatureException;
 
-import org.bouncycastle.jcajce.provider.digest.SHA3;
-
 import com.chaingrok.lib.ChaingrokException;
 import com.chaingrok.libra4j.types.Signature;
-import com.chaingrok.libra4j.types.Transaction;
 
 public class Signer {
 	
 	public static final String DEFAULT_ALGORITHM = KeyPair.ED25519;
-	public static final String LIBRA_HASH_SUFFIX = "RawTransaction@@$$LIBRA$$@@"; // cf crypto/legacy_crypto/src/hash.rs
 	
 	private String cryptoAlgorithm = null;
 	private PrivateKey privateKey = null;
@@ -57,20 +53,6 @@ public class Signer {
 	public String getCryptoAlgorithm() {
 		return cryptoAlgorithm;
 	}
-	
-	public byte[] signRawTransaction(Transaction rawTransaction, PrivateKey privateKey) {
-        SHA3.DigestSHA3 digestSHA3 = new SHA3.Digest256();
-        byte[] hashSuffix = digestSHA3.digest(LIBRA_HASH_SUFFIX.getBytes());
-        /*
-        byte[] transactionBytes = rawTransaction.toByteArray();
-        byte[] saltDigestAndTransaction = new byte[hashSuffix.length + transactionBytes.length];
-        System.arraycopy(hashSuffix, 0, saltDigestAndTransaction, 0, hashSuffix.length);
-        System.arraycopy(transactionBytes, 0, saltDigestAndTransaction, hashSuffix.length, transactionBytes.length);
-        return sign(transactionBytes);
-        */
-        return null;
-    }
-	
 	
 	public byte[] sign(byte[] contentToSign) {
 		byte[] result = null;

@@ -89,7 +89,7 @@ public class Argument extends ByteArray implements LCSInterface {
 		String dataStr = "";
 		switch (type) {
 			case U64:
-				dataStr = (new UInt64(bytes)).getAsLong() +" (" + Utils.byteArrayToHexString(bytes) + ")";
+				dataStr = (new UInt64(bytes)).toString() +" (" + Utils.byteArrayToHexString(bytes) + ")";
 				break;
 			case STRING:
 				dataStr = new String(bytes) + " (" + Utils.byteArrayToHexString(bytes) + ")";

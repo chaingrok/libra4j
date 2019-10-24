@@ -49,7 +49,8 @@ public class TestLedgerGet extends TestClassLibra {
 		assertEquals(1L,ledger.getRequestCount());
 		assertFalse(ChaingrokError.hasLogs());
 		assertNotNull(transaction);
-		validateTransaction(transaction,version,withEvents);
+		Long sequenceNumber = null;
+		validateTransaction(transaction,version,sequenceNumber,withEvents);
 	}
 	
 	@Test
@@ -60,7 +61,8 @@ public class TestLedgerGet extends TestClassLibra {
 		assertEquals(1L,ledger.getRequestCount());
 		assertFalse(ChaingrokError.hasLogs());
 		assertNotNull(transaction);
-		validateTransaction(transaction,version,withEvents);
+		Long sequenceNumber = null;
+		validateTransaction(transaction,version,sequenceNumber,withEvents);
 	}
 	
 	@Test
@@ -81,7 +83,9 @@ public class TestLedgerGet extends TestClassLibra {
 		assertNotNull(transactions);
 		assertEquals(transactions.size(),count);
 		for (Transaction transaction : transactions) {
-			validateTransaction(transaction,version++,withEvents);
+			Long sequenceNumber = null;
+			validateTransaction(transaction,version,sequenceNumber,withEvents);
+			++version;
 		}
 	}
 	
@@ -96,7 +100,9 @@ public class TestLedgerGet extends TestClassLibra {
 		assertNotNull(transactions);
 		assertEquals(transactions.size(),count);
 		for (Transaction transaction : transactions) {
-			validateTransaction(transaction,version++,withEvents);
+			Long sequenceNumber = null;
+			validateTransaction(transaction,version,sequenceNumber,withEvents);
+			++version;
 		}
 	}
 	
