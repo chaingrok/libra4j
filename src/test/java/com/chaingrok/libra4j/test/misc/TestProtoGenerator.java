@@ -31,7 +31,7 @@ public class TestProtoGenerator {
 	
 	@Test
 	public void test002GenerateProtoDirectory() {
-		//following lines must be commented out when not generating : grpc java plugin missin on CI server
+		//following lines must be commented out when not generating : grpc java plugin missing on CI server
 		/*
 		ProtoGenerator protoGenerator = new ProtoGenerator(PROTO_FILES_DIR,GRPC_DIR,PROTOC_JAVA_PLUGIN);
 		assertTrue(protoGenerator.generateDirectory()); //uncomment this line to generate
