@@ -11,6 +11,8 @@ import static org.junit.Assert.fail;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigInteger;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -90,7 +92,19 @@ public class TestUtils extends TestClass {
 	}
 	
 	@Test
-	public void test007ReadWriteFile() throws IOException {
+	public void test007DeleteDirectory() throws IOException {
+		Path tempDirPath = Files.createTempDirectory("foo");
+		Path tempFilePath = tempDirPath.resolve("tmp-file");
+		assertTrue(tempDirPath.toFile().exists());
+		assertFalse(tempFilePath.toFile().exists());
+		assertTrue(tempFilePath.toFile().createNewFile());
+		assertTrue(tempFilePath.toFile().exists());
+		assertTrue(Utils.deleteDirectoryWithContent(tempDirPath.toString()));
+		assertFalse(tempDirPath.toFile().exists());
+	}
+	
+	@Test
+	public void test008ReadWriteFile() throws IOException {
 		File file = File.createTempFile("tmpFile", "tmp");
 		assertTrue(file.delete());
 		assertFalse(file.exists());
@@ -102,7 +116,7 @@ public class TestUtils extends TestClass {
 	}
 	
 	@Test
-	public void test008ReadWritErrors() throws IOException {
+	public void test009ReadWritErrors() throws IOException {
 		try {
 			Utils.readFile("");
 			fail("empty filepath should fail");
@@ -120,7 +134,7 @@ public class TestUtils extends TestClass {
 	}
 	
 	@Test
-	public void test009ByteArrayToLong() {
+	public void test010ByteArrayToLong() {
 		long value = 0L;
 		assertEquals(value,Utils.byteArrayToLong(Utils.longToByteArray(value)));
 		value = 1L;
@@ -134,7 +148,7 @@ public class TestUtils extends TestClass {
 	}
 	
 	@Test
-	public void test010ByteArrayToInt() {
+	public void test011ByteArrayToInt() {
 		int value = 0;
 		assertEquals(value,Utils.byteArrayToInt(Utils.intToByteArray(value)));
 		value = 1;
@@ -148,7 +162,7 @@ public class TestUtils extends TestClass {
 	}
 	
 	@Test
-	public void test0011ByteArrayToBigInt() {
+	public void test0012ByteArrayToBigInt() {
 		byte[] bytes={0x00};
 		assertEquals(BigInteger.valueOf(0),Utils.byteArraytoBigInt(bytes));
 		byte[] bytes2={0x00,0x01};
@@ -169,14 +183,14 @@ public class TestUtils extends TestClass {
 	}
 	
 	@Test
-	public void test012TimestampMillisTotString() {
+	public void test013TimestampMillisTotString() {
 		long millis = 1568003223154L;
 		String dateString = Utils.timestampMillisToDateString(millis);
 		assertEquals("2019-09-09 04:27:03",dateString);
 	}
 	
 	@Test
-	public void test013GetByteArray() {
+	public void test014GetByteArray() {
 		int l = 10;
 		byte[] bytes = Utils.getByteArray(l);
 		assertEquals(l,bytes.length);

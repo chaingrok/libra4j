@@ -1,5 +1,7 @@
 package com.chaingrok.lib;
 
+import static org.junit.Assert.assertTrue;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -7,9 +9,11 @@ import java.io.PrintWriter;
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.TimeZone;
 
 import javax.xml.bind.DatatypeConverter;
@@ -18,6 +22,20 @@ import com.chaingrok.lib.ChaingrokLog.Type;
 import com.google.protobuf.ByteString;
 
 public class Utils {
+	
+	public static boolean deleteDirectoryWithContent(String dirPathname) {
+		boolean result = true;
+		Path dirPath = Paths.get(dirPathname);
+		try {
+			Files.walk(dirPath)
+			  .sorted(Comparator.reverseOrder())
+			  .map(Path::toFile)
+			  .forEach(File::delete);
+		} catch (IOException e) {
+			throw new ChaingrokException(e);
+		}
+		return result;
+	}
 	
 	public static byte[] readFile(String path) {
 		byte[] bytes = null;
