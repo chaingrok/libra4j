@@ -9,7 +9,7 @@ option java_package = "org.libra.grpc.types";
 //import "access_path.proto"; //ChainGrok: commenting out (unused)
 import "events.proto";
 import "proof.proto";
-import "transaction_info.proto";
+//import "transaction_info.proto"; //ChainGrok: commenting out (unused)
 import "google/protobuf/wrappers.proto";
 
 // An argument to the transaction if the transaction takes arguments

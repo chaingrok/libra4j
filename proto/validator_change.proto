@@ -6,7 +6,7 @@ syntax = "proto3";
 package types;
 option java_package = "org.libra.grpc.types";
 
-import "events.proto";
+//import "events.proto"; //ChainGrok: commenting out (unused)
 import "ledger_info.proto";
 
 // This is used to prove validator changes.  When a validator is changing, it
