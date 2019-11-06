@@ -555,12 +555,12 @@ public final class TransactionOuterClass {
 
     /**
      * <pre>
-     * LCS byte code representation of a SignedTransaction
+     * LCS bytes representation of a SignedTransaction.
      * </pre>
      *
-     * <code>bytes signed_txn = 5;</code>
+     * <code>bytes txn_bytes = 5;</code>
      */
-    com.google.protobuf.ByteString getSignedTxn();
+    com.google.protobuf.ByteString getTxnBytes();
   }
   /**
    * <pre>
@@ -579,7 +579,7 @@ public final class TransactionOuterClass {
       super(builder);
     }
     private SignedTransaction() {
-      signedTxn_ = com.google.protobuf.ByteString.EMPTY;
+      txnBytes_ = com.google.protobuf.ByteString.EMPTY;
     }
 
     @java.lang.Override
@@ -608,7 +608,7 @@ public final class TransactionOuterClass {
               break;
             case 42: {
 
-              signedTxn_ = input.readBytes();
+              txnBytes_ = input.readBytes();
               break;
             }
             default: {
@@ -643,17 +643,17 @@ public final class TransactionOuterClass {
               org.libra.grpc.types.TransactionOuterClass.SignedTransaction.class, org.libra.grpc.types.TransactionOuterClass.SignedTransaction.Builder.class);
     }
 
-    public static final int SIGNED_TXN_FIELD_NUMBER = 5;
-    private com.google.protobuf.ByteString signedTxn_;
+    public static final int TXN_BYTES_FIELD_NUMBER = 5;
+    private com.google.protobuf.ByteString txnBytes_;
     /**
      * <pre>
-     * LCS byte code representation of a SignedTransaction
+     * LCS bytes representation of a SignedTransaction.
      * </pre>
      *
-     * <code>bytes signed_txn = 5;</code>
+     * <code>bytes txn_bytes = 5;</code>
      */
-    public com.google.protobuf.ByteString getSignedTxn() {
-      return signedTxn_;
+    public com.google.protobuf.ByteString getTxnBytes() {
+      return txnBytes_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -670,8 +670,8 @@ public final class TransactionOuterClass {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (!signedTxn_.isEmpty()) {
-        output.writeBytes(5, signedTxn_);
+      if (!txnBytes_.isEmpty()) {
+        output.writeBytes(5, txnBytes_);
       }
       unknownFields.writeTo(output);
     }
@@ -682,9 +682,9 @@ public final class TransactionOuterClass {
       if (size != -1) return size;
 
       size = 0;
-      if (!signedTxn_.isEmpty()) {
+      if (!txnBytes_.isEmpty()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(5, signedTxn_);
+          .computeBytesSize(5, txnBytes_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -701,8 +701,8 @@ public final class TransactionOuterClass {
       }
       org.libra.grpc.types.TransactionOuterClass.SignedTransaction other = (org.libra.grpc.types.TransactionOuterClass.SignedTransaction) obj;
 
-      if (!getSignedTxn()
-          .equals(other.getSignedTxn())) return false;
+      if (!getTxnBytes()
+          .equals(other.getTxnBytes())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -714,8 +714,8 @@ public final class TransactionOuterClass {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + SIGNED_TXN_FIELD_NUMBER;
-      hash = (53 * hash) + getSignedTxn().hashCode();
+      hash = (37 * hash) + TXN_BYTES_FIELD_NUMBER;
+      hash = (53 * hash) + getTxnBytes().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -853,7 +853,7 @@ public final class TransactionOuterClass {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        signedTxn_ = com.google.protobuf.ByteString.EMPTY;
+        txnBytes_ = com.google.protobuf.ByteString.EMPTY;
 
         return this;
       }
@@ -881,7 +881,7 @@ public final class TransactionOuterClass {
       @java.lang.Override
       public org.libra.grpc.types.TransactionOuterClass.SignedTransaction buildPartial() {
         org.libra.grpc.types.TransactionOuterClass.SignedTransaction result = new org.libra.grpc.types.TransactionOuterClass.SignedTransaction(this);
-        result.signedTxn_ = signedTxn_;
+        result.txnBytes_ = txnBytes_;
         onBuilt();
         return result;
       }
@@ -930,8 +930,8 @@ public final class TransactionOuterClass {
 
       public Builder mergeFrom(org.libra.grpc.types.TransactionOuterClass.SignedTransaction other) {
         if (other == org.libra.grpc.types.TransactionOuterClass.SignedTransaction.getDefaultInstance()) return this;
-        if (other.getSignedTxn() != com.google.protobuf.ByteString.EMPTY) {
-          setSignedTxn(other.getSignedTxn());
+        if (other.getTxnBytes() != com.google.protobuf.ByteString.EMPTY) {
+          setTxnBytes(other.getTxnBytes());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -962,43 +962,43 @@ public final class TransactionOuterClass {
         return this;
       }
 
-      private com.google.protobuf.ByteString signedTxn_ = com.google.protobuf.ByteString.EMPTY;
+      private com.google.protobuf.ByteString txnBytes_ = com.google.protobuf.ByteString.EMPTY;
       /**
        * <pre>
-       * LCS byte code representation of a SignedTransaction
+       * LCS bytes representation of a SignedTransaction.
        * </pre>
        *
-       * <code>bytes signed_txn = 5;</code>
+       * <code>bytes txn_bytes = 5;</code>
        */
-      public com.google.protobuf.ByteString getSignedTxn() {
-        return signedTxn_;
+      public com.google.protobuf.ByteString getTxnBytes() {
+        return txnBytes_;
       }
       /**
        * <pre>
-       * LCS byte code representation of a SignedTransaction
+       * LCS bytes representation of a SignedTransaction.
        * </pre>
        *
-       * <code>bytes signed_txn = 5;</code>
+       * <code>bytes txn_bytes = 5;</code>
        */
-      public Builder setSignedTxn(com.google.protobuf.ByteString value) {
+      public Builder setTxnBytes(com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   
-        signedTxn_ = value;
+        txnBytes_ = value;
         onChanged();
         return this;
       }
       /**
        * <pre>
-       * LCS byte code representation of a SignedTransaction
+       * LCS bytes representation of a SignedTransaction.
        * </pre>
        *
-       * <code>bytes signed_txn = 5;</code>
+       * <code>bytes txn_bytes = 5;</code>
        */
-      public Builder clearSignedTxn() {
+      public Builder clearTxnBytes() {
         
-        signedTxn_ = getDefaultInstance().getSignedTxn();
+        txnBytes_ = getDefaultInstance().getTxnBytes();
         onChanged();
         return this;
       }
@@ -1543,8 +1543,8 @@ public final class TransactionOuterClass {
 
   }
 
-  public interface SignedTransactionWithProofOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:types.SignedTransactionWithProof)
+  public interface TransactionWithProofOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:types.TransactionWithProof)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -1561,50 +1561,50 @@ public final class TransactionOuterClass {
      * The transaction itself.
      * </pre>
      *
-     * <code>.types.SignedTransaction signed_transaction = 2;</code>
+     * <code>.types.Transaction transaction = 2;</code>
      */
-    boolean hasSignedTransaction();
+    boolean hasTransaction();
     /**
      * <pre>
      * The transaction itself.
      * </pre>
      *
-     * <code>.types.SignedTransaction signed_transaction = 2;</code>
+     * <code>.types.Transaction transaction = 2;</code>
      */
-    org.libra.grpc.types.TransactionOuterClass.SignedTransaction getSignedTransaction();
+    org.libra.grpc.types.TransactionOuterClass.Transaction getTransaction();
     /**
      * <pre>
      * The transaction itself.
      * </pre>
      *
-     * <code>.types.SignedTransaction signed_transaction = 2;</code>
+     * <code>.types.Transaction transaction = 2;</code>
      */
-    org.libra.grpc.types.TransactionOuterClass.SignedTransactionOrBuilder getSignedTransactionOrBuilder();
+    org.libra.grpc.types.TransactionOuterClass.TransactionOrBuilder getTransactionOrBuilder();
 
     /**
      * <pre>
-     * The proof authenticating the signed transaction.
+     * The proof authenticating the transaction.
      * </pre>
      *
-     * <code>.types.SignedTransactionProof proof = 3;</code>
+     * <code>.types.TransactionProof proof = 3;</code>
      */
     boolean hasProof();
     /**
      * <pre>
-     * The proof authenticating the signed transaction.
+     * The proof authenticating the transaction.
      * </pre>
      *
-     * <code>.types.SignedTransactionProof proof = 3;</code>
+     * <code>.types.TransactionProof proof = 3;</code>
      */
-    org.libra.grpc.types.Proof.SignedTransactionProof getProof();
+    org.libra.grpc.types.Proof.TransactionProof getProof();
     /**
      * <pre>
-     * The proof authenticating the signed transaction.
+     * The proof authenticating the transaction.
      * </pre>
      *
-     * <code>.types.SignedTransactionProof proof = 3;</code>
+     * <code>.types.TransactionProof proof = 3;</code>
      */
-    org.libra.grpc.types.Proof.SignedTransactionProofOrBuilder getProofOrBuilder();
+    org.libra.grpc.types.Proof.TransactionProofOrBuilder getProofOrBuilder();
 
     /**
      * <pre>
@@ -1632,18 +1632,18 @@ public final class TransactionOuterClass {
     org.libra.grpc.types.Events.EventsListOrBuilder getEventsOrBuilder();
   }
   /**
-   * Protobuf type {@code types.SignedTransactionWithProof}
+   * Protobuf type {@code types.TransactionWithProof}
    */
-  public  static final class SignedTransactionWithProof extends
+  public  static final class TransactionWithProof extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:types.SignedTransactionWithProof)
-      SignedTransactionWithProofOrBuilder {
+      // @@protoc_insertion_point(message_implements:types.TransactionWithProof)
+      TransactionWithProofOrBuilder {
   private static final long serialVersionUID = 0L;
-    // Use SignedTransactionWithProof.newBuilder() to construct.
-    private SignedTransactionWithProof(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    // Use TransactionWithProof.newBuilder() to construct.
+    private TransactionWithProof(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private SignedTransactionWithProof() {
+    private TransactionWithProof() {
     }
 
     @java.lang.Override
@@ -1651,7 +1651,7 @@ public final class TransactionOuterClass {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private SignedTransactionWithProof(
+    private TransactionWithProof(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1676,24 +1676,24 @@ public final class TransactionOuterClass {
               break;
             }
             case 18: {
-              org.libra.grpc.types.TransactionOuterClass.SignedTransaction.Builder subBuilder = null;
-              if (signedTransaction_ != null) {
-                subBuilder = signedTransaction_.toBuilder();
+              org.libra.grpc.types.TransactionOuterClass.Transaction.Builder subBuilder = null;
+              if (transaction_ != null) {
+                subBuilder = transaction_.toBuilder();
               }
-              signedTransaction_ = input.readMessage(org.libra.grpc.types.TransactionOuterClass.SignedTransaction.parser(), extensionRegistry);
+              transaction_ = input.readMessage(org.libra.grpc.types.TransactionOuterClass.Transaction.parser(), extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom(signedTransaction_);
-                signedTransaction_ = subBuilder.buildPartial();
+                subBuilder.mergeFrom(transaction_);
+                transaction_ = subBuilder.buildPartial();
               }
 
               break;
             }
             case 26: {
-              org.libra.grpc.types.Proof.SignedTransactionProof.Builder subBuilder = null;
+              org.libra.grpc.types.Proof.TransactionProof.Builder subBuilder = null;
               if (proof_ != null) {
                 subBuilder = proof_.toBuilder();
               }
-              proof_ = input.readMessage(org.libra.grpc.types.Proof.SignedTransactionProof.parser(), extensionRegistry);
+              proof_ = input.readMessage(org.libra.grpc.types.Proof.TransactionProof.parser(), extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(proof_);
                 proof_ = subBuilder.buildPartial();
@@ -1735,15 +1735,15 @@ public final class TransactionOuterClass {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return org.libra.grpc.types.TransactionOuterClass.internal_static_types_SignedTransactionWithProof_descriptor;
+      return org.libra.grpc.types.TransactionOuterClass.internal_static_types_TransactionWithProof_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return org.libra.grpc.types.TransactionOuterClass.internal_static_types_SignedTransactionWithProof_fieldAccessorTable
+      return org.libra.grpc.types.TransactionOuterClass.internal_static_types_TransactionWithProof_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof.class, org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof.Builder.class);
+              org.libra.grpc.types.TransactionOuterClass.TransactionWithProof.class, org.libra.grpc.types.TransactionOuterClass.TransactionWithProof.Builder.class);
     }
 
     public static final int VERSION_FIELD_NUMBER = 1;
@@ -1759,69 +1759,69 @@ public final class TransactionOuterClass {
       return version_;
     }
 
-    public static final int SIGNED_TRANSACTION_FIELD_NUMBER = 2;
-    private org.libra.grpc.types.TransactionOuterClass.SignedTransaction signedTransaction_;
+    public static final int TRANSACTION_FIELD_NUMBER = 2;
+    private org.libra.grpc.types.TransactionOuterClass.Transaction transaction_;
     /**
      * <pre>
      * The transaction itself.
      * </pre>
      *
-     * <code>.types.SignedTransaction signed_transaction = 2;</code>
+     * <code>.types.Transaction transaction = 2;</code>
      */
-    public boolean hasSignedTransaction() {
-      return signedTransaction_ != null;
+    public boolean hasTransaction() {
+      return transaction_ != null;
     }
     /**
      * <pre>
      * The transaction itself.
      * </pre>
      *
-     * <code>.types.SignedTransaction signed_transaction = 2;</code>
+     * <code>.types.Transaction transaction = 2;</code>
      */
-    public org.libra.grpc.types.TransactionOuterClass.SignedTransaction getSignedTransaction() {
-      return signedTransaction_ == null ? org.libra.grpc.types.TransactionOuterClass.SignedTransaction.getDefaultInstance() : signedTransaction_;
+    public org.libra.grpc.types.TransactionOuterClass.Transaction getTransaction() {
+      return transaction_ == null ? org.libra.grpc.types.TransactionOuterClass.Transaction.getDefaultInstance() : transaction_;
     }
     /**
      * <pre>
      * The transaction itself.
      * </pre>
      *
-     * <code>.types.SignedTransaction signed_transaction = 2;</code>
+     * <code>.types.Transaction transaction = 2;</code>
      */
-    public org.libra.grpc.types.TransactionOuterClass.SignedTransactionOrBuilder getSignedTransactionOrBuilder() {
-      return getSignedTransaction();
+    public org.libra.grpc.types.TransactionOuterClass.TransactionOrBuilder getTransactionOrBuilder() {
+      return getTransaction();
     }
 
     public static final int PROOF_FIELD_NUMBER = 3;
-    private org.libra.grpc.types.Proof.SignedTransactionProof proof_;
+    private org.libra.grpc.types.Proof.TransactionProof proof_;
     /**
      * <pre>
-     * The proof authenticating the signed transaction.
+     * The proof authenticating the transaction.
      * </pre>
      *
-     * <code>.types.SignedTransactionProof proof = 3;</code>
+     * <code>.types.TransactionProof proof = 3;</code>
      */
     public boolean hasProof() {
       return proof_ != null;
     }
     /**
      * <pre>
-     * The proof authenticating the signed transaction.
+     * The proof authenticating the transaction.
      * </pre>
      *
-     * <code>.types.SignedTransactionProof proof = 3;</code>
+     * <code>.types.TransactionProof proof = 3;</code>
      */
-    public org.libra.grpc.types.Proof.SignedTransactionProof getProof() {
-      return proof_ == null ? org.libra.grpc.types.Proof.SignedTransactionProof.getDefaultInstance() : proof_;
+    public org.libra.grpc.types.Proof.TransactionProof getProof() {
+      return proof_ == null ? org.libra.grpc.types.Proof.TransactionProof.getDefaultInstance() : proof_;
     }
     /**
      * <pre>
-     * The proof authenticating the signed transaction.
+     * The proof authenticating the transaction.
      * </pre>
      *
-     * <code>.types.SignedTransactionProof proof = 3;</code>
+     * <code>.types.TransactionProof proof = 3;</code>
      */
-    public org.libra.grpc.types.Proof.SignedTransactionProofOrBuilder getProofOrBuilder() {
+    public org.libra.grpc.types.Proof.TransactionProofOrBuilder getProofOrBuilder() {
       return getProof();
     }
 
@@ -1875,8 +1875,8 @@ public final class TransactionOuterClass {
       if (version_ != 0L) {
         output.writeUInt64(1, version_);
       }
-      if (signedTransaction_ != null) {
-        output.writeMessage(2, getSignedTransaction());
+      if (transaction_ != null) {
+        output.writeMessage(2, getTransaction());
       }
       if (proof_ != null) {
         output.writeMessage(3, getProof());
@@ -1897,9 +1897,9 @@ public final class TransactionOuterClass {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt64Size(1, version_);
       }
-      if (signedTransaction_ != null) {
+      if (transaction_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, getSignedTransaction());
+          .computeMessageSize(2, getTransaction());
       }
       if (proof_ != null) {
         size += com.google.protobuf.CodedOutputStream
@@ -1919,17 +1919,17 @@ public final class TransactionOuterClass {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof)) {
+      if (!(obj instanceof org.libra.grpc.types.TransactionOuterClass.TransactionWithProof)) {
         return super.equals(obj);
       }
-      org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof other = (org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof) obj;
+      org.libra.grpc.types.TransactionOuterClass.TransactionWithProof other = (org.libra.grpc.types.TransactionOuterClass.TransactionWithProof) obj;
 
       if (getVersion()
           != other.getVersion()) return false;
-      if (hasSignedTransaction() != other.hasSignedTransaction()) return false;
-      if (hasSignedTransaction()) {
-        if (!getSignedTransaction()
-            .equals(other.getSignedTransaction())) return false;
+      if (hasTransaction() != other.hasTransaction()) return false;
+      if (hasTransaction()) {
+        if (!getTransaction()
+            .equals(other.getTransaction())) return false;
       }
       if (hasProof() != other.hasProof()) return false;
       if (hasProof()) {
@@ -1955,9 +1955,9 @@ public final class TransactionOuterClass {
       hash = (37 * hash) + VERSION_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getVersion());
-      if (hasSignedTransaction()) {
-        hash = (37 * hash) + SIGNED_TRANSACTION_FIELD_NUMBER;
-        hash = (53 * hash) + getSignedTransaction().hashCode();
+      if (hasTransaction()) {
+        hash = (37 * hash) + TRANSACTION_FIELD_NUMBER;
+        hash = (53 * hash) + getTransaction().hashCode();
       }
       if (hasProof()) {
         hash = (37 * hash) + PROOF_FIELD_NUMBER;
@@ -1972,69 +1972,69 @@ public final class TransactionOuterClass {
       return hash;
     }
 
-    public static org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof parseFrom(
+    public static org.libra.grpc.types.TransactionOuterClass.TransactionWithProof parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof parseFrom(
+    public static org.libra.grpc.types.TransactionOuterClass.TransactionWithProof parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof parseFrom(
+    public static org.libra.grpc.types.TransactionOuterClass.TransactionWithProof parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof parseFrom(
+    public static org.libra.grpc.types.TransactionOuterClass.TransactionWithProof parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof parseFrom(byte[] data)
+    public static org.libra.grpc.types.TransactionOuterClass.TransactionWithProof parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof parseFrom(
+    public static org.libra.grpc.types.TransactionOuterClass.TransactionWithProof parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof parseFrom(java.io.InputStream input)
+    public static org.libra.grpc.types.TransactionOuterClass.TransactionWithProof parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof parseFrom(
+    public static org.libra.grpc.types.TransactionOuterClass.TransactionWithProof parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof parseDelimitedFrom(java.io.InputStream input)
+    public static org.libra.grpc.types.TransactionOuterClass.TransactionWithProof parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof parseDelimitedFrom(
+    public static org.libra.grpc.types.TransactionOuterClass.TransactionWithProof parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof parseFrom(
+    public static org.libra.grpc.types.TransactionOuterClass.TransactionWithProof parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof parseFrom(
+    public static org.libra.grpc.types.TransactionOuterClass.TransactionWithProof parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -2047,7 +2047,7 @@ public final class TransactionOuterClass {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof prototype) {
+    public static Builder newBuilder(org.libra.grpc.types.TransactionOuterClass.TransactionWithProof prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -2063,26 +2063,26 @@ public final class TransactionOuterClass {
       return builder;
     }
     /**
-     * Protobuf type {@code types.SignedTransactionWithProof}
+     * Protobuf type {@code types.TransactionWithProof}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:types.SignedTransactionWithProof)
-        org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProofOrBuilder {
+        // @@protoc_insertion_point(builder_implements:types.TransactionWithProof)
+        org.libra.grpc.types.TransactionOuterClass.TransactionWithProofOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return org.libra.grpc.types.TransactionOuterClass.internal_static_types_SignedTransactionWithProof_descriptor;
+        return org.libra.grpc.types.TransactionOuterClass.internal_static_types_TransactionWithProof_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return org.libra.grpc.types.TransactionOuterClass.internal_static_types_SignedTransactionWithProof_fieldAccessorTable
+        return org.libra.grpc.types.TransactionOuterClass.internal_static_types_TransactionWithProof_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof.class, org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof.Builder.class);
+                org.libra.grpc.types.TransactionOuterClass.TransactionWithProof.class, org.libra.grpc.types.TransactionOuterClass.TransactionWithProof.Builder.class);
       }
 
-      // Construct using org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof.newBuilder()
+      // Construct using org.libra.grpc.types.TransactionOuterClass.TransactionWithProof.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -2102,11 +2102,11 @@ public final class TransactionOuterClass {
         super.clear();
         version_ = 0L;
 
-        if (signedTransactionBuilder_ == null) {
-          signedTransaction_ = null;
+        if (transactionBuilder_ == null) {
+          transaction_ = null;
         } else {
-          signedTransaction_ = null;
-          signedTransactionBuilder_ = null;
+          transaction_ = null;
+          transactionBuilder_ = null;
         }
         if (proofBuilder_ == null) {
           proof_ = null;
@@ -2126,17 +2126,17 @@ public final class TransactionOuterClass {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return org.libra.grpc.types.TransactionOuterClass.internal_static_types_SignedTransactionWithProof_descriptor;
+        return org.libra.grpc.types.TransactionOuterClass.internal_static_types_TransactionWithProof_descriptor;
       }
 
       @java.lang.Override
-      public org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof getDefaultInstanceForType() {
-        return org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof.getDefaultInstance();
+      public org.libra.grpc.types.TransactionOuterClass.TransactionWithProof getDefaultInstanceForType() {
+        return org.libra.grpc.types.TransactionOuterClass.TransactionWithProof.getDefaultInstance();
       }
 
       @java.lang.Override
-      public org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof build() {
-        org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof result = buildPartial();
+      public org.libra.grpc.types.TransactionOuterClass.TransactionWithProof build() {
+        org.libra.grpc.types.TransactionOuterClass.TransactionWithProof result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -2144,13 +2144,13 @@ public final class TransactionOuterClass {
       }
 
       @java.lang.Override
-      public org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof buildPartial() {
-        org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof result = new org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof(this);
+      public org.libra.grpc.types.TransactionOuterClass.TransactionWithProof buildPartial() {
+        org.libra.grpc.types.TransactionOuterClass.TransactionWithProof result = new org.libra.grpc.types.TransactionOuterClass.TransactionWithProof(this);
         result.version_ = version_;
-        if (signedTransactionBuilder_ == null) {
-          result.signedTransaction_ = signedTransaction_;
+        if (transactionBuilder_ == null) {
+          result.transaction_ = transaction_;
         } else {
-          result.signedTransaction_ = signedTransactionBuilder_.build();
+          result.transaction_ = transactionBuilder_.build();
         }
         if (proofBuilder_ == null) {
           result.proof_ = proof_;
@@ -2200,21 +2200,21 @@ public final class TransactionOuterClass {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof) {
-          return mergeFrom((org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof)other);
+        if (other instanceof org.libra.grpc.types.TransactionOuterClass.TransactionWithProof) {
+          return mergeFrom((org.libra.grpc.types.TransactionOuterClass.TransactionWithProof)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof other) {
-        if (other == org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof.getDefaultInstance()) return this;
+      public Builder mergeFrom(org.libra.grpc.types.TransactionOuterClass.TransactionWithProof other) {
+        if (other == org.libra.grpc.types.TransactionOuterClass.TransactionWithProof.getDefaultInstance()) return this;
         if (other.getVersion() != 0L) {
           setVersion(other.getVersion());
         }
-        if (other.hasSignedTransaction()) {
-          mergeSignedTransaction(other.getSignedTransaction());
+        if (other.hasTransaction()) {
+          mergeTransaction(other.getTransaction());
         }
         if (other.hasProof()) {
           mergeProof(other.getProof());
@@ -2237,11 +2237,11 @@ public final class TransactionOuterClass {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof parsedMessage = null;
+        org.libra.grpc.types.TransactionOuterClass.TransactionWithProof parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof) e.getUnfinishedMessage();
+          parsedMessage = (org.libra.grpc.types.TransactionOuterClass.TransactionWithProof) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -2289,31 +2289,31 @@ public final class TransactionOuterClass {
         return this;
       }
 
-      private org.libra.grpc.types.TransactionOuterClass.SignedTransaction signedTransaction_;
+      private org.libra.grpc.types.TransactionOuterClass.Transaction transaction_;
       private com.google.protobuf.SingleFieldBuilderV3<
-          org.libra.grpc.types.TransactionOuterClass.SignedTransaction, org.libra.grpc.types.TransactionOuterClass.SignedTransaction.Builder, org.libra.grpc.types.TransactionOuterClass.SignedTransactionOrBuilder> signedTransactionBuilder_;
+          org.libra.grpc.types.TransactionOuterClass.Transaction, org.libra.grpc.types.TransactionOuterClass.Transaction.Builder, org.libra.grpc.types.TransactionOuterClass.TransactionOrBuilder> transactionBuilder_;
       /**
        * <pre>
        * The transaction itself.
        * </pre>
        *
-       * <code>.types.SignedTransaction signed_transaction = 2;</code>
+       * <code>.types.Transaction transaction = 2;</code>
        */
-      public boolean hasSignedTransaction() {
-        return signedTransactionBuilder_ != null || signedTransaction_ != null;
+      public boolean hasTransaction() {
+        return transactionBuilder_ != null || transaction_ != null;
       }
       /**
        * <pre>
        * The transaction itself.
        * </pre>
        *
-       * <code>.types.SignedTransaction signed_transaction = 2;</code>
+       * <code>.types.Transaction transaction = 2;</code>
        */
-      public org.libra.grpc.types.TransactionOuterClass.SignedTransaction getSignedTransaction() {
-        if (signedTransactionBuilder_ == null) {
-          return signedTransaction_ == null ? org.libra.grpc.types.TransactionOuterClass.SignedTransaction.getDefaultInstance() : signedTransaction_;
+      public org.libra.grpc.types.TransactionOuterClass.Transaction getTransaction() {
+        if (transactionBuilder_ == null) {
+          return transaction_ == null ? org.libra.grpc.types.TransactionOuterClass.Transaction.getDefaultInstance() : transaction_;
         } else {
-          return signedTransactionBuilder_.getMessage();
+          return transactionBuilder_.getMessage();
         }
       }
       /**
@@ -2321,17 +2321,17 @@ public final class TransactionOuterClass {
        * The transaction itself.
        * </pre>
        *
-       * <code>.types.SignedTransaction signed_transaction = 2;</code>
+       * <code>.types.Transaction transaction = 2;</code>
        */
-      public Builder setSignedTransaction(org.libra.grpc.types.TransactionOuterClass.SignedTransaction value) {
-        if (signedTransactionBuilder_ == null) {
+      public Builder setTransaction(org.libra.grpc.types.TransactionOuterClass.Transaction value) {
+        if (transactionBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          signedTransaction_ = value;
+          transaction_ = value;
           onChanged();
         } else {
-          signedTransactionBuilder_.setMessage(value);
+          transactionBuilder_.setMessage(value);
         }
 
         return this;
@@ -2341,15 +2341,15 @@ public final class TransactionOuterClass {
        * The transaction itself.
        * </pre>
        *
-       * <code>.types.SignedTransaction signed_transaction = 2;</code>
+       * <code>.types.Transaction transaction = 2;</code>
        */
-      public Builder setSignedTransaction(
-          org.libra.grpc.types.TransactionOuterClass.SignedTransaction.Builder builderForValue) {
-        if (signedTransactionBuilder_ == null) {
-          signedTransaction_ = builderForValue.build();
+      public Builder setTransaction(
+          org.libra.grpc.types.TransactionOuterClass.Transaction.Builder builderForValue) {
+        if (transactionBuilder_ == null) {
+          transaction_ = builderForValue.build();
           onChanged();
         } else {
-          signedTransactionBuilder_.setMessage(builderForValue.build());
+          transactionBuilder_.setMessage(builderForValue.build());
         }
 
         return this;
@@ -2359,19 +2359,19 @@ public final class TransactionOuterClass {
        * The transaction itself.
        * </pre>
        *
-       * <code>.types.SignedTransaction signed_transaction = 2;</code>
+       * <code>.types.Transaction transaction = 2;</code>
        */
-      public Builder mergeSignedTransaction(org.libra.grpc.types.TransactionOuterClass.SignedTransaction value) {
-        if (signedTransactionBuilder_ == null) {
-          if (signedTransaction_ != null) {
-            signedTransaction_ =
-              org.libra.grpc.types.TransactionOuterClass.SignedTransaction.newBuilder(signedTransaction_).mergeFrom(value).buildPartial();
+      public Builder mergeTransaction(org.libra.grpc.types.TransactionOuterClass.Transaction value) {
+        if (transactionBuilder_ == null) {
+          if (transaction_ != null) {
+            transaction_ =
+              org.libra.grpc.types.TransactionOuterClass.Transaction.newBuilder(transaction_).mergeFrom(value).buildPartial();
           } else {
-            signedTransaction_ = value;
+            transaction_ = value;
           }
           onChanged();
         } else {
-          signedTransactionBuilder_.mergeFrom(value);
+          transactionBuilder_.mergeFrom(value);
         }
 
         return this;
@@ -2381,15 +2381,15 @@ public final class TransactionOuterClass {
        * The transaction itself.
        * </pre>
        *
-       * <code>.types.SignedTransaction signed_transaction = 2;</code>
+       * <code>.types.Transaction transaction = 2;</code>
        */
-      public Builder clearSignedTransaction() {
-        if (signedTransactionBuilder_ == null) {
-          signedTransaction_ = null;
+      public Builder clearTransaction() {
+        if (transactionBuilder_ == null) {
+          transaction_ = null;
           onChanged();
         } else {
-          signedTransaction_ = null;
-          signedTransactionBuilder_ = null;
+          transaction_ = null;
+          transactionBuilder_ = null;
         }
 
         return this;
@@ -2399,26 +2399,26 @@ public final class TransactionOuterClass {
        * The transaction itself.
        * </pre>
        *
-       * <code>.types.SignedTransaction signed_transaction = 2;</code>
+       * <code>.types.Transaction transaction = 2;</code>
        */
-      public org.libra.grpc.types.TransactionOuterClass.SignedTransaction.Builder getSignedTransactionBuilder() {
+      public org.libra.grpc.types.TransactionOuterClass.Transaction.Builder getTransactionBuilder() {
         
         onChanged();
-        return getSignedTransactionFieldBuilder().getBuilder();
+        return getTransactionFieldBuilder().getBuilder();
       }
       /**
        * <pre>
        * The transaction itself.
        * </pre>
        *
-       * <code>.types.SignedTransaction signed_transaction = 2;</code>
+       * <code>.types.Transaction transaction = 2;</code>
        */
-      public org.libra.grpc.types.TransactionOuterClass.SignedTransactionOrBuilder getSignedTransactionOrBuilder() {
-        if (signedTransactionBuilder_ != null) {
-          return signedTransactionBuilder_.getMessageOrBuilder();
+      public org.libra.grpc.types.TransactionOuterClass.TransactionOrBuilder getTransactionOrBuilder() {
+        if (transactionBuilder_ != null) {
+          return transactionBuilder_.getMessageOrBuilder();
         } else {
-          return signedTransaction_ == null ?
-              org.libra.grpc.types.TransactionOuterClass.SignedTransaction.getDefaultInstance() : signedTransaction_;
+          return transaction_ == null ?
+              org.libra.grpc.types.TransactionOuterClass.Transaction.getDefaultInstance() : transaction_;
         }
       }
       /**
@@ -2426,57 +2426,57 @@ public final class TransactionOuterClass {
        * The transaction itself.
        * </pre>
        *
-       * <code>.types.SignedTransaction signed_transaction = 2;</code>
+       * <code>.types.Transaction transaction = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          org.libra.grpc.types.TransactionOuterClass.SignedTransaction, org.libra.grpc.types.TransactionOuterClass.SignedTransaction.Builder, org.libra.grpc.types.TransactionOuterClass.SignedTransactionOrBuilder> 
-          getSignedTransactionFieldBuilder() {
-        if (signedTransactionBuilder_ == null) {
-          signedTransactionBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              org.libra.grpc.types.TransactionOuterClass.SignedTransaction, org.libra.grpc.types.TransactionOuterClass.SignedTransaction.Builder, org.libra.grpc.types.TransactionOuterClass.SignedTransactionOrBuilder>(
-                  getSignedTransaction(),
+          org.libra.grpc.types.TransactionOuterClass.Transaction, org.libra.grpc.types.TransactionOuterClass.Transaction.Builder, org.libra.grpc.types.TransactionOuterClass.TransactionOrBuilder> 
+          getTransactionFieldBuilder() {
+        if (transactionBuilder_ == null) {
+          transactionBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              org.libra.grpc.types.TransactionOuterClass.Transaction, org.libra.grpc.types.TransactionOuterClass.Transaction.Builder, org.libra.grpc.types.TransactionOuterClass.TransactionOrBuilder>(
+                  getTransaction(),
                   getParentForChildren(),
                   isClean());
-          signedTransaction_ = null;
+          transaction_ = null;
         }
-        return signedTransactionBuilder_;
+        return transactionBuilder_;
       }
 
-      private org.libra.grpc.types.Proof.SignedTransactionProof proof_;
+      private org.libra.grpc.types.Proof.TransactionProof proof_;
       private com.google.protobuf.SingleFieldBuilderV3<
-          org.libra.grpc.types.Proof.SignedTransactionProof, org.libra.grpc.types.Proof.SignedTransactionProof.Builder, org.libra.grpc.types.Proof.SignedTransactionProofOrBuilder> proofBuilder_;
+          org.libra.grpc.types.Proof.TransactionProof, org.libra.grpc.types.Proof.TransactionProof.Builder, org.libra.grpc.types.Proof.TransactionProofOrBuilder> proofBuilder_;
       /**
        * <pre>
-       * The proof authenticating the signed transaction.
+       * The proof authenticating the transaction.
        * </pre>
        *
-       * <code>.types.SignedTransactionProof proof = 3;</code>
+       * <code>.types.TransactionProof proof = 3;</code>
        */
       public boolean hasProof() {
         return proofBuilder_ != null || proof_ != null;
       }
       /**
        * <pre>
-       * The proof authenticating the signed transaction.
+       * The proof authenticating the transaction.
        * </pre>
        *
-       * <code>.types.SignedTransactionProof proof = 3;</code>
+       * <code>.types.TransactionProof proof = 3;</code>
        */
-      public org.libra.grpc.types.Proof.SignedTransactionProof getProof() {
+      public org.libra.grpc.types.Proof.TransactionProof getProof() {
         if (proofBuilder_ == null) {
-          return proof_ == null ? org.libra.grpc.types.Proof.SignedTransactionProof.getDefaultInstance() : proof_;
+          return proof_ == null ? org.libra.grpc.types.Proof.TransactionProof.getDefaultInstance() : proof_;
         } else {
           return proofBuilder_.getMessage();
         }
       }
       /**
        * <pre>
-       * The proof authenticating the signed transaction.
+       * The proof authenticating the transaction.
        * </pre>
        *
-       * <code>.types.SignedTransactionProof proof = 3;</code>
+       * <code>.types.TransactionProof proof = 3;</code>
        */
-      public Builder setProof(org.libra.grpc.types.Proof.SignedTransactionProof value) {
+      public Builder setProof(org.libra.grpc.types.Proof.TransactionProof value) {
         if (proofBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -2491,13 +2491,13 @@ public final class TransactionOuterClass {
       }
       /**
        * <pre>
-       * The proof authenticating the signed transaction.
+       * The proof authenticating the transaction.
        * </pre>
        *
-       * <code>.types.SignedTransactionProof proof = 3;</code>
+       * <code>.types.TransactionProof proof = 3;</code>
        */
       public Builder setProof(
-          org.libra.grpc.types.Proof.SignedTransactionProof.Builder builderForValue) {
+          org.libra.grpc.types.Proof.TransactionProof.Builder builderForValue) {
         if (proofBuilder_ == null) {
           proof_ = builderForValue.build();
           onChanged();
@@ -2509,16 +2509,16 @@ public final class TransactionOuterClass {
       }
       /**
        * <pre>
-       * The proof authenticating the signed transaction.
+       * The proof authenticating the transaction.
        * </pre>
        *
-       * <code>.types.SignedTransactionProof proof = 3;</code>
+       * <code>.types.TransactionProof proof = 3;</code>
        */
-      public Builder mergeProof(org.libra.grpc.types.Proof.SignedTransactionProof value) {
+      public Builder mergeProof(org.libra.grpc.types.Proof.TransactionProof value) {
         if (proofBuilder_ == null) {
           if (proof_ != null) {
             proof_ =
-              org.libra.grpc.types.Proof.SignedTransactionProof.newBuilder(proof_).mergeFrom(value).buildPartial();
+              org.libra.grpc.types.Proof.TransactionProof.newBuilder(proof_).mergeFrom(value).buildPartial();
           } else {
             proof_ = value;
           }
@@ -2531,10 +2531,10 @@ public final class TransactionOuterClass {
       }
       /**
        * <pre>
-       * The proof authenticating the signed transaction.
+       * The proof authenticating the transaction.
        * </pre>
        *
-       * <code>.types.SignedTransactionProof proof = 3;</code>
+       * <code>.types.TransactionProof proof = 3;</code>
        */
       public Builder clearProof() {
         if (proofBuilder_ == null) {
@@ -2549,44 +2549,44 @@ public final class TransactionOuterClass {
       }
       /**
        * <pre>
-       * The proof authenticating the signed transaction.
+       * The proof authenticating the transaction.
        * </pre>
        *
-       * <code>.types.SignedTransactionProof proof = 3;</code>
+       * <code>.types.TransactionProof proof = 3;</code>
        */
-      public org.libra.grpc.types.Proof.SignedTransactionProof.Builder getProofBuilder() {
+      public org.libra.grpc.types.Proof.TransactionProof.Builder getProofBuilder() {
         
         onChanged();
         return getProofFieldBuilder().getBuilder();
       }
       /**
        * <pre>
-       * The proof authenticating the signed transaction.
+       * The proof authenticating the transaction.
        * </pre>
        *
-       * <code>.types.SignedTransactionProof proof = 3;</code>
+       * <code>.types.TransactionProof proof = 3;</code>
        */
-      public org.libra.grpc.types.Proof.SignedTransactionProofOrBuilder getProofOrBuilder() {
+      public org.libra.grpc.types.Proof.TransactionProofOrBuilder getProofOrBuilder() {
         if (proofBuilder_ != null) {
           return proofBuilder_.getMessageOrBuilder();
         } else {
           return proof_ == null ?
-              org.libra.grpc.types.Proof.SignedTransactionProof.getDefaultInstance() : proof_;
+              org.libra.grpc.types.Proof.TransactionProof.getDefaultInstance() : proof_;
         }
       }
       /**
        * <pre>
-       * The proof authenticating the signed transaction.
+       * The proof authenticating the transaction.
        * </pre>
        *
-       * <code>.types.SignedTransactionProof proof = 3;</code>
+       * <code>.types.TransactionProof proof = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          org.libra.grpc.types.Proof.SignedTransactionProof, org.libra.grpc.types.Proof.SignedTransactionProof.Builder, org.libra.grpc.types.Proof.SignedTransactionProofOrBuilder> 
+          org.libra.grpc.types.Proof.TransactionProof, org.libra.grpc.types.Proof.TransactionProof.Builder, org.libra.grpc.types.Proof.TransactionProofOrBuilder> 
           getProofFieldBuilder() {
         if (proofBuilder_ == null) {
           proofBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              org.libra.grpc.types.Proof.SignedTransactionProof, org.libra.grpc.types.Proof.SignedTransactionProof.Builder, org.libra.grpc.types.Proof.SignedTransactionProofOrBuilder>(
+              org.libra.grpc.types.Proof.TransactionProof, org.libra.grpc.types.Proof.TransactionProof.Builder, org.libra.grpc.types.Proof.TransactionProofOrBuilder>(
                   getProof(),
                   getParentForChildren(),
                   isClean());
@@ -2760,41 +2760,41 @@ public final class TransactionOuterClass {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:types.SignedTransactionWithProof)
+      // @@protoc_insertion_point(builder_scope:types.TransactionWithProof)
     }
 
-    // @@protoc_insertion_point(class_scope:types.SignedTransactionWithProof)
-    private static final org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:types.TransactionWithProof)
+    private static final org.libra.grpc.types.TransactionOuterClass.TransactionWithProof DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof();
+      DEFAULT_INSTANCE = new org.libra.grpc.types.TransactionOuterClass.TransactionWithProof();
     }
 
-    public static org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof getDefaultInstance() {
+    public static org.libra.grpc.types.TransactionOuterClass.TransactionWithProof getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<SignedTransactionWithProof>
-        PARSER = new com.google.protobuf.AbstractParser<SignedTransactionWithProof>() {
+    private static final com.google.protobuf.Parser<TransactionWithProof>
+        PARSER = new com.google.protobuf.AbstractParser<TransactionWithProof>() {
       @java.lang.Override
-      public SignedTransactionWithProof parsePartialFrom(
+      public TransactionWithProof parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new SignedTransactionWithProof(input, extensionRegistry);
+        return new TransactionWithProof(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<SignedTransactionWithProof> parser() {
+    public static com.google.protobuf.Parser<TransactionWithProof> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<SignedTransactionWithProof> getParserForType() {
+    public com.google.protobuf.Parser<TransactionWithProof> getParserForType() {
       return PARSER;
     }
 
     @java.lang.Override
-    public org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof getDefaultInstanceForType() {
+    public org.libra.grpc.types.TransactionOuterClass.TransactionWithProof getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -6286,24 +6286,24 @@ public final class TransactionOuterClass {
      * The list of transactions.
      * </pre>
      *
-     * <code>repeated .types.SignedTransaction transactions = 1;</code>
+     * <code>repeated .types.Transaction transactions = 1;</code>
      */
-    java.util.List<org.libra.grpc.types.TransactionOuterClass.SignedTransaction> 
+    java.util.List<org.libra.grpc.types.TransactionOuterClass.Transaction> 
         getTransactionsList();
     /**
      * <pre>
      * The list of transactions.
      * </pre>
      *
-     * <code>repeated .types.SignedTransaction transactions = 1;</code>
+     * <code>repeated .types.Transaction transactions = 1;</code>
      */
-    org.libra.grpc.types.TransactionOuterClass.SignedTransaction getTransactions(int index);
+    org.libra.grpc.types.TransactionOuterClass.Transaction getTransactions(int index);
     /**
      * <pre>
      * The list of transactions.
      * </pre>
      *
-     * <code>repeated .types.SignedTransaction transactions = 1;</code>
+     * <code>repeated .types.Transaction transactions = 1;</code>
      */
     int getTransactionsCount();
     /**
@@ -6311,62 +6311,18 @@ public final class TransactionOuterClass {
      * The list of transactions.
      * </pre>
      *
-     * <code>repeated .types.SignedTransaction transactions = 1;</code>
+     * <code>repeated .types.Transaction transactions = 1;</code>
      */
-    java.util.List<? extends org.libra.grpc.types.TransactionOuterClass.SignedTransactionOrBuilder> 
+    java.util.List<? extends org.libra.grpc.types.TransactionOuterClass.TransactionOrBuilder> 
         getTransactionsOrBuilderList();
     /**
      * <pre>
      * The list of transactions.
      * </pre>
      *
-     * <code>repeated .types.SignedTransaction transactions = 1;</code>
+     * <code>repeated .types.Transaction transactions = 1;</code>
      */
-    org.libra.grpc.types.TransactionOuterClass.SignedTransactionOrBuilder getTransactionsOrBuilder(
-        int index);
-
-    /**
-     * <pre>
-     * The list of corresponding TransactionInfo objects.
-     * </pre>
-     *
-     * <code>repeated .types.TransactionInfo infos = 2;</code>
-     */
-    java.util.List<org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo> 
-        getInfosList();
-    /**
-     * <pre>
-     * The list of corresponding TransactionInfo objects.
-     * </pre>
-     *
-     * <code>repeated .types.TransactionInfo infos = 2;</code>
-     */
-    org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo getInfos(int index);
-    /**
-     * <pre>
-     * The list of corresponding TransactionInfo objects.
-     * </pre>
-     *
-     * <code>repeated .types.TransactionInfo infos = 2;</code>
-     */
-    int getInfosCount();
-    /**
-     * <pre>
-     * The list of corresponding TransactionInfo objects.
-     * </pre>
-     *
-     * <code>repeated .types.TransactionInfo infos = 2;</code>
-     */
-    java.util.List<? extends org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfoOrBuilder> 
-        getInfosOrBuilderList();
-    /**
-     * <pre>
-     * The list of corresponding TransactionInfo objects.
-     * </pre>
-     *
-     * <code>repeated .types.TransactionInfo infos = 2;</code>
-     */
-    org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfoOrBuilder getInfosOrBuilder(
+    org.libra.grpc.types.TransactionOuterClass.TransactionOrBuilder getTransactionsOrBuilder(
         int index);
 
     /**
@@ -6374,7 +6330,7 @@ public final class TransactionOuterClass {
      * The list of corresponding Event objects (only present if fetch_events was set to true in req)
      * </pre>
      *
-     * <code>.types.EventsForVersions events_for_versions = 3;</code>
+     * <code>.types.EventsForVersions events_for_versions = 2;</code>
      */
     boolean hasEventsForVersions();
     /**
@@ -6382,7 +6338,7 @@ public final class TransactionOuterClass {
      * The list of corresponding Event objects (only present if fetch_events was set to true in req)
      * </pre>
      *
-     * <code>.types.EventsForVersions events_for_versions = 3;</code>
+     * <code>.types.EventsForVersions events_for_versions = 2;</code>
      */
     org.libra.grpc.types.Events.EventsForVersions getEventsForVersions();
     /**
@@ -6390,7 +6346,7 @@ public final class TransactionOuterClass {
      * The list of corresponding Event objects (only present if fetch_events was set to true in req)
      * </pre>
      *
-     * <code>.types.EventsForVersions events_for_versions = 3;</code>
+     * <code>.types.EventsForVersions events_for_versions = 2;</code>
      */
     org.libra.grpc.types.Events.EventsForVersionsOrBuilder getEventsForVersionsOrBuilder();
 
@@ -6399,7 +6355,7 @@ public final class TransactionOuterClass {
      * If the list is not empty, the version of the first transaction.
      * </pre>
      *
-     * <code>.google.protobuf.UInt64Value first_transaction_version = 4;</code>
+     * <code>.google.protobuf.UInt64Value first_transaction_version = 3;</code>
      */
     boolean hasFirstTransactionVersion();
     /**
@@ -6407,7 +6363,7 @@ public final class TransactionOuterClass {
      * If the list is not empty, the version of the first transaction.
      * </pre>
      *
-     * <code>.google.protobuf.UInt64Value first_transaction_version = 4;</code>
+     * <code>.google.protobuf.UInt64Value first_transaction_version = 3;</code>
      */
     com.google.protobuf.UInt64Value getFirstTransactionVersion();
     /**
@@ -6415,62 +6371,49 @@ public final class TransactionOuterClass {
      * If the list is not empty, the version of the first transaction.
      * </pre>
      *
-     * <code>.google.protobuf.UInt64Value first_transaction_version = 4;</code>
+     * <code>.google.protobuf.UInt64Value first_transaction_version = 3;</code>
      */
     com.google.protobuf.UInt64ValueOrBuilder getFirstTransactionVersionOrBuilder();
 
     /**
      * <pre>
-     * The proofs of the first and last transaction in this chunk. When this is
-     * used for state synchronization, the validator who requests the transactions
+     * The proof authenticating the transactions and events.When this is used
+     * for state synchronization, the validator who requests the transactions
      * will provide a version in the request and the proofs will be relative to
      * the given version. When this is returned in GetTransactionsResponse, the
      * proofs will be relative to the ledger info returned in
      * UpdateToLatestLedgerResponse.
      * </pre>
      *
-     * <code>.types.AccumulatorProof proof_of_first_transaction = 5;</code>
+     * <code>.types.TransactionListProof proof = 4;</code>
      */
-    boolean hasProofOfFirstTransaction();
+    boolean hasProof();
     /**
      * <pre>
-     * The proofs of the first and last transaction in this chunk. When this is
-     * used for state synchronization, the validator who requests the transactions
+     * The proof authenticating the transactions and events.When this is used
+     * for state synchronization, the validator who requests the transactions
      * will provide a version in the request and the proofs will be relative to
      * the given version. When this is returned in GetTransactionsResponse, the
      * proofs will be relative to the ledger info returned in
      * UpdateToLatestLedgerResponse.
      * </pre>
      *
-     * <code>.types.AccumulatorProof proof_of_first_transaction = 5;</code>
+     * <code>.types.TransactionListProof proof = 4;</code>
      */
-    org.libra.grpc.types.Proof.AccumulatorProof getProofOfFirstTransaction();
+    org.libra.grpc.types.Proof.TransactionListProof getProof();
     /**
      * <pre>
-     * The proofs of the first and last transaction in this chunk. When this is
-     * used for state synchronization, the validator who requests the transactions
+     * The proof authenticating the transactions and events.When this is used
+     * for state synchronization, the validator who requests the transactions
      * will provide a version in the request and the proofs will be relative to
      * the given version. When this is returned in GetTransactionsResponse, the
      * proofs will be relative to the ledger info returned in
      * UpdateToLatestLedgerResponse.
      * </pre>
      *
-     * <code>.types.AccumulatorProof proof_of_first_transaction = 5;</code>
+     * <code>.types.TransactionListProof proof = 4;</code>
      */
-    org.libra.grpc.types.Proof.AccumulatorProofOrBuilder getProofOfFirstTransactionOrBuilder();
-
-    /**
-     * <code>.types.AccumulatorProof proof_of_last_transaction = 6;</code>
-     */
-    boolean hasProofOfLastTransaction();
-    /**
-     * <code>.types.AccumulatorProof proof_of_last_transaction = 6;</code>
-     */
-    org.libra.grpc.types.Proof.AccumulatorProof getProofOfLastTransaction();
-    /**
-     * <code>.types.AccumulatorProof proof_of_last_transaction = 6;</code>
-     */
-    org.libra.grpc.types.Proof.AccumulatorProofOrBuilder getProofOfLastTransactionOrBuilder();
+    org.libra.grpc.types.Proof.TransactionListProofOrBuilder getProofOrBuilder();
   }
   /**
    * <pre>
@@ -6494,7 +6437,6 @@ public final class TransactionOuterClass {
     }
     private TransactionListWithProof() {
       transactions_ = java.util.Collections.emptyList();
-      infos_ = java.util.Collections.emptyList();
     }
 
     @java.lang.Override
@@ -6523,23 +6465,14 @@ public final class TransactionOuterClass {
               break;
             case 10: {
               if (!((mutable_bitField0_ & 0x00000001) != 0)) {
-                transactions_ = new java.util.ArrayList<org.libra.grpc.types.TransactionOuterClass.SignedTransaction>();
+                transactions_ = new java.util.ArrayList<org.libra.grpc.types.TransactionOuterClass.Transaction>();
                 mutable_bitField0_ |= 0x00000001;
               }
               transactions_.add(
-                  input.readMessage(org.libra.grpc.types.TransactionOuterClass.SignedTransaction.parser(), extensionRegistry));
+                  input.readMessage(org.libra.grpc.types.TransactionOuterClass.Transaction.parser(), extensionRegistry));
               break;
             }
             case 18: {
-              if (!((mutable_bitField0_ & 0x00000002) != 0)) {
-                infos_ = new java.util.ArrayList<org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo>();
-                mutable_bitField0_ |= 0x00000002;
-              }
-              infos_.add(
-                  input.readMessage(org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo.parser(), extensionRegistry));
-              break;
-            }
-            case 26: {
               org.libra.grpc.types.Events.EventsForVersions.Builder subBuilder = null;
               if (eventsForVersions_ != null) {
                 subBuilder = eventsForVersions_.toBuilder();
@@ -6552,7 +6485,7 @@ public final class TransactionOuterClass {
 
               break;
             }
-            case 34: {
+            case 26: {
               com.google.protobuf.UInt64Value.Builder subBuilder = null;
               if (firstTransactionVersion_ != null) {
                 subBuilder = firstTransactionVersion_.toBuilder();
@@ -6565,28 +6498,15 @@ public final class TransactionOuterClass {
 
               break;
             }
-            case 42: {
-              org.libra.grpc.types.Proof.AccumulatorProof.Builder subBuilder = null;
-              if (proofOfFirstTransaction_ != null) {
-                subBuilder = proofOfFirstTransaction_.toBuilder();
+            case 34: {
+              org.libra.grpc.types.Proof.TransactionListProof.Builder subBuilder = null;
+              if (proof_ != null) {
+                subBuilder = proof_.toBuilder();
               }
-              proofOfFirstTransaction_ = input.readMessage(org.libra.grpc.types.Proof.AccumulatorProof.parser(), extensionRegistry);
+              proof_ = input.readMessage(org.libra.grpc.types.Proof.TransactionListProof.parser(), extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom(proofOfFirstTransaction_);
-                proofOfFirstTransaction_ = subBuilder.buildPartial();
-              }
-
-              break;
-            }
-            case 50: {
-              org.libra.grpc.types.Proof.AccumulatorProof.Builder subBuilder = null;
-              if (proofOfLastTransaction_ != null) {
-                subBuilder = proofOfLastTransaction_.toBuilder();
-              }
-              proofOfLastTransaction_ = input.readMessage(org.libra.grpc.types.Proof.AccumulatorProof.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(proofOfLastTransaction_);
-                proofOfLastTransaction_ = subBuilder.buildPartial();
+                subBuilder.mergeFrom(proof_);
+                proof_ = subBuilder.buildPartial();
               }
 
               break;
@@ -6609,9 +6529,6 @@ public final class TransactionOuterClass {
         if (((mutable_bitField0_ & 0x00000001) != 0)) {
           transactions_ = java.util.Collections.unmodifiableList(transactions_);
         }
-        if (((mutable_bitField0_ & 0x00000002) != 0)) {
-          infos_ = java.util.Collections.unmodifiableList(infos_);
-        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -6631,15 +6548,15 @@ public final class TransactionOuterClass {
 
     private int bitField0_;
     public static final int TRANSACTIONS_FIELD_NUMBER = 1;
-    private java.util.List<org.libra.grpc.types.TransactionOuterClass.SignedTransaction> transactions_;
+    private java.util.List<org.libra.grpc.types.TransactionOuterClass.Transaction> transactions_;
     /**
      * <pre>
      * The list of transactions.
      * </pre>
      *
-     * <code>repeated .types.SignedTransaction transactions = 1;</code>
+     * <code>repeated .types.Transaction transactions = 1;</code>
      */
-    public java.util.List<org.libra.grpc.types.TransactionOuterClass.SignedTransaction> getTransactionsList() {
+    public java.util.List<org.libra.grpc.types.TransactionOuterClass.Transaction> getTransactionsList() {
       return transactions_;
     }
     /**
@@ -6647,9 +6564,9 @@ public final class TransactionOuterClass {
      * The list of transactions.
      * </pre>
      *
-     * <code>repeated .types.SignedTransaction transactions = 1;</code>
+     * <code>repeated .types.Transaction transactions = 1;</code>
      */
-    public java.util.List<? extends org.libra.grpc.types.TransactionOuterClass.SignedTransactionOrBuilder> 
+    public java.util.List<? extends org.libra.grpc.types.TransactionOuterClass.TransactionOrBuilder> 
         getTransactionsOrBuilderList() {
       return transactions_;
     }
@@ -6658,7 +6575,7 @@ public final class TransactionOuterClass {
      * The list of transactions.
      * </pre>
      *
-     * <code>repeated .types.SignedTransaction transactions = 1;</code>
+     * <code>repeated .types.Transaction transactions = 1;</code>
      */
     public int getTransactionsCount() {
       return transactions_.size();
@@ -6668,9 +6585,9 @@ public final class TransactionOuterClass {
      * The list of transactions.
      * </pre>
      *
-     * <code>repeated .types.SignedTransaction transactions = 1;</code>
+     * <code>repeated .types.Transaction transactions = 1;</code>
      */
-    public org.libra.grpc.types.TransactionOuterClass.SignedTransaction getTransactions(int index) {
+    public org.libra.grpc.types.TransactionOuterClass.Transaction getTransactions(int index) {
       return transactions_.get(index);
     }
     /**
@@ -6678,76 +6595,21 @@ public final class TransactionOuterClass {
      * The list of transactions.
      * </pre>
      *
-     * <code>repeated .types.SignedTransaction transactions = 1;</code>
+     * <code>repeated .types.Transaction transactions = 1;</code>
      */
-    public org.libra.grpc.types.TransactionOuterClass.SignedTransactionOrBuilder getTransactionsOrBuilder(
+    public org.libra.grpc.types.TransactionOuterClass.TransactionOrBuilder getTransactionsOrBuilder(
         int index) {
       return transactions_.get(index);
     }
 
-    public static final int INFOS_FIELD_NUMBER = 2;
-    private java.util.List<org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo> infos_;
-    /**
-     * <pre>
-     * The list of corresponding TransactionInfo objects.
-     * </pre>
-     *
-     * <code>repeated .types.TransactionInfo infos = 2;</code>
-     */
-    public java.util.List<org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo> getInfosList() {
-      return infos_;
-    }
-    /**
-     * <pre>
-     * The list of corresponding TransactionInfo objects.
-     * </pre>
-     *
-     * <code>repeated .types.TransactionInfo infos = 2;</code>
-     */
-    public java.util.List<? extends org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfoOrBuilder> 
-        getInfosOrBuilderList() {
-      return infos_;
-    }
-    /**
-     * <pre>
-     * The list of corresponding TransactionInfo objects.
-     * </pre>
-     *
-     * <code>repeated .types.TransactionInfo infos = 2;</code>
-     */
-    public int getInfosCount() {
-      return infos_.size();
-    }
-    /**
-     * <pre>
-     * The list of corresponding TransactionInfo objects.
-     * </pre>
-     *
-     * <code>repeated .types.TransactionInfo infos = 2;</code>
-     */
-    public org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo getInfos(int index) {
-      return infos_.get(index);
-    }
-    /**
-     * <pre>
-     * The list of corresponding TransactionInfo objects.
-     * </pre>
-     *
-     * <code>repeated .types.TransactionInfo infos = 2;</code>
-     */
-    public org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfoOrBuilder getInfosOrBuilder(
-        int index) {
-      return infos_.get(index);
-    }
-
-    public static final int EVENTS_FOR_VERSIONS_FIELD_NUMBER = 3;
+    public static final int EVENTS_FOR_VERSIONS_FIELD_NUMBER = 2;
     private org.libra.grpc.types.Events.EventsForVersions eventsForVersions_;
     /**
      * <pre>
      * The list of corresponding Event objects (only present if fetch_events was set to true in req)
      * </pre>
      *
-     * <code>.types.EventsForVersions events_for_versions = 3;</code>
+     * <code>.types.EventsForVersions events_for_versions = 2;</code>
      */
     public boolean hasEventsForVersions() {
       return eventsForVersions_ != null;
@@ -6757,7 +6619,7 @@ public final class TransactionOuterClass {
      * The list of corresponding Event objects (only present if fetch_events was set to true in req)
      * </pre>
      *
-     * <code>.types.EventsForVersions events_for_versions = 3;</code>
+     * <code>.types.EventsForVersions events_for_versions = 2;</code>
      */
     public org.libra.grpc.types.Events.EventsForVersions getEventsForVersions() {
       return eventsForVersions_ == null ? org.libra.grpc.types.Events.EventsForVersions.getDefaultInstance() : eventsForVersions_;
@@ -6767,20 +6629,20 @@ public final class TransactionOuterClass {
      * The list of corresponding Event objects (only present if fetch_events was set to true in req)
      * </pre>
      *
-     * <code>.types.EventsForVersions events_for_versions = 3;</code>
+     * <code>.types.EventsForVersions events_for_versions = 2;</code>
      */
     public org.libra.grpc.types.Events.EventsForVersionsOrBuilder getEventsForVersionsOrBuilder() {
       return getEventsForVersions();
     }
 
-    public static final int FIRST_TRANSACTION_VERSION_FIELD_NUMBER = 4;
+    public static final int FIRST_TRANSACTION_VERSION_FIELD_NUMBER = 3;
     private com.google.protobuf.UInt64Value firstTransactionVersion_;
     /**
      * <pre>
      * If the list is not empty, the version of the first transaction.
      * </pre>
      *
-     * <code>.google.protobuf.UInt64Value first_transaction_version = 4;</code>
+     * <code>.google.protobuf.UInt64Value first_transaction_version = 3;</code>
      */
     public boolean hasFirstTransactionVersion() {
       return firstTransactionVersion_ != null;
@@ -6790,7 +6652,7 @@ public final class TransactionOuterClass {
      * If the list is not empty, the version of the first transaction.
      * </pre>
      *
-     * <code>.google.protobuf.UInt64Value first_transaction_version = 4;</code>
+     * <code>.google.protobuf.UInt64Value first_transaction_version = 3;</code>
      */
     public com.google.protobuf.UInt64Value getFirstTransactionVersion() {
       return firstTransactionVersion_ == null ? com.google.protobuf.UInt64Value.getDefaultInstance() : firstTransactionVersion_;
@@ -6800,79 +6662,58 @@ public final class TransactionOuterClass {
      * If the list is not empty, the version of the first transaction.
      * </pre>
      *
-     * <code>.google.protobuf.UInt64Value first_transaction_version = 4;</code>
+     * <code>.google.protobuf.UInt64Value first_transaction_version = 3;</code>
      */
     public com.google.protobuf.UInt64ValueOrBuilder getFirstTransactionVersionOrBuilder() {
       return getFirstTransactionVersion();
     }
 
-    public static final int PROOF_OF_FIRST_TRANSACTION_FIELD_NUMBER = 5;
-    private org.libra.grpc.types.Proof.AccumulatorProof proofOfFirstTransaction_;
+    public static final int PROOF_FIELD_NUMBER = 4;
+    private org.libra.grpc.types.Proof.TransactionListProof proof_;
     /**
      * <pre>
-     * The proofs of the first and last transaction in this chunk. When this is
-     * used for state synchronization, the validator who requests the transactions
+     * The proof authenticating the transactions and events.When this is used
+     * for state synchronization, the validator who requests the transactions
      * will provide a version in the request and the proofs will be relative to
      * the given version. When this is returned in GetTransactionsResponse, the
      * proofs will be relative to the ledger info returned in
      * UpdateToLatestLedgerResponse.
      * </pre>
      *
-     * <code>.types.AccumulatorProof proof_of_first_transaction = 5;</code>
+     * <code>.types.TransactionListProof proof = 4;</code>
      */
-    public boolean hasProofOfFirstTransaction() {
-      return proofOfFirstTransaction_ != null;
+    public boolean hasProof() {
+      return proof_ != null;
     }
     /**
      * <pre>
-     * The proofs of the first and last transaction in this chunk. When this is
-     * used for state synchronization, the validator who requests the transactions
+     * The proof authenticating the transactions and events.When this is used
+     * for state synchronization, the validator who requests the transactions
      * will provide a version in the request and the proofs will be relative to
      * the given version. When this is returned in GetTransactionsResponse, the
      * proofs will be relative to the ledger info returned in
      * UpdateToLatestLedgerResponse.
      * </pre>
      *
-     * <code>.types.AccumulatorProof proof_of_first_transaction = 5;</code>
+     * <code>.types.TransactionListProof proof = 4;</code>
      */
-    public org.libra.grpc.types.Proof.AccumulatorProof getProofOfFirstTransaction() {
-      return proofOfFirstTransaction_ == null ? org.libra.grpc.types.Proof.AccumulatorProof.getDefaultInstance() : proofOfFirstTransaction_;
+    public org.libra.grpc.types.Proof.TransactionListProof getProof() {
+      return proof_ == null ? org.libra.grpc.types.Proof.TransactionListProof.getDefaultInstance() : proof_;
     }
     /**
      * <pre>
-     * The proofs of the first and last transaction in this chunk. When this is
-     * used for state synchronization, the validator who requests the transactions
+     * The proof authenticating the transactions and events.When this is used
+     * for state synchronization, the validator who requests the transactions
      * will provide a version in the request and the proofs will be relative to
      * the given version. When this is returned in GetTransactionsResponse, the
      * proofs will be relative to the ledger info returned in
      * UpdateToLatestLedgerResponse.
      * </pre>
      *
-     * <code>.types.AccumulatorProof proof_of_first_transaction = 5;</code>
+     * <code>.types.TransactionListProof proof = 4;</code>
      */
-    public org.libra.grpc.types.Proof.AccumulatorProofOrBuilder getProofOfFirstTransactionOrBuilder() {
-      return getProofOfFirstTransaction();
-    }
-
-    public static final int PROOF_OF_LAST_TRANSACTION_FIELD_NUMBER = 6;
-    private org.libra.grpc.types.Proof.AccumulatorProof proofOfLastTransaction_;
-    /**
-     * <code>.types.AccumulatorProof proof_of_last_transaction = 6;</code>
-     */
-    public boolean hasProofOfLastTransaction() {
-      return proofOfLastTransaction_ != null;
-    }
-    /**
-     * <code>.types.AccumulatorProof proof_of_last_transaction = 6;</code>
-     */
-    public org.libra.grpc.types.Proof.AccumulatorProof getProofOfLastTransaction() {
-      return proofOfLastTransaction_ == null ? org.libra.grpc.types.Proof.AccumulatorProof.getDefaultInstance() : proofOfLastTransaction_;
-    }
-    /**
-     * <code>.types.AccumulatorProof proof_of_last_transaction = 6;</code>
-     */
-    public org.libra.grpc.types.Proof.AccumulatorProofOrBuilder getProofOfLastTransactionOrBuilder() {
-      return getProofOfLastTransaction();
+    public org.libra.grpc.types.Proof.TransactionListProofOrBuilder getProofOrBuilder() {
+      return getProof();
     }
 
     private byte memoizedIsInitialized = -1;
@@ -6892,20 +6733,14 @@ public final class TransactionOuterClass {
       for (int i = 0; i < transactions_.size(); i++) {
         output.writeMessage(1, transactions_.get(i));
       }
-      for (int i = 0; i < infos_.size(); i++) {
-        output.writeMessage(2, infos_.get(i));
-      }
       if (eventsForVersions_ != null) {
-        output.writeMessage(3, getEventsForVersions());
+        output.writeMessage(2, getEventsForVersions());
       }
       if (firstTransactionVersion_ != null) {
-        output.writeMessage(4, getFirstTransactionVersion());
+        output.writeMessage(3, getFirstTransactionVersion());
       }
-      if (proofOfFirstTransaction_ != null) {
-        output.writeMessage(5, getProofOfFirstTransaction());
-      }
-      if (proofOfLastTransaction_ != null) {
-        output.writeMessage(6, getProofOfLastTransaction());
+      if (proof_ != null) {
+        output.writeMessage(4, getProof());
       }
       unknownFields.writeTo(output);
     }
@@ -6920,25 +6755,17 @@ public final class TransactionOuterClass {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, transactions_.get(i));
       }
-      for (int i = 0; i < infos_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, infos_.get(i));
-      }
       if (eventsForVersions_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, getEventsForVersions());
+          .computeMessageSize(2, getEventsForVersions());
       }
       if (firstTransactionVersion_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, getFirstTransactionVersion());
+          .computeMessageSize(3, getFirstTransactionVersion());
       }
-      if (proofOfFirstTransaction_ != null) {
+      if (proof_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(5, getProofOfFirstTransaction());
-      }
-      if (proofOfLastTransaction_ != null) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(6, getProofOfLastTransaction());
+          .computeMessageSize(4, getProof());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -6957,8 +6784,6 @@ public final class TransactionOuterClass {
 
       if (!getTransactionsList()
           .equals(other.getTransactionsList())) return false;
-      if (!getInfosList()
-          .equals(other.getInfosList())) return false;
       if (hasEventsForVersions() != other.hasEventsForVersions()) return false;
       if (hasEventsForVersions()) {
         if (!getEventsForVersions()
@@ -6969,15 +6794,10 @@ public final class TransactionOuterClass {
         if (!getFirstTransactionVersion()
             .equals(other.getFirstTransactionVersion())) return false;
       }
-      if (hasProofOfFirstTransaction() != other.hasProofOfFirstTransaction()) return false;
-      if (hasProofOfFirstTransaction()) {
-        if (!getProofOfFirstTransaction()
-            .equals(other.getProofOfFirstTransaction())) return false;
-      }
-      if (hasProofOfLastTransaction() != other.hasProofOfLastTransaction()) return false;
-      if (hasProofOfLastTransaction()) {
-        if (!getProofOfLastTransaction()
-            .equals(other.getProofOfLastTransaction())) return false;
+      if (hasProof() != other.hasProof()) return false;
+      if (hasProof()) {
+        if (!getProof()
+            .equals(other.getProof())) return false;
       }
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
@@ -6994,10 +6814,6 @@ public final class TransactionOuterClass {
         hash = (37 * hash) + TRANSACTIONS_FIELD_NUMBER;
         hash = (53 * hash) + getTransactionsList().hashCode();
       }
-      if (getInfosCount() > 0) {
-        hash = (37 * hash) + INFOS_FIELD_NUMBER;
-        hash = (53 * hash) + getInfosList().hashCode();
-      }
       if (hasEventsForVersions()) {
         hash = (37 * hash) + EVENTS_FOR_VERSIONS_FIELD_NUMBER;
         hash = (53 * hash) + getEventsForVersions().hashCode();
@@ -7006,13 +6822,9 @@ public final class TransactionOuterClass {
         hash = (37 * hash) + FIRST_TRANSACTION_VERSION_FIELD_NUMBER;
         hash = (53 * hash) + getFirstTransactionVersion().hashCode();
       }
-      if (hasProofOfFirstTransaction()) {
-        hash = (37 * hash) + PROOF_OF_FIRST_TRANSACTION_FIELD_NUMBER;
-        hash = (53 * hash) + getProofOfFirstTransaction().hashCode();
-      }
-      if (hasProofOfLastTransaction()) {
-        hash = (37 * hash) + PROOF_OF_LAST_TRANSACTION_FIELD_NUMBER;
-        hash = (53 * hash) + getProofOfLastTransaction().hashCode();
+      if (hasProof()) {
+        hash = (37 * hash) + PROOF_FIELD_NUMBER;
+        hash = (53 * hash) + getProof().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -7151,7 +6963,6 @@ public final class TransactionOuterClass {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
           getTransactionsFieldBuilder();
-          getInfosFieldBuilder();
         }
       }
       @java.lang.Override
@@ -7162,12 +6973,6 @@ public final class TransactionOuterClass {
           bitField0_ = (bitField0_ & ~0x00000001);
         } else {
           transactionsBuilder_.clear();
-        }
-        if (infosBuilder_ == null) {
-          infos_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
-        } else {
-          infosBuilder_.clear();
         }
         if (eventsForVersionsBuilder_ == null) {
           eventsForVersions_ = null;
@@ -7181,17 +6986,11 @@ public final class TransactionOuterClass {
           firstTransactionVersion_ = null;
           firstTransactionVersionBuilder_ = null;
         }
-        if (proofOfFirstTransactionBuilder_ == null) {
-          proofOfFirstTransaction_ = null;
+        if (proofBuilder_ == null) {
+          proof_ = null;
         } else {
-          proofOfFirstTransaction_ = null;
-          proofOfFirstTransactionBuilder_ = null;
-        }
-        if (proofOfLastTransactionBuilder_ == null) {
-          proofOfLastTransaction_ = null;
-        } else {
-          proofOfLastTransaction_ = null;
-          proofOfLastTransactionBuilder_ = null;
+          proof_ = null;
+          proofBuilder_ = null;
         }
         return this;
       }
@@ -7230,15 +7029,6 @@ public final class TransactionOuterClass {
         } else {
           result.transactions_ = transactionsBuilder_.build();
         }
-        if (infosBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) != 0)) {
-            infos_ = java.util.Collections.unmodifiableList(infos_);
-            bitField0_ = (bitField0_ & ~0x00000002);
-          }
-          result.infos_ = infos_;
-        } else {
-          result.infos_ = infosBuilder_.build();
-        }
         if (eventsForVersionsBuilder_ == null) {
           result.eventsForVersions_ = eventsForVersions_;
         } else {
@@ -7249,15 +7039,10 @@ public final class TransactionOuterClass {
         } else {
           result.firstTransactionVersion_ = firstTransactionVersionBuilder_.build();
         }
-        if (proofOfFirstTransactionBuilder_ == null) {
-          result.proofOfFirstTransaction_ = proofOfFirstTransaction_;
+        if (proofBuilder_ == null) {
+          result.proof_ = proof_;
         } else {
-          result.proofOfFirstTransaction_ = proofOfFirstTransactionBuilder_.build();
-        }
-        if (proofOfLastTransactionBuilder_ == null) {
-          result.proofOfLastTransaction_ = proofOfLastTransaction_;
-        } else {
-          result.proofOfLastTransaction_ = proofOfLastTransactionBuilder_.build();
+          result.proof_ = proofBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -7334,43 +7119,14 @@ public final class TransactionOuterClass {
             }
           }
         }
-        if (infosBuilder_ == null) {
-          if (!other.infos_.isEmpty()) {
-            if (infos_.isEmpty()) {
-              infos_ = other.infos_;
-              bitField0_ = (bitField0_ & ~0x00000002);
-            } else {
-              ensureInfosIsMutable();
-              infos_.addAll(other.infos_);
-            }
-            onChanged();
-          }
-        } else {
-          if (!other.infos_.isEmpty()) {
-            if (infosBuilder_.isEmpty()) {
-              infosBuilder_.dispose();
-              infosBuilder_ = null;
-              infos_ = other.infos_;
-              bitField0_ = (bitField0_ & ~0x00000002);
-              infosBuilder_ = 
-                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                   getInfosFieldBuilder() : null;
-            } else {
-              infosBuilder_.addAllMessages(other.infos_);
-            }
-          }
-        }
         if (other.hasEventsForVersions()) {
           mergeEventsForVersions(other.getEventsForVersions());
         }
         if (other.hasFirstTransactionVersion()) {
           mergeFirstTransactionVersion(other.getFirstTransactionVersion());
         }
-        if (other.hasProofOfFirstTransaction()) {
-          mergeProofOfFirstTransaction(other.getProofOfFirstTransaction());
-        }
-        if (other.hasProofOfLastTransaction()) {
-          mergeProofOfLastTransaction(other.getProofOfLastTransaction());
+        if (other.hasProof()) {
+          mergeProof(other.getProof());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -7402,26 +7158,26 @@ public final class TransactionOuterClass {
       }
       private int bitField0_;
 
-      private java.util.List<org.libra.grpc.types.TransactionOuterClass.SignedTransaction> transactions_ =
+      private java.util.List<org.libra.grpc.types.TransactionOuterClass.Transaction> transactions_ =
         java.util.Collections.emptyList();
       private void ensureTransactionsIsMutable() {
         if (!((bitField0_ & 0x00000001) != 0)) {
-          transactions_ = new java.util.ArrayList<org.libra.grpc.types.TransactionOuterClass.SignedTransaction>(transactions_);
+          transactions_ = new java.util.ArrayList<org.libra.grpc.types.TransactionOuterClass.Transaction>(transactions_);
           bitField0_ |= 0x00000001;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          org.libra.grpc.types.TransactionOuterClass.SignedTransaction, org.libra.grpc.types.TransactionOuterClass.SignedTransaction.Builder, org.libra.grpc.types.TransactionOuterClass.SignedTransactionOrBuilder> transactionsBuilder_;
+          org.libra.grpc.types.TransactionOuterClass.Transaction, org.libra.grpc.types.TransactionOuterClass.Transaction.Builder, org.libra.grpc.types.TransactionOuterClass.TransactionOrBuilder> transactionsBuilder_;
 
       /**
        * <pre>
        * The list of transactions.
        * </pre>
        *
-       * <code>repeated .types.SignedTransaction transactions = 1;</code>
+       * <code>repeated .types.Transaction transactions = 1;</code>
        */
-      public java.util.List<org.libra.grpc.types.TransactionOuterClass.SignedTransaction> getTransactionsList() {
+      public java.util.List<org.libra.grpc.types.TransactionOuterClass.Transaction> getTransactionsList() {
         if (transactionsBuilder_ == null) {
           return java.util.Collections.unmodifiableList(transactions_);
         } else {
@@ -7433,7 +7189,7 @@ public final class TransactionOuterClass {
        * The list of transactions.
        * </pre>
        *
-       * <code>repeated .types.SignedTransaction transactions = 1;</code>
+       * <code>repeated .types.Transaction transactions = 1;</code>
        */
       public int getTransactionsCount() {
         if (transactionsBuilder_ == null) {
@@ -7447,9 +7203,9 @@ public final class TransactionOuterClass {
        * The list of transactions.
        * </pre>
        *
-       * <code>repeated .types.SignedTransaction transactions = 1;</code>
+       * <code>repeated .types.Transaction transactions = 1;</code>
        */
-      public org.libra.grpc.types.TransactionOuterClass.SignedTransaction getTransactions(int index) {
+      public org.libra.grpc.types.TransactionOuterClass.Transaction getTransactions(int index) {
         if (transactionsBuilder_ == null) {
           return transactions_.get(index);
         } else {
@@ -7461,10 +7217,10 @@ public final class TransactionOuterClass {
        * The list of transactions.
        * </pre>
        *
-       * <code>repeated .types.SignedTransaction transactions = 1;</code>
+       * <code>repeated .types.Transaction transactions = 1;</code>
        */
       public Builder setTransactions(
-          int index, org.libra.grpc.types.TransactionOuterClass.SignedTransaction value) {
+          int index, org.libra.grpc.types.TransactionOuterClass.Transaction value) {
         if (transactionsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -7482,10 +7238,10 @@ public final class TransactionOuterClass {
        * The list of transactions.
        * </pre>
        *
-       * <code>repeated .types.SignedTransaction transactions = 1;</code>
+       * <code>repeated .types.Transaction transactions = 1;</code>
        */
       public Builder setTransactions(
-          int index, org.libra.grpc.types.TransactionOuterClass.SignedTransaction.Builder builderForValue) {
+          int index, org.libra.grpc.types.TransactionOuterClass.Transaction.Builder builderForValue) {
         if (transactionsBuilder_ == null) {
           ensureTransactionsIsMutable();
           transactions_.set(index, builderForValue.build());
@@ -7500,9 +7256,9 @@ public final class TransactionOuterClass {
        * The list of transactions.
        * </pre>
        *
-       * <code>repeated .types.SignedTransaction transactions = 1;</code>
+       * <code>repeated .types.Transaction transactions = 1;</code>
        */
-      public Builder addTransactions(org.libra.grpc.types.TransactionOuterClass.SignedTransaction value) {
+      public Builder addTransactions(org.libra.grpc.types.TransactionOuterClass.Transaction value) {
         if (transactionsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -7520,10 +7276,10 @@ public final class TransactionOuterClass {
        * The list of transactions.
        * </pre>
        *
-       * <code>repeated .types.SignedTransaction transactions = 1;</code>
+       * <code>repeated .types.Transaction transactions = 1;</code>
        */
       public Builder addTransactions(
-          int index, org.libra.grpc.types.TransactionOuterClass.SignedTransaction value) {
+          int index, org.libra.grpc.types.TransactionOuterClass.Transaction value) {
         if (transactionsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -7541,10 +7297,10 @@ public final class TransactionOuterClass {
        * The list of transactions.
        * </pre>
        *
-       * <code>repeated .types.SignedTransaction transactions = 1;</code>
+       * <code>repeated .types.Transaction transactions = 1;</code>
        */
       public Builder addTransactions(
-          org.libra.grpc.types.TransactionOuterClass.SignedTransaction.Builder builderForValue) {
+          org.libra.grpc.types.TransactionOuterClass.Transaction.Builder builderForValue) {
         if (transactionsBuilder_ == null) {
           ensureTransactionsIsMutable();
           transactions_.add(builderForValue.build());
@@ -7559,10 +7315,10 @@ public final class TransactionOuterClass {
        * The list of transactions.
        * </pre>
        *
-       * <code>repeated .types.SignedTransaction transactions = 1;</code>
+       * <code>repeated .types.Transaction transactions = 1;</code>
        */
       public Builder addTransactions(
-          int index, org.libra.grpc.types.TransactionOuterClass.SignedTransaction.Builder builderForValue) {
+          int index, org.libra.grpc.types.TransactionOuterClass.Transaction.Builder builderForValue) {
         if (transactionsBuilder_ == null) {
           ensureTransactionsIsMutable();
           transactions_.add(index, builderForValue.build());
@@ -7577,10 +7333,10 @@ public final class TransactionOuterClass {
        * The list of transactions.
        * </pre>
        *
-       * <code>repeated .types.SignedTransaction transactions = 1;</code>
+       * <code>repeated .types.Transaction transactions = 1;</code>
        */
       public Builder addAllTransactions(
-          java.lang.Iterable<? extends org.libra.grpc.types.TransactionOuterClass.SignedTransaction> values) {
+          java.lang.Iterable<? extends org.libra.grpc.types.TransactionOuterClass.Transaction> values) {
         if (transactionsBuilder_ == null) {
           ensureTransactionsIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
@@ -7596,7 +7352,7 @@ public final class TransactionOuterClass {
        * The list of transactions.
        * </pre>
        *
-       * <code>repeated .types.SignedTransaction transactions = 1;</code>
+       * <code>repeated .types.Transaction transactions = 1;</code>
        */
       public Builder clearTransactions() {
         if (transactionsBuilder_ == null) {
@@ -7613,7 +7369,7 @@ public final class TransactionOuterClass {
        * The list of transactions.
        * </pre>
        *
-       * <code>repeated .types.SignedTransaction transactions = 1;</code>
+       * <code>repeated .types.Transaction transactions = 1;</code>
        */
       public Builder removeTransactions(int index) {
         if (transactionsBuilder_ == null) {
@@ -7630,9 +7386,9 @@ public final class TransactionOuterClass {
        * The list of transactions.
        * </pre>
        *
-       * <code>repeated .types.SignedTransaction transactions = 1;</code>
+       * <code>repeated .types.Transaction transactions = 1;</code>
        */
-      public org.libra.grpc.types.TransactionOuterClass.SignedTransaction.Builder getTransactionsBuilder(
+      public org.libra.grpc.types.TransactionOuterClass.Transaction.Builder getTransactionsBuilder(
           int index) {
         return getTransactionsFieldBuilder().getBuilder(index);
       }
@@ -7641,9 +7397,9 @@ public final class TransactionOuterClass {
        * The list of transactions.
        * </pre>
        *
-       * <code>repeated .types.SignedTransaction transactions = 1;</code>
+       * <code>repeated .types.Transaction transactions = 1;</code>
        */
-      public org.libra.grpc.types.TransactionOuterClass.SignedTransactionOrBuilder getTransactionsOrBuilder(
+      public org.libra.grpc.types.TransactionOuterClass.TransactionOrBuilder getTransactionsOrBuilder(
           int index) {
         if (transactionsBuilder_ == null) {
           return transactions_.get(index);  } else {
@@ -7655,9 +7411,9 @@ public final class TransactionOuterClass {
        * The list of transactions.
        * </pre>
        *
-       * <code>repeated .types.SignedTransaction transactions = 1;</code>
+       * <code>repeated .types.Transaction transactions = 1;</code>
        */
-      public java.util.List<? extends org.libra.grpc.types.TransactionOuterClass.SignedTransactionOrBuilder> 
+      public java.util.List<? extends org.libra.grpc.types.TransactionOuterClass.TransactionOrBuilder> 
            getTransactionsOrBuilderList() {
         if (transactionsBuilder_ != null) {
           return transactionsBuilder_.getMessageOrBuilderList();
@@ -7670,41 +7426,41 @@ public final class TransactionOuterClass {
        * The list of transactions.
        * </pre>
        *
-       * <code>repeated .types.SignedTransaction transactions = 1;</code>
+       * <code>repeated .types.Transaction transactions = 1;</code>
        */
-      public org.libra.grpc.types.TransactionOuterClass.SignedTransaction.Builder addTransactionsBuilder() {
+      public org.libra.grpc.types.TransactionOuterClass.Transaction.Builder addTransactionsBuilder() {
         return getTransactionsFieldBuilder().addBuilder(
-            org.libra.grpc.types.TransactionOuterClass.SignedTransaction.getDefaultInstance());
+            org.libra.grpc.types.TransactionOuterClass.Transaction.getDefaultInstance());
       }
       /**
        * <pre>
        * The list of transactions.
        * </pre>
        *
-       * <code>repeated .types.SignedTransaction transactions = 1;</code>
+       * <code>repeated .types.Transaction transactions = 1;</code>
        */
-      public org.libra.grpc.types.TransactionOuterClass.SignedTransaction.Builder addTransactionsBuilder(
+      public org.libra.grpc.types.TransactionOuterClass.Transaction.Builder addTransactionsBuilder(
           int index) {
         return getTransactionsFieldBuilder().addBuilder(
-            index, org.libra.grpc.types.TransactionOuterClass.SignedTransaction.getDefaultInstance());
+            index, org.libra.grpc.types.TransactionOuterClass.Transaction.getDefaultInstance());
       }
       /**
        * <pre>
        * The list of transactions.
        * </pre>
        *
-       * <code>repeated .types.SignedTransaction transactions = 1;</code>
+       * <code>repeated .types.Transaction transactions = 1;</code>
        */
-      public java.util.List<org.libra.grpc.types.TransactionOuterClass.SignedTransaction.Builder> 
+      public java.util.List<org.libra.grpc.types.TransactionOuterClass.Transaction.Builder> 
            getTransactionsBuilderList() {
         return getTransactionsFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          org.libra.grpc.types.TransactionOuterClass.SignedTransaction, org.libra.grpc.types.TransactionOuterClass.SignedTransaction.Builder, org.libra.grpc.types.TransactionOuterClass.SignedTransactionOrBuilder> 
+          org.libra.grpc.types.TransactionOuterClass.Transaction, org.libra.grpc.types.TransactionOuterClass.Transaction.Builder, org.libra.grpc.types.TransactionOuterClass.TransactionOrBuilder> 
           getTransactionsFieldBuilder() {
         if (transactionsBuilder_ == null) {
           transactionsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              org.libra.grpc.types.TransactionOuterClass.SignedTransaction, org.libra.grpc.types.TransactionOuterClass.SignedTransaction.Builder, org.libra.grpc.types.TransactionOuterClass.SignedTransactionOrBuilder>(
+              org.libra.grpc.types.TransactionOuterClass.Transaction, org.libra.grpc.types.TransactionOuterClass.Transaction.Builder, org.libra.grpc.types.TransactionOuterClass.TransactionOrBuilder>(
                   transactions_,
                   ((bitField0_ & 0x00000001) != 0),
                   getParentForChildren(),
@@ -7712,318 +7468,6 @@ public final class TransactionOuterClass {
           transactions_ = null;
         }
         return transactionsBuilder_;
-      }
-
-      private java.util.List<org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo> infos_ =
-        java.util.Collections.emptyList();
-      private void ensureInfosIsMutable() {
-        if (!((bitField0_ & 0x00000002) != 0)) {
-          infos_ = new java.util.ArrayList<org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo>(infos_);
-          bitField0_ |= 0x00000002;
-         }
-      }
-
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo, org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo.Builder, org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfoOrBuilder> infosBuilder_;
-
-      /**
-       * <pre>
-       * The list of corresponding TransactionInfo objects.
-       * </pre>
-       *
-       * <code>repeated .types.TransactionInfo infos = 2;</code>
-       */
-      public java.util.List<org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo> getInfosList() {
-        if (infosBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(infos_);
-        } else {
-          return infosBuilder_.getMessageList();
-        }
-      }
-      /**
-       * <pre>
-       * The list of corresponding TransactionInfo objects.
-       * </pre>
-       *
-       * <code>repeated .types.TransactionInfo infos = 2;</code>
-       */
-      public int getInfosCount() {
-        if (infosBuilder_ == null) {
-          return infos_.size();
-        } else {
-          return infosBuilder_.getCount();
-        }
-      }
-      /**
-       * <pre>
-       * The list of corresponding TransactionInfo objects.
-       * </pre>
-       *
-       * <code>repeated .types.TransactionInfo infos = 2;</code>
-       */
-      public org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo getInfos(int index) {
-        if (infosBuilder_ == null) {
-          return infos_.get(index);
-        } else {
-          return infosBuilder_.getMessage(index);
-        }
-      }
-      /**
-       * <pre>
-       * The list of corresponding TransactionInfo objects.
-       * </pre>
-       *
-       * <code>repeated .types.TransactionInfo infos = 2;</code>
-       */
-      public Builder setInfos(
-          int index, org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo value) {
-        if (infosBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureInfosIsMutable();
-          infos_.set(index, value);
-          onChanged();
-        } else {
-          infosBuilder_.setMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       * The list of corresponding TransactionInfo objects.
-       * </pre>
-       *
-       * <code>repeated .types.TransactionInfo infos = 2;</code>
-       */
-      public Builder setInfos(
-          int index, org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo.Builder builderForValue) {
-        if (infosBuilder_ == null) {
-          ensureInfosIsMutable();
-          infos_.set(index, builderForValue.build());
-          onChanged();
-        } else {
-          infosBuilder_.setMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       * The list of corresponding TransactionInfo objects.
-       * </pre>
-       *
-       * <code>repeated .types.TransactionInfo infos = 2;</code>
-       */
-      public Builder addInfos(org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo value) {
-        if (infosBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureInfosIsMutable();
-          infos_.add(value);
-          onChanged();
-        } else {
-          infosBuilder_.addMessage(value);
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       * The list of corresponding TransactionInfo objects.
-       * </pre>
-       *
-       * <code>repeated .types.TransactionInfo infos = 2;</code>
-       */
-      public Builder addInfos(
-          int index, org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo value) {
-        if (infosBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureInfosIsMutable();
-          infos_.add(index, value);
-          onChanged();
-        } else {
-          infosBuilder_.addMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       * The list of corresponding TransactionInfo objects.
-       * </pre>
-       *
-       * <code>repeated .types.TransactionInfo infos = 2;</code>
-       */
-      public Builder addInfos(
-          org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo.Builder builderForValue) {
-        if (infosBuilder_ == null) {
-          ensureInfosIsMutable();
-          infos_.add(builderForValue.build());
-          onChanged();
-        } else {
-          infosBuilder_.addMessage(builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       * The list of corresponding TransactionInfo objects.
-       * </pre>
-       *
-       * <code>repeated .types.TransactionInfo infos = 2;</code>
-       */
-      public Builder addInfos(
-          int index, org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo.Builder builderForValue) {
-        if (infosBuilder_ == null) {
-          ensureInfosIsMutable();
-          infos_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          infosBuilder_.addMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       * The list of corresponding TransactionInfo objects.
-       * </pre>
-       *
-       * <code>repeated .types.TransactionInfo infos = 2;</code>
-       */
-      public Builder addAllInfos(
-          java.lang.Iterable<? extends org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo> values) {
-        if (infosBuilder_ == null) {
-          ensureInfosIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, infos_);
-          onChanged();
-        } else {
-          infosBuilder_.addAllMessages(values);
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       * The list of corresponding TransactionInfo objects.
-       * </pre>
-       *
-       * <code>repeated .types.TransactionInfo infos = 2;</code>
-       */
-      public Builder clearInfos() {
-        if (infosBuilder_ == null) {
-          infos_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
-          onChanged();
-        } else {
-          infosBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       * The list of corresponding TransactionInfo objects.
-       * </pre>
-       *
-       * <code>repeated .types.TransactionInfo infos = 2;</code>
-       */
-      public Builder removeInfos(int index) {
-        if (infosBuilder_ == null) {
-          ensureInfosIsMutable();
-          infos_.remove(index);
-          onChanged();
-        } else {
-          infosBuilder_.remove(index);
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       * The list of corresponding TransactionInfo objects.
-       * </pre>
-       *
-       * <code>repeated .types.TransactionInfo infos = 2;</code>
-       */
-      public org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo.Builder getInfosBuilder(
-          int index) {
-        return getInfosFieldBuilder().getBuilder(index);
-      }
-      /**
-       * <pre>
-       * The list of corresponding TransactionInfo objects.
-       * </pre>
-       *
-       * <code>repeated .types.TransactionInfo infos = 2;</code>
-       */
-      public org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfoOrBuilder getInfosOrBuilder(
-          int index) {
-        if (infosBuilder_ == null) {
-          return infos_.get(index);  } else {
-          return infosBuilder_.getMessageOrBuilder(index);
-        }
-      }
-      /**
-       * <pre>
-       * The list of corresponding TransactionInfo objects.
-       * </pre>
-       *
-       * <code>repeated .types.TransactionInfo infos = 2;</code>
-       */
-      public java.util.List<? extends org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfoOrBuilder> 
-           getInfosOrBuilderList() {
-        if (infosBuilder_ != null) {
-          return infosBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(infos_);
-        }
-      }
-      /**
-       * <pre>
-       * The list of corresponding TransactionInfo objects.
-       * </pre>
-       *
-       * <code>repeated .types.TransactionInfo infos = 2;</code>
-       */
-      public org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo.Builder addInfosBuilder() {
-        return getInfosFieldBuilder().addBuilder(
-            org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo.getDefaultInstance());
-      }
-      /**
-       * <pre>
-       * The list of corresponding TransactionInfo objects.
-       * </pre>
-       *
-       * <code>repeated .types.TransactionInfo infos = 2;</code>
-       */
-      public org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo.Builder addInfosBuilder(
-          int index) {
-        return getInfosFieldBuilder().addBuilder(
-            index, org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo.getDefaultInstance());
-      }
-      /**
-       * <pre>
-       * The list of corresponding TransactionInfo objects.
-       * </pre>
-       *
-       * <code>repeated .types.TransactionInfo infos = 2;</code>
-       */
-      public java.util.List<org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo.Builder> 
-           getInfosBuilderList() {
-        return getInfosFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo, org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo.Builder, org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfoOrBuilder> 
-          getInfosFieldBuilder() {
-        if (infosBuilder_ == null) {
-          infosBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo, org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo.Builder, org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfoOrBuilder>(
-                  infos_,
-                  ((bitField0_ & 0x00000002) != 0),
-                  getParentForChildren(),
-                  isClean());
-          infos_ = null;
-        }
-        return infosBuilder_;
       }
 
       private org.libra.grpc.types.Events.EventsForVersions eventsForVersions_;
@@ -8034,7 +7478,7 @@ public final class TransactionOuterClass {
        * The list of corresponding Event objects (only present if fetch_events was set to true in req)
        * </pre>
        *
-       * <code>.types.EventsForVersions events_for_versions = 3;</code>
+       * <code>.types.EventsForVersions events_for_versions = 2;</code>
        */
       public boolean hasEventsForVersions() {
         return eventsForVersionsBuilder_ != null || eventsForVersions_ != null;
@@ -8044,7 +7488,7 @@ public final class TransactionOuterClass {
        * The list of corresponding Event objects (only present if fetch_events was set to true in req)
        * </pre>
        *
-       * <code>.types.EventsForVersions events_for_versions = 3;</code>
+       * <code>.types.EventsForVersions events_for_versions = 2;</code>
        */
       public org.libra.grpc.types.Events.EventsForVersions getEventsForVersions() {
         if (eventsForVersionsBuilder_ == null) {
@@ -8058,7 +7502,7 @@ public final class TransactionOuterClass {
        * The list of corresponding Event objects (only present if fetch_events was set to true in req)
        * </pre>
        *
-       * <code>.types.EventsForVersions events_for_versions = 3;</code>
+       * <code>.types.EventsForVersions events_for_versions = 2;</code>
        */
       public Builder setEventsForVersions(org.libra.grpc.types.Events.EventsForVersions value) {
         if (eventsForVersionsBuilder_ == null) {
@@ -8078,7 +7522,7 @@ public final class TransactionOuterClass {
        * The list of corresponding Event objects (only present if fetch_events was set to true in req)
        * </pre>
        *
-       * <code>.types.EventsForVersions events_for_versions = 3;</code>
+       * <code>.types.EventsForVersions events_for_versions = 2;</code>
        */
       public Builder setEventsForVersions(
           org.libra.grpc.types.Events.EventsForVersions.Builder builderForValue) {
@@ -8096,7 +7540,7 @@ public final class TransactionOuterClass {
        * The list of corresponding Event objects (only present if fetch_events was set to true in req)
        * </pre>
        *
-       * <code>.types.EventsForVersions events_for_versions = 3;</code>
+       * <code>.types.EventsForVersions events_for_versions = 2;</code>
        */
       public Builder mergeEventsForVersions(org.libra.grpc.types.Events.EventsForVersions value) {
         if (eventsForVersionsBuilder_ == null) {
@@ -8118,7 +7562,7 @@ public final class TransactionOuterClass {
        * The list of corresponding Event objects (only present if fetch_events was set to true in req)
        * </pre>
        *
-       * <code>.types.EventsForVersions events_for_versions = 3;</code>
+       * <code>.types.EventsForVersions events_for_versions = 2;</code>
        */
       public Builder clearEventsForVersions() {
         if (eventsForVersionsBuilder_ == null) {
@@ -8136,7 +7580,7 @@ public final class TransactionOuterClass {
        * The list of corresponding Event objects (only present if fetch_events was set to true in req)
        * </pre>
        *
-       * <code>.types.EventsForVersions events_for_versions = 3;</code>
+       * <code>.types.EventsForVersions events_for_versions = 2;</code>
        */
       public org.libra.grpc.types.Events.EventsForVersions.Builder getEventsForVersionsBuilder() {
         
@@ -8148,7 +7592,7 @@ public final class TransactionOuterClass {
        * The list of corresponding Event objects (only present if fetch_events was set to true in req)
        * </pre>
        *
-       * <code>.types.EventsForVersions events_for_versions = 3;</code>
+       * <code>.types.EventsForVersions events_for_versions = 2;</code>
        */
       public org.libra.grpc.types.Events.EventsForVersionsOrBuilder getEventsForVersionsOrBuilder() {
         if (eventsForVersionsBuilder_ != null) {
@@ -8163,7 +7607,7 @@ public final class TransactionOuterClass {
        * The list of corresponding Event objects (only present if fetch_events was set to true in req)
        * </pre>
        *
-       * <code>.types.EventsForVersions events_for_versions = 3;</code>
+       * <code>.types.EventsForVersions events_for_versions = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           org.libra.grpc.types.Events.EventsForVersions, org.libra.grpc.types.Events.EventsForVersions.Builder, org.libra.grpc.types.Events.EventsForVersionsOrBuilder> 
@@ -8187,7 +7631,7 @@ public final class TransactionOuterClass {
        * If the list is not empty, the version of the first transaction.
        * </pre>
        *
-       * <code>.google.protobuf.UInt64Value first_transaction_version = 4;</code>
+       * <code>.google.protobuf.UInt64Value first_transaction_version = 3;</code>
        */
       public boolean hasFirstTransactionVersion() {
         return firstTransactionVersionBuilder_ != null || firstTransactionVersion_ != null;
@@ -8197,7 +7641,7 @@ public final class TransactionOuterClass {
        * If the list is not empty, the version of the first transaction.
        * </pre>
        *
-       * <code>.google.protobuf.UInt64Value first_transaction_version = 4;</code>
+       * <code>.google.protobuf.UInt64Value first_transaction_version = 3;</code>
        */
       public com.google.protobuf.UInt64Value getFirstTransactionVersion() {
         if (firstTransactionVersionBuilder_ == null) {
@@ -8211,7 +7655,7 @@ public final class TransactionOuterClass {
        * If the list is not empty, the version of the first transaction.
        * </pre>
        *
-       * <code>.google.protobuf.UInt64Value first_transaction_version = 4;</code>
+       * <code>.google.protobuf.UInt64Value first_transaction_version = 3;</code>
        */
       public Builder setFirstTransactionVersion(com.google.protobuf.UInt64Value value) {
         if (firstTransactionVersionBuilder_ == null) {
@@ -8231,7 +7675,7 @@ public final class TransactionOuterClass {
        * If the list is not empty, the version of the first transaction.
        * </pre>
        *
-       * <code>.google.protobuf.UInt64Value first_transaction_version = 4;</code>
+       * <code>.google.protobuf.UInt64Value first_transaction_version = 3;</code>
        */
       public Builder setFirstTransactionVersion(
           com.google.protobuf.UInt64Value.Builder builderForValue) {
@@ -8249,7 +7693,7 @@ public final class TransactionOuterClass {
        * If the list is not empty, the version of the first transaction.
        * </pre>
        *
-       * <code>.google.protobuf.UInt64Value first_transaction_version = 4;</code>
+       * <code>.google.protobuf.UInt64Value first_transaction_version = 3;</code>
        */
       public Builder mergeFirstTransactionVersion(com.google.protobuf.UInt64Value value) {
         if (firstTransactionVersionBuilder_ == null) {
@@ -8271,7 +7715,7 @@ public final class TransactionOuterClass {
        * If the list is not empty, the version of the first transaction.
        * </pre>
        *
-       * <code>.google.protobuf.UInt64Value first_transaction_version = 4;</code>
+       * <code>.google.protobuf.UInt64Value first_transaction_version = 3;</code>
        */
       public Builder clearFirstTransactionVersion() {
         if (firstTransactionVersionBuilder_ == null) {
@@ -8289,7 +7733,7 @@ public final class TransactionOuterClass {
        * If the list is not empty, the version of the first transaction.
        * </pre>
        *
-       * <code>.google.protobuf.UInt64Value first_transaction_version = 4;</code>
+       * <code>.google.protobuf.UInt64Value first_transaction_version = 3;</code>
        */
       public com.google.protobuf.UInt64Value.Builder getFirstTransactionVersionBuilder() {
         
@@ -8301,7 +7745,7 @@ public final class TransactionOuterClass {
        * If the list is not empty, the version of the first transaction.
        * </pre>
        *
-       * <code>.google.protobuf.UInt64Value first_transaction_version = 4;</code>
+       * <code>.google.protobuf.UInt64Value first_transaction_version = 3;</code>
        */
       public com.google.protobuf.UInt64ValueOrBuilder getFirstTransactionVersionOrBuilder() {
         if (firstTransactionVersionBuilder_ != null) {
@@ -8316,7 +7760,7 @@ public final class TransactionOuterClass {
        * If the list is not empty, the version of the first transaction.
        * </pre>
        *
-       * <code>.google.protobuf.UInt64Value first_transaction_version = 4;</code>
+       * <code>.google.protobuf.UInt64Value first_transaction_version = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.google.protobuf.UInt64Value, com.google.protobuf.UInt64Value.Builder, com.google.protobuf.UInt64ValueOrBuilder> 
@@ -8332,319 +7776,202 @@ public final class TransactionOuterClass {
         return firstTransactionVersionBuilder_;
       }
 
-      private org.libra.grpc.types.Proof.AccumulatorProof proofOfFirstTransaction_;
+      private org.libra.grpc.types.Proof.TransactionListProof proof_;
       private com.google.protobuf.SingleFieldBuilderV3<
-          org.libra.grpc.types.Proof.AccumulatorProof, org.libra.grpc.types.Proof.AccumulatorProof.Builder, org.libra.grpc.types.Proof.AccumulatorProofOrBuilder> proofOfFirstTransactionBuilder_;
+          org.libra.grpc.types.Proof.TransactionListProof, org.libra.grpc.types.Proof.TransactionListProof.Builder, org.libra.grpc.types.Proof.TransactionListProofOrBuilder> proofBuilder_;
       /**
        * <pre>
-       * The proofs of the first and last transaction in this chunk. When this is
-       * used for state synchronization, the validator who requests the transactions
+       * The proof authenticating the transactions and events.When this is used
+       * for state synchronization, the validator who requests the transactions
        * will provide a version in the request and the proofs will be relative to
        * the given version. When this is returned in GetTransactionsResponse, the
        * proofs will be relative to the ledger info returned in
        * UpdateToLatestLedgerResponse.
        * </pre>
        *
-       * <code>.types.AccumulatorProof proof_of_first_transaction = 5;</code>
+       * <code>.types.TransactionListProof proof = 4;</code>
        */
-      public boolean hasProofOfFirstTransaction() {
-        return proofOfFirstTransactionBuilder_ != null || proofOfFirstTransaction_ != null;
+      public boolean hasProof() {
+        return proofBuilder_ != null || proof_ != null;
       }
       /**
        * <pre>
-       * The proofs of the first and last transaction in this chunk. When this is
-       * used for state synchronization, the validator who requests the transactions
+       * The proof authenticating the transactions and events.When this is used
+       * for state synchronization, the validator who requests the transactions
        * will provide a version in the request and the proofs will be relative to
        * the given version. When this is returned in GetTransactionsResponse, the
        * proofs will be relative to the ledger info returned in
        * UpdateToLatestLedgerResponse.
        * </pre>
        *
-       * <code>.types.AccumulatorProof proof_of_first_transaction = 5;</code>
+       * <code>.types.TransactionListProof proof = 4;</code>
        */
-      public org.libra.grpc.types.Proof.AccumulatorProof getProofOfFirstTransaction() {
-        if (proofOfFirstTransactionBuilder_ == null) {
-          return proofOfFirstTransaction_ == null ? org.libra.grpc.types.Proof.AccumulatorProof.getDefaultInstance() : proofOfFirstTransaction_;
+      public org.libra.grpc.types.Proof.TransactionListProof getProof() {
+        if (proofBuilder_ == null) {
+          return proof_ == null ? org.libra.grpc.types.Proof.TransactionListProof.getDefaultInstance() : proof_;
         } else {
-          return proofOfFirstTransactionBuilder_.getMessage();
+          return proofBuilder_.getMessage();
         }
       }
       /**
        * <pre>
-       * The proofs of the first and last transaction in this chunk. When this is
-       * used for state synchronization, the validator who requests the transactions
+       * The proof authenticating the transactions and events.When this is used
+       * for state synchronization, the validator who requests the transactions
        * will provide a version in the request and the proofs will be relative to
        * the given version. When this is returned in GetTransactionsResponse, the
        * proofs will be relative to the ledger info returned in
        * UpdateToLatestLedgerResponse.
        * </pre>
        *
-       * <code>.types.AccumulatorProof proof_of_first_transaction = 5;</code>
+       * <code>.types.TransactionListProof proof = 4;</code>
        */
-      public Builder setProofOfFirstTransaction(org.libra.grpc.types.Proof.AccumulatorProof value) {
-        if (proofOfFirstTransactionBuilder_ == null) {
+      public Builder setProof(org.libra.grpc.types.Proof.TransactionListProof value) {
+        if (proofBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          proofOfFirstTransaction_ = value;
+          proof_ = value;
           onChanged();
         } else {
-          proofOfFirstTransactionBuilder_.setMessage(value);
+          proofBuilder_.setMessage(value);
         }
 
         return this;
       }
       /**
        * <pre>
-       * The proofs of the first and last transaction in this chunk. When this is
-       * used for state synchronization, the validator who requests the transactions
+       * The proof authenticating the transactions and events.When this is used
+       * for state synchronization, the validator who requests the transactions
        * will provide a version in the request and the proofs will be relative to
        * the given version. When this is returned in GetTransactionsResponse, the
        * proofs will be relative to the ledger info returned in
        * UpdateToLatestLedgerResponse.
        * </pre>
        *
-       * <code>.types.AccumulatorProof proof_of_first_transaction = 5;</code>
+       * <code>.types.TransactionListProof proof = 4;</code>
        */
-      public Builder setProofOfFirstTransaction(
-          org.libra.grpc.types.Proof.AccumulatorProof.Builder builderForValue) {
-        if (proofOfFirstTransactionBuilder_ == null) {
-          proofOfFirstTransaction_ = builderForValue.build();
+      public Builder setProof(
+          org.libra.grpc.types.Proof.TransactionListProof.Builder builderForValue) {
+        if (proofBuilder_ == null) {
+          proof_ = builderForValue.build();
           onChanged();
         } else {
-          proofOfFirstTransactionBuilder_.setMessage(builderForValue.build());
+          proofBuilder_.setMessage(builderForValue.build());
         }
 
         return this;
       }
       /**
        * <pre>
-       * The proofs of the first and last transaction in this chunk. When this is
-       * used for state synchronization, the validator who requests the transactions
+       * The proof authenticating the transactions and events.When this is used
+       * for state synchronization, the validator who requests the transactions
        * will provide a version in the request and the proofs will be relative to
        * the given version. When this is returned in GetTransactionsResponse, the
        * proofs will be relative to the ledger info returned in
        * UpdateToLatestLedgerResponse.
        * </pre>
        *
-       * <code>.types.AccumulatorProof proof_of_first_transaction = 5;</code>
+       * <code>.types.TransactionListProof proof = 4;</code>
        */
-      public Builder mergeProofOfFirstTransaction(org.libra.grpc.types.Proof.AccumulatorProof value) {
-        if (proofOfFirstTransactionBuilder_ == null) {
-          if (proofOfFirstTransaction_ != null) {
-            proofOfFirstTransaction_ =
-              org.libra.grpc.types.Proof.AccumulatorProof.newBuilder(proofOfFirstTransaction_).mergeFrom(value).buildPartial();
+      public Builder mergeProof(org.libra.grpc.types.Proof.TransactionListProof value) {
+        if (proofBuilder_ == null) {
+          if (proof_ != null) {
+            proof_ =
+              org.libra.grpc.types.Proof.TransactionListProof.newBuilder(proof_).mergeFrom(value).buildPartial();
           } else {
-            proofOfFirstTransaction_ = value;
+            proof_ = value;
           }
           onChanged();
         } else {
-          proofOfFirstTransactionBuilder_.mergeFrom(value);
+          proofBuilder_.mergeFrom(value);
         }
 
         return this;
       }
       /**
        * <pre>
-       * The proofs of the first and last transaction in this chunk. When this is
-       * used for state synchronization, the validator who requests the transactions
+       * The proof authenticating the transactions and events.When this is used
+       * for state synchronization, the validator who requests the transactions
        * will provide a version in the request and the proofs will be relative to
        * the given version. When this is returned in GetTransactionsResponse, the
        * proofs will be relative to the ledger info returned in
        * UpdateToLatestLedgerResponse.
        * </pre>
        *
-       * <code>.types.AccumulatorProof proof_of_first_transaction = 5;</code>
+       * <code>.types.TransactionListProof proof = 4;</code>
        */
-      public Builder clearProofOfFirstTransaction() {
-        if (proofOfFirstTransactionBuilder_ == null) {
-          proofOfFirstTransaction_ = null;
+      public Builder clearProof() {
+        if (proofBuilder_ == null) {
+          proof_ = null;
           onChanged();
         } else {
-          proofOfFirstTransaction_ = null;
-          proofOfFirstTransactionBuilder_ = null;
+          proof_ = null;
+          proofBuilder_ = null;
         }
 
         return this;
       }
       /**
        * <pre>
-       * The proofs of the first and last transaction in this chunk. When this is
-       * used for state synchronization, the validator who requests the transactions
+       * The proof authenticating the transactions and events.When this is used
+       * for state synchronization, the validator who requests the transactions
        * will provide a version in the request and the proofs will be relative to
        * the given version. When this is returned in GetTransactionsResponse, the
        * proofs will be relative to the ledger info returned in
        * UpdateToLatestLedgerResponse.
        * </pre>
        *
-       * <code>.types.AccumulatorProof proof_of_first_transaction = 5;</code>
+       * <code>.types.TransactionListProof proof = 4;</code>
        */
-      public org.libra.grpc.types.Proof.AccumulatorProof.Builder getProofOfFirstTransactionBuilder() {
+      public org.libra.grpc.types.Proof.TransactionListProof.Builder getProofBuilder() {
         
         onChanged();
-        return getProofOfFirstTransactionFieldBuilder().getBuilder();
+        return getProofFieldBuilder().getBuilder();
       }
       /**
        * <pre>
-       * The proofs of the first and last transaction in this chunk. When this is
-       * used for state synchronization, the validator who requests the transactions
+       * The proof authenticating the transactions and events.When this is used
+       * for state synchronization, the validator who requests the transactions
        * will provide a version in the request and the proofs will be relative to
        * the given version. When this is returned in GetTransactionsResponse, the
        * proofs will be relative to the ledger info returned in
        * UpdateToLatestLedgerResponse.
        * </pre>
        *
-       * <code>.types.AccumulatorProof proof_of_first_transaction = 5;</code>
+       * <code>.types.TransactionListProof proof = 4;</code>
        */
-      public org.libra.grpc.types.Proof.AccumulatorProofOrBuilder getProofOfFirstTransactionOrBuilder() {
-        if (proofOfFirstTransactionBuilder_ != null) {
-          return proofOfFirstTransactionBuilder_.getMessageOrBuilder();
+      public org.libra.grpc.types.Proof.TransactionListProofOrBuilder getProofOrBuilder() {
+        if (proofBuilder_ != null) {
+          return proofBuilder_.getMessageOrBuilder();
         } else {
-          return proofOfFirstTransaction_ == null ?
-              org.libra.grpc.types.Proof.AccumulatorProof.getDefaultInstance() : proofOfFirstTransaction_;
+          return proof_ == null ?
+              org.libra.grpc.types.Proof.TransactionListProof.getDefaultInstance() : proof_;
         }
       }
       /**
        * <pre>
-       * The proofs of the first and last transaction in this chunk. When this is
-       * used for state synchronization, the validator who requests the transactions
+       * The proof authenticating the transactions and events.When this is used
+       * for state synchronization, the validator who requests the transactions
        * will provide a version in the request and the proofs will be relative to
        * the given version. When this is returned in GetTransactionsResponse, the
        * proofs will be relative to the ledger info returned in
        * UpdateToLatestLedgerResponse.
        * </pre>
        *
-       * <code>.types.AccumulatorProof proof_of_first_transaction = 5;</code>
+       * <code>.types.TransactionListProof proof = 4;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          org.libra.grpc.types.Proof.AccumulatorProof, org.libra.grpc.types.Proof.AccumulatorProof.Builder, org.libra.grpc.types.Proof.AccumulatorProofOrBuilder> 
-          getProofOfFirstTransactionFieldBuilder() {
-        if (proofOfFirstTransactionBuilder_ == null) {
-          proofOfFirstTransactionBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              org.libra.grpc.types.Proof.AccumulatorProof, org.libra.grpc.types.Proof.AccumulatorProof.Builder, org.libra.grpc.types.Proof.AccumulatorProofOrBuilder>(
-                  getProofOfFirstTransaction(),
+          org.libra.grpc.types.Proof.TransactionListProof, org.libra.grpc.types.Proof.TransactionListProof.Builder, org.libra.grpc.types.Proof.TransactionListProofOrBuilder> 
+          getProofFieldBuilder() {
+        if (proofBuilder_ == null) {
+          proofBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              org.libra.grpc.types.Proof.TransactionListProof, org.libra.grpc.types.Proof.TransactionListProof.Builder, org.libra.grpc.types.Proof.TransactionListProofOrBuilder>(
+                  getProof(),
                   getParentForChildren(),
                   isClean());
-          proofOfFirstTransaction_ = null;
+          proof_ = null;
         }
-        return proofOfFirstTransactionBuilder_;
-      }
-
-      private org.libra.grpc.types.Proof.AccumulatorProof proofOfLastTransaction_;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          org.libra.grpc.types.Proof.AccumulatorProof, org.libra.grpc.types.Proof.AccumulatorProof.Builder, org.libra.grpc.types.Proof.AccumulatorProofOrBuilder> proofOfLastTransactionBuilder_;
-      /**
-       * <code>.types.AccumulatorProof proof_of_last_transaction = 6;</code>
-       */
-      public boolean hasProofOfLastTransaction() {
-        return proofOfLastTransactionBuilder_ != null || proofOfLastTransaction_ != null;
-      }
-      /**
-       * <code>.types.AccumulatorProof proof_of_last_transaction = 6;</code>
-       */
-      public org.libra.grpc.types.Proof.AccumulatorProof getProofOfLastTransaction() {
-        if (proofOfLastTransactionBuilder_ == null) {
-          return proofOfLastTransaction_ == null ? org.libra.grpc.types.Proof.AccumulatorProof.getDefaultInstance() : proofOfLastTransaction_;
-        } else {
-          return proofOfLastTransactionBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>.types.AccumulatorProof proof_of_last_transaction = 6;</code>
-       */
-      public Builder setProofOfLastTransaction(org.libra.grpc.types.Proof.AccumulatorProof value) {
-        if (proofOfLastTransactionBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          proofOfLastTransaction_ = value;
-          onChanged();
-        } else {
-          proofOfLastTransactionBuilder_.setMessage(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.types.AccumulatorProof proof_of_last_transaction = 6;</code>
-       */
-      public Builder setProofOfLastTransaction(
-          org.libra.grpc.types.Proof.AccumulatorProof.Builder builderForValue) {
-        if (proofOfLastTransactionBuilder_ == null) {
-          proofOfLastTransaction_ = builderForValue.build();
-          onChanged();
-        } else {
-          proofOfLastTransactionBuilder_.setMessage(builderForValue.build());
-        }
-
-        return this;
-      }
-      /**
-       * <code>.types.AccumulatorProof proof_of_last_transaction = 6;</code>
-       */
-      public Builder mergeProofOfLastTransaction(org.libra.grpc.types.Proof.AccumulatorProof value) {
-        if (proofOfLastTransactionBuilder_ == null) {
-          if (proofOfLastTransaction_ != null) {
-            proofOfLastTransaction_ =
-              org.libra.grpc.types.Proof.AccumulatorProof.newBuilder(proofOfLastTransaction_).mergeFrom(value).buildPartial();
-          } else {
-            proofOfLastTransaction_ = value;
-          }
-          onChanged();
-        } else {
-          proofOfLastTransactionBuilder_.mergeFrom(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.types.AccumulatorProof proof_of_last_transaction = 6;</code>
-       */
-      public Builder clearProofOfLastTransaction() {
-        if (proofOfLastTransactionBuilder_ == null) {
-          proofOfLastTransaction_ = null;
-          onChanged();
-        } else {
-          proofOfLastTransaction_ = null;
-          proofOfLastTransactionBuilder_ = null;
-        }
-
-        return this;
-      }
-      /**
-       * <code>.types.AccumulatorProof proof_of_last_transaction = 6;</code>
-       */
-      public org.libra.grpc.types.Proof.AccumulatorProof.Builder getProofOfLastTransactionBuilder() {
-        
-        onChanged();
-        return getProofOfLastTransactionFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>.types.AccumulatorProof proof_of_last_transaction = 6;</code>
-       */
-      public org.libra.grpc.types.Proof.AccumulatorProofOrBuilder getProofOfLastTransactionOrBuilder() {
-        if (proofOfLastTransactionBuilder_ != null) {
-          return proofOfLastTransactionBuilder_.getMessageOrBuilder();
-        } else {
-          return proofOfLastTransaction_ == null ?
-              org.libra.grpc.types.Proof.AccumulatorProof.getDefaultInstance() : proofOfLastTransaction_;
-        }
-      }
-      /**
-       * <code>.types.AccumulatorProof proof_of_last_transaction = 6;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          org.libra.grpc.types.Proof.AccumulatorProof, org.libra.grpc.types.Proof.AccumulatorProof.Builder, org.libra.grpc.types.Proof.AccumulatorProofOrBuilder> 
-          getProofOfLastTransactionFieldBuilder() {
-        if (proofOfLastTransactionBuilder_ == null) {
-          proofOfLastTransactionBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              org.libra.grpc.types.Proof.AccumulatorProof, org.libra.grpc.types.Proof.AccumulatorProof.Builder, org.libra.grpc.types.Proof.AccumulatorProofOrBuilder>(
-                  getProofOfLastTransaction(),
-                  getParentForChildren(),
-                  isClean());
-          proofOfLastTransaction_ = null;
-        }
-        return proofOfLastTransactionBuilder_;
+        return proofBuilder_;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -8715,10 +8042,10 @@ public final class TransactionOuterClass {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_types_Transaction_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_types_SignedTransactionWithProof_descriptor;
+    internal_static_types_TransactionWithProof_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_types_SignedTransactionWithProof_fieldAccessorTable;
+      internal_static_types_TransactionWithProof_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_types_SignedTransactionsBlock_descriptor;
   private static final 
@@ -8749,36 +8076,31 @@ public final class TransactionOuterClass {
   static {
     java.lang.String[] descriptorData = {
       "\n\021transaction.proto\022\005types\032\014events.proto" +
-      "\032\013proof.proto\032\026transaction_info.proto\032\036g" +
-      "oogle/protobuf/wrappers.proto\"Q\n\023Transac" +
-      "tionArgument\":\n\007ArgType\022\007\n\003U64\020\000\022\013\n\007ADDR" +
-      "ESS\020\001\022\n\n\006STRING\020\002\022\r\n\tBYTEARRAY\020\003\"\'\n\021Sign" +
-      "edTransaction\022\022\n\nsigned_txn\030\005 \001(\014\"\"\n\013Tra" +
-      "nsaction\022\023\n\013transaction\030\001 \001(\014\"\264\001\n\032Signed" +
-      "TransactionWithProof\022\017\n\007version\030\001 \001(\004\0224\n" +
-      "\022signed_transaction\030\002 \001(\0132\030.types.Signed" +
-      "Transaction\022,\n\005proof\030\003 \001(\0132\035.types.Signe" +
-      "dTransactionProof\022!\n\006events\030\004 \001(\0132\021.type" +
-      "s.EventsList\"\204\001\n\027SignedTransactionsBlock" +
-      "\022.\n\014transactions\030\001 \003(\0132\030.types.SignedTra" +
-      "nsaction\022\034\n\024validator_public_key\030\002 \001(\014\022\033" +
-      "\n\023validator_signature\030\003 \001(\014\"-\n\014AccountSt" +
-      "ate\022\017\n\007address\030\001 \001(\014\022\014\n\004blob\030\002 \001(\014\"\261\001\n\023T" +
-      "ransactionToCommit\022\'\n\013transaction\030\001 \001(\0132" +
-      "\022.types.Transaction\022+\n\016account_states\030\002 " +
-      "\003(\0132\023.types.AccountState\022\034\n\006events\030\003 \003(\013" +
-      "2\014.types.Event\022\020\n\010gas_used\030\004 \001(\004\022\024\n\014majo" +
-      "r_status\030\005 \001(\004\"\342\002\n\030TransactionListWithPr" +
-      "oof\022.\n\014transactions\030\001 \003(\0132\030.types.Signed" +
-      "Transaction\022%\n\005infos\030\002 \003(\0132\026.types.Trans" +
-      "actionInfo\0225\n\023events_for_versions\030\003 \001(\0132" +
-      "\030.types.EventsForVersions\022?\n\031first_trans" +
-      "action_version\030\004 \001(\0132\034.google.protobuf.U" +
-      "Int64Value\022;\n\032proof_of_first_transaction" +
-      "\030\005 \001(\0132\027.types.AccumulatorProof\022:\n\031proof" +
-      "_of_last_transaction\030\006 \001(\0132\027.types.Accum" +
-      "ulatorProofB\026\n\024org.libra.grpc.typesb\006pro" +
-      "to3"
+      "\032\013proof.proto\032\036google/protobuf/wrappers." +
+      "proto\"Q\n\023TransactionArgument\":\n\007ArgType\022" +
+      "\007\n\003U64\020\000\022\013\n\007ADDRESS\020\001\022\n\n\006STRING\020\002\022\r\n\tBYT" +
+      "EARRAY\020\003\"&\n\021SignedTransaction\022\021\n\ttxn_byt" +
+      "es\030\005 \001(\014\"\"\n\013Transaction\022\023\n\013transaction\030\001" +
+      " \001(\014\"\233\001\n\024TransactionWithProof\022\017\n\007version" +
+      "\030\001 \001(\004\022\'\n\013transaction\030\002 \001(\0132\022.types.Tran" +
+      "saction\022&\n\005proof\030\003 \001(\0132\027.types.Transacti" +
+      "onProof\022!\n\006events\030\004 \001(\0132\021.types.EventsLi" +
+      "st\"\204\001\n\027SignedTransactionsBlock\022.\n\014transa" +
+      "ctions\030\001 \003(\0132\030.types.SignedTransaction\022\034" +
+      "\n\024validator_public_key\030\002 \001(\014\022\033\n\023validato" +
+      "r_signature\030\003 \001(\014\"-\n\014AccountState\022\017\n\007add" +
+      "ress\030\001 \001(\014\022\014\n\004blob\030\002 \001(\014\"\261\001\n\023Transaction" +
+      "ToCommit\022\'\n\013transaction\030\001 \001(\0132\022.types.Tr" +
+      "ansaction\022+\n\016account_states\030\002 \003(\0132\023.type" +
+      "s.AccountState\022\034\n\006events\030\003 \003(\0132\014.types.E" +
+      "vent\022\020\n\010gas_used\030\004 \001(\004\022\024\n\014major_status\030\005" +
+      " \001(\004\"\350\001\n\030TransactionListWithProof\022(\n\014tra" +
+      "nsactions\030\001 \003(\0132\022.types.Transaction\0225\n\023e" +
+      "vents_for_versions\030\002 \001(\0132\030.types.EventsF" +
+      "orVersions\022?\n\031first_transaction_version\030" +
+      "\003 \001(\0132\034.google.protobuf.UInt64Value\022*\n\005p" +
+      "roof\030\004 \001(\0132\033.types.TransactionListProofB" +
+      "\026\n\024org.libra.grpc.typesb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -8793,7 +8115,6 @@ public final class TransactionOuterClass {
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           org.libra.grpc.types.Events.getDescriptor(),
           org.libra.grpc.types.Proof.getDescriptor(),
-          org.libra.grpc.types.TransactionInfoOuterClass.getDescriptor(),
           com.google.protobuf.WrappersProto.getDescriptor(),
         }, assigner);
     internal_static_types_TransactionArgument_descriptor =
@@ -8807,19 +8128,19 @@ public final class TransactionOuterClass {
     internal_static_types_SignedTransaction_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_types_SignedTransaction_descriptor,
-        new java.lang.String[] { "SignedTxn", });
+        new java.lang.String[] { "TxnBytes", });
     internal_static_types_Transaction_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_types_Transaction_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_types_Transaction_descriptor,
         new java.lang.String[] { "Transaction", });
-    internal_static_types_SignedTransactionWithProof_descriptor =
+    internal_static_types_TransactionWithProof_descriptor =
       getDescriptor().getMessageTypes().get(3);
-    internal_static_types_SignedTransactionWithProof_fieldAccessorTable = new
+    internal_static_types_TransactionWithProof_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_types_SignedTransactionWithProof_descriptor,
-        new java.lang.String[] { "Version", "SignedTransaction", "Proof", "Events", });
+        internal_static_types_TransactionWithProof_descriptor,
+        new java.lang.String[] { "Version", "Transaction", "Proof", "Events", });
     internal_static_types_SignedTransactionsBlock_descriptor =
       getDescriptor().getMessageTypes().get(4);
     internal_static_types_SignedTransactionsBlock_fieldAccessorTable = new
@@ -8843,10 +8164,9 @@ public final class TransactionOuterClass {
     internal_static_types_TransactionListWithProof_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_types_TransactionListWithProof_descriptor,
-        new java.lang.String[] { "Transactions", "Infos", "EventsForVersions", "FirstTransactionVersion", "ProofOfFirstTransaction", "ProofOfLastTransaction", });
+        new java.lang.String[] { "Transactions", "EventsForVersions", "FirstTransactionVersion", "Proof", });
     org.libra.grpc.types.Events.getDescriptor();
     org.libra.grpc.types.Proof.getDescriptor();
-    org.libra.grpc.types.TransactionInfoOuterClass.getDescriptor();
     com.google.protobuf.WrappersProto.getDescriptor();
   }
 

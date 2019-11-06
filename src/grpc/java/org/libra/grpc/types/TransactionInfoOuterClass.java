@@ -20,12 +20,12 @@ public final class TransactionInfoOuterClass {
 
     /**
      * <pre>
-     * Hash of the signed transaction that is stored
+     * Hash of the transaction that is stored.
      * </pre>
      *
-     * <code>bytes signed_transaction_hash = 1;</code>
+     * <code>bytes transaction_hash = 1;</code>
      */
-    com.google.protobuf.ByteString getSignedTransactionHash();
+    com.google.protobuf.ByteString getTransactionHash();
 
     /**
      * <pre>
@@ -85,7 +85,7 @@ public final class TransactionInfoOuterClass {
       super(builder);
     }
     private TransactionInfo() {
-      signedTransactionHash_ = com.google.protobuf.ByteString.EMPTY;
+      transactionHash_ = com.google.protobuf.ByteString.EMPTY;
       stateRootHash_ = com.google.protobuf.ByteString.EMPTY;
       eventRootHash_ = com.google.protobuf.ByteString.EMPTY;
     }
@@ -116,7 +116,7 @@ public final class TransactionInfoOuterClass {
               break;
             case 10: {
 
-              signedTransactionHash_ = input.readBytes();
+              transactionHash_ = input.readBytes();
               break;
             }
             case 18: {
@@ -171,17 +171,17 @@ public final class TransactionInfoOuterClass {
               org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo.class, org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo.Builder.class);
     }
 
-    public static final int SIGNED_TRANSACTION_HASH_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString signedTransactionHash_;
+    public static final int TRANSACTION_HASH_FIELD_NUMBER = 1;
+    private com.google.protobuf.ByteString transactionHash_;
     /**
      * <pre>
-     * Hash of the signed transaction that is stored
+     * Hash of the transaction that is stored.
      * </pre>
      *
-     * <code>bytes signed_transaction_hash = 1;</code>
+     * <code>bytes transaction_hash = 1;</code>
      */
-    public com.google.protobuf.ByteString getSignedTransactionHash() {
-      return signedTransactionHash_;
+    public com.google.protobuf.ByteString getTransactionHash() {
+      return transactionHash_;
     }
 
     public static final int STATE_ROOT_HASH_FIELD_NUMBER = 2;
@@ -252,8 +252,8 @@ public final class TransactionInfoOuterClass {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (!signedTransactionHash_.isEmpty()) {
-        output.writeBytes(1, signedTransactionHash_);
+      if (!transactionHash_.isEmpty()) {
+        output.writeBytes(1, transactionHash_);
       }
       if (!stateRootHash_.isEmpty()) {
         output.writeBytes(2, stateRootHash_);
@@ -276,9 +276,9 @@ public final class TransactionInfoOuterClass {
       if (size != -1) return size;
 
       size = 0;
-      if (!signedTransactionHash_.isEmpty()) {
+      if (!transactionHash_.isEmpty()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, signedTransactionHash_);
+          .computeBytesSize(1, transactionHash_);
       }
       if (!stateRootHash_.isEmpty()) {
         size += com.google.protobuf.CodedOutputStream
@@ -311,8 +311,8 @@ public final class TransactionInfoOuterClass {
       }
       org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo other = (org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo) obj;
 
-      if (!getSignedTransactionHash()
-          .equals(other.getSignedTransactionHash())) return false;
+      if (!getTransactionHash()
+          .equals(other.getTransactionHash())) return false;
       if (!getStateRootHash()
           .equals(other.getStateRootHash())) return false;
       if (!getEventRootHash()
@@ -332,8 +332,8 @@ public final class TransactionInfoOuterClass {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + SIGNED_TRANSACTION_HASH_FIELD_NUMBER;
-      hash = (53 * hash) + getSignedTransactionHash().hashCode();
+      hash = (37 * hash) + TRANSACTION_HASH_FIELD_NUMBER;
+      hash = (53 * hash) + getTransactionHash().hashCode();
       hash = (37 * hash) + STATE_ROOT_HASH_FIELD_NUMBER;
       hash = (53 * hash) + getStateRootHash().hashCode();
       hash = (37 * hash) + EVENT_ROOT_HASH_FIELD_NUMBER;
@@ -484,7 +484,7 @@ public final class TransactionInfoOuterClass {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        signedTransactionHash_ = com.google.protobuf.ByteString.EMPTY;
+        transactionHash_ = com.google.protobuf.ByteString.EMPTY;
 
         stateRootHash_ = com.google.protobuf.ByteString.EMPTY;
 
@@ -520,7 +520,7 @@ public final class TransactionInfoOuterClass {
       @java.lang.Override
       public org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo buildPartial() {
         org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo result = new org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo(this);
-        result.signedTransactionHash_ = signedTransactionHash_;
+        result.transactionHash_ = transactionHash_;
         result.stateRootHash_ = stateRootHash_;
         result.eventRootHash_ = eventRootHash_;
         result.gasUsed_ = gasUsed_;
@@ -573,8 +573,8 @@ public final class TransactionInfoOuterClass {
 
       public Builder mergeFrom(org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo other) {
         if (other == org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo.getDefaultInstance()) return this;
-        if (other.getSignedTransactionHash() != com.google.protobuf.ByteString.EMPTY) {
-          setSignedTransactionHash(other.getSignedTransactionHash());
+        if (other.getTransactionHash() != com.google.protobuf.ByteString.EMPTY) {
+          setTransactionHash(other.getTransactionHash());
         }
         if (other.getStateRootHash() != com.google.protobuf.ByteString.EMPTY) {
           setStateRootHash(other.getStateRootHash());
@@ -617,43 +617,43 @@ public final class TransactionInfoOuterClass {
         return this;
       }
 
-      private com.google.protobuf.ByteString signedTransactionHash_ = com.google.protobuf.ByteString.EMPTY;
+      private com.google.protobuf.ByteString transactionHash_ = com.google.protobuf.ByteString.EMPTY;
       /**
        * <pre>
-       * Hash of the signed transaction that is stored
+       * Hash of the transaction that is stored.
        * </pre>
        *
-       * <code>bytes signed_transaction_hash = 1;</code>
+       * <code>bytes transaction_hash = 1;</code>
        */
-      public com.google.protobuf.ByteString getSignedTransactionHash() {
-        return signedTransactionHash_;
+      public com.google.protobuf.ByteString getTransactionHash() {
+        return transactionHash_;
       }
       /**
        * <pre>
-       * Hash of the signed transaction that is stored
+       * Hash of the transaction that is stored.
        * </pre>
        *
-       * <code>bytes signed_transaction_hash = 1;</code>
+       * <code>bytes transaction_hash = 1;</code>
        */
-      public Builder setSignedTransactionHash(com.google.protobuf.ByteString value) {
+      public Builder setTransactionHash(com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   
-        signedTransactionHash_ = value;
+        transactionHash_ = value;
         onChanged();
         return this;
       }
       /**
        * <pre>
-       * Hash of the signed transaction that is stored
+       * Hash of the transaction that is stored.
        * </pre>
        *
-       * <code>bytes signed_transaction_hash = 1;</code>
+       * <code>bytes transaction_hash = 1;</code>
        */
-      public Builder clearSignedTransactionHash() {
+      public Builder clearTransactionHash() {
         
-        signedTransactionHash_ = getDefaultInstance().getSignedTransactionHash();
+        transactionHash_ = getDefaultInstance().getTransactionHash();
         onChanged();
         return this;
       }
@@ -888,12 +888,11 @@ public final class TransactionInfoOuterClass {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\026transaction_info.proto\022\005types\"\214\001\n\017Tran" +
-      "sactionInfo\022\037\n\027signed_transaction_hash\030\001" +
-      " \001(\014\022\027\n\017state_root_hash\030\002 \001(\014\022\027\n\017event_r" +
-      "oot_hash\030\003 \001(\014\022\020\n\010gas_used\030\004 \001(\004\022\024\n\014majo" +
-      "r_status\030\005 \001(\004B\026\n\024org.libra.grpc.typesb\006" +
-      "proto3"
+      "\n\026transaction_info.proto\022\005types\"\205\001\n\017Tran" +
+      "sactionInfo\022\030\n\020transaction_hash\030\001 \001(\014\022\027\n" +
+      "\017state_root_hash\030\002 \001(\014\022\027\n\017event_root_has" +
+      "h\030\003 \001(\014\022\020\n\010gas_used\030\004 \001(\004\022\024\n\014major_statu" +
+      "s\030\005 \001(\004B\026\n\024org.libra.grpc.typesb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -912,7 +911,7 @@ public final class TransactionInfoOuterClass {
     internal_static_types_TransactionInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_types_TransactionInfo_descriptor,
-        new java.lang.String[] { "SignedTransactionHash", "StateRootHash", "EventRootHash", "GasUsed", "MajorStatus", });
+        new java.lang.String[] { "TransactionHash", "StateRootHash", "EventRootHash", "GasUsed", "MajorStatus", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

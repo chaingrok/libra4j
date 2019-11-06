@@ -2469,10 +2469,9 @@ public final class GetWithProof {
      * until the current version
      * </pre>
      *
-     * <code>repeated .types.ValidatorChangeEventWithProof validator_change_events = 3;</code>
+     * <code>.types.ValidatorChangeEventWithProof validator_change_events = 3;</code>
      */
-    java.util.List<org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof> 
-        getValidatorChangeEventsList();
+    boolean hasValidatorChangeEvents();
     /**
      * <pre>
      * Validator change events from what the client last knew.  This is used to
@@ -2480,9 +2479,9 @@ public final class GetWithProof {
      * until the current version
      * </pre>
      *
-     * <code>repeated .types.ValidatorChangeEventWithProof validator_change_events = 3;</code>
+     * <code>.types.ValidatorChangeEventWithProof validator_change_events = 3;</code>
      */
-    org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof getValidatorChangeEvents(int index);
+    org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof getValidatorChangeEvents();
     /**
      * <pre>
      * Validator change events from what the client last knew.  This is used to
@@ -2490,31 +2489,9 @@ public final class GetWithProof {
      * until the current version
      * </pre>
      *
-     * <code>repeated .types.ValidatorChangeEventWithProof validator_change_events = 3;</code>
+     * <code>.types.ValidatorChangeEventWithProof validator_change_events = 3;</code>
      */
-    int getValidatorChangeEventsCount();
-    /**
-     * <pre>
-     * Validator change events from what the client last knew.  This is used to
-     * inform the client of validator changes from the client's last known version
-     * until the current version
-     * </pre>
-     *
-     * <code>repeated .types.ValidatorChangeEventWithProof validator_change_events = 3;</code>
-     */
-    java.util.List<? extends org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProofOrBuilder> 
-        getValidatorChangeEventsOrBuilderList();
-    /**
-     * <pre>
-     * Validator change events from what the client last knew.  This is used to
-     * inform the client of validator changes from the client's last known version
-     * until the current version
-     * </pre>
-     *
-     * <code>repeated .types.ValidatorChangeEventWithProof validator_change_events = 3;</code>
-     */
-    org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProofOrBuilder getValidatorChangeEventsOrBuilder(
-        int index);
+    org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProofOrBuilder getValidatorChangeEventsOrBuilder();
 
     /**
      * <pre>
@@ -2562,7 +2539,6 @@ public final class GetWithProof {
     }
     private UpdateToLatestLedgerResponse() {
       responseItems_ = java.util.Collections.emptyList();
-      validatorChangeEvents_ = java.util.Collections.emptyList();
     }
 
     @java.lang.Override
@@ -2612,12 +2588,16 @@ public final class GetWithProof {
               break;
             }
             case 26: {
-              if (!((mutable_bitField0_ & 0x00000004) != 0)) {
-                validatorChangeEvents_ = new java.util.ArrayList<org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof>();
-                mutable_bitField0_ |= 0x00000004;
+              org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof.Builder subBuilder = null;
+              if (validatorChangeEvents_ != null) {
+                subBuilder = validatorChangeEvents_.toBuilder();
               }
-              validatorChangeEvents_.add(
-                  input.readMessage(org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof.parser(), extensionRegistry));
+              validatorChangeEvents_ = input.readMessage(org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(validatorChangeEvents_);
+                validatorChangeEvents_ = subBuilder.buildPartial();
+              }
+
               break;
             }
             case 34: {
@@ -2650,9 +2630,6 @@ public final class GetWithProof {
       } finally {
         if (((mutable_bitField0_ & 0x00000001) != 0)) {
           responseItems_ = java.util.Collections.unmodifiableList(responseItems_);
-        }
-        if (((mutable_bitField0_ & 0x00000004) != 0)) {
-          validatorChangeEvents_ = java.util.Collections.unmodifiableList(validatorChangeEvents_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -2772,7 +2749,7 @@ public final class GetWithProof {
     }
 
     public static final int VALIDATOR_CHANGE_EVENTS_FIELD_NUMBER = 3;
-    private java.util.List<org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof> validatorChangeEvents_;
+    private org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof validatorChangeEvents_;
     /**
      * <pre>
      * Validator change events from what the client last knew.  This is used to
@@ -2780,10 +2757,10 @@ public final class GetWithProof {
      * until the current version
      * </pre>
      *
-     * <code>repeated .types.ValidatorChangeEventWithProof validator_change_events = 3;</code>
+     * <code>.types.ValidatorChangeEventWithProof validator_change_events = 3;</code>
      */
-    public java.util.List<org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof> getValidatorChangeEventsList() {
-      return validatorChangeEvents_;
+    public boolean hasValidatorChangeEvents() {
+      return validatorChangeEvents_ != null;
     }
     /**
      * <pre>
@@ -2792,11 +2769,10 @@ public final class GetWithProof {
      * until the current version
      * </pre>
      *
-     * <code>repeated .types.ValidatorChangeEventWithProof validator_change_events = 3;</code>
+     * <code>.types.ValidatorChangeEventWithProof validator_change_events = 3;</code>
      */
-    public java.util.List<? extends org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProofOrBuilder> 
-        getValidatorChangeEventsOrBuilderList() {
-      return validatorChangeEvents_;
+    public org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof getValidatorChangeEvents() {
+      return validatorChangeEvents_ == null ? org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof.getDefaultInstance() : validatorChangeEvents_;
     }
     /**
      * <pre>
@@ -2805,35 +2781,10 @@ public final class GetWithProof {
      * until the current version
      * </pre>
      *
-     * <code>repeated .types.ValidatorChangeEventWithProof validator_change_events = 3;</code>
+     * <code>.types.ValidatorChangeEventWithProof validator_change_events = 3;</code>
      */
-    public int getValidatorChangeEventsCount() {
-      return validatorChangeEvents_.size();
-    }
-    /**
-     * <pre>
-     * Validator change events from what the client last knew.  This is used to
-     * inform the client of validator changes from the client's last known version
-     * until the current version
-     * </pre>
-     *
-     * <code>repeated .types.ValidatorChangeEventWithProof validator_change_events = 3;</code>
-     */
-    public org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof getValidatorChangeEvents(int index) {
-      return validatorChangeEvents_.get(index);
-    }
-    /**
-     * <pre>
-     * Validator change events from what the client last knew.  This is used to
-     * inform the client of validator changes from the client's last known version
-     * until the current version
-     * </pre>
-     *
-     * <code>repeated .types.ValidatorChangeEventWithProof validator_change_events = 3;</code>
-     */
-    public org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProofOrBuilder getValidatorChangeEventsOrBuilder(
-        int index) {
-      return validatorChangeEvents_.get(index);
+    public org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProofOrBuilder getValidatorChangeEventsOrBuilder() {
+      return getValidatorChangeEvents();
     }
 
     public static final int LEDGER_CONSISTENCY_PROOF_FIELD_NUMBER = 4;
@@ -2892,8 +2843,8 @@ public final class GetWithProof {
       if (ledgerInfoWithSigs_ != null) {
         output.writeMessage(2, getLedgerInfoWithSigs());
       }
-      for (int i = 0; i < validatorChangeEvents_.size(); i++) {
-        output.writeMessage(3, validatorChangeEvents_.get(i));
+      if (validatorChangeEvents_ != null) {
+        output.writeMessage(3, getValidatorChangeEvents());
       }
       if (ledgerConsistencyProof_ != null) {
         output.writeMessage(4, getLedgerConsistencyProof());
@@ -2915,9 +2866,9 @@ public final class GetWithProof {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, getLedgerInfoWithSigs());
       }
-      for (int i = 0; i < validatorChangeEvents_.size(); i++) {
+      if (validatorChangeEvents_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, validatorChangeEvents_.get(i));
+          .computeMessageSize(3, getValidatorChangeEvents());
       }
       if (ledgerConsistencyProof_ != null) {
         size += com.google.protobuf.CodedOutputStream
@@ -2945,8 +2896,11 @@ public final class GetWithProof {
         if (!getLedgerInfoWithSigs()
             .equals(other.getLedgerInfoWithSigs())) return false;
       }
-      if (!getValidatorChangeEventsList()
-          .equals(other.getValidatorChangeEventsList())) return false;
+      if (hasValidatorChangeEvents() != other.hasValidatorChangeEvents()) return false;
+      if (hasValidatorChangeEvents()) {
+        if (!getValidatorChangeEvents()
+            .equals(other.getValidatorChangeEvents())) return false;
+      }
       if (hasLedgerConsistencyProof() != other.hasLedgerConsistencyProof()) return false;
       if (hasLedgerConsistencyProof()) {
         if (!getLedgerConsistencyProof()
@@ -2971,9 +2925,9 @@ public final class GetWithProof {
         hash = (37 * hash) + LEDGER_INFO_WITH_SIGS_FIELD_NUMBER;
         hash = (53 * hash) + getLedgerInfoWithSigs().hashCode();
       }
-      if (getValidatorChangeEventsCount() > 0) {
+      if (hasValidatorChangeEvents()) {
         hash = (37 * hash) + VALIDATOR_CHANGE_EVENTS_FIELD_NUMBER;
-        hash = (53 * hash) + getValidatorChangeEventsList().hashCode();
+        hash = (53 * hash) + getValidatorChangeEvents().hashCode();
       }
       if (hasLedgerConsistencyProof()) {
         hash = (37 * hash) + LEDGER_CONSISTENCY_PROOF_FIELD_NUMBER;
@@ -3112,7 +3066,6 @@ public final class GetWithProof {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
           getResponseItemsFieldBuilder();
-          getValidatorChangeEventsFieldBuilder();
         }
       }
       @java.lang.Override
@@ -3131,10 +3084,10 @@ public final class GetWithProof {
           ledgerInfoWithSigsBuilder_ = null;
         }
         if (validatorChangeEventsBuilder_ == null) {
-          validatorChangeEvents_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000004);
+          validatorChangeEvents_ = null;
         } else {
-          validatorChangeEventsBuilder_.clear();
+          validatorChangeEvents_ = null;
+          validatorChangeEventsBuilder_ = null;
         }
         if (ledgerConsistencyProofBuilder_ == null) {
           ledgerConsistencyProof_ = null;
@@ -3185,10 +3138,6 @@ public final class GetWithProof {
           result.ledgerInfoWithSigs_ = ledgerInfoWithSigsBuilder_.build();
         }
         if (validatorChangeEventsBuilder_ == null) {
-          if (((bitField0_ & 0x00000004) != 0)) {
-            validatorChangeEvents_ = java.util.Collections.unmodifiableList(validatorChangeEvents_);
-            bitField0_ = (bitField0_ & ~0x00000004);
-          }
           result.validatorChangeEvents_ = validatorChangeEvents_;
         } else {
           result.validatorChangeEvents_ = validatorChangeEventsBuilder_.build();
@@ -3276,31 +3225,8 @@ public final class GetWithProof {
         if (other.hasLedgerInfoWithSigs()) {
           mergeLedgerInfoWithSigs(other.getLedgerInfoWithSigs());
         }
-        if (validatorChangeEventsBuilder_ == null) {
-          if (!other.validatorChangeEvents_.isEmpty()) {
-            if (validatorChangeEvents_.isEmpty()) {
-              validatorChangeEvents_ = other.validatorChangeEvents_;
-              bitField0_ = (bitField0_ & ~0x00000004);
-            } else {
-              ensureValidatorChangeEventsIsMutable();
-              validatorChangeEvents_.addAll(other.validatorChangeEvents_);
-            }
-            onChanged();
-          }
-        } else {
-          if (!other.validatorChangeEvents_.isEmpty()) {
-            if (validatorChangeEventsBuilder_.isEmpty()) {
-              validatorChangeEventsBuilder_.dispose();
-              validatorChangeEventsBuilder_ = null;
-              validatorChangeEvents_ = other.validatorChangeEvents_;
-              bitField0_ = (bitField0_ & ~0x00000004);
-              validatorChangeEventsBuilder_ = 
-                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                   getValidatorChangeEventsFieldBuilder() : null;
-            } else {
-              validatorChangeEventsBuilder_.addAllMessages(other.validatorChangeEvents_);
-            }
-          }
+        if (other.hasValidatorChangeEvents()) {
+          mergeValidatorChangeEvents(other.getValidatorChangeEvents());
         }
         if (other.hasLedgerConsistencyProof()) {
           mergeLedgerConsistencyProof(other.getLedgerConsistencyProof());
@@ -3836,33 +3762,58 @@ public final class GetWithProof {
         return ledgerInfoWithSigsBuilder_;
       }
 
-      private java.util.List<org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof> validatorChangeEvents_ =
-        java.util.Collections.emptyList();
-      private void ensureValidatorChangeEventsIsMutable() {
-        if (!((bitField0_ & 0x00000004) != 0)) {
-          validatorChangeEvents_ = new java.util.ArrayList<org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof>(validatorChangeEvents_);
-          bitField0_ |= 0x00000004;
-         }
-      }
-
-      private com.google.protobuf.RepeatedFieldBuilderV3<
+      private org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof validatorChangeEvents_;
+      private com.google.protobuf.SingleFieldBuilderV3<
           org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof, org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof.Builder, org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProofOrBuilder> validatorChangeEventsBuilder_;
+      /**
+       * <pre>
+       * Validator change events from what the client last knew.  This is used to
+       * inform the client of validator changes from the client's last known version
+       * until the current version
+       * </pre>
+       *
+       * <code>.types.ValidatorChangeEventWithProof validator_change_events = 3;</code>
+       */
+      public boolean hasValidatorChangeEvents() {
+        return validatorChangeEventsBuilder_ != null || validatorChangeEvents_ != null;
+      }
+      /**
+       * <pre>
+       * Validator change events from what the client last knew.  This is used to
+       * inform the client of validator changes from the client's last known version
+       * until the current version
+       * </pre>
+       *
+       * <code>.types.ValidatorChangeEventWithProof validator_change_events = 3;</code>
+       */
+      public org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof getValidatorChangeEvents() {
+        if (validatorChangeEventsBuilder_ == null) {
+          return validatorChangeEvents_ == null ? org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof.getDefaultInstance() : validatorChangeEvents_;
+        } else {
+          return validatorChangeEventsBuilder_.getMessage();
+        }
+      }
+      /**
+       * <pre>
+       * Validator change events from what the client last knew.  This is used to
+       * inform the client of validator changes from the client's last known version
+       * until the current version
+       * </pre>
+       *
+       * <code>.types.ValidatorChangeEventWithProof validator_change_events = 3;</code>
+       */
+      public Builder setValidatorChangeEvents(org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof value) {
+        if (validatorChangeEventsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          validatorChangeEvents_ = value;
+          onChanged();
+        } else {
+          validatorChangeEventsBuilder_.setMessage(value);
+        }
 
-      /**
-       * <pre>
-       * Validator change events from what the client last knew.  This is used to
-       * inform the client of validator changes from the client's last known version
-       * until the current version
-       * </pre>
-       *
-       * <code>repeated .types.ValidatorChangeEventWithProof validator_change_events = 3;</code>
-       */
-      public java.util.List<org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof> getValidatorChangeEventsList() {
-        if (validatorChangeEventsBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(validatorChangeEvents_);
-        } else {
-          return validatorChangeEventsBuilder_.getMessageList();
-        }
+        return this;
       }
       /**
        * <pre>
@@ -3871,137 +3822,17 @@ public final class GetWithProof {
        * until the current version
        * </pre>
        *
-       * <code>repeated .types.ValidatorChangeEventWithProof validator_change_events = 3;</code>
-       */
-      public int getValidatorChangeEventsCount() {
-        if (validatorChangeEventsBuilder_ == null) {
-          return validatorChangeEvents_.size();
-        } else {
-          return validatorChangeEventsBuilder_.getCount();
-        }
-      }
-      /**
-       * <pre>
-       * Validator change events from what the client last knew.  This is used to
-       * inform the client of validator changes from the client's last known version
-       * until the current version
-       * </pre>
-       *
-       * <code>repeated .types.ValidatorChangeEventWithProof validator_change_events = 3;</code>
-       */
-      public org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof getValidatorChangeEvents(int index) {
-        if (validatorChangeEventsBuilder_ == null) {
-          return validatorChangeEvents_.get(index);
-        } else {
-          return validatorChangeEventsBuilder_.getMessage(index);
-        }
-      }
-      /**
-       * <pre>
-       * Validator change events from what the client last knew.  This is used to
-       * inform the client of validator changes from the client's last known version
-       * until the current version
-       * </pre>
-       *
-       * <code>repeated .types.ValidatorChangeEventWithProof validator_change_events = 3;</code>
+       * <code>.types.ValidatorChangeEventWithProof validator_change_events = 3;</code>
        */
       public Builder setValidatorChangeEvents(
-          int index, org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof value) {
-        if (validatorChangeEventsBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureValidatorChangeEventsIsMutable();
-          validatorChangeEvents_.set(index, value);
-          onChanged();
-        } else {
-          validatorChangeEventsBuilder_.setMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       * Validator change events from what the client last knew.  This is used to
-       * inform the client of validator changes from the client's last known version
-       * until the current version
-       * </pre>
-       *
-       * <code>repeated .types.ValidatorChangeEventWithProof validator_change_events = 3;</code>
-       */
-      public Builder setValidatorChangeEvents(
-          int index, org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof.Builder builderForValue) {
-        if (validatorChangeEventsBuilder_ == null) {
-          ensureValidatorChangeEventsIsMutable();
-          validatorChangeEvents_.set(index, builderForValue.build());
-          onChanged();
-        } else {
-          validatorChangeEventsBuilder_.setMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       * Validator change events from what the client last knew.  This is used to
-       * inform the client of validator changes from the client's last known version
-       * until the current version
-       * </pre>
-       *
-       * <code>repeated .types.ValidatorChangeEventWithProof validator_change_events = 3;</code>
-       */
-      public Builder addValidatorChangeEvents(org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof value) {
-        if (validatorChangeEventsBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureValidatorChangeEventsIsMutable();
-          validatorChangeEvents_.add(value);
-          onChanged();
-        } else {
-          validatorChangeEventsBuilder_.addMessage(value);
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       * Validator change events from what the client last knew.  This is used to
-       * inform the client of validator changes from the client's last known version
-       * until the current version
-       * </pre>
-       *
-       * <code>repeated .types.ValidatorChangeEventWithProof validator_change_events = 3;</code>
-       */
-      public Builder addValidatorChangeEvents(
-          int index, org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof value) {
-        if (validatorChangeEventsBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureValidatorChangeEventsIsMutable();
-          validatorChangeEvents_.add(index, value);
-          onChanged();
-        } else {
-          validatorChangeEventsBuilder_.addMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       * Validator change events from what the client last knew.  This is used to
-       * inform the client of validator changes from the client's last known version
-       * until the current version
-       * </pre>
-       *
-       * <code>repeated .types.ValidatorChangeEventWithProof validator_change_events = 3;</code>
-       */
-      public Builder addValidatorChangeEvents(
           org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof.Builder builderForValue) {
         if (validatorChangeEventsBuilder_ == null) {
-          ensureValidatorChangeEventsIsMutable();
-          validatorChangeEvents_.add(builderForValue.build());
+          validatorChangeEvents_ = builderForValue.build();
           onChanged();
         } else {
-          validatorChangeEventsBuilder_.addMessage(builderForValue.build());
+          validatorChangeEventsBuilder_.setMessage(builderForValue.build());
         }
+
         return this;
       }
       /**
@@ -4011,17 +3842,21 @@ public final class GetWithProof {
        * until the current version
        * </pre>
        *
-       * <code>repeated .types.ValidatorChangeEventWithProof validator_change_events = 3;</code>
+       * <code>.types.ValidatorChangeEventWithProof validator_change_events = 3;</code>
        */
-      public Builder addValidatorChangeEvents(
-          int index, org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof.Builder builderForValue) {
+      public Builder mergeValidatorChangeEvents(org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof value) {
         if (validatorChangeEventsBuilder_ == null) {
-          ensureValidatorChangeEventsIsMutable();
-          validatorChangeEvents_.add(index, builderForValue.build());
+          if (validatorChangeEvents_ != null) {
+            validatorChangeEvents_ =
+              org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof.newBuilder(validatorChangeEvents_).mergeFrom(value).buildPartial();
+          } else {
+            validatorChangeEvents_ = value;
+          }
           onChanged();
         } else {
-          validatorChangeEventsBuilder_.addMessage(index, builderForValue.build());
+          validatorChangeEventsBuilder_.mergeFrom(value);
         }
+
         return this;
       }
       /**
@@ -4031,37 +3866,17 @@ public final class GetWithProof {
        * until the current version
        * </pre>
        *
-       * <code>repeated .types.ValidatorChangeEventWithProof validator_change_events = 3;</code>
-       */
-      public Builder addAllValidatorChangeEvents(
-          java.lang.Iterable<? extends org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof> values) {
-        if (validatorChangeEventsBuilder_ == null) {
-          ensureValidatorChangeEventsIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, validatorChangeEvents_);
-          onChanged();
-        } else {
-          validatorChangeEventsBuilder_.addAllMessages(values);
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       * Validator change events from what the client last knew.  This is used to
-       * inform the client of validator changes from the client's last known version
-       * until the current version
-       * </pre>
-       *
-       * <code>repeated .types.ValidatorChangeEventWithProof validator_change_events = 3;</code>
+       * <code>.types.ValidatorChangeEventWithProof validator_change_events = 3;</code>
        */
       public Builder clearValidatorChangeEvents() {
         if (validatorChangeEventsBuilder_ == null) {
-          validatorChangeEvents_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000004);
+          validatorChangeEvents_ = null;
           onChanged();
         } else {
-          validatorChangeEventsBuilder_.clear();
+          validatorChangeEvents_ = null;
+          validatorChangeEventsBuilder_ = null;
         }
+
         return this;
       }
       /**
@@ -4071,17 +3886,12 @@ public final class GetWithProof {
        * until the current version
        * </pre>
        *
-       * <code>repeated .types.ValidatorChangeEventWithProof validator_change_events = 3;</code>
+       * <code>.types.ValidatorChangeEventWithProof validator_change_events = 3;</code>
        */
-      public Builder removeValidatorChangeEvents(int index) {
-        if (validatorChangeEventsBuilder_ == null) {
-          ensureValidatorChangeEventsIsMutable();
-          validatorChangeEvents_.remove(index);
-          onChanged();
-        } else {
-          validatorChangeEventsBuilder_.remove(index);
-        }
-        return this;
+      public org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof.Builder getValidatorChangeEventsBuilder() {
+        
+        onChanged();
+        return getValidatorChangeEventsFieldBuilder().getBuilder();
       }
       /**
        * <pre>
@@ -4090,43 +3900,14 @@ public final class GetWithProof {
        * until the current version
        * </pre>
        *
-       * <code>repeated .types.ValidatorChangeEventWithProof validator_change_events = 3;</code>
+       * <code>.types.ValidatorChangeEventWithProof validator_change_events = 3;</code>
        */
-      public org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof.Builder getValidatorChangeEventsBuilder(
-          int index) {
-        return getValidatorChangeEventsFieldBuilder().getBuilder(index);
-      }
-      /**
-       * <pre>
-       * Validator change events from what the client last knew.  This is used to
-       * inform the client of validator changes from the client's last known version
-       * until the current version
-       * </pre>
-       *
-       * <code>repeated .types.ValidatorChangeEventWithProof validator_change_events = 3;</code>
-       */
-      public org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProofOrBuilder getValidatorChangeEventsOrBuilder(
-          int index) {
-        if (validatorChangeEventsBuilder_ == null) {
-          return validatorChangeEvents_.get(index);  } else {
-          return validatorChangeEventsBuilder_.getMessageOrBuilder(index);
-        }
-      }
-      /**
-       * <pre>
-       * Validator change events from what the client last knew.  This is used to
-       * inform the client of validator changes from the client's last known version
-       * until the current version
-       * </pre>
-       *
-       * <code>repeated .types.ValidatorChangeEventWithProof validator_change_events = 3;</code>
-       */
-      public java.util.List<? extends org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProofOrBuilder> 
-           getValidatorChangeEventsOrBuilderList() {
+      public org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProofOrBuilder getValidatorChangeEventsOrBuilder() {
         if (validatorChangeEventsBuilder_ != null) {
-          return validatorChangeEventsBuilder_.getMessageOrBuilderList();
+          return validatorChangeEventsBuilder_.getMessageOrBuilder();
         } else {
-          return java.util.Collections.unmodifiableList(validatorChangeEvents_);
+          return validatorChangeEvents_ == null ?
+              org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof.getDefaultInstance() : validatorChangeEvents_;
         }
       }
       /**
@@ -4136,47 +3917,15 @@ public final class GetWithProof {
        * until the current version
        * </pre>
        *
-       * <code>repeated .types.ValidatorChangeEventWithProof validator_change_events = 3;</code>
+       * <code>.types.ValidatorChangeEventWithProof validator_change_events = 3;</code>
        */
-      public org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof.Builder addValidatorChangeEventsBuilder() {
-        return getValidatorChangeEventsFieldBuilder().addBuilder(
-            org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof.getDefaultInstance());
-      }
-      /**
-       * <pre>
-       * Validator change events from what the client last knew.  This is used to
-       * inform the client of validator changes from the client's last known version
-       * until the current version
-       * </pre>
-       *
-       * <code>repeated .types.ValidatorChangeEventWithProof validator_change_events = 3;</code>
-       */
-      public org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof.Builder addValidatorChangeEventsBuilder(
-          int index) {
-        return getValidatorChangeEventsFieldBuilder().addBuilder(
-            index, org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof.getDefaultInstance());
-      }
-      /**
-       * <pre>
-       * Validator change events from what the client last knew.  This is used to
-       * inform the client of validator changes from the client's last known version
-       * until the current version
-       * </pre>
-       *
-       * <code>repeated .types.ValidatorChangeEventWithProof validator_change_events = 3;</code>
-       */
-      public java.util.List<org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof.Builder> 
-           getValidatorChangeEventsBuilderList() {
-        return getValidatorChangeEventsFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilderV3<
+      private com.google.protobuf.SingleFieldBuilderV3<
           org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof, org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof.Builder, org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProofOrBuilder> 
           getValidatorChangeEventsFieldBuilder() {
         if (validatorChangeEventsBuilder_ == null) {
-          validatorChangeEventsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+          validatorChangeEventsBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
               org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof, org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof.Builder, org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProofOrBuilder>(
-                  validatorChangeEvents_,
-                  ((bitField0_ & 0x00000004) != 0),
+                  getValidatorChangeEvents(),
                   getParentForChildren(),
                   isClean());
           validatorChangeEvents_ = null;
@@ -7659,27 +7408,27 @@ public final class GetWithProof {
      * transaction with proof.
      * </pre>
      *
-     * <code>.types.SignedTransactionWithProof signed_transaction_with_proof = 2;</code>
+     * <code>.types.TransactionWithProof transaction_with_proof = 2;</code>
      */
-    boolean hasSignedTransactionWithProof();
+    boolean hasTransactionWithProof();
     /**
      * <pre>
      * When the transaction requested is committed, return the committed
      * transaction with proof.
      * </pre>
      *
-     * <code>.types.SignedTransactionWithProof signed_transaction_with_proof = 2;</code>
+     * <code>.types.TransactionWithProof transaction_with_proof = 2;</code>
      */
-    org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof getSignedTransactionWithProof();
+    org.libra.grpc.types.TransactionOuterClass.TransactionWithProof getTransactionWithProof();
     /**
      * <pre>
      * When the transaction requested is committed, return the committed
      * transaction with proof.
      * </pre>
      *
-     * <code>.types.SignedTransactionWithProof signed_transaction_with_proof = 2;</code>
+     * <code>.types.TransactionWithProof transaction_with_proof = 2;</code>
      */
-    org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProofOrBuilder getSignedTransactionWithProofOrBuilder();
+    org.libra.grpc.types.TransactionOuterClass.TransactionWithProofOrBuilder getTransactionWithProofOrBuilder();
 
     /**
      * <pre>
@@ -7757,14 +7506,14 @@ public final class GetWithProof {
               done = true;
               break;
             case 18: {
-              org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof.Builder subBuilder = null;
-              if (signedTransactionWithProof_ != null) {
-                subBuilder = signedTransactionWithProof_.toBuilder();
+              org.libra.grpc.types.TransactionOuterClass.TransactionWithProof.Builder subBuilder = null;
+              if (transactionWithProof_ != null) {
+                subBuilder = transactionWithProof_.toBuilder();
               }
-              signedTransactionWithProof_ = input.readMessage(org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof.parser(), extensionRegistry);
+              transactionWithProof_ = input.readMessage(org.libra.grpc.types.TransactionOuterClass.TransactionWithProof.parser(), extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom(signedTransactionWithProof_);
-                signedTransactionWithProof_ = subBuilder.buildPartial();
+                subBuilder.mergeFrom(transactionWithProof_);
+                transactionWithProof_ = subBuilder.buildPartial();
               }
 
               break;
@@ -7814,18 +7563,18 @@ public final class GetWithProof {
               org.libra.grpc.types.GetWithProof.GetAccountTransactionBySequenceNumberResponse.class, org.libra.grpc.types.GetWithProof.GetAccountTransactionBySequenceNumberResponse.Builder.class);
     }
 
-    public static final int SIGNED_TRANSACTION_WITH_PROOF_FIELD_NUMBER = 2;
-    private org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof signedTransactionWithProof_;
+    public static final int TRANSACTION_WITH_PROOF_FIELD_NUMBER = 2;
+    private org.libra.grpc.types.TransactionOuterClass.TransactionWithProof transactionWithProof_;
     /**
      * <pre>
      * When the transaction requested is committed, return the committed
      * transaction with proof.
      * </pre>
      *
-     * <code>.types.SignedTransactionWithProof signed_transaction_with_proof = 2;</code>
+     * <code>.types.TransactionWithProof transaction_with_proof = 2;</code>
      */
-    public boolean hasSignedTransactionWithProof() {
-      return signedTransactionWithProof_ != null;
+    public boolean hasTransactionWithProof() {
+      return transactionWithProof_ != null;
     }
     /**
      * <pre>
@@ -7833,10 +7582,10 @@ public final class GetWithProof {
      * transaction with proof.
      * </pre>
      *
-     * <code>.types.SignedTransactionWithProof signed_transaction_with_proof = 2;</code>
+     * <code>.types.TransactionWithProof transaction_with_proof = 2;</code>
      */
-    public org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof getSignedTransactionWithProof() {
-      return signedTransactionWithProof_ == null ? org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof.getDefaultInstance() : signedTransactionWithProof_;
+    public org.libra.grpc.types.TransactionOuterClass.TransactionWithProof getTransactionWithProof() {
+      return transactionWithProof_ == null ? org.libra.grpc.types.TransactionOuterClass.TransactionWithProof.getDefaultInstance() : transactionWithProof_;
     }
     /**
      * <pre>
@@ -7844,10 +7593,10 @@ public final class GetWithProof {
      * transaction with proof.
      * </pre>
      *
-     * <code>.types.SignedTransactionWithProof signed_transaction_with_proof = 2;</code>
+     * <code>.types.TransactionWithProof transaction_with_proof = 2;</code>
      */
-    public org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProofOrBuilder getSignedTransactionWithProofOrBuilder() {
-      return getSignedTransactionWithProof();
+    public org.libra.grpc.types.TransactionOuterClass.TransactionWithProofOrBuilder getTransactionWithProofOrBuilder() {
+      return getTransactionWithProof();
     }
 
     public static final int PROOF_OF_CURRENT_SEQUENCE_NUMBER_FIELD_NUMBER = 3;
@@ -7903,8 +7652,8 @@ public final class GetWithProof {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (signedTransactionWithProof_ != null) {
-        output.writeMessage(2, getSignedTransactionWithProof());
+      if (transactionWithProof_ != null) {
+        output.writeMessage(2, getTransactionWithProof());
       }
       if (proofOfCurrentSequenceNumber_ != null) {
         output.writeMessage(3, getProofOfCurrentSequenceNumber());
@@ -7918,9 +7667,9 @@ public final class GetWithProof {
       if (size != -1) return size;
 
       size = 0;
-      if (signedTransactionWithProof_ != null) {
+      if (transactionWithProof_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, getSignedTransactionWithProof());
+          .computeMessageSize(2, getTransactionWithProof());
       }
       if (proofOfCurrentSequenceNumber_ != null) {
         size += com.google.protobuf.CodedOutputStream
@@ -7941,10 +7690,10 @@ public final class GetWithProof {
       }
       org.libra.grpc.types.GetWithProof.GetAccountTransactionBySequenceNumberResponse other = (org.libra.grpc.types.GetWithProof.GetAccountTransactionBySequenceNumberResponse) obj;
 
-      if (hasSignedTransactionWithProof() != other.hasSignedTransactionWithProof()) return false;
-      if (hasSignedTransactionWithProof()) {
-        if (!getSignedTransactionWithProof()
-            .equals(other.getSignedTransactionWithProof())) return false;
+      if (hasTransactionWithProof() != other.hasTransactionWithProof()) return false;
+      if (hasTransactionWithProof()) {
+        if (!getTransactionWithProof()
+            .equals(other.getTransactionWithProof())) return false;
       }
       if (hasProofOfCurrentSequenceNumber() != other.hasProofOfCurrentSequenceNumber()) return false;
       if (hasProofOfCurrentSequenceNumber()) {
@@ -7962,9 +7711,9 @@ public final class GetWithProof {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasSignedTransactionWithProof()) {
-        hash = (37 * hash) + SIGNED_TRANSACTION_WITH_PROOF_FIELD_NUMBER;
-        hash = (53 * hash) + getSignedTransactionWithProof().hashCode();
+      if (hasTransactionWithProof()) {
+        hash = (37 * hash) + TRANSACTION_WITH_PROOF_FIELD_NUMBER;
+        hash = (53 * hash) + getTransactionWithProof().hashCode();
       }
       if (hasProofOfCurrentSequenceNumber()) {
         hash = (37 * hash) + PROOF_OF_CURRENT_SEQUENCE_NUMBER_FIELD_NUMBER;
@@ -8108,11 +7857,11 @@ public final class GetWithProof {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        if (signedTransactionWithProofBuilder_ == null) {
-          signedTransactionWithProof_ = null;
+        if (transactionWithProofBuilder_ == null) {
+          transactionWithProof_ = null;
         } else {
-          signedTransactionWithProof_ = null;
-          signedTransactionWithProofBuilder_ = null;
+          transactionWithProof_ = null;
+          transactionWithProofBuilder_ = null;
         }
         if (proofOfCurrentSequenceNumberBuilder_ == null) {
           proofOfCurrentSequenceNumber_ = null;
@@ -8146,10 +7895,10 @@ public final class GetWithProof {
       @java.lang.Override
       public org.libra.grpc.types.GetWithProof.GetAccountTransactionBySequenceNumberResponse buildPartial() {
         org.libra.grpc.types.GetWithProof.GetAccountTransactionBySequenceNumberResponse result = new org.libra.grpc.types.GetWithProof.GetAccountTransactionBySequenceNumberResponse(this);
-        if (signedTransactionWithProofBuilder_ == null) {
-          result.signedTransactionWithProof_ = signedTransactionWithProof_;
+        if (transactionWithProofBuilder_ == null) {
+          result.transactionWithProof_ = transactionWithProof_;
         } else {
-          result.signedTransactionWithProof_ = signedTransactionWithProofBuilder_.build();
+          result.transactionWithProof_ = transactionWithProofBuilder_.build();
         }
         if (proofOfCurrentSequenceNumberBuilder_ == null) {
           result.proofOfCurrentSequenceNumber_ = proofOfCurrentSequenceNumber_;
@@ -8204,8 +7953,8 @@ public final class GetWithProof {
 
       public Builder mergeFrom(org.libra.grpc.types.GetWithProof.GetAccountTransactionBySequenceNumberResponse other) {
         if (other == org.libra.grpc.types.GetWithProof.GetAccountTransactionBySequenceNumberResponse.getDefaultInstance()) return this;
-        if (other.hasSignedTransactionWithProof()) {
-          mergeSignedTransactionWithProof(other.getSignedTransactionWithProof());
+        if (other.hasTransactionWithProof()) {
+          mergeTransactionWithProof(other.getTransactionWithProof());
         }
         if (other.hasProofOfCurrentSequenceNumber()) {
           mergeProofOfCurrentSequenceNumber(other.getProofOfCurrentSequenceNumber());
@@ -8239,19 +7988,19 @@ public final class GetWithProof {
         return this;
       }
 
-      private org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof signedTransactionWithProof_;
+      private org.libra.grpc.types.TransactionOuterClass.TransactionWithProof transactionWithProof_;
       private com.google.protobuf.SingleFieldBuilderV3<
-          org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof, org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof.Builder, org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProofOrBuilder> signedTransactionWithProofBuilder_;
+          org.libra.grpc.types.TransactionOuterClass.TransactionWithProof, org.libra.grpc.types.TransactionOuterClass.TransactionWithProof.Builder, org.libra.grpc.types.TransactionOuterClass.TransactionWithProofOrBuilder> transactionWithProofBuilder_;
       /**
        * <pre>
        * When the transaction requested is committed, return the committed
        * transaction with proof.
        * </pre>
        *
-       * <code>.types.SignedTransactionWithProof signed_transaction_with_proof = 2;</code>
+       * <code>.types.TransactionWithProof transaction_with_proof = 2;</code>
        */
-      public boolean hasSignedTransactionWithProof() {
-        return signedTransactionWithProofBuilder_ != null || signedTransactionWithProof_ != null;
+      public boolean hasTransactionWithProof() {
+        return transactionWithProofBuilder_ != null || transactionWithProof_ != null;
       }
       /**
        * <pre>
@@ -8259,13 +8008,13 @@ public final class GetWithProof {
        * transaction with proof.
        * </pre>
        *
-       * <code>.types.SignedTransactionWithProof signed_transaction_with_proof = 2;</code>
+       * <code>.types.TransactionWithProof transaction_with_proof = 2;</code>
        */
-      public org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof getSignedTransactionWithProof() {
-        if (signedTransactionWithProofBuilder_ == null) {
-          return signedTransactionWithProof_ == null ? org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof.getDefaultInstance() : signedTransactionWithProof_;
+      public org.libra.grpc.types.TransactionOuterClass.TransactionWithProof getTransactionWithProof() {
+        if (transactionWithProofBuilder_ == null) {
+          return transactionWithProof_ == null ? org.libra.grpc.types.TransactionOuterClass.TransactionWithProof.getDefaultInstance() : transactionWithProof_;
         } else {
-          return signedTransactionWithProofBuilder_.getMessage();
+          return transactionWithProofBuilder_.getMessage();
         }
       }
       /**
@@ -8274,17 +8023,17 @@ public final class GetWithProof {
        * transaction with proof.
        * </pre>
        *
-       * <code>.types.SignedTransactionWithProof signed_transaction_with_proof = 2;</code>
+       * <code>.types.TransactionWithProof transaction_with_proof = 2;</code>
        */
-      public Builder setSignedTransactionWithProof(org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof value) {
-        if (signedTransactionWithProofBuilder_ == null) {
+      public Builder setTransactionWithProof(org.libra.grpc.types.TransactionOuterClass.TransactionWithProof value) {
+        if (transactionWithProofBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          signedTransactionWithProof_ = value;
+          transactionWithProof_ = value;
           onChanged();
         } else {
-          signedTransactionWithProofBuilder_.setMessage(value);
+          transactionWithProofBuilder_.setMessage(value);
         }
 
         return this;
@@ -8295,15 +8044,15 @@ public final class GetWithProof {
        * transaction with proof.
        * </pre>
        *
-       * <code>.types.SignedTransactionWithProof signed_transaction_with_proof = 2;</code>
+       * <code>.types.TransactionWithProof transaction_with_proof = 2;</code>
        */
-      public Builder setSignedTransactionWithProof(
-          org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof.Builder builderForValue) {
-        if (signedTransactionWithProofBuilder_ == null) {
-          signedTransactionWithProof_ = builderForValue.build();
+      public Builder setTransactionWithProof(
+          org.libra.grpc.types.TransactionOuterClass.TransactionWithProof.Builder builderForValue) {
+        if (transactionWithProofBuilder_ == null) {
+          transactionWithProof_ = builderForValue.build();
           onChanged();
         } else {
-          signedTransactionWithProofBuilder_.setMessage(builderForValue.build());
+          transactionWithProofBuilder_.setMessage(builderForValue.build());
         }
 
         return this;
@@ -8314,19 +8063,19 @@ public final class GetWithProof {
        * transaction with proof.
        * </pre>
        *
-       * <code>.types.SignedTransactionWithProof signed_transaction_with_proof = 2;</code>
+       * <code>.types.TransactionWithProof transaction_with_proof = 2;</code>
        */
-      public Builder mergeSignedTransactionWithProof(org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof value) {
-        if (signedTransactionWithProofBuilder_ == null) {
-          if (signedTransactionWithProof_ != null) {
-            signedTransactionWithProof_ =
-              org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof.newBuilder(signedTransactionWithProof_).mergeFrom(value).buildPartial();
+      public Builder mergeTransactionWithProof(org.libra.grpc.types.TransactionOuterClass.TransactionWithProof value) {
+        if (transactionWithProofBuilder_ == null) {
+          if (transactionWithProof_ != null) {
+            transactionWithProof_ =
+              org.libra.grpc.types.TransactionOuterClass.TransactionWithProof.newBuilder(transactionWithProof_).mergeFrom(value).buildPartial();
           } else {
-            signedTransactionWithProof_ = value;
+            transactionWithProof_ = value;
           }
           onChanged();
         } else {
-          signedTransactionWithProofBuilder_.mergeFrom(value);
+          transactionWithProofBuilder_.mergeFrom(value);
         }
 
         return this;
@@ -8337,15 +8086,15 @@ public final class GetWithProof {
        * transaction with proof.
        * </pre>
        *
-       * <code>.types.SignedTransactionWithProof signed_transaction_with_proof = 2;</code>
+       * <code>.types.TransactionWithProof transaction_with_proof = 2;</code>
        */
-      public Builder clearSignedTransactionWithProof() {
-        if (signedTransactionWithProofBuilder_ == null) {
-          signedTransactionWithProof_ = null;
+      public Builder clearTransactionWithProof() {
+        if (transactionWithProofBuilder_ == null) {
+          transactionWithProof_ = null;
           onChanged();
         } else {
-          signedTransactionWithProof_ = null;
-          signedTransactionWithProofBuilder_ = null;
+          transactionWithProof_ = null;
+          transactionWithProofBuilder_ = null;
         }
 
         return this;
@@ -8356,12 +8105,12 @@ public final class GetWithProof {
        * transaction with proof.
        * </pre>
        *
-       * <code>.types.SignedTransactionWithProof signed_transaction_with_proof = 2;</code>
+       * <code>.types.TransactionWithProof transaction_with_proof = 2;</code>
        */
-      public org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof.Builder getSignedTransactionWithProofBuilder() {
+      public org.libra.grpc.types.TransactionOuterClass.TransactionWithProof.Builder getTransactionWithProofBuilder() {
         
         onChanged();
-        return getSignedTransactionWithProofFieldBuilder().getBuilder();
+        return getTransactionWithProofFieldBuilder().getBuilder();
       }
       /**
        * <pre>
@@ -8369,14 +8118,14 @@ public final class GetWithProof {
        * transaction with proof.
        * </pre>
        *
-       * <code>.types.SignedTransactionWithProof signed_transaction_with_proof = 2;</code>
+       * <code>.types.TransactionWithProof transaction_with_proof = 2;</code>
        */
-      public org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProofOrBuilder getSignedTransactionWithProofOrBuilder() {
-        if (signedTransactionWithProofBuilder_ != null) {
-          return signedTransactionWithProofBuilder_.getMessageOrBuilder();
+      public org.libra.grpc.types.TransactionOuterClass.TransactionWithProofOrBuilder getTransactionWithProofOrBuilder() {
+        if (transactionWithProofBuilder_ != null) {
+          return transactionWithProofBuilder_.getMessageOrBuilder();
         } else {
-          return signedTransactionWithProof_ == null ?
-              org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof.getDefaultInstance() : signedTransactionWithProof_;
+          return transactionWithProof_ == null ?
+              org.libra.grpc.types.TransactionOuterClass.TransactionWithProof.getDefaultInstance() : transactionWithProof_;
         }
       }
       /**
@@ -8385,20 +8134,20 @@ public final class GetWithProof {
        * transaction with proof.
        * </pre>
        *
-       * <code>.types.SignedTransactionWithProof signed_transaction_with_proof = 2;</code>
+       * <code>.types.TransactionWithProof transaction_with_proof = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof, org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof.Builder, org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProofOrBuilder> 
-          getSignedTransactionWithProofFieldBuilder() {
-        if (signedTransactionWithProofBuilder_ == null) {
-          signedTransactionWithProofBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof, org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof.Builder, org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProofOrBuilder>(
-                  getSignedTransactionWithProof(),
+          org.libra.grpc.types.TransactionOuterClass.TransactionWithProof, org.libra.grpc.types.TransactionOuterClass.TransactionWithProof.Builder, org.libra.grpc.types.TransactionOuterClass.TransactionWithProofOrBuilder> 
+          getTransactionWithProofFieldBuilder() {
+        if (transactionWithProofBuilder_ == null) {
+          transactionWithProofBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              org.libra.grpc.types.TransactionOuterClass.TransactionWithProof, org.libra.grpc.types.TransactionOuterClass.TransactionWithProof.Builder, org.libra.grpc.types.TransactionOuterClass.TransactionWithProofOrBuilder>(
+                  getTransactionWithProof(),
                   getParentForChildren(),
                   isClean());
-          signedTransactionWithProof_ = null;
+          transactionWithProof_ = null;
         }
-        return signedTransactionWithProofBuilder_;
+        return transactionWithProofBuilder_;
       }
 
       private org.libra.grpc.types.AccountStateBlobOuterClass.AccountStateWithProof proofOfCurrentSequenceNumber_;
@@ -12143,7 +11892,7 @@ public final class GetWithProof {
       "\022+\n\016response_items\030\001 \003(\0132\023.types.Respons" +
       "eItem\022>\n\025ledger_info_with_sigs\030\002 \001(\0132\037.t" +
       "ypes.LedgerInfoWithSignatures\022E\n\027validat" +
-      "or_change_events\030\003 \003(\0132$.types.Validator" +
+      "or_change_events\030\003 \001(\0132$.types.Validator" +
       "ChangeEventWithProof\022D\n\030ledger_consisten" +
       "cy_proof\030\004 \001(\0132\".types.AccumulatorConsis" +
       "tencyProof\"\377\002\n\014ResponseItem\022D\n\032get_accou" +
@@ -12162,24 +11911,24 @@ public final class GetWithProof {
       "eWithProof\"n\n,GetAccountTransactionBySeq" +
       "uenceNumberRequest\022\017\n\007account\030\001 \001(\014\022\027\n\017s" +
       "equence_number\030\002 \001(\004\022\024\n\014fetch_events\030\003 \001" +
-      "(\010\"\301\001\n-GetAccountTransactionBySequenceNu" +
-      "mberResponse\022H\n\035signed_transaction_with_" +
-      "proof\030\002 \001(\0132!.types.SignedTransactionWit" +
-      "hProof\022F\n proof_of_current_sequence_numb" +
-      "er\030\003 \001(\0132\034.types.AccountStateWithProof\"\212" +
-      "\001\n!GetEventsByEventAccessPathRequest\022&\n\013" +
-      "access_path\030\001 \001(\0132\021.types.AccessPath\022\033\n\023" +
-      "start_event_seq_num\030\002 \001(\004\022\021\n\tascending\030\003" +
-      " \001(\010\022\r\n\005limit\030\004 \001(\004\"\223\001\n\"GetEventsByEvent" +
-      "AccessPathResponse\0220\n\021events_with_proof\030" +
-      "\001 \003(\0132\025.types.EventWithProof\022;\n\025proof_of" +
-      "_latest_event\030\002 \001(\0132\034.types.AccountState" +
-      "WithProof\"T\n\026GetTransactionsRequest\022\025\n\rs" +
-      "tart_version\030\001 \001(\004\022\r\n\005limit\030\002 \001(\004\022\024\n\014fet" +
-      "ch_events\030\003 \001(\010\"W\n\027GetTransactionsRespon" +
-      "se\022<\n\023txn_list_with_proof\030\001 \001(\0132\037.types." +
-      "TransactionListWithProofB\026\n\024org.libra.gr" +
-      "pc.typesb\006proto3"
+      "(\010\"\264\001\n-GetAccountTransactionBySequenceNu" +
+      "mberResponse\022;\n\026transaction_with_proof\030\002" +
+      " \001(\0132\033.types.TransactionWithProof\022F\n pro" +
+      "of_of_current_sequence_number\030\003 \001(\0132\034.ty" +
+      "pes.AccountStateWithProof\"\212\001\n!GetEventsB" +
+      "yEventAccessPathRequest\022&\n\013access_path\030\001" +
+      " \001(\0132\021.types.AccessPath\022\033\n\023start_event_s" +
+      "eq_num\030\002 \001(\004\022\021\n\tascending\030\003 \001(\010\022\r\n\005limit" +
+      "\030\004 \001(\004\"\223\001\n\"GetEventsByEventAccessPathRes" +
+      "ponse\0220\n\021events_with_proof\030\001 \003(\0132\025.types" +
+      ".EventWithProof\022;\n\025proof_of_latest_event" +
+      "\030\002 \001(\0132\034.types.AccountStateWithProof\"T\n\026" +
+      "GetTransactionsRequest\022\025\n\rstart_version\030" +
+      "\001 \001(\004\022\r\n\005limit\030\002 \001(\004\022\024\n\014fetch_events\030\003 \001" +
+      "(\010\"W\n\027GetTransactionsResponse\022<\n\023txn_lis" +
+      "t_with_proof\030\001 \001(\0132\037.types.TransactionLi" +
+      "stWithProofB\026\n\024org.libra.grpc.typesb\006pro" +
+      "to3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -12247,7 +11996,7 @@ public final class GetWithProof {
     internal_static_types_GetAccountTransactionBySequenceNumberResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_types_GetAccountTransactionBySequenceNumberResponse_descriptor,
-        new java.lang.String[] { "SignedTransactionWithProof", "ProofOfCurrentSequenceNumber", });
+        new java.lang.String[] { "TransactionWithProof", "ProofOfCurrentSequenceNumber", });
     internal_static_types_GetEventsByEventAccessPathRequest_descriptor =
       getDescriptor().getMessageTypes().get(8);
     internal_static_types_GetEventsByEventAccessPathRequest_fieldAccessorTable = new

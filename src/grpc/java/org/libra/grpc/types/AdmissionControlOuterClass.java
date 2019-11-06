@@ -1078,28 +1078,28 @@ public final class AdmissionControlOuterClass {
 
     /**
      * <pre>
-     * Transaction signed by wallet.
+     * Transaction submitted by user.
      * </pre>
      *
-     * <code>.types.SignedTransaction signed_txn = 1;</code>
+     * <code>.types.SignedTransaction transaction = 1;</code>
      */
-    boolean hasSignedTxn();
+    boolean hasTransaction();
     /**
      * <pre>
-     * Transaction signed by wallet.
+     * Transaction submitted by user.
      * </pre>
      *
-     * <code>.types.SignedTransaction signed_txn = 1;</code>
+     * <code>.types.SignedTransaction transaction = 1;</code>
      */
-    org.libra.grpc.types.TransactionOuterClass.SignedTransaction getSignedTxn();
+    org.libra.grpc.types.TransactionOuterClass.SignedTransaction getTransaction();
     /**
      * <pre>
-     * Transaction signed by wallet.
+     * Transaction submitted by user.
      * </pre>
      *
-     * <code>.types.SignedTransaction signed_txn = 1;</code>
+     * <code>.types.SignedTransaction transaction = 1;</code>
      */
-    org.libra.grpc.types.TransactionOuterClass.SignedTransactionOrBuilder getSignedTxnOrBuilder();
+    org.libra.grpc.types.TransactionOuterClass.SignedTransactionOrBuilder getTransactionOrBuilder();
   }
   /**
    * <pre>
@@ -1149,13 +1149,13 @@ public final class AdmissionControlOuterClass {
               break;
             case 10: {
               org.libra.grpc.types.TransactionOuterClass.SignedTransaction.Builder subBuilder = null;
-              if (signedTxn_ != null) {
-                subBuilder = signedTxn_.toBuilder();
+              if (transaction_ != null) {
+                subBuilder = transaction_.toBuilder();
               }
-              signedTxn_ = input.readMessage(org.libra.grpc.types.TransactionOuterClass.SignedTransaction.parser(), extensionRegistry);
+              transaction_ = input.readMessage(org.libra.grpc.types.TransactionOuterClass.SignedTransaction.parser(), extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom(signedTxn_);
-                signedTxn_ = subBuilder.buildPartial();
+                subBuilder.mergeFrom(transaction_);
+                transaction_ = subBuilder.buildPartial();
               }
 
               break;
@@ -1192,37 +1192,37 @@ public final class AdmissionControlOuterClass {
               org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionRequest.class, org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionRequest.Builder.class);
     }
 
-    public static final int SIGNED_TXN_FIELD_NUMBER = 1;
-    private org.libra.grpc.types.TransactionOuterClass.SignedTransaction signedTxn_;
+    public static final int TRANSACTION_FIELD_NUMBER = 1;
+    private org.libra.grpc.types.TransactionOuterClass.SignedTransaction transaction_;
     /**
      * <pre>
-     * Transaction signed by wallet.
+     * Transaction submitted by user.
      * </pre>
      *
-     * <code>.types.SignedTransaction signed_txn = 1;</code>
+     * <code>.types.SignedTransaction transaction = 1;</code>
      */
-    public boolean hasSignedTxn() {
-      return signedTxn_ != null;
+    public boolean hasTransaction() {
+      return transaction_ != null;
     }
     /**
      * <pre>
-     * Transaction signed by wallet.
+     * Transaction submitted by user.
      * </pre>
      *
-     * <code>.types.SignedTransaction signed_txn = 1;</code>
+     * <code>.types.SignedTransaction transaction = 1;</code>
      */
-    public org.libra.grpc.types.TransactionOuterClass.SignedTransaction getSignedTxn() {
-      return signedTxn_ == null ? org.libra.grpc.types.TransactionOuterClass.SignedTransaction.getDefaultInstance() : signedTxn_;
+    public org.libra.grpc.types.TransactionOuterClass.SignedTransaction getTransaction() {
+      return transaction_ == null ? org.libra.grpc.types.TransactionOuterClass.SignedTransaction.getDefaultInstance() : transaction_;
     }
     /**
      * <pre>
-     * Transaction signed by wallet.
+     * Transaction submitted by user.
      * </pre>
      *
-     * <code>.types.SignedTransaction signed_txn = 1;</code>
+     * <code>.types.SignedTransaction transaction = 1;</code>
      */
-    public org.libra.grpc.types.TransactionOuterClass.SignedTransactionOrBuilder getSignedTxnOrBuilder() {
-      return getSignedTxn();
+    public org.libra.grpc.types.TransactionOuterClass.SignedTransactionOrBuilder getTransactionOrBuilder() {
+      return getTransaction();
     }
 
     private byte memoizedIsInitialized = -1;
@@ -1239,8 +1239,8 @@ public final class AdmissionControlOuterClass {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (signedTxn_ != null) {
-        output.writeMessage(1, getSignedTxn());
+      if (transaction_ != null) {
+        output.writeMessage(1, getTransaction());
       }
       unknownFields.writeTo(output);
     }
@@ -1251,9 +1251,9 @@ public final class AdmissionControlOuterClass {
       if (size != -1) return size;
 
       size = 0;
-      if (signedTxn_ != null) {
+      if (transaction_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, getSignedTxn());
+          .computeMessageSize(1, getTransaction());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -1270,10 +1270,10 @@ public final class AdmissionControlOuterClass {
       }
       org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionRequest other = (org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionRequest) obj;
 
-      if (hasSignedTxn() != other.hasSignedTxn()) return false;
-      if (hasSignedTxn()) {
-        if (!getSignedTxn()
-            .equals(other.getSignedTxn())) return false;
+      if (hasTransaction() != other.hasTransaction()) return false;
+      if (hasTransaction()) {
+        if (!getTransaction()
+            .equals(other.getTransaction())) return false;
       }
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
@@ -1286,9 +1286,9 @@ public final class AdmissionControlOuterClass {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasSignedTxn()) {
-        hash = (37 * hash) + SIGNED_TXN_FIELD_NUMBER;
-        hash = (53 * hash) + getSignedTxn().hashCode();
+      if (hasTransaction()) {
+        hash = (37 * hash) + TRANSACTION_FIELD_NUMBER;
+        hash = (53 * hash) + getTransaction().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -1430,11 +1430,11 @@ public final class AdmissionControlOuterClass {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        if (signedTxnBuilder_ == null) {
-          signedTxn_ = null;
+        if (transactionBuilder_ == null) {
+          transaction_ = null;
         } else {
-          signedTxn_ = null;
-          signedTxnBuilder_ = null;
+          transaction_ = null;
+          transactionBuilder_ = null;
         }
         return this;
       }
@@ -1462,10 +1462,10 @@ public final class AdmissionControlOuterClass {
       @java.lang.Override
       public org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionRequest buildPartial() {
         org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionRequest result = new org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionRequest(this);
-        if (signedTxnBuilder_ == null) {
-          result.signedTxn_ = signedTxn_;
+        if (transactionBuilder_ == null) {
+          result.transaction_ = transaction_;
         } else {
-          result.signedTxn_ = signedTxnBuilder_.build();
+          result.transaction_ = transactionBuilder_.build();
         }
         onBuilt();
         return result;
@@ -1515,8 +1515,8 @@ public final class AdmissionControlOuterClass {
 
       public Builder mergeFrom(org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionRequest other) {
         if (other == org.libra.grpc.types.AdmissionControlOuterClass.SubmitTransactionRequest.getDefaultInstance()) return this;
-        if (other.hasSignedTxn()) {
-          mergeSignedTxn(other.getSignedTxn());
+        if (other.hasTransaction()) {
+          mergeTransaction(other.getTransaction());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -1547,157 +1547,157 @@ public final class AdmissionControlOuterClass {
         return this;
       }
 
-      private org.libra.grpc.types.TransactionOuterClass.SignedTransaction signedTxn_;
+      private org.libra.grpc.types.TransactionOuterClass.SignedTransaction transaction_;
       private com.google.protobuf.SingleFieldBuilderV3<
-          org.libra.grpc.types.TransactionOuterClass.SignedTransaction, org.libra.grpc.types.TransactionOuterClass.SignedTransaction.Builder, org.libra.grpc.types.TransactionOuterClass.SignedTransactionOrBuilder> signedTxnBuilder_;
+          org.libra.grpc.types.TransactionOuterClass.SignedTransaction, org.libra.grpc.types.TransactionOuterClass.SignedTransaction.Builder, org.libra.grpc.types.TransactionOuterClass.SignedTransactionOrBuilder> transactionBuilder_;
       /**
        * <pre>
-       * Transaction signed by wallet.
+       * Transaction submitted by user.
        * </pre>
        *
-       * <code>.types.SignedTransaction signed_txn = 1;</code>
+       * <code>.types.SignedTransaction transaction = 1;</code>
        */
-      public boolean hasSignedTxn() {
-        return signedTxnBuilder_ != null || signedTxn_ != null;
+      public boolean hasTransaction() {
+        return transactionBuilder_ != null || transaction_ != null;
       }
       /**
        * <pre>
-       * Transaction signed by wallet.
+       * Transaction submitted by user.
        * </pre>
        *
-       * <code>.types.SignedTransaction signed_txn = 1;</code>
+       * <code>.types.SignedTransaction transaction = 1;</code>
        */
-      public org.libra.grpc.types.TransactionOuterClass.SignedTransaction getSignedTxn() {
-        if (signedTxnBuilder_ == null) {
-          return signedTxn_ == null ? org.libra.grpc.types.TransactionOuterClass.SignedTransaction.getDefaultInstance() : signedTxn_;
+      public org.libra.grpc.types.TransactionOuterClass.SignedTransaction getTransaction() {
+        if (transactionBuilder_ == null) {
+          return transaction_ == null ? org.libra.grpc.types.TransactionOuterClass.SignedTransaction.getDefaultInstance() : transaction_;
         } else {
-          return signedTxnBuilder_.getMessage();
+          return transactionBuilder_.getMessage();
         }
       }
       /**
        * <pre>
-       * Transaction signed by wallet.
+       * Transaction submitted by user.
        * </pre>
        *
-       * <code>.types.SignedTransaction signed_txn = 1;</code>
+       * <code>.types.SignedTransaction transaction = 1;</code>
        */
-      public Builder setSignedTxn(org.libra.grpc.types.TransactionOuterClass.SignedTransaction value) {
-        if (signedTxnBuilder_ == null) {
+      public Builder setTransaction(org.libra.grpc.types.TransactionOuterClass.SignedTransaction value) {
+        if (transactionBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          signedTxn_ = value;
+          transaction_ = value;
           onChanged();
         } else {
-          signedTxnBuilder_.setMessage(value);
+          transactionBuilder_.setMessage(value);
         }
 
         return this;
       }
       /**
        * <pre>
-       * Transaction signed by wallet.
+       * Transaction submitted by user.
        * </pre>
        *
-       * <code>.types.SignedTransaction signed_txn = 1;</code>
+       * <code>.types.SignedTransaction transaction = 1;</code>
        */
-      public Builder setSignedTxn(
+      public Builder setTransaction(
           org.libra.grpc.types.TransactionOuterClass.SignedTransaction.Builder builderForValue) {
-        if (signedTxnBuilder_ == null) {
-          signedTxn_ = builderForValue.build();
+        if (transactionBuilder_ == null) {
+          transaction_ = builderForValue.build();
           onChanged();
         } else {
-          signedTxnBuilder_.setMessage(builderForValue.build());
+          transactionBuilder_.setMessage(builderForValue.build());
         }
 
         return this;
       }
       /**
        * <pre>
-       * Transaction signed by wallet.
+       * Transaction submitted by user.
        * </pre>
        *
-       * <code>.types.SignedTransaction signed_txn = 1;</code>
+       * <code>.types.SignedTransaction transaction = 1;</code>
        */
-      public Builder mergeSignedTxn(org.libra.grpc.types.TransactionOuterClass.SignedTransaction value) {
-        if (signedTxnBuilder_ == null) {
-          if (signedTxn_ != null) {
-            signedTxn_ =
-              org.libra.grpc.types.TransactionOuterClass.SignedTransaction.newBuilder(signedTxn_).mergeFrom(value).buildPartial();
+      public Builder mergeTransaction(org.libra.grpc.types.TransactionOuterClass.SignedTransaction value) {
+        if (transactionBuilder_ == null) {
+          if (transaction_ != null) {
+            transaction_ =
+              org.libra.grpc.types.TransactionOuterClass.SignedTransaction.newBuilder(transaction_).mergeFrom(value).buildPartial();
           } else {
-            signedTxn_ = value;
+            transaction_ = value;
           }
           onChanged();
         } else {
-          signedTxnBuilder_.mergeFrom(value);
+          transactionBuilder_.mergeFrom(value);
         }
 
         return this;
       }
       /**
        * <pre>
-       * Transaction signed by wallet.
+       * Transaction submitted by user.
        * </pre>
        *
-       * <code>.types.SignedTransaction signed_txn = 1;</code>
+       * <code>.types.SignedTransaction transaction = 1;</code>
        */
-      public Builder clearSignedTxn() {
-        if (signedTxnBuilder_ == null) {
-          signedTxn_ = null;
+      public Builder clearTransaction() {
+        if (transactionBuilder_ == null) {
+          transaction_ = null;
           onChanged();
         } else {
-          signedTxn_ = null;
-          signedTxnBuilder_ = null;
+          transaction_ = null;
+          transactionBuilder_ = null;
         }
 
         return this;
       }
       /**
        * <pre>
-       * Transaction signed by wallet.
+       * Transaction submitted by user.
        * </pre>
        *
-       * <code>.types.SignedTransaction signed_txn = 1;</code>
+       * <code>.types.SignedTransaction transaction = 1;</code>
        */
-      public org.libra.grpc.types.TransactionOuterClass.SignedTransaction.Builder getSignedTxnBuilder() {
+      public org.libra.grpc.types.TransactionOuterClass.SignedTransaction.Builder getTransactionBuilder() {
         
         onChanged();
-        return getSignedTxnFieldBuilder().getBuilder();
+        return getTransactionFieldBuilder().getBuilder();
       }
       /**
        * <pre>
-       * Transaction signed by wallet.
+       * Transaction submitted by user.
        * </pre>
        *
-       * <code>.types.SignedTransaction signed_txn = 1;</code>
+       * <code>.types.SignedTransaction transaction = 1;</code>
        */
-      public org.libra.grpc.types.TransactionOuterClass.SignedTransactionOrBuilder getSignedTxnOrBuilder() {
-        if (signedTxnBuilder_ != null) {
-          return signedTxnBuilder_.getMessageOrBuilder();
+      public org.libra.grpc.types.TransactionOuterClass.SignedTransactionOrBuilder getTransactionOrBuilder() {
+        if (transactionBuilder_ != null) {
+          return transactionBuilder_.getMessageOrBuilder();
         } else {
-          return signedTxn_ == null ?
-              org.libra.grpc.types.TransactionOuterClass.SignedTransaction.getDefaultInstance() : signedTxn_;
+          return transaction_ == null ?
+              org.libra.grpc.types.TransactionOuterClass.SignedTransaction.getDefaultInstance() : transaction_;
         }
       }
       /**
        * <pre>
-       * Transaction signed by wallet.
+       * Transaction submitted by user.
        * </pre>
        *
-       * <code>.types.SignedTransaction signed_txn = 1;</code>
+       * <code>.types.SignedTransaction transaction = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           org.libra.grpc.types.TransactionOuterClass.SignedTransaction, org.libra.grpc.types.TransactionOuterClass.SignedTransaction.Builder, org.libra.grpc.types.TransactionOuterClass.SignedTransactionOrBuilder> 
-          getSignedTxnFieldBuilder() {
-        if (signedTxnBuilder_ == null) {
-          signedTxnBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+          getTransactionFieldBuilder() {
+        if (transactionBuilder_ == null) {
+          transactionBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
               org.libra.grpc.types.TransactionOuterClass.SignedTransaction, org.libra.grpc.types.TransactionOuterClass.SignedTransaction.Builder, org.libra.grpc.types.TransactionOuterClass.SignedTransactionOrBuilder>(
-                  getSignedTxn(),
+                  getTransaction(),
                   getParentForChildren(),
                   isClean());
-          signedTxn_ = null;
+          transaction_ = null;
         }
-        return signedTxnBuilder_;
+        return transactionBuilder_;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -3691,26 +3691,26 @@ public final class AdmissionControlOuterClass {
       "trol.SubmitTransactionRequestH\000\022S\n\033submi" +
       "t_transaction_response\030\002 \001(\0132,.admission" +
       "_control.SubmitTransactionResponseH\000B\t\n\007" +
-      "message\"H\n\030SubmitTransactionRequest\022,\n\ns" +
-      "igned_txn\030\001 \001(\0132\030.types.SignedTransactio" +
-      "n\"f\n\026AdmissionControlStatus\022;\n\004code\030\001 \001(" +
-      "\0162-.admission_control.AdmissionControlSt" +
-      "atusCode\022\017\n\007message\030\002 \001(\t\"\350\001\n\031SubmitTran" +
-      "sactionResponse\022$\n\tvm_status\030\001 \001(\0132\017.typ" +
-      "es.VMStatusH\000\022>\n\tac_status\030\002 \001(\0132).admis" +
-      "sion_control.AdmissionControlStatusH\000\022E\n" +
-      "\016mempool_status\030\003 \001(\0132+.mempool_status.M" +
-      "empoolAddTransactionStatusH\000\022\024\n\014validato" +
-      "r_id\030\004 \001(\014B\010\n\006status*I\n\032AdmissionControl" +
-      "StatusCode\022\014\n\010Accepted\020\000\022\017\n\013Blacklisted\020" +
-      "\001\022\014\n\010Rejected\020\0022\347\001\n\020AdmissionControl\022p\n\021" +
-      "SubmitTransaction\022+.admission_control.Su" +
-      "bmitTransactionRequest\032,.admission_contr" +
-      "ol.SubmitTransactionResponse\"\000\022a\n\024Update" +
-      "ToLatestLedger\022\".types.UpdateToLatestLed" +
-      "gerRequest\032#.types.UpdateToLatestLedgerR" +
-      "esponse\"\000B\026\n\024org.libra.grpc.typesb\006proto" +
-      "3"
+      "message\"I\n\030SubmitTransactionRequest\022-\n\013t" +
+      "ransaction\030\001 \001(\0132\030.types.SignedTransacti" +
+      "on\"f\n\026AdmissionControlStatus\022;\n\004code\030\001 \001" +
+      "(\0162-.admission_control.AdmissionControlS" +
+      "tatusCode\022\017\n\007message\030\002 \001(\t\"\350\001\n\031SubmitTra" +
+      "nsactionResponse\022$\n\tvm_status\030\001 \001(\0132\017.ty" +
+      "pes.VMStatusH\000\022>\n\tac_status\030\002 \001(\0132).admi" +
+      "ssion_control.AdmissionControlStatusH\000\022E" +
+      "\n\016mempool_status\030\003 \001(\0132+.mempool_status." +
+      "MempoolAddTransactionStatusH\000\022\024\n\014validat" +
+      "or_id\030\004 \001(\014B\010\n\006status*I\n\032AdmissionContro" +
+      "lStatusCode\022\014\n\010Accepted\020\000\022\017\n\013Blacklisted" +
+      "\020\001\022\014\n\010Rejected\020\0022\347\001\n\020AdmissionControl\022p\n" +
+      "\021SubmitTransaction\022+.admission_control.S" +
+      "ubmitTransactionRequest\032,.admission_cont" +
+      "rol.SubmitTransactionResponse\"\000\022a\n\024Updat" +
+      "eToLatestLedger\022\".types.UpdateToLatestLe" +
+      "dgerRequest\032#.types.UpdateToLatestLedger" +
+      "Response\"\000B\026\n\024org.libra.grpc.typesb\006prot" +
+      "o3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3739,7 +3739,7 @@ public final class AdmissionControlOuterClass {
     internal_static_admission_control_SubmitTransactionRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_admission_control_SubmitTransactionRequest_descriptor,
-        new java.lang.String[] { "SignedTxn", });
+        new java.lang.String[] { "Transaction", });
     internal_static_admission_control_AdmissionControlStatus_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_admission_control_AdmissionControlStatus_fieldAccessorTable = new

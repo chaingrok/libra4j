@@ -19,30 +19,28 @@ public final class ValidatorChange {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>.types.LedgerInfoWithSignatures ledger_info_with_sigs = 1;</code>
+     * <code>repeated .types.LedgerInfoWithSignatures ledger_info_with_sigs = 1;</code>
      */
-    boolean hasLedgerInfoWithSigs();
+    java.util.List<org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures> 
+        getLedgerInfoWithSigsList();
     /**
-     * <code>.types.LedgerInfoWithSignatures ledger_info_with_sigs = 1;</code>
+     * <code>repeated .types.LedgerInfoWithSignatures ledger_info_with_sigs = 1;</code>
      */
-    org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures getLedgerInfoWithSigs();
+    org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures getLedgerInfoWithSigs(int index);
     /**
-     * <code>.types.LedgerInfoWithSignatures ledger_info_with_sigs = 1;</code>
+     * <code>repeated .types.LedgerInfoWithSignatures ledger_info_with_sigs = 1;</code>
      */
-    org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignaturesOrBuilder getLedgerInfoWithSigsOrBuilder();
-
+    int getLedgerInfoWithSigsCount();
     /**
-     * <code>.types.EventWithProof event_with_proof = 2;</code>
+     * <code>repeated .types.LedgerInfoWithSignatures ledger_info_with_sigs = 1;</code>
      */
-    boolean hasEventWithProof();
+    java.util.List<? extends org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignaturesOrBuilder> 
+        getLedgerInfoWithSigsOrBuilderList();
     /**
-     * <code>.types.EventWithProof event_with_proof = 2;</code>
+     * <code>repeated .types.LedgerInfoWithSignatures ledger_info_with_sigs = 1;</code>
      */
-    org.libra.grpc.types.Events.EventWithProof getEventWithProof();
-    /**
-     * <code>.types.EventWithProof event_with_proof = 2;</code>
-     */
-    org.libra.grpc.types.Events.EventWithProofOrBuilder getEventWithProofOrBuilder();
+    org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignaturesOrBuilder getLedgerInfoWithSigsOrBuilder(
+        int index);
   }
   /**
    * <pre>
@@ -56,8 +54,6 @@ public final class ValidatorChange {
    * proof.  The client can then verify that these events were under the current
    * tree and that the changes were signed by the old validators (and that the
    * events correctly show which validators are the new validators).
-   * This message represents a single validator change event and the proof that
-   * corresponds to it
    * </pre>
    *
    * Protobuf type {@code types.ValidatorChangeEventWithProof}
@@ -72,6 +68,7 @@ public final class ValidatorChange {
       super(builder);
     }
     private ValidatorChangeEventWithProof() {
+      ledgerInfoWithSigs_ = java.util.Collections.emptyList();
     }
 
     @java.lang.Override
@@ -99,29 +96,12 @@ public final class ValidatorChange {
               done = true;
               break;
             case 10: {
-              org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures.Builder subBuilder = null;
-              if (ledgerInfoWithSigs_ != null) {
-                subBuilder = ledgerInfoWithSigs_.toBuilder();
+              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
+                ledgerInfoWithSigs_ = new java.util.ArrayList<org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures>();
+                mutable_bitField0_ |= 0x00000001;
               }
-              ledgerInfoWithSigs_ = input.readMessage(org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(ledgerInfoWithSigs_);
-                ledgerInfoWithSigs_ = subBuilder.buildPartial();
-              }
-
-              break;
-            }
-            case 18: {
-              org.libra.grpc.types.Events.EventWithProof.Builder subBuilder = null;
-              if (eventWithProof_ != null) {
-                subBuilder = eventWithProof_.toBuilder();
-              }
-              eventWithProof_ = input.readMessage(org.libra.grpc.types.Events.EventWithProof.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(eventWithProof_);
-                eventWithProof_ = subBuilder.buildPartial();
-              }
-
+              ledgerInfoWithSigs_.add(
+                  input.readMessage(org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures.parser(), extensionRegistry));
               break;
             }
             default: {
@@ -139,6 +119,9 @@ public final class ValidatorChange {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        if (((mutable_bitField0_ & 0x00000001) != 0)) {
+          ledgerInfoWithSigs_ = java.util.Collections.unmodifiableList(ledgerInfoWithSigs_);
+        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -157,45 +140,38 @@ public final class ValidatorChange {
     }
 
     public static final int LEDGER_INFO_WITH_SIGS_FIELD_NUMBER = 1;
-    private org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures ledgerInfoWithSigs_;
+    private java.util.List<org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures> ledgerInfoWithSigs_;
     /**
-     * <code>.types.LedgerInfoWithSignatures ledger_info_with_sigs = 1;</code>
+     * <code>repeated .types.LedgerInfoWithSignatures ledger_info_with_sigs = 1;</code>
      */
-    public boolean hasLedgerInfoWithSigs() {
-      return ledgerInfoWithSigs_ != null;
+    public java.util.List<org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures> getLedgerInfoWithSigsList() {
+      return ledgerInfoWithSigs_;
     }
     /**
-     * <code>.types.LedgerInfoWithSignatures ledger_info_with_sigs = 1;</code>
+     * <code>repeated .types.LedgerInfoWithSignatures ledger_info_with_sigs = 1;</code>
      */
-    public org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures getLedgerInfoWithSigs() {
-      return ledgerInfoWithSigs_ == null ? org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures.getDefaultInstance() : ledgerInfoWithSigs_;
+    public java.util.List<? extends org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignaturesOrBuilder> 
+        getLedgerInfoWithSigsOrBuilderList() {
+      return ledgerInfoWithSigs_;
     }
     /**
-     * <code>.types.LedgerInfoWithSignatures ledger_info_with_sigs = 1;</code>
+     * <code>repeated .types.LedgerInfoWithSignatures ledger_info_with_sigs = 1;</code>
      */
-    public org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignaturesOrBuilder getLedgerInfoWithSigsOrBuilder() {
-      return getLedgerInfoWithSigs();
-    }
-
-    public static final int EVENT_WITH_PROOF_FIELD_NUMBER = 2;
-    private org.libra.grpc.types.Events.EventWithProof eventWithProof_;
-    /**
-     * <code>.types.EventWithProof event_with_proof = 2;</code>
-     */
-    public boolean hasEventWithProof() {
-      return eventWithProof_ != null;
+    public int getLedgerInfoWithSigsCount() {
+      return ledgerInfoWithSigs_.size();
     }
     /**
-     * <code>.types.EventWithProof event_with_proof = 2;</code>
+     * <code>repeated .types.LedgerInfoWithSignatures ledger_info_with_sigs = 1;</code>
      */
-    public org.libra.grpc.types.Events.EventWithProof getEventWithProof() {
-      return eventWithProof_ == null ? org.libra.grpc.types.Events.EventWithProof.getDefaultInstance() : eventWithProof_;
+    public org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures getLedgerInfoWithSigs(int index) {
+      return ledgerInfoWithSigs_.get(index);
     }
     /**
-     * <code>.types.EventWithProof event_with_proof = 2;</code>
+     * <code>repeated .types.LedgerInfoWithSignatures ledger_info_with_sigs = 1;</code>
      */
-    public org.libra.grpc.types.Events.EventWithProofOrBuilder getEventWithProofOrBuilder() {
-      return getEventWithProof();
+    public org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignaturesOrBuilder getLedgerInfoWithSigsOrBuilder(
+        int index) {
+      return ledgerInfoWithSigs_.get(index);
     }
 
     private byte memoizedIsInitialized = -1;
@@ -212,11 +188,8 @@ public final class ValidatorChange {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (ledgerInfoWithSigs_ != null) {
-        output.writeMessage(1, getLedgerInfoWithSigs());
-      }
-      if (eventWithProof_ != null) {
-        output.writeMessage(2, getEventWithProof());
+      for (int i = 0; i < ledgerInfoWithSigs_.size(); i++) {
+        output.writeMessage(1, ledgerInfoWithSigs_.get(i));
       }
       unknownFields.writeTo(output);
     }
@@ -227,13 +200,9 @@ public final class ValidatorChange {
       if (size != -1) return size;
 
       size = 0;
-      if (ledgerInfoWithSigs_ != null) {
+      for (int i = 0; i < ledgerInfoWithSigs_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, getLedgerInfoWithSigs());
-      }
-      if (eventWithProof_ != null) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, getEventWithProof());
+          .computeMessageSize(1, ledgerInfoWithSigs_.get(i));
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -250,16 +219,8 @@ public final class ValidatorChange {
       }
       org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof other = (org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof) obj;
 
-      if (hasLedgerInfoWithSigs() != other.hasLedgerInfoWithSigs()) return false;
-      if (hasLedgerInfoWithSigs()) {
-        if (!getLedgerInfoWithSigs()
-            .equals(other.getLedgerInfoWithSigs())) return false;
-      }
-      if (hasEventWithProof() != other.hasEventWithProof()) return false;
-      if (hasEventWithProof()) {
-        if (!getEventWithProof()
-            .equals(other.getEventWithProof())) return false;
-      }
+      if (!getLedgerInfoWithSigsList()
+          .equals(other.getLedgerInfoWithSigsList())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -271,13 +232,9 @@ public final class ValidatorChange {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasLedgerInfoWithSigs()) {
+      if (getLedgerInfoWithSigsCount() > 0) {
         hash = (37 * hash) + LEDGER_INFO_WITH_SIGS_FIELD_NUMBER;
-        hash = (53 * hash) + getLedgerInfoWithSigs().hashCode();
-      }
-      if (hasEventWithProof()) {
-        hash = (37 * hash) + EVENT_WITH_PROOF_FIELD_NUMBER;
-        hash = (53 * hash) + getEventWithProof().hashCode();
+        hash = (53 * hash) + getLedgerInfoWithSigsList().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -386,8 +343,6 @@ public final class ValidatorChange {
      * proof.  The client can then verify that these events were under the current
      * tree and that the changes were signed by the old validators (and that the
      * events correctly show which validators are the new validators).
-     * This message represents a single validator change event and the proof that
-     * corresponds to it
      * </pre>
      *
      * Protobuf type {@code types.ValidatorChangeEventWithProof}
@@ -422,22 +377,17 @@ public final class ValidatorChange {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
+          getLedgerInfoWithSigsFieldBuilder();
         }
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
         if (ledgerInfoWithSigsBuilder_ == null) {
-          ledgerInfoWithSigs_ = null;
+          ledgerInfoWithSigs_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
         } else {
-          ledgerInfoWithSigs_ = null;
-          ledgerInfoWithSigsBuilder_ = null;
-        }
-        if (eventWithProofBuilder_ == null) {
-          eventWithProof_ = null;
-        } else {
-          eventWithProof_ = null;
-          eventWithProofBuilder_ = null;
+          ledgerInfoWithSigsBuilder_.clear();
         }
         return this;
       }
@@ -465,15 +415,15 @@ public final class ValidatorChange {
       @java.lang.Override
       public org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof buildPartial() {
         org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof result = new org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof(this);
+        int from_bitField0_ = bitField0_;
         if (ledgerInfoWithSigsBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) != 0)) {
+            ledgerInfoWithSigs_ = java.util.Collections.unmodifiableList(ledgerInfoWithSigs_);
+            bitField0_ = (bitField0_ & ~0x00000001);
+          }
           result.ledgerInfoWithSigs_ = ledgerInfoWithSigs_;
         } else {
           result.ledgerInfoWithSigs_ = ledgerInfoWithSigsBuilder_.build();
-        }
-        if (eventWithProofBuilder_ == null) {
-          result.eventWithProof_ = eventWithProof_;
-        } else {
-          result.eventWithProof_ = eventWithProofBuilder_.build();
         }
         onBuilt();
         return result;
@@ -523,11 +473,31 @@ public final class ValidatorChange {
 
       public Builder mergeFrom(org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof other) {
         if (other == org.libra.grpc.types.ValidatorChange.ValidatorChangeEventWithProof.getDefaultInstance()) return this;
-        if (other.hasLedgerInfoWithSigs()) {
-          mergeLedgerInfoWithSigs(other.getLedgerInfoWithSigs());
-        }
-        if (other.hasEventWithProof()) {
-          mergeEventWithProof(other.getEventWithProof());
+        if (ledgerInfoWithSigsBuilder_ == null) {
+          if (!other.ledgerInfoWithSigs_.isEmpty()) {
+            if (ledgerInfoWithSigs_.isEmpty()) {
+              ledgerInfoWithSigs_ = other.ledgerInfoWithSigs_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+            } else {
+              ensureLedgerInfoWithSigsIsMutable();
+              ledgerInfoWithSigs_.addAll(other.ledgerInfoWithSigs_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.ledgerInfoWithSigs_.isEmpty()) {
+            if (ledgerInfoWithSigsBuilder_.isEmpty()) {
+              ledgerInfoWithSigsBuilder_.dispose();
+              ledgerInfoWithSigsBuilder_ = null;
+              ledgerInfoWithSigs_ = other.ledgerInfoWithSigs_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+              ledgerInfoWithSigsBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getLedgerInfoWithSigsFieldBuilder() : null;
+            } else {
+              ledgerInfoWithSigsBuilder_.addAllMessages(other.ledgerInfoWithSigs_);
+            }
+          }
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -557,239 +527,246 @@ public final class ValidatorChange {
         }
         return this;
       }
+      private int bitField0_;
 
-      private org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures ledgerInfoWithSigs_;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures, org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures.Builder, org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignaturesOrBuilder> ledgerInfoWithSigsBuilder_;
-      /**
-       * <code>.types.LedgerInfoWithSignatures ledger_info_with_sigs = 1;</code>
-       */
-      public boolean hasLedgerInfoWithSigs() {
-        return ledgerInfoWithSigsBuilder_ != null || ledgerInfoWithSigs_ != null;
+      private java.util.List<org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures> ledgerInfoWithSigs_ =
+        java.util.Collections.emptyList();
+      private void ensureLedgerInfoWithSigsIsMutable() {
+        if (!((bitField0_ & 0x00000001) != 0)) {
+          ledgerInfoWithSigs_ = new java.util.ArrayList<org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures>(ledgerInfoWithSigs_);
+          bitField0_ |= 0x00000001;
+         }
       }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures, org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures.Builder, org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignaturesOrBuilder> ledgerInfoWithSigsBuilder_;
+
       /**
-       * <code>.types.LedgerInfoWithSignatures ledger_info_with_sigs = 1;</code>
+       * <code>repeated .types.LedgerInfoWithSignatures ledger_info_with_sigs = 1;</code>
        */
-      public org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures getLedgerInfoWithSigs() {
+      public java.util.List<org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures> getLedgerInfoWithSigsList() {
         if (ledgerInfoWithSigsBuilder_ == null) {
-          return ledgerInfoWithSigs_ == null ? org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures.getDefaultInstance() : ledgerInfoWithSigs_;
+          return java.util.Collections.unmodifiableList(ledgerInfoWithSigs_);
         } else {
-          return ledgerInfoWithSigsBuilder_.getMessage();
+          return ledgerInfoWithSigsBuilder_.getMessageList();
         }
       }
       /**
-       * <code>.types.LedgerInfoWithSignatures ledger_info_with_sigs = 1;</code>
+       * <code>repeated .types.LedgerInfoWithSignatures ledger_info_with_sigs = 1;</code>
        */
-      public Builder setLedgerInfoWithSigs(org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures value) {
+      public int getLedgerInfoWithSigsCount() {
+        if (ledgerInfoWithSigsBuilder_ == null) {
+          return ledgerInfoWithSigs_.size();
+        } else {
+          return ledgerInfoWithSigsBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .types.LedgerInfoWithSignatures ledger_info_with_sigs = 1;</code>
+       */
+      public org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures getLedgerInfoWithSigs(int index) {
+        if (ledgerInfoWithSigsBuilder_ == null) {
+          return ledgerInfoWithSigs_.get(index);
+        } else {
+          return ledgerInfoWithSigsBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .types.LedgerInfoWithSignatures ledger_info_with_sigs = 1;</code>
+       */
+      public Builder setLedgerInfoWithSigs(
+          int index, org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures value) {
         if (ledgerInfoWithSigsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ledgerInfoWithSigs_ = value;
+          ensureLedgerInfoWithSigsIsMutable();
+          ledgerInfoWithSigs_.set(index, value);
           onChanged();
         } else {
-          ledgerInfoWithSigsBuilder_.setMessage(value);
+          ledgerInfoWithSigsBuilder_.setMessage(index, value);
         }
-
         return this;
       }
       /**
-       * <code>.types.LedgerInfoWithSignatures ledger_info_with_sigs = 1;</code>
+       * <code>repeated .types.LedgerInfoWithSignatures ledger_info_with_sigs = 1;</code>
        */
       public Builder setLedgerInfoWithSigs(
+          int index, org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures.Builder builderForValue) {
+        if (ledgerInfoWithSigsBuilder_ == null) {
+          ensureLedgerInfoWithSigsIsMutable();
+          ledgerInfoWithSigs_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          ledgerInfoWithSigsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .types.LedgerInfoWithSignatures ledger_info_with_sigs = 1;</code>
+       */
+      public Builder addLedgerInfoWithSigs(org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures value) {
+        if (ledgerInfoWithSigsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureLedgerInfoWithSigsIsMutable();
+          ledgerInfoWithSigs_.add(value);
+          onChanged();
+        } else {
+          ledgerInfoWithSigsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .types.LedgerInfoWithSignatures ledger_info_with_sigs = 1;</code>
+       */
+      public Builder addLedgerInfoWithSigs(
+          int index, org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures value) {
+        if (ledgerInfoWithSigsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureLedgerInfoWithSigsIsMutable();
+          ledgerInfoWithSigs_.add(index, value);
+          onChanged();
+        } else {
+          ledgerInfoWithSigsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .types.LedgerInfoWithSignatures ledger_info_with_sigs = 1;</code>
+       */
+      public Builder addLedgerInfoWithSigs(
           org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures.Builder builderForValue) {
         if (ledgerInfoWithSigsBuilder_ == null) {
-          ledgerInfoWithSigs_ = builderForValue.build();
+          ensureLedgerInfoWithSigsIsMutable();
+          ledgerInfoWithSigs_.add(builderForValue.build());
           onChanged();
         } else {
-          ledgerInfoWithSigsBuilder_.setMessage(builderForValue.build());
+          ledgerInfoWithSigsBuilder_.addMessage(builderForValue.build());
         }
-
         return this;
       }
       /**
-       * <code>.types.LedgerInfoWithSignatures ledger_info_with_sigs = 1;</code>
+       * <code>repeated .types.LedgerInfoWithSignatures ledger_info_with_sigs = 1;</code>
        */
-      public Builder mergeLedgerInfoWithSigs(org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures value) {
+      public Builder addLedgerInfoWithSigs(
+          int index, org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures.Builder builderForValue) {
         if (ledgerInfoWithSigsBuilder_ == null) {
-          if (ledgerInfoWithSigs_ != null) {
-            ledgerInfoWithSigs_ =
-              org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures.newBuilder(ledgerInfoWithSigs_).mergeFrom(value).buildPartial();
-          } else {
-            ledgerInfoWithSigs_ = value;
-          }
+          ensureLedgerInfoWithSigsIsMutable();
+          ledgerInfoWithSigs_.add(index, builderForValue.build());
           onChanged();
         } else {
-          ledgerInfoWithSigsBuilder_.mergeFrom(value);
+          ledgerInfoWithSigsBuilder_.addMessage(index, builderForValue.build());
         }
-
         return this;
       }
       /**
-       * <code>.types.LedgerInfoWithSignatures ledger_info_with_sigs = 1;</code>
+       * <code>repeated .types.LedgerInfoWithSignatures ledger_info_with_sigs = 1;</code>
+       */
+      public Builder addAllLedgerInfoWithSigs(
+          java.lang.Iterable<? extends org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures> values) {
+        if (ledgerInfoWithSigsBuilder_ == null) {
+          ensureLedgerInfoWithSigsIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, ledgerInfoWithSigs_);
+          onChanged();
+        } else {
+          ledgerInfoWithSigsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .types.LedgerInfoWithSignatures ledger_info_with_sigs = 1;</code>
        */
       public Builder clearLedgerInfoWithSigs() {
         if (ledgerInfoWithSigsBuilder_ == null) {
-          ledgerInfoWithSigs_ = null;
+          ledgerInfoWithSigs_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
           onChanged();
         } else {
-          ledgerInfoWithSigs_ = null;
-          ledgerInfoWithSigsBuilder_ = null;
+          ledgerInfoWithSigsBuilder_.clear();
         }
-
         return this;
       }
       /**
-       * <code>.types.LedgerInfoWithSignatures ledger_info_with_sigs = 1;</code>
+       * <code>repeated .types.LedgerInfoWithSignatures ledger_info_with_sigs = 1;</code>
        */
-      public org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures.Builder getLedgerInfoWithSigsBuilder() {
-        
-        onChanged();
-        return getLedgerInfoWithSigsFieldBuilder().getBuilder();
+      public Builder removeLedgerInfoWithSigs(int index) {
+        if (ledgerInfoWithSigsBuilder_ == null) {
+          ensureLedgerInfoWithSigsIsMutable();
+          ledgerInfoWithSigs_.remove(index);
+          onChanged();
+        } else {
+          ledgerInfoWithSigsBuilder_.remove(index);
+        }
+        return this;
       }
       /**
-       * <code>.types.LedgerInfoWithSignatures ledger_info_with_sigs = 1;</code>
+       * <code>repeated .types.LedgerInfoWithSignatures ledger_info_with_sigs = 1;</code>
        */
-      public org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignaturesOrBuilder getLedgerInfoWithSigsOrBuilder() {
-        if (ledgerInfoWithSigsBuilder_ != null) {
-          return ledgerInfoWithSigsBuilder_.getMessageOrBuilder();
-        } else {
-          return ledgerInfoWithSigs_ == null ?
-              org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures.getDefaultInstance() : ledgerInfoWithSigs_;
+      public org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures.Builder getLedgerInfoWithSigsBuilder(
+          int index) {
+        return getLedgerInfoWithSigsFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .types.LedgerInfoWithSignatures ledger_info_with_sigs = 1;</code>
+       */
+      public org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignaturesOrBuilder getLedgerInfoWithSigsOrBuilder(
+          int index) {
+        if (ledgerInfoWithSigsBuilder_ == null) {
+          return ledgerInfoWithSigs_.get(index);  } else {
+          return ledgerInfoWithSigsBuilder_.getMessageOrBuilder(index);
         }
       }
       /**
-       * <code>.types.LedgerInfoWithSignatures ledger_info_with_sigs = 1;</code>
+       * <code>repeated .types.LedgerInfoWithSignatures ledger_info_with_sigs = 1;</code>
        */
-      private com.google.protobuf.SingleFieldBuilderV3<
+      public java.util.List<? extends org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignaturesOrBuilder> 
+           getLedgerInfoWithSigsOrBuilderList() {
+        if (ledgerInfoWithSigsBuilder_ != null) {
+          return ledgerInfoWithSigsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(ledgerInfoWithSigs_);
+        }
+      }
+      /**
+       * <code>repeated .types.LedgerInfoWithSignatures ledger_info_with_sigs = 1;</code>
+       */
+      public org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures.Builder addLedgerInfoWithSigsBuilder() {
+        return getLedgerInfoWithSigsFieldBuilder().addBuilder(
+            org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .types.LedgerInfoWithSignatures ledger_info_with_sigs = 1;</code>
+       */
+      public org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures.Builder addLedgerInfoWithSigsBuilder(
+          int index) {
+        return getLedgerInfoWithSigsFieldBuilder().addBuilder(
+            index, org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .types.LedgerInfoWithSignatures ledger_info_with_sigs = 1;</code>
+       */
+      public java.util.List<org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures.Builder> 
+           getLedgerInfoWithSigsBuilderList() {
+        return getLedgerInfoWithSigsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
           org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures, org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures.Builder, org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignaturesOrBuilder> 
           getLedgerInfoWithSigsFieldBuilder() {
         if (ledgerInfoWithSigsBuilder_ == null) {
-          ledgerInfoWithSigsBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+          ledgerInfoWithSigsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures, org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignatures.Builder, org.libra.grpc.types.LedgerInfoOuterClass.LedgerInfoWithSignaturesOrBuilder>(
-                  getLedgerInfoWithSigs(),
+                  ledgerInfoWithSigs_,
+                  ((bitField0_ & 0x00000001) != 0),
                   getParentForChildren(),
                   isClean());
           ledgerInfoWithSigs_ = null;
         }
         return ledgerInfoWithSigsBuilder_;
-      }
-
-      private org.libra.grpc.types.Events.EventWithProof eventWithProof_;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          org.libra.grpc.types.Events.EventWithProof, org.libra.grpc.types.Events.EventWithProof.Builder, org.libra.grpc.types.Events.EventWithProofOrBuilder> eventWithProofBuilder_;
-      /**
-       * <code>.types.EventWithProof event_with_proof = 2;</code>
-       */
-      public boolean hasEventWithProof() {
-        return eventWithProofBuilder_ != null || eventWithProof_ != null;
-      }
-      /**
-       * <code>.types.EventWithProof event_with_proof = 2;</code>
-       */
-      public org.libra.grpc.types.Events.EventWithProof getEventWithProof() {
-        if (eventWithProofBuilder_ == null) {
-          return eventWithProof_ == null ? org.libra.grpc.types.Events.EventWithProof.getDefaultInstance() : eventWithProof_;
-        } else {
-          return eventWithProofBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>.types.EventWithProof event_with_proof = 2;</code>
-       */
-      public Builder setEventWithProof(org.libra.grpc.types.Events.EventWithProof value) {
-        if (eventWithProofBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          eventWithProof_ = value;
-          onChanged();
-        } else {
-          eventWithProofBuilder_.setMessage(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.types.EventWithProof event_with_proof = 2;</code>
-       */
-      public Builder setEventWithProof(
-          org.libra.grpc.types.Events.EventWithProof.Builder builderForValue) {
-        if (eventWithProofBuilder_ == null) {
-          eventWithProof_ = builderForValue.build();
-          onChanged();
-        } else {
-          eventWithProofBuilder_.setMessage(builderForValue.build());
-        }
-
-        return this;
-      }
-      /**
-       * <code>.types.EventWithProof event_with_proof = 2;</code>
-       */
-      public Builder mergeEventWithProof(org.libra.grpc.types.Events.EventWithProof value) {
-        if (eventWithProofBuilder_ == null) {
-          if (eventWithProof_ != null) {
-            eventWithProof_ =
-              org.libra.grpc.types.Events.EventWithProof.newBuilder(eventWithProof_).mergeFrom(value).buildPartial();
-          } else {
-            eventWithProof_ = value;
-          }
-          onChanged();
-        } else {
-          eventWithProofBuilder_.mergeFrom(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.types.EventWithProof event_with_proof = 2;</code>
-       */
-      public Builder clearEventWithProof() {
-        if (eventWithProofBuilder_ == null) {
-          eventWithProof_ = null;
-          onChanged();
-        } else {
-          eventWithProof_ = null;
-          eventWithProofBuilder_ = null;
-        }
-
-        return this;
-      }
-      /**
-       * <code>.types.EventWithProof event_with_proof = 2;</code>
-       */
-      public org.libra.grpc.types.Events.EventWithProof.Builder getEventWithProofBuilder() {
-        
-        onChanged();
-        return getEventWithProofFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>.types.EventWithProof event_with_proof = 2;</code>
-       */
-      public org.libra.grpc.types.Events.EventWithProofOrBuilder getEventWithProofOrBuilder() {
-        if (eventWithProofBuilder_ != null) {
-          return eventWithProofBuilder_.getMessageOrBuilder();
-        } else {
-          return eventWithProof_ == null ?
-              org.libra.grpc.types.Events.EventWithProof.getDefaultInstance() : eventWithProof_;
-        }
-      }
-      /**
-       * <code>.types.EventWithProof event_with_proof = 2;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          org.libra.grpc.types.Events.EventWithProof, org.libra.grpc.types.Events.EventWithProof.Builder, org.libra.grpc.types.Events.EventWithProofOrBuilder> 
-          getEventWithProofFieldBuilder() {
-        if (eventWithProofBuilder_ == null) {
-          eventWithProofBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              org.libra.grpc.types.Events.EventWithProof, org.libra.grpc.types.Events.EventWithProof.Builder, org.libra.grpc.types.Events.EventWithProofOrBuilder>(
-                  getEventWithProof(),
-                  getParentForChildren(),
-                  isClean());
-          eventWithProof_ = null;
-        }
-        return eventWithProofBuilder_;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -858,13 +835,11 @@ public final class ValidatorChange {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\026validator_change.proto\022\005types\032\014events." +
-      "proto\032\021ledger_info.proto\"\220\001\n\035ValidatorCh" +
-      "angeEventWithProof\022>\n\025ledger_info_with_s" +
-      "igs\030\001 \001(\0132\037.types.LedgerInfoWithSignatur" +
-      "es\022/\n\020event_with_proof\030\002 \001(\0132\025.types.Eve" +
-      "ntWithProofB\026\n\024org.libra.grpc.typesb\006pro" +
-      "to3"
+      "\n\026validator_change.proto\022\005types\032\021ledger_" +
+      "info.proto\"_\n\035ValidatorChangeEventWithPr" +
+      "oof\022>\n\025ledger_info_with_sigs\030\001 \003(\0132\037.typ" +
+      "es.LedgerInfoWithSignaturesB\026\n\024org.libra" +
+      ".grpc.typesb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -877,7 +852,6 @@ public final class ValidatorChange {
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
-          org.libra.grpc.types.Events.getDescriptor(),
           org.libra.grpc.types.LedgerInfoOuterClass.getDescriptor(),
         }, assigner);
     internal_static_types_ValidatorChangeEventWithProof_descriptor =
@@ -885,8 +859,7 @@ public final class ValidatorChange {
     internal_static_types_ValidatorChangeEventWithProof_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_types_ValidatorChangeEventWithProof_descriptor,
-        new java.lang.String[] { "LedgerInfoWithSigs", "EventWithProof", });
-    org.libra.grpc.types.Events.getDescriptor();
+        new java.lang.String[] { "LedgerInfoWithSigs", });
     org.libra.grpc.types.LedgerInfoOuterClass.getDescriptor();
   }
 

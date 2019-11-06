@@ -20,44 +20,34 @@ public final class Proof {
 
     /**
      * <pre>
-     * The bitmap indicating which siblings are default. 1 means non-default and
-     * 0 means default. The LSB corresponds to the sibling at the bottom of the
-     * accumulator. The leftmost 1-bit corresponds to the sibling at the level
-     * just below root level in the accumulator, since this one is always
-     * non-default.
+     * The siblings. The ones near the leaf are at the beginning of the list. The
+     * placeholder nodes are represented by empty byte arrays, other nodes should
+     * be exactly 32-bytes long.
      * </pre>
      *
-     * <code>uint64 bitmap = 1;</code>
+     * <code>repeated bytes siblings = 1;</code>
      */
-    long getBitmap();
-
+    java.util.List<com.google.protobuf.ByteString> getSiblingsList();
     /**
      * <pre>
-     * The non-default siblings. The ones near the root are at the beginning of
-     * the list.
+     * The siblings. The ones near the leaf are at the beginning of the list. The
+     * placeholder nodes are represented by empty byte arrays, other nodes should
+     * be exactly 32-bytes long.
      * </pre>
      *
-     * <code>repeated bytes non_default_siblings = 2;</code>
+     * <code>repeated bytes siblings = 1;</code>
      */
-    java.util.List<com.google.protobuf.ByteString> getNonDefaultSiblingsList();
+    int getSiblingsCount();
     /**
      * <pre>
-     * The non-default siblings. The ones near the root are at the beginning of
-     * the list.
+     * The siblings. The ones near the leaf are at the beginning of the list. The
+     * placeholder nodes are represented by empty byte arrays, other nodes should
+     * be exactly 32-bytes long.
      * </pre>
      *
-     * <code>repeated bytes non_default_siblings = 2;</code>
+     * <code>repeated bytes siblings = 1;</code>
      */
-    int getNonDefaultSiblingsCount();
-    /**
-     * <pre>
-     * The non-default siblings. The ones near the root are at the beginning of
-     * the list.
-     * </pre>
-     *
-     * <code>repeated bytes non_default_siblings = 2;</code>
-     */
-    com.google.protobuf.ByteString getNonDefaultSiblings(int index);
+    com.google.protobuf.ByteString getSiblings(int index);
   }
   /**
    * Protobuf type {@code types.AccumulatorProof}
@@ -72,7 +62,7 @@ public final class Proof {
       super(builder);
     }
     private AccumulatorProof() {
-      nonDefaultSiblings_ = java.util.Collections.emptyList();
+      siblings_ = java.util.Collections.emptyList();
     }
 
     @java.lang.Override
@@ -99,17 +89,12 @@ public final class Proof {
             case 0:
               done = true;
               break;
-            case 8: {
-
-              bitmap_ = input.readUInt64();
-              break;
-            }
-            case 18: {
-              if (!((mutable_bitField0_ & 0x00000002) != 0)) {
-                nonDefaultSiblings_ = new java.util.ArrayList<com.google.protobuf.ByteString>();
-                mutable_bitField0_ |= 0x00000002;
+            case 10: {
+              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
+                siblings_ = new java.util.ArrayList<com.google.protobuf.ByteString>();
+                mutable_bitField0_ |= 0x00000001;
               }
-              nonDefaultSiblings_.add(input.readBytes());
+              siblings_.add(input.readBytes());
               break;
             }
             default: {
@@ -127,8 +112,8 @@ public final class Proof {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000002) != 0)) {
-          nonDefaultSiblings_ = java.util.Collections.unmodifiableList(nonDefaultSiblings_); // C
+        if (((mutable_bitField0_ & 0x00000001) != 0)) {
+          siblings_ = java.util.Collections.unmodifiableList(siblings_); // C
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -147,59 +132,44 @@ public final class Proof {
               org.libra.grpc.types.Proof.AccumulatorProof.class, org.libra.grpc.types.Proof.AccumulatorProof.Builder.class);
     }
 
-    private int bitField0_;
-    public static final int BITMAP_FIELD_NUMBER = 1;
-    private long bitmap_;
+    public static final int SIBLINGS_FIELD_NUMBER = 1;
+    private java.util.List<com.google.protobuf.ByteString> siblings_;
     /**
      * <pre>
-     * The bitmap indicating which siblings are default. 1 means non-default and
-     * 0 means default. The LSB corresponds to the sibling at the bottom of the
-     * accumulator. The leftmost 1-bit corresponds to the sibling at the level
-     * just below root level in the accumulator, since this one is always
-     * non-default.
+     * The siblings. The ones near the leaf are at the beginning of the list. The
+     * placeholder nodes are represented by empty byte arrays, other nodes should
+     * be exactly 32-bytes long.
      * </pre>
      *
-     * <code>uint64 bitmap = 1;</code>
-     */
-    public long getBitmap() {
-      return bitmap_;
-    }
-
-    public static final int NON_DEFAULT_SIBLINGS_FIELD_NUMBER = 2;
-    private java.util.List<com.google.protobuf.ByteString> nonDefaultSiblings_;
-    /**
-     * <pre>
-     * The non-default siblings. The ones near the root are at the beginning of
-     * the list.
-     * </pre>
-     *
-     * <code>repeated bytes non_default_siblings = 2;</code>
+     * <code>repeated bytes siblings = 1;</code>
      */
     public java.util.List<com.google.protobuf.ByteString>
-        getNonDefaultSiblingsList() {
-      return nonDefaultSiblings_;
+        getSiblingsList() {
+      return siblings_;
     }
     /**
      * <pre>
-     * The non-default siblings. The ones near the root are at the beginning of
-     * the list.
+     * The siblings. The ones near the leaf are at the beginning of the list. The
+     * placeholder nodes are represented by empty byte arrays, other nodes should
+     * be exactly 32-bytes long.
      * </pre>
      *
-     * <code>repeated bytes non_default_siblings = 2;</code>
+     * <code>repeated bytes siblings = 1;</code>
      */
-    public int getNonDefaultSiblingsCount() {
-      return nonDefaultSiblings_.size();
+    public int getSiblingsCount() {
+      return siblings_.size();
     }
     /**
      * <pre>
-     * The non-default siblings. The ones near the root are at the beginning of
-     * the list.
+     * The siblings. The ones near the leaf are at the beginning of the list. The
+     * placeholder nodes are represented by empty byte arrays, other nodes should
+     * be exactly 32-bytes long.
      * </pre>
      *
-     * <code>repeated bytes non_default_siblings = 2;</code>
+     * <code>repeated bytes siblings = 1;</code>
      */
-    public com.google.protobuf.ByteString getNonDefaultSiblings(int index) {
-      return nonDefaultSiblings_.get(index);
+    public com.google.protobuf.ByteString getSiblings(int index) {
+      return siblings_.get(index);
     }
 
     private byte memoizedIsInitialized = -1;
@@ -216,11 +186,8 @@ public final class Proof {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (bitmap_ != 0L) {
-        output.writeUInt64(1, bitmap_);
-      }
-      for (int i = 0; i < nonDefaultSiblings_.size(); i++) {
-        output.writeBytes(2, nonDefaultSiblings_.get(i));
+      for (int i = 0; i < siblings_.size(); i++) {
+        output.writeBytes(1, siblings_.get(i));
       }
       unknownFields.writeTo(output);
     }
@@ -231,18 +198,14 @@ public final class Proof {
       if (size != -1) return size;
 
       size = 0;
-      if (bitmap_ != 0L) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt64Size(1, bitmap_);
-      }
       {
         int dataSize = 0;
-        for (int i = 0; i < nonDefaultSiblings_.size(); i++) {
+        for (int i = 0; i < siblings_.size(); i++) {
           dataSize += com.google.protobuf.CodedOutputStream
-            .computeBytesSizeNoTag(nonDefaultSiblings_.get(i));
+            .computeBytesSizeNoTag(siblings_.get(i));
         }
         size += dataSize;
-        size += 1 * getNonDefaultSiblingsList().size();
+        size += 1 * getSiblingsList().size();
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -259,10 +222,8 @@ public final class Proof {
       }
       org.libra.grpc.types.Proof.AccumulatorProof other = (org.libra.grpc.types.Proof.AccumulatorProof) obj;
 
-      if (getBitmap()
-          != other.getBitmap()) return false;
-      if (!getNonDefaultSiblingsList()
-          .equals(other.getNonDefaultSiblingsList())) return false;
+      if (!getSiblingsList()
+          .equals(other.getSiblingsList())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -274,12 +235,9 @@ public final class Proof {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + BITMAP_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          getBitmap());
-      if (getNonDefaultSiblingsCount() > 0) {
-        hash = (37 * hash) + NON_DEFAULT_SIBLINGS_FIELD_NUMBER;
-        hash = (53 * hash) + getNonDefaultSiblingsList().hashCode();
+      if (getSiblingsCount() > 0) {
+        hash = (37 * hash) + SIBLINGS_FIELD_NUMBER;
+        hash = (53 * hash) + getSiblingsList().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -414,10 +372,8 @@ public final class Proof {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        bitmap_ = 0L;
-
-        nonDefaultSiblings_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000002);
+        siblings_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
 
@@ -445,14 +401,11 @@ public final class Proof {
       public org.libra.grpc.types.Proof.AccumulatorProof buildPartial() {
         org.libra.grpc.types.Proof.AccumulatorProof result = new org.libra.grpc.types.Proof.AccumulatorProof(this);
         int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        result.bitmap_ = bitmap_;
-        if (((bitField0_ & 0x00000002) != 0)) {
-          nonDefaultSiblings_ = java.util.Collections.unmodifiableList(nonDefaultSiblings_);
-          bitField0_ = (bitField0_ & ~0x00000002);
+        if (((bitField0_ & 0x00000001) != 0)) {
+          siblings_ = java.util.Collections.unmodifiableList(siblings_);
+          bitField0_ = (bitField0_ & ~0x00000001);
         }
-        result.nonDefaultSiblings_ = nonDefaultSiblings_;
-        result.bitField0_ = to_bitField0_;
+        result.siblings_ = siblings_;
         onBuilt();
         return result;
       }
@@ -501,16 +454,13 @@ public final class Proof {
 
       public Builder mergeFrom(org.libra.grpc.types.Proof.AccumulatorProof other) {
         if (other == org.libra.grpc.types.Proof.AccumulatorProof.getDefaultInstance()) return this;
-        if (other.getBitmap() != 0L) {
-          setBitmap(other.getBitmap());
-        }
-        if (!other.nonDefaultSiblings_.isEmpty()) {
-          if (nonDefaultSiblings_.isEmpty()) {
-            nonDefaultSiblings_ = other.nonDefaultSiblings_;
-            bitField0_ = (bitField0_ & ~0x00000002);
+        if (!other.siblings_.isEmpty()) {
+          if (siblings_.isEmpty()) {
+            siblings_ = other.siblings_;
+            bitField0_ = (bitField0_ & ~0x00000001);
           } else {
-            ensureNonDefaultSiblingsIsMutable();
-            nonDefaultSiblings_.addAll(other.nonDefaultSiblings_);
+            ensureSiblingsIsMutable();
+            siblings_.addAll(other.siblings_);
           }
           onChanged();
         }
@@ -544,160 +494,117 @@ public final class Proof {
       }
       private int bitField0_;
 
-      private long bitmap_ ;
-      /**
-       * <pre>
-       * The bitmap indicating which siblings are default. 1 means non-default and
-       * 0 means default. The LSB corresponds to the sibling at the bottom of the
-       * accumulator. The leftmost 1-bit corresponds to the sibling at the level
-       * just below root level in the accumulator, since this one is always
-       * non-default.
-       * </pre>
-       *
-       * <code>uint64 bitmap = 1;</code>
-       */
-      public long getBitmap() {
-        return bitmap_;
-      }
-      /**
-       * <pre>
-       * The bitmap indicating which siblings are default. 1 means non-default and
-       * 0 means default. The LSB corresponds to the sibling at the bottom of the
-       * accumulator. The leftmost 1-bit corresponds to the sibling at the level
-       * just below root level in the accumulator, since this one is always
-       * non-default.
-       * </pre>
-       *
-       * <code>uint64 bitmap = 1;</code>
-       */
-      public Builder setBitmap(long value) {
-        
-        bitmap_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       * The bitmap indicating which siblings are default. 1 means non-default and
-       * 0 means default. The LSB corresponds to the sibling at the bottom of the
-       * accumulator. The leftmost 1-bit corresponds to the sibling at the level
-       * just below root level in the accumulator, since this one is always
-       * non-default.
-       * </pre>
-       *
-       * <code>uint64 bitmap = 1;</code>
-       */
-      public Builder clearBitmap() {
-        
-        bitmap_ = 0L;
-        onChanged();
-        return this;
-      }
-
-      private java.util.List<com.google.protobuf.ByteString> nonDefaultSiblings_ = java.util.Collections.emptyList();
-      private void ensureNonDefaultSiblingsIsMutable() {
-        if (!((bitField0_ & 0x00000002) != 0)) {
-          nonDefaultSiblings_ = new java.util.ArrayList<com.google.protobuf.ByteString>(nonDefaultSiblings_);
-          bitField0_ |= 0x00000002;
+      private java.util.List<com.google.protobuf.ByteString> siblings_ = java.util.Collections.emptyList();
+      private void ensureSiblingsIsMutable() {
+        if (!((bitField0_ & 0x00000001) != 0)) {
+          siblings_ = new java.util.ArrayList<com.google.protobuf.ByteString>(siblings_);
+          bitField0_ |= 0x00000001;
          }
       }
       /**
        * <pre>
-       * The non-default siblings. The ones near the root are at the beginning of
-       * the list.
+       * The siblings. The ones near the leaf are at the beginning of the list. The
+       * placeholder nodes are represented by empty byte arrays, other nodes should
+       * be exactly 32-bytes long.
        * </pre>
        *
-       * <code>repeated bytes non_default_siblings = 2;</code>
+       * <code>repeated bytes siblings = 1;</code>
        */
       public java.util.List<com.google.protobuf.ByteString>
-          getNonDefaultSiblingsList() {
-        return ((bitField0_ & 0x00000002) != 0) ?
-                 java.util.Collections.unmodifiableList(nonDefaultSiblings_) : nonDefaultSiblings_;
+          getSiblingsList() {
+        return ((bitField0_ & 0x00000001) != 0) ?
+                 java.util.Collections.unmodifiableList(siblings_) : siblings_;
       }
       /**
        * <pre>
-       * The non-default siblings. The ones near the root are at the beginning of
-       * the list.
+       * The siblings. The ones near the leaf are at the beginning of the list. The
+       * placeholder nodes are represented by empty byte arrays, other nodes should
+       * be exactly 32-bytes long.
        * </pre>
        *
-       * <code>repeated bytes non_default_siblings = 2;</code>
+       * <code>repeated bytes siblings = 1;</code>
        */
-      public int getNonDefaultSiblingsCount() {
-        return nonDefaultSiblings_.size();
+      public int getSiblingsCount() {
+        return siblings_.size();
       }
       /**
        * <pre>
-       * The non-default siblings. The ones near the root are at the beginning of
-       * the list.
+       * The siblings. The ones near the leaf are at the beginning of the list. The
+       * placeholder nodes are represented by empty byte arrays, other nodes should
+       * be exactly 32-bytes long.
        * </pre>
        *
-       * <code>repeated bytes non_default_siblings = 2;</code>
+       * <code>repeated bytes siblings = 1;</code>
        */
-      public com.google.protobuf.ByteString getNonDefaultSiblings(int index) {
-        return nonDefaultSiblings_.get(index);
+      public com.google.protobuf.ByteString getSiblings(int index) {
+        return siblings_.get(index);
       }
       /**
        * <pre>
-       * The non-default siblings. The ones near the root are at the beginning of
-       * the list.
+       * The siblings. The ones near the leaf are at the beginning of the list. The
+       * placeholder nodes are represented by empty byte arrays, other nodes should
+       * be exactly 32-bytes long.
        * </pre>
        *
-       * <code>repeated bytes non_default_siblings = 2;</code>
+       * <code>repeated bytes siblings = 1;</code>
        */
-      public Builder setNonDefaultSiblings(
+      public Builder setSiblings(
           int index, com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  ensureNonDefaultSiblingsIsMutable();
-        nonDefaultSiblings_.set(index, value);
+  ensureSiblingsIsMutable();
+        siblings_.set(index, value);
         onChanged();
         return this;
       }
       /**
        * <pre>
-       * The non-default siblings. The ones near the root are at the beginning of
-       * the list.
+       * The siblings. The ones near the leaf are at the beginning of the list. The
+       * placeholder nodes are represented by empty byte arrays, other nodes should
+       * be exactly 32-bytes long.
        * </pre>
        *
-       * <code>repeated bytes non_default_siblings = 2;</code>
+       * <code>repeated bytes siblings = 1;</code>
        */
-      public Builder addNonDefaultSiblings(com.google.protobuf.ByteString value) {
+      public Builder addSiblings(com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  ensureNonDefaultSiblingsIsMutable();
-        nonDefaultSiblings_.add(value);
+  ensureSiblingsIsMutable();
+        siblings_.add(value);
         onChanged();
         return this;
       }
       /**
        * <pre>
-       * The non-default siblings. The ones near the root are at the beginning of
-       * the list.
+       * The siblings. The ones near the leaf are at the beginning of the list. The
+       * placeholder nodes are represented by empty byte arrays, other nodes should
+       * be exactly 32-bytes long.
        * </pre>
        *
-       * <code>repeated bytes non_default_siblings = 2;</code>
+       * <code>repeated bytes siblings = 1;</code>
        */
-      public Builder addAllNonDefaultSiblings(
+      public Builder addAllSiblings(
           java.lang.Iterable<? extends com.google.protobuf.ByteString> values) {
-        ensureNonDefaultSiblingsIsMutable();
+        ensureSiblingsIsMutable();
         com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, nonDefaultSiblings_);
+            values, siblings_);
         onChanged();
         return this;
       }
       /**
        * <pre>
-       * The non-default siblings. The ones near the root are at the beginning of
-       * the list.
+       * The siblings. The ones near the leaf are at the beginning of the list. The
+       * placeholder nodes are represented by empty byte arrays, other nodes should
+       * be exactly 32-bytes long.
        * </pre>
        *
-       * <code>repeated bytes non_default_siblings = 2;</code>
+       * <code>repeated bytes siblings = 1;</code>
        */
-      public Builder clearNonDefaultSiblings() {
-        nonDefaultSiblings_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000002);
+      public Builder clearSiblings() {
+        siblings_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000001);
         onChanged();
         return this;
       }
@@ -783,44 +690,34 @@ public final class Proof {
 
     /**
      * <pre>
-     * The bitmap indicating which siblings are default. 1 means non-default and
-     * 0 means default. The MSB of the first byte corresponds to the sibling at
-     * the top of the Sparse Merkle Tree. The rightmost 1-bit of the last byte
-     * corresponds to the sibling at the bottom, since this one is always
-     * non-default.
+     * The siblings. The ones near the leaf are at the beginning of the list. The
+     * placeholder nodes are represented by empty byte arrays, other nodes should
+     * be exactly 32-bytes long.
      * </pre>
      *
-     * <code>bytes bitmap = 2;</code>
+     * <code>repeated bytes siblings = 2;</code>
      */
-    com.google.protobuf.ByteString getBitmap();
-
+    java.util.List<com.google.protobuf.ByteString> getSiblingsList();
     /**
      * <pre>
-     * The non-default siblings. The ones near the root are at the beginning of
-     * the list.
+     * The siblings. The ones near the leaf are at the beginning of the list. The
+     * placeholder nodes are represented by empty byte arrays, other nodes should
+     * be exactly 32-bytes long.
      * </pre>
      *
-     * <code>repeated bytes non_default_siblings = 3;</code>
+     * <code>repeated bytes siblings = 2;</code>
      */
-    java.util.List<com.google.protobuf.ByteString> getNonDefaultSiblingsList();
+    int getSiblingsCount();
     /**
      * <pre>
-     * The non-default siblings. The ones near the root are at the beginning of
-     * the list.
+     * The siblings. The ones near the leaf are at the beginning of the list. The
+     * placeholder nodes are represented by empty byte arrays, other nodes should
+     * be exactly 32-bytes long.
      * </pre>
      *
-     * <code>repeated bytes non_default_siblings = 3;</code>
+     * <code>repeated bytes siblings = 2;</code>
      */
-    int getNonDefaultSiblingsCount();
-    /**
-     * <pre>
-     * The non-default siblings. The ones near the root are at the beginning of
-     * the list.
-     * </pre>
-     *
-     * <code>repeated bytes non_default_siblings = 3;</code>
-     */
-    com.google.protobuf.ByteString getNonDefaultSiblings(int index);
+    com.google.protobuf.ByteString getSiblings(int index);
   }
   /**
    * Protobuf type {@code types.SparseMerkleProof}
@@ -836,8 +733,7 @@ public final class Proof {
     }
     private SparseMerkleProof() {
       leaf_ = com.google.protobuf.ByteString.EMPTY;
-      bitmap_ = com.google.protobuf.ByteString.EMPTY;
-      nonDefaultSiblings_ = java.util.Collections.emptyList();
+      siblings_ = java.util.Collections.emptyList();
     }
 
     @java.lang.Override
@@ -870,16 +766,11 @@ public final class Proof {
               break;
             }
             case 18: {
-
-              bitmap_ = input.readBytes();
-              break;
-            }
-            case 26: {
-              if (!((mutable_bitField0_ & 0x00000004) != 0)) {
-                nonDefaultSiblings_ = new java.util.ArrayList<com.google.protobuf.ByteString>();
-                mutable_bitField0_ |= 0x00000004;
+              if (!((mutable_bitField0_ & 0x00000002) != 0)) {
+                siblings_ = new java.util.ArrayList<com.google.protobuf.ByteString>();
+                mutable_bitField0_ |= 0x00000002;
               }
-              nonDefaultSiblings_.add(input.readBytes());
+              siblings_.add(input.readBytes());
               break;
             }
             default: {
@@ -897,8 +788,8 @@ public final class Proof {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000004) != 0)) {
-          nonDefaultSiblings_ = java.util.Collections.unmodifiableList(nonDefaultSiblings_); // C
+        if (((mutable_bitField0_ & 0x00000002) != 0)) {
+          siblings_ = java.util.Collections.unmodifiableList(siblings_); // C
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -945,58 +836,44 @@ public final class Proof {
       return leaf_;
     }
 
-    public static final int BITMAP_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString bitmap_;
+    public static final int SIBLINGS_FIELD_NUMBER = 2;
+    private java.util.List<com.google.protobuf.ByteString> siblings_;
     /**
      * <pre>
-     * The bitmap indicating which siblings are default. 1 means non-default and
-     * 0 means default. The MSB of the first byte corresponds to the sibling at
-     * the top of the Sparse Merkle Tree. The rightmost 1-bit of the last byte
-     * corresponds to the sibling at the bottom, since this one is always
-     * non-default.
+     * The siblings. The ones near the leaf are at the beginning of the list. The
+     * placeholder nodes are represented by empty byte arrays, other nodes should
+     * be exactly 32-bytes long.
      * </pre>
      *
-     * <code>bytes bitmap = 2;</code>
-     */
-    public com.google.protobuf.ByteString getBitmap() {
-      return bitmap_;
-    }
-
-    public static final int NON_DEFAULT_SIBLINGS_FIELD_NUMBER = 3;
-    private java.util.List<com.google.protobuf.ByteString> nonDefaultSiblings_;
-    /**
-     * <pre>
-     * The non-default siblings. The ones near the root are at the beginning of
-     * the list.
-     * </pre>
-     *
-     * <code>repeated bytes non_default_siblings = 3;</code>
+     * <code>repeated bytes siblings = 2;</code>
      */
     public java.util.List<com.google.protobuf.ByteString>
-        getNonDefaultSiblingsList() {
-      return nonDefaultSiblings_;
+        getSiblingsList() {
+      return siblings_;
     }
     /**
      * <pre>
-     * The non-default siblings. The ones near the root are at the beginning of
-     * the list.
+     * The siblings. The ones near the leaf are at the beginning of the list. The
+     * placeholder nodes are represented by empty byte arrays, other nodes should
+     * be exactly 32-bytes long.
      * </pre>
      *
-     * <code>repeated bytes non_default_siblings = 3;</code>
+     * <code>repeated bytes siblings = 2;</code>
      */
-    public int getNonDefaultSiblingsCount() {
-      return nonDefaultSiblings_.size();
+    public int getSiblingsCount() {
+      return siblings_.size();
     }
     /**
      * <pre>
-     * The non-default siblings. The ones near the root are at the beginning of
-     * the list.
+     * The siblings. The ones near the leaf are at the beginning of the list. The
+     * placeholder nodes are represented by empty byte arrays, other nodes should
+     * be exactly 32-bytes long.
      * </pre>
      *
-     * <code>repeated bytes non_default_siblings = 3;</code>
+     * <code>repeated bytes siblings = 2;</code>
      */
-    public com.google.protobuf.ByteString getNonDefaultSiblings(int index) {
-      return nonDefaultSiblings_.get(index);
+    public com.google.protobuf.ByteString getSiblings(int index) {
+      return siblings_.get(index);
     }
 
     private byte memoizedIsInitialized = -1;
@@ -1016,11 +893,8 @@ public final class Proof {
       if (!leaf_.isEmpty()) {
         output.writeBytes(1, leaf_);
       }
-      if (!bitmap_.isEmpty()) {
-        output.writeBytes(2, bitmap_);
-      }
-      for (int i = 0; i < nonDefaultSiblings_.size(); i++) {
-        output.writeBytes(3, nonDefaultSiblings_.get(i));
+      for (int i = 0; i < siblings_.size(); i++) {
+        output.writeBytes(2, siblings_.get(i));
       }
       unknownFields.writeTo(output);
     }
@@ -1035,18 +909,14 @@ public final class Proof {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(1, leaf_);
       }
-      if (!bitmap_.isEmpty()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, bitmap_);
-      }
       {
         int dataSize = 0;
-        for (int i = 0; i < nonDefaultSiblings_.size(); i++) {
+        for (int i = 0; i < siblings_.size(); i++) {
           dataSize += com.google.protobuf.CodedOutputStream
-            .computeBytesSizeNoTag(nonDefaultSiblings_.get(i));
+            .computeBytesSizeNoTag(siblings_.get(i));
         }
         size += dataSize;
-        size += 1 * getNonDefaultSiblingsList().size();
+        size += 1 * getSiblingsList().size();
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -1065,10 +935,8 @@ public final class Proof {
 
       if (!getLeaf()
           .equals(other.getLeaf())) return false;
-      if (!getBitmap()
-          .equals(other.getBitmap())) return false;
-      if (!getNonDefaultSiblingsList()
-          .equals(other.getNonDefaultSiblingsList())) return false;
+      if (!getSiblingsList()
+          .equals(other.getSiblingsList())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -1082,11 +950,9 @@ public final class Proof {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + LEAF_FIELD_NUMBER;
       hash = (53 * hash) + getLeaf().hashCode();
-      hash = (37 * hash) + BITMAP_FIELD_NUMBER;
-      hash = (53 * hash) + getBitmap().hashCode();
-      if (getNonDefaultSiblingsCount() > 0) {
-        hash = (37 * hash) + NON_DEFAULT_SIBLINGS_FIELD_NUMBER;
-        hash = (53 * hash) + getNonDefaultSiblingsList().hashCode();
+      if (getSiblingsCount() > 0) {
+        hash = (37 * hash) + SIBLINGS_FIELD_NUMBER;
+        hash = (53 * hash) + getSiblingsList().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -1223,10 +1089,8 @@ public final class Proof {
         super.clear();
         leaf_ = com.google.protobuf.ByteString.EMPTY;
 
-        bitmap_ = com.google.protobuf.ByteString.EMPTY;
-
-        nonDefaultSiblings_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000004);
+        siblings_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
 
@@ -1256,12 +1120,11 @@ public final class Proof {
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         result.leaf_ = leaf_;
-        result.bitmap_ = bitmap_;
-        if (((bitField0_ & 0x00000004) != 0)) {
-          nonDefaultSiblings_ = java.util.Collections.unmodifiableList(nonDefaultSiblings_);
-          bitField0_ = (bitField0_ & ~0x00000004);
+        if (((bitField0_ & 0x00000002) != 0)) {
+          siblings_ = java.util.Collections.unmodifiableList(siblings_);
+          bitField0_ = (bitField0_ & ~0x00000002);
         }
-        result.nonDefaultSiblings_ = nonDefaultSiblings_;
+        result.siblings_ = siblings_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1314,16 +1177,13 @@ public final class Proof {
         if (other.getLeaf() != com.google.protobuf.ByteString.EMPTY) {
           setLeaf(other.getLeaf());
         }
-        if (other.getBitmap() != com.google.protobuf.ByteString.EMPTY) {
-          setBitmap(other.getBitmap());
-        }
-        if (!other.nonDefaultSiblings_.isEmpty()) {
-          if (nonDefaultSiblings_.isEmpty()) {
-            nonDefaultSiblings_ = other.nonDefaultSiblings_;
-            bitField0_ = (bitField0_ & ~0x00000004);
+        if (!other.siblings_.isEmpty()) {
+          if (siblings_.isEmpty()) {
+            siblings_ = other.siblings_;
+            bitField0_ = (bitField0_ & ~0x00000002);
           } else {
-            ensureNonDefaultSiblingsIsMutable();
-            nonDefaultSiblings_.addAll(other.nonDefaultSiblings_);
+            ensureSiblingsIsMutable();
+            siblings_.addAll(other.siblings_);
           }
           onChanged();
         }
@@ -1440,163 +1300,117 @@ public final class Proof {
         return this;
       }
 
-      private com.google.protobuf.ByteString bitmap_ = com.google.protobuf.ByteString.EMPTY;
-      /**
-       * <pre>
-       * The bitmap indicating which siblings are default. 1 means non-default and
-       * 0 means default. The MSB of the first byte corresponds to the sibling at
-       * the top of the Sparse Merkle Tree. The rightmost 1-bit of the last byte
-       * corresponds to the sibling at the bottom, since this one is always
-       * non-default.
-       * </pre>
-       *
-       * <code>bytes bitmap = 2;</code>
-       */
-      public com.google.protobuf.ByteString getBitmap() {
-        return bitmap_;
-      }
-      /**
-       * <pre>
-       * The bitmap indicating which siblings are default. 1 means non-default and
-       * 0 means default. The MSB of the first byte corresponds to the sibling at
-       * the top of the Sparse Merkle Tree. The rightmost 1-bit of the last byte
-       * corresponds to the sibling at the bottom, since this one is always
-       * non-default.
-       * </pre>
-       *
-       * <code>bytes bitmap = 2;</code>
-       */
-      public Builder setBitmap(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        bitmap_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       * The bitmap indicating which siblings are default. 1 means non-default and
-       * 0 means default. The MSB of the first byte corresponds to the sibling at
-       * the top of the Sparse Merkle Tree. The rightmost 1-bit of the last byte
-       * corresponds to the sibling at the bottom, since this one is always
-       * non-default.
-       * </pre>
-       *
-       * <code>bytes bitmap = 2;</code>
-       */
-      public Builder clearBitmap() {
-        
-        bitmap_ = getDefaultInstance().getBitmap();
-        onChanged();
-        return this;
-      }
-
-      private java.util.List<com.google.protobuf.ByteString> nonDefaultSiblings_ = java.util.Collections.emptyList();
-      private void ensureNonDefaultSiblingsIsMutable() {
-        if (!((bitField0_ & 0x00000004) != 0)) {
-          nonDefaultSiblings_ = new java.util.ArrayList<com.google.protobuf.ByteString>(nonDefaultSiblings_);
-          bitField0_ |= 0x00000004;
+      private java.util.List<com.google.protobuf.ByteString> siblings_ = java.util.Collections.emptyList();
+      private void ensureSiblingsIsMutable() {
+        if (!((bitField0_ & 0x00000002) != 0)) {
+          siblings_ = new java.util.ArrayList<com.google.protobuf.ByteString>(siblings_);
+          bitField0_ |= 0x00000002;
          }
       }
       /**
        * <pre>
-       * The non-default siblings. The ones near the root are at the beginning of
-       * the list.
+       * The siblings. The ones near the leaf are at the beginning of the list. The
+       * placeholder nodes are represented by empty byte arrays, other nodes should
+       * be exactly 32-bytes long.
        * </pre>
        *
-       * <code>repeated bytes non_default_siblings = 3;</code>
+       * <code>repeated bytes siblings = 2;</code>
        */
       public java.util.List<com.google.protobuf.ByteString>
-          getNonDefaultSiblingsList() {
-        return ((bitField0_ & 0x00000004) != 0) ?
-                 java.util.Collections.unmodifiableList(nonDefaultSiblings_) : nonDefaultSiblings_;
+          getSiblingsList() {
+        return ((bitField0_ & 0x00000002) != 0) ?
+                 java.util.Collections.unmodifiableList(siblings_) : siblings_;
       }
       /**
        * <pre>
-       * The non-default siblings. The ones near the root are at the beginning of
-       * the list.
+       * The siblings. The ones near the leaf are at the beginning of the list. The
+       * placeholder nodes are represented by empty byte arrays, other nodes should
+       * be exactly 32-bytes long.
        * </pre>
        *
-       * <code>repeated bytes non_default_siblings = 3;</code>
+       * <code>repeated bytes siblings = 2;</code>
        */
-      public int getNonDefaultSiblingsCount() {
-        return nonDefaultSiblings_.size();
+      public int getSiblingsCount() {
+        return siblings_.size();
       }
       /**
        * <pre>
-       * The non-default siblings. The ones near the root are at the beginning of
-       * the list.
+       * The siblings. The ones near the leaf are at the beginning of the list. The
+       * placeholder nodes are represented by empty byte arrays, other nodes should
+       * be exactly 32-bytes long.
        * </pre>
        *
-       * <code>repeated bytes non_default_siblings = 3;</code>
+       * <code>repeated bytes siblings = 2;</code>
        */
-      public com.google.protobuf.ByteString getNonDefaultSiblings(int index) {
-        return nonDefaultSiblings_.get(index);
+      public com.google.protobuf.ByteString getSiblings(int index) {
+        return siblings_.get(index);
       }
       /**
        * <pre>
-       * The non-default siblings. The ones near the root are at the beginning of
-       * the list.
+       * The siblings. The ones near the leaf are at the beginning of the list. The
+       * placeholder nodes are represented by empty byte arrays, other nodes should
+       * be exactly 32-bytes long.
        * </pre>
        *
-       * <code>repeated bytes non_default_siblings = 3;</code>
+       * <code>repeated bytes siblings = 2;</code>
        */
-      public Builder setNonDefaultSiblings(
+      public Builder setSiblings(
           int index, com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  ensureNonDefaultSiblingsIsMutable();
-        nonDefaultSiblings_.set(index, value);
+  ensureSiblingsIsMutable();
+        siblings_.set(index, value);
         onChanged();
         return this;
       }
       /**
        * <pre>
-       * The non-default siblings. The ones near the root are at the beginning of
-       * the list.
+       * The siblings. The ones near the leaf are at the beginning of the list. The
+       * placeholder nodes are represented by empty byte arrays, other nodes should
+       * be exactly 32-bytes long.
        * </pre>
        *
-       * <code>repeated bytes non_default_siblings = 3;</code>
+       * <code>repeated bytes siblings = 2;</code>
        */
-      public Builder addNonDefaultSiblings(com.google.protobuf.ByteString value) {
+      public Builder addSiblings(com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  ensureNonDefaultSiblingsIsMutable();
-        nonDefaultSiblings_.add(value);
+  ensureSiblingsIsMutable();
+        siblings_.add(value);
         onChanged();
         return this;
       }
       /**
        * <pre>
-       * The non-default siblings. The ones near the root are at the beginning of
-       * the list.
+       * The siblings. The ones near the leaf are at the beginning of the list. The
+       * placeholder nodes are represented by empty byte arrays, other nodes should
+       * be exactly 32-bytes long.
        * </pre>
        *
-       * <code>repeated bytes non_default_siblings = 3;</code>
+       * <code>repeated bytes siblings = 2;</code>
        */
-      public Builder addAllNonDefaultSiblings(
+      public Builder addAllSiblings(
           java.lang.Iterable<? extends com.google.protobuf.ByteString> values) {
-        ensureNonDefaultSiblingsIsMutable();
+        ensureSiblingsIsMutable();
         com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, nonDefaultSiblings_);
+            values, siblings_);
         onChanged();
         return this;
       }
       /**
        * <pre>
-       * The non-default siblings. The ones near the root are at the beginning of
-       * the list.
+       * The siblings. The ones near the leaf are at the beginning of the list. The
+       * placeholder nodes are represented by empty byte arrays, other nodes should
+       * be exactly 32-bytes long.
        * </pre>
        *
-       * <code>repeated bytes non_default_siblings = 3;</code>
+       * <code>repeated bytes siblings = 2;</code>
        */
-      public Builder clearNonDefaultSiblings() {
-        nonDefaultSiblings_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000004);
+      public Builder clearSiblings() {
+        siblings_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000002);
         onChanged();
         return this;
       }
@@ -2287,8 +2101,914 @@ public final class Proof {
 
   }
 
-  public interface SignedTransactionProofOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:types.SignedTransactionProof)
+  public interface AccumulatorRangeProofOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:types.AccumulatorRangeProof)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <pre>
+     * The siblings on the left of the path from root to the first leaf. The ones
+     * near the leaf are at the beginning of the list. The placeholder nodes are
+     * represented by empty byte arrays, other nodes should be exactly 32-bytes
+     * long.
+     * </pre>
+     *
+     * <code>repeated bytes left_siblings = 1;</code>
+     */
+    java.util.List<com.google.protobuf.ByteString> getLeftSiblingsList();
+    /**
+     * <pre>
+     * The siblings on the left of the path from root to the first leaf. The ones
+     * near the leaf are at the beginning of the list. The placeholder nodes are
+     * represented by empty byte arrays, other nodes should be exactly 32-bytes
+     * long.
+     * </pre>
+     *
+     * <code>repeated bytes left_siblings = 1;</code>
+     */
+    int getLeftSiblingsCount();
+    /**
+     * <pre>
+     * The siblings on the left of the path from root to the first leaf. The ones
+     * near the leaf are at the beginning of the list. The placeholder nodes are
+     * represented by empty byte arrays, other nodes should be exactly 32-bytes
+     * long.
+     * </pre>
+     *
+     * <code>repeated bytes left_siblings = 1;</code>
+     */
+    com.google.protobuf.ByteString getLeftSiblings(int index);
+
+    /**
+     * <pre>
+     * The siblings on the right of the path from root to the last leaf. The ones
+     * near the leaf are at the beginning of the list. The placeholder nodes are
+     * represented by empty byte arrays, other nodes should be exactly 32-bytes
+     * long.
+     * </pre>
+     *
+     * <code>repeated bytes right_siblings = 2;</code>
+     */
+    java.util.List<com.google.protobuf.ByteString> getRightSiblingsList();
+    /**
+     * <pre>
+     * The siblings on the right of the path from root to the last leaf. The ones
+     * near the leaf are at the beginning of the list. The placeholder nodes are
+     * represented by empty byte arrays, other nodes should be exactly 32-bytes
+     * long.
+     * </pre>
+     *
+     * <code>repeated bytes right_siblings = 2;</code>
+     */
+    int getRightSiblingsCount();
+    /**
+     * <pre>
+     * The siblings on the right of the path from root to the last leaf. The ones
+     * near the leaf are at the beginning of the list. The placeholder nodes are
+     * represented by empty byte arrays, other nodes should be exactly 32-bytes
+     * long.
+     * </pre>
+     *
+     * <code>repeated bytes right_siblings = 2;</code>
+     */
+    com.google.protobuf.ByteString getRightSiblings(int index);
+  }
+  /**
+   * Protobuf type {@code types.AccumulatorRangeProof}
+   */
+  public  static final class AccumulatorRangeProof extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:types.AccumulatorRangeProof)
+      AccumulatorRangeProofOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use AccumulatorRangeProof.newBuilder() to construct.
+    private AccumulatorRangeProof(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private AccumulatorRangeProof() {
+      leftSiblings_ = java.util.Collections.emptyList();
+      rightSiblings_ = java.util.Collections.emptyList();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private AccumulatorRangeProof(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
+                leftSiblings_ = new java.util.ArrayList<com.google.protobuf.ByteString>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              leftSiblings_.add(input.readBytes());
+              break;
+            }
+            case 18: {
+              if (!((mutable_bitField0_ & 0x00000002) != 0)) {
+                rightSiblings_ = new java.util.ArrayList<com.google.protobuf.ByteString>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              rightSiblings_.add(input.readBytes());
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000001) != 0)) {
+          leftSiblings_ = java.util.Collections.unmodifiableList(leftSiblings_); // C
+        }
+        if (((mutable_bitField0_ & 0x00000002) != 0)) {
+          rightSiblings_ = java.util.Collections.unmodifiableList(rightSiblings_); // C
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return org.libra.grpc.types.Proof.internal_static_types_AccumulatorRangeProof_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return org.libra.grpc.types.Proof.internal_static_types_AccumulatorRangeProof_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              org.libra.grpc.types.Proof.AccumulatorRangeProof.class, org.libra.grpc.types.Proof.AccumulatorRangeProof.Builder.class);
+    }
+
+    public static final int LEFT_SIBLINGS_FIELD_NUMBER = 1;
+    private java.util.List<com.google.protobuf.ByteString> leftSiblings_;
+    /**
+     * <pre>
+     * The siblings on the left of the path from root to the first leaf. The ones
+     * near the leaf are at the beginning of the list. The placeholder nodes are
+     * represented by empty byte arrays, other nodes should be exactly 32-bytes
+     * long.
+     * </pre>
+     *
+     * <code>repeated bytes left_siblings = 1;</code>
+     */
+    public java.util.List<com.google.protobuf.ByteString>
+        getLeftSiblingsList() {
+      return leftSiblings_;
+    }
+    /**
+     * <pre>
+     * The siblings on the left of the path from root to the first leaf. The ones
+     * near the leaf are at the beginning of the list. The placeholder nodes are
+     * represented by empty byte arrays, other nodes should be exactly 32-bytes
+     * long.
+     * </pre>
+     *
+     * <code>repeated bytes left_siblings = 1;</code>
+     */
+    public int getLeftSiblingsCount() {
+      return leftSiblings_.size();
+    }
+    /**
+     * <pre>
+     * The siblings on the left of the path from root to the first leaf. The ones
+     * near the leaf are at the beginning of the list. The placeholder nodes are
+     * represented by empty byte arrays, other nodes should be exactly 32-bytes
+     * long.
+     * </pre>
+     *
+     * <code>repeated bytes left_siblings = 1;</code>
+     */
+    public com.google.protobuf.ByteString getLeftSiblings(int index) {
+      return leftSiblings_.get(index);
+    }
+
+    public static final int RIGHT_SIBLINGS_FIELD_NUMBER = 2;
+    private java.util.List<com.google.protobuf.ByteString> rightSiblings_;
+    /**
+     * <pre>
+     * The siblings on the right of the path from root to the last leaf. The ones
+     * near the leaf are at the beginning of the list. The placeholder nodes are
+     * represented by empty byte arrays, other nodes should be exactly 32-bytes
+     * long.
+     * </pre>
+     *
+     * <code>repeated bytes right_siblings = 2;</code>
+     */
+    public java.util.List<com.google.protobuf.ByteString>
+        getRightSiblingsList() {
+      return rightSiblings_;
+    }
+    /**
+     * <pre>
+     * The siblings on the right of the path from root to the last leaf. The ones
+     * near the leaf are at the beginning of the list. The placeholder nodes are
+     * represented by empty byte arrays, other nodes should be exactly 32-bytes
+     * long.
+     * </pre>
+     *
+     * <code>repeated bytes right_siblings = 2;</code>
+     */
+    public int getRightSiblingsCount() {
+      return rightSiblings_.size();
+    }
+    /**
+     * <pre>
+     * The siblings on the right of the path from root to the last leaf. The ones
+     * near the leaf are at the beginning of the list. The placeholder nodes are
+     * represented by empty byte arrays, other nodes should be exactly 32-bytes
+     * long.
+     * </pre>
+     *
+     * <code>repeated bytes right_siblings = 2;</code>
+     */
+    public com.google.protobuf.ByteString getRightSiblings(int index) {
+      return rightSiblings_.get(index);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      for (int i = 0; i < leftSiblings_.size(); i++) {
+        output.writeBytes(1, leftSiblings_.get(i));
+      }
+      for (int i = 0; i < rightSiblings_.size(); i++) {
+        output.writeBytes(2, rightSiblings_.get(i));
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      {
+        int dataSize = 0;
+        for (int i = 0; i < leftSiblings_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeBytesSizeNoTag(leftSiblings_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getLeftSiblingsList().size();
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < rightSiblings_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeBytesSizeNoTag(rightSiblings_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getRightSiblingsList().size();
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof org.libra.grpc.types.Proof.AccumulatorRangeProof)) {
+        return super.equals(obj);
+      }
+      org.libra.grpc.types.Proof.AccumulatorRangeProof other = (org.libra.grpc.types.Proof.AccumulatorRangeProof) obj;
+
+      if (!getLeftSiblingsList()
+          .equals(other.getLeftSiblingsList())) return false;
+      if (!getRightSiblingsList()
+          .equals(other.getRightSiblingsList())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (getLeftSiblingsCount() > 0) {
+        hash = (37 * hash) + LEFT_SIBLINGS_FIELD_NUMBER;
+        hash = (53 * hash) + getLeftSiblingsList().hashCode();
+      }
+      if (getRightSiblingsCount() > 0) {
+        hash = (37 * hash) + RIGHT_SIBLINGS_FIELD_NUMBER;
+        hash = (53 * hash) + getRightSiblingsList().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static org.libra.grpc.types.Proof.AccumulatorRangeProof parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.libra.grpc.types.Proof.AccumulatorRangeProof parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.libra.grpc.types.Proof.AccumulatorRangeProof parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.libra.grpc.types.Proof.AccumulatorRangeProof parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.libra.grpc.types.Proof.AccumulatorRangeProof parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.libra.grpc.types.Proof.AccumulatorRangeProof parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.libra.grpc.types.Proof.AccumulatorRangeProof parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static org.libra.grpc.types.Proof.AccumulatorRangeProof parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static org.libra.grpc.types.Proof.AccumulatorRangeProof parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static org.libra.grpc.types.Proof.AccumulatorRangeProof parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static org.libra.grpc.types.Proof.AccumulatorRangeProof parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static org.libra.grpc.types.Proof.AccumulatorRangeProof parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(org.libra.grpc.types.Proof.AccumulatorRangeProof prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code types.AccumulatorRangeProof}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:types.AccumulatorRangeProof)
+        org.libra.grpc.types.Proof.AccumulatorRangeProofOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return org.libra.grpc.types.Proof.internal_static_types_AccumulatorRangeProof_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return org.libra.grpc.types.Proof.internal_static_types_AccumulatorRangeProof_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                org.libra.grpc.types.Proof.AccumulatorRangeProof.class, org.libra.grpc.types.Proof.AccumulatorRangeProof.Builder.class);
+      }
+
+      // Construct using org.libra.grpc.types.Proof.AccumulatorRangeProof.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        leftSiblings_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000001);
+        rightSiblings_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return org.libra.grpc.types.Proof.internal_static_types_AccumulatorRangeProof_descriptor;
+      }
+
+      @java.lang.Override
+      public org.libra.grpc.types.Proof.AccumulatorRangeProof getDefaultInstanceForType() {
+        return org.libra.grpc.types.Proof.AccumulatorRangeProof.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public org.libra.grpc.types.Proof.AccumulatorRangeProof build() {
+        org.libra.grpc.types.Proof.AccumulatorRangeProof result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public org.libra.grpc.types.Proof.AccumulatorRangeProof buildPartial() {
+        org.libra.grpc.types.Proof.AccumulatorRangeProof result = new org.libra.grpc.types.Proof.AccumulatorRangeProof(this);
+        int from_bitField0_ = bitField0_;
+        if (((bitField0_ & 0x00000001) != 0)) {
+          leftSiblings_ = java.util.Collections.unmodifiableList(leftSiblings_);
+          bitField0_ = (bitField0_ & ~0x00000001);
+        }
+        result.leftSiblings_ = leftSiblings_;
+        if (((bitField0_ & 0x00000002) != 0)) {
+          rightSiblings_ = java.util.Collections.unmodifiableList(rightSiblings_);
+          bitField0_ = (bitField0_ & ~0x00000002);
+        }
+        result.rightSiblings_ = rightSiblings_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof org.libra.grpc.types.Proof.AccumulatorRangeProof) {
+          return mergeFrom((org.libra.grpc.types.Proof.AccumulatorRangeProof)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(org.libra.grpc.types.Proof.AccumulatorRangeProof other) {
+        if (other == org.libra.grpc.types.Proof.AccumulatorRangeProof.getDefaultInstance()) return this;
+        if (!other.leftSiblings_.isEmpty()) {
+          if (leftSiblings_.isEmpty()) {
+            leftSiblings_ = other.leftSiblings_;
+            bitField0_ = (bitField0_ & ~0x00000001);
+          } else {
+            ensureLeftSiblingsIsMutable();
+            leftSiblings_.addAll(other.leftSiblings_);
+          }
+          onChanged();
+        }
+        if (!other.rightSiblings_.isEmpty()) {
+          if (rightSiblings_.isEmpty()) {
+            rightSiblings_ = other.rightSiblings_;
+            bitField0_ = (bitField0_ & ~0x00000002);
+          } else {
+            ensureRightSiblingsIsMutable();
+            rightSiblings_.addAll(other.rightSiblings_);
+          }
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        org.libra.grpc.types.Proof.AccumulatorRangeProof parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (org.libra.grpc.types.Proof.AccumulatorRangeProof) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.util.List<com.google.protobuf.ByteString> leftSiblings_ = java.util.Collections.emptyList();
+      private void ensureLeftSiblingsIsMutable() {
+        if (!((bitField0_ & 0x00000001) != 0)) {
+          leftSiblings_ = new java.util.ArrayList<com.google.protobuf.ByteString>(leftSiblings_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+      /**
+       * <pre>
+       * The siblings on the left of the path from root to the first leaf. The ones
+       * near the leaf are at the beginning of the list. The placeholder nodes are
+       * represented by empty byte arrays, other nodes should be exactly 32-bytes
+       * long.
+       * </pre>
+       *
+       * <code>repeated bytes left_siblings = 1;</code>
+       */
+      public java.util.List<com.google.protobuf.ByteString>
+          getLeftSiblingsList() {
+        return ((bitField0_ & 0x00000001) != 0) ?
+                 java.util.Collections.unmodifiableList(leftSiblings_) : leftSiblings_;
+      }
+      /**
+       * <pre>
+       * The siblings on the left of the path from root to the first leaf. The ones
+       * near the leaf are at the beginning of the list. The placeholder nodes are
+       * represented by empty byte arrays, other nodes should be exactly 32-bytes
+       * long.
+       * </pre>
+       *
+       * <code>repeated bytes left_siblings = 1;</code>
+       */
+      public int getLeftSiblingsCount() {
+        return leftSiblings_.size();
+      }
+      /**
+       * <pre>
+       * The siblings on the left of the path from root to the first leaf. The ones
+       * near the leaf are at the beginning of the list. The placeholder nodes are
+       * represented by empty byte arrays, other nodes should be exactly 32-bytes
+       * long.
+       * </pre>
+       *
+       * <code>repeated bytes left_siblings = 1;</code>
+       */
+      public com.google.protobuf.ByteString getLeftSiblings(int index) {
+        return leftSiblings_.get(index);
+      }
+      /**
+       * <pre>
+       * The siblings on the left of the path from root to the first leaf. The ones
+       * near the leaf are at the beginning of the list. The placeholder nodes are
+       * represented by empty byte arrays, other nodes should be exactly 32-bytes
+       * long.
+       * </pre>
+       *
+       * <code>repeated bytes left_siblings = 1;</code>
+       */
+      public Builder setLeftSiblings(
+          int index, com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureLeftSiblingsIsMutable();
+        leftSiblings_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * The siblings on the left of the path from root to the first leaf. The ones
+       * near the leaf are at the beginning of the list. The placeholder nodes are
+       * represented by empty byte arrays, other nodes should be exactly 32-bytes
+       * long.
+       * </pre>
+       *
+       * <code>repeated bytes left_siblings = 1;</code>
+       */
+      public Builder addLeftSiblings(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureLeftSiblingsIsMutable();
+        leftSiblings_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * The siblings on the left of the path from root to the first leaf. The ones
+       * near the leaf are at the beginning of the list. The placeholder nodes are
+       * represented by empty byte arrays, other nodes should be exactly 32-bytes
+       * long.
+       * </pre>
+       *
+       * <code>repeated bytes left_siblings = 1;</code>
+       */
+      public Builder addAllLeftSiblings(
+          java.lang.Iterable<? extends com.google.protobuf.ByteString> values) {
+        ensureLeftSiblingsIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, leftSiblings_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * The siblings on the left of the path from root to the first leaf. The ones
+       * near the leaf are at the beginning of the list. The placeholder nodes are
+       * represented by empty byte arrays, other nodes should be exactly 32-bytes
+       * long.
+       * </pre>
+       *
+       * <code>repeated bytes left_siblings = 1;</code>
+       */
+      public Builder clearLeftSiblings() {
+        leftSiblings_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000001);
+        onChanged();
+        return this;
+      }
+
+      private java.util.List<com.google.protobuf.ByteString> rightSiblings_ = java.util.Collections.emptyList();
+      private void ensureRightSiblingsIsMutable() {
+        if (!((bitField0_ & 0x00000002) != 0)) {
+          rightSiblings_ = new java.util.ArrayList<com.google.protobuf.ByteString>(rightSiblings_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+      /**
+       * <pre>
+       * The siblings on the right of the path from root to the last leaf. The ones
+       * near the leaf are at the beginning of the list. The placeholder nodes are
+       * represented by empty byte arrays, other nodes should be exactly 32-bytes
+       * long.
+       * </pre>
+       *
+       * <code>repeated bytes right_siblings = 2;</code>
+       */
+      public java.util.List<com.google.protobuf.ByteString>
+          getRightSiblingsList() {
+        return ((bitField0_ & 0x00000002) != 0) ?
+                 java.util.Collections.unmodifiableList(rightSiblings_) : rightSiblings_;
+      }
+      /**
+       * <pre>
+       * The siblings on the right of the path from root to the last leaf. The ones
+       * near the leaf are at the beginning of the list. The placeholder nodes are
+       * represented by empty byte arrays, other nodes should be exactly 32-bytes
+       * long.
+       * </pre>
+       *
+       * <code>repeated bytes right_siblings = 2;</code>
+       */
+      public int getRightSiblingsCount() {
+        return rightSiblings_.size();
+      }
+      /**
+       * <pre>
+       * The siblings on the right of the path from root to the last leaf. The ones
+       * near the leaf are at the beginning of the list. The placeholder nodes are
+       * represented by empty byte arrays, other nodes should be exactly 32-bytes
+       * long.
+       * </pre>
+       *
+       * <code>repeated bytes right_siblings = 2;</code>
+       */
+      public com.google.protobuf.ByteString getRightSiblings(int index) {
+        return rightSiblings_.get(index);
+      }
+      /**
+       * <pre>
+       * The siblings on the right of the path from root to the last leaf. The ones
+       * near the leaf are at the beginning of the list. The placeholder nodes are
+       * represented by empty byte arrays, other nodes should be exactly 32-bytes
+       * long.
+       * </pre>
+       *
+       * <code>repeated bytes right_siblings = 2;</code>
+       */
+      public Builder setRightSiblings(
+          int index, com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureRightSiblingsIsMutable();
+        rightSiblings_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * The siblings on the right of the path from root to the last leaf. The ones
+       * near the leaf are at the beginning of the list. The placeholder nodes are
+       * represented by empty byte arrays, other nodes should be exactly 32-bytes
+       * long.
+       * </pre>
+       *
+       * <code>repeated bytes right_siblings = 2;</code>
+       */
+      public Builder addRightSiblings(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureRightSiblingsIsMutable();
+        rightSiblings_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * The siblings on the right of the path from root to the last leaf. The ones
+       * near the leaf are at the beginning of the list. The placeholder nodes are
+       * represented by empty byte arrays, other nodes should be exactly 32-bytes
+       * long.
+       * </pre>
+       *
+       * <code>repeated bytes right_siblings = 2;</code>
+       */
+      public Builder addAllRightSiblings(
+          java.lang.Iterable<? extends com.google.protobuf.ByteString> values) {
+        ensureRightSiblingsIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, rightSiblings_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * The siblings on the right of the path from root to the last leaf. The ones
+       * near the leaf are at the beginning of the list. The placeholder nodes are
+       * represented by empty byte arrays, other nodes should be exactly 32-bytes
+       * long.
+       * </pre>
+       *
+       * <code>repeated bytes right_siblings = 2;</code>
+       */
+      public Builder clearRightSiblings() {
+        rightSiblings_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000002);
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:types.AccumulatorRangeProof)
+    }
+
+    // @@protoc_insertion_point(class_scope:types.AccumulatorRangeProof)
+    private static final org.libra.grpc.types.Proof.AccumulatorRangeProof DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new org.libra.grpc.types.Proof.AccumulatorRangeProof();
+    }
+
+    public static org.libra.grpc.types.Proof.AccumulatorRangeProof getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<AccumulatorRangeProof>
+        PARSER = new com.google.protobuf.AbstractParser<AccumulatorRangeProof>() {
+      @java.lang.Override
+      public AccumulatorRangeProof parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new AccumulatorRangeProof(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<AccumulatorRangeProof> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<AccumulatorRangeProof> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public org.libra.grpc.types.Proof.AccumulatorRangeProof getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface TransactionProofOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:types.TransactionProof)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -2319,21 +3039,21 @@ public final class Proof {
   }
   /**
    * <pre>
-   * The complete proof used to authenticate a signed transaction.
+   * The complete proof used to authenticate a transaction.
    * </pre>
    *
-   * Protobuf type {@code types.SignedTransactionProof}
+   * Protobuf type {@code types.TransactionProof}
    */
-  public  static final class SignedTransactionProof extends
+  public  static final class TransactionProof extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:types.SignedTransactionProof)
-      SignedTransactionProofOrBuilder {
+      // @@protoc_insertion_point(message_implements:types.TransactionProof)
+      TransactionProofOrBuilder {
   private static final long serialVersionUID = 0L;
-    // Use SignedTransactionProof.newBuilder() to construct.
-    private SignedTransactionProof(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    // Use TransactionProof.newBuilder() to construct.
+    private TransactionProof(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private SignedTransactionProof() {
+    private TransactionProof() {
     }
 
     @java.lang.Override
@@ -2341,7 +3061,7 @@ public final class Proof {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private SignedTransactionProof(
+    private TransactionProof(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -2407,15 +3127,15 @@ public final class Proof {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return org.libra.grpc.types.Proof.internal_static_types_SignedTransactionProof_descriptor;
+      return org.libra.grpc.types.Proof.internal_static_types_TransactionProof_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return org.libra.grpc.types.Proof.internal_static_types_SignedTransactionProof_fieldAccessorTable
+      return org.libra.grpc.types.Proof.internal_static_types_TransactionProof_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              org.libra.grpc.types.Proof.SignedTransactionProof.class, org.libra.grpc.types.Proof.SignedTransactionProof.Builder.class);
+              org.libra.grpc.types.Proof.TransactionProof.class, org.libra.grpc.types.Proof.TransactionProof.Builder.class);
     }
 
     public static final int LEDGER_INFO_TO_TRANSACTION_INFO_PROOF_FIELD_NUMBER = 1;
@@ -2507,10 +3227,10 @@ public final class Proof {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof org.libra.grpc.types.Proof.SignedTransactionProof)) {
+      if (!(obj instanceof org.libra.grpc.types.Proof.TransactionProof)) {
         return super.equals(obj);
       }
-      org.libra.grpc.types.Proof.SignedTransactionProof other = (org.libra.grpc.types.Proof.SignedTransactionProof) obj;
+      org.libra.grpc.types.Proof.TransactionProof other = (org.libra.grpc.types.Proof.TransactionProof) obj;
 
       if (hasLedgerInfoToTransactionInfoProof() != other.hasLedgerInfoToTransactionInfoProof()) return false;
       if (hasLedgerInfoToTransactionInfoProof()) {
@@ -2546,69 +3266,69 @@ public final class Proof {
       return hash;
     }
 
-    public static org.libra.grpc.types.Proof.SignedTransactionProof parseFrom(
+    public static org.libra.grpc.types.Proof.TransactionProof parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static org.libra.grpc.types.Proof.SignedTransactionProof parseFrom(
+    public static org.libra.grpc.types.Proof.TransactionProof parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static org.libra.grpc.types.Proof.SignedTransactionProof parseFrom(
+    public static org.libra.grpc.types.Proof.TransactionProof parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static org.libra.grpc.types.Proof.SignedTransactionProof parseFrom(
+    public static org.libra.grpc.types.Proof.TransactionProof parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static org.libra.grpc.types.Proof.SignedTransactionProof parseFrom(byte[] data)
+    public static org.libra.grpc.types.Proof.TransactionProof parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static org.libra.grpc.types.Proof.SignedTransactionProof parseFrom(
+    public static org.libra.grpc.types.Proof.TransactionProof parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static org.libra.grpc.types.Proof.SignedTransactionProof parseFrom(java.io.InputStream input)
+    public static org.libra.grpc.types.Proof.TransactionProof parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static org.libra.grpc.types.Proof.SignedTransactionProof parseFrom(
+    public static org.libra.grpc.types.Proof.TransactionProof parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static org.libra.grpc.types.Proof.SignedTransactionProof parseDelimitedFrom(java.io.InputStream input)
+    public static org.libra.grpc.types.Proof.TransactionProof parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static org.libra.grpc.types.Proof.SignedTransactionProof parseDelimitedFrom(
+    public static org.libra.grpc.types.Proof.TransactionProof parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static org.libra.grpc.types.Proof.SignedTransactionProof parseFrom(
+    public static org.libra.grpc.types.Proof.TransactionProof parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static org.libra.grpc.types.Proof.SignedTransactionProof parseFrom(
+    public static org.libra.grpc.types.Proof.TransactionProof parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -2621,7 +3341,7 @@ public final class Proof {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(org.libra.grpc.types.Proof.SignedTransactionProof prototype) {
+    public static Builder newBuilder(org.libra.grpc.types.Proof.TransactionProof prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -2638,29 +3358,29 @@ public final class Proof {
     }
     /**
      * <pre>
-     * The complete proof used to authenticate a signed transaction.
+     * The complete proof used to authenticate a transaction.
      * </pre>
      *
-     * Protobuf type {@code types.SignedTransactionProof}
+     * Protobuf type {@code types.TransactionProof}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:types.SignedTransactionProof)
-        org.libra.grpc.types.Proof.SignedTransactionProofOrBuilder {
+        // @@protoc_insertion_point(builder_implements:types.TransactionProof)
+        org.libra.grpc.types.Proof.TransactionProofOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return org.libra.grpc.types.Proof.internal_static_types_SignedTransactionProof_descriptor;
+        return org.libra.grpc.types.Proof.internal_static_types_TransactionProof_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return org.libra.grpc.types.Proof.internal_static_types_SignedTransactionProof_fieldAccessorTable
+        return org.libra.grpc.types.Proof.internal_static_types_TransactionProof_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                org.libra.grpc.types.Proof.SignedTransactionProof.class, org.libra.grpc.types.Proof.SignedTransactionProof.Builder.class);
+                org.libra.grpc.types.Proof.TransactionProof.class, org.libra.grpc.types.Proof.TransactionProof.Builder.class);
       }
 
-      // Construct using org.libra.grpc.types.Proof.SignedTransactionProof.newBuilder()
+      // Construct using org.libra.grpc.types.Proof.TransactionProof.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -2696,17 +3416,17 @@ public final class Proof {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return org.libra.grpc.types.Proof.internal_static_types_SignedTransactionProof_descriptor;
+        return org.libra.grpc.types.Proof.internal_static_types_TransactionProof_descriptor;
       }
 
       @java.lang.Override
-      public org.libra.grpc.types.Proof.SignedTransactionProof getDefaultInstanceForType() {
-        return org.libra.grpc.types.Proof.SignedTransactionProof.getDefaultInstance();
+      public org.libra.grpc.types.Proof.TransactionProof getDefaultInstanceForType() {
+        return org.libra.grpc.types.Proof.TransactionProof.getDefaultInstance();
       }
 
       @java.lang.Override
-      public org.libra.grpc.types.Proof.SignedTransactionProof build() {
-        org.libra.grpc.types.Proof.SignedTransactionProof result = buildPartial();
+      public org.libra.grpc.types.Proof.TransactionProof build() {
+        org.libra.grpc.types.Proof.TransactionProof result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -2714,8 +3434,8 @@ public final class Proof {
       }
 
       @java.lang.Override
-      public org.libra.grpc.types.Proof.SignedTransactionProof buildPartial() {
-        org.libra.grpc.types.Proof.SignedTransactionProof result = new org.libra.grpc.types.Proof.SignedTransactionProof(this);
+      public org.libra.grpc.types.Proof.TransactionProof buildPartial() {
+        org.libra.grpc.types.Proof.TransactionProof result = new org.libra.grpc.types.Proof.TransactionProof(this);
         if (ledgerInfoToTransactionInfoProofBuilder_ == null) {
           result.ledgerInfoToTransactionInfoProof_ = ledgerInfoToTransactionInfoProof_;
         } else {
@@ -2764,16 +3484,16 @@ public final class Proof {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof org.libra.grpc.types.Proof.SignedTransactionProof) {
-          return mergeFrom((org.libra.grpc.types.Proof.SignedTransactionProof)other);
+        if (other instanceof org.libra.grpc.types.Proof.TransactionProof) {
+          return mergeFrom((org.libra.grpc.types.Proof.TransactionProof)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(org.libra.grpc.types.Proof.SignedTransactionProof other) {
-        if (other == org.libra.grpc.types.Proof.SignedTransactionProof.getDefaultInstance()) return this;
+      public Builder mergeFrom(org.libra.grpc.types.Proof.TransactionProof other) {
+        if (other == org.libra.grpc.types.Proof.TransactionProof.getDefaultInstance()) return this;
         if (other.hasLedgerInfoToTransactionInfoProof()) {
           mergeLedgerInfoToTransactionInfoProof(other.getLedgerInfoToTransactionInfoProof());
         }
@@ -2795,11 +3515,11 @@ public final class Proof {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        org.libra.grpc.types.Proof.SignedTransactionProof parsedMessage = null;
+        org.libra.grpc.types.Proof.TransactionProof parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (org.libra.grpc.types.Proof.SignedTransactionProof) e.getUnfinishedMessage();
+          parsedMessage = (org.libra.grpc.types.Proof.TransactionProof) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -3055,41 +3775,41 @@ public final class Proof {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:types.SignedTransactionProof)
+      // @@protoc_insertion_point(builder_scope:types.TransactionProof)
     }
 
-    // @@protoc_insertion_point(class_scope:types.SignedTransactionProof)
-    private static final org.libra.grpc.types.Proof.SignedTransactionProof DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:types.TransactionProof)
+    private static final org.libra.grpc.types.Proof.TransactionProof DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new org.libra.grpc.types.Proof.SignedTransactionProof();
+      DEFAULT_INSTANCE = new org.libra.grpc.types.Proof.TransactionProof();
     }
 
-    public static org.libra.grpc.types.Proof.SignedTransactionProof getDefaultInstance() {
+    public static org.libra.grpc.types.Proof.TransactionProof getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<SignedTransactionProof>
-        PARSER = new com.google.protobuf.AbstractParser<SignedTransactionProof>() {
+    private static final com.google.protobuf.Parser<TransactionProof>
+        PARSER = new com.google.protobuf.AbstractParser<TransactionProof>() {
       @java.lang.Override
-      public SignedTransactionProof parsePartialFrom(
+      public TransactionProof parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new SignedTransactionProof(input, extensionRegistry);
+        return new TransactionProof(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<SignedTransactionProof> parser() {
+    public static com.google.protobuf.Parser<TransactionProof> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<SignedTransactionProof> getParserForType() {
+    public com.google.protobuf.Parser<TransactionProof> getParserForType() {
       return PARSER;
     }
 
     @java.lang.Override
-    public org.libra.grpc.types.Proof.SignedTransactionProof getDefaultInstanceForType() {
+    public org.libra.grpc.types.Proof.TransactionProof getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -5099,6 +5819,992 @@ public final class Proof {
 
   }
 
+  public interface TransactionListProofOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:types.TransactionListProof)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>.types.AccumulatorRangeProof ledger_info_to_transaction_infos_proof = 1;</code>
+     */
+    boolean hasLedgerInfoToTransactionInfosProof();
+    /**
+     * <code>.types.AccumulatorRangeProof ledger_info_to_transaction_infos_proof = 1;</code>
+     */
+    org.libra.grpc.types.Proof.AccumulatorRangeProof getLedgerInfoToTransactionInfosProof();
+    /**
+     * <code>.types.AccumulatorRangeProof ledger_info_to_transaction_infos_proof = 1;</code>
+     */
+    org.libra.grpc.types.Proof.AccumulatorRangeProofOrBuilder getLedgerInfoToTransactionInfosProofOrBuilder();
+
+    /**
+     * <code>repeated .types.TransactionInfo transaction_infos = 2;</code>
+     */
+    java.util.List<org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo> 
+        getTransactionInfosList();
+    /**
+     * <code>repeated .types.TransactionInfo transaction_infos = 2;</code>
+     */
+    org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo getTransactionInfos(int index);
+    /**
+     * <code>repeated .types.TransactionInfo transaction_infos = 2;</code>
+     */
+    int getTransactionInfosCount();
+    /**
+     * <code>repeated .types.TransactionInfo transaction_infos = 2;</code>
+     */
+    java.util.List<? extends org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfoOrBuilder> 
+        getTransactionInfosOrBuilderList();
+    /**
+     * <code>repeated .types.TransactionInfo transaction_infos = 2;</code>
+     */
+    org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfoOrBuilder getTransactionInfosOrBuilder(
+        int index);
+  }
+  /**
+   * <pre>
+   * The complete proof used to authenticate a list of transactions.
+   * </pre>
+   *
+   * Protobuf type {@code types.TransactionListProof}
+   */
+  public  static final class TransactionListProof extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:types.TransactionListProof)
+      TransactionListProofOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use TransactionListProof.newBuilder() to construct.
+    private TransactionListProof(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private TransactionListProof() {
+      transactionInfos_ = java.util.Collections.emptyList();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private TransactionListProof(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              org.libra.grpc.types.Proof.AccumulatorRangeProof.Builder subBuilder = null;
+              if (ledgerInfoToTransactionInfosProof_ != null) {
+                subBuilder = ledgerInfoToTransactionInfosProof_.toBuilder();
+              }
+              ledgerInfoToTransactionInfosProof_ = input.readMessage(org.libra.grpc.types.Proof.AccumulatorRangeProof.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(ledgerInfoToTransactionInfosProof_);
+                ledgerInfoToTransactionInfosProof_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 18: {
+              if (!((mutable_bitField0_ & 0x00000002) != 0)) {
+                transactionInfos_ = new java.util.ArrayList<org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              transactionInfos_.add(
+                  input.readMessage(org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo.parser(), extensionRegistry));
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000002) != 0)) {
+          transactionInfos_ = java.util.Collections.unmodifiableList(transactionInfos_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return org.libra.grpc.types.Proof.internal_static_types_TransactionListProof_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return org.libra.grpc.types.Proof.internal_static_types_TransactionListProof_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              org.libra.grpc.types.Proof.TransactionListProof.class, org.libra.grpc.types.Proof.TransactionListProof.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int LEDGER_INFO_TO_TRANSACTION_INFOS_PROOF_FIELD_NUMBER = 1;
+    private org.libra.grpc.types.Proof.AccumulatorRangeProof ledgerInfoToTransactionInfosProof_;
+    /**
+     * <code>.types.AccumulatorRangeProof ledger_info_to_transaction_infos_proof = 1;</code>
+     */
+    public boolean hasLedgerInfoToTransactionInfosProof() {
+      return ledgerInfoToTransactionInfosProof_ != null;
+    }
+    /**
+     * <code>.types.AccumulatorRangeProof ledger_info_to_transaction_infos_proof = 1;</code>
+     */
+    public org.libra.grpc.types.Proof.AccumulatorRangeProof getLedgerInfoToTransactionInfosProof() {
+      return ledgerInfoToTransactionInfosProof_ == null ? org.libra.grpc.types.Proof.AccumulatorRangeProof.getDefaultInstance() : ledgerInfoToTransactionInfosProof_;
+    }
+    /**
+     * <code>.types.AccumulatorRangeProof ledger_info_to_transaction_infos_proof = 1;</code>
+     */
+    public org.libra.grpc.types.Proof.AccumulatorRangeProofOrBuilder getLedgerInfoToTransactionInfosProofOrBuilder() {
+      return getLedgerInfoToTransactionInfosProof();
+    }
+
+    public static final int TRANSACTION_INFOS_FIELD_NUMBER = 2;
+    private java.util.List<org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo> transactionInfos_;
+    /**
+     * <code>repeated .types.TransactionInfo transaction_infos = 2;</code>
+     */
+    public java.util.List<org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo> getTransactionInfosList() {
+      return transactionInfos_;
+    }
+    /**
+     * <code>repeated .types.TransactionInfo transaction_infos = 2;</code>
+     */
+    public java.util.List<? extends org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfoOrBuilder> 
+        getTransactionInfosOrBuilderList() {
+      return transactionInfos_;
+    }
+    /**
+     * <code>repeated .types.TransactionInfo transaction_infos = 2;</code>
+     */
+    public int getTransactionInfosCount() {
+      return transactionInfos_.size();
+    }
+    /**
+     * <code>repeated .types.TransactionInfo transaction_infos = 2;</code>
+     */
+    public org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo getTransactionInfos(int index) {
+      return transactionInfos_.get(index);
+    }
+    /**
+     * <code>repeated .types.TransactionInfo transaction_infos = 2;</code>
+     */
+    public org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfoOrBuilder getTransactionInfosOrBuilder(
+        int index) {
+      return transactionInfos_.get(index);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (ledgerInfoToTransactionInfosProof_ != null) {
+        output.writeMessage(1, getLedgerInfoToTransactionInfosProof());
+      }
+      for (int i = 0; i < transactionInfos_.size(); i++) {
+        output.writeMessage(2, transactionInfos_.get(i));
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (ledgerInfoToTransactionInfosProof_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, getLedgerInfoToTransactionInfosProof());
+      }
+      for (int i = 0; i < transactionInfos_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, transactionInfos_.get(i));
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof org.libra.grpc.types.Proof.TransactionListProof)) {
+        return super.equals(obj);
+      }
+      org.libra.grpc.types.Proof.TransactionListProof other = (org.libra.grpc.types.Proof.TransactionListProof) obj;
+
+      if (hasLedgerInfoToTransactionInfosProof() != other.hasLedgerInfoToTransactionInfosProof()) return false;
+      if (hasLedgerInfoToTransactionInfosProof()) {
+        if (!getLedgerInfoToTransactionInfosProof()
+            .equals(other.getLedgerInfoToTransactionInfosProof())) return false;
+      }
+      if (!getTransactionInfosList()
+          .equals(other.getTransactionInfosList())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasLedgerInfoToTransactionInfosProof()) {
+        hash = (37 * hash) + LEDGER_INFO_TO_TRANSACTION_INFOS_PROOF_FIELD_NUMBER;
+        hash = (53 * hash) + getLedgerInfoToTransactionInfosProof().hashCode();
+      }
+      if (getTransactionInfosCount() > 0) {
+        hash = (37 * hash) + TRANSACTION_INFOS_FIELD_NUMBER;
+        hash = (53 * hash) + getTransactionInfosList().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static org.libra.grpc.types.Proof.TransactionListProof parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.libra.grpc.types.Proof.TransactionListProof parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.libra.grpc.types.Proof.TransactionListProof parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.libra.grpc.types.Proof.TransactionListProof parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.libra.grpc.types.Proof.TransactionListProof parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.libra.grpc.types.Proof.TransactionListProof parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.libra.grpc.types.Proof.TransactionListProof parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static org.libra.grpc.types.Proof.TransactionListProof parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static org.libra.grpc.types.Proof.TransactionListProof parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static org.libra.grpc.types.Proof.TransactionListProof parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static org.libra.grpc.types.Proof.TransactionListProof parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static org.libra.grpc.types.Proof.TransactionListProof parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(org.libra.grpc.types.Proof.TransactionListProof prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     * The complete proof used to authenticate a list of transactions.
+     * </pre>
+     *
+     * Protobuf type {@code types.TransactionListProof}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:types.TransactionListProof)
+        org.libra.grpc.types.Proof.TransactionListProofOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return org.libra.grpc.types.Proof.internal_static_types_TransactionListProof_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return org.libra.grpc.types.Proof.internal_static_types_TransactionListProof_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                org.libra.grpc.types.Proof.TransactionListProof.class, org.libra.grpc.types.Proof.TransactionListProof.Builder.class);
+      }
+
+      // Construct using org.libra.grpc.types.Proof.TransactionListProof.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+          getTransactionInfosFieldBuilder();
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        if (ledgerInfoToTransactionInfosProofBuilder_ == null) {
+          ledgerInfoToTransactionInfosProof_ = null;
+        } else {
+          ledgerInfoToTransactionInfosProof_ = null;
+          ledgerInfoToTransactionInfosProofBuilder_ = null;
+        }
+        if (transactionInfosBuilder_ == null) {
+          transactionInfos_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+        } else {
+          transactionInfosBuilder_.clear();
+        }
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return org.libra.grpc.types.Proof.internal_static_types_TransactionListProof_descriptor;
+      }
+
+      @java.lang.Override
+      public org.libra.grpc.types.Proof.TransactionListProof getDefaultInstanceForType() {
+        return org.libra.grpc.types.Proof.TransactionListProof.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public org.libra.grpc.types.Proof.TransactionListProof build() {
+        org.libra.grpc.types.Proof.TransactionListProof result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public org.libra.grpc.types.Proof.TransactionListProof buildPartial() {
+        org.libra.grpc.types.Proof.TransactionListProof result = new org.libra.grpc.types.Proof.TransactionListProof(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (ledgerInfoToTransactionInfosProofBuilder_ == null) {
+          result.ledgerInfoToTransactionInfosProof_ = ledgerInfoToTransactionInfosProof_;
+        } else {
+          result.ledgerInfoToTransactionInfosProof_ = ledgerInfoToTransactionInfosProofBuilder_.build();
+        }
+        if (transactionInfosBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) != 0)) {
+            transactionInfos_ = java.util.Collections.unmodifiableList(transactionInfos_);
+            bitField0_ = (bitField0_ & ~0x00000002);
+          }
+          result.transactionInfos_ = transactionInfos_;
+        } else {
+          result.transactionInfos_ = transactionInfosBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof org.libra.grpc.types.Proof.TransactionListProof) {
+          return mergeFrom((org.libra.grpc.types.Proof.TransactionListProof)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(org.libra.grpc.types.Proof.TransactionListProof other) {
+        if (other == org.libra.grpc.types.Proof.TransactionListProof.getDefaultInstance()) return this;
+        if (other.hasLedgerInfoToTransactionInfosProof()) {
+          mergeLedgerInfoToTransactionInfosProof(other.getLedgerInfoToTransactionInfosProof());
+        }
+        if (transactionInfosBuilder_ == null) {
+          if (!other.transactionInfos_.isEmpty()) {
+            if (transactionInfos_.isEmpty()) {
+              transactionInfos_ = other.transactionInfos_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+            } else {
+              ensureTransactionInfosIsMutable();
+              transactionInfos_.addAll(other.transactionInfos_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.transactionInfos_.isEmpty()) {
+            if (transactionInfosBuilder_.isEmpty()) {
+              transactionInfosBuilder_.dispose();
+              transactionInfosBuilder_ = null;
+              transactionInfos_ = other.transactionInfos_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+              transactionInfosBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getTransactionInfosFieldBuilder() : null;
+            } else {
+              transactionInfosBuilder_.addAllMessages(other.transactionInfos_);
+            }
+          }
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        org.libra.grpc.types.Proof.TransactionListProof parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (org.libra.grpc.types.Proof.TransactionListProof) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private org.libra.grpc.types.Proof.AccumulatorRangeProof ledgerInfoToTransactionInfosProof_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          org.libra.grpc.types.Proof.AccumulatorRangeProof, org.libra.grpc.types.Proof.AccumulatorRangeProof.Builder, org.libra.grpc.types.Proof.AccumulatorRangeProofOrBuilder> ledgerInfoToTransactionInfosProofBuilder_;
+      /**
+       * <code>.types.AccumulatorRangeProof ledger_info_to_transaction_infos_proof = 1;</code>
+       */
+      public boolean hasLedgerInfoToTransactionInfosProof() {
+        return ledgerInfoToTransactionInfosProofBuilder_ != null || ledgerInfoToTransactionInfosProof_ != null;
+      }
+      /**
+       * <code>.types.AccumulatorRangeProof ledger_info_to_transaction_infos_proof = 1;</code>
+       */
+      public org.libra.grpc.types.Proof.AccumulatorRangeProof getLedgerInfoToTransactionInfosProof() {
+        if (ledgerInfoToTransactionInfosProofBuilder_ == null) {
+          return ledgerInfoToTransactionInfosProof_ == null ? org.libra.grpc.types.Proof.AccumulatorRangeProof.getDefaultInstance() : ledgerInfoToTransactionInfosProof_;
+        } else {
+          return ledgerInfoToTransactionInfosProofBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.types.AccumulatorRangeProof ledger_info_to_transaction_infos_proof = 1;</code>
+       */
+      public Builder setLedgerInfoToTransactionInfosProof(org.libra.grpc.types.Proof.AccumulatorRangeProof value) {
+        if (ledgerInfoToTransactionInfosProofBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ledgerInfoToTransactionInfosProof_ = value;
+          onChanged();
+        } else {
+          ledgerInfoToTransactionInfosProofBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.types.AccumulatorRangeProof ledger_info_to_transaction_infos_proof = 1;</code>
+       */
+      public Builder setLedgerInfoToTransactionInfosProof(
+          org.libra.grpc.types.Proof.AccumulatorRangeProof.Builder builderForValue) {
+        if (ledgerInfoToTransactionInfosProofBuilder_ == null) {
+          ledgerInfoToTransactionInfosProof_ = builderForValue.build();
+          onChanged();
+        } else {
+          ledgerInfoToTransactionInfosProofBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.types.AccumulatorRangeProof ledger_info_to_transaction_infos_proof = 1;</code>
+       */
+      public Builder mergeLedgerInfoToTransactionInfosProof(org.libra.grpc.types.Proof.AccumulatorRangeProof value) {
+        if (ledgerInfoToTransactionInfosProofBuilder_ == null) {
+          if (ledgerInfoToTransactionInfosProof_ != null) {
+            ledgerInfoToTransactionInfosProof_ =
+              org.libra.grpc.types.Proof.AccumulatorRangeProof.newBuilder(ledgerInfoToTransactionInfosProof_).mergeFrom(value).buildPartial();
+          } else {
+            ledgerInfoToTransactionInfosProof_ = value;
+          }
+          onChanged();
+        } else {
+          ledgerInfoToTransactionInfosProofBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.types.AccumulatorRangeProof ledger_info_to_transaction_infos_proof = 1;</code>
+       */
+      public Builder clearLedgerInfoToTransactionInfosProof() {
+        if (ledgerInfoToTransactionInfosProofBuilder_ == null) {
+          ledgerInfoToTransactionInfosProof_ = null;
+          onChanged();
+        } else {
+          ledgerInfoToTransactionInfosProof_ = null;
+          ledgerInfoToTransactionInfosProofBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.types.AccumulatorRangeProof ledger_info_to_transaction_infos_proof = 1;</code>
+       */
+      public org.libra.grpc.types.Proof.AccumulatorRangeProof.Builder getLedgerInfoToTransactionInfosProofBuilder() {
+        
+        onChanged();
+        return getLedgerInfoToTransactionInfosProofFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.types.AccumulatorRangeProof ledger_info_to_transaction_infos_proof = 1;</code>
+       */
+      public org.libra.grpc.types.Proof.AccumulatorRangeProofOrBuilder getLedgerInfoToTransactionInfosProofOrBuilder() {
+        if (ledgerInfoToTransactionInfosProofBuilder_ != null) {
+          return ledgerInfoToTransactionInfosProofBuilder_.getMessageOrBuilder();
+        } else {
+          return ledgerInfoToTransactionInfosProof_ == null ?
+              org.libra.grpc.types.Proof.AccumulatorRangeProof.getDefaultInstance() : ledgerInfoToTransactionInfosProof_;
+        }
+      }
+      /**
+       * <code>.types.AccumulatorRangeProof ledger_info_to_transaction_infos_proof = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          org.libra.grpc.types.Proof.AccumulatorRangeProof, org.libra.grpc.types.Proof.AccumulatorRangeProof.Builder, org.libra.grpc.types.Proof.AccumulatorRangeProofOrBuilder> 
+          getLedgerInfoToTransactionInfosProofFieldBuilder() {
+        if (ledgerInfoToTransactionInfosProofBuilder_ == null) {
+          ledgerInfoToTransactionInfosProofBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              org.libra.grpc.types.Proof.AccumulatorRangeProof, org.libra.grpc.types.Proof.AccumulatorRangeProof.Builder, org.libra.grpc.types.Proof.AccumulatorRangeProofOrBuilder>(
+                  getLedgerInfoToTransactionInfosProof(),
+                  getParentForChildren(),
+                  isClean());
+          ledgerInfoToTransactionInfosProof_ = null;
+        }
+        return ledgerInfoToTransactionInfosProofBuilder_;
+      }
+
+      private java.util.List<org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo> transactionInfos_ =
+        java.util.Collections.emptyList();
+      private void ensureTransactionInfosIsMutable() {
+        if (!((bitField0_ & 0x00000002) != 0)) {
+          transactionInfos_ = new java.util.ArrayList<org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo>(transactionInfos_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo, org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo.Builder, org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfoOrBuilder> transactionInfosBuilder_;
+
+      /**
+       * <code>repeated .types.TransactionInfo transaction_infos = 2;</code>
+       */
+      public java.util.List<org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo> getTransactionInfosList() {
+        if (transactionInfosBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(transactionInfos_);
+        } else {
+          return transactionInfosBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .types.TransactionInfo transaction_infos = 2;</code>
+       */
+      public int getTransactionInfosCount() {
+        if (transactionInfosBuilder_ == null) {
+          return transactionInfos_.size();
+        } else {
+          return transactionInfosBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .types.TransactionInfo transaction_infos = 2;</code>
+       */
+      public org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo getTransactionInfos(int index) {
+        if (transactionInfosBuilder_ == null) {
+          return transactionInfos_.get(index);
+        } else {
+          return transactionInfosBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .types.TransactionInfo transaction_infos = 2;</code>
+       */
+      public Builder setTransactionInfos(
+          int index, org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo value) {
+        if (transactionInfosBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureTransactionInfosIsMutable();
+          transactionInfos_.set(index, value);
+          onChanged();
+        } else {
+          transactionInfosBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .types.TransactionInfo transaction_infos = 2;</code>
+       */
+      public Builder setTransactionInfos(
+          int index, org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo.Builder builderForValue) {
+        if (transactionInfosBuilder_ == null) {
+          ensureTransactionInfosIsMutable();
+          transactionInfos_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          transactionInfosBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .types.TransactionInfo transaction_infos = 2;</code>
+       */
+      public Builder addTransactionInfos(org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo value) {
+        if (transactionInfosBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureTransactionInfosIsMutable();
+          transactionInfos_.add(value);
+          onChanged();
+        } else {
+          transactionInfosBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .types.TransactionInfo transaction_infos = 2;</code>
+       */
+      public Builder addTransactionInfos(
+          int index, org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo value) {
+        if (transactionInfosBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureTransactionInfosIsMutable();
+          transactionInfos_.add(index, value);
+          onChanged();
+        } else {
+          transactionInfosBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .types.TransactionInfo transaction_infos = 2;</code>
+       */
+      public Builder addTransactionInfos(
+          org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo.Builder builderForValue) {
+        if (transactionInfosBuilder_ == null) {
+          ensureTransactionInfosIsMutable();
+          transactionInfos_.add(builderForValue.build());
+          onChanged();
+        } else {
+          transactionInfosBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .types.TransactionInfo transaction_infos = 2;</code>
+       */
+      public Builder addTransactionInfos(
+          int index, org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo.Builder builderForValue) {
+        if (transactionInfosBuilder_ == null) {
+          ensureTransactionInfosIsMutable();
+          transactionInfos_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          transactionInfosBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .types.TransactionInfo transaction_infos = 2;</code>
+       */
+      public Builder addAllTransactionInfos(
+          java.lang.Iterable<? extends org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo> values) {
+        if (transactionInfosBuilder_ == null) {
+          ensureTransactionInfosIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, transactionInfos_);
+          onChanged();
+        } else {
+          transactionInfosBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .types.TransactionInfo transaction_infos = 2;</code>
+       */
+      public Builder clearTransactionInfos() {
+        if (transactionInfosBuilder_ == null) {
+          transactionInfos_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+          onChanged();
+        } else {
+          transactionInfosBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .types.TransactionInfo transaction_infos = 2;</code>
+       */
+      public Builder removeTransactionInfos(int index) {
+        if (transactionInfosBuilder_ == null) {
+          ensureTransactionInfosIsMutable();
+          transactionInfos_.remove(index);
+          onChanged();
+        } else {
+          transactionInfosBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .types.TransactionInfo transaction_infos = 2;</code>
+       */
+      public org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo.Builder getTransactionInfosBuilder(
+          int index) {
+        return getTransactionInfosFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .types.TransactionInfo transaction_infos = 2;</code>
+       */
+      public org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfoOrBuilder getTransactionInfosOrBuilder(
+          int index) {
+        if (transactionInfosBuilder_ == null) {
+          return transactionInfos_.get(index);  } else {
+          return transactionInfosBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .types.TransactionInfo transaction_infos = 2;</code>
+       */
+      public java.util.List<? extends org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfoOrBuilder> 
+           getTransactionInfosOrBuilderList() {
+        if (transactionInfosBuilder_ != null) {
+          return transactionInfosBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(transactionInfos_);
+        }
+      }
+      /**
+       * <code>repeated .types.TransactionInfo transaction_infos = 2;</code>
+       */
+      public org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo.Builder addTransactionInfosBuilder() {
+        return getTransactionInfosFieldBuilder().addBuilder(
+            org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .types.TransactionInfo transaction_infos = 2;</code>
+       */
+      public org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo.Builder addTransactionInfosBuilder(
+          int index) {
+        return getTransactionInfosFieldBuilder().addBuilder(
+            index, org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .types.TransactionInfo transaction_infos = 2;</code>
+       */
+      public java.util.List<org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo.Builder> 
+           getTransactionInfosBuilderList() {
+        return getTransactionInfosFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo, org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo.Builder, org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfoOrBuilder> 
+          getTransactionInfosFieldBuilder() {
+        if (transactionInfosBuilder_ == null) {
+          transactionInfosBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo, org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo.Builder, org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfoOrBuilder>(
+                  transactionInfos_,
+                  ((bitField0_ & 0x00000002) != 0),
+                  getParentForChildren(),
+                  isClean());
+          transactionInfos_ = null;
+        }
+        return transactionInfosBuilder_;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:types.TransactionListProof)
+    }
+
+    // @@protoc_insertion_point(class_scope:types.TransactionListProof)
+    private static final org.libra.grpc.types.Proof.TransactionListProof DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new org.libra.grpc.types.Proof.TransactionListProof();
+    }
+
+    public static org.libra.grpc.types.Proof.TransactionListProof getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<TransactionListProof>
+        PARSER = new com.google.protobuf.AbstractParser<TransactionListProof>() {
+      @java.lang.Override
+      public TransactionListProof parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new TransactionListProof(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<TransactionListProof> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<TransactionListProof> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public org.libra.grpc.types.Proof.TransactionListProof getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_types_AccumulatorProof_descriptor;
   private static final 
@@ -5115,10 +6821,15 @@ public final class Proof {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_types_AccumulatorConsistencyProof_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_types_SignedTransactionProof_descriptor;
+    internal_static_types_AccumulatorRangeProof_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_types_SignedTransactionProof_fieldAccessorTable;
+      internal_static_types_AccumulatorRangeProof_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_types_TransactionProof_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_types_TransactionProof_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_types_AccountStateProof_descriptor;
   private static final 
@@ -5129,6 +6840,11 @@ public final class Proof {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_types_EventProof_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_types_TransactionListProof_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_types_TransactionListProof_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -5139,26 +6855,31 @@ public final class Proof {
   static {
     java.lang.String[] descriptorData = {
       "\n\013proof.proto\022\005types\032\026transaction_info.p" +
-      "roto\"@\n\020AccumulatorProof\022\016\n\006bitmap\030\001 \001(\004" +
-      "\022\034\n\024non_default_siblings\030\002 \003(\014\"O\n\021Sparse" +
-      "MerkleProof\022\014\n\004leaf\030\001 \001(\014\022\016\n\006bitmap\030\002 \001(" +
-      "\014\022\034\n\024non_default_siblings\030\003 \003(\014\"/\n\033Accum" +
-      "ulatorConsistencyProof\022\020\n\010subtrees\030\001 \003(\014" +
-      "\"\222\001\n\026SignedTransactionProof\022F\n%ledger_in" +
+      "roto\"$\n\020AccumulatorProof\022\020\n\010siblings\030\001 \003" +
+      "(\014\"3\n\021SparseMerkleProof\022\014\n\004leaf\030\001 \001(\014\022\020\n" +
+      "\010siblings\030\002 \003(\014\"/\n\033AccumulatorConsistenc" +
+      "yProof\022\020\n\010subtrees\030\001 \003(\014\"F\n\025AccumulatorR" +
+      "angeProof\022\025\n\rleft_siblings\030\001 \003(\014\022\026\n\016righ" +
+      "t_siblings\030\002 \003(\014\"\214\001\n\020TransactionProof\022F\n" +
+      "%ledger_info_to_transaction_info_proof\030\001" +
+      " \001(\0132\027.types.AccumulatorProof\0220\n\020transac" +
+      "tion_info\030\002 \001(\0132\026.types.TransactionInfo\"" +
+      "\322\001\n\021AccountStateProof\022F\n%ledger_info_to_" +
+      "transaction_info_proof\030\001 \001(\0132\027.types.Acc" +
+      "umulatorProof\0220\n\020transaction_info\030\002 \001(\0132" +
+      "\026.types.TransactionInfo\022C\n!transaction_i" +
+      "nfo_to_account_proof\030\003 \001(\0132\030.types.Spars" +
+      "eMerkleProof\"\310\001\n\nEventProof\022F\n%ledger_in" +
       "fo_to_transaction_info_proof\030\001 \001(\0132\027.typ" +
       "es.AccumulatorProof\0220\n\020transaction_info\030" +
-      "\002 \001(\0132\026.types.TransactionInfo\"\322\001\n\021Accoun" +
-      "tStateProof\022F\n%ledger_info_to_transactio" +
-      "n_info_proof\030\001 \001(\0132\027.types.AccumulatorPr" +
-      "oof\0220\n\020transaction_info\030\002 \001(\0132\026.types.Tr" +
-      "ansactionInfo\022C\n!transaction_info_to_acc" +
-      "ount_proof\030\003 \001(\0132\030.types.SparseMerklePro" +
-      "of\"\310\001\n\nEventProof\022F\n%ledger_info_to_tran" +
-      "saction_info_proof\030\001 \001(\0132\027.types.Accumul" +
-      "atorProof\0220\n\020transaction_info\030\002 \001(\0132\026.ty" +
-      "pes.TransactionInfo\022@\n\037transaction_info_" +
-      "to_event_proof\030\003 \001(\0132\027.types.Accumulator" +
-      "ProofB\026\n\024org.libra.grpc.typesb\006proto3"
+      "\002 \001(\0132\026.types.TransactionInfo\022@\n\037transac" +
+      "tion_info_to_event_proof\030\003 \001(\0132\027.types.A" +
+      "ccumulatorProof\"\227\001\n\024TransactionListProof" +
+      "\022L\n&ledger_info_to_transaction_infos_pro" +
+      "of\030\001 \001(\0132\034.types.AccumulatorRangeProof\0221" +
+      "\n\021transaction_infos\030\002 \003(\0132\026.types.Transa" +
+      "ctionInfoB\026\n\024org.libra.grpc.typesb\006proto" +
+      "3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -5178,37 +6899,49 @@ public final class Proof {
     internal_static_types_AccumulatorProof_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_types_AccumulatorProof_descriptor,
-        new java.lang.String[] { "Bitmap", "NonDefaultSiblings", });
+        new java.lang.String[] { "Siblings", });
     internal_static_types_SparseMerkleProof_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_types_SparseMerkleProof_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_types_SparseMerkleProof_descriptor,
-        new java.lang.String[] { "Leaf", "Bitmap", "NonDefaultSiblings", });
+        new java.lang.String[] { "Leaf", "Siblings", });
     internal_static_types_AccumulatorConsistencyProof_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_types_AccumulatorConsistencyProof_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_types_AccumulatorConsistencyProof_descriptor,
         new java.lang.String[] { "Subtrees", });
-    internal_static_types_SignedTransactionProof_descriptor =
+    internal_static_types_AccumulatorRangeProof_descriptor =
       getDescriptor().getMessageTypes().get(3);
-    internal_static_types_SignedTransactionProof_fieldAccessorTable = new
+    internal_static_types_AccumulatorRangeProof_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_types_SignedTransactionProof_descriptor,
+        internal_static_types_AccumulatorRangeProof_descriptor,
+        new java.lang.String[] { "LeftSiblings", "RightSiblings", });
+    internal_static_types_TransactionProof_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_types_TransactionProof_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_types_TransactionProof_descriptor,
         new java.lang.String[] { "LedgerInfoToTransactionInfoProof", "TransactionInfo", });
     internal_static_types_AccountStateProof_descriptor =
-      getDescriptor().getMessageTypes().get(4);
+      getDescriptor().getMessageTypes().get(5);
     internal_static_types_AccountStateProof_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_types_AccountStateProof_descriptor,
         new java.lang.String[] { "LedgerInfoToTransactionInfoProof", "TransactionInfo", "TransactionInfoToAccountProof", });
     internal_static_types_EventProof_descriptor =
-      getDescriptor().getMessageTypes().get(5);
+      getDescriptor().getMessageTypes().get(6);
     internal_static_types_EventProof_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_types_EventProof_descriptor,
         new java.lang.String[] { "LedgerInfoToTransactionInfoProof", "TransactionInfo", "TransactionInfoToEventProof", });
+    internal_static_types_TransactionListProof_descriptor =
+      getDescriptor().getMessageTypes().get(7);
+    internal_static_types_TransactionListProof_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_types_TransactionListProof_descriptor,
+        new java.lang.String[] { "LedgerInfoToTransactionInfosProof", "TransactionInfos", });
     org.libra.grpc.types.TransactionInfoOuterClass.getDescriptor();
   }
 

@@ -32,6 +32,11 @@ public final class Events {
      * <code>bytes event_data = 3;</code>
      */
     com.google.protobuf.ByteString getEventData();
+
+    /**
+     * <code>bytes type_tag = 4;</code>
+     */
+    com.google.protobuf.ByteString getTypeTag();
   }
   /**
    * <pre>
@@ -52,6 +57,7 @@ public final class Events {
     private Event() {
       key_ = com.google.protobuf.ByteString.EMPTY;
       eventData_ = com.google.protobuf.ByteString.EMPTY;
+      typeTag_ = com.google.protobuf.ByteString.EMPTY;
     }
 
     @java.lang.Override
@@ -91,6 +97,11 @@ public final class Events {
             case 26: {
 
               eventData_ = input.readBytes();
+              break;
+            }
+            case 34: {
+
+              typeTag_ = input.readBytes();
               break;
             }
             default: {
@@ -152,6 +163,15 @@ public final class Events {
       return eventData_;
     }
 
+    public static final int TYPE_TAG_FIELD_NUMBER = 4;
+    private com.google.protobuf.ByteString typeTag_;
+    /**
+     * <code>bytes type_tag = 4;</code>
+     */
+    public com.google.protobuf.ByteString getTypeTag() {
+      return typeTag_;
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -175,6 +195,9 @@ public final class Events {
       if (!eventData_.isEmpty()) {
         output.writeBytes(3, eventData_);
       }
+      if (!typeTag_.isEmpty()) {
+        output.writeBytes(4, typeTag_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -195,6 +218,10 @@ public final class Events {
       if (!eventData_.isEmpty()) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(3, eventData_);
+      }
+      if (!typeTag_.isEmpty()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, typeTag_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -217,6 +244,8 @@ public final class Events {
           != other.getSequenceNumber()) return false;
       if (!getEventData()
           .equals(other.getEventData())) return false;
+      if (!getTypeTag()
+          .equals(other.getTypeTag())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -235,6 +264,8 @@ public final class Events {
           getSequenceNumber());
       hash = (37 * hash) + EVENT_DATA_FIELD_NUMBER;
       hash = (53 * hash) + getEventData().hashCode();
+      hash = (37 * hash) + TYPE_TAG_FIELD_NUMBER;
+      hash = (53 * hash) + getTypeTag().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -378,6 +409,8 @@ public final class Events {
 
         eventData_ = com.google.protobuf.ByteString.EMPTY;
 
+        typeTag_ = com.google.protobuf.ByteString.EMPTY;
+
         return this;
       }
 
@@ -407,6 +440,7 @@ public final class Events {
         result.key_ = key_;
         result.sequenceNumber_ = sequenceNumber_;
         result.eventData_ = eventData_;
+        result.typeTag_ = typeTag_;
         onBuilt();
         return result;
       }
@@ -463,6 +497,9 @@ public final class Events {
         }
         if (other.getEventData() != com.google.protobuf.ByteString.EMPTY) {
           setEventData(other.getEventData());
+        }
+        if (other.getTypeTag() != com.google.protobuf.ByteString.EMPTY) {
+          setTypeTag(other.getTypeTag());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -573,6 +610,35 @@ public final class Events {
       public Builder clearEventData() {
         
         eventData_ = getDefaultInstance().getEventData();
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.ByteString typeTag_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>bytes type_tag = 4;</code>
+       */
+      public com.google.protobuf.ByteString getTypeTag() {
+        return typeTag_;
+      }
+      /**
+       * <code>bytes type_tag = 4;</code>
+       */
+      public Builder setTypeTag(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        typeTag_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bytes type_tag = 4;</code>
+       */
+      public Builder clearTypeTag() {
+        
+        typeTag_ = getDefaultInstance().getTypeTag();
         onChanged();
         return this;
       }
@@ -3170,16 +3236,16 @@ public final class Events {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\014events.proto\022\005types\032\013proof.proto\"A\n\005Ev" +
+      "\n\014events.proto\022\005types\032\013proof.proto\"S\n\005Ev" +
       "ent\022\013\n\003key\030\001 \001(\014\022\027\n\017sequence_number\030\002 \001(" +
-      "\004\022\022\n\nevent_data\030\003 \001(\014\"\201\001\n\016EventWithProof" +
-      "\022\033\n\023transaction_version\030\001 \001(\004\022\023\n\013event_i" +
-      "ndex\030\002 \001(\004\022\033\n\005event\030\003 \001(\0132\014.types.Event\022" +
-      " \n\005proof\030\004 \001(\0132\021.types.EventProof\"*\n\nEve" +
-      "ntsList\022\034\n\006events\030\001 \003(\0132\014.types.Event\"B\n" +
-      "\021EventsForVersions\022-\n\022events_for_version" +
-      "\030\001 \003(\0132\021.types.EventsListB\026\n\024org.libra.g" +
-      "rpc.typesb\006proto3"
+      "\004\022\022\n\nevent_data\030\003 \001(\014\022\020\n\010type_tag\030\004 \001(\014\"" +
+      "\201\001\n\016EventWithProof\022\033\n\023transaction_versio" +
+      "n\030\001 \001(\004\022\023\n\013event_index\030\002 \001(\004\022\033\n\005event\030\003 " +
+      "\001(\0132\014.types.Event\022 \n\005proof\030\004 \001(\0132\021.types" +
+      ".EventProof\"*\n\nEventsList\022\034\n\006events\030\001 \003(" +
+      "\0132\014.types.Event\"B\n\021EventsForVersions\022-\n\022" +
+      "events_for_version\030\001 \003(\0132\021.types.EventsL" +
+      "istB\026\n\024org.libra.grpc.typesb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3199,7 +3265,7 @@ public final class Events {
     internal_static_types_Event_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_types_Event_descriptor,
-        new java.lang.String[] { "Key", "SequenceNumber", "EventData", });
+        new java.lang.String[] { "Key", "SequenceNumber", "EventData", "TypeTag", });
     internal_static_types_EventWithProof_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_types_EventWithProof_fieldAccessorTable = new
