@@ -1,0 +1,141 @@
+Text Compare
+Produced: 06.11.19 07:11:09
+
+Mode:  Differences
+Left base folder:  libra4j/proto
+Right base folder: libra4j/proto-new
+
+File: access_path.proto
+
+File: account_state_blob.proto
+
+File: admission_control.proto
+  // Transaction signed by wallet.        <>   // Transaction submitted by user.
+  types.SignedTransaction signed_txn = 1;      types.SignedTransaction transaction = 1;
+---------------------------------------------------------------------------------------
+
+File: events.proto
+ -+     bytes type_tag = 4;
+---------------------------
+
+File: get_with_proof.proto
+    repeated ValidatorChangeEventWithProof validator_change_events = 3; <>     ValidatorChangeEventWithProof validator_change_events = 3;
+-----------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------
+  SignedTransactionWithProof signed_transaction_with_proof = 2;         <>   TransactionWithProof transaction_with_proof = 2;
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+File: language_storage.proto
+
+File: ledger_info.proto
+
+File: mempool_status.proto
+
+File: proof.proto
+  // The bitmap indicating which siblings are default. 1 means non-default and <>   // The siblings. The ones near the leaf are at the beginning of the list. The
+  // 0 means default. The LSB corresponds to the sibling at the bottom of the
+  // accumulator. The leftmost 1-bit corresponds to the sibling at the level
+  // just below root level in the accumulator, since this one is always             // placeholder nodes are represented by empty byte arrays, other nodes should
+  // non-default.
+  uint64 bitmap = 1;
+                                                                                    // be exactly 32-bytes long.
+  // The non-default siblings. The ones near the root are at the beginning of
+  // the list.
+  repeated bytes non_default_siblings = 2;                                          repeated bytes siblings = 1;
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // The bitmap indicating which siblings are default. 1 means non-default and <>   // The siblings. The ones near the leaf are at the beginning of the list. The
+  // 0 means default. The MSB of the first byte corresponds to the sibling at       // placeholder nodes are represented by empty byte arrays, other nodes should
+  // the top of the Sparse Merkle Tree. The rightmost 1-bit of the last byte
+  // corresponds to the sibling at the bottom, since this one is always
+  // non-default.
+  bytes bitmap = 2;
+                                                                                    // be exactly 32-bytes long.
+  // The non-default siblings. The ones near the root are at the beginning of
+  // the list.
+  repeated bytes non_default_siblings = 3;                                          repeated bytes siblings = 2;
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+                                                                               <> message AccumulatorRangeProof {
+                                                                                    // The siblings on the left of the path from root to the first leaf. The ones
+                                                                                    // near the leaf are at the beginning of the list. The placeholder nodes are
+                                                                                    // represented by empty byte arrays, other nodes should be exactly 32-bytes
+                                                                                    // long.
+                                                                                    repeated bytes left_siblings = 1;
+
+                                                                                    // The siblings on the right of the path from root to the last leaf. The ones
+                                                                                    // near the leaf are at the beginning of the list. The placeholder nodes are
+                                                                                    // represented by empty byte arrays, other nodes should be exactly 32-bytes
+                                                                                    // long.
+                                                                                    repeated bytes right_siblings = 2;
+                                                                                  }
+
+// The complete proof used to authenticate a signed transaction.                  // The complete proof used to authenticate a transaction.
+message SignedTransactionProof {                                                  message TransactionProof {
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+                                                                               -+
+                                                                                  // The complete proof used to authenticate a list of transactions.
+                                                                                  message TransactionListProof {
+                                                                                    AccumulatorRangeProof ledger_info_to_transaction_infos_proof = 1;
+                                                                                    repeated TransactionInfo transaction_infos = 2;
+                                                                                  }
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+File: transaction.proto
+    // LCS byte code representation of a SignedTransaction                         <>     // LCS bytes representation of a SignedTransaction.
+    bytes signed_txn = 5;                                                                 bytes txn_bytes = 5;
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+message SignedTransactionWithProof {                                               <> message TransactionWithProof {
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    SignedTransaction signed_transaction = 2;                                      <>     Transaction transaction = 2;
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // The proof authenticating the signed transaction.                            <>     // The proof authenticating the transaction.
+    SignedTransactionProof proof = 3;                                                     TransactionProof proof = 3;
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    repeated SignedTransaction transactions = 1;                                   <>     repeated Transaction transactions = 1;
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // The list of corresponding TransactionInfo objects.                          +-
+    repeated TransactionInfo infos = 2;
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    EventsForVersions events_for_versions = 3;                                     <>     EventsForVersions events_for_versions = 2;
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    google.protobuf.UInt64Value first_transaction_version = 4;                     <>     google.protobuf.UInt64Value first_transaction_version = 3;
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // The proofs of the first and last transaction in this chunk. When this is    <>     // The proof authenticating the transactions and events.When this is used
+    // used for state synchronization, the validator who requests the transactions        // for state synchronization, the validator who requests the transactions
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    AccumulatorProof proof_of_first_transaction = 5;                               <>     TransactionListProof proof = 4;
+    AccumulatorProof proof_of_last_transaction = 6;
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+File: transaction_info.proto
+  // Hash of the signed transaction that is stored <>   // Hash of the transaction that is stored.
+  bytes signed_transaction_hash = 1;                    bytes transaction_hash = 1;
+--------------------------------------------------------------------------------------------------
+
+File: validator_change.proto
+//                                                                            +-
+// This message represents a single validator change event and the proof that
+// corresponds to it
+-----------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------
+  LedgerInfoWithSignatures ledger_info_with_sigs = 1;                         <>   repeated LedgerInfoWithSignatures ledger_info_with_sigs = 1;
+  EventWithProof event_with_proof = 2;
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+File: validator_public_keys.proto
+
+File: validator_set.proto
+
+File: vm_errors.proto
