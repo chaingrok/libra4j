@@ -8,3 +8,5 @@ Java client library for Libra
 [![codecov](https://codecov.io/gh/chaingrok/libra4j/branch/master/graph/badge.svg)](https://codecov.io/gh/chaingrok/libra4j)
 
 UNDER CONSTRUCTION....
+
+This project is current "on backburner" and will be completed when the Libra project gets close to effective launch.
