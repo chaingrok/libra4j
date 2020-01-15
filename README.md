@@ -9,4 +9,4 @@ Java client library for Libra
 
 UNDER CONSTRUCTION....
 
-This project is current "on backburner" and will be completed when the Libra project gets close to effective launch.
+This project is currently "on back burner" and will be completed only when the Libra project gets close to effective launch.
