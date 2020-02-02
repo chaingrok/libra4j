@@ -9,4 +9,4 @@ Java client library for Libra
 
 UNDER CONSTRUCTION....
 
-This project is currently "on back burner" and will be completed only when the Libra project gets close to effective launch.
+This project has currently been put "on backburner" in Q3 2019 and will be completed only when the Libra project gets close to effective launch (hopefully during 2020)
