@@ -35,10 +35,10 @@ import org.libra.grpc.types.Proof.AccumulatorConsistencyProof;
 import org.libra.grpc.types.Proof.AccountStateProof;
 import org.libra.grpc.types.Proof.AccumulatorProof;
 import org.libra.grpc.types.Proof.EventProof;
-import org.libra.grpc.types.Proof.SignedTransactionProof;
+import org.libra.grpc.types.Proof.TransactionProof;
 import org.libra.grpc.types.Proof.SparseMerkleProof;
 import org.libra.grpc.types.TransactionOuterClass.SignedTransaction;
-import org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof;
+import org.libra.grpc.types.TransactionOuterClass.TransactionWithProof;
 import org.libra.grpc.types.TransactionOuterClass.TransactionListWithProof;
 import org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo;
 import org.libra.grpc.types.VmErrors.VMStatus;
@@ -80,7 +80,7 @@ public class Ledger {
 				//.setSignedTxn(ByteString.copyFrom(signedTransactionBytes))
 				.build();
 		SubmitTransactionRequest submitTransactionRequest = SubmitTransactionRequest.newBuilder()
-				.setSignedTxn(signedTransaction)
+				.setTransaction(signedTransaction)
 				.build();
 		AdmissionControlBlockingStub blockingStub = validatorEndpoint.getBlockingStub();
 		SubmitTransactionResponse submitTransactionResponse = blockingStub.submitTransaction(submitTransactionRequest);
@@ -137,7 +137,7 @@ public class Ledger {
 				}
 				UInt64Value u64Version = transactionListWithProof.getFirstTransactionVersion();
 				long transactionVersion = u64Version.getValue();
-				List<TransactionInfo> transactionInfoList = transactionListWithProof.getInfosList();
+				List<TransactionInfo> transactionInfoList = null; // TODO: fix to get transactionListWithProof.getInfosList();
 				if (transactionInfoList != null) {
 					for (TransactionInfo transactionInfo : transactionInfoList) {
 						Transaction transaction = new Transaction();
@@ -146,7 +146,7 @@ public class Ledger {
 						result.add(transaction);
 					}
 				}
-				List<SignedTransaction> signedTransactions = transactionListWithProof.getTransactionsList();
+				List<SignedTransaction> signedTransactions = null; // TODO: fix to get back totransactionListWithProof.getTransactionsList();
 				if (signedTransactions != null) {
 					if (signedTransactions.size() != result.size()) {
 						new ChaingrokError(Type.INVALID_LENGTH,"result size <> signedTransactions size: " + result.size() + " <> " + signedTransactions.size());
@@ -217,6 +217,7 @@ public class Ledger {
 			GetAccountTransactionBySequenceNumberResponse accountTransactionBySequenceNumberResponse = responseItem.getGetAccountTransactionBySequenceNumberResponse();
 			grpcChecker.checkExpectedFields(accountTransactionBySequenceNumberResponse,1);
 			if (accountTransactionBySequenceNumberResponse != null) {
+				/* TODO: restore code
 				SignedTransactionWithProof signedTransactionWithProof = accountTransactionBySequenceNumberResponse.getSignedTransactionWithProof();
 				grpcChecker.checkExpectedFields(signedTransactionWithProof,3);
 				SignedTransaction signedTransaction = signedTransactionWithProof.getSignedTransaction();
@@ -236,6 +237,7 @@ public class Ledger {
 				if (accountStateWithProof != null) {
 					processAccountStateWithProof(accountStateWithProof);
 				} 
+				*/
 			} else {
 				new ChaingrokError(Type.MISSING_DATA,"expected field missing in " + ResponseItem.class.getCanonicalName() + ": " + GetAccountTransactionBySequenceNumberResponse.class.getCanonicalName());
 			}
@@ -371,7 +373,7 @@ public class Ledger {
 			result.setMajorStatus(transactionInfo.getMajorStatus());
 			result.setGasUsed(transactionInfo.getGasUsed());
 			result.setTxnInfoSerializedSize(transactionInfo.getSerializedSize());
-			ByteString hash = transactionInfo.getSignedTransactionHash();
+			ByteString hash = null; // TODO: transactionInfo.getSignedTransactionHash();
 			if ((hash != null) 
 					&& (hash.toByteArray() != null)
 					&& (hash.toByteArray().length > 0)) {
@@ -410,7 +412,7 @@ public class Ledger {
 				new ChaingrokError(Type.INVALID_LENGTH,"transaction size mismatch: " + result.getSignedTxnSerializedSize() + " <> " + signedTransaction.getSignedTxn().toByteArray().length);
 			}
 			*/
-			byte[] signedTransactionBytes = signedTransaction.getSignedTxn().toByteArray();
+			byte[] signedTransactionBytes = null; //TODO: restore to signedTransaction.getSignedTxn().toByteArray();
 			if ((signedTransactionBytes != null) 
 					&& (signedTransactionBytes.length > 0)) {
 				processSignedTransactionBytes(signedTransactionBytes,transaction);
@@ -483,9 +485,9 @@ public class Ledger {
 	
 	private void processAccumulatorProof(AccumulatorProof accumulatorProof) {
 		grpcChecker.checkExpectedFields(accumulatorProof,2);
-		long bitmap = accumulatorProof.getBitmap();
+		long bitmap = 0L; //TODO: accumulatorProof.getBitmap();
 		//result.setBitmap(Utils.longToByteArray(bitmap));
-		List<ByteString> siblings = accumulatorProof.getNonDefaultSiblingsList();
+		List<ByteString> siblings = null; // TODO: restore accumulatorProof.getNonDefaultSiblingsList();
 		if( (siblings != null)
 				&& (siblings.size() > 0)) {
 			ArrayList<byte[]> nonDefaultSiblings = new ArrayList<byte[]>();
@@ -512,9 +514,9 @@ public class Ledger {
 		grpcChecker.checkExpectedFields(accountStateProof,3);
 		AccumulatorProof ledgerInfoToTransactionInfoProof = accountStateProof.getLedgerInfoToTransactionInfoProof();
 		grpcChecker.checkExpectedFields(ledgerInfoToTransactionInfoProof,2);
-		long bitmap = ledgerInfoToTransactionInfoProof.getBitmap();
+		long bitmap = 0L; //TODO: restore to ledgerInfoToTransactionInfoProof.getBitmap();
 		result.setBitmap(Utils.longToByteArray(bitmap));
-		List<ByteString> siblings = ledgerInfoToTransactionInfoProof.getNonDefaultSiblingsList();
+		List<ByteString> siblings = null; //TODO: restorte to ledgerInfoToTransactionInfoProof.getNonDefaultSiblingsList();
 		if ((siblings != null)
 				&& (siblings.size() > 0)) {
 			ArrayList<byte[]> nonDefaultSiblings = new ArrayList<byte[]>();
@@ -530,9 +532,9 @@ public class Ledger {
 		}
 		SparseMerkleProof transactionInfoToAccountProof = accountStateProof.getTransactionInfoToAccountProof();
 		grpcChecker.checkExpectedFields(transactionInfoToAccountProof,3);
-		transactionInfoToAccountProof.getBitmap().toByteArray();
+		//TODO: restore to transactionInfoToAccountProof.getBitmap().toByteArray();
 		transactionInfoToAccountProof.getLeaf().toByteArray();
-		siblings = transactionInfoToAccountProof.getNonDefaultSiblingsList(); 
+		//TODO restore to siblings = transactionInfoToAccountProof.getNonDefaultSiblingsList(); 
 		if( (siblings != null)
 				&& (siblings.size() > 0)) {
 			ArrayList<byte[]> nonDefaultSiblings = new ArrayList<byte[]>();
@@ -549,7 +551,7 @@ public class Ledger {
 		TransactionInfo transactionInfo = accountStateProof.getTransactionInfo();
 		grpcChecker.checkExpectedFields(transactionInfo,4);
 		Transaction transaction = new Transaction();
-		transaction.setSignedTransactionHash(new Hash(transactionInfo.getSignedTransactionHash()));
+		//TODO : restore to transaction.setSignedTransactionHash(new Hash(transactionInfo.getSignedTransactionHash()));
 		transaction.setEventRootHash(new Hash(transactionInfo.getEventRootHash()));
 		transaction.setStateRootHash(new Hash(transactionInfo.getStateRootHash()));
 		transaction.setGasUsed(transactionInfo.getGasUsed());

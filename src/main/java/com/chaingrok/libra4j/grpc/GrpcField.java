@@ -29,12 +29,12 @@ import org.libra.grpc.types.LedgerInfoOuterClass.ValidatorSignature;
 import org.libra.grpc.types.Proof.AccountStateProof;
 import org.libra.grpc.types.Proof.AccumulatorProof;
 import org.libra.grpc.types.Proof.AccumulatorConsistencyProof;
-import org.libra.grpc.types.Proof.SignedTransactionProof;
+import org.libra.grpc.types.Proof.TransactionProof;
 import org.libra.grpc.types.Proof.SparseMerkleProof;
 import org.libra.grpc.types.TransactionOuterClass.Transaction;
 import org.libra.grpc.types.TransactionOuterClass.TransactionListWithProof;
 import org.libra.grpc.types.TransactionOuterClass.SignedTransaction;
-import org.libra.grpc.types.TransactionOuterClass.SignedTransactionWithProof;
+import org.libra.grpc.types.TransactionOuterClass.TransactionWithProof;
 import org.libra.grpc.types.TransactionInfoOuterClass.TransactionInfo;
 import org.libra.grpc.types.TransactionOuterClass.TransactionArgument;
 
@@ -101,13 +101,13 @@ public enum GrpcField {
 	SPARSE_MERKLE_PROOF_BITMAP("types.SparseMerkleProof.bitmap",ByteString.class,SparseMerkleProof.class),
 	SPARSE_MERKLE_PROOF_NON_DEFAULT_SIBLINGS("types.SparseMerkleProof.non_default_siblings",ByteString.class,SparseMerkleProof.class),
 	PROOF_OF_LATEST_EVENT("types.GetEventsByEventAccessPathResponse.proof_of_latest_event",AccountStateWithProof.class,GetEventsByEventAccessPathResponse.class),
-	SIGNED_TRANSACTION_WITH_PROOF("types.GetAccountTransactionBySequenceNumberResponse.signed_transaction_with_proof",SignedTransactionWithProof.class,GetAccountTransactionBySequenceNumberResponse.class),
-	SIGNED_TRANSACTION_LEDGER_INFO_TO_TRANSACTION_INFO_PROOF("types.SignedTransactionProof.ledger_info_to_transaction_info_proof",AccumulatorProof.class,SignedTransactionProof.class),
-	SIGNED_TRANSACTION_TRANSACTION_IMFO("types.SignedTransactionProof.transaction_info",TransactionInfo.class,SignedTransactionProof.class),
-	TRANSACTION_VERSION("types.SignedTransactionWithProof.version",Long.class,SignedTransactionWithProof.class),
-	SIGNED_TRANSACTION("types.SignedTransactionWithProof.signed_transaction",SignedTransaction.class,SignedTransactionWithProof.class),
-	SIGNED_TRANSACTION_PROOF("types.SignedTransactionWithProof.proof",SignedTransactionProof.class,SignedTransactionWithProof.class),
-	SIGNED_TRANSACTION_EVENTS("types.SignedTransactionWithProof.events",EventsList.class,SignedTransactionWithProof.class),
+	SIGNED_TRANSACTION_WITH_PROOF("types.GetAccountTransactionBySequenceNumberResponse.signed_transaction_with_proof",TransactionWithProof.class,GetAccountTransactionBySequenceNumberResponse.class),
+	SIGNED_TRANSACTION_LEDGER_INFO_TO_TRANSACTION_INFO_PROOF("types.SignedTransactionProof.ledger_info_to_transaction_info_proof",AccumulatorProof.class,TransactionProof.class),
+	SIGNED_TRANSACTION_TRANSACTION_IMFO("types.SignedTransactionProof.transaction_info",TransactionInfo.class,TransactionProof.class),
+	TRANSACTION_VERSION("types.SignedTransactionWithProof.version",Long.class,TransactionWithProof.class),
+	SIGNED_TRANSACTION("types.SignedTransactionWithProof.signed_transaction",SignedTransaction.class,TransactionWithProof.class),
+	SIGNED_TRANSACTION_PROOF("types.SignedTransactionWithProof.proof",TransactionProof.class,TransactionWithProof.class),
+	SIGNED_TRANSACTION_EVENTS("types.SignedTransactionWithProof.events",EventsList.class,TransactionWithProof.class),
 	EVENTS("types.EventsList.events",Event.class,EventsList.class),
 	EVENT_ACCESS_PATH("types.Event.access_path",AccessPath.class,Event.class),
 	EVENT_KEY("types.Event.key",ByteString.class,Event.class),

@@ -220,8 +220,8 @@ public class TestGrpcChecker extends TestClass {
 				.build();
 		assertTrue(transactionInfo2 instanceof MessageOrBuilder);
 		TransactionListWithProof transactionListWithProof = TransactionListWithProof.newBuilder()
-									.addInfos(0,transactionInfo1)
-									.addInfos(1,transactionInfo2)
+									//TODO: restore to .addInfos(0,transactionInfo1)
+				                    //TODO: restore to.addInfos(1,transactionInfo2)
 									.build();
 		assertEquals(1,transactionListWithProof.getAllFields().size());
 		Object object = transactionListWithProof.getAllFields().values().toArray()[0];
@@ -327,8 +327,8 @@ public class TestGrpcChecker extends TestClass {
 				.build();
 		assertTrue(transactionInfo2 instanceof MessageOrBuilder);
 		TransactionListWithProof transactionListWithProof = TransactionListWithProof.newBuilder()
-									.addInfos(0,transactionInfo1)
-									.addInfos(1,transactionInfo2)
+				                    //TODO: restore to .addInfos(0,transactionInfo1)
+                                    //TODO: restore to.addInfos(1,transactionInfo2)
 									.build();
 		assertEquals(1,transactionListWithProof.getAllFields().size());
 		Map<FieldDescriptor, Object> fieldDescriptors3 = transactionListWithProof.getAllFields();
@@ -428,8 +428,8 @@ public class TestGrpcChecker extends TestClass {
 		assertEquals(1,version.getAllFields().size());
 		TransactionListWithProof transactionListWithProof = TransactionListWithProof.newBuilder()
 									.setFirstTransactionVersion(version)
-									.addInfos(0,transactionInfo1)
-									.addInfos(0,transactionInfo2)
+									//TODO: restore to .addInfos(0,transactionInfo1)
+				                    //TODO: restore to.addInfos(1,transactionInfo2)
 									.build();
 		assertTrue(transactionListWithProof instanceof MessageOrBuilder);
 		assertEquals(listExpectedFields,transactionListWithProof.getAllFields().size());
