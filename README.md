@@ -2,9 +2,9 @@
 
 __UNDER CONSTRUCTION....__
 
-libra4j is a Java client library for Libra DLT. It is based on a generatec Java version of the gRPC .proto files provided by the [Libra project](https://github.com/libra/libra). 
+libra4j is a Java client library for the Libra DLT. It is based on a generated Java version of the gRPC .proto files provided by the [Libra project](https://github.com/libra/libra). 
 
-libra4j is built via Maven on Travis CI (see below) and tested through a large suite of JUnit tests, whose code coverage is computed by CodeCov: see dashboard linked by badge below. In addition, the code style and quality are measured by Codacy: see dashboard linked by badge below for details.
+libra4j is built via Maven on Travis CI (see badge below) and tested through a large suite of JUnit tests, whose code coverage is computed by CodeCov: see dashboard linked by badge below. In addition, the code style and quality are measured by Codacy: see dashboard linked by badge below for details.
 
 [![Build Status](https://travis-ci.org/chaingrok/libra4j.svg?branch=master)](https://travis-ci.org/chaingrok/libra4j)
 
